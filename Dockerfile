@@ -1,11 +1,16 @@
 FROM python:3.10-slim
 
-# Install Chromium and Driver (Simpler and more stable for Docker)
+# Install Chromium, Driver, AND Node.js prereqs
 RUN apt-get update && apt-get install -y \
     wget gnupg unzip curl xvfb \
     chromium \
     chromium-driver \
+    lsb-release \
     && rm -rf /var/lib/apt/lists/*
+
+# Install Node.js (Version 20)
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs
 
 WORKDIR /app
 COPY requirements.txt .
@@ -15,7 +20,6 @@ COPY . .
 
 # Build Frontend
 WORKDIR /app/frontend
-# Ensure clean install
 RUN npm install && npm run build
 
 WORKDIR /app
