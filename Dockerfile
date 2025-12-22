@@ -1,16 +1,27 @@
 FROM python:3.10-slim
-RUN apt-get update && apt-get install -y wget gnupg unzip curl xvfb && rm -rf /var/lib/apt/lists/*
-RUN mkdir -p /etc/apt/keyrings && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub > /etc/apt/keyrings/google.pub
-RUN echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/google.pub] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
-RUN apt-get update && apt-get install -y google-chrome-stable
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && apt-get install -y nodejs
+
+# Install Chromium and Driver (Simpler and more stable for Docker)
+RUN apt-get update && apt-get install -y \
+    wget gnupg unzip curl xvfb \
+    chromium \
+    chromium-driver \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
+
 COPY . .
+
+# Build Frontend
 WORKDIR /app/frontend
+# Ensure clean install
 RUN npm install && npm run build
+
 WORKDIR /app
+
+# Environment Settings
 ENV HEADLESS=true
 ENV PYTHONUNBUFFERED=1
+
 CMD python RUN_EVERYTHING.py
