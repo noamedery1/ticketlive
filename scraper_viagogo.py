@@ -29,19 +29,35 @@ def extract_prices(driver):
     try:
         time.sleep(8)
         
+        # 0. Anti-bot / Lazy load behavior
+        driver.execute_script("window.scrollTo(0, 300);")
+        time.sleep(1)
+        driver.execute_script("window.scrollTo(0, document.body.scrollHeight/3);")
+        time.sleep(2)
+
         # 1. Debug: Check where we actually are
         page_title = driver.title
-        # print(f"      ℹ️ Page Title: {page_title}")
         
         if 'pardon' in page_title.lower() or 'denied' in page_title.lower() or 'robot' in page_title.lower():
              print(f"      ⚠️ BLOCK DETECTED: {page_title}")
              return {}
 
+        # Attempt to dismiss popups (generic)
+        try:
+            # Common overlays/modals
+            overlays = driver.find_elements(By.CSS_SELECTOR, "div[role='dialog'], div[class*='modal'], button[aria-label='Close']")
+            if len(overlays) > 0:
+                  driver.execute_script("arguments[0].click();", overlays[0])
+                  time.sleep(1)
+        except: pass
+
         prices = {}
         
-        # 2. General strategy: Find any element detailing a "Category"
+        # 2. General strategy: Find any element detailing a "Category" OR "Section"
         # This covers <div>, <span>, <button>, etc.
-        elements = driver.find_elements(By.XPATH, "//*[contains(text(), 'Category')]")
+        # XPath searches for elements containing 'Category' or 'Section' (case insensitive-ish handling via Python regex later if needed, but text() is sensitive usually)
+        # Using Translate for case-insensitivity in XPath 1.0 is messy, so we trust standard caps first.
+        elements = driver.find_elements(By.XPATH, "//*[contains(text(), 'Category') or contains(text(), 'Section')]")
         
         # If no explicit 'Category' text found, try looking for general listing containers (fallback)
         if not elements:
