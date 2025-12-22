@@ -90,13 +90,14 @@ def extract_prices(driver):
                     if cat_m: 
                         cat_num = cat_m.group(1)
                     
-                    # Check for Section (explicit "Section 101" or just "101" "205" etc)
-                    # We look for 3 digits that are likely section numbers
+                    # Check for Section 
                     if not cat_num:
-                        # "101" or "Section 101" or "Block 101"
-                        sec_m = re.search(r'\b(Section|Block)?\s*(\d{3})\b', line, re.I)
+                        # Sometimes it's just "101" or "Section 101"
+                        # We use strict boundary to avoid matching "2026" (year)
+                        # Match 1-3 digits but usually 3 for sections
+                        sec_m = re.search(r'(?:Section\s+|Block\s+|^|\s)([1-5]\d{2})\b', line, re.I)
                         if sec_m:
-                            section_name = sec_m.group(2) # just the number
+                             section_name = sec_m.group(1)
 
                     # Check Price
                     if '$' in line:
@@ -113,15 +114,18 @@ def extract_prices(driver):
                 if cat_num: 
                     final_cat = f'Category {cat_num}'
                 elif section_name:
-                    # MAP SECTIONS TO CATEGORIES (Approximation for World Cup)
-                    # 100s -> Cat 1, 200s -> Cat 2, 300s -> Cat 3, 400s+ -> Cat 4
+                    # MAP SECTIONS TO CATEGORIES (Standard WC logic)
                     sec_int = int(section_name)
                     if 100 <= sec_int < 200: final_cat = 'Category 1'
-                    elif 200 <= sec_int < 300: final_cat = 'Category 2'
-                    elif 300 <= sec_int < 400: final_cat = 'Category 3'
-                    elif sec_int >= 400: final_cat = 'Category 4'
-                    else: final_cat = f'Section {section_name}'
-                
+                    elif 200 <= sec_int < 300: final_cat = 'Category 1' # Often lower bowl is Cat 1
+                    elif 300 <= sec_int < 400: final_cat = 'Category 2'
+                    elif 400 <= sec_int < 500: final_cat = 'Category 3' # 400s usually upper
+                    elif 500 <= sec_int < 700: final_cat = 'Category 4' # 500-600 nosebleeds
+                    else: final_cat = f'Category 1' # Fallback for prime seats
+                    
+                    # Override based on heuristics if needed
+                    if 'club' in txt.lower() or 'vip' in txt.lower(): final_cat = 'Category 1'
+
                 if final_cat and price_val:
                      # Keep lowest price found for this category/section
                      if final_cat not in prices or price_val < prices[final_cat]:
