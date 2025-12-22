@@ -387,8 +387,8 @@ def extract_prices(driver):
                  
                  for pm in price_matches:
                      dist = pm.start() - sec_pos
-                     # If price is ahead of section and close enough (e.g. within 100 chars)
-                     if 0 < dist < 100:
+                     # If price is ahead of section and close enough (tuned to 300 chars for mobile layouts)
+                     if 0 < dist < 300:
                          if dist < min_dist:
                              min_dist = dist
                              val = float(pm.group(2).replace(',', ''))
