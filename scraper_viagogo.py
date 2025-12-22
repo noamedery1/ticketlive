@@ -242,38 +242,45 @@ def run_scraper_cycle():
             target_url = url + ('&Currency=USD' if '?' in url else '?Currency=USD')
             
             print(f'[{i}/{len(games)}] {match_name[:30]}... ', end='', flush=True)
-            try:
-                driver.get(target_url)
-                prices = extract_prices(driver)
-                if prices:
-                    for cat, price in prices.items():
-                        new_records_buffer.append({
-                            'match_url': clean_url, 'match_name': match_name,
-                            'category': cat, 'price': price, 'currency': 'USD', 'timestamp': timestamp
-                        })
-                    success_count += 1
-                    print(f'✅ Found {len(prices)}')
-                else: 
-                     print('❌ No data found.')
-                     # DEBUG: Why no data?
-                     title = driver.title
-                     current_url = driver.current_url
-                     body = driver.find_element(By.TAG_NAME, 'body').text[:300].replace('\n', ' ')
-                     print(f"   [DEBUG] Title: {title}")
-                     print(f"   [DEBUG] URL: {current_url}")
-                     print(f"   [DEBUG] Body Snippet: {body}...")
-                
-                if len(new_records_buffer) > 20: 
-                    append_data(DATA_FILE_VIAGOGO, new_records_buffer); new_records_buffer = []
-                time.sleep(2)
-            except Exception as e: 
-                print(f'❌ Error: {e}')
-                msg = str(e).lower()
-                if 'crashed' in msg or 'disconnected' in msg or 'timeout' in msg or 'no such execution context' in msg:
-                    print('   ⚠️ Critcal error. Rebooting driver...')
-                    try: driver.quit()
-                    except: pass
-                    driver = None
+            
+            # Retry loop for page load (handles 502/network issues)
+            for attempt in range(3):
+                try:
+                    driver.get(target_url)
+                    
+                    # Check for 502/Server Errors
+                    if '502' in driver.title or 'Bad Gateway' in driver.title:
+                        print(f'   ⚠️ Server Error (Attempt {attempt+1}/3). Waiting...')
+                        time.sleep(5)
+                        continue
+                        
+                    prices = extract_prices(driver)
+                    if prices:
+                        for cat, price in prices.items():
+                            new_records_buffer.append({
+                                'match_url': clean_url, 'match_name': match_name,
+                                'category': cat, 'price': price, 'currency': 'USD', 'timestamp': timestamp
+                            })
+                        success_count += 1
+                        print(f'✅ Found {len(prices)}')
+                        break # Success, exit retry loop
+                    else: 
+                         print('❌ No data found.')
+                         # DEBUG: Why no data?
+                         title = driver.title
+                         current_url = driver.current_url
+                         body = driver.find_element(By.TAG_NAME, 'body').text[:300].replace('\n', ' ')
+                         print(f"   [DEBUG] Title: {title}")
+                         print(f"   [DEBUG] URL: {current_url}")
+                         print(f"   [DEBUG] Body Snippet: {body}...")
+                         break # No data but page loaded OK, don't retry same page
+                         
+                except Exception as e: 
+                    print(f'❌ Error: {e}')
+                    msg = str(e).lower()
+                    if 'crashed' in msg or 'disconnected' in msg or 'timeout' in msg:
+                        raise e # Critical error, let outer loop handle driver restart
+                    time.sleep(2)
 
         if new_records_buffer: append_data(DATA_FILE_VIAGOGO, new_records_buffer)
             
