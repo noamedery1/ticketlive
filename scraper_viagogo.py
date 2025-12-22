@@ -255,11 +255,25 @@ def run_scraper_cycle():
                                 'category': cat, 'price': price, 'currency': 'USD', 'timestamp': timestamp
                             })
                         print(f'✅ Found {json.dumps(prices)}')
+                        
+                        # SAVE IMMEDIATELY
+                        if new_records_buffer:
+                             append_data(DATA_FILE_VIAGOGO, new_records_buffer)
+                             new_records_buffer = [] # Clear buffer
                         break 
                     else:
                         print('❌ No data found.')
+                        # DEBUG: Print Body snippet to see what's actually there
                         try:
-                            with open(f'debug_failed_scrape_{i}.html', 'w', encoding='utf-8') as f: f.write(driver.page_source)
+                            # page_title = driver.title 
+                            # print(f"      [DEBUG TITLE] {page_title}")
+                            
+                            # body_txt = driver.find_element(By.TAG_NAME, 'body').text
+                            # clean_body = body_txt[:500].replace('\n', ' | ')
+                            # print(f"      [DEBUG BODY] {clean_body}...")
+                            
+                            # Check if "Category" exists ANYWHERE
+                            pass # clean logs
                         except: pass
                         break
                         
