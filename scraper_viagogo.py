@@ -404,8 +404,8 @@ def run_scraper_cycle():
                         # -------------------------------------------------------------
                         print('   ⚠️ No passive data. Attempting interactive click...')
                         try:
-                            interact_success = False
-                            # 1. Try Clicking "See Listings" or similar count (e.g. "14 listings")
+                            # PHASE 1: Try Clearing Interstitials / Clicking Listings Count
+                            listings_clicked = False
                             try:
                                 list_els = driver.find_elements(By.XPATH, "//*[contains(text(), 'listings')]")
                                 for le in list_els:
@@ -414,12 +414,18 @@ def run_scraper_cycle():
                                          try: le.click()
                                          except: driver.execute_script("arguments[0].click();", le)
                                          time.sleep(3)
-                                         interact_success = True
+                                         listings_clicked = True
                                          break
                             except: pass
 
-                            # 2. Try Clicking Sections
-                            if not interact_success:
+                            # Check if listings click revealed prices
+                            if listings_clicked:
+                                print('   🔄 Checked listings. Retrying extraction...')
+                                prices = extract_prices(driver)
+                            
+                            # PHASE 2: If still no prices, drill down into Sections
+                            if not prices:
+                                interact_success = False
                                 targets = list(range(101, 121)) + list(range(201, 211))
                                 for k in targets: 
                                     try:
@@ -436,10 +442,11 @@ def run_scraper_cycle():
                                                     break
                                     except: pass
                                     if interact_success: break
-                            
-                            if interact_success:
-                                print('   🔄 Content updated? Retrying extraction...')
-                                prices = extract_prices(driver)
+                                
+                                if interact_success:
+                                    print('   🔄 Section clicked. Retrying extraction...')
+                                    prices = extract_prices(driver)
+
                         except: pass
 
                         if prices:
@@ -449,7 +456,7 @@ def run_scraper_cycle():
                                     'category': cat, 'price': price, 'currency': 'USD', 'timestamp': timestamp
                                 })
                             success_count += 1
-                            print(f'✅ Found {len(prices)} (after click)')
+                            print(f'✅ Found {len(prices)} (after interactive)')
                             break
                         
                         print('❌ No data found.')
