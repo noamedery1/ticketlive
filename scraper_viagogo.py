@@ -100,12 +100,18 @@ def extract_prices(driver):
                     
                     # Check for Section 
                     if not cat_num:
-                        # Sometimes it's just "101" or "Section 101"
-                        # We use strict boundary to avoid matching "2026" (year)
-                        # Match 1-3 digits but usually 3 for sections
-                        sec_m = re.search(r'(?:Section\s+|Block\s+|^|\s)([1-5]\d{2})\b', line, re.I)
+                        # Improved Regex to catch "101", "CS2", "113A", "W101"
+                        # Matches:
+                        # - 3 digits (101-999) optionally followed by a letter (113A)
+                        # - Prefix letters followed by digits (CS2, W100)
+                        sec_m = re.search(r'(?:Section\s+|Block\s+|^|\s)([A-Z]*\d{1,3}[A-Z]*)', line, re.I)
+                        
+                        # Filter to ensure we have at least one digit and exclude common years (2026)
                         if sec_m:
-                             section_name = sec_m.group(1)
+                             candidate = sec_m.group(1)
+                             # Basic validation: has digit, length < 6, not "2026"
+                             if any(c.isdigit() for c in candidate) and len(candidate) < 6 and candidate != '2026':
+                                 section_name = candidate
 
                     # Check Price
                     if '$' in line:
@@ -121,16 +127,35 @@ def extract_prices(driver):
                 final_cat = None
                 if cat_num: 
                     final_cat = f'Category {cat_num}'
+                # Logic to determine final category label
+                final_cat = None
+                if cat_num: 
+                    final_cat = f'Category {cat_num}'
                 elif section_name:
                     # MAP SECTIONS TO CATEGORIES (Standard WC logic)
-                    sec_int = int(section_name)
-                    if 100 <= sec_int < 200: final_cat = 'Category 1'
-                    elif 200 <= sec_int < 300: final_cat = 'Category 1' # Often lower bowl is Cat 1
-                    elif 300 <= sec_int < 400: final_cat = 'Category 2'
-                    elif 400 <= sec_int < 500: final_cat = 'Category 3' # 400s usually upper
-                    elif 500 <= sec_int < 700: final_cat = 'Category 4' # 500-600 nosebleeds
-                    else: final_cat = f'Category 1' # Fallback for prime seats
+                    # Extract just the numbers for range checks
+                    digits = ''.join(filter(str.isdigit, section_name))
+                    sec_int = int(digits) if digits else 0
                     
+                    # Special Prefixes
+                    lower_sec = section_name.lower()
+                    if 'cs' in lower_sec or 'club' in lower_sec or 'vip' in lower_sec:
+                        final_cat = 'Category 1'
+                    elif 't' in lower_sec: # often temp stands or upper
+                         final_cat = 'Category 4'
+                    elif 'w' in lower_sec: # wheelchair/accessible often lower
+                         final_cat = 'Category 1'
+                    elif sec_int > 0:
+                        if 100 <= sec_int < 200: final_cat = 'Category 1'
+                        elif 200 <= sec_int < 300: final_cat = 'Category 2' # Adjusted: Cat 2 often mid-tier
+                        elif 300 <= sec_int < 400: final_cat = 'Category 2' # Club/Mid
+                        elif 400 <= sec_int < 500: final_cat = 'Category 3' 
+                        elif 500 <= sec_int < 700: final_cat = 'Category 4' 
+                        elif sec_int < 100: final_cat = 'Category 1' # Pitch side
+                        else: final_cat = f'Section {section_name}' # Fallback
+                    else:
+                        final_cat = f'Section {section_name}'
+
                     # Override based on heuristics if needed
                     if 'club' in txt.lower() or 'vip' in txt.lower(): final_cat = 'Category 1'
 
