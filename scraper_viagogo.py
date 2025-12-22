@@ -6,6 +6,7 @@ import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from datetime import datetime
+from selenium.webdriver.common.action_chains import ActionChains
 
 # ==========================================
 # ⚙️ CONFIGURATION
@@ -31,15 +32,13 @@ def extract_prices(driver):
         time.sleep(8)
         
         # 0. Anti-bot / Lazy load behavior
-        # Trigger potential lazy loading of the ticket grid
         try:
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             time.sleep(2)
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight - 500);")
             time.sleep(1)
             body_el = driver.find_element(By.TAG_NAME, 'body')
-            body_el.send_keys(Keys.HOME) # Go back to top to scan from start? No, stay down? 
-            # Actually, we want to scan the whole page.
+            body_el.send_keys(Keys.HOME) 
         except: pass
 
         # 1. Debug: Check where we actually are
@@ -110,24 +109,14 @@ def extract_prices(driver):
         # ---------------------------------------------------------
         try:
              # Find explicit text nodes "Category X"
-             # Structure seen: <div><p>Category 1</p><p>$1,608</p></div>
              for i in range(1, 5):
                  cat_name = f"Category {i}"
                  try:
-                     # XPath to find P tag with exact text "Category X"
-                     # Then look for following-sibling or preceding-sibling with '$'
-                     # Or parent's other child
-                     
-                     # 1. Look for text element
                      cat_els = driver.find_elements(By.XPATH, f"//*[contains(text(), '{cat_name}')]")
-                     
                      for el in cat_els:
-                         # Check siblings for price
                          try:
                              parent = el.find_element(By.XPATH, "..")
                              full_text = parent.text
-                             
-                             # Extract price from parent text (which contains both Cat and Price)
                              m_price = re.search(r'(\$|₪)\s*([\d,]+)', full_text)
                              if m_price:
                                  val = float(m_price.group(2).replace(',', ''))
@@ -141,18 +130,12 @@ def extract_prices(driver):
         
         if len(prices) > 0:
             return prices
-
-        if len(prices) > 0:
-            return prices
-
+            
         # ---------------------------------------------------------
         # STRATEGY 1: Listing Buttons (Standard View)
         # ---------------------------------------------------------
-        # Standard logic continues below if Strategy 0 fails...
-        
         # Attempt to dismiss popups (generic)
         try:
-            # Common overlays/modals
             overlays = driver.find_elements(By.CSS_SELECTOR, "div[role='dialog'], div[class*='modal'], button[aria-label='Close']")
             if len(overlays) > 0:
                   driver.execute_script("arguments[0].click();", overlays[0])
@@ -162,34 +145,22 @@ def extract_prices(driver):
         prices = {}
         
         # 2. General strategy: Find any element detailing a "Category" OR "Section"
-        # This covers <div>, <span>, <button>, etc.
-        # XPath searches for elements containing 'Category' or 'Section' (case insensitive-ish handling via Python regex later if needed, but text() is sensitive usually)
-        # Using Translate for case-insensitivity in XPath 1.0 is messy, so we trust standard caps first.
         elements = driver.find_elements(By.XPATH, "//*[contains(text(), 'Category') or contains(text(), 'Section')]")
         
         if not elements:
             # Fallback 2: BRUTE FORCE. Get all potential listing containers.
-            # Viagogo listings often look like card rows.
-            # We will search for any element that has a "$" or "₪" in it, as that's a price.
             price_elements = driver.find_elements(By.XPATH, "//*[contains(text(), '$') or contains(text(), '₪')]")
             elements = []
             for pel in price_elements:
                  try:
-                     # Get parent of price to find context (Section/Category)
                      parent = pel.find_element(By.XPATH, "./..")
                      elements.append(parent)
-                     # Also get grandparent
                      elements.append(parent.find_element(By.XPATH, "./.."))
                  except: pass
 
         count_found = 0
-        # DEBUG: Print what we are scanning to allow diagnosis
         if not elements: print("   [DEBUG] Parsing: No specific elements found.")
         
-        for i, el in enumerate(elements):
-            if i > 5: break # Don't spam log
-            # print(f"   [DEBUG-EL] {el.text.replace('\n', '|')[:50]}") # Uncomment if needed
-            
         for el in elements:
             try:
                 txt = el.text.strip()
@@ -207,23 +178,15 @@ def extract_prices(driver):
                     
                     # Check for Section 
                     if not cat_num:
-                        # Improved Regex to catch "101", "CS2", "113A", "W101"
-                        # matches 3 digits (100-999) standalone or with prefix/suffix
-                        # We specifically look for "words" that look like section names
                         words = line.split()
                         for w in words:
-                             # Clean punctuation
                              w_clean = w.strip('.,-')
-                             # Match: (Prefix)(Digits)(Suffix) e.g. W102, 102, 115A
-                             # Digits must comprise the main part
                              if re.match(r'^[A-Z]*\d{3}[A-Z]*$', w_clean, re.I):
-                                  # Exclude obvious non-sections (years)
                                   if w_clean == '2026': continue
                                   section_name = w_clean
-                                  break # Take first valid section found in line
+                                  break 
                         
                         if not section_name:
-                             # Fallback regex for "Section 101" in full line
                              sec_m = re.search(r'(?:Section|Block)\s*([A-Z]*\d{1,3}[A-Z]*)', line, re.I)
                              if sec_m: section_name = sec_m.group(1)
 
@@ -238,38 +201,33 @@ def extract_prices(driver):
                             price_val = round(val * ILS_TO_USD, 2)
                 
                 # Logic to determine final category label
-                # Logic to determine final category label
                 final_cat = None
                 if cat_num: 
                     final_cat = f'Category {cat_num}'
                 elif section_name:
                     # MAP SECTIONS TO CATEGORIES (Standard WC logic)
-                    # Extract just the numbers for range checks
                     digits = ''.join(filter(str.isdigit, section_name))
                     sec_int = int(digits) if digits else 0
                     
-                    # Special Prefixes
                     lower_sec = section_name.lower()
                     if 'cs' in lower_sec or 'club' in lower_sec or 'vip' in lower_sec:
                         final_cat = 'Category 1'
-                    elif 't' in lower_sec: # often temp stands or upper
+                    elif 't' in lower_sec: 
                          final_cat = 'Category 4'
-                    elif 'w' in lower_sec: # wheelchair/accessible often lower
+                    elif 'w' in lower_sec: 
                          final_cat = 'Category 1'
                     elif sec_int > 0:
                         if 100 <= sec_int < 200: final_cat = 'Category 1'
-                        elif 200 <= sec_int < 300: final_cat = 'Category 2' # Adjusted: Cat 2 often mid-tier
-                        elif 300 <= sec_int < 400: final_cat = 'Category 2' # Club/Mid
+                        elif 200 <= sec_int < 300: final_cat = 'Category 2' 
+                        elif 300 <= sec_int < 400: final_cat = 'Category 2'
                         elif 400 <= sec_int < 500: final_cat = 'Category 3' 
-                        else: final_cat = 'Category 4' # 500+ usually high up
+                        else: final_cat = 'Category 4' 
                     else:
-                        final_cat = 'Category 4' # Default fallback for structureless sections
+                        final_cat = 'Category 4' 
 
-                    # Override based on heuristics if needed
                     if 'club' in txt.lower() or 'vip' in txt.lower(): final_cat = 'Category 1'
 
                 if final_cat and price_val:
-                     # Keep lowest price found for this category/section
                      if final_cat not in prices or price_val < prices[final_cat]:
                          prices[final_cat] = price_val
                          count_found += 1
@@ -285,19 +243,14 @@ def extract_prices(driver):
             
              lines = full_text.split('\n')
              for i, line in enumerate(lines):
-                 # Skip lines that are just "Row 5" or "Match 20"
                  if 'row' in line.lower() or 'match' in line.lower(): continue
 
-                 # We look for a Key (Category or Section)
                  cat_m = re.search(r'Category\s+(\d)', line, re.I)
                  
-                 # Regex for Section: "Section 101", "101", "115A", "W105"
-                 # Must start with letter or digit, contain 3 digits, max length 6
                  words = line.split()
                  sec_match = None
                  for w in words:
                       clean = w.strip('.,-')
-                      # Matches "101", "W101", "101A"
                       if re.match(r'^[A-Z]*\d{3}[A-Z]*$', clean, re.I):
                            if clean != '2026': 
                                sec_match = clean
@@ -308,7 +261,7 @@ def extract_prices(driver):
                      found_key = f'Category {cat_m.group(1)}'
                  elif sec_match:
                      candidate = sec_match
-                     if True: # Already validated by regex above
+                     if True: 
                          # Map Section to Category
                          digits = ''.join(filter(str.isdigit, candidate))
                          sec_int = int(digits) if digits else 0
@@ -322,22 +275,19 @@ def extract_prices(driver):
                             elif 200 <= sec_int < 300: found_key = 'Category 2'
                             elif 300 <= sec_int < 400: found_key = 'Category 2'
                             elif 400 <= sec_int < 500: found_key = 'Category 3'
-                            elif sec_int >= 500: found_key = 'Category 4'
-                            elif sec_int < 100: found_key = 'Category 1'
-                            else: found_key = f'Section {candidate}'
+                            else: found_key = 'Category 4'
                          else:
-                            found_key = f'Section {candidate}'
+                            found_key = 'Category 4'
 
                  if found_key:
-                     # Look for price in this line and next 5 lines (expanded window)
                      found_price = None
-                     search_window = lines[i:i+6] # Current + next 5
+                     search_window = lines[i:i+6] 
                      for pline in search_window:
                          m_price = re.search(r'(\$|₪)\s*([\d,]+)', pline)
                          if m_price:
                              val = float(m_price.group(2).replace(',', ''))
                              if m_price.group(1) == '₪': val = round(val * ILS_TO_USD, 2)
-                             if val > 10: # Sanity check
+                             if val > 10: 
                                  found_price = val
                                  break
                      
@@ -346,28 +296,23 @@ def extract_prices(driver):
                              prices[found_key] = found_price
                              count_found += 1
 
-        # 4. Ultimate Fallback: Proximity Scan (Structureless)
-        # Some pages list all sections first, then all prices, or weird layouts.
-        # We look for any 3-digit number that is followed by a price within 50 chars.
+        # 4. Ultimate Fallback: Proximity Scan
         if count_found == 0:
              # Find all prices with their positions
              price_matches = [m for m in re.finditer(r'(?:US)?(\$|₪|USD)\s*([\d,]+)', full_text, re.IGNORECASE)]
              
              # Find all section candidates
-             # strictly 3 digits 100-999 to avoid junk
              sec_matches = [m for m in re.finditer(r'\b([1-5]\d{2})(?:[A-Z])?\b', full_text)]
              
              for sm in sec_matches:
-                 sec_pos = sm.end()     # End of section number
-                 sec_val = sm.group(1)  # The number part '101'
+                 sec_pos = sm.end()     
+                 sec_val = sm.group(1)  
                  
-                 # Look for the nearest price appearing AFTER this section
                  nearest_price = None
                  min_dist = 9999
                  
                  for pm in price_matches:
                      dist = pm.start() - sec_pos
-                     # If price is ahead of section and close enough (tuned to 800 chars for massive section lists)
                      if 0 < dist < 800:
                          if dist < min_dist:
                              min_dist = dist
@@ -376,16 +321,14 @@ def extract_prices(driver):
                              nearest_price = val
                  
                  if nearest_price and nearest_price > 10:
-                     # Map it
                      digits = ''.join(filter(str.isdigit, sec_val))
                      sec_int = int(digits)
-                     final_cat = 'Category 4' # Default fallback
+                     final_cat = 'Category 4' 
                      
                      if 100 <= sec_int < 200: final_cat = 'Category 1'
                      elif 200 <= sec_int < 300: final_cat = 'Category 2'
                      elif 300 <= sec_int < 400: final_cat = 'Category 2'
                      elif 400 <= sec_int < 500: final_cat = 'Category 3'
-                     # All others (500+, or undefined) -> Category 4
                      
                      if final_cat not in prices or nearest_price < prices[final_cat]:
                          prices[final_cat] = nearest_price
@@ -408,7 +351,7 @@ def get_driver():
             options.add_argument('--disable-features=VizDisplayCompositor')
             options.add_argument('--disable-extensions')
             options.add_argument('--window-size=1920,1080')
-            options.page_load_strategy = 'eager' # Don't wait for full assets/ads
+            options.page_load_strategy = 'eager' 
 
         browser_path = '/usr/bin/chromium' if os.path.exists('/usr/bin/chromium') else None
         driver_path = '/usr/bin/chromedriver' if os.path.exists('/usr/bin/chromedriver') else None
@@ -450,7 +393,7 @@ def run_scraper_cycle():
 
     try:
         for i, game in enumerate(games, 1):
-             # 🔄 BATCH RESTART: Proactively restart driver every 10 games
+             # 🔄 BATCH RESTART
             if i > 1 and i % 10 == 0:
                 print(f'   🔄 Scheduled Batch Restart (Match {i})...')
                 try: driver.quit()
@@ -470,7 +413,7 @@ def run_scraper_cycle():
             
             print(f'[{i}/{len(games)}] {match_name[:30]}... ', end='', flush=True)
             
-            # Retry loop for page load (handles 502/network issues)
+            # Retry loop for page load
             for attempt in range(3):
                 try:
                     driver.get(target_url)
@@ -491,37 +434,69 @@ def run_scraper_cycle():
                         success_count += 1
                         print(f'✅ Found {len(prices)}')
                         break # Success, exit retry loop
-                    else: 
-                         print('❌ No data found.')
-                         
-                         # DEBUG: Save HTML to inspect layout of failed pages
-                         try:
-                             with open(f'debug_failed_scrape_{i}.html', 'w', encoding='utf-8') as f:
-                                 f.write(driver.page_source)
-                         except: pass
+                    else:
+                        # -------------------------------------------------------------
+                        # STRATEGY 6: CLICK FALLBACK (Interactive)
+                        # -------------------------------------------------------------
+                        print('   ⚠️ No passive data. Attempting interactive click...')
+                        try:
+                            interact_success = False
+                            for k in range(101, 130): 
+                                try:
+                                    els = driver.find_elements(By.XPATH, f"//*[text()='{k}']")
+                                    for el in els:
+                                        if el.is_displayed() and el.is_enabled():
+                                            driver.execute_script("arguments[0].click();", el)
+                                            time.sleep(2.5) 
+                                            interact_success = True
+                                            break
+                                except: pass
+                                if interact_success: break
+                            
+                            if interact_success:
+                                print('   🔄 Content updated? Retrying extraction...')
+                                prices = extract_prices(driver)
+                        except: pass
 
-                         # DEBUG: Why no data?
-                         title = driver.title
-                         current_url = driver.current_url
-                         body = driver.find_element(By.TAG_NAME, 'body').text[:300].replace('\n', ' ')
-                         print(f"   [DEBUG] Title: {title}")
-                         print(f"   [DEBUG] URL: {current_url}")
-                         print(f"   [DEBUG] Body Snippet: {body}...")
-                         break # No data but page loaded OK, don't retry same page
-                         
+                        if prices:
+                            for cat, price in prices.items():
+                                new_records_buffer.append({
+                                    'match_url': clean_url, 'match_name': match_name,
+                                    'category': cat, 'price': price, 'currency': 'USD', 'timestamp': timestamp
+                                })
+                            success_count += 1
+                            print(f'✅ Found {len(prices)} (after click)')
+                            break
+                        
+                        print('❌ No data found.')
+                        # DEBUG
+                        try:
+                            with open(f'debug_failed_scrape_{i}.html', 'w', encoding='utf-8') as f:
+                                f.write(driver.page_source)
+                        except: pass
+
+                        # DEBUG: Why no data?
+                        title = driver.title
+                        current_url = driver.current_url
+                        body = driver.find_element(By.TAG_NAME, 'body').text[:300].replace('\n', ' ')
+                        print(f"   [DEBUG] Title: {title}")
+                        print(f"   [DEBUG] URL: {current_url}")
+                        print(f"   [DEBUG] Body Snippet: {body}...")
+                        break 
+                        
                 except Exception as e: 
                     print(f'❌ Error: {e}')
                     msg = str(e).lower()
                     if 'crashed' in msg or 'disconnected' in msg or 'timeout' in msg:
                         raise e # Critical error, let outer loop handle driver restart
                     time.sleep(2)
-            time.sleep(1) # Added sleep at the end of the match loop
+            time.sleep(1) 
 
         if new_records_buffer: append_data(DATA_FILE_VIAGOGO, new_records_buffer)
             
         print(f'   ... Waiting for scanners to finish ...')
         
-        # Stability Cooldown: Let Chrome breathe to prevent tab crashes
+        # Stability Cooldown
         time.sleep(1.0)
         
     except Exception as e: print(f'🔥 Error: {e}')
