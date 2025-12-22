@@ -49,6 +49,10 @@ def extract_prices_clean(driver):
             if not anchors:
                  anchors = driver.find_elements(By.XPATH, f"//*[contains(normalize-space(text()), 'Cat {i}')]")
             
+            # DEBUG: Why is Cat 1 missing?
+            if i == 1 and not anchors:
+                print("      ⚠️ No 'Category 1' anchors found.")
+
             best_price = None
             
             for anchor in anchors:
@@ -59,6 +63,8 @@ def extract_prices_clean(driver):
                     # Check Anchor, Parent, Grandparent
                     for level in range(3):
                         txt = container.text.replace('\n', ' ').strip()
+                        if i == 1:
+                            print(f"      [DEBUG CAT1] '{txt[:50]}'")
                         
                         price_matches = re.finditer(r'(?:\$|₪|USD|ILS|NIS)?\s*([\d,]{2,})', txt)
                         min_p = float('inf')
