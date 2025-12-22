@@ -106,56 +106,46 @@ def extract_prices(driver):
         if len(prices) > 0:
             return prices # Found golden data, return immediately
 
+        if len(prices) > 0:
+            return prices # Found golden data, return immediately
+
         # ---------------------------------------------------------
-        # STRATEGY 0.5: Search ANY Element with "Select ..." Label
+        # STRATEGY -1: "Simple HTML" (User Request)
+        # Search for text "Category 1", "Category 2"... and find price sibling
         # ---------------------------------------------------------
         try:
-             # Broadest possible search for the "Button Bar" pattern
-             # Viagogo might use div, span, or nested elements for the label
-             elements = driver.find_elements(By.XPATH, "//*[@aria-label and contains(@aria-label, 'Select') and (contains(@aria-label, '$') or contains(@aria-label, '₪'))]")
-             for el in elements:
-                try:
-                    aria_txt = el.get_attribute('aria-label')
-                    if not aria_txt: continue
-                    
-                    # Regex: Matches "Select (Category|Section) (101) ... ($)(500)"
-                    m = re.search(r'(Category|Section|Block)\s+([A-Z0-9]+).*?(\$|₪)\s*([\d,]+)', aria_txt, re.I)
-                    
-                    if m:
-                        type_label = m.group(1).lower()
-                        id_label = m.group(2)
-                        sym = m.group(3)
-                        val = float(m.group(4).replace(',', ''))
-                        if sym == '₪': val = round(val * ILS_TO_USD, 2)
-                        
-                        # Logic to map ID to Category
-                        final_cat = None
-                        if 'category' in type_label:
-                            final_cat = f'Category {id_label}'
-                        else:
-                            clean_id = id_label
-                            digits = ''.join(filter(str.isdigit, clean_id))
-                            sec_int = int(digits) if digits else 0
-                            lower_id = clean_id.lower()
-                            
-                            if 'cs' in lower_id or 'club' in lower_id or 'vip' in lower_id: final_cat = 'Category 1'
-                            elif 'w' in lower_id: final_cat = 'Category 1'
-                            elif 't' in lower_id: final_cat = 'Category 4'
-                            elif sec_int > 0:
-                                if 100 <= sec_int < 200: final_cat = 'Category 1'
-                                elif 200 <= sec_int < 300: final_cat = 'Category 2'
-                                elif 300 <= sec_int < 400: final_cat = 'Category 2'
-                                elif 400 <= sec_int < 500: final_cat = 'Category 3'
-                                elif sec_int >= 500: final_cat = 'Category 4'
-                                else: final_cat = f'Section {clean_id}'
-                            else:
-                                final_cat = f'Section {clean_id}'
-                        
-                        if final_cat:
-                             if final_cat not in prices or val < prices[final_cat]:
-                                 prices[final_cat] = val
-                except: pass
+             # Find explicit text nodes "Category X"
+             # Structure seen: <div><p>Category 1</p><p>$1,608</p></div>
+             for i in range(1, 5):
+                 cat_name = f"Category {i}"
+                 try:
+                     # XPath to find P tag with exact text "Category X"
+                     # Then look for following-sibling or preceding-sibling with '$'
+                     # Or parent's other child
+                     
+                     # 1. Look for text element
+                     cat_els = driver.find_elements(By.XPATH, f"//*[contains(text(), '{cat_name}')]")
+                     
+                     for el in cat_els:
+                         # Check siblings for price
+                         try:
+                             parent = el.find_element(By.XPATH, "..")
+                             full_text = parent.text
+                             
+                             # Extract price from parent text (which contains both Cat and Price)
+                             m_price = re.search(r'(\$|₪)\s*([\d,]+)', full_text)
+                             if m_price:
+                                 val = float(m_price.group(2).replace(',', ''))
+                                 if m_price.group(1) == '₪': val = round(val * ILS_TO_USD, 2)
+                                 
+                                 if cat_name not in prices or val < prices[cat_name]:
+                                     prices[cat_name] = val
+                         except: pass
+                 except: pass
         except: pass
+        
+        if len(prices) > 0:
+            return prices
 
         if len(prices) > 0:
             return prices
@@ -371,7 +361,7 @@ def extract_prices(driver):
         # We look for any 3-digit number that is followed by a price within 50 chars.
         if count_found == 0:
              # Find all prices with their positions
-             price_matches = [m for m in re.finditer(r'(\$|₪)\s*([\d,]+)', full_text)]
+             price_matches = [m for m in re.finditer(r'(?:US)?(\$|₪|USD)\s*([\d,]+)', full_text, re.IGNORECASE)]
              
              # Find all section candidates
              # strictly 3 digits 100-999 to avoid junk
@@ -427,6 +417,7 @@ def get_driver():
             options.add_argument('--disable-software-rasterizer')
             options.add_argument('--disable-extensions')
             options.add_argument('--window-size=1920,1080')
+            options.page_load_strategy = 'eager' # Don't wait for full assets/ads
 
         browser_path = '/usr/bin/chromium' if os.path.exists('/usr/bin/chromium') else None
         driver_path = '/usr/bin/chromedriver' if os.path.exists('/usr/bin/chromedriver') else None
