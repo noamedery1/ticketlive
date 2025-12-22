@@ -50,6 +50,41 @@ def extract_prices(driver):
              print(f"      ⚠️ BLOCK DETECTED: {page_title}")
              return {}
 
+        prices = {}
+        
+        # ---------------------------------------------------------
+        # STRATEGY 0: Check "Select Category" Buttons (High Precision)
+        # ---------------------------------------------------------
+        try:
+            # Look for buttons that specifically say "Select Category X - $Price"
+            cat_buttons = driver.find_elements(By.XPATH, "//button[contains(@aria-label, 'Select Category')]")
+            for btn in cat_buttons:
+                try:
+                    aria_txt = btn.get_attribute('aria-label')
+                    # Format: "Select Category 1 - $1,608"
+                    # Regex: Select Category (\d+) - .*?(\$|₪)([\d,]+)
+                    m = re.search(r'Category\s+(\d+).*?(\$|₪)\s*([\d,]+)', aria_txt)
+                    if m:
+                        cat_num = m.group(1)
+                        sym = m.group(2)
+                        val = float(m.group(3).replace(',', ''))
+                        
+                        if sym == '₪': val = round(val * ILS_TO_USD, 2)
+                        
+                        key = f'Category {cat_num}'
+                        if key not in prices or val < prices[key]:
+                            prices[key] = val
+                except: pass
+        except: pass
+        
+        if len(prices) > 0:
+            return prices # Found golden data, return immediately
+
+        # ---------------------------------------------------------
+        # STRATEGY 1: Listing Buttons (Standard View)
+        # ---------------------------------------------------------
+        # Standard logic continues below if Strategy 0 fails...
+        
         # Attempt to dismiss popups (generic)
         try:
             # Common overlays/modals
@@ -83,6 +118,13 @@ def extract_prices(driver):
                  except: pass
 
         count_found = 0
+        # DEBUG: Print what we are scanning to allow diagnosis
+        if not elements: print("   [DEBUG] Parsing: No specific elements found.")
+        
+        for i, el in enumerate(elements):
+            if i > 5: break # Don't spam log
+            # print(f"   [DEBUG-EL] {el.text.replace('\n', '|')[:50]}") # Uncomment if needed
+            
         for el in elements:
             try:
                 txt = el.text.strip()
@@ -172,7 +214,64 @@ def extract_prices(driver):
                          prices[final_cat] = price_val
                          count_found += 1
             except: continue
+        
+        # 3. Last Resort: Body Scan (Line-by-Line with Context)
+        if count_found == 0:
+             try:
+                 main_list = driver.find_element(By.ID, 'grid-container') 
+                 full_text = main_list.text
+             except:
+                 full_text = driver.find_element(By.TAG_NAME, 'body').text
             
+             lines = full_text.split('\n')
+             for i, line in enumerate(lines):
+                 # We look for a Key (Category or Section)
+                 cat_m = re.search(r'Category\s+(\d)', line, re.I)
+                 sec_m = re.search(r'(?:Section\s+|Block\s+|^|\s)([A-Z]*\d{3}[A-Z]*)', line, re.I)
+                 
+                 found_key = None
+                 if cat_m:
+                     found_key = f'Category {cat_m.group(1)}'
+                 elif sec_m:
+                     candidate = sec_m.group(1)
+                     if any(c.isdigit() for c in candidate) and len(candidate) < 6 and candidate != '2026':
+                         # Map Section to Category
+                         digits = ''.join(filter(str.isdigit, candidate))
+                         sec_int = int(digits) if digits else 0
+                         lower_sec = candidate.lower()
+                         
+                         if 'cs' in lower_sec or 'club' in lower_sec or 'vip' in lower_sec: found_key = 'Category 1'
+                         elif 'w' in lower_sec: found_key = 'Category 1'
+                         elif 't' in lower_sec: found_key = 'Category 4'
+                         elif sec_int > 0:
+                            if 100 <= sec_int < 200: found_key = 'Category 1'
+                            elif 200 <= sec_int < 300: found_key = 'Category 2'
+                            elif 300 <= sec_int < 400: found_key = 'Category 2'
+                            elif 400 <= sec_int < 500: found_key = 'Category 3'
+                            elif sec_int >= 500: found_key = 'Category 4'
+                            elif sec_int < 100: found_key = 'Category 1'
+                            else: found_key = f'Section {candidate}'
+                         else:
+                            found_key = f'Section {candidate}'
+
+                 if found_key:
+                     # Look for price in this line and next 3 lines
+                     found_price = None
+                     search_window = lines[i:i+4] # Current + next 3
+                     for pline in search_window:
+                         m_price = re.search(r'(\$|₪)\s*([\d,]+)', pline)
+                         if m_price:
+                             val = float(m_price.group(2).replace(',', ''))
+                             if m_price.group(1) == '₪': val = round(val * ILS_TO_USD, 2)
+                             if val > 10: # Sanity check
+                                 found_price = val
+                                 break
+                     
+                     if found_price:
+                         if found_key not in prices or found_price < prices[found_key]:
+                             prices[found_key] = found_price
+                             count_found += 1
+
         return prices
     except Exception as e: 
         print(f"      ⚠️ Extract Error: {e}")
