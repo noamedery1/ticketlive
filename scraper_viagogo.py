@@ -59,33 +59,38 @@ def extract_prices(driver):
         # Using Translate for case-insensitivity in XPath 1.0 is messy, so we trust standard caps first.
         elements = driver.find_elements(By.XPATH, "//*[contains(text(), 'Category') or contains(text(), 'Section')]")
         
-        # If no explicit 'Category' text found, try looking for general listing containers (fallback)
         if not elements:
-             # Sometimes they just say "Section 105" etc. But we specifically want Categories for this app.
-             pass
+            # Fallback: Look for generic listing items if no explicit labels found
+            # Viagogo often puts listings in specific containers
+            elements = driver.find_elements(By.XPATH, "//div[contains(@class, 'listing')] | //div[contains(@data-testid, 'listing')] | //li")
 
         count_found = 0
         for el in elements:
             try:
                 # Get text of the element. If it's short, get the parent's text.
                 txt = el.text.strip()
-                if len(txt) < 10: # likely just "Category 1" without price
+                # If we are in fallback mode (no 'Category' found initially), we accept any text that looks like a listing
+                if len(txt) < 10: 
                      try: txt = el.find_element(By.XPATH, "./..").text.strip()
                      except: pass
                 
-                if len(txt) < 10: # still too short, go one more up
-                     try: txt = el.find_element(By.XPATH, "./../..").text.strip()
-                     except: pass
-
                 lines = txt.split('\n')
                 cat_num = None; price_val = None
+                section_name = None
                 
-                # Parse lines
                 for line in lines:
-                    # Check Category
+                    # Check for explicit Category
                     cat_m = re.search(r'Category\s+(\d)', line, re.I)
-                    if cat_m: cat_num = cat_m.group(1)
+                    if cat_m: 
+                        cat_num = cat_m.group(1)
                     
+                    # Check for Section (e.g. "Section 101" or just "101")
+                    # If we don't have a category, we might map sections to categories later, or just store as is
+                    if not cat_num:
+                        sec_m = re.search(r'(Section\s+)?(\d{3})', line, re.I)
+                        if sec_m:
+                            section_name = sec_m.group(0)
+
                     # Check Price
                     if '$' in line:
                         m = re.search(r'\$\s*([\d,]+)', line)
@@ -95,13 +100,20 @@ def extract_prices(driver):
                         if m: 
                             val = float(m.group(1).replace(',', ''))
                             price_val = round(val * ILS_TO_USD, 2)
-                            
-                # Store if valid
-                if cat_num and price_val:
-                     key = f'Category {cat_num}'
-                     # Keep lowest price found for this category
-                     if key not in prices or price_val < prices[key]:
-                         prices[key] = price_val
+                
+                # Logic to determine final category label
+                final_cat = None
+                if cat_num: 
+                    final_cat = f'Category {cat_num}'
+                elif section_name:
+                    # If we only have section, try to infer category or just use section name
+                    # For now, let's just use the section name if no category is present
+                    final_cat = section_name
+                
+                if final_cat and price_val:
+                     # Keep lowest price found for this category/section
+                     if final_cat not in prices or price_val < prices[final_cat]:
+                         prices[final_cat] = price_val
                          count_found += 1
             except: continue
             
