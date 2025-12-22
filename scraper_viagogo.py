@@ -51,85 +51,49 @@ def extract_prices(driver):
         prices = {}
         
         # ---------------------------------------------------------
-        # STRATEGY 0: Check "Select Category/Section" Buttons (High Precision)
+        # STRATEGY 0: "Category Button" Scan (Golden Path)
+        # Target: <button aria-label="Select Category 1..."> OR <button><p>Category 1</p><p>$100</p></button>
         # ---------------------------------------------------------
         try:
-            # Look for buttons that specifically say "Select Category X - $Price" or "Select Section X"
-            # We use a broad searching XPath to catch any button with "Select" and "$" in label
-            cat_buttons = driver.find_elements(By.XPATH, "//button[contains(@aria-label, 'Select') and (contains(@aria-label, '$') or contains(@aria-label, '₪'))]")
+            # 1. Wait briefly for these critical buttons to render
+            for _ in range(5):
+                golden_btns = driver.find_elements(By.XPATH, "//button[contains(@aria-label, 'Select Category') or descendant::p[contains(text(), 'Category')]]")
+                if golden_btns: break
+                time.sleep(1)
             
-            for btn in cat_buttons:
+            for btn in golden_btns:
                 try:
+                    # Option A: Check Aria Label (Fastest)
                     aria_txt = btn.get_attribute('aria-label')
-                    # Regex: Matches "Select (Category|Section) (101) ... ($)(500)"
-                    m = re.search(r'(Category|Section|Block)\s+([A-Z0-9]+).*?(\$|₪)\s*([\d,]+)', aria_txt, re.I)
-                    
-                    if m:
-                        type_label = m.group(1).lower() # category, section...
-                        id_label = m.group(2) # 1, 101, CS2
-                        sym = m.group(3)
-                        val = float(m.group(4).replace(',', ''))
-                        
-                        if sym == '₪': val = round(val * ILS_TO_USD, 2)
-                        
-                        final_cat = None
-                        if 'category' in type_label:
-                            final_cat = f'Category {id_label}'
-                        else:
-                            # Map Section/Block to Category
-                            clean_id = id_label
-                            digits = ''.join(filter(str.isdigit, clean_id))
-                            sec_int = int(digits) if digits else 0
-                            lower_id = clean_id.lower()
+                    if aria_txt and 'Category' in aria_txt:
+                        m = re.search(r'Category\s+(\d+).*?(\$|₪)\s*([\d,]+)', aria_txt, re.I)
+                        if m:
+                            cat_key = f"Category {m.group(1)}"
+                            val = float(m.group(3).replace(',', ''))
+                            if m.group(2) == '₪': val = round(val * ILS_TO_USD, 2)
                             
-                            if 'cs' in lower_id or 'club' in lower_id or 'vip' in lower_id: final_cat = 'Category 1'
-                            elif 'w' in lower_id: final_cat = 'Category 1'
-                            elif 't' in lower_id: final_cat = 'Category 4'
-                            elif sec_int > 0:
-                                if 100 <= sec_int < 200: final_cat = 'Category 1'
-                                elif 200 <= sec_int < 300: final_cat = 'Category 2'
-                                elif 300 <= sec_int < 400: final_cat = 'Category 2'
-                                elif 400 <= sec_int < 500: final_cat = 'Category 3'
-                                else: final_cat = 'Category 4'
-                            else:
-                                final_cat = 'Category 4'
-                        
-                        if final_cat:
-                             if final_cat not in prices or val < prices[final_cat]:
-                                 prices[final_cat] = val
+                            if cat_key not in prices or val < prices[cat_key]:
+                                prices[cat_key] = val
+                            continue # Successfully parsed via Aria
+                    
+                    # Option B: Check Inner Text (p tags)
+                    # Structure: <p>Category 1</p> <p>$1,608</p>
+                    full_txt = btn.text.replace('\n', ' ')
+                    if 'Category' in full_txt and ('$' in full_txt or '₪' in full_txt):
+                        # Regex to find "Category X ... $Price" in the flattened text
+                        m_txt = re.search(r'Category\s+(\d+).*?(\$|₪)\s*([\d,]+)', full_txt, re.I)
+                        if m_txt:
+                            cat_key = f"Category {m_txt.group(1)}"
+                            val = float(m_txt.group(3).replace(',', ''))
+                            if m_txt.group(2) == '₪': val = round(val * ILS_TO_USD, 2)
+                            
+                            if cat_key not in prices or val < prices[cat_key]:
+                                prices[cat_key] = val
                 except: pass
         except: pass
-        
+
         if len(prices) > 0:
             return prices # Found golden data, return immediately
-
-        # ---------------------------------------------------------
-        # STRATEGY -1: "Simple HTML" (User Request)
-        # Search for text "Category 1", "Category 2"... and find price sibling
-        # ---------------------------------------------------------
-        try:
-             # Find explicit text nodes "Category X"
-             for i in range(1, 5):
-                 cat_name = f"Category {i}"
-                 try:
-                     cat_els = driver.find_elements(By.XPATH, f"//*[contains(text(), '{cat_name}')]")
-                     for el in cat_els:
-                         try:
-                             parent = el.find_element(By.XPATH, "..")
-                             full_text = parent.text
-                             m_price = re.search(r'(\$|₪)\s*([\d,]+)', full_text)
-                             if m_price:
-                                 val = float(m_price.group(2).replace(',', ''))
-                                 if m_price.group(1) == '₪': val = round(val * ILS_TO_USD, 2)
-                                 
-                                 if cat_name not in prices or val < prices[cat_name]:
-                                     prices[cat_name] = val
-                         except: pass
-                 except: pass
-        except: pass
-        
-        if len(prices) > 0:
-            return prices
             
         # ---------------------------------------------------------
         # STRATEGY 1: Listing Buttons (Standard View)
