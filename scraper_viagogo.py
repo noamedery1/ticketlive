@@ -255,7 +255,7 @@ def run_scraper_cycle():
                     # -------------------------------------------------------------
                     if not prices:
                         try:
-                            # 1. Search for Listings Count
+                            # 1. Search for Listings Count (to reveal Pills)
                             listings_clicked = False
                             list_els = driver.find_elements(By.XPATH, "//*[contains(text(), 'listings')]")
                             for le in list_els:
@@ -267,46 +267,10 @@ def run_scraper_cycle():
                                      listings_clicked = True
                                      break
                             
-                            # 2. Search for Sections (Hidden Categories)
-                            # We search for "101", "201" etc.
-                            interact_success = False
-                            targets = list(range(101, 121)) + list(range(201, 211))
-                            
-                            for k in targets:
-                                try:
-                                    els = driver.find_elements(By.XPATH, f"//*[contains(text(), '{k}')]")
-                                    for el in els:
-                                        txt = el.text.strip()
-                                        if len(txt) < 25 and (txt == str(k) or f"Section {k}" in txt or f"Sec {k}" in txt):
-                                            print(f"      🖱️ Clicking Section: '{txt}'")
-                                            try: driver.execute_script("arguments[0].click();", el)
-                                            except: el.click()
-                                            time.sleep(3.5)
-                                            interact_success = True
-                                            
-                                            # CONTEXT SCAN IS CRITICAL HERE
-                                            # We just clicked "101". Any price we see now is "Category 1".
-                                            body_text = driver.find_element(By.TAG_NAME, 'body').text
-                                            price_matches = re.findall(r'(?:\$|₪)\s*([\d,]+)', body_text)
-                                            if price_matches:
-                                                 sec_int = int(k)
-                                                 cat_map = 'Category 4'
-                                                 if 100 <= sec_int < 200: cat_map = 'Category 1'
-                                                 elif 200 <= sec_int < 300: cat_map = 'Category 2'
-                                                 elif 300 <= sec_int < 400: cat_map = 'Category 2'
-                                                 elif 400 <= sec_int < 500: cat_map = 'Category 3'
-                                                 
-                                                 # Find cheapest new price
-                                                 for pstr in price_matches:
-                                                     val = float(pstr.replace(',', ''))
-                                                     if val > 10:
-                                                         if '₪' in body_text: val = round(val * ILS_TO_USD, 2)
-                                                         if cat_map not in prices or val < prices[cat_map]:
-                                                             prices[cat_map] = val
-                                            break
-                                except: pass
-                                if interact_success: break # Stop after one successful click
-                                
+                            if listings_clicked:
+                                print('   � Listings expanded. Retrying Pill Scan...')
+                                prices = extract_prices(driver)
+
                         except: pass
 
                     if prices:
