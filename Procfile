@@ -1,0 +1,1 @@
+web: python RUN_EVERYTHING.py
