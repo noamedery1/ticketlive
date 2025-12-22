@@ -105,6 +105,60 @@ def extract_prices(driver):
                 except: pass
         except: pass
         
+        if len(prices) > 0:
+            return prices
+
+        # ---------------------------------------------------------
+        # STRATEGY 1: Section Scan -> Strict Category Mapping (Fallback)
+        # Use this ONLY if explicit Category buttons are missing (e.g. Match 79).
+        # We find "Section 101" and map it to "Category 1".
+        # We NEVER output "Section X".
+        # ---------------------------------------------------------
+        try:
+             # Find elements with "$" or "₪"
+             price_els = driver.find_elements(By.XPATH, "//*[contains(text(), '$') or contains(text(), '₪')]")
+             for pel in price_els:
+                 try:
+                     # Get text of price + parent (context)
+                     txt = pel.text.strip()
+                     parent_txt = pel.find_element(By.XPATH, "..").text.strip()
+                     full_line = (parent_txt + " " + txt).replace('\n', ' ')
+                     
+                     # Extract Price
+                     m_price = re.search(r'(\$|₪)\s*([\d,]+)', full_line)
+                     if not m_price: continue
+                     
+                     val = float(m_price.group(2).replace(',', ''))
+                     if m_price.group(1) == '₪': val = round(val * ILS_TO_USD, 2)
+
+                     # Look for Section Number
+                     # Matches "101", "Section 101", "W105"
+                     sec_m = re.search(r'\b([A-Z]*\d{3}[A-Z]*)\b', full_line)
+                     if sec_m:
+                         sec_str = sec_m.group(1)
+                         digits = ''.join(filter(str.isdigit, sec_str))
+                         if not digits: continue
+                         sec_int = int(digits)
+                         if sec_int > 600: continue # Likely not a section
+                         
+                         cat_key = 'Category 4' # Default
+                         
+                         # STRICT MAPPING LOGIC
+                         if 100 <= sec_int < 200: cat_key = 'Category 1'
+                         elif 200 <= sec_int < 300: cat_key = 'Category 2'
+                         elif 300 <= sec_int < 400: cat_key = 'Category 2'
+                         elif 400 <= sec_int < 500: cat_key = 'Category 3'
+                         
+                         # Override for Club/VIP
+                         if 'club' in full_line.lower() or 'vip' in full_line.lower(): cat_key = 'Category 1'
+                         
+                         # Save ONLY if valid price
+                         if val > 10:
+                             if cat_key not in prices or val < prices[cat_key]:
+                                 prices[cat_key] = val
+                 except: pass
+        except: pass
+        
         return prices
 
     except Exception as e: 
