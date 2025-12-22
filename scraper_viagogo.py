@@ -4,7 +4,6 @@ import re
 import time
 import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from datetime import datetime
 
 # ==========================================
@@ -28,8 +27,7 @@ def append_data(file_path, new_records):
 
 def extract_prices_clean(driver):
     """
-    Clean, robust strategy to find 'Category X' labels and associated prices.
-    Strategy: Find 'Category X' text -> Check Container -> Find Price.
+    Clean, robust strategy to find 'Category X' labels and fallback to Section Mapping.
     """
     prices = {}
     try:
@@ -39,22 +37,20 @@ def extract_prices_clean(driver):
         driver.execute_script("window.scrollTo(0, 0);")
         time.sleep(0.5)
         
-        # 1. Wait for "Category" text to appear (Dynamic Loading)
-        for _ in range(10):
+        # 1. Wait for "Category" text or "Section" text
+        for _ in range(5):
             body_txt = driver.find_element(By.TAG_NAME, 'body').text
-            if 'Category' in body_txt or 'Cat ' in body_txt:
+            if 'Category' in body_txt or 'Cat ' in body_txt or '101' in body_txt:
                 break
             time.sleep(1)
 
         # ------------------------------------------------------------------
-        # APPROACH 1: "Anchor & Context" (Robust)
+        # APPROACH 1: "Anchor & Context" (Category Labels)
         # ------------------------------------------------------------------
-        # We look for explicit Category labels: 1, 2, 3, 4
-        # We look for explicit Category labels: 1, 2, 3, 4
         for i in range(1, 5):
             cat_name = f"Category {i}"
             
-            # Find all elements containing this specific text
+            # Find all elements containing this text
             anchors = driver.find_elements(By.XPATH, f"//*[contains(normalize-space(text()), '{cat_name}')]")
             if not anchors:
                  anchors = driver.find_elements(By.XPATH, f"//*[contains(normalize-space(text()), 'Cat {i}')]")
@@ -80,11 +76,9 @@ def extract_prices_clean(driver):
                                 full_match = pm.group(0)
                                 val = float(p_str.replace(',', ''))
                                 
-                                # Filters
                                 if val < 35: continue 
                                 if val > 50000: continue 
                                 
-                                # Currency
                                 is_ils = '₪' in full_match or 'ILS' in full_match or 'NIS' in full_match
                                 if not is_ils and ('₪' in txt or 'ILS' in txt or 'NIS' in txt): is_ils = True
                                 if is_ils: val = round(val * ILS_TO_USD, 2)
@@ -127,41 +121,55 @@ def extract_prices_clean(driver):
                 prices[cat_name] = best_price
 
         # ------------------------------------------------------------------
-        # APPROACH 2: Aria-Label Scan (Backup for Screen Readers)
+        # APPROACH 2: Interactive Section Mapping (Fallback if No Categories Found)
         # ------------------------------------------------------------------
         if not prices:
-            aria_els = driver.find_elements(By.XPATH, "//*[@aria-label]")
-            for el in aria_els:
-                try:
-                    txt = el.get_attribute('aria-label')
-                    if 'Category' in txt:
-                        m_cat = re.search(r'Category\s+(\d)', txt, re.I)
-                        m_price = re.search(r'(\$|₪|USD)\s*([\d,]+)', txt)
+            # Map of Section Series -> Category
+            series_map = {'1': 'Category 1', '2': 'Category 2', '3': 'Category 3', '4': 'Category 4'}
+            
+            for prefix, cat_label in series_map.items():
+                if cat_label in prices: continue 
+                
+                # Check typical sections: 101, 102, 103...
+                for suffix in ['01', '02', '03', '04', '05', '10']: 
+                    sec_id = f"{prefix}{suffix}"
+                    try:
+                        els = driver.find_elements(By.XPATH, f"//*[contains(text(), '{sec_id}')]")
+                        target_el = None
+                        for el in els:
+                            t = el.text.strip()
+                            if t == sec_id or t == f"Section {sec_id}":
+                                target_el = el
+                                break
                         
-                        if m_cat and m_price:
-                            c = m_cat.group(1)
-                            p = float(m_price.group(2).replace(',', ''))
-                            if '₪' in txt: p = round(p * ILS_TO_USD, 2)
+                        if target_el and target_el.is_displayed():
+                            print(f"      🖱️ Mapping Section {sec_id} -> {cat_label}...")
+                            try: driver.execute_script("arguments[0].click();", target_el)
+                            except: target_el.click()
+                            time.sleep(1.5) 
                             
-                            key = f"Category {c}"
-                            if int(c) <= 4:
-                                prices[key] = p
-                except: pass
-
-        if not prices:
-            # DEBUG: Print Body snippet to see what's actually there
-            try:
-                page_title = driver.title
-                print(f"      [DEBUG TITLE] {page_title}")
-                
-                body_txt = driver.find_element(By.TAG_NAME, 'body').text
-                clean_body = body_txt[:500].replace('\n', ' | ')
-                print(f"      [DEBUG BODY] {clean_body}...")
-                
-                # Check if "Category" exists ANYWHERE
-                if 'Category' not in body_txt:
-                     print("      ⚠️ 'Category' word NOT found in body text.")
-            except: pass
+                            # Scan body for NEW price
+                            body_txt = driver.find_element(By.TAG_NAME, 'body').text
+                            pm = re.findall(r'(?:\$|₪|USD)?\s*([\d,]{2,})', body_txt)
+                            found_p = None
+                            curr_min = float('inf')
+                            
+                            for p_str in pm:
+                                try:
+                                    v = float(p_str.replace(',', ''))
+                                    if v < 35: continue
+                                    if v > 10000: continue
+                                    if '₪' in body_txt: v = round(v * ILS_TO_USD, 2)
+                                    if v < curr_min:
+                                        curr_min = v
+                                        found_p = v
+                                except: pass
+                                
+                            if found_p:
+                                prices[cat_label] = found_p
+                                print(f"      ✅ Mapped: {cat_label} = {found_p}")
+                                break # Done with this category
+                    except: pass
 
         return prices
 
@@ -188,15 +196,12 @@ def get_driver():
 
         for attempt in range(3):
             try:
-                driver = uc.Chrome(
-                    options=options, version_main=None, 
-                    browser_executable_path=browser_path, driver_executable_path=driver_path
-                )
+                driver = uc.Chrome(options=options, version_main=None, browser_executable_path=browser_path, driver_executable_path=driver_path)
                 driver.set_page_load_timeout(60)
                 return driver
             except OSError as e:
-                if 'Text file busy' in str(e): time.sleep(5)
-                else: raise e
+                time.sleep(5)
+                if attempt == 2: raise e
     except Exception as e:
         print(f'❌ [ERROR] Failed to start Chrome Driver: {e}')
         return None
@@ -237,14 +242,13 @@ def run_scraper_cycle():
                     if '502' in driver.title:
                         time.sleep(5); continue
                         
-                    # 1. Try standard extract
+                    # 1. Try standard extract (Includes Section Fallback)
                     prices = extract_prices_clean(driver)
                     
                     # 2. Interactive: Click "Listings" summary if no data found
                     if not prices:
                         try:
                             listings_clicked = False
-                            # Look for clickable "X listings" text
                             list_els = driver.find_elements(By.XPATH, "//*[contains(text(), 'listings')]")
                             for le in list_els:
                                 if 'ticket' not in le.text.lower() and len(le.text) < 30 and le.is_displayed():
@@ -254,7 +258,7 @@ def run_scraper_cycle():
                                      time.sleep(3)
                                      listings_clicked = True
                                      break
-                                     
+                            
                             if listings_clicked:
                                 print('   🔄 Listings expanded. Retrying extraction...')
                                 prices = extract_prices_clean(driver)
@@ -271,22 +275,11 @@ def run_scraper_cycle():
                         # SAVE IMMEDIATELY
                         if new_records_buffer:
                              append_data(DATA_FILE_VIAGOGO, new_records_buffer)
-                             new_records_buffer = [] # Clear buffer
+                             new_records_buffer = [] 
                         break 
                     else:
                         print('❌ No data found.')
-                        # DEBUG: Print Body snippet to see what's actually there
-                        try:
-                            # page_title = driver.title 
-                            # print(f"      [DEBUG TITLE] {page_title}")
-                            
-                            # body_txt = driver.find_element(By.TAG_NAME, 'body').text
-                            # clean_body = body_txt[:500].replace('\n', ' | ')
-                            # print(f"      [DEBUG BODY] {clean_body}...")
-                            
-                            # Check if "Category" exists ANYWHERE
-                            pass # clean logs
-                        except: pass
+                        # Debug logic hidden to keep logs clean
                         break
                         
                 except Exception as e: 
@@ -294,8 +287,6 @@ def run_scraper_cycle():
                     if 'crashed' in msg or 'disconnected' in msg: raise e 
                     time.sleep(2)
             time.sleep(1) 
-
-        if new_records_buffer: append_data(DATA_FILE_VIAGOGO, new_records_buffer)
         
         time.sleep(1.0)
         
