@@ -9,9 +9,7 @@ from datetime import datetime
 
 EUR_TO_USD = 1.05  # Approximate rate
 
-def scrape_ftn_single(url, match_name):
-    print(f'   Scraping {match_name[:30]}...')
-    
+def get_driver():
     try:
         options = uc.ChromeOptions()
         if os.environ.get('HEADLESS') == 'true':
@@ -19,12 +17,23 @@ def scrape_ftn_single(url, match_name):
             options.add_argument('--no-sandbox')
             options.add_argument('--disable-dev-shm-usage')
             options.add_argument('--disable-gpu')
-            
-        driver = uc.Chrome(options=options)
+        
+        browser_path = '/usr/bin/chromium' if os.path.exists('/usr/bin/chromium') else None
+        driver_path = '/usr/bin/chromedriver' if os.path.exists('/usr/bin/chromedriver') else None
+
+        driver = uc.Chrome(
+            options=options,
+            version_main=None,
+            browser_executable_path=browser_path,
+            driver_executable_path=driver_path
+        )
+        return driver
     except Exception as e:
         print(f'❌ [ERROR] Chrome Driver init failed: {e}')
-        return []
+        return None
 
+def scrape_ftn_single(driver, url, match_name):
+    print(f'   Scraping {match_name[:30]}...')
     prices_found_for_match = defaultdict(lambda: float('inf'))
 
     try:
@@ -81,11 +90,8 @@ def scrape_ftn_single(url, match_name):
         return records
 
     except Exception as e:
-        print(f'      🔥 Error: {e}')
+        print(f'      🔥 Error during scraping: {e}')
         return []
-    finally:
-        try: driver.quit()
-        except: pass
 
 def run_ftn_scraper_cycle():
     GAMES_FILE = 'all_games_ftn_to_scrape.json'
@@ -102,20 +108,33 @@ def run_ftn_scraper_cycle():
         
     print(f'   Target: {len(games)} games...')
     
-    existing_data = []
-    if os.path.exists(OUTPUT_FILE):
-        try:
-            with open(OUTPUT_FILE, 'r') as f: existing_data = json.load(f)
-        except: pass
-    
-    for i, game in enumerate(games):
-        new_records = scrape_ftn_single(game['url'], game['match_name'])
-        if new_records:
-            existing_data.extend(new_records)
-            with open(OUTPUT_FILE, 'w') as f:
-                json.dump(existing_data, f, indent=2)
+    # Initialize driver ONCE
+    driver = get_driver()
+    if not driver:
+        return
+
+    try:
+        existing_data = []
+        if os.path.exists(OUTPUT_FILE):
+            try:
+                with open(OUTPUT_FILE, 'r') as f: existing_data = json.load(f)
+            except: pass
         
-        time.sleep(2) 
+        for i, game in enumerate(games):
+            new_records = scrape_ftn_single(driver, game['url'], game['match_name'])
+            if new_records:
+                existing_data.extend(new_records)
+                with open(OUTPUT_FILE, 'w') as f:
+                    json.dump(existing_data, f, indent=2)
+            
+            time.sleep(2) 
+            
+    except Exception as e:
+        print(f'🔥 Fatal Error in FTN Cycle: {e}')
+    finally:
+        if driver:
+            try: driver.quit()
+            except: pass
     
     print(f'[{datetime.now().strftime("%H:%M")}] 💤 FTN CYCLE COMPLETE.')
 

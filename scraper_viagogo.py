@@ -68,7 +68,15 @@ def run_scraper_cycle():
             options.add_argument('--disable-dev-shm-usage')
             options.add_argument('--disable-gpu')
 
-        driver = uc.Chrome(options=options, version_main=None)
+        browser_path = '/usr/bin/chromium' if os.path.exists('/usr/bin/chromium') else None
+        driver_path = '/usr/bin/chromedriver' if os.path.exists('/usr/bin/chromedriver') else None
+
+        driver = uc.Chrome(
+            options=options, 
+            version_main=None, 
+            browser_executable_path=browser_path, 
+            driver_executable_path=driver_path
+        )
         driver.set_page_load_timeout(60)
     except Exception as e:
         print(f'❌ [ERROR] Failed to start Chrome Driver: {e}')
