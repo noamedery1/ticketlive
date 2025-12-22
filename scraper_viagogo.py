@@ -441,15 +441,21 @@ def run_scraper_cycle():
                         print('   ⚠️ No passive data. Attempting interactive click...')
                         try:
                             interact_success = False
-                            for k in range(101, 130): 
+                            # Scan common section ranges (Lower and Mid tiers)
+                            targets = list(range(101, 121)) + list(range(201, 211))
+                            for k in targets: 
                                 try:
-                                    els = driver.find_elements(By.XPATH, f"//*[normalize-space(text())='{k}']")
+                                    # Look for "101" OR "Section 101"
+                                    els = driver.find_elements(By.XPATH, f"//*[contains(text(), '{k}')]")
                                     for el in els:
-                                        if el.is_displayed() and el.is_enabled():
-                                            driver.execute_script("arguments[0].click();", el)
-                                            time.sleep(2.5) 
-                                            interact_success = True
-                                            break
+                                        txt = el.text.strip()
+                                        # Click only if text is short (button-like) e.g. "101" or "Section 101"
+                                        if len(txt) < 25 and (txt == str(k) or f"Section {k}" in txt or f"Sec {k}" in txt):
+                                            if el.is_displayed() and el.is_enabled():
+                                                driver.execute_script("arguments[0].click();", el)
+                                                time.sleep(2.5) 
+                                                interact_success = True
+                                                break
                                 except: pass
                                 if interact_success: break
                             
