@@ -432,14 +432,16 @@ def run_scraper_cycle():
                                         els = driver.find_elements(By.XPATH, f"//*[contains(text(), '{k}')]")
                                         for el in els:
                                             txt = el.text.strip()
+                                            # Debug visibility
+                                            # print(f"         > Candidate {k}: '{txt[:20]}'...") 
+                                            
                                             if len(txt) < 25 and (txt == str(k) or f"Section {k}" in txt or f"Sec {k}" in txt):
-                                                if el.is_displayed() and el.is_enabled():
-                                                    print(f"      🖱️ Clicking Section: '{txt}'")
-                                                    try: el.click()
-                                                    except: driver.execute_script("arguments[0].click();", el)
-                                                    time.sleep(3.5) 
-                                                    interact_success = True
-                                                    break
+                                                print(f"      🖱️ Clicking Section: '{txt}'")
+                                                try: driver.execute_script("arguments[0].click();", el)
+                                                except: el.click()
+                                                time.sleep(3.5) 
+                                                interact_success = True
+                                                break
                                     except: pass
                                     if interact_success: break
                                 
