@@ -405,23 +405,37 @@ def run_scraper_cycle():
                         print('   ⚠️ No passive data. Attempting interactive click...')
                         try:
                             interact_success = False
-                            # Scan common section ranges (Lower and Mid tiers)
-                            targets = list(range(101, 121)) + list(range(201, 211))
-                            for k in targets: 
-                                try:
-                                    # Look for "101" OR "Section 101"
-                                    els = driver.find_elements(By.XPATH, f"//*[contains(text(), '{k}')]")
-                                    for el in els:
-                                        txt = el.text.strip()
-                                        # Click only if text is short (button-like) e.g. "101" or "Section 101"
-                                        if len(txt) < 25 and (txt == str(k) or f"Section {k}" in txt or f"Sec {k}" in txt):
-                                            if el.is_displayed() and el.is_enabled():
-                                                driver.execute_script("arguments[0].click();", el)
-                                                time.sleep(2.5) 
-                                                interact_success = True
-                                                break
-                                except: pass
-                                if interact_success: break
+                            # 1. Try Clicking "See Listings" or similar count (e.g. "14 listings")
+                            try:
+                                list_els = driver.find_elements(By.XPATH, "//*[contains(text(), 'listings')]")
+                                for le in list_els:
+                                    if 'ticket' not in le.text.lower() and len(le.text) < 30 and le.is_displayed():
+                                         print(f"      🖱️ Clicking Listing Summary: '{le.text}'")
+                                         try: le.click()
+                                         except: driver.execute_script("arguments[0].click();", le)
+                                         time.sleep(3)
+                                         interact_success = True
+                                         break
+                            except: pass
+
+                            # 2. Try Clicking Sections
+                            if not interact_success:
+                                targets = list(range(101, 121)) + list(range(201, 211))
+                                for k in targets: 
+                                    try:
+                                        els = driver.find_elements(By.XPATH, f"//*[contains(text(), '{k}')]")
+                                        for el in els:
+                                            txt = el.text.strip()
+                                            if len(txt) < 25 and (txt == str(k) or f"Section {k}" in txt or f"Sec {k}" in txt):
+                                                if el.is_displayed() and el.is_enabled():
+                                                    print(f"      🖱️ Clicking Section: '{txt}'")
+                                                    try: el.click()
+                                                    except: driver.execute_script("arguments[0].click();", el)
+                                                    time.sleep(3.5) 
+                                                    interact_success = True
+                                                    break
+                                    except: pass
+                                    if interact_success: break
                             
                             if interact_success:
                                 print('   🔄 Content updated? Retrying extraction...')
@@ -439,7 +453,7 @@ def run_scraper_cycle():
                             break
                         
                         print('❌ No data found.')
-                        # DEBUG
+                        # DEBUG: Save HTML to inspect layout of failed pages
                         try:
                             with open(f'debug_failed_scrape_{i}.html', 'w', encoding='utf-8') as f:
                                 f.write(driver.page_source)
@@ -452,7 +466,7 @@ def run_scraper_cycle():
                         print(f"   [DEBUG] Title: {title}")
                         print(f"   [DEBUG] URL: {current_url}")
                         print(f"   [DEBUG] Body Snippet: {body}...")
-                        break 
+                        break # No data but page loaded OK, don't retry same page
                         
                 except Exception as e: 
                     print(f'❌ Error: {e}')
