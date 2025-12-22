@@ -31,17 +31,16 @@ def extract_prices(driver):
         time.sleep(8)
         
         # 0. Anti-bot / Lazy load behavior
-        # Send physical keys which often triggers listeners better than JS scrolling
+        # Trigger potential lazy loading of the ticket grid
         try:
-            body_el = driver.find_element(By.TAG_NAME, 'body')
-            body_el.send_keys(Keys.PAGE_DOWN)
+            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(2)
+            driver.execute_script("window.scrollTo(0, document.body.scrollHeight - 500);")
             time.sleep(1)
-            body_el.send_keys(Keys.PAGE_DOWN)
-            time.sleep(2)
-        except:
-             # Fallback to JS if keys fail
-            driver.execute_script("window.scrollTo(0, document.body.scrollHeight/2);")
-            time.sleep(2)
+            body_el = driver.find_element(By.TAG_NAME, 'body')
+            body_el.send_keys(Keys.HOME) # Go back to top to scan from start? No, stay down? 
+            # Actually, we want to scan the whole page.
+        except: pass
 
         # 1. Debug: Check where we actually are
         page_title = driver.title
