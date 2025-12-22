@@ -28,28 +28,71 @@ def append_data(file_path, new_records):
 def extract_prices(driver):
     try:
         time.sleep(8)
-        buttons = driver.find_elements(By.TAG_NAME, 'button')
+        
+        # 1. Debug: Check where we actually are
+        page_title = driver.title
+        # print(f"      ℹ️ Page Title: {page_title}")
+        
+        if 'pardon' in page_title.lower() or 'denied' in page_title.lower() or 'robot' in page_title.lower():
+             print(f"      ⚠️ BLOCK DETECTED: {page_title}")
+             return {}
+
         prices = {}
-        for btn in buttons:
-            txt = btn.text
-            if 'Category' not in txt: continue
-            lines = txt.split('\n')
-            cat_num = None; price_val = None
-            for line in lines:
-                cat_m = re.search(r'Category\s+(\d)', line, re.I)
-                if cat_m: cat_num = cat_m.group(1)
+        
+        # 2. General strategy: Find any element detailing a "Category"
+        # This covers <div>, <span>, <button>, etc.
+        elements = driver.find_elements(By.XPATH, "//*[contains(text(), 'Category')]")
+        
+        # If no explicit 'Category' text found, try looking for general listing containers (fallback)
+        if not elements:
+             # Sometimes they just say "Section 105" etc. But we specifically want Categories for this app.
+             pass
+
+        count_found = 0
+        for el in elements:
+            try:
+                # Get text of the element. If it's short, get the parent's text.
+                txt = el.text.strip()
+                if len(txt) < 10: # likely just "Category 1" without price
+                     try: txt = el.find_element(By.XPATH, "./..").text.strip()
+                     except: pass
                 
-                if '$' in line:
-                    m = re.search(r'\$\s*([\d,]+)', line)
-                    if m: price_val = float(m.group(1).replace(',', ''))
-                elif '₪' in line and price_val is None:
-                    m = re.search(r'₪([\d,]+)', line)
-                    if m: 
-                        val = float(m.group(1).replace(',', ''))
-                        price_val = round(val * ILS_TO_USD, 2)
-            if cat_num and price_val: prices[f'Category {cat_num}'] = price_val
+                if len(txt) < 10: # still too short, go one more up
+                     try: txt = el.find_element(By.XPATH, "./../..").text.strip()
+                     except: pass
+
+                lines = txt.split('\n')
+                cat_num = None; price_val = None
+                
+                # Parse lines
+                for line in lines:
+                    # Check Category
+                    cat_m = re.search(r'Category\s+(\d)', line, re.I)
+                    if cat_m: cat_num = cat_m.group(1)
+                    
+                    # Check Price
+                    if '$' in line:
+                        m = re.search(r'\$\s*([\d,]+)', line)
+                        if m: price_val = float(m.group(1).replace(',', ''))
+                    elif '₪' in line and price_val is None:
+                        m = re.search(r'₪([\d,]+)', line)
+                        if m: 
+                            val = float(m.group(1).replace(',', ''))
+                            price_val = round(val * ILS_TO_USD, 2)
+                            
+                # Store if valid
+                if cat_num and price_val:
+                     key = f'Category {cat_num}'
+                     # Keep lowest price found for this category
+                     if key not in prices or price_val < prices[key]:
+                         prices[key] = price_val
+                         count_found += 1
+            except: continue
+            
         return prices
-    except: return {}
+    except Exception as e: 
+        print(f"      ⚠️ Extract Error: {e}")
+        return {}
 
 def get_driver():
     try:
