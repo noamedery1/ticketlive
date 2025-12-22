@@ -142,7 +142,8 @@ def extract_prices_clean(driver):
                 print(f"      [DEBUG TITLE] {page_title}")
                 
                 body_txt = driver.find_element(By.TAG_NAME, 'body').text
-                print(f"      [DEBUG BODY] {body_txt[:500].replace('\n', ' | ')}...")
+                clean_body = body_txt[:500].replace('\n', ' | ')
+                print(f"      [DEBUG BODY] {clean_body}...")
                 
                 # Check if "Category" exists ANYWHERE
                 if 'Category' not in body_txt:
