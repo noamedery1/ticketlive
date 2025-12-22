@@ -26,156 +26,109 @@ def append_data(file_path, new_records):
     data.extend(new_records)
     with open(file_path, 'w') as f: json.dump(data, f)
 
-def extract_prices(driver):
+def extract_prices_clean(driver):
+    """
+    Clean, robust strategy to find 'Category X' labels and associated prices.
+    Strategy: Find 'Category X' text -> Check Container -> Find Price.
+    """
+    prices = {}
     try:
-        time.sleep(5)
-        
-        # 0. Anti-bot / Lazy load behavior
-        try:
-            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-            time.sleep(1)
-            driver.execute_script("window.scrollTo(0, 0);")
-        except: pass
+        # 0. Trigger visual rendering
+        driver.execute_script("window.scrollBy(0, 200);")
+        time.sleep(1)
 
-        # 1. Debug: Check where we actually are
-        page_title = driver.title
-        if 'pardon' in page_title.lower() or 'denied' in page_title.lower() or 'robot' in page_title.lower():
-             print(f"      ⚠️ BLOCK DETECTED: {page_title}")
-             return {}
+        # ------------------------------------------------------------------
+        # APPROACH 1: "Anchor & Context" (Robust)
+        # ------------------------------------------------------------------
+        # We look for explicit Category labels: 1, 2, 3, 4
+        for i in range(1, 5):
+            cat_name = f"Category {i}"
+            
+            # Find all elements containing this specific text
+            # We use a broad XPath to find ANY element with this text
+            anchors = driver.find_elements(By.XPATH, f"//*[contains(text(), '{cat_name}')]")
+            
+            best_price = None
+            
+            for anchor in anchors:
+                try:
+                    # 1. Get the container (Button or Div)
+                    # We climb up 3 levels maximum to find a meaningful container
+                    # e.g. span -> div -> button
+                    container = anchor
+                    valid_price = None
+                    
+                    # Check Anchor, Parent, Grandparent
+                    for _ in range(3):
+                        txt = container.text.replace('\n', ' ').strip()
+                        
+                        # Look for price pattern: $1,234 or 1,234
+                        # We specifically look for the number format
+                        price_matches = re.findall(r'(?:\$|₪|USD)?\s*([\d,]{2,})', txt)
+                        
+                        min_p = float('inf')
+                        found = False
+                        
+                        for p_str in price_matches:
+                            try:
+                                # Clean string "1,234" -> 1234.0
+                                val = float(p_str.replace(',', ''))
+                                
+                                # Filter out the Category number itself (e.g. "1") and garbage
+                                if val < 10: continue 
+                                if val > 50000: continue # Sanity cap
+                                
+                                # Currency Conversion
+                                if '₪' in txt: val = round(val * ILS_TO_USD, 2)
+                                
+                                if val < min_p:
+                                    min_p = val
+                                    found = True
+                            except: pass
+                        
+                        if found:
+                            valid_price = min_p
+                            break # Found a price in this container level, stop climbing
+                        
+                        # Climb up one level
+                        try: container = container.find_element(By.XPATH, "..")
+                        except: break
 
-        prices = {}
-        
-        # ---------------------------------------------------------
-        # STRATEGY 0: "Category Pill" Scan (Golden Path)
-        # Matches the screenshot: "Category 1 $1,296" pills above map.
-        # We look for ANY element containing "Category X" and a price.
-        # ---------------------------------------------------------
-        try:
-            # 0. Scroll to trigger lazy loading of pills
-            driver.execute_script("window.scrollBy(0, 300);")
-            time.sleep(1)
+                    if valid_price:
+                        if best_price is None or valid_price < best_price:
+                            best_price = valid_price
+                            # print(f"      [DEBUG] Found {cat_name}: ${best_price} in context: '{txt[:30]}...'")
+                            
+                except: pass
+            
+            if best_price:
+                prices[cat_name] = best_price
 
-            # 1. Aria-Label Scan (Broad)
-            # Catches <div role="button" aria-label="Category 1 $500">
+        # ------------------------------------------------------------------
+        # APPROACH 2: Aria-Label Scan (Backup for Screen Readers)
+        # ------------------------------------------------------------------
+        if not prices:
             aria_els = driver.find_elements(By.XPATH, "//*[@aria-label]")
             for el in aria_els:
                 try:
-                    aria_txt = el.get_attribute('aria-label')
-                    if 'Category' in aria_txt:
-                        m = re.search(r'Category\s+(\d+)', aria_txt, re.I)
-                        m_price = re.search(r'(\$|₪|USD)\s*([\d,]+)', aria_txt)
+                    txt = el.get_attribute('aria-label')
+                    if 'Category' in txt:
+                        m_cat = re.search(r'Category\s+(\d)', txt, re.I)
+                        m_price = re.search(r'(\$|₪|USD)\s*([\d,]+)', txt)
                         
-                        if m and m_price:
-                             cat_key = f"Category {m.group(1)}"
-                             val = float(m_price.group(2).replace(',', ''))
-                             if '₪' in m_price.group(0): val = round(val * ILS_TO_USD, 2)
-                             
-                             if m.group(1) in ['1','2','3','4']:
-                                 if cat_key not in prices or val < prices[cat_key]:
-                                     prices[cat_key] = val
-                except: pass
-
-            # 2. visual Text Scan (Pills)
-            potential_pills = driver.find_elements(By.XPATH, "//*[contains(text(), 'Category')]")
-            
-            for el in potential_pills:
-                try:
-                    txt = el.text.strip().replace('\n', ' ')
-                    # print(f"      [DEBUG] Candidate: {txt[:50]}...") # Un-comment to debug
-                    
-                    if len(txt) > 1000: continue # Increased limit
-                    
-                    # Regex: Allow stricter (with currency) first
-                    m = re.search(r'Category\s+(\d+).*?(\$|₪)\s*([\d,]+)', txt, re.I)
-                    
-                    # Fallback Regex: Loose
-                    if not m:
-                        m = re.search(r'Category\s+(\d+).*?\s+([\d,]{3,})', txt, re.I)
-
-                    # Check Parent
-                    if not m:
-                        try:
-                            parent = el.find_element(By.XPATH, "..")
-                            p_txt = parent.text.strip().replace('\n', ' ')
-                            if len(p_txt) < 1000:
-                                m = re.search(r'Category\s+(\d+).*?(\$|₪)\s*([\d,]+)', p_txt, re.I)
-                                
-                                # Check Grandparent (New layer of depth)
-                                if not m:
-                                    grand = parent.find_element(By.XPATH, "..")
-                                    g_txt = grand.text.strip().replace('\n', ' ')
-                                    if len(g_txt) < 1000:
-                                        m = re.search(r'Category\s+(\d+).*?(\$|₪)\s*([\d,]+)', g_txt, re.I)
-                        except: pass
-
-                    if m:
-                        cat_str = m.group(1)
-                        if cat_str in ['1','2','3','4']:
-                            cat_key = f"Category {cat_str}"
-                            # Group 3 is price in strict regex, Group 2 in loose fallback. logic needed.
-                            # Standardize finding the price group
-                            groups = m.groups()
-                            raw_price = None
-                            for g in groups:
-                                if g and re.match(r'^[\d,]+$', g):
-                                    raw_price = g
-                                    break
+                        if m_cat and m_price:
+                            c = m_cat.group(1)
+                            p = float(m_price.group(2).replace(',', ''))
+                            if '₪' in txt: p = round(p * ILS_TO_USD, 2)
                             
-                            if raw_price:
-                                val = float(raw_price.replace(',', ''))
-                                if '₪' in txt or ('p_txt' in locals() and '₪' in p_txt): 
-                                     val = round(val * ILS_TO_USD, 2)
-                                
-                                # Sanity check for price
-                                if val > 10:
-                                    if cat_key not in prices or val < prices[cat_key]:
-                                        prices[cat_key] = val
-                                        # print(f"      ✨ Found Pill: {cat_key} @ ${val}") 
+                            key = f"Category {c}"
+                            if int(c) <= 4:
+                                prices[key] = p
                 except: pass
-        except: pass
-        
-        if len(prices) > 0: return prices
-        
-        # ---------------------------------------------------------
-        # STRATEGY 1: Strict Section Mapping (Passive)
-        # ---------------------------------------------------------
-        try:
-             price_els = driver.find_elements(By.XPATH, "//*[contains(text(), '$') or contains(text(), '₪')]")
-             for pel in price_els:
-                 try:
-                     txt = pel.text.strip()
-                     parent_txt = pel.find_element(By.XPATH, "..").text.strip()
-                     full_line = (parent_txt + " " + txt).replace('\n', ' ')
-                     
-                     m_price = re.search(r'(\$|₪)\s*([\d,]+)', full_line)
-                     if not m_price: continue
-                     
-                     val = float(m_price.group(2).replace(',', ''))
-                     if m_price.group(1) == '₪': val = round(val * ILS_TO_USD, 2)
 
-                     sec_m = re.search(r'\b([A-Z]*\d{3}[A-Z]*)\b', full_line)
-                     if sec_m:
-                         sec_str = sec_m.group(1)
-                         digits = ''.join(filter(str.isdigit, sec_str))
-                         if not digits: continue
-                         sec_int = int(digits)
-                         if sec_int > 600: continue 
-                         
-                         cat_key = 'Category 4' 
-                         if 100 <= sec_int < 200: cat_key = 'Category 1'
-                         elif 200 <= sec_int < 300: cat_key = 'Category 2'
-                         elif 300 <= sec_int < 400: cat_key = 'Category 2'
-                         elif 400 <= sec_int < 500: cat_key = 'Category 3'
-                         
-                         if val > 10:
-                             if cat_key not in prices or val < prices[cat_key]:
-                                 prices[cat_key] = val
-                 except: pass
-        except: pass
-        
         return prices
 
-    except Exception as e: 
+    except Exception as e:
         print(f"      ⚠️ Extract Error: {e}")
         return {}
 
@@ -212,12 +165,13 @@ def get_driver():
         return None
 
 def run_scraper_cycle():
-    print(f'\n[{datetime.now().strftime("%H:%M")}] 🚀 VIAGOGO SCRAPER STARTING (INTELLIGENT MAPPING)...')
+    print(f'\n[{datetime.now().strftime("%H:%M")}] 🚀 VIAGOGO SCRAPER STARTING (CLEAN ANCHOR STRATEGY)...')
     if not os.path.exists(GAMES_FILE):
         print(f'❌ [ERROR] {GAMES_FILE} not found!')
         return
 
-    with open(GAMES_FILE, 'r') as f: games = json.load(f)
+    with open(GAMES_FILE, 'r') as games_f: 
+        games = json.load(games_f)
 
     driver = get_driver()
     timestamp = datetime.now().isoformat()
@@ -246,17 +200,14 @@ def run_scraper_cycle():
                     if '502' in driver.title:
                         time.sleep(5); continue
                         
-                    prices = extract_prices(driver)
+                    # 1. Try standard extract
+                    prices = extract_prices_clean(driver)
                     
-                    # -------------------------------------------------------------
-                    # INTERACTIVE FALLBACK:
-                    # If strict extraction fails, we MUST click sections to reveal prices.
-                    # BUT we will map them strictly to Categories.
-                    # -------------------------------------------------------------
+                    # 2. Interactive: Click "Listings" summary if no data found
                     if not prices:
                         try:
-                            # 1. Search for Listings Count (to reveal Pills)
                             listings_clicked = False
+                            # Look for clickable "X listings" text
                             list_els = driver.find_elements(By.XPATH, "//*[contains(text(), 'listings')]")
                             for le in list_els:
                                 if 'ticket' not in le.text.lower() and len(le.text) < 30 and le.is_displayed():
@@ -266,11 +217,10 @@ def run_scraper_cycle():
                                      time.sleep(3)
                                      listings_clicked = True
                                      break
-                            
+                                     
                             if listings_clicked:
-                                print('   � Listings expanded. Retrying Pill Scan...')
-                                prices = extract_prices(driver)
-
+                                print('   🔄 Listings expanded. Retrying extraction...')
+                                prices = extract_prices_clean(driver)
                         except: pass
 
                     if prices:
@@ -279,7 +229,7 @@ def run_scraper_cycle():
                                 'match_url': clean_url, 'match_name': match_name,
                                 'category': cat, 'price': price, 'currency': 'USD', 'timestamp': timestamp
                             })
-                        print(f'✅ Found {len(prices)} Categories')
+                        print(f'✅ Found {json.dumps(prices)}')
                         break 
                     else:
                         print('❌ No data found.')
