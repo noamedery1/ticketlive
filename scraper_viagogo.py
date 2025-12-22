@@ -66,14 +66,23 @@ def get_driver():
         browser_path = '/usr/bin/chromium' if os.path.exists('/usr/bin/chromium') else None
         driver_path = '/usr/bin/chromedriver' if os.path.exists('/usr/bin/chromedriver') else None
 
-        driver = uc.Chrome(
-             options=options, 
-             version_main=None, 
-             browser_executable_path=browser_path, 
-             driver_executable_path=driver_path
-        )
-        driver.set_page_load_timeout(60)
-        return driver
+        for attempt in range(3):
+            try:
+                driver = uc.Chrome(
+                    options=options, 
+                    version_main=None, 
+                    browser_executable_path=browser_path, 
+                    driver_executable_path=driver_path
+                )
+                driver.set_page_load_timeout(60)
+                return driver
+            except OSError as e:
+                # Catch "Text file busy" specifically
+                if 'Text file busy' in str(e):
+                    print(f'   ⚠️ Driver file busy (attempt {attempt+1}/3). Waiting...')
+                    time.sleep(5)
+                else:
+                    raise e
     except Exception as e:
         print(f'❌ [ERROR] Failed to start Chrome Driver: {e}')
         return None

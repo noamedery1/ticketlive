@@ -128,8 +128,9 @@ def run_scrapers_parallel():
         try:
             print(f'\\n[{datetime.now().strftime("%H:%M")}] 🚀 STARTING PARALLEL SCAPERS...')
             
-            # Launch both concurrently
+            # Launch both concurrently (staggered to avoid driver collision)
             p_viagogo = subprocess.Popen(['python', 'scraper_viagogo.py'])
+            time.sleep(15) # Wait for Viagogo driver to fully init
             p_ftn = subprocess.Popen(['python', 'scraper_ftn.py'])
             
             # Wait for both to finish
