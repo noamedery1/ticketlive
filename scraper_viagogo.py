@@ -81,22 +81,31 @@ def extract_prices(driver):
             for el in potential_pills:
                 try:
                     txt = el.text.strip().replace('\n', ' ')
-                    if len(txt) > 200: continue # Skip huge bodies
+                    # print(f"      [DEBUG] Candidate: {txt[:50]}...") # Un-comment to debug
+                    
+                    if len(txt) > 1000: continue # Increased limit
                     
                     # Regex: Allow stricter (with currency) first
                     m = re.search(r'Category\s+(\d+).*?(\$|₪)\s*([\d,]+)', txt, re.I)
                     
-                    # Fallback Regex: Loose (just number looking like price near category)
+                    # Fallback Regex: Loose
                     if not m:
-                        m = re.search(r'Category\s+(\d+).*?\s+([\d,]{3,})', txt, re.I) # e.g. "Category 1 1,500"
+                        m = re.search(r'Category\s+(\d+).*?\s+([\d,]{3,})', txt, re.I)
 
-                    # Check Parent if direct text failed
+                    # Check Parent
                     if not m:
                         try:
                             parent = el.find_element(By.XPATH, "..")
                             p_txt = parent.text.strip().replace('\n', ' ')
-                            if len(p_txt) < 200:
+                            if len(p_txt) < 1000:
                                 m = re.search(r'Category\s+(\d+).*?(\$|₪)\s*([\d,]+)', p_txt, re.I)
+                                
+                                # Check Grandparent (New layer of depth)
+                                if not m:
+                                    grand = parent.find_element(By.XPATH, "..")
+                                    g_txt = grand.text.strip().replace('\n', ' ')
+                                    if len(g_txt) < 1000:
+                                        m = re.search(r'Category\s+(\d+).*?(\$|₪)\s*([\d,]+)', g_txt, re.I)
                         except: pass
 
                     if m:
@@ -104,16 +113,24 @@ def extract_prices(driver):
                         if cat_str in ['1','2','3','4']:
                             cat_key = f"Category {cat_str}"
                             # Group 3 is price in strict regex, Group 2 in loose fallback. logic needed.
-                            raw_price = m.group(3) if len(m.groups()) >= 3 else m.group(2)
+                            # Standardize finding the price group
+                            groups = m.groups()
+                            raw_price = None
+                            for g in groups:
+                                if g and re.match(r'^[\d,]+$', g):
+                                    raw_price = g
+                                    break
+                            
                             if raw_price:
                                 val = float(raw_price.replace(',', ''))
-                                if '₪' in txt or '₪' in (p_txt if 'p_txt' in locals() else ''): 
+                                if '₪' in txt or ('p_txt' in locals() and '₪' in p_txt): 
                                      val = round(val * ILS_TO_USD, 2)
                                 
                                 # Sanity check for price
                                 if val > 10:
                                     if cat_key not in prices or val < prices[cat_key]:
                                         prices[cat_key] = val
+                                        # print(f"      ✨ Found Pill: {cat_key} @ ${val}") 
                 except: pass
         except: pass
         
