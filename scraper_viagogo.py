@@ -176,7 +176,15 @@ def run_scraper_cycle():
                         })
                     success_count += 1
                     print(f'✅ Found {len(prices)}')
-                else: print('❌ No data')
+                else: 
+                     print('❌ No data found.')
+                     # DEBUG: Why no data?
+                     title = driver.title
+                     current_url = driver.current_url
+                     body = driver.find_element(By.TAG_NAME, 'body').text[:300].replace('\n', ' ')
+                     print(f"   [DEBUG] Title: {title}")
+                     print(f"   [DEBUG] URL: {current_url}")
+                     print(f"   [DEBUG] Body Snippet: {body}...")
                 
                 if len(new_records_buffer) > 20: 
                     append_data(DATA_FILE_VIAGOGO, new_records_buffer); new_records_buffer = []
