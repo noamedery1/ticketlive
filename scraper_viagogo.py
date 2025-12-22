@@ -107,11 +107,12 @@ def extract_prices(driver):
             return prices # Found golden data, return immediately
 
         # ---------------------------------------------------------
-        # STRATEGY 0.5: Check DIVs/SPANs with "Select Category" (Variation)
+        # STRATEGY 0.5: Search ANY Element with "Select ..." Label
         # ---------------------------------------------------------
         try:
-             # Sometimes they assume role="button" on a div
-             elements = driver.find_elements(By.XPATH, "//*[@role='button' or contains(@class, 'Select')]")
+             # Broadest possible search for the "Button Bar" pattern
+             # Viagogo might use div, span, or nested elements for the label
+             elements = driver.find_elements(By.XPATH, "//*[@aria-label and contains(@aria-label, 'Select') and (contains(@aria-label, '$') or contains(@aria-label, '₪'))]")
              for el in elements:
                 try:
                     aria_txt = el.get_attribute('aria-label')
