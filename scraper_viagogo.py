@@ -45,8 +45,9 @@ def extract_prices_clean(driver):
             cat_name = f"Category {i}"
             
             # Find all elements containing this specific text
-            # We use a broad XPath to find ANY element with this text
-            anchors = driver.find_elements(By.XPATH, f"//*[contains(text(), '{cat_name}')]")
+            anchors = driver.find_elements(By.XPATH, f"//*[contains(normalize-space(text()), '{cat_name}')]")
+            if not anchors:
+                 anchors = driver.find_elements(By.XPATH, f"//*[contains(normalize-space(text()), 'Cat {i}')]")
             
             best_price = None
             
@@ -59,27 +60,35 @@ def extract_prices_clean(driver):
                     valid_price = None
                     
                     # Check Anchor, Parent, Grandparent
-                    for _ in range(3):
+                    for level in range(3):
                         txt = container.text.replace('\n', ' ').strip()
                         
-                        # Look for price pattern: $1,234 or 1,234
-                        # We specifically look for the number format
-                        price_matches = re.findall(r'(?:\$|₪|USD)?\s*([\d,]{2,})', txt)
+                        # Look for price pattern with optional currency
+                        # We try to capture the symbol if present
+                        price_matches = re.finditer(r'(?:\$|₪|USD|ILS|NIS)?\s*([\d,]{2,})', txt)
                         
                         min_p = float('inf')
                         found = False
                         
-                        for p_str in price_matches:
+                        for pm in price_matches:
                             try:
-                                # Clean string "1,234" -> 1234.0
+                                p_str = pm.group(1)
+                                full_match = pm.group(0)
+                                
                                 val = float(p_str.replace(',', ''))
                                 
-                                # Filter out the Category number itself (e.g. "1") and garbage
-                                if val < 10: continue 
-                                if val > 50000: continue # Sanity cap
+                                # Filter out garbage
+                                if val < 35: continue 
+                                if val > 50000: continue 
                                 
-                                # Currency Conversion
-                                if '₪' in txt: val = round(val * ILS_TO_USD, 2)
+                                # Currency Conversion Logic
+                                # 1. Check direct symbol capture
+                                is_ils = '₪' in full_match or 'ILS' in full_match or 'NIS' in full_match
+                                # 2. Check context if symbol missing 
+                                if not is_ils and ('₪' in txt or 'ILS' in txt or 'NIS' in txt):
+                                     is_ils = True
+                                
+                                if is_ils: val = round(val * ILS_TO_USD, 2)
                                 
                                 if val < min_p:
                                     min_p = val
@@ -125,6 +134,17 @@ def extract_prices_clean(driver):
                             if int(c) <= 4:
                                 prices[key] = p
                 except: pass
+
+        if not prices:
+            # DEBUG: Print Body snippet to see what's actually there
+            try:
+                body_txt = driver.find_element(By.TAG_NAME, 'body').text
+                # print(f"      [DEBUG BODY] {body_txt[:500].replace('\n', ' | ')}...")
+                
+                # Check if "Category" exists ANYWHERE
+                if 'Category' not in body_txt:
+                     print("      ⚠️ 'Category' word NOT found in body text.")
+            except: pass
 
         return prices
 
