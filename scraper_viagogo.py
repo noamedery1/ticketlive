@@ -53,27 +53,54 @@ def extract_prices(driver):
         prices = {}
         
         # ---------------------------------------------------------
-        # STRATEGY 0: Check "Select Category" Buttons (High Precision)
+        # STRATEGY 0: Check "Select Category/Section" Buttons (High Precision)
         # ---------------------------------------------------------
         try:
-            # Look for buttons that specifically say "Select Category X - $Price"
-            cat_buttons = driver.find_elements(By.XPATH, "//button[contains(@aria-label, 'Select Category')]")
+            # Look for buttons that specifically say "Select Category X - $Price" or "Select Section X"
+            # We use a broad searching XPath to catch any button with "Select" and "$" in label
+            cat_buttons = driver.find_elements(By.XPATH, "//button[contains(@aria-label, 'Select') and (contains(@aria-label, '$') or contains(@aria-label, '₪'))]")
+            
             for btn in cat_buttons:
                 try:
                     aria_txt = btn.get_attribute('aria-label')
-                    # Format: "Select Category 1 - $1,608"
-                    # Regex: Select Category (\d+) - .*?(\$|₪)([\d,]+)
-                    m = re.search(r'Category\s+(\d+).*?(\$|₪)\s*([\d,]+)', aria_txt)
+                    # Regex: Matches "Select (Category|Section) (101) ... ($)(500)"
+                    m = re.search(r'(Category|Section|Block)\s+([A-Z0-9]+).*?(\$|₪)\s*([\d,]+)', aria_txt, re.I)
+                    
                     if m:
-                        cat_num = m.group(1)
-                        sym = m.group(2)
-                        val = float(m.group(3).replace(',', ''))
+                        type_label = m.group(1).lower() # category, section...
+                        id_label = m.group(2) # 1, 101, CS2
+                        sym = m.group(3)
+                        val = float(m.group(4).replace(',', ''))
                         
                         if sym == '₪': val = round(val * ILS_TO_USD, 2)
                         
-                        key = f'Category {cat_num}'
-                        if key not in prices or val < prices[key]:
-                            prices[key] = val
+                        final_cat = None
+                        if 'category' in type_label:
+                            final_cat = f'Category {id_label}'
+                        else:
+                            # Map Section/Block to Category
+                            clean_id = id_label
+                            digits = ''.join(filter(str.isdigit, clean_id))
+                            sec_int = int(digits) if digits else 0
+                            lower_id = clean_id.lower()
+                            
+                            if 'cs' in lower_id or 'club' in lower_id or 'vip' in lower_id: final_cat = 'Category 1'
+                            elif 'w' in lower_id: final_cat = 'Category 1'
+                            elif 't' in lower_id: final_cat = 'Category 4'
+                            elif sec_int > 0:
+                                if 100 <= sec_int < 200: final_cat = 'Category 1'
+                                elif 200 <= sec_int < 300: final_cat = 'Category 2'
+                                elif 300 <= sec_int < 400: final_cat = 'Category 2'
+                                elif 400 <= sec_int < 500: final_cat = 'Category 3'
+                                elif sec_int >= 500: final_cat = 'Category 4'
+                                elif sec_int < 100: final_cat = 'Category 1'
+                                else: final_cat = f'Section {clean_id}'
+                            else:
+                                final_cat = f'Section {clean_id}'
+                        
+                        if final_cat:
+                             if final_cat not in prices or val < prices[final_cat]:
+                                 prices[final_cat] = val
                 except: pass
         except: pass
         
@@ -225,16 +252,30 @@ def extract_prices(driver):
             
              lines = full_text.split('\n')
              for i, line in enumerate(lines):
+                 # Skip lines that are just "Row 5" or "Match 20"
+                 if 'row' in line.lower() or 'match' in line.lower(): continue
+
                  # We look for a Key (Category or Section)
                  cat_m = re.search(r'Category\s+(\d)', line, re.I)
-                 sec_m = re.search(r'(?:Section\s+|Block\s+|^|\s)([A-Z]*\d{3}[A-Z]*)', line, re.I)
+                 
+                 # Regex for Section: "Section 101", "101", "115A", "W105"
+                 # Must start with letter or digit, contain 3 digits, max length 6
+                 words = line.split()
+                 sec_match = None
+                 for w in words:
+                      clean = w.strip('.,-')
+                      # Matches "101", "W101", "101A"
+                      if re.match(r'^[A-Z]*\d{3}[A-Z]*$', clean, re.I):
+                           if clean != '2026': 
+                               sec_match = clean
+                               break
                  
                  found_key = None
                  if cat_m:
                      found_key = f'Category {cat_m.group(1)}'
-                 elif sec_m:
-                     candidate = sec_m.group(1)
-                     if any(c.isdigit() for c in candidate) and len(candidate) < 6 and candidate != '2026':
+                 elif sec_match:
+                     candidate = sec_match
+                     if True: # Already validated by regex above
                          # Map Section to Category
                          digits = ''.join(filter(str.isdigit, candidate))
                          sec_int = int(digits) if digits else 0
@@ -255,9 +296,9 @@ def extract_prices(driver):
                             found_key = f'Section {candidate}'
 
                  if found_key:
-                     # Look for price in this line and next 3 lines
+                     # Look for price in this line and next 5 lines (expanded window)
                      found_price = None
-                     search_window = lines[i:i+4] # Current + next 3
+                     search_window = lines[i:i+6] # Current + next 5
                      for pline in search_window:
                          m_price = re.search(r'(\$|₪)\s*([\d,]+)', pline)
                          if m_price:
