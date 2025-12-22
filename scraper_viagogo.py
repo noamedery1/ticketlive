@@ -52,7 +52,7 @@ def extract_prices(driver):
     except: return {}
 
 def run_scraper_cycle():
-    print(f'\n[{datetime.now().strftime('%H:%M')}] 🚀 VIAGOGO SCRAPER STARTING...')
+    print(f'\n[{datetime.now().strftime("%H:%M")}] 🚀 VIAGOGO SCRAPER STARTING...')
     if not os.path.exists(GAMES_FILE):
         print(f'❌ [ERROR] {GAMES_FILE} not found! Cannot scrape.')
         return
@@ -109,7 +109,7 @@ def run_scraper_cycle():
     finally:
         try: driver.quit()
         except: pass
-        print(f'[{datetime.now().strftime('%H:%M')}] 💤 VIAGOGO CYCLE COMPLETE.')
+        print(f'[{datetime.now().strftime("%H:%M")}] 💤 VIAGOGO CYCLE COMPLETE.')
 
 if __name__ == '__main__':
     run_scraper_cycle()
