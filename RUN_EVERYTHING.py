@@ -126,7 +126,7 @@ def get_history(match_url: str):
 def run_scrapers_parallel():
     while True:
         try:
-            print(f'\\n[{datetime.now().strftime('%H:%M')}] 🚀 STARTING PARALLEL SCAPERS...')
+            print(f'\\n[{datetime.now().strftime("%H:%M")}] 🚀 STARTING PARALLEL SCAPERS...')
             
             # Launch both concurrently
             p_viagogo = subprocess.Popen(['python', 'scraper_viagogo.py'])
@@ -137,7 +137,7 @@ def run_scrapers_parallel():
             p_viagogo.wait()
             p_ftn.wait()
             
-            print(f'[{datetime.now().strftime('%H:%M')}] ✅ ALL SCRAPERS FINISHED.')
+            print(f'[{datetime.now().strftime("%H:%M")}] ✅ ALL SCRAPERS FINISHED.')
             
         except Exception as e:
             print(f'Orchestrator Error: {e}')
