@@ -108,6 +108,59 @@ def extract_prices(driver):
             return prices # Found golden data, return immediately
 
         # ---------------------------------------------------------
+        # STRATEGY 0.5: Check DIVs/SPANs with "Select Category" (Variation)
+        # ---------------------------------------------------------
+        try:
+             # Sometimes they assume role="button" on a div
+             elements = driver.find_elements(By.XPATH, "//*[@role='button' or contains(@class, 'Select')]")
+             for el in elements:
+                try:
+                    aria_txt = el.get_attribute('aria-label')
+                    if not aria_txt: continue
+                    
+                    # Regex: Matches "Select (Category|Section) (101) ... ($)(500)"
+                    m = re.search(r'(Category|Section|Block)\s+([A-Z0-9]+).*?(\$|₪)\s*([\d,]+)', aria_txt, re.I)
+                    
+                    if m:
+                        type_label = m.group(1).lower()
+                        id_label = m.group(2)
+                        sym = m.group(3)
+                        val = float(m.group(4).replace(',', ''))
+                        if sym == '₪': val = round(val * ILS_TO_USD, 2)
+                        
+                        # Logic to map ID to Category
+                        final_cat = None
+                        if 'category' in type_label:
+                            final_cat = f'Category {id_label}'
+                        else:
+                            clean_id = id_label
+                            digits = ''.join(filter(str.isdigit, clean_id))
+                            sec_int = int(digits) if digits else 0
+                            lower_id = clean_id.lower()
+                            
+                            if 'cs' in lower_id or 'club' in lower_id or 'vip' in lower_id: final_cat = 'Category 1'
+                            elif 'w' in lower_id: final_cat = 'Category 1'
+                            elif 't' in lower_id: final_cat = 'Category 4'
+                            elif sec_int > 0:
+                                if 100 <= sec_int < 200: final_cat = 'Category 1'
+                                elif 200 <= sec_int < 300: final_cat = 'Category 2'
+                                elif 300 <= sec_int < 400: final_cat = 'Category 2'
+                                elif 400 <= sec_int < 500: final_cat = 'Category 3'
+                                elif sec_int >= 500: final_cat = 'Category 4'
+                                else: final_cat = f'Section {clean_id}'
+                            else:
+                                final_cat = f'Section {clean_id}'
+                        
+                        if final_cat:
+                             if final_cat not in prices or val < prices[final_cat]:
+                                 prices[final_cat] = val
+                except: pass
+        except: pass
+
+        if len(prices) > 0:
+            return prices
+
+        # ---------------------------------------------------------
         # STRATEGY 1: Listing Buttons (Standard View)
         # ---------------------------------------------------------
         # Standard logic continues below if Strategy 0 fails...
@@ -313,6 +366,51 @@ def extract_prices(driver):
                              prices[found_key] = found_price
                              count_found += 1
 
+        # 4. Ultimate Fallback: Proximity Scan (Structureless)
+        # Some pages list all sections first, then all prices, or weird layouts.
+        # We look for any 3-digit number that is followed by a price within 50 chars.
+        if count_found == 0:
+             # Find all prices with their positions
+             price_matches = [m for m in re.finditer(r'(\$|₪)\s*([\d,]+)', full_text)]
+             
+             # Find all section candidates
+             # strictly 3 digits 100-999 to avoid junk
+             sec_matches = [m for m in re.finditer(r'\b([1-5]\d{2})(?:[A-Z])?\b', full_text)]
+             
+             for sm in sec_matches:
+                 sec_pos = sm.end()     # End of section number
+                 sec_val = sm.group(1)  # The number part '101'
+                 
+                 # Look for the nearest price appearing AFTER this section
+                 nearest_price = None
+                 min_dist = 9999
+                 
+                 for pm in price_matches:
+                     dist = pm.start() - sec_pos
+                     # If price is ahead of section and close enough (e.g. within 100 chars)
+                     if 0 < dist < 100:
+                         if dist < min_dist:
+                             min_dist = dist
+                             val = float(pm.group(2).replace(',', ''))
+                             if pm.group(1) == '₪': val = round(val * ILS_TO_USD, 2)
+                             nearest_price = val
+                 
+                 if nearest_price and nearest_price > 10:
+                     # Map it
+                     digits = ''.join(filter(str.isdigit, sec_val))
+                     sec_int = int(digits)
+                     final_cat = f'Section {sec_val}'
+                     
+                     if 100 <= sec_int < 200: final_cat = 'Category 1'
+                     elif 200 <= sec_int < 300: final_cat = 'Category 2'
+                     elif 300 <= sec_int < 400: final_cat = 'Category 2'
+                     elif 400 <= sec_int < 500: final_cat = 'Category 3'
+                     elif sec_int >= 500: final_cat = 'Category 4'
+                     
+                     if final_cat not in prices or nearest_price < prices[final_cat]:
+                         prices[final_cat] = nearest_price
+                         count_found += 1
+                         
         return prices
     except Exception as e: 
         print(f"      ⚠️ Extract Error: {e}")
