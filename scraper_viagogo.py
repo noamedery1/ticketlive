@@ -31,12 +31,6 @@ def extract_prices_clean(driver):
     """
     prices = {}
     try:
-        # 0. Trigger visual rendering (Scroll Jiggle)
-        driver.execute_script("window.scrollTo(0, 300);")
-        time.sleep(0.5)
-        driver.execute_script("window.scrollTo(0, 0);")
-        time.sleep(0.5)
-        
         # 1. Wait for "Category" text or "Section" text
         for _ in range(5):
             body_txt = driver.find_element(By.TAG_NAME, 'body').text
@@ -191,6 +185,7 @@ def get_driver():
             options.add_argument('--disable-features=VizDisplayCompositor')
             options.add_argument('--disable-extensions')
             options.add_argument('--window-size=1920,1080')
+            options.add_argument('--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36')
             options.page_load_strategy = 'eager' 
 
         browser_path = '/usr/bin/chromium' if os.path.exists('/usr/bin/chromium') else None
