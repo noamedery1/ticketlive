@@ -91,11 +91,9 @@ def extract_prices(driver):
                                 elif 200 <= sec_int < 300: final_cat = 'Category 2'
                                 elif 300 <= sec_int < 400: final_cat = 'Category 2'
                                 elif 400 <= sec_int < 500: final_cat = 'Category 3'
-                                elif sec_int >= 500: final_cat = 'Category 4'
-                                elif sec_int < 100: final_cat = 'Category 1'
-                                else: final_cat = f'Section {clean_id}'
+                                else: final_cat = 'Category 4'
                             else:
-                                final_cat = f'Section {clean_id}'
+                                final_cat = 'Category 4'
                         
                         if final_cat:
                              if final_cat not in prices or val < prices[final_cat]:
@@ -243,9 +241,6 @@ def extract_prices(driver):
                             price_val = round(val * ILS_TO_USD, 2)
                 
                 # Logic to determine final category label
-                final_cat = None
-                if cat_num: 
-                    final_cat = f'Category {cat_num}'
                 # Logic to determine final category label
                 final_cat = None
                 if cat_num: 
@@ -269,11 +264,9 @@ def extract_prices(driver):
                         elif 200 <= sec_int < 300: final_cat = 'Category 2' # Adjusted: Cat 2 often mid-tier
                         elif 300 <= sec_int < 400: final_cat = 'Category 2' # Club/Mid
                         elif 400 <= sec_int < 500: final_cat = 'Category 3' 
-                        elif 500 <= sec_int < 700: final_cat = 'Category 4' 
-                        elif sec_int < 100: final_cat = 'Category 1' # Pitch side
-                        else: final_cat = f'Section {section_name}' # Fallback
+                        else: final_cat = 'Category 4' # 500+ usually high up
                     else:
-                        final_cat = f'Section {section_name}'
+                        final_cat = 'Category 4' # Default fallback for structureless sections
 
                     # Override based on heuristics if needed
                     if 'club' in txt.lower() or 'vip' in txt.lower(): final_cat = 'Category 1'
@@ -389,13 +382,13 @@ def extract_prices(driver):
                      # Map it
                      digits = ''.join(filter(str.isdigit, sec_val))
                      sec_int = int(digits)
-                     final_cat = f'Section {sec_val}'
+                     final_cat = 'Category 4' # Default fallback
                      
                      if 100 <= sec_int < 200: final_cat = 'Category 1'
                      elif 200 <= sec_int < 300: final_cat = 'Category 2'
                      elif 300 <= sec_int < 400: final_cat = 'Category 2'
                      elif 400 <= sec_int < 500: final_cat = 'Category 3'
-                     elif sec_int >= 500: final_cat = 'Category 4'
+                     # All others (500+, or undefined) -> Category 4
                      
                      if final_cat not in prices or nearest_price < prices[final_cat]:
                          prices[final_cat] = nearest_price
@@ -415,6 +408,7 @@ def get_driver():
             options.add_argument('--disable-dev-shm-usage')
             options.add_argument('--disable-gpu')
             options.add_argument('--disable-software-rasterizer')
+            options.add_argument('--disable-features=VizDisplayCompositor')
             options.add_argument('--disable-extensions')
             options.add_argument('--window-size=1920,1080')
             options.page_load_strategy = 'eager' # Don't wait for full assets/ads
@@ -502,6 +496,13 @@ def run_scraper_cycle():
                         break # Success, exit retry loop
                     else: 
                          print('❌ No data found.')
+                         
+                         # DEBUG: Save HTML to inspect layout of failed pages
+                         try:
+                             with open(f'debug_failed_scrape_{i}.html', 'w', encoding='utf-8') as f:
+                                 f.write(driver.page_source)
+                         except: pass
+
                          # DEBUG: Why no data?
                          title = driver.title
                          current_url = driver.current_url
