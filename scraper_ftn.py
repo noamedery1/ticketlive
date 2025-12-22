@@ -91,7 +91,7 @@ def run_ftn_scraper_cycle():
     GAMES_FILE = 'all_games_ftn_to_scrape.json'
     OUTPUT_FILE = 'prices_ftn.json'
     
-    print(f'\n[{datetime.now().strftime('%H:%M')}] 🚀 FTN SCRAPER STARTING...')
+    print(f'\n[{datetime.now().strftime("%H:%M")}] 🚀 FTN SCRAPER STARTING...')
     
     if not os.path.exists(GAMES_FILE):
         print(f'❌ [ERROR] {GAMES_FILE} not found. Run get_ftn_urls.py first.')
@@ -117,7 +117,7 @@ def run_ftn_scraper_cycle():
         
         time.sleep(2) 
     
-    print(f'[{datetime.now().strftime('%H:%M')}] 💤 FTN CYCLE COMPLETE.')
+    print(f'[{datetime.now().strftime("%H:%M")}] 💤 FTN CYCLE COMPLETE.')
 
 if __name__ == '__main__':
     run_ftn_scraper_cycle()
