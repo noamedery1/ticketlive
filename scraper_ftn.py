@@ -17,6 +17,8 @@ def get_driver():
             options.add_argument('--no-sandbox')
             options.add_argument('--disable-dev-shm-usage')
             options.add_argument('--disable-gpu')
+            options.add_argument('--disable-software-rasterizer')
+            options.add_argument('--disable-extensions')
         
         browser_path = '/usr/bin/chromium' if os.path.exists('/usr/bin/chromium') else None
         driver_path = '/usr/bin/chromedriver' if os.path.exists('/usr/bin/chromedriver') else None
@@ -90,7 +92,11 @@ def scrape_ftn_single(driver, url, match_name):
         return records
 
     except Exception as e:
-        print(f'      🔥 Error during scraping: {e}')
+        msg = str(e).lower()
+        if 'crashed' in msg or 'disconnected' in msg or 'timeout' in msg:
+            print(f'      🔥 Critical Driver Error: {e}')
+            return None # Signal to restart driver
+        print(f'      ❌ Error: {e}')
         return []
 
 def run_ftn_scraper_cycle():
@@ -108,11 +114,9 @@ def run_ftn_scraper_cycle():
         
     print(f'   Target: {len(games)} games...')
     
-    # Initialize driver ONCE
+    # Initialize driver
     driver = get_driver()
-    if not driver:
-        return
-
+    
     try:
         existing_data = []
         if os.path.exists(OUTPUT_FILE):
@@ -121,11 +125,39 @@ def run_ftn_scraper_cycle():
             except: pass
         
         for i, game in enumerate(games):
-            new_records = scrape_ftn_single(driver, game['url'], game['match_name'])
-            if new_records:
-                existing_data.extend(new_records)
-                with open(OUTPUT_FILE, 'w') as f:
-                    json.dump(existing_data, f, indent=2)
+            # 🔄 BATCH RESTART: Proactively restart driver every 10 games to free memory
+            if i > 0 and i % 10 == 0:
+                print(f'   🔄 Scheduled Batch Restart (Match {i})...')
+                try: driver.quit()
+                except: pass
+                driver = None
+
+            # 1. Check if driver is alive/healthy before starting
+            if driver is None:
+                driver = get_driver()
+                if not driver:
+                    print('   ❌ Could not restart driver, skipping...')
+                    continue
+            
+            # 2. Scrape with retry/recovery logic
+            try:
+                new_records = scrape_ftn_single(driver, game['url'], game['match_name'])
+                
+                # If None returned (signal for critical error), force restart
+                if new_records is None:
+                    raise Exception("Critical Driver Error detected in worker")
+
+                if new_records:
+                    existing_data.extend(new_records)
+                    with open(OUTPUT_FILE, 'w') as f:
+                        json.dump(existing_data, f, indent=2)
+            
+            except Exception as e:
+                print(f'   ⚠️ Driver Unstable ({e}). Restarting...')
+                try: driver.quit()
+                except: pass
+                driver = None # Force create new one next loop
+                continue
             
             time.sleep(2) 
             

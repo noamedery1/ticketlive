@@ -51,6 +51,33 @@ def extract_prices(driver):
         return prices
     except: return {}
 
+def get_driver():
+    try:
+        options = uc.ChromeOptions()
+        if os.environ.get('HEADLESS') == 'true':
+            options.add_argument('--headless')
+            options.add_argument('--no-sandbox')
+            options.add_argument('--disable-dev-shm-usage')
+            options.add_argument('--disable-gpu')
+            options.add_argument('--disable-software-rasterizer')
+            options.add_argument('--disable-extensions')
+            options.add_argument('--window-size=1920,1080')
+
+        browser_path = '/usr/bin/chromium' if os.path.exists('/usr/bin/chromium') else None
+        driver_path = '/usr/bin/chromedriver' if os.path.exists('/usr/bin/chromedriver') else None
+
+        driver = uc.Chrome(
+             options=options, 
+             version_main=None, 
+             browser_executable_path=browser_path, 
+             driver_executable_path=driver_path
+        )
+        driver.set_page_load_timeout(60)
+        return driver
+    except Exception as e:
+        print(f'❌ [ERROR] Failed to start Chrome Driver: {e}')
+        return None
+
 def run_scraper_cycle():
     print(f'\n[{datetime.now().strftime("%H:%M")}] 🚀 VIAGOGO SCRAPER STARTING...')
     if not os.path.exists(GAMES_FILE):
@@ -59,34 +86,27 @@ def run_scraper_cycle():
 
     with open(GAMES_FILE, 'r') as f: games = json.load(f)
 
-    print('   Initializing Chrome Driver...')
-    try:
-        options = uc.ChromeOptions()
-        if os.environ.get('HEADLESS') == 'true':
-            options.add_argument('--headless')
-            options.add_argument('--no-sandbox')
-            options.add_argument('--disable-dev-shm-usage')
-            options.add_argument('--disable-gpu')
-
-        browser_path = '/usr/bin/chromium' if os.path.exists('/usr/bin/chromium') else None
-        driver_path = '/usr/bin/chromedriver' if os.path.exists('/usr/bin/chromedriver') else None
-
-        driver = uc.Chrome(
-            options=options, 
-            version_main=None, 
-            browser_executable_path=browser_path, 
-            driver_executable_path=driver_path
-        )
-        driver.set_page_load_timeout(60)
-    except Exception as e:
-        print(f'❌ [ERROR] Failed to start Chrome Driver: {e}')
-        return
+    # Initial Driver
+    driver = get_driver()
     
     timestamp = datetime.now().isoformat()
     success_count = 0; new_records_buffer = []
 
     try:
         for i, game in enumerate(games, 1):
+             # 🔄 BATCH RESTART: Proactively restart driver every 10 games
+            if i > 1 and i % 10 == 0:
+                print(f'   🔄 Scheduled Batch Restart (Match {i})...')
+                try: driver.quit()
+                except: pass
+                driver = None
+
+             # check driver health
+            if driver is None:
+                print('   🔄 Restarting Driver...')
+                driver = get_driver()
+                if not driver: continue
+
             match_name = game['match_name']
             url = game['url']
             clean_url = url.split('&Currency')[0].split('?Currency')[0]
@@ -109,8 +129,15 @@ def run_scraper_cycle():
                 if len(new_records_buffer) > 20: 
                     append_data(DATA_FILE_VIAGOGO, new_records_buffer); new_records_buffer = []
                 time.sleep(2)
-            except Exception as e: print(f'❌ Error: {e}')
-                
+            except Exception as e: 
+                print(f'❌ Error: {e}')
+                msg = str(e).lower()
+                if 'crashed' in msg or 'disconnected' in msg or 'timeout' in msg or 'no such execution context' in msg:
+                    print('   ⚠️ Critcal error. Rebooting driver...')
+                    try: driver.quit()
+                    except: pass
+                    driver = None
+
         if new_records_buffer: append_data(DATA_FILE_VIAGOGO, new_records_buffer)
             
     except Exception as e: print(f'🔥 Error: {e}')
