@@ -104,9 +104,6 @@ def extract_prices(driver):
         if len(prices) > 0:
             return prices # Found golden data, return immediately
 
-        if len(prices) > 0:
-            return prices # Found golden data, return immediately
-
         # ---------------------------------------------------------
         # STRATEGY -1: "Simple HTML" (User Request)
         # Search for text "Category 1", "Category 2"... and find price sibling

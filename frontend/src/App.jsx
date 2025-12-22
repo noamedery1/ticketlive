@@ -9,7 +9,8 @@ function App() {
   const [matches, setMatches] = useState([])
   const [selectedMatch, setSelectedMatch] = useState(null)
   const [history, setHistory] = useState(null)
-  const [timeRange, setTimeRange] = useState('24h')
+  const [timeRange, setTimeRange] = useState('all')
+
 
   useEffect(() => {
     fetchMatches()
