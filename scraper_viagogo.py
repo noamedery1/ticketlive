@@ -146,7 +146,7 @@ def extract_prices_clean(driver):
                             print(f"      🖱️ Mapping Section {sec_id} -> {cat_label}...")
                             try: driver.execute_script("arguments[0].click();", target_el)
                             except: target_el.click()
-                            time.sleep(1.5) 
+                            time.sleep(3.0) 
                             
                             # Scan body for NEW price
                             body_txt = driver.find_element(By.TAG_NAME, 'body').text
@@ -157,8 +157,10 @@ def extract_prices_clean(driver):
                             for p_str in pm:
                                 try:
                                     v = float(p_str.replace(',', ''))
-                                    if v < 35: continue
-                                    if v > 10000: continue
+                                    if v < 35: 
+                                        # print(f"         ⚠️ Saw {v} but < 35 (ignored)")
+                                        continue
+                                    if v > 50000: continue
                                     if '₪' in body_txt: v = round(v * ILS_TO_USD, 2)
                                     if v < curr_min:
                                         curr_min = v
@@ -221,7 +223,7 @@ def run_scraper_cycle():
 
     try:
         for i, game in enumerate(games, 1):
-            if i > 1 and i % 10 == 0:
+            if i > 1 and i % 3 == 0:
                 try: driver.quit()
                 except: pass
                 driver = get_driver()
