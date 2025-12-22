@@ -1,0 +1,5 @@
+{
+  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
+  "summary": "Technical plan for Viagogo Benchmarking Agent using Python and Playwright. Covers scraping strategy, data normalization, and CSV export.",
+  "updatedAt": "2025-12-07T09:49:23.482319800Z"
+}

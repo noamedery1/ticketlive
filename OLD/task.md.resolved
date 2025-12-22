@@ -1,0 +1,21 @@
+# Viagogo Benchmark Agent Tasks
+
+- [ ] Initialize Project
+    - [/] Create project directory `scratch/viagogo_benchmark` <!-- id: 0 -->
+    - [ ] Create `input.json` with mock data <!-- id: 1 -->
+    - [ ] Create `requirements.txt` <!-- id: 2 -->
+- [ ] Implement Scraper Core (`viagogo_agent.py`)
+    - [ ] Setup Playwright and browser context <!-- id: 3 -->
+    - [ ] Implement `process_match(match)` function <!-- id: 4 -->
+        - [ ] Navigation logic <!-- id: 5 -->
+        - [ ] Dynamic content handling (wait for selectors) <!-- id: 6 -->
+        - [ ] Extraction of Ticket Blocks (Category, Price, Currency) <!-- id: 7 -->
+        - [ ] Normalization logic (currency symbols, string to float) <!-- id: 8 -->
+    - [ ] Implement Aggregation Logic (Min price per category) <!-- id: 9 -->
+- [ ] Implement Output Handlers
+    - [ ] JSON Output generation <!-- id: 10 -->
+    - [ ] CSV Export functionality (Option 3 requirement) <!-- id: 11 -->
+- [ ] Verification
+    - [ ] Run agent with `input.json` <!-- id: 12 -->
+    - [ ] Verify `output.json` validity <!-- id: 13 -->
+    - [ ] Verify `benchmark_results.csv` validity <!-- id: 14 -->

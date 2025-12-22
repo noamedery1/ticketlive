@@ -1,0 +1,106 @@
+[
+  {
+    "match_name": "Match 85 Test",
+    "category": "Category 2",
+    "price": 582.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-21T09:07:45"
+  },
+  {
+    "match_name": "Match 85 Test",
+    "category": "Category 2",
+    "price": 735.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-21T09:07:45"
+  },
+  {
+    "match_name": "Match 85 Test",
+    "category": "Category 1",
+    "price": 745.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-21T09:07:45"
+  },
+  {
+    "match_name": "Match 85 Test",
+    "category": "Category 3",
+    "price": 1065.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-21T09:07:45"
+  },
+  {
+    "match_name": "Match 85 Test",
+    "category": "Category 3",
+    "price": 2553.6,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-21T09:07:45"
+  },
+  {
+    "match_name": "Match 85 Test",
+    "category": "Category 2",
+    "price": 2756.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-21T09:07:45"
+  },
+  {
+    "match_name": "Match 85 Test",
+    "category": "Category 2",
+    "price": 3151.05,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-21T09:07:45"
+  },
+  {
+    "match_name": "Match 85 Test",
+    "category": "Category 1",
+    "price": 3449.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-21T09:07:45"
+  },
+  {
+    "match_name": "Match 85 Test",
+    "category": "Category 1",
+    "price": 3747.45,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-21T09:07:45"
+  },
+  {
+    "match_name": "Match 85 Test",
+    "category": "Category 3",
+    "price": 4046.7,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-21T09:07:45"
+  },
+  {
+    "match_name": "Match 85 Test",
+    "category": "Category 1 Premium",
+    "price": 10500.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-21T09:07:45"
+  },
+  {
+    "match_name": "Match 85 Test",
+    "category": "Category 1",
+    "price": 17850.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-21T09:07:45"
+  },
+  {
+    "match_name": "Match 85 Test",
+    "category": "Category 1 Premium",
+    "price": 22049.99,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-21T09:07:45"
+  }
+]

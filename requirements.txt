@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+undetected-chromedriver
+selenium
+python-multipart
+requests

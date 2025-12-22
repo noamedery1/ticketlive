@@ -1,0 +1,414 @@
+[
+  {
+    "match_name": "Match 1 - Mexico vs South Africa",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-1-mexico-vs-south-africa"
+  },
+  {
+    "match_name": "Match 2 - South Korea vs European Play Off D",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-2-south-korea-vs-european-play-off-d"
+  },
+  {
+    "match_name": "Match 3 - Canada vs European Play Off A",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-3-canada-vs-european-play-off-a"
+  },
+  {
+    "match_name": "Match 4 - United States vs Paraguay",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-4-united-states-vs-paraguay"
+  },
+  {
+    "match_name": "Match 8 - Qatar vs Switzerland",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-8-qatar-vs-switzerland"
+  },
+  {
+    "match_name": "Match 7 - Brazil vs Morocco",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-7-brazil-vs-morocco"
+  },
+  {
+    "match_name": "Match 6 - Australia vs European Play Off C",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-6-australia-vs-european-play-off-c"
+  },
+  {
+    "match_name": "Match 5 - Haiti vs Scotland",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-5-haiti-vs-scotland"
+  },
+  {
+    "match_name": "Match 10 - Germany vs Curacao",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-10-germany-vs-curacao"
+  },
+  {
+    "match_name": "Match 11 - Netherlands vs Japan",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-11-netherlands-vs-japan"
+  },
+  {
+    "match_name": "Match 9 - Ivory Coast vs Ecuador",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-9-ivory-coast-vs-ecuador"
+  },
+  {
+    "match_name": "Match 12 - European Play Off B vs Tunisia",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-12-european-play-off-b-vs-tunisia"
+  },
+  {
+    "match_name": "Match 14 - Spain vs Cabo Verde",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-14-spain-vs-cabo-verde"
+  },
+  {
+    "match_name": "Match 16 - Belgium vs Egypt",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-16-belgium-vs-egypt"
+  },
+  {
+    "match_name": "Match 15 - Iran vs New Zealand",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-15-iran-vs-new-zealand"
+  },
+  {
+    "match_name": "Match 13 - Saudi Arabia vs Uruguay",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-13-saudi-arabia-vs-uruguay"
+  },
+  {
+    "match_name": "Match 17 - France vs Senegal",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-17-france-vs-senegal"
+  },
+  {
+    "match_name": "Match 18 - FIFA Play Off 2 vs Norway",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-18-fifa-play-off-2-vs-norway"
+  },
+  {
+    "match_name": "Match 19 - Argentina vs Algeria",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-19-argentina-vs-algeria"
+  },
+  {
+    "match_name": "Match 20 - Austria vs Jordan",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-20-austria-vs-jordan"
+  },
+  {
+    "match_name": "Match 23 - Portugal vs FIFA Play Off 1",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-23-portugal-vs-fifa-play-off-1"
+  },
+  {
+    "match_name": "Match 22 - England vs Croatia",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-22-england-vs-croatia"
+  },
+  {
+    "match_name": "Match 21 - Ghana vs Panama",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-21-ghana-vs-panama"
+  },
+  {
+    "match_name": "Match 24 - Uzbekistan vs Colombia",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-24-uzbekistan-vs-colombia"
+  },
+  {
+    "match_name": "Match 25 - European Play Off D vs South Africa",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-25-european-play-off-d-vs-south-africa"
+  },
+  {
+    "match_name": "Match 26 - Switzerland vs European Play Off A",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-26-switzerland-vs-european-play-off-a"
+  },
+  {
+    "match_name": "Match 27 - Canada vs Qatar",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-27-canada-vs-qatar"
+  },
+  {
+    "match_name": "Match 28 - Mexico vs South Korea",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-28-mexico-vs-south-korea"
+  },
+  {
+    "match_name": "Match 32 - United States vs Australia",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-32-united-states-vs-australia"
+  },
+  {
+    "match_name": "Match 30 - Scotland vs Morocco",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-30-scotland-vs-morocco"
+  },
+  {
+    "match_name": "Match 29 - Brazil vs Haiti",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-29-brazil-vs-haiti"
+  },
+  {
+    "match_name": "Match 31 - European Play Off C vs Paraguay",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-31-european-play-off-c-vs-paraguay"
+  },
+  {
+    "match_name": "Match 35 - Netherlands vs European Play Off B",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-35-netherlands-vs-european-play-off-b"
+  },
+  {
+    "match_name": "Match 33 - Germany vs Ivory Coast",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-33-germany-vs-ivory-coast"
+  },
+  {
+    "match_name": "Match 34 - Ecuador vs Curacao",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-34-ecuador-vs-curacao"
+  },
+  {
+    "match_name": "Match 36 - Tunisia vs Japan",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-36-tunisia-vs-japan"
+  },
+  {
+    "match_name": "Match 38 - Spain vs Saudi Arabia",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-38-spain-vs-saudi-arabia"
+  },
+  {
+    "match_name": "Match 39 - Belgium vs Iran",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-39-belgium-vs-iran"
+  },
+  {
+    "match_name": "Match 37 - Uruguay vs Cabo Verde",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-37-uruguay-vs-cabo-verde"
+  },
+  {
+    "match_name": "Match 40 - New Zealand vs Egypt",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-40-new-zealand-vs-egypt"
+  },
+  {
+    "match_name": "Match 43 - Argentina vs Austria",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-43-argentina-vs-austria"
+  },
+  {
+    "match_name": "Match 42 - France vs FIFA Play Off 2",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-42-france-vs-fifa-play-off-2"
+  },
+  {
+    "match_name": "Match 41 - Norway vs Senegal",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-41-norway-vs-senegal"
+  },
+  {
+    "match_name": "Match 44 - Jordan vs Algeria",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-44-jordan-vs-algeria"
+  },
+  {
+    "match_name": "Match 47 - Portugal vs Uzbekistan",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-47-portugal-vs-uzbekistan"
+  },
+  {
+    "match_name": "Match 45 - England vs Ghana",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-45-england-vs-ghana"
+  },
+  {
+    "match_name": "Match 46 - Panama vs Croatia",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-46-panama-vs-croatia"
+  },
+  {
+    "match_name": "Match 48 - Colombia vs FIFA Play Off 1",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-48-colombia-vs-fifa-play-off-1"
+  },
+  {
+    "match_name": "Match 51 - Switzerland vs Canada",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-51-switzerland-vs-canada"
+  },
+  {
+    "match_name": "Match 52 - European Play Off A vs Qatar",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-52-european-play-off-a-vs-qatar"
+  },
+  {
+    "match_name": "Match 49 - Scotland vs Brazil",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-49-scotland-vs-brazil"
+  },
+  {
+    "match_name": "Match 50 - Morocco vs Haiti",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-50-morocco-vs-haiti"
+  },
+  {
+    "match_name": "Match 54 - South Africa vs South Korea",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-54-south-africa-vs-south-korea"
+  },
+  {
+    "match_name": "Match 53 - European Play Off D vs Mexico",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-53-european-play-off-d-vs-mexico"
+  },
+  {
+    "match_name": "Match 56 - Ecuador vs Germany",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-56-ecuador-vs-germany"
+  },
+  {
+    "match_name": "Match 55 - Curacao vs Ivory Coast",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-55-curacao-vs-ivory-coast"
+  },
+  {
+    "match_name": "Match 57 - Japan vs European Play Off B",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-57-japan-vs-european-play-off-b"
+  },
+  {
+    "match_name": "Match 58 - Tunisia vs Netherlands",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-58-tunisia-vs-netherlands"
+  },
+  {
+    "match_name": "Match 59 - European Play Off C vs United States",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-59-european-play-off-c-vs-united-states"
+  },
+  {
+    "match_name": "Match 60 - Paraguay vs Australia",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-60-paraguay-vs-australia"
+  },
+  {
+    "match_name": "Match 61 - Norway vs France",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-61-norway-vs-france"
+  },
+  {
+    "match_name": "Match 62 - Senegal vs FIFA Play Off 2",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-62-senegal-vs-fifa-play-off-2"
+  },
+  {
+    "match_name": "Match 66 - Uruguay vs Spain",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-66-uruguay-vs-spain"
+  },
+  {
+    "match_name": "Match 65 - Cabo Verde vs Saudi Arabia",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-65-cabo-verde-vs-saudi-arabia"
+  },
+  {
+    "match_name": "Match 64 - New Zealand vs Belgium",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-64-new-zealand-vs-belgium"
+  },
+  {
+    "match_name": "Match 63 - Egypt vs Iran",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-63-egypt-vs-iran"
+  },
+  {
+    "match_name": "Match 67 - Panama vs England",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-67-panama-vs-england"
+  },
+  {
+    "match_name": "Match 68 - Croatia vs Ghana",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-68-croatia-vs-ghana"
+  },
+  {
+    "match_name": "Match 72 - FIFA Play Off 1 vs Uzbekistan",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-72-fifa-play-off-1-vs-uzbekistan"
+  },
+  {
+    "match_name": "Match 71 - Colombia vs Portugal",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-71-colombia-vs-portugal"
+  },
+  {
+    "match_name": "Match 69 - Algeria vs Austria",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-69-algeria-vs-austria"
+  },
+  {
+    "match_name": "Match 70 - Jordan vs Argentina",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-70-jordan-vs-argentina"
+  },
+  {
+    "match_name": "Match 73 - Group A runners up vs Group B runners up",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-73-group-a-runners-up-vs-group-b-runners-up"
+  },
+  {
+    "match_name": "Match 76 - Group C winners vs Group F runners up",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-76-group-c-winners-vs-group-f-runners-up"
+  },
+  {
+    "match_name": "Match 74 - Group E winners vs Group A/B/C/D/F third place",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-74-group-e-winners-vs-group-a-b-c-d-f-third-place"
+  },
+  {
+    "match_name": "Match 75 - Group F winners vs Group C runners up",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-75-group-f-winners-vs-group-c-runners-up"
+  },
+  {
+    "match_name": "Match 78 - Group E runners up vs Group I runners up",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-78-group-e-runners-up-vs-group-i-runners-up"
+  },
+  {
+    "match_name": "Match 77 - Group I winners vs Group C/D/F/G/H third place",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-77-group-i-winners-vs-group-c-d-f-g-h-third-place"
+  },
+  {
+    "match_name": "Match 79 - Group A winners vs Group C/E/F/H/I third place",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-79-group-a-winners-vs-group-c-e-f-h-i-third-place"
+  },
+  {
+    "match_name": "Match 80 - Group L winners vs Group E/H/I/J/K third place",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-80-group-l-winners-vs-group-e-h-i-j-k-third-place"
+  },
+  {
+    "match_name": "Match 82 - Group G winners vs Group A/E/H/I/J third place",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-82-group-g-winners-vs-group-a-e-h-i-j-third-place"
+  },
+  {
+    "match_name": "Match 81 - Group D winners vs Group B/E/F/I/J third place",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-81-group-d-winners-vs-group-b-e-f-i-j-third-place"
+  },
+  {
+    "match_name": "Match 84 - Group H winners vs Group J runners up",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-84-group-h-winners-vs-group-j-runners-up"
+  },
+  {
+    "match_name": "Match 83 - Group K runners up vs Group L runners up",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-83-group-k-runners-up-vs-group-l-runners-up"
+  },
+  {
+    "match_name": "Match 85 - Group B winners vs Group E/F/G/I/J third place",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-85-group-b-winners-vs-group-e-f-g-i-j-third-place"
+  },
+  {
+    "match_name": "Match 88 - Group D runners up vs Group G runners up",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-88-group-d-runners-up-vs-group-g-runners-up"
+  },
+  {
+    "match_name": "Match 86 - Group J winners vs Group H runners up",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-86-group-j-winners-vs-group-h-runners-up"
+  },
+  {
+    "match_name": "Match 87 - Group K winners vs Group D/E/I/J/L third place",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-87-group-k-winners-vs-group-d-e-i-j-l-third-place"
+  },
+  {
+    "match_name": "Match 90 - Winner match 73 vs Winner match 75",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-90-winner-match-73-vs-winner-match-75"
+  },
+  {
+    "match_name": "Match 89 - Winner match 74 vs Winner match 77",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-89-winner-match-74-vs-winner-match-77"
+  },
+  {
+    "match_name": "Match 91 - Winner match 76 vs Winner match 78",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-91-winner-match-76-vs-winner-match-78"
+  },
+  {
+    "match_name": "Match 92 - Winner match 79 vs Winner match 80",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-92-winner-match-79-vs-winner-match-80"
+  },
+  {
+    "match_name": "Match 93 - Winner match 83 vs Winner match 84",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-93-winner-match-83-vs-winner-match-84"
+  },
+  {
+    "match_name": "Match 94 - Winner match 81 vs Winner match 82",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-94-winner-match-81-vs-winner-match-82"
+  },
+  {
+    "match_name": "Match 95 - Winner match 86 vs Winner match 88",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-95-winner-match-86-vs-winner-match-88"
+  },
+  {
+    "match_name": "Match 96 - Winner match 85 vs Winner match 87",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-96-winner-match-85-vs-winner-match-87"
+  },
+  {
+    "match_name": "Match 97 - Winner match 89 vs Winner match 90",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-97-winner-match-89-vs-winner-match-90"
+  },
+  {
+    "match_name": "Match 98 - Winner match 93 vs Winner match 94",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-98-winner-match-93-vs-winner-match-94"
+  },
+  {
+    "match_name": "Match 99 - Winner match 91 vs Winner match 92",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-99-winner-match-91-vs-winner-match-92"
+  },
+  {
+    "match_name": "Match 100 - Winner match 95 vs Winner match 96",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-100-winner-match-95-vs-winner-match-96"
+  },
+  {
+    "match_name": "Match 101 - Winner match 97 vs Winner match 98",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-101-winner-match-97-vs-winner-match-98"
+  },
+  {
+    "match_name": "Match 102 - Winner match 99 vs Winner match 100",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-102-winner-match-99-vs-winner-match-100"
+  },
+  {
+    "match_name": "Match 103 - World Cup 2026 Bronze Final",
+    "url": "https://www.footballticketnet.com/world-cup-2026/match-103-world-cup-2026-bronze-final"
+  }
+]
