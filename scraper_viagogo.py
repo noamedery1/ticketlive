@@ -33,13 +33,23 @@ def extract_prices_clean(driver):
     """
     prices = {}
     try:
-        # 0. Trigger visual rendering
-        driver.execute_script("window.scrollBy(0, 200);")
-        time.sleep(1)
+        # 0. Trigger visual rendering (Scroll Jiggle)
+        driver.execute_script("window.scrollTo(0, 300);")
+        time.sleep(0.5)
+        driver.execute_script("window.scrollTo(0, 0);")
+        time.sleep(0.5)
+        
+        # 1. Wait for "Category" text to appear (Dynamic Loading)
+        for _ in range(10):
+            body_txt = driver.find_element(By.TAG_NAME, 'body').text
+            if 'Category' in body_txt or 'Cat ' in body_txt:
+                break
+            time.sleep(1)
 
         # ------------------------------------------------------------------
         # APPROACH 1: "Anchor & Context" (Robust)
         # ------------------------------------------------------------------
+        # We look for explicit Category labels: 1, 2, 3, 4
         # We look for explicit Category labels: 1, 2, 3, 4
         for i in range(1, 5):
             cat_name = f"Category {i}"
@@ -53,9 +63,6 @@ def extract_prices_clean(driver):
             
             for anchor in anchors:
                 try:
-                    # 1. Get the container (Button or Div)
-                    # We climb up 3 levels maximum to find a meaningful container
-                    # e.g. span -> div -> button
                     container = anchor
                     valid_price = None
                     
@@ -63,10 +70,7 @@ def extract_prices_clean(driver):
                     for level in range(3):
                         txt = container.text.replace('\n', ' ').strip()
                         
-                        # Look for price pattern with optional currency
-                        # We try to capture the symbol if present
                         price_matches = re.finditer(r'(?:\$|₪|USD|ILS|NIS)?\s*([\d,]{2,})', txt)
-                        
                         min_p = float('inf')
                         found = False
                         
@@ -74,20 +78,15 @@ def extract_prices_clean(driver):
                             try:
                                 p_str = pm.group(1)
                                 full_match = pm.group(0)
-                                
                                 val = float(p_str.replace(',', ''))
                                 
-                                # Filter out garbage
+                                # Filters
                                 if val < 35: continue 
                                 if val > 50000: continue 
                                 
-                                # Currency Conversion Logic
-                                # 1. Check direct symbol capture
+                                # Currency
                                 is_ils = '₪' in full_match or 'ILS' in full_match or 'NIS' in full_match
-                                # 2. Check context if symbol missing 
-                                if not is_ils and ('₪' in txt or 'ILS' in txt or 'NIS' in txt):
-                                     is_ils = True
-                                
+                                if not is_ils and ('₪' in txt or 'ILS' in txt or 'NIS' in txt): is_ils = True
                                 if is_ils: val = round(val * ILS_TO_USD, 2)
                                 
                                 if val < min_p:
@@ -97,19 +96,33 @@ def extract_prices_clean(driver):
                         
                         if found:
                             valid_price = min_p
-                            break # Found a price in this container level, stop climbing
+                            break 
                         
-                        # Climb up one level
                         try: container = container.find_element(By.XPATH, "..")
                         except: break
 
                     if valid_price:
                         if best_price is None or valid_price < best_price:
                             best_price = valid_price
-                            # print(f"      [DEBUG] Found {cat_name}: ${best_price} in context: '{txt[:30]}...'")
-                            
                 except: pass
             
+            # Fallback ONLY for Category 1 if best_price is missing
+            if not best_price and i == 1:
+                try:
+                     print("      🔍 Checking fallback for Category 1...")
+                     aria_pills = driver.find_elements(By.XPATH, "//*[@aria-label and contains(@aria-label, 'Category 1')]")
+                     for el in aria_pills:
+                         txt = el.get_attribute('aria-label')
+                         m = re.search(r'(?:\$|₪|USD)?\s*([\d,]{2,})', txt)
+                         if m:
+                             p = float(m.group(1).replace(',', ''))
+                             if '₪' in txt: p = round(p * ILS_TO_USD, 2)
+                             if p > 35:
+                                 best_price = p
+                                 print(f"      ✅ Fallback found Cat 1: {best_price}")
+                                 break
+                except: pass
+
             if best_price:
                 prices[cat_name] = best_price
 
