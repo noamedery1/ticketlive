@@ -526,9 +526,15 @@ def run_scraper_cycle():
                     if 'crashed' in msg or 'disconnected' in msg or 'timeout' in msg:
                         raise e # Critical error, let outer loop handle driver restart
                     time.sleep(2)
+            time.sleep(1) # Added sleep at the end of the match loop
 
         if new_records_buffer: append_data(DATA_FILE_VIAGOGO, new_records_buffer)
             
+        print(f'   ... Waiting for scanners to finish ...')
+        
+        # Stability Cooldown: Let Chrome breathe to prevent tab crashes
+        time.sleep(1.0)
+        
     except Exception as e: print(f'🔥 Error: {e}')
     finally:
         try: driver.quit()

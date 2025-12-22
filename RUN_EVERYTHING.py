@@ -65,23 +65,31 @@ def get_history(match_url: str):
     try:
         # 1. LOAD VIAGOGO DATA
         viagogo_data = load_data(DATA_FILE_VIAGOGO)
-        
-        # Robust URL Matching
-        # The stored URL might differ slightly from the requested URL (query params, etc.)
-        # We try to match by the unique Event ID often found in Viagogo URLs (e.g. E-153033506)
-        
-        target_event_id = None
-        m_id = re.search(r'E-(\d+)', match_url)
-        if m_id: target_event_id = m_id.group(1)
-        
         v_match_data = []
-        if target_event_id:
-             v_match_data = [d for d in viagogo_data if target_event_id in d.get('match_url', '')]
-        else:
-             # Fallback: Compare base URLs
-             clean_target = match_url.split('?')[0].split('&')[0]
-             v_match_data = [d for d in viagogo_data if clean_target in d.get('match_url', '')]
+        
+        # Extract ID from requested URL
+        # e.g. .../World-Cup-Tickets/E-153033506?Currency=... -> E-153033506
+        req_id = None
+        match = re.search(r'/(E-\d+)', match_url)
+        if match: req_id = match.group(1)
+        
+        print(f"[API] History Request for ID: {req_id} (URL: {match_url[:30]}...)")
 
+        for row in viagogo_data:
+            # Extract ID from stored URL
+            stored_url = row.get('match_url', '')
+            stored_id = None
+            m_stored = re.search(r'/(E-\d+)', stored_url)
+            if m_stored: stored_id = m_stored.group(1)
+            
+            # Match by ID if possible, else fallback to string string
+            if req_id and stored_id:
+                if req_id == stored_id:
+                    v_match_data.append(row)
+            elif match_url in stored_url or stored_url in match_url:
+                 v_match_data.append(row)
+                 
+        print(f"[API] Found {len(v_match_data)} Viagogo records.")
         v_match_data.sort(key=lambda x: x['timestamp'])
 
         # 2. IDENTIFY MATCH FOR FTN
