@@ -443,7 +443,7 @@ def run_scraper_cycle():
                             interact_success = False
                             for k in range(101, 130): 
                                 try:
-                                    els = driver.find_elements(By.XPATH, f"//*[text()='{k}']")
+                                    els = driver.find_elements(By.XPATH, f"//*[normalize-space(text())='{k}']")
                                     for el in els:
                                         if el.is_displayed() and el.is_enabled():
                                             driver.execute_script("arguments[0].click();", el)
