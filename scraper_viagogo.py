@@ -101,17 +101,24 @@ def extract_prices(driver):
                     # Check for Section 
                     if not cat_num:
                         # Improved Regex to catch "101", "CS2", "113A", "W101"
-                        # Matches:
-                        # - 3 digits (101-999) optionally followed by a letter (113A)
-                        # - Prefix letters followed by digits (CS2, W100)
-                        sec_m = re.search(r'(?:Section\s+|Block\s+|^|\s)([A-Z]*\d{1,3}[A-Z]*)', line, re.I)
+                        # matches 3 digits (100-999) standalone or with prefix/suffix
+                        # We specifically look for "words" that look like section names
+                        words = line.split()
+                        for w in words:
+                             # Clean punctuation
+                             w_clean = w.strip('.,-')
+                             # Match: (Prefix)(Digits)(Suffix) e.g. W102, 102, 115A
+                             # Digits must comprise the main part
+                             if re.match(r'^[A-Z]*\d{3}[A-Z]*$', w_clean, re.I):
+                                  # Exclude obvious non-sections (years)
+                                  if w_clean == '2026': continue
+                                  section_name = w_clean
+                                  break # Take first valid section found in line
                         
-                        # Filter to ensure we have at least one digit and exclude common years (2026)
-                        if sec_m:
-                             candidate = sec_m.group(1)
-                             # Basic validation: has digit, length < 6, not "2026"
-                             if any(c.isdigit() for c in candidate) and len(candidate) < 6 and candidate != '2026':
-                                 section_name = candidate
+                        if not section_name:
+                             # Fallback regex for "Section 101" in full line
+                             sec_m = re.search(r'(?:Section|Block)\s*([A-Z]*\d{1,3}[A-Z]*)', line, re.I)
+                             if sec_m: section_name = sec_m.group(1)
 
                     # Check Price
                     if '$' in line:
