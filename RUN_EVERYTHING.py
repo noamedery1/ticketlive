@@ -65,8 +65,23 @@ def get_history(match_url: str):
     try:
         # 1. LOAD VIAGOGO DATA
         viagogo_data = load_data(DATA_FILE_VIAGOGO)
-        clean_url = match_url.split('&Currency')[0].split('?Currency')[0]
-        v_match_data = [d for d in viagogo_data if d.get('match_url', '').startswith(clean_url)]
+        
+        # Robust URL Matching
+        # The stored URL might differ slightly from the requested URL (query params, etc.)
+        # We try to match by the unique Event ID often found in Viagogo URLs (e.g. E-153033506)
+        
+        target_event_id = None
+        m_id = re.search(r'E-(\d+)', match_url)
+        if m_id: target_event_id = m_id.group(1)
+        
+        v_match_data = []
+        if target_event_id:
+             v_match_data = [d for d in viagogo_data if target_event_id in d.get('match_url', '')]
+        else:
+             # Fallback: Compare base URLs
+             clean_target = match_url.split('?')[0].split('&')[0]
+             v_match_data = [d for d in viagogo_data if clean_target in d.get('match_url', '')]
+
         v_match_data.sort(key=lambda x: x['timestamp'])
 
         # 2. IDENTIFY MATCH FOR FTN

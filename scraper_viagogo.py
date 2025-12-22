@@ -4,6 +4,7 @@ import re
 import time
 import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from datetime import datetime
 
 # ==========================================
@@ -30,10 +31,17 @@ def extract_prices(driver):
         time.sleep(8)
         
         # 0. Anti-bot / Lazy load behavior
-        driver.execute_script("window.scrollTo(0, 300);")
-        time.sleep(1)
-        driver.execute_script("window.scrollTo(0, document.body.scrollHeight/3);")
-        time.sleep(2)
+        # Send physical keys which often triggers listeners better than JS scrolling
+        try:
+            body_el = driver.find_element(By.TAG_NAME, 'body')
+            body_el.send_keys(Keys.PAGE_DOWN)
+            time.sleep(1)
+            body_el.send_keys(Keys.PAGE_DOWN)
+            time.sleep(2)
+        except:
+             # Fallback to JS if keys fail
+            driver.execute_script("window.scrollTo(0, document.body.scrollHeight/2);")
+            time.sleep(2)
 
         # 1. Debug: Check where we actually are
         page_title = driver.title
