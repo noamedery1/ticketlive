@@ -104,25 +104,22 @@ def get_driver():
                 # Network and renderer stability
                 options.add_argument("--disable-features=TranslateUI")
                 options.add_argument("--disable-ipc-flooding-protection")
-                # Additional Render-specific flags
+                # Additional Render-specific flags (no duplicates)
                 options.add_argument("--disable-setuid-sandbox")
-                options.add_argument("--remote-debugging-port=9222")
                 options.add_argument("--disable-background-networking")
                 options.add_argument("--disable-breakpad")
-                options.add_argument("--disable-client-side-phishing-detection")
-                options.add_argument("--disable-default-apps")
                 options.add_argument("--disable-domain-reliability")
                 options.add_argument("--disable-features=AudioServiceOutOfProcess")
-                options.add_argument("--disable-hang-monitor")
                 options.add_argument("--disable-popup-blocking")
-                options.add_argument("--disable-prompt-on-repost")
-                options.add_argument("--disable-sync")
                 options.add_argument("--metrics-recording-only")
-                options.add_argument("--no-first-run")
                 options.add_argument("--safebrowsing-disable-auto-update")
                 options.add_argument("--enable-automation")
                 options.add_argument("--password-store=basic")
                 options.add_argument("--use-mock-keychain")
+                # Reduce startup overhead
+                options.add_argument("--disable-logging")
+                options.add_argument("--log-level=3")  # Only fatal errors
+                options.add_argument("--silent")
                 
                 # Block images to save resources
                 prefs = {"profile.managed_default_content_settings.images": 2}
@@ -137,31 +134,48 @@ def get_driver():
                 
                 def init_worker():
                     try:
-                        init_result['driver'] = uc.Chrome(
-                            options=options,
-                            browser_executable_path=browser_path,
-                            driver_executable_path=driver_path,
-                            version_main=None,
-                            use_subprocess=True  # Use subprocess to avoid connection issues
-                        )
-                        init_result['done'] = True
+                        # Add retry for "file busy" errors
+                        max_retries = 3
+                        for retry in range(max_retries):
+                            try:
+                                init_result['driver'] = uc.Chrome(
+                                    options=options,
+                                    browser_executable_path=browser_path,
+                                    driver_executable_path=driver_path,
+                                    version_main=None,
+                                    use_subprocess=True  # Use subprocess to avoid connection issues
+                                )
+                                init_result['done'] = True
+                                break
+                            except OSError as e:
+                                if 'Text file busy' in str(e) or 'file busy' in str(e).lower():
+                                    if retry < max_retries - 1:
+                                        print(f"   ⚠️ Driver file busy (retry {retry + 1}/{max_retries}). Waiting...", flush=True)
+                                        time.sleep(5)
+                                        continue
+                                    else:
+                                        raise
+                                else:
+                                    raise
+                            except Exception as e:
+                                raise
                     except Exception as e:
                         init_result['error'] = e
                         init_result['done'] = True
                 
                 init_thread = threading.Thread(target=init_worker, daemon=True)
                 init_thread.start()
-                init_thread.join(timeout=45)  # 45 second timeout for initialization
+                init_thread.join(timeout=90)  # 90 second timeout for Render's slower environment
                 
                 if init_thread.is_alive():
-                    print(f"   ERROR: Driver initialization timed out after 45s", flush=True)
+                    print(f"   ERROR: Driver initialization timed out after 90s", flush=True)
                     if attempt < 2:
                         wait_time = 5 * (attempt + 1)
                         print(f"   Retrying in {wait_time} seconds...", flush=True)
                         time.sleep(wait_time)
                         continue
                     else:
-                        raise Exception("Driver initialization timed out after 3 attempts")
+                        raise Exception("Driver initialization timed out after 3 attempts (90s each)")
                 
                 if init_result['error']:
                     raise init_result['error']
