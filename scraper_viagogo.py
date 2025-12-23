@@ -369,7 +369,7 @@ def run():
 
             print(f"   ✅ Found prices: {prices}", flush=True)
 
-                        for cat, price in prices.items():
+            for cat, price in prices.items():
                 # Clean URL (remove Currency parameter)
                 clean_url = url.split("&Currency")[0].split("?Currency")[0]
                 
@@ -381,8 +381,8 @@ def run():
                     "currency": "USD",
                     "timestamp": timestamp
                 })
-                        
-                except Exception as e: 
+
+    except Exception as e:
         print(f"ERROR: Fatal error in scraper: {e}", flush=True)
         import traceback
         traceback.print_exc()
