@@ -34,6 +34,7 @@ def extract_prices_clean(driver):
     Clean, robust strategy to find 'Category X' labels and fallback to Section Mapping.
     """
     prices = {}
+    extraction_start_time = time.time()  # Track total extraction time
     try:
         print("      ➡️ Entering extraction logic...", flush=True)
         # REMOVED: Expensive body.text check that causes Docker CPU hangs
@@ -52,13 +53,37 @@ def extract_prices_clean(driver):
             # Find all elements containing this text - EXPANDED XPATH to include more element types
             xpath_query = f"//div[contains(text(), '{cat_name}')] | //span[contains(text(), '{cat_name}')] | //button[contains(text(), '{cat_name}')] | //a[contains(text(), '{cat_name}')] | //li[contains(text(), '{cat_name}')] | //p[contains(text(), '{cat_name}')] | //label[contains(text(), '{cat_name}')]"
             
-            print(f"      ... searching for {cat_name} ...")
-            anchors = driver.find_elements(By.XPATH, xpath_query)
+            print(f"      ... searching for {cat_name} ...", flush=True)
+            try:
+                # Add timeout protection for find_elements
+                search_start = time.time()
+                anchors = driver.find_elements(By.XPATH, xpath_query)
+                search_time = time.time() - search_start
+                if search_time > 5:
+                    print(f"      ⚠️ Search took {search_time:.1f}s (slow)")
+                    anchors = anchors[:10]  # Limit if too slow
+            except Exception as find_err:
+                msg = str(find_err).lower()
+                if 'crashed' in msg or 'disconnected' in msg:
+                    print(f"      🔥 Driver crashed during search: {msg[:50]}")
+                    raise find_err
+                print(f"      ⚠️ Search error: {msg[:50]}")
+                anchors = []
             
             # Fallback for "Cat 1" etc
             if not anchors:
-                 xpath_short = f"//div[contains(text(), 'Cat {i}')] | //span[contains(text(), 'Cat {i}')] | //button[contains(text(), 'Cat {i}')] | //a[contains(text(), 'Cat {i}')]"
-                 anchors = driver.find_elements(By.XPATH, xpath_short)
+                 try:
+                     xpath_short = f"//div[contains(text(), 'Cat {i}')] | //span[contains(text(), 'Cat {i}')] | //button[contains(text(), 'Cat {i}')] | //a[contains(text(), 'Cat {i}')]"
+                     search_start = time.time()
+                     anchors = driver.find_elements(By.XPATH, xpath_short)
+                     search_time = time.time() - search_start
+                     if search_time > 5:
+                         anchors = anchors[:10]
+                 except Exception as find_err:
+                     msg = str(find_err).lower()
+                     if 'crashed' in msg or 'disconnected' in msg:
+                         raise find_err
+                     anchors = []
             
             # DEBUG
             if not anchors:
@@ -205,7 +230,9 @@ def extract_prices_clean(driver):
 
             if best_price:
                 prices[cat_name] = best_price
-                print(f"      ✅ Found {cat_name}: ${best_price}")
+                print(f"      ✅ Found {cat_name}: ${best_price}", flush=True)
+            else:
+                print(f"      ⚠️ No price found for {cat_name}", flush=True)
 
         # ------------------------------------------------------------------
         # APPROACH 2: Interactive Section Mapping (Fill in missing categories)
@@ -277,6 +304,7 @@ def extract_prices_clean(driver):
                         
                         # Scan body for NEW price - look for prices near the category text
                         try:
+
                             # Check driver health before reading body
                             try:
                                 driver.current_url
@@ -486,13 +514,19 @@ def extract_prices_clean(driver):
                     else:
                         print(f"      ⚠️ Text scan error: {msg[:50]}")
 
+        extraction_total_time = time.time() - extraction_start_time
+        if extraction_total_time > 20:
+            print(f"      ⚠️ Total extraction took {extraction_total_time:.1f}s")
+        print(f"      ✅ Extraction complete: found {len(prices)} categories", flush=True)
         return prices
 
     except Exception as e:
+        extraction_total_time = time.time() - extraction_start_time if 'extraction_start_time' in locals() else 0
         msg = str(e).lower()
         if 'timeout' in msg or 'crashed' in msg or 'disconnected' in msg:
+            print(f"      🔥 Critical extraction error after {extraction_total_time:.1f}s: {msg[:50]}")
             raise e  # Propagate critical errors to trigger driver restart
-        print(f"      ⚠️ Extract Error: {e}")
+        print(f"      ⚠️ Extract Error after {extraction_total_time:.1f}s: {e}")
         return {}
 
 def _create_chrome_options():
@@ -742,9 +776,7 @@ def run_scraper_cycle():
                         if new_records_buffer:
                              append_data(DATA_FILE_VIAGOGO, new_records_buffer)
                              new_records_buffer = [] 
-                        break 
-                        break 
-                        break 
+                        break  # Break from retry loop, continue to next match 
                     else:
                         print('❌ No data found (will retry)...')
                         try:
