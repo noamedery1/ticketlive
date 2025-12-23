@@ -66,25 +66,55 @@ def _extract_prices_clean_internal(driver):
             xpath_query = f"//div[contains(text(), '{cat_name}')] | //span[contains(text(), '{cat_name}')] | //button[contains(text(), '{cat_name}')] | //a[contains(text(), '{cat_name}')] | //li[contains(text(), '{cat_name}')] | //p[contains(text(), '{cat_name}')] | //label[contains(text(), '{cat_name}')]"
             
             print(f"      ... searching for {cat_name} ...", flush=True)
+            anchors = []
             try:
-                # Add timeout protection for find_elements
+                # Add aggressive timeout protection for find_elements
                 search_start = time.time()
-                # Set shorter implicit wait for this search
-                original_wait = driver.timeouts.implicit_wait if hasattr(driver.timeouts, 'implicit_wait') else 10
-                driver.implicitly_wait(3)  # Reduce wait time for faster failure
+                max_search_time = 8  # Maximum time for a single search
+                
+                # Set very short implicit wait for this search
+                original_wait = 10
                 try:
-                    anchors = driver.find_elements(By.XPATH, xpath_query)
+                    original_wait = driver.timeouts.implicit_wait if hasattr(driver.timeouts, 'implicit_wait') else 10
+                except:
+                    pass
+                
+                driver.implicitly_wait(2)  # Very short wait - 2 seconds max
+                try:
+                    # Use a thread with timeout for find_elements to prevent hanging
+                    search_result = {'elements': [], 'done': False}
+                    def search_worker():
+                        try:
+                            search_result['elements'] = driver.find_elements(By.XPATH, xpath_query)
+                            search_result['done'] = True
+                        except Exception as e:
+                            search_result['error'] = e
+                            search_result['done'] = True
+                    
+                    search_thread = threading.Thread(target=search_worker, daemon=True)
+                    search_thread.start()
+                    search_thread.join(timeout=max_search_time)
+                    
+                    if search_thread.is_alive():
+                        print(f"      ⚠️ Search for {cat_name} exceeded {max_search_time}s, skipping...")
+                        anchors = []
+                    elif 'error' in search_result:
+                        raise search_result['error']
+                    else:
+                        anchors = search_result['elements']
                 finally:
-                    driver.implicitly_wait(original_wait)  # Restore original wait
+                    try:
+                        driver.implicitly_wait(original_wait)  # Restore original wait
+                    except:
+                        pass
                 
                 search_time = time.time() - search_start
-                if search_time > 8:
+                if search_time > 5:
                     print(f"      ⚠️ Search took {search_time:.1f}s (slow), limiting results")
                     anchors = anchors[:3]  # Limit to 3 if too slow
-                if search_time > 12:
+                if search_time > max_search_time:
                     print(f"      ⚠️ Search took {search_time:.1f}s (very slow), skipping this category")
                     anchors = []  # Skip if extremely slow
-                    break  # Break from category loop to save time
             except Exception as find_err:
                 msg = str(find_err).lower()
                 if 'crashed' in msg or 'disconnected' in msg:
@@ -619,7 +649,8 @@ def _extract_prices_clean_internal(driver):
         if extraction_total_time > 20:
             print(f"      ⚠️ Total extraction took {extraction_total_time:.1f}s")
         print(f"      ✅ Extraction complete: found {len(prices)} categories", flush=True)
-        return prices
+        # Always return prices, even if empty
+        return prices if prices else {}
 
     except Exception as e:
         extraction_total_time = time.time() - extraction_start_time if 'extraction_start_time' in locals() else 0
@@ -870,9 +901,12 @@ def run_scraper_cycle():
                         print(f"      🔍 Starting extraction (max {max_extraction_time}s)...", flush=True)
                         prices = extract_prices_clean(driver, timeout=max_extraction_time)
                         extraction_time = time.time() - extraction_start
-                        if extraction_time > 30:
-                            print(f"      ⚠️ Extraction took {extraction_time:.1f}s (slow)")
-                        print(f"      ✅ Extraction completed in {extraction_time:.1f}s, found {len(prices)} categories")
+                        if extraction_time > 25:
+                            print(f"      ⚠️ Extraction took {extraction_time:.1f}s (slow)", flush=True)
+                        if prices:
+                            print(f"      ✅ Extraction completed in {extraction_time:.1f}s, found {len(prices)} categories: {list(prices.keys())}", flush=True)
+                        else:
+                            print(f"      ⚠️ Extraction completed in {extraction_time:.1f}s but found 0 categories", flush=True)
                     except Exception as extract_err:
                         extraction_time = time.time() - extraction_start
                         msg = str(extract_err).lower()
