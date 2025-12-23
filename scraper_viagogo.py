@@ -5,6 +5,10 @@ import time
 import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
 from datetime import datetime
+try:
+    from pyvirtualdisplay import Display
+except ImportError:
+    pass
 
 # ==========================================
 # ⚙️ CONFIGURATION
@@ -182,17 +186,18 @@ def extract_prices_clean(driver):
 def get_driver():
     try:
         options = uc.ChromeOptions()
-        if os.environ.get('HEADLESS') == 'true':
-            options.add_argument('--headless')
-            options.add_argument('--no-sandbox')
-            options.add_argument('--disable-dev-shm-usage')
-            options.add_argument('--disable-gpu')
-            options.add_argument('--disable-software-rasterizer')
-            options.add_argument('--disable-features=VizDisplayCompositor')
-            options.add_argument('--disable-extensions')
-            options.add_argument('--window-size=1920,1080')
-            options.add_argument('--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36')
-            options.page_load_strategy = 'eager' 
+        # NOTE: When using pyvirtualdisplay / xvfb, we DO NOT use --headless.
+        # This makes the browser "think" it is visible, avoiding detection.
+        
+        # options.add_argument('--headless') # <--- REMOVED for anti-detection
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
+        options.add_argument('--disable-gpu')
+        # options.add_argument('--disable-software-rasterizer') # optional
+        options.add_argument('--disable-extensions')
+        options.add_argument('--window-size=1920,1080')
+        options.add_argument('--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36')
+        options.page_load_strategy = 'eager' 
 
         browser_path = '/usr/bin/chromium' if os.path.exists('/usr/bin/chromium') else None
         driver_path = '/usr/bin/chromedriver' if os.path.exists('/usr/bin/chromedriver') else None
@@ -211,8 +216,20 @@ def get_driver():
 
 def run_scraper_cycle():
     print(f'\n[{datetime.now().strftime("%H:%M")}] 🚀 VIAGOGO SCRAPER STARTING (CLEAN ANCHOR STRATEGY)...')
+    
+    # START VIRTUAL DISPLAY IF HEADLESS (DOCKER/LINUX)
+    display = None
+    if os.environ.get('HEADLESS') == 'true':
+        try:
+            print("      🖥️ Starting Virtual Display (XVFB)...")
+            display = Display(visible=0, size=(1920, 1080))
+            display.start()
+        except Exception as e:
+            print(f"      ⚠️ Failed to start XVFB: {e}")
+
     if not os.path.exists(GAMES_FILE):
         print(f'❌ [ERROR] {GAMES_FILE} not found!')
+        if display: display.stop()
         return
 
     with open(GAMES_FILE, 'r') as games_f: 
@@ -297,6 +314,9 @@ def run_scraper_cycle():
     finally:
         try: driver.quit()
         except: pass
+        if display:
+            try: display.stop()
+            except: pass
         print(f'[{datetime.now().strftime("%H:%M")}] 💤 VIAGOGO CYCLE COMPLETE.')
 
 if __name__ == '__main__':

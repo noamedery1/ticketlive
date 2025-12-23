@@ -4,3 +4,4 @@ undetected-chromedriver
 selenium
 python-multipart
 requests
+pyvirtualdisplay
