@@ -43,12 +43,18 @@ def extract_prices_clean(driver):
         # ------------------------------------------------------------------
         # APPROACH 1: "Anchor & Context" (Category Labels)
         # ------------------------------------------------------------------
+        category_search_start = time.time()
         for i in range(1, 5):
             cat_name = f"Category {i}"
             
             # Skip if already found
             if cat_name in prices:
                 continue
+            
+            # Check if we're taking too long on category search
+            if time.time() - category_search_start > 30:
+                print(f"      ⚠️ Category search taking too long, skipping remaining categories")
+                break
             
             # Find all elements containing this text - EXPANDED XPATH to include more element types
             xpath_query = f"//div[contains(text(), '{cat_name}')] | //span[contains(text(), '{cat_name}')] | //button[contains(text(), '{cat_name}')] | //a[contains(text(), '{cat_name}')] | //li[contains(text(), '{cat_name}')] | //p[contains(text(), '{cat_name}')] | //label[contains(text(), '{cat_name}')]"
@@ -93,14 +99,49 @@ def extract_prices_clean(driver):
 
             best_price = None
             
-            for anchor in anchors:
+            # Limit number of anchors to process (prevent hanging on too many elements)
+            max_anchors = 5 if len(anchors) > 5 else len(anchors)
+            anchors_to_process = anchors[:max_anchors]
+            if len(anchors) > max_anchors:
+                print(f"      ⚠️ Limiting to {max_anchors} anchors (found {len(anchors)})")
+            
+            for anchor_idx, anchor in enumerate(anchors_to_process):
                 try:
+                    # Check driver health before processing each anchor
+                    try:
+                        driver.current_url
+                    except:
+                        print(f"      ⚠️ Driver unhealthy, stopping anchor processing")
+                        break
+                    
                     container = anchor
                     valid_price = None
+                    anchor_start_time = time.time()
                     
                     # Check Anchor, Parent, Grandparent, and siblings (expanded to 4 levels)
                     for level in range(4):
-                        txt = container.text.replace('\n', ' ').strip()
+                        # Add timeout protection for text access (can hang in Docker)
+                        try:
+                            text_start = time.time()
+                            txt = container.text.replace('\n', ' ').strip()
+                            text_time = time.time() - text_start
+                            if text_time > 3:
+                                print(f"      ⚠️ Text access took {text_time:.1f}s (slow), skipping level {level}")
+                                break  # Skip remaining levels if too slow
+                        except Exception as text_err:
+                            msg = str(text_err).lower()
+                            if 'crashed' in msg or 'disconnected' in msg:
+                                raise text_err
+                            print(f"      ⚠️ Text access error: {msg[:30]}")
+                            break
+                        
+                        # Skip if text is empty or too short
+                        if not txt or len(txt) < 3:
+                            try:
+                                container = container.find_element(By.XPATH, "..")
+                            except:
+                                break
+                            continue
                         
                         price_matches = re.finditer(r'(?:\$|₪|USD|ILS|NIS)?\s*([\d,]{2,})', txt)
                         min_p = float('inf')
@@ -137,7 +178,20 @@ def extract_prices_clean(driver):
                     if valid_price:
                         if best_price is None or valid_price < best_price:
                             best_price = valid_price
-                except: pass
+                    
+                    anchor_time = time.time() - anchor_start_time
+                    if anchor_time > 5:
+                        print(f"      ⚠️ Anchor {anchor_idx+1} processing took {anchor_time:.1f}s")
+                        # If processing is too slow, break early
+                        if anchor_time > 10:
+                            print(f"      ⚠️ Stopping anchor processing (too slow)")
+                            break
+                except Exception as anchor_err:
+                    msg = str(anchor_err).lower()
+                    if 'crashed' in msg or 'disconnected' in msg:
+                        raise anchor_err
+                    # Skip individual anchor errors
+                    pass
             
             # Fallback: Check aria-label for ALL categories (not just Category 1)
             if not best_price:
