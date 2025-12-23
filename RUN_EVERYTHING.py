@@ -146,17 +146,39 @@ def get_history(match_url: str):
 # ---------------------------------------------------------
 # Orchestrator Logic
 # ---------------------------------------------------------
+def run_scraper_viagogo():
+    """Run Viagogo scraper in a thread"""
+    try:
+        print('   👉 Starting Viagogo Scraper...')
+        subprocess.run(['python', 'scraper_viagogo.py'], check=True)
+        print('   ✅ Viagogo Scraper finished.')
+    except Exception as e:
+        print(f'   ❌ Viagogo Scraper Error: {e}')
+
+def run_scraper_ftn():
+    """Run FTN scraper in a thread"""
+    try:
+        print('   👉 Starting FTN Scraper...')
+        subprocess.run(['python', 'scraper_ftn.py'], check=True)
+        print('   ✅ FTN Scraper finished.')
+    except Exception as e:
+        print(f'   ❌ FTN Scraper Error: {e}')
+
 def run_scrapers_parallel():
     while True:
         try:
             print(f'\\n[{datetime.now().strftime("%H:%M")}] 🚀 STARTING PARALLEL SCAPERS...')
             
-            # Launch sequentially to save memory/CPU in Docker
-            print('   👉 Starting Viagogo Scraper...')
-            subprocess.run(['python', 'scraper_viagogo.py'])
+            # Launch in parallel using threads
+            viagogo_thread = threading.Thread(target=run_scraper_viagogo, daemon=False)
+            ftn_thread = threading.Thread(target=run_scraper_ftn, daemon=False)
             
-            print('   👉 Starting FTN Scraper...')
-            subprocess.run(['python', 'scraper_ftn.py'])
+            viagogo_thread.start()
+            ftn_thread.start()
+            
+            # Wait for both to complete
+            viagogo_thread.join()
+            ftn_thread.join()
             
             print(f'[{datetime.now().strftime("%H:%M")}] ✅ ALL SCRAPERS FINISHED.')
             

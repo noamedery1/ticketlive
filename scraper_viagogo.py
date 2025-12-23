@@ -146,40 +146,67 @@ def extract_prices_clean(driver):
         # Now run section mapping for ANY missing categories (not just when prices is empty)
         series_map = {'1': 'Category 1', '2': 'Category 2', '3': 'Category 3', '4': 'Category 4'}
         
+        missing_before_mapping = [cat for cat in ['Category 1', 'Category 2', 'Category 3', 'Category 4'] if cat not in prices]
+        if missing_before_mapping:
+            print(f"      🔄 Section mapping: Looking for {len(missing_before_mapping)} missing categories...")
+        
         for prefix, cat_label in series_map.items():
             # Skip if already found
             if cat_label in prices: 
                 continue
             
             print(f"      🔄 Trying section mapping for missing {cat_label}...")
+            found_via_section = False
             
-            # Check typical sections: 101, 102, 103...
-            for suffix in ['01', '02', '03', '04', '05', '10', '11', '12']: 
+            # Check typical sections: 101, 102, 103... (expanded list)
+            for suffix in ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15']: 
                 sec_id = f"{prefix}{suffix}"
                 try:
-                    # Expanded search for section elements
-                    els = driver.find_elements(By.XPATH, f"//div[contains(text(), '{sec_id}')] | //span[contains(text(), '{sec_id}')] | //button[contains(text(), '{sec_id}')] | //a[contains(text(), '{sec_id}')]")
+                    # Expanded search for section elements - try multiple patterns
+                    xpath_patterns = [
+                        f"//div[contains(text(), '{sec_id}')]",
+                        f"//span[contains(text(), '{sec_id}')]",
+                        f"//button[contains(text(), '{sec_id}')]",
+                        f"//a[contains(text(), '{sec_id}')]",
+                        f"//*[@data-section='{sec_id}']",
+                        f"//*[contains(@class, 'section-{sec_id}')]",
+                        f"//*[contains(@id, '{sec_id}')]"
+                    ]
+                    
+                    els = []
+                    for pattern in xpath_patterns:
+                        try:
+                            found = driver.find_elements(By.XPATH, pattern)
+                            els.extend(found)
+                        except:
+                            continue
+                    
                     target_el = None
                     for el in els:
-                        t = el.text.strip()
-                        if sec_id in t or f"Section {sec_id}" in t:
-                            if el.is_displayed():
-                                target_el = el
-                                break
+                        try:
+                            t = el.text.strip()
+                            # More flexible matching
+                            if sec_id in t or f"Section {sec_id}" in t or f"Sec {sec_id}" in t:
+                                if el.is_displayed():
+                                    target_el = el
+                                    break
+                        except:
+                            continue
                     
                     if target_el:
                         print(f"      🖱️ Clicking Section {sec_id} to find {cat_label}...")
                         try: 
-                            driver.execute_script("arguments[0].scrollIntoView(true);", target_el)
-                            time.sleep(0.5)
+                            driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", target_el)
+                            time.sleep(0.8)
                             driver.execute_script("arguments[0].click();", target_el)
-                        except: 
+                            time.sleep(2.5)  # Wait for page to update
+                        except Exception as click_err:
                             try:
                                 target_el.click()
+                                time.sleep(2.5)
                             except:
+                                print(f"      ⚠️ Could not click section {sec_id}")
                                 continue
-                        
-                        time.sleep(2.5)  # Reduced from 3.0 for faster processing
                         
                         # Scan body for NEW price - look for prices near the category text
                         try:
@@ -191,9 +218,9 @@ def extract_prices_clean(driver):
                             cat_match = re.search(cat_pattern, body_txt, re.IGNORECASE)
                             
                             if cat_match:
-                                # Look for prices near this category mention
+                                # Look for prices near this category mention (expanded window)
                                 start_pos = cat_match.end()
-                                search_window = body_txt[start_pos:start_pos + 500]  # 500 chars after category
+                                search_window = body_txt[start_pos:start_pos + 800]  # Increased to 800 chars
                                 pm = re.findall(r'(?:\$|₪|USD)?\s*([\d,]{2,})', search_window)
                             else:
                                 # Fallback: scan all prices and take minimum
@@ -217,12 +244,59 @@ def extract_prices_clean(driver):
                             if found_p:
                                 prices[cat_label] = found_p
                                 print(f"      ✅ Section mapping found {cat_label}: ${found_p}")
+                                found_via_section = True
                                 break  # Done with this category
                         except Exception as scan_error:
-                            print(f"      ⚠️ Error scanning prices: {scan_error}")
+                            print(f"      ⚠️ Error scanning prices after clicking {sec_id}: {scan_error}")
                             pass
+                    else:
+                        # Try alternative: look for section numbers without prefix
+                        if suffix in ['01', '02', '03', '04']:
+                            # Try clicking any section that might be category-related
+                            try:
+                                alt_els = driver.find_elements(By.XPATH, f"//*[contains(text(), 'Section {sec_id}') or contains(text(), 'Sec {sec_id}')]")
+                                for alt_el in alt_els[:3]:  # Try first 3 matches
+                                    try:
+                                        if alt_el.is_displayed():
+                                            print(f"      🖱️ Trying alternative section element for {cat_label}...")
+                                            driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", alt_el)
+                                            time.sleep(0.8)
+                                            driver.execute_script("arguments[0].click();", alt_el)
+                                            time.sleep(2.5)
+                                            
+                                            body_txt = driver.find_element(By.TAG_NAME, 'body').text
+                                            cat_pattern = rf"Category\s+{prefix}\b"
+                                            if re.search(cat_pattern, body_txt, re.IGNORECASE):
+                                                pm = re.findall(r'(?:\$|₪|USD)?\s*([\d,]{2,})', body_txt)
+                                                found_p = None
+                                                curr_min = float('inf')
+                                                for p_str in pm:
+                                                    try:
+                                                        v = float(p_str.replace(',', ''))
+                                                        if 35 <= v <= 50000:
+                                                            if '₪' in body_txt or 'ILS' in body_txt: 
+                                                                v = round(v * ILS_TO_USD, 2)
+                                                            if v < curr_min:
+                                                                curr_min = v
+                                                                found_p = v
+                                                    except: pass
+                                                if found_p:
+                                                    prices[cat_label] = found_p
+                                                    print(f"      ✅ Alternative section click found {cat_label}: ${found_p}")
+                                                    found_via_section = True
+                                                    break
+                                    except:
+                                        continue
+                                if found_via_section:
+                                    break
+                            except:
+                                pass
                 except Exception as e:
+                    print(f"      ⚠️ Section mapping error for {sec_id}: {str(e)[:50]}")
                     pass
+            
+            if not found_via_section:
+                print(f"      ⚠️ Section mapping did not find {cat_label}")
         
         # ------------------------------------------------------------------
         # APPROACH 3: Comprehensive body text scan for any remaining missing categories
