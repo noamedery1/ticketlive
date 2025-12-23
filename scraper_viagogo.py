@@ -90,6 +90,8 @@ def extract_prices_from_network(driver):
     # Try network extraction first
     try:
         logs = driver.get_log("performance")
+        print(f"      Retrieved {len(logs)} performance log entries", flush=True)
+        
         for entry in logs:
             try:
                 msg = json.loads(entry["message"])["message"]
@@ -103,9 +105,13 @@ def extract_prices_from_network(driver):
             except:
                 continue
     except Exception as e:
-        # Performance logs not available, use DOM fallback
-        print(f"      Performance logs not available: {str(e)[:50]}", flush=True)
-        print("      Using DOM-based extraction...", flush=True)
+        # Performance logs not available, use DOM fallback (this is normal in some environments)
+        error_msg = str(e)[:80]
+        if "HTTPConnectionPool" in error_msg or "performance" in error_msg.lower():
+            # This is expected - CDP not available, use DOM
+            print("      Performance logs not available, using DOM extraction...", flush=True)
+        else:
+            print(f"      Log error: {error_msg}", flush=True)
         return extract_prices_from_dom(driver)
 
     if not api_urls:
@@ -131,96 +137,96 @@ def extract_prices_from_network(driver):
         try:
             print(f"      Trying API: {api_url[:80]}...", flush=True)
             r = requests.get(api_url, headers=headers, timeout=10)
-                if r.status_code != 200:
-                    continue
+            if r.status_code != 200:
+                continue
 
-                data = r.json()
-                items = []
+            data = r.json()
+            items = []
 
-                # Handle multiple API response formats
-                if isinstance(data, dict):
-                    for key in ["listings", "inventory", "items", "rows", "data", "results"]:
-                        if key in data and isinstance(data[key], list):
-                            items = data[key]
+            # Handle multiple API response formats
+            if isinstance(data, dict):
+                for key in ["listings", "inventory", "items", "rows", "data", "results"]:
+                    if key in data and isinstance(data[key], list):
+                        items = data[key]
+                        break
+                # Also check nested structures
+                if not items and "data" in data and isinstance(data["data"], dict):
+                    for key in ["listings", "inventory", "items", "rows"]:
+                        if key in data["data"] and isinstance(data["data"][key], list):
+                            items = data["data"][key]
                             break
-                    # Also check nested structures
-                    if not items and "data" in data and isinstance(data["data"], dict):
-                        for key in ["listings", "inventory", "items", "rows"]:
-                            if key in data["data"] and isinstance(data["data"][key], list):
-                                items = data["data"][key]
-                                break
-                elif isinstance(data, list):
-                    items = data
+            elif isinstance(data, list):
+                items = data
 
-                if not items:
-                    continue
+            if not items:
+                continue
 
-                print(f"      Found {len(items)} items in API response", flush=True)
+            print(f"      Found {len(items)} items in API response", flush=True)
 
-                for item in items:
-                    try:
-                        # Try multiple field names for category
-                        cat = (
-                            item.get("category")
-                            or item.get("ticketClass")
-                            or item.get("sectionCategory")
-                            or item.get("section")
-                            or item.get("tier")
-                            or str(item.get("categoryId", ""))
-                        )
+            for item in items:
+                try:
+                    # Try multiple field names for category
+                    cat = (
+                        item.get("category")
+                        or item.get("ticketClass")
+                        or item.get("sectionCategory")
+                        or item.get("section")
+                        or item.get("tier")
+                        or str(item.get("categoryId", ""))
+                    )
 
-                        # Try multiple field names for price
-                        price = (
-                            item.get("price")
-                            or item.get("displayPrice")
-                            or item.get("amount")
-                            or item.get("minPrice")
-                            or item.get("pricePerTicket")
-                        )
+                    # Try multiple field names for price
+                    price = (
+                        item.get("price")
+                        or item.get("displayPrice")
+                        or item.get("amount")
+                        or item.get("minPrice")
+                        or item.get("pricePerTicket")
+                    )
 
-                        # Try multiple field names for currency
-                        currency = (
-                            item.get("currency")
-                            or item.get("currencyCode")
-                            or item.get("currencySymbol")
-                            or "USD"
-                        )
+                    # Try multiple field names for currency
+                    currency = (
+                        item.get("currency")
+                        or item.get("currencyCode")
+                        or item.get("currencySymbol")
+                        or "USD"
+                    )
 
-                        if not cat or price is None:
-                            continue
-
-                        # Extract category number (1-4)
-                        cat_match = re.search(r"([1-4])", str(cat))
-                        if not cat_match:
-                            continue
-
-                        category = f"Category {cat_match.group(1)}"
-                        
-                        # Convert price to float
-                        try:
-                            price = float(price)
-                        except:
-                            continue
-
-                        # Validate price range (page is already in USD)
-                        if not (35 <= price <= 50000):
-                            continue
-
-                        # Keep minimum price per category
-                        if category not in prices or price < prices[category]:
-                            prices[category] = price
-                            print(f"      Found {category}: ${price}", flush=True)
-
-                    except Exception as e:
+                    if not cat or price is None:
                         continue
 
-            except requests.exceptions.RequestException:
-                continue
-            except json.JSONDecodeError:
-                continue
-            except Exception as e:
-                print(f"      API error: {str(e)[:50]}", flush=True)
-                continue
+                    # Extract category number (1-4)
+                    cat_match = re.search(r"([1-4])", str(cat))
+                    if not cat_match:
+                        continue
+
+                    category = f"Category {cat_match.group(1)}"
+                    
+                    # Convert price to float
+                    try:
+                        price = float(price)
+                    except:
+                        continue
+
+                    # Validate price range (page is already in USD)
+                    if not (35 <= price <= 50000):
+                        continue
+
+                    # Keep minimum price per category
+                    if category not in prices or price < prices[category]:
+                        prices[category] = price
+                        print(f"      Found {category}: ${price}", flush=True)
+
+                except Exception as e:
+                    continue
+
+        except requests.exceptions.RequestException:
+            continue
+        except json.JSONDecodeError:
+            continue
+        except Exception as e:
+            print(f"      API error: {str(e)[:50]}", flush=True)
+            continue
     
     return prices
 
@@ -229,19 +235,21 @@ def extract_prices_from_dom(driver):
     prices = {}
     
     try:
-        # Wait for page to stabilize (reduced from 3s to 2s)
-        time.sleep(2)
+        # Wait for page to stabilize (reduced to 1.5s for speed)
+        time.sleep(1.5)
         
         # Try to find price elements in the DOM
         # Look for elements with aria-label containing Category and price
         try:
-            driver.implicitly_wait(2)  # Short wait for elements
+            driver.implicitly_wait(1)  # Very short wait for elements
             aria_elements = driver.find_elements(By.XPATH, "//*[@aria-label]")
             driver.implicitly_wait(10)  # Restore default
             
-            print(f"      Found {len(aria_elements)} elements with aria-label", flush=True)
+            if len(aria_elements) > 0:
+                print(f"      Found {len(aria_elements)} elements with aria-label", flush=True)
             
-            for elem in aria_elements[:50]:  # Reduced from 100 to 50 for speed
+            # Process first 30 elements for speed (reduced from 50)
+            for elem in aria_elements[:30]:
                 try:
                     aria_text = elem.get_attribute('aria-label') or ''
                     if not aria_text:
@@ -293,7 +301,7 @@ def run():
         return
 
     print(f"   Target: {len(games)} games...", flush=True)
-    
+
     driver = get_driver()
     if not driver:
         print("ERROR: Failed to initialize driver", flush=True)
@@ -332,20 +340,36 @@ def run():
                 print(f"   ERROR: Failed to load page: {str(e)[:50]}", flush=True)
                 continue
 
-            # Allow XHRs to load (reduced from 10s to 8s)
+            # Allow XHRs to load (reduced to 6s for speed)
             print(f"   Waiting for page to load...", flush=True)
-            time.sleep(8)
+            time.sleep(6)
 
             print(f"   Extracting prices...", flush=True)
+            extraction_start = time.time()
             prices = extract_prices_from_network(driver)
+            extraction_time = time.time() - extraction_start
+            
+            if extraction_time > 10:
+                print(f"   WARNING: Extraction took {extraction_time:.1f}s (slow)", flush=True)
 
             if not prices:
-                print(f"   ❌ No prices found for {name}", flush=True)
-                continue
+                print(f"   ❌ No prices found for {name} (tried network + DOM)", flush=True)
+                # Try one more time with a longer wait if first attempt failed
+                if idx == 1:  # Only retry for first match
+                    print(f"   Retrying first match with longer wait...", flush=True)
+                    time.sleep(5)
+                    prices = extract_prices_from_network(driver)
+                    if prices:
+                        print(f"   ✅ Found prices on retry: {prices}", flush=True)
+                    else:
+                        print(f"   ❌ Still no prices after retry", flush=True)
+                        continue
+                else:
+                    continue
 
             print(f"   ✅ Found prices: {prices}", flush=True)
 
-            for cat, price in prices.items():
+                        for cat, price in prices.items():
                 # Clean URL (remove Currency parameter)
                 clean_url = url.split("&Currency")[0].split("?Currency")[0]
                 
@@ -357,8 +381,8 @@ def run():
                     "currency": "USD",
                     "timestamp": timestamp
                 })
-
-    except Exception as e:
+                        
+                except Exception as e: 
         print(f"ERROR: Fatal error in scraper: {e}", flush=True)
         import traceback
         traceback.print_exc()
