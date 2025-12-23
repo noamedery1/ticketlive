@@ -10,6 +10,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from datetime import datetime, timezone
 
+# Global lock for driver initialization to prevent "file busy" errors
+_driver_init_lock = threading.Lock()
+
 # =========================
 # CONFIG
 # =========================
@@ -130,52 +133,71 @@ def get_driver():
                 options.page_load_strategy = 'normal'
                 
                 # Use threading to add timeout for driver initialization (prevents hanging)
+                # Use lock to prevent concurrent driver initialization
                 init_result = {'driver': None, 'error': None, 'done': False}
                 
                 def init_worker():
                     try:
-                        # Add retry for "file busy" errors
-                        max_retries = 3
-                        for retry in range(max_retries):
-                            try:
-                                init_result['driver'] = uc.Chrome(
-                                    options=options,
-                                    browser_executable_path=browser_path,
-                                    driver_executable_path=driver_path,
-                                    version_main=None,
-                                    use_subprocess=True  # Use subprocess to avoid connection issues
-                                )
-                                init_result['done'] = True
-                                break
-                            except OSError as e:
-                                if 'Text file busy' in str(e) or 'file busy' in str(e).lower():
-                                    if retry < max_retries - 1:
-                                        print(f"   ⚠️ Driver file busy (retry {retry + 1}/{max_retries}). Waiting...", flush=True)
-                                        time.sleep(5)
-                                        continue
+                        # Acquire lock to prevent concurrent driver initialization
+                        with _driver_init_lock:
+                            print(f"   🔒 Acquired driver initialization lock...", flush=True)
+                            # Add retry for "file busy" errors
+                            max_retries = 5  # Increased retries
+                            for retry in range(max_retries):
+                                try:
+                                    init_result['driver'] = uc.Chrome(
+                                        options=options,
+                                        browser_executable_path=browser_path,
+                                        driver_executable_path=driver_path,
+                                        version_main=None,
+                                        use_subprocess=True  # Use subprocess to avoid connection issues
+                                    )
+                                    init_result['done'] = True
+                                    print(f"   🔓 Released driver initialization lock", flush=True)
+                                    break
+                                except OSError as e:
+                                    if 'Text file busy' in str(e) or 'file busy' in str(e).lower():
+                                        if retry < max_retries - 1:
+                                            wait_time = 3 * (retry + 1)  # Increasing wait: 3s, 6s, 9s, 12s
+                                            print(f"   ⚠️ Driver file busy (retry {retry + 1}/{max_retries}). Waiting {wait_time}s...", flush=True)
+                                            time.sleep(wait_time)
+                                            continue
+                                        else:
+                                            raise
                                     else:
                                         raise
-                                else:
+                                except Exception as e:
+                                    # Release lock on error
+                                    print(f"   🔓 Released driver initialization lock (error)", flush=True)
                                     raise
-                            except Exception as e:
-                                raise
                     except Exception as e:
                         init_result['error'] = e
                         init_result['done'] = True
+                        if _driver_init_lock.locked():
+                            try:
+                                _driver_init_lock.release()
+                            except:
+                                pass
                 
                 init_thread = threading.Thread(target=init_worker, daemon=True)
                 init_thread.start()
-                init_thread.join(timeout=90)  # 90 second timeout for Render's slower environment
+                init_thread.join(timeout=120)  # Increased to 120s for Render with lock contention
                 
                 if init_thread.is_alive():
-                    print(f"   ERROR: Driver initialization timed out after 90s", flush=True)
+                    print(f"   ERROR: Driver initialization timed out after 120s", flush=True)
+                    # Release lock if still held
+                    try:
+                        if _driver_init_lock.locked():
+                            _driver_init_lock.release()
+                    except:
+                        pass
                     if attempt < 2:
-                        wait_time = 5 * (attempt + 1)
+                        wait_time = 10 * (attempt + 1)  # Increased wait: 10s, 20s
                         print(f"   Retrying in {wait_time} seconds...", flush=True)
                         time.sleep(wait_time)
                         continue
                     else:
-                        raise Exception("Driver initialization timed out after 3 attempts (90s each)")
+                        raise Exception("Driver initialization timed out after 3 attempts (120s each)")
                 
                 if init_result['error']:
                     raise init_result['error']
