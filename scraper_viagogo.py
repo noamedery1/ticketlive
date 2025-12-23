@@ -324,17 +324,31 @@ def _extract_prices_clean_internal(driver):
         # ------------------------------------------------------------------
         # APPROACH 2: Interactive Section Mapping (Fill in missing categories)
         # ------------------------------------------------------------------
+        # Check total time before starting section mapping
+        if time.time() - extraction_start_time > 25:
+            print(f"      ⚠️ Skipping section mapping (already used {time.time() - extraction_start_time:.1f}s)")
+            return prices
+        
         # Now run section mapping for ANY missing categories (not just when prices is empty)
         series_map = {'1': 'Category 1', '2': 'Category 2', '3': 'Category 3', '4': 'Category 4'}
         
         missing_before_mapping = [cat for cat in ['Category 1', 'Category 2', 'Category 3', 'Category 4'] if cat not in prices]
         if missing_before_mapping:
             print(f"      🔄 Section mapping: Looking for {len(missing_before_mapping)} missing categories...")
+            section_mapping_start = time.time()
         
         for prefix, cat_label in series_map.items():
             # Skip if already found
             if cat_label in prices: 
                 continue
+            
+            # Check time limits before starting section mapping for this category
+            if time.time() - extraction_start_time > 30:
+                print(f"      ⚠️ Stopping section mapping (time limit reached)")
+                break
+            if 'section_mapping_start' in locals() and time.time() - section_mapping_start > 10:
+                print(f"      ⚠️ Section mapping taking too long, stopping")
+                break
             
             print(f"      🔄 Trying section mapping for missing {cat_label}...")
             found_via_section = False
@@ -616,11 +630,11 @@ def _extract_prices_clean_internal(driver):
         print(f"      ⚠️ Extract Error after {extraction_total_time:.1f}s: {e}")
         return {}
 
-def extract_prices_clean(driver, timeout=45):
+def extract_prices_clean(driver, timeout=35):
     """
     Wrapper with hard timeout to prevent infinite hangs.
     Uses threading to enforce maximum execution time.
-    Reduced to 45s to fail faster and continue processing.
+    Reduced to 35s to fail faster and continue processing.
     """
     result = {'prices': {}, 'error': None, 'completed': False}
     
@@ -851,10 +865,10 @@ def run_scraper_cycle():
                     # 1. Try standard extract (Includes Section Fallback) with timeout protection
                     extraction_start = time.time()
                     prices = {}
-                    max_extraction_time = 60  # Maximum time for extraction (60 seconds)
+                    max_extraction_time = 35  # Maximum time for extraction (35 seconds, matches wrapper timeout)
                     try:
-                        print(f"      🔍 Starting extraction (max {max_extraction_time}s)...")
-                        prices = extract_prices_clean(driver)
+                        print(f"      🔍 Starting extraction (max {max_extraction_time}s)...", flush=True)
+                        prices = extract_prices_clean(driver, timeout=max_extraction_time)
                         extraction_time = time.time() - extraction_start
                         if extraction_time > 30:
                             print(f"      ⚠️ Extraction took {extraction_time:.1f}s (slow)")
