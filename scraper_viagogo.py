@@ -35,7 +35,7 @@ def extract_prices_clean(driver):
     """
     prices = {}
     try:
-        print("      ➡️ Entering extraction logic...")
+        print("      ➡️ Entering extraction logic...", flush=True)
         # REMOVED: Expensive body.text check that causes Docker CPU hangs
         # We proceed directly to targeted element searches which are lighter.
 
@@ -212,6 +212,10 @@ def get_driver():
         profile_dir = os.path.join(os.getcwd(), 'chrome_profile_viagogo')
         options.add_argument(f'--user-data-dir={profile_dir}')
         
+        # BLOCK IMAGES to save CPU/Bandwidth
+        prefs = {"profile.managed_default_content_settings.images": 2}
+        options.add_experimental_option("prefs", prefs)
+        
         options.page_load_strategy = 'eager' 
 
         browser_path = '/usr/bin/chromium' if os.path.exists('/usr/bin/chromium') else None
@@ -274,6 +278,14 @@ def run_scraper_cycle():
             for attempt in range(3):
                 try:
                     driver.get(target_url)
+                    
+                    # 🛑 FORCE STOP LOADING after 8 seconds to kill heavy JS/Ads
+                    try:
+                        time.sleep(8)
+                        driver.execute_script("window.stop();")
+                        print("      🛑 Executed window.stop() to clear resources")
+                    except: pass
+
                     print(f"      🔎 Title: {driver.title}")
                     
                     if '502' in driver.title or '403' in driver.title or 'Just a moment' in driver.title:
