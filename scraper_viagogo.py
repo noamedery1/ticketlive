@@ -62,71 +62,31 @@ def _extract_prices_clean_internal(driver):
                 print(f"      ⚠️ Total extraction time limit reached ({time.time() - extraction_start_time:.1f}s), stopping category search", flush=True)
                 break
             
-            # Find all elements containing this text - EXPANDED XPATH to include more element types
-            xpath_query = f"//div[contains(text(), '{cat_name}')] | //span[contains(text(), '{cat_name}')] | //button[contains(text(), '{cat_name}')] | //a[contains(text(), '{cat_name}')] | //li[contains(text(), '{cat_name}')] | //p[contains(text(), '{cat_name}')] | //label[contains(text(), '{cat_name}')]"
+            # Split massive XPath into specific checks to avoid XML parser CPU spike
+            # Check most likely containers first
+            tag_priority = ['div', 'span', 'button', 'a', 'p', 'label', 'li']
+            anchors = []
             
             print(f"      ... searching for {cat_name} ...", flush=True)
-            anchors = []
-            try:
-                # Add aggressive timeout protection for find_elements
-                search_start = time.time()
-                max_search_time = 3  # Reduced to 3 seconds - fail very fast
-                
-                # Set very short implicit wait for this search
-                original_wait = 10
-                try:
-                    original_wait = driver.timeouts.implicit_wait if hasattr(driver.timeouts, 'implicit_wait') else 10
-                except:
-                    pass
-                
-                driver.implicitly_wait(1)  # Very short wait - 1 second max
-                try:
-                    # Use a thread with timeout for find_elements to prevent hanging
-                    search_result = {'elements': [], 'done': False, 'error': None}
-                    def search_worker():
-                        try:
-                            search_result['elements'] = driver.find_elements(By.XPATH, xpath_query)
-                            search_result['done'] = True
-                        except Exception as e:
-                            search_result['error'] = e
-                            search_result['done'] = True
-                    
-                    search_thread = threading.Thread(target=search_worker, daemon=True)
-                    search_thread.start()
-                    search_thread.join(timeout=max_search_time)
-                    
-                    if search_thread.is_alive():
-                        print(f"      ⚠️ Search for {cat_name} exceeded {max_search_time}s, skipping...", flush=True)
-                        anchors = []
-                    elif search_result['error']:
-                        msg = str(search_result['error']).lower()
-                        if 'crashed' in msg or 'disconnected' in msg:
-                            raise search_result['error']
-                        print(f"      ⚠️ Search error for {cat_name}: {str(search_result['error'])[:30]}")
-                        anchors = []
-                    else:
-                        anchors = search_result['elements']
-                finally:
-                    try:
-                        driver.implicitly_wait(original_wait)  # Restore original wait
-                    except:
-                        pass
-                
-                search_time = time.time() - search_start
-                # If search took longer than timeout, it means thread.join didn't work - skip immediately
-                if search_time > max_search_time:
-                    print(f"      ⚠️ Search took {search_time:.1f}s (exceeded {max_search_time}s limit), skipping this category", flush=True)
-                    anchors = []  # Skip if exceeded timeout
-                elif search_time > 3:
-                    print(f"      ⚠️ Search took {search_time:.1f}s (slow), limiting results", flush=True)
-                    anchors = anchors[:2]  # Limit to 2 if too slow
-            except Exception as find_err:
-                msg = str(find_err).lower()
-                if 'crashed' in msg or 'disconnected' in msg:
-                    print(f"      🔥 Driver crashed during search: {msg[:50]}")
-                    raise find_err
-                print(f"      ⚠️ Search error: {msg[:50]}")
-                anchors = []
+            
+            for tag in tag_priority:
+                 # Check if we already found something effectively
+                 if anchors: break
+                 
+                 xpath_simple = f"//{tag}[contains(text(), '{cat_name}')]"
+                 try:
+                     driver.implicitly_wait(0.5) # Very fast check
+                     found = driver.find_elements(By.XPATH, xpath_simple)
+                     if found:
+                         anchors.extend(found)
+                 except: pass
+            
+            # Restore wait
+            driver.implicitly_wait(2)
+            
+            
+            # REMOVED: Complex threaded logic replaced by simple sequential check above
+            # The previous logic was over-engineered for what is essentially a find_elements call
             
             # Fallback for "Cat 1" etc
             if not anchors:
@@ -880,7 +840,7 @@ def run_scraper_cycle():
                     
                     # 🛑 FORCE STOP LOADING after 15 seconds to kill heavy JS/Ads (increased from 10)
                     try:
-                        time.sleep(15)  # Increased wait time for slower servers
+                        time.sleep(12)  # Increased wait time for slower servers
                         driver.execute_script("window.stop();")
                         print("      🛑 Executed window.stop() to clear resources")
                     except Exception: 
@@ -936,7 +896,7 @@ def run_scraper_cycle():
                     if not prices:
                         try:
                             listings_clicked = False
-                            list_els = driver.find_elements(By.XPATH, "//*[contains(text(), 'listings')]")
+                            list_els = driver.find_elements(By.XPATH, "//div[contains(text(), 'listings')] | //span[contains(text(), 'listings')]")
                             for le in list_els:
                                 if 'ticket' not in le.text.lower() and len(le.text) < 30 and le.is_displayed():
                                      print(f"      🖱️ Clicking Listing Summary: '{le.text}'")
