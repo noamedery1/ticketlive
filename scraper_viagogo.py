@@ -41,35 +41,6 @@ def append_json(path, rows):
 def get_driver():
     """Get Chrome driver with network logging enabled"""
     try:
-        options = uc.ChromeOptions()
-
-        # Always use headless on server environments (Render, Docker, etc.)
-        # Render doesn't have display, so headless is required
-        options.add_argument("--headless=new")
-        options.add_argument("--no-sandbox")
-        options.add_argument("--disable-dev-shm-usage")
-        options.add_argument("--disable-gpu")
-        options.add_argument("--window-size=1920,1080")
-        options.add_argument("--lang=en-US")
-        options.add_argument("--disable-software-rasterizer")
-        options.add_argument("--disable-extensions")
-
-        options.add_argument("--disable-blink-features=AutomationControlled")
-        options.add_argument("--disable-features=IsolateOrigins,site-per-process")
-        
-        # Additional stability flags for Render
-        options.add_argument("--disable-session-crashed-bubble")
-        options.add_argument("--disable-crash-reporter")
-        options.add_argument("--js-flags=--max-old-space-size=2048")
-        options.add_argument("--disable-background-timer-throttling")
-        options.add_argument("--disable-renderer-backgrounding")
-        
-        # Block images to save resources
-        prefs = {"profile.managed_default_content_settings.images": 2}
-        options.add_experimental_option("prefs", prefs)
-        
-        options.page_load_strategy = 'eager'
-
         # Check for Chromium/Chrome paths (Render might not have them)
         browser_path = None
         driver_path = None
@@ -96,6 +67,36 @@ def get_driver():
         for attempt in range(3):
             try:
                 print(f"   Attempt {attempt + 1}/3 to initialize driver...", flush=True)
+                
+                # Create FRESH ChromeOptions for each attempt (cannot reuse!)
+                options = uc.ChromeOptions()
+
+                # Always use headless on server environments (Render, Docker, etc.)
+                # Render doesn't have display, so headless is required
+                options.add_argument("--headless=new")
+                options.add_argument("--no-sandbox")
+                options.add_argument("--disable-dev-shm-usage")
+                options.add_argument("--disable-gpu")
+                options.add_argument("--window-size=1920,1080")
+                options.add_argument("--lang=en-US")
+                options.add_argument("--disable-software-rasterizer")
+                options.add_argument("--disable-extensions")
+
+                options.add_argument("--disable-blink-features=AutomationControlled")
+                options.add_argument("--disable-features=IsolateOrigins,site-per-process")
+                
+                # Additional stability flags for Render
+                options.add_argument("--disable-session-crashed-bubble")
+                options.add_argument("--disable-crash-reporter")
+                options.add_argument("--js-flags=--max-old-space-size=2048")
+                options.add_argument("--disable-background-timer-throttling")
+                options.add_argument("--disable-renderer-backgrounding")
+                
+                # Block images to save resources
+                prefs = {"profile.managed_default_content_settings.images": 2}
+                options.add_experimental_option("prefs", prefs)
+                
+                options.page_load_strategy = 'eager'
                 
                 # Use threading to add timeout for driver initialization (prevents hanging)
                 init_result = {'driver': None, 'error': None, 'done': False}
@@ -467,7 +468,7 @@ def extract_prices_from_dom(driver):
                                 print(f"      Found {category_found}: ${price_val} (DOM traversal)", flush=True)
                     except:
                         continue
-            except Exception as e:
+    except Exception as e:
                 print(f"      Price element search error: {str(e)[:50]}", flush=True)
         
         # Strategy 3: Simple text scan for remaining categories
@@ -667,8 +668,8 @@ def run():
                     "currency": "USD",
                     "timestamp": timestamp
                 })
-
-    except Exception as e: 
+                        
+                except Exception as e: 
         print(f"ERROR: Fatal error in scraper: {e}", flush=True)
         import traceback
         traceback.print_exc()
