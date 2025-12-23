@@ -118,22 +118,42 @@ def extract_prices_clean(driver):
             if not best_price:
                 try:
                      print(f"      🔍 Checking aria-label fallback for {cat_name}...")
-                     aria_pills = driver.find_elements(By.XPATH, f"//*[@aria-label and contains(@aria-label, '{cat_name}')]")
-                     if not aria_pills:
-                         # Try short form
-                         aria_pills = driver.find_elements(By.XPATH, f"//*[@aria-label and contains(@aria-label, 'Cat {i}')]")
+                     # Add timeout protection for element finding
+                     try:
+                         aria_pills = driver.find_elements(By.XPATH, f"//*[@aria-label and contains(@aria-label, '{cat_name}')]")
+                         if not aria_pills:
+                             # Try short form
+                             aria_pills = driver.find_elements(By.XPATH, f"//*[@aria-label and contains(@aria-label, 'Cat {i}')]")
+                     except Exception as find_err:
+                         # If finding elements causes crash, skip this fallback
+                         msg = str(find_err).lower()
+                         if 'crashed' in msg or 'disconnected' in msg or 'target closed' in msg:
+                             print(f"      ⚠️ Driver unstable during aria-label search, skipping...")
+                             raise find_err  # Re-raise to trigger driver restart
+                         aria_pills = []
                      
-                     for el in aria_pills:
-                         txt = el.get_attribute('aria-label')
-                         m = re.search(r'(?:\$|₪|USD)?\s*([\d,]{2,})', txt)
-                         if m:
-                             p = float(m.group(1).replace(',', ''))
-                             if '₪' in txt: p = round(p * ILS_TO_USD, 2)
-                             if p > 35 and p < 50000:
-                                 best_price = p
-                                 print(f"      ✅ Aria-label fallback found {cat_name}: {best_price}")
-                                 break
+                     for el in aria_pills[:5]:  # Limit to first 5 to prevent memory issues
+                         try:
+                             txt = el.get_attribute('aria-label')
+                             if not txt:
+                                 continue
+                             m = re.search(r'(?:\$|₪|USD)?\s*([\d,]{2,})', txt)
+                             if m:
+                                 p = float(m.group(1).replace(',', ''))
+                                 if '₪' in txt: p = round(p * ILS_TO_USD, 2)
+                                 if p > 35 and p < 50000:
+                                     best_price = p
+                                     print(f"      ✅ Aria-label fallback found {cat_name}: {best_price}")
+                                     break
+                         except Exception as el_err:
+                             # Skip individual element errors
+                             continue
                 except Exception as e:
+                    msg = str(e).lower()
+                    # Re-raise critical errors to trigger driver restart
+                    if 'crashed' in msg or 'disconnected' in msg or 'target closed' in msg or 'tab crashed' in msg:
+                        print(f"      🔥 Critical error in aria-label fallback: {msg[:50]}")
+                        raise e
                     pass
 
             if best_price:
@@ -372,6 +392,31 @@ def get_driver():
         options.add_argument('--disable-features=VizDisplayCompositor')
         # Memory and performance optimizations
         options.add_argument('--memory-pressure-off')
+        # Additional stability flags to prevent crashes
+        options.add_argument('--disable-blink-features=AutomationControlled')
+        options.add_argument('--disable-infobars')
+        options.add_argument('--disable-notifications')
+        options.add_argument('--disable-popup-blocking')
+        options.add_argument('--disable-translate')
+        options.add_argument('--disable-background-networking')
+        options.add_argument('--disable-default-apps')
+        options.add_argument('--disable-session-crashed-bubble')
+        options.add_argument('--disable-crash-reporter')
+        options.add_argument('--disable-breakpad')
+        # Memory limits to prevent crashes (V8 heap limit via js-flags)
+        options.add_argument('--js-flags=--max-old-space-size=2048')
+        # Reduce memory usage
+        options.add_argument('--disable-accelerated-2d-canvas')
+        options.add_argument('--disable-accelerated-video-decode')
+        options.add_argument('--disable-canvas-aa')
+        options.add_argument('--disable-2d-canvas-clip-aa')
+        options.add_argument('--disable-gl-drawing-for-tests')
+        # Additional crash prevention
+        options.add_argument('--disable-component-extensions-with-background-pages')
+        options.add_argument('--disable-background-downloads')
+        options.add_argument('--disable-client-side-phishing-detection')
+        options.add_argument('--disable-domain-reliability')
+        options.add_argument('--disable-features=AudioServiceOutOfProcess')
         # options.add_argument('--user-agent=...') # REMOVED: Let UC/Chrome handle this to avoid fingerprint mismatches
         
         # Add persistent profile to build "trust" and avoid repetitive CAPTCHAs
@@ -429,10 +474,18 @@ def run_scraper_cycle():
 
     try:
         for i, game in enumerate(games, 1):
-            if i > 1 and i % 3 == 0:
-                try: driver.quit()
-                except: pass
+            # Proactive driver restart every 5 games to prevent memory buildup and crashes
+            if i > 1 and i % 5 == 0:
+                print(f"      🔄 Proactive driver restart (game {i}/{len(games)})...")
+                try: 
+                    driver.quit()
+                except: 
+                    pass
+                time.sleep(2)
                 driver = get_driver()
+                if not driver:
+                    print(f"      ❌ Failed to restart driver")
+                    break
 
             if driver is None: driver = get_driver()
             if not driver: continue
@@ -526,25 +579,37 @@ def run_scraper_cycle():
                 except Exception as e: 
                     msg = str(e).lower()
                     print(f"      ⚠️ Driver Error: {msg}")
-                    # Handle timeout errors more gracefully
+                    # Handle different types of errors
+                    is_critical = False
+                    
                     if 'timeout' in msg or 'timed out receiving message from renderer' in msg:
                         print(f"      🔄 Renderer timeout detected, restarting driver...")
+                        is_critical = True
+                    elif 'tab crashed' in msg or 'session deleted' in msg or 'target closed' in msg:
+                        print(f"      🔥 Tab crashed detected, restarting driver...")
+                        is_critical = True
+                    elif 'chrome not reachable' in msg or 'disconnected' in msg:
+                        print(f"      🔥 Chrome disconnected, restarting driver...")
+                        is_critical = True
+                    elif 'crashed' in msg:
+                        print(f"      🔥 Crash detected, restarting driver...")
+                        is_critical = True
+                    
+                    if is_critical:
                         try: 
                             driver.quit()
                         except: 
                             pass
-                        time.sleep(3)
+                        time.sleep(5)  # Increased wait time after crash
                         driver = get_driver()
                         if not driver:
                             print(f"      ❌ Failed to restart driver, skipping this match")
                             break
                         time.sleep(5)
                     else:
-                        # Force restart driver on other critical errors
-                        try: driver.quit()
-                        except: pass
-                        driver = get_driver()
-                        time.sleep(5)
+                        # For non-critical errors, try to continue
+                        print(f"      ⚠️ Non-critical error, continuing...")
+                        time.sleep(2)
             time.sleep(1) 
         
         time.sleep(1.0)
