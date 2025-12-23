@@ -151,15 +151,12 @@ def run_scrapers_parallel():
         try:
             print(f'\\n[{datetime.now().strftime("%H:%M")}] 🚀 STARTING PARALLEL SCAPERS...')
             
-            # Launch both concurrently (staggered to avoid driver collision)
-            p_viagogo = subprocess.Popen(['python', 'scraper_viagogo.py'])
-            time.sleep(15) # Wait for Viagogo driver to fully init
-            p_ftn = subprocess.Popen(['python', 'scraper_ftn.py'])
+            # Launch sequentially to save memory/CPU in Docker
+            print('   👉 Starting Viagogo Scraper...')
+            subprocess.run(['python', 'scraper_viagogo.py'])
             
-            # Wait for both to finish
-            print('   ... Waiting for scanners to finish ...')
-            p_viagogo.wait()
-            p_ftn.wait()
+            print('   👉 Starting FTN Scraper...')
+            subprocess.run(['python', 'scraper_ftn.py'])
             
             print(f'[{datetime.now().strftime("%H:%M")}] ✅ ALL SCRAPERS FINISHED.')
             

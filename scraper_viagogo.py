@@ -180,6 +180,9 @@ def extract_prices_clean(driver):
         return prices
 
     except Exception as e:
+        msg = str(e).lower()
+        if 'timeout' in msg or 'crashed' in msg or 'disconnected' in msg:
+            raise e  # Propagate critical errors to trigger driver restart
         print(f"      ⚠️ Extract Error: {e}")
         return {}
 
@@ -297,15 +300,21 @@ def run_scraper_cycle():
                              append_data(DATA_FILE_VIAGOGO, new_records_buffer)
                              new_records_buffer = [] 
                         break 
+                        break 
                     else:
-                        print('❌ No data found.')
-                        # Debug logic hidden to keep logs clean
-                        break
+                        print('❌ No data found (will retry)...')
+                        # Do NOT break; let it retry naturally
+                        if attempt == 2:
+                             print("      Giving up on this match.")
                         
                 except Exception as e: 
                     msg = str(e).lower()
-                    if 'crashed' in msg or 'disconnected' in msg: raise e 
-                    time.sleep(2)
+                    print(f"      ⚠️ Driver Error: {msg}")
+                    # Force restart driver on critical errors
+                    try: driver.quit()
+                    except: pass
+                    driver = get_driver()
+                    time.sleep(5)
             time.sleep(1) 
         
         time.sleep(1.0)
