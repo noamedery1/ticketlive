@@ -117,14 +117,31 @@ def extract_prices_clean(driver):
             # Fallback: Check aria-label for ALL categories (not just Category 1)
             if not best_price:
                 try:
+                     # Check driver health before expensive operation
+                     try:
+                         driver.current_url  # Quick health check
+                     except:
+                         print(f"      ⚠️ Driver unhealthy, skipping aria-label fallback for {cat_name}")
+                         raise Exception("Driver unhealthy")
+                     
                      print(f"      🔍 Checking aria-label fallback for {cat_name}...")
+                     time.sleep(0.5)  # Small delay to let page stabilize
+                     
                      # Add timeout protection for element finding
                      try:
+                         # Use shorter timeout for element finding
+                         driver.implicitly_wait(2)  # Reduce from 10 to 2 seconds
                          aria_pills = driver.find_elements(By.XPATH, f"//*[@aria-label and contains(@aria-label, '{cat_name}')]")
                          if not aria_pills:
                              # Try short form
                              aria_pills = driver.find_elements(By.XPATH, f"//*[@aria-label and contains(@aria-label, 'Cat {i}')]")
+                         driver.implicitly_wait(10)  # Restore original timeout
                      except Exception as find_err:
+                         # Restore timeout even on error
+                         try:
+                             driver.implicitly_wait(10)
+                         except:
+                             pass
                          # If finding elements causes crash, skip this fallback
                          msg = str(find_err).lower()
                          if 'crashed' in msg or 'disconnected' in msg or 'target closed' in msg:
@@ -132,8 +149,15 @@ def extract_prices_clean(driver):
                              raise find_err  # Re-raise to trigger driver restart
                          aria_pills = []
                      
-                     for el in aria_pills[:5]:  # Limit to first 5 to prevent memory issues
+                     # Limit to first 3 elements to reduce memory pressure
+                     for el in aria_pills[:3]:
                          try:
+                             # Quick health check before accessing element
+                             try:
+                                 driver.current_url
+                             except:
+                                 raise Exception("Driver crashed during element access")
+                             
                              txt = el.get_attribute('aria-label')
                              if not txt:
                                  continue
@@ -146,12 +170,15 @@ def extract_prices_clean(driver):
                                      print(f"      ✅ Aria-label fallback found {cat_name}: {best_price}")
                                      break
                          except Exception as el_err:
+                             msg = str(el_err).lower()
+                             if 'crashed' in msg or 'disconnected' in msg:
+                                 raise el_err  # Re-raise critical errors
                              # Skip individual element errors
                              continue
                 except Exception as e:
                     msg = str(e).lower()
                     # Re-raise critical errors to trigger driver restart
-                    if 'crashed' in msg or 'disconnected' in msg or 'target closed' in msg or 'tab crashed' in msg:
+                    if 'crashed' in msg or 'disconnected' in msg or 'target closed' in msg or 'tab crashed' in msg or 'unhealthy' in msg:
                         print(f"      🔥 Critical error in aria-label fallback: {msg[:50]}")
                         raise e
                     pass
@@ -505,6 +532,19 @@ def run_scraper_cycle():
             if driver is None: driver = get_driver()
             if not driver: continue
 
+            # Check driver health before starting
+            try:
+                driver.current_url
+            except:
+                print(f"      ⚠️ Driver unhealthy before match {i}, restarting...")
+                try:
+                    driver.quit()
+                except:
+                    pass
+                driver = get_driver()
+                if not driver:
+                    continue
+
             match_name = game['match_name']
             url = game['url']
             clean_url = url.split('&Currency')[0].split('?Currency')[0]
@@ -538,6 +578,13 @@ def run_scraper_cycle():
                         pass
 
                     print(f"      🔎 Title: {driver.title}")
+                    
+                    # Check driver health before expensive extraction
+                    try:
+                        driver.current_url
+                    except:
+                        print(f"      ⚠️ Driver unhealthy before extraction, restarting...")
+                        raise Exception("Driver unhealthy before extraction")
                     
                     if '502' in driver.title or '403' in driver.title or 'Just a moment' in driver.title:
                         print(f"      ⚠️ Blocked/Error Page detected ('{driver.title}'). waiting...")
