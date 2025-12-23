@@ -35,12 +35,9 @@ def extract_prices_clean(driver):
     """
     prices = {}
     try:
-        # 1. Wait for "Category" text or "Section" text
-        for _ in range(5):
-            body_txt = driver.find_element(By.TAG_NAME, 'body').text
-            if 'Category' in body_txt or 'Cat ' in body_txt or '101' in body_txt:
-                break
-            time.sleep(1)
+        print("      ➡️ Entering extraction logic...")
+        # REMOVED: Expensive body.text check that causes Docker CPU hangs
+        # We proceed directly to targeted element searches which are lighter.
 
         # ------------------------------------------------------------------
         # APPROACH 1: "Anchor & Context" (Category Labels)
