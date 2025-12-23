@@ -52,9 +52,14 @@ def _extract_prices_clean_internal(driver):
             if cat_name in prices:
                 continue
             
-            # Check if we're taking too long on category search
-            if time.time() - category_search_start > 30:
-                print(f"      ⚠️ Category search taking too long, skipping remaining categories")
+            # Check if we're taking too long on category search (reduced from 30s to 20s)
+            elapsed = time.time() - category_search_start
+            if elapsed > 20:
+                print(f"      ⚠️ Category search taking too long ({elapsed:.1f}s), skipping remaining categories")
+                break
+            # Also check total extraction time
+            if time.time() - extraction_start_time > 40:
+                print(f"      ⚠️ Total extraction time limit reached, stopping category search")
                 break
             
             # Find all elements containing this text - EXPANDED XPATH to include more element types
@@ -73,12 +78,13 @@ def _extract_prices_clean_internal(driver):
                     driver.implicitly_wait(original_wait)  # Restore original wait
                 
                 search_time = time.time() - search_start
-                if search_time > 5:
+                if search_time > 8:
                     print(f"      ⚠️ Search took {search_time:.1f}s (slow), limiting results")
-                    anchors = anchors[:5]  # Limit to 5 if too slow
-                if search_time > 15:
+                    anchors = anchors[:3]  # Limit to 3 if too slow
+                if search_time > 12:
                     print(f"      ⚠️ Search took {search_time:.1f}s (very slow), skipping this category")
                     anchors = []  # Skip if extremely slow
+                    break  # Break from category loop to save time
             except Exception as find_err:
                 msg = str(find_err).lower()
                 if 'crashed' in msg or 'disconnected' in msg:
@@ -610,18 +616,21 @@ def _extract_prices_clean_internal(driver):
         print(f"      ⚠️ Extract Error after {extraction_total_time:.1f}s: {e}")
         return {}
 
-def extract_prices_clean(driver, timeout=50):
+def extract_prices_clean(driver, timeout=45):
     """
     Wrapper with hard timeout to prevent infinite hangs.
     Uses threading to enforce maximum execution time.
+    Reduced to 45s to fail faster and continue processing.
     """
-    result = {'prices': {}, 'error': None}
+    result = {'prices': {}, 'error': None, 'completed': False}
     
     def extract_worker():
         try:
             result['prices'] = _extract_prices_clean_internal(driver)
+            result['completed'] = True
         except Exception as e:
             result['error'] = e
+            result['completed'] = True
     
     thread = threading.Thread(target=extract_worker, daemon=True)
     thread.start()
@@ -632,7 +641,13 @@ def extract_prices_clean(driver, timeout=50):
         return {}  # Return empty on timeout
     
     if result['error']:
-        raise result['error']
+        # Only raise critical errors, others are handled internally
+        msg = str(result['error']).lower()
+        if 'crashed' in msg or 'disconnected' in msg or 'tab crashed' in msg:
+            raise result['error']
+        # For other errors, return empty to continue
+        print(f"      ⚠️ Extraction had non-critical error: {str(result['error'])[:50]}")
+        return {}
     
     return result['prices']
 
