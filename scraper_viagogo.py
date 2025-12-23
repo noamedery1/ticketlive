@@ -131,11 +131,31 @@ def extract_prices_clean(driver):
                      try:
                          # Use shorter timeout for element finding
                          driver.implicitly_wait(2)  # Reduce from 10 to 2 seconds
-                         aria_pills = driver.find_elements(By.XPATH, f"//*[@aria-label and contains(@aria-label, '{cat_name}')]")
+                         # Add explicit timeout wrapper for find_elements (can hang)
+                         start_time = time.time()
+                         try:
+                             aria_pills = driver.find_elements(By.XPATH, f"//*[@aria-label and contains(@aria-label, '{cat_name}')]")
+                             if time.time() - start_time > 5:
+                                 print(f"      ⚠️ Aria-label search took {time.time() - start_time:.1f}s, limiting results")
+                                 aria_pills = aria_pills[:3]  # Limit if too slow
+                         except Exception as find_xpath_err:
+                             aria_pills = []
+                             if 'crashed' in str(find_xpath_err).lower():
+                                 raise find_xpath_err
+                         
                          if not aria_pills:
-                             # Try short form
-                             aria_pills = driver.find_elements(By.XPATH, f"//*[@aria-label and contains(@aria-label, 'Cat {i}')]")
+                             # Try short form with timeout
+                             try:
+                                 start_time = time.time()
+                                 aria_pills = driver.find_elements(By.XPATH, f"//*[@aria-label and contains(@aria-label, 'Cat {i}')]")
+                                 if time.time() - start_time > 5:
+                                     aria_pills = aria_pills[:3]
+                             except:
+                                 aria_pills = []
+                         
                          driver.implicitly_wait(10)  # Restore original timeout
+                         if aria_pills:
+                             print(f"      Found {len(aria_pills)} aria-label elements for {cat_name}")
                      except Exception as find_err:
                          # Restore timeout even on error
                          try:
@@ -671,9 +691,25 @@ def run_scraper_cycle():
                     if '502' in driver.title or '403' in driver.title or 'Just a moment' in driver.title:
                         print(f"      ⚠️ Blocked/Error Page detected ('{driver.title}'). waiting...")
                         time.sleep(10)
-                        
-                    # 1. Try standard extract (Includes Section Fallback)
-                    prices = extract_prices_clean(driver)
+                    
+                    # 1. Try standard extract (Includes Section Fallback) with timeout protection
+                    extraction_start = time.time()
+                    try:
+                        prices = extract_prices_clean(driver)
+                        extraction_time = time.time() - extraction_start
+                        if extraction_time > 30:
+                            print(f"      ⚠️ Extraction took {extraction_time:.1f}s (slow)")
+                    except Exception as extract_err:
+                        extraction_time = time.time() - extraction_start
+                        msg = str(extract_err).lower()
+                        if extraction_time > 60:
+                            print(f"      ⚠️ Extraction timed out after {extraction_time:.1f}s")
+                            prices = {}  # Return empty, continue to next match
+                        elif 'crashed' in msg or 'disconnected' in msg:
+                            raise extract_err  # Re-raise to trigger restart
+                        else:
+                            print(f"      ⚠️ Extraction error: {msg[:50]}")
+                            prices = {}
                     
                     # 2. Interactive: Click "Listings" summary if no data found
                     if not prices:
