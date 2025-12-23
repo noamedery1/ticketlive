@@ -63,11 +63,21 @@ def extract_prices_clean(driver):
             try:
                 # Add timeout protection for find_elements
                 search_start = time.time()
-                anchors = driver.find_elements(By.XPATH, xpath_query)
+                # Set shorter implicit wait for this search
+                original_wait = driver.timeouts.implicit_wait if hasattr(driver.timeouts, 'implicit_wait') else 10
+                driver.implicitly_wait(3)  # Reduce wait time for faster failure
+                try:
+                    anchors = driver.find_elements(By.XPATH, xpath_query)
+                finally:
+                    driver.implicitly_wait(original_wait)  # Restore original wait
+                
                 search_time = time.time() - search_start
                 if search_time > 5:
-                    print(f"      ⚠️ Search took {search_time:.1f}s (slow)")
-                    anchors = anchors[:10]  # Limit if too slow
+                    print(f"      ⚠️ Search took {search_time:.1f}s (slow), limiting results")
+                    anchors = anchors[:5]  # Limit to 5 if too slow
+                if search_time > 15:
+                    print(f"      ⚠️ Search took {search_time:.1f}s (very slow), skipping this category")
+                    anchors = []  # Skip if extremely slow
             except Exception as find_err:
                 msg = str(find_err).lower()
                 if 'crashed' in msg or 'disconnected' in msg:
@@ -782,22 +792,33 @@ def run_scraper_cycle():
                     
                     # 1. Try standard extract (Includes Section Fallback) with timeout protection
                     extraction_start = time.time()
+                    prices = {}
+                    max_extraction_time = 60  # Maximum time for extraction (60 seconds)
                     try:
+                        print(f"      🔍 Starting extraction (max {max_extraction_time}s)...")
                         prices = extract_prices_clean(driver)
                         extraction_time = time.time() - extraction_start
                         if extraction_time > 30:
                             print(f"      ⚠️ Extraction took {extraction_time:.1f}s (slow)")
+                        print(f"      ✅ Extraction completed in {extraction_time:.1f}s, found {len(prices)} categories")
                     except Exception as extract_err:
                         extraction_time = time.time() - extraction_start
                         msg = str(extract_err).lower()
-                        if extraction_time > 60:
-                            print(f"      ⚠️ Extraction timed out after {extraction_time:.1f}s")
+                        if extraction_time > max_extraction_time:
+                            print(f"      ⚠️ Extraction exceeded {max_extraction_time}s timeout ({extraction_time:.1f}s), continuing to next match...")
                             prices = {}  # Return empty, continue to next match
-                        elif 'crashed' in msg or 'disconnected' in msg:
+                        elif 'crashed' in msg or 'disconnected' in msg or 'tab crashed' in msg:
+                            print(f"      🔥 Critical extraction error after {extraction_time:.1f}s: {msg[:50]}")
                             raise extract_err  # Re-raise to trigger restart
                         else:
-                            print(f"      ⚠️ Extraction error: {msg[:50]}")
-                            prices = {}
+                            print(f"      ⚠️ Extraction error after {extraction_time:.1f}s: {msg[:50]}")
+                            prices = {}  # Continue with empty prices
+                    
+                    # Safety check: if extraction took too long but didn't raise error, continue anyway
+                    extraction_time = time.time() - extraction_start
+                    if extraction_time > max_extraction_time and not prices:
+                        print(f"      ⚠️ Extraction took {extraction_time:.1f}s without results, continuing to next match...")
+                        prices = {}  # Ensure empty to continue
                     
                     # 2. Interactive: Click "Listings" summary if no data found
                     if not prices:
@@ -844,7 +865,7 @@ def run_scraper_cycle():
                         
                 except Exception as e: 
                     msg = str(e).lower()
-                    print(f"      ⚠️ Driver Error: {msg}")
+                    print(f"      ⚠️ Driver Error (attempt {attempt+1}/3): {msg[:100]}")
                     # Handle different types of errors
                     is_critical = False
                     
@@ -870,12 +891,15 @@ def run_scraper_cycle():
                         driver = get_driver()
                         if not driver:
                             print(f"      ❌ Failed to restart driver, skipping this match")
-                            break
+                            break  # Break from retry loop, continue to next match
                         time.sleep(5)
+                        # Continue to next attempt
                     else:
-                        # For non-critical errors, try to continue
-                        print(f"      ⚠️ Non-critical error, continuing...")
-                        time.sleep(2)
+                        # For non-critical errors, try to continue to next attempt
+                        print(f"      ⚠️ Non-critical error, will retry...")
+                        if attempt < 2:  # Don't sleep on last attempt
+                            time.sleep(2)
+                        # Continue to next attempt in the loop
             time.sleep(1) 
         
         time.sleep(1.0)
