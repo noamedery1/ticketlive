@@ -2,6 +2,7 @@ import json
 import os
 import re
 import time
+import threading
 import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
 from datetime import datetime
@@ -29,9 +30,9 @@ def append_data(file_path, new_records):
     data.extend(new_records)
     with open(file_path, 'w') as f: json.dump(data, f)
 
-def extract_prices_clean(driver):
+def _extract_prices_clean_internal(driver):
     """
-    Clean, robust strategy to find 'Category X' labels and fallback to Section Mapping.
+    Internal extraction function - called with timeout wrapper
     """
     prices = {}
     extraction_start_time = time.time()  # Track total extraction time
@@ -133,9 +134,25 @@ def extract_prices_clean(driver):
                         # Add timeout protection for text access (can hang in Docker)
                         try:
                             text_start = time.time()
-                            txt = container.text.replace('\n', ' ').strip()
+                            # Use get_attribute with timeout protection
+                            txt = None
+                            try:
+                                # Try get_attribute first (faster, less likely to hang)
+                                txt = container.get_attribute('textContent') or container.get_attribute('innerText')
+                                if not txt:
+                                    # Fallback to .text but with timeout check
+                                    if time.time() - text_start < 2:  # Only if we haven't spent too much time
+                                        txt = container.text
+                            except:
+                                # If get_attribute fails, try .text as last resort
+                                if time.time() - text_start < 2:
+                                    txt = container.text
+                            
+                            if txt:
+                                txt = txt.replace('\n', ' ').strip()
+                            
                             text_time = time.time() - text_start
-                            if text_time > 3:
+                            if text_time > 2:
                                 print(f"      ⚠️ Text access took {text_time:.1f}s (slow), skipping level {level}")
                                 break  # Skip remaining levels if too slow
                         except Exception as text_err:
@@ -592,6 +609,32 @@ def extract_prices_clean(driver):
             raise e  # Propagate critical errors to trigger driver restart
         print(f"      ⚠️ Extract Error after {extraction_total_time:.1f}s: {e}")
         return {}
+
+def extract_prices_clean(driver, timeout=50):
+    """
+    Wrapper with hard timeout to prevent infinite hangs.
+    Uses threading to enforce maximum execution time.
+    """
+    result = {'prices': {}, 'error': None}
+    
+    def extract_worker():
+        try:
+            result['prices'] = _extract_prices_clean_internal(driver)
+        except Exception as e:
+            result['error'] = e
+    
+    thread = threading.Thread(target=extract_worker, daemon=True)
+    thread.start()
+    thread.join(timeout=timeout)
+    
+    if thread.is_alive():
+        print(f"      🔥 Extraction exceeded {timeout}s timeout, aborting...")
+        return {}  # Return empty on timeout
+    
+    if result['error']:
+        raise result['error']
+    
+    return result['prices']
 
 def _create_chrome_options():
     """Create a fresh ChromeOptions object with all stability flags"""
