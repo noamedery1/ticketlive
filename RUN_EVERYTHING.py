@@ -149,11 +149,25 @@ def get_history(match_url: str):
 def run_scraper_viagogo():
     """Run Viagogo scraper in a thread"""
     try:
-        print('   👉 Starting Viagogo Scraper...')
-        subprocess.run(['python', 'scraper_viagogo.py'], check=True)
-        print('   ✅ Viagogo Scraper finished.')
+        print('   👉 Starting Viagogo Scraper...', flush=True)
+        # Use Popen to stream output in real-time
+        process = subprocess.Popen(
+            ['python', 'scraper_viagogo.py'],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            universal_newlines=True,
+            bufsize=1
+        )
+        # Stream output line by line
+        for line in process.stdout:
+            print(line.rstrip(), flush=True)
+        process.wait()
+        if process.returncode == 0:
+            print('   ✅ Viagogo Scraper finished.', flush=True)
+        else:
+            print(f'   ❌ Viagogo Scraper exited with code {process.returncode}', flush=True)
     except Exception as e:
-        print(f'   ❌ Viagogo Scraper Error: {e}')
+        print(f'   ❌ Viagogo Scraper Error: {e}', flush=True)
 
 def run_scraper_ftn():
     """Run FTN scraper in a thread"""

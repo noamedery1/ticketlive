@@ -104,15 +104,15 @@ def extract_prices_from_network(driver):
                 continue
     except Exception as e:
         # Performance logs not available, use DOM fallback
-        print(f"      Performance logs not available: {str(e)[:50]}")
-        print("      Using DOM-based extraction...")
+        print(f"      Performance logs not available: {str(e)[:50]}", flush=True)
+        print("      Using DOM-based extraction...", flush=True)
         return extract_prices_from_dom(driver)
 
     if not api_urls:
-        print("      No API URLs found in network logs. Using DOM extraction...")
+        print("      No API URLs found in network logs. Using DOM extraction...", flush=True)
         return extract_prices_from_dom(driver)
 
-    print(f"      Found {len(api_urls)} potential API URLs")
+    print(f"      Found {len(api_urls)} potential API URLs", flush=True)
 
     # Get user agent from driver
     try:
@@ -128,9 +128,9 @@ def extract_prices_from_network(driver):
     }
 
     for api_url in api_urls:
-            try:
-                print(f"      Trying API: {api_url[:80]}...")
-                r = requests.get(api_url, headers=headers, timeout=10)
+        try:
+            print(f"      Trying API: {api_url[:80]}...", flush=True)
+            r = requests.get(api_url, headers=headers, timeout=10)
                 if r.status_code != 200:
                     continue
 
@@ -155,7 +155,7 @@ def extract_prices_from_network(driver):
                 if not items:
                     continue
 
-                print(f"      Found {len(items)} items in API response")
+                print(f"      Found {len(items)} items in API response", flush=True)
 
                 for item in items:
                     try:
@@ -209,7 +209,7 @@ def extract_prices_from_network(driver):
                         # Keep minimum price per category
                         if category not in prices or price < prices[category]:
                             prices[category] = price
-                            print(f"      Found {category}: ${price}")
+                            print(f"      Found {category}: ${price}", flush=True)
 
                     except Exception as e:
                         continue
@@ -219,7 +219,7 @@ def extract_prices_from_network(driver):
             except json.JSONDecodeError:
                 continue
             except Exception as e:
-                print(f"      API error: {str(e)[:50]}")
+                print(f"      API error: {str(e)[:50]}", flush=True)
                 continue
     
     return prices
@@ -229,15 +229,19 @@ def extract_prices_from_dom(driver):
     prices = {}
     
     try:
-        # Wait for page to load
-        time.sleep(3)
+        # Wait for page to stabilize (reduced from 3s to 2s)
+        time.sleep(2)
         
         # Try to find price elements in the DOM
         # Look for elements with aria-label containing Category and price
         try:
+            driver.implicitly_wait(2)  # Short wait for elements
             aria_elements = driver.find_elements(By.XPATH, "//*[@aria-label]")
+            driver.implicitly_wait(10)  # Restore default
             
-            for elem in aria_elements[:100]:  # Limit to avoid hanging
+            print(f"      Found {len(aria_elements)} elements with aria-label", flush=True)
+            
+            for elem in aria_elements[:50]:  # Reduced from 100 to 50 for speed
                 try:
                     aria_text = elem.get_attribute('aria-label') or ''
                     if not aria_text:
@@ -264,16 +268,16 @@ def extract_prices_from_dom(driver):
                                 # Keep minimum price per category
                                 if cat_name not in prices or price_val < prices[cat_name]:
                                     prices[cat_name] = price_val
-                                    print(f"      Found {cat_name}: ${price_val} (DOM)")
+                                    print(f"      Found {cat_name}: ${price_val} (DOM)", flush=True)
                         except:
                             continue
                 except:
                     continue
         except Exception as e:
-            print(f"      DOM extraction error: {str(e)[:50]}")
+            print(f"      DOM extraction error: {str(e)[:50]}", flush=True)
     
     except Exception as e:
-        print(f"      DOM fallback error: {str(e)[:50]}")
+        print(f"      DOM fallback error: {str(e)[:50]}", flush=True)
     
     return prices
 
@@ -281,37 +285,65 @@ def extract_prices_from_dom(driver):
 # MAIN
 # =========================
 def run():
+    print(f'\n[{datetime.now().strftime("%H:%M")}] 🚀 VIAGOGO SCRAPER STARTING...', flush=True)
+    
     games = load_json(GAMES_FILE, [])
     if not games:
-        print("ERROR: No games file found")
+        print("ERROR: No games file found", flush=True)
         return
 
+    print(f"   Target: {len(games)} games...", flush=True)
+    
     driver = get_driver()
+    if not driver:
+        print("ERROR: Failed to initialize driver", flush=True)
+        return
+    
     results = []
     timestamp = datetime.now(timezone.utc).isoformat()
 
     try:
         for idx, game in enumerate(games, 1):
+            # Restart driver every 5 matches to prevent slowdowns
+            if idx > 1 and idx % 5 == 1:
+                print(f"   🔄 Restarting driver (match {idx})...", flush=True)
+                try:
+                    driver.quit()
+                except:
+                    pass
+                time.sleep(2)
+                driver = get_driver()
+                if not driver:
+                    print(f"   ERROR: Failed to restart driver, skipping", flush=True)
+                    continue
+            
             url = game["url"]
             name = game.get("match_name", "Unknown Match")
 
-            print(f"[{idx}/{len(games)}] {name}")
+            print(f"[{idx}/{len(games)}] {name}", flush=True)
 
             if "Currency=USD" not in url:
                 url += "&Currency=USD" if "?" in url else "?Currency=USD"
 
-            driver.get(url)
+            try:
+                print(f"   Loading page...", flush=True)
+                driver.get(url)
+            except Exception as e:
+                print(f"   ERROR: Failed to load page: {str(e)[:50]}", flush=True)
+                continue
 
-            # Allow XHRs to load
-            time.sleep(10)
+            # Allow XHRs to load (reduced from 10s to 8s)
+            print(f"   Waiting for page to load...", flush=True)
+            time.sleep(8)
 
+            print(f"   Extracting prices...", flush=True)
             prices = extract_prices_from_network(driver)
 
             if not prices:
-                print("   No prices found")
+                print(f"   ❌ No prices found for {name}", flush=True)
                 continue
 
-            print("   SUCCESS:", prices)
+            print(f"   ✅ Found prices: {prices}", flush=True)
 
             for cat, price in prices.items():
                 # Clean URL (remove Currency parameter)
@@ -326,12 +358,21 @@ def run():
                     "timestamp": timestamp
                 })
 
+    except Exception as e:
+        print(f"ERROR: Fatal error in scraper: {e}", flush=True)
+        import traceback
+        traceback.print_exc()
     finally:
-        driver.quit()
+        try:
+            driver.quit()
+        except:
+            pass
 
     if results:
         append_json(OUTPUT_FILE, results)
-        print(f"\nSaved {len(results)} rows to {OUTPUT_FILE}")
+        print(f"\nSaved {len(results)} rows to {OUTPUT_FILE}", flush=True)
+    
+    print(f'[{datetime.now().strftime("%H:%M")}] 💤 VIAGOGO SCRAPER COMPLETE.', flush=True)
 
 # =========================
 if __name__ == "__main__":
