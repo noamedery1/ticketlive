@@ -468,7 +468,7 @@ def extract_prices_from_dom(driver):
                                 print(f"      Found {category_found}: ${price_val} (DOM traversal)", flush=True)
                     except:
                         continue
-    except Exception as e:
+            except Exception as e:
                 print(f"      Price element search error: {str(e)[:50]}", flush=True)
         
         # Strategy 3: Simple text scan for remaining categories
@@ -669,7 +669,8 @@ def run():
                     "timestamp": timestamp
                 })
                         
-                except Exception as e: 
+
+    except Exception as e: 
         print(f"ERROR: Fatal error in scraper: {e}", flush=True)
         import traceback
         traceback.print_exc()
