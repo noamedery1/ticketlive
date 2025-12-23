@@ -48,14 +48,23 @@ def extract_prices_clean(driver):
         for i in range(1, 5):
             cat_name = f"Category {i}"
             
-            # Find all elements containing this text
-            anchors = driver.find_elements(By.XPATH, f"//*[contains(normalize-space(text()), '{cat_name}')]")
+            # Find all elements containing this text - OPTIMIZED XPATH
+            # Instead of //*, we look for common text containers to save CPU
+            xpath_query = f"//div[contains(text(), '{cat_name}')] | //span[contains(text(), '{cat_name}')] | //button[contains(text(), '{cat_name}')]"
+            
+            print(f"      ... searching for {cat_name} ...")
+            anchors = driver.find_elements(By.XPATH, xpath_query)
+            
+            # Fallback for "Cat 1" etc
             if not anchors:
-                 anchors = driver.find_elements(By.XPATH, f"//*[contains(normalize-space(text()), 'Cat {i}')]")
+                 xpath_short = f"//div[contains(text(), 'Cat {i}')] | //span[contains(text(), 'Cat {i}')]"
+                 anchors = driver.find_elements(By.XPATH, xpath_short)
             
             # DEBUG: Why is Cat 1 missing?
             if i == 1 and not anchors:
                 print("      ⚠️ No 'Category 1' anchors found.")
+            elif i == 1:
+                print(f"      found {len(anchors)} potential anchors for Cat 1")
 
             best_price = None
             
@@ -138,7 +147,8 @@ def extract_prices_clean(driver):
                 for suffix in ['01', '02', '03', '04', '05', '10']: 
                     sec_id = f"{prefix}{suffix}"
                     try:
-                        els = driver.find_elements(By.XPATH, f"//*[contains(text(), '{sec_id}')]")
+                        # Optimized Search
+                        els = driver.find_elements(By.XPATH, f"//div[contains(text(), '{sec_id}')] | //span[contains(text(), '{sec_id}')]")
                         target_el = None
                         for el in els:
                             t = el.text.strip()
