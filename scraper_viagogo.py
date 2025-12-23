@@ -52,14 +52,14 @@ def _extract_prices_clean_internal(driver):
             if cat_name in prices:
                 continue
             
-            # Check if we're taking too long on category search (reduced from 30s to 20s)
+            # Check if we're taking too long on category search (reduced to 12s - fail very fast)
             elapsed = time.time() - category_search_start
-            if elapsed > 20:
-                print(f"      ⚠️ Category search taking too long ({elapsed:.1f}s), skipping remaining categories")
+            if elapsed > 12:
+                print(f"      ⚠️ Category search taking too long ({elapsed:.1f}s), skipping remaining categories", flush=True)
                 break
-            # Also check total extraction time
-            if time.time() - extraction_start_time > 40:
-                print(f"      ⚠️ Total extraction time limit reached, stopping category search")
+            # Also check total extraction time (reduced to 25s)
+            if time.time() - extraction_start_time > 25:
+                print(f"      ⚠️ Total extraction time limit reached ({time.time() - extraction_start_time:.1f}s), stopping category search", flush=True)
                 break
             
             # Find all elements containing this text - EXPANDED XPATH to include more element types
@@ -70,7 +70,7 @@ def _extract_prices_clean_internal(driver):
             try:
                 # Add aggressive timeout protection for find_elements
                 search_start = time.time()
-                max_search_time = 5  # Reduced to 5 seconds - fail fast
+                max_search_time = 3  # Reduced to 3 seconds - fail very fast
                 
                 # Set very short implicit wait for this search
                 original_wait = 10
@@ -113,12 +113,13 @@ def _extract_prices_clean_internal(driver):
                         pass
                 
                 search_time = time.time() - search_start
-                if search_time > 3:
+                # If search took longer than timeout, it means thread.join didn't work - skip immediately
+                if search_time > max_search_time:
+                    print(f"      ⚠️ Search took {search_time:.1f}s (exceeded {max_search_time}s limit), skipping this category", flush=True)
+                    anchors = []  # Skip if exceeded timeout
+                elif search_time > 3:
                     print(f"      ⚠️ Search took {search_time:.1f}s (slow), limiting results", flush=True)
                     anchors = anchors[:2]  # Limit to 2 if too slow
-                if search_time > max_search_time:
-                    print(f"      ⚠️ Search took {search_time:.1f}s (very slow), skipping this category", flush=True)
-                    anchors = []  # Skip if extremely slow
             except Exception as find_err:
                 msg = str(find_err).lower()
                 if 'crashed' in msg or 'disconnected' in msg:
@@ -665,11 +666,11 @@ def _extract_prices_clean_internal(driver):
         print(f"      ⚠️ Extract Error after {extraction_total_time:.1f}s: {e}")
         return {}
 
-def extract_prices_clean(driver, timeout=35):
+def extract_prices_clean(driver, timeout=30):
     """
     Wrapper with hard timeout to prevent infinite hangs.
     Uses threading to enforce maximum execution time.
-    Reduced to 35s to fail faster and continue processing.
+    Reduced to 30s to fail faster and continue processing.
     """
     result = {'prices': {}, 'error': None, 'completed': False}
     
@@ -825,18 +826,20 @@ def run_scraper_cycle():
         for i, game in enumerate(games, 1):
             # Restart driver before EACH match to ensure fresh state (prevents slowdowns)
             if i > 1:  # Skip restart for first match
-                print(f"      🔄 Restarting driver for fresh state (match {i}/{len(games)})...")
+                print(f"      🔄 Restarting driver for fresh state (match {i}/{len(games)})...", flush=True)
                 try: 
                     driver.quit()
                 except: 
                     pass
-                time.sleep(2)  # Brief pause to ensure cleanup
+                time.sleep(3)  # Increased pause to ensure cleanup
             
             # Always get a fresh driver
             driver = get_driver()
             if not driver:
-                print(f"      ❌ Failed to get driver, skipping match {i}")
+                print(f"      ❌ Failed to get driver, skipping match {i}", flush=True)
                 continue
+            
+            print(f"      ✅ Driver ready for match {i}", flush=True)
 
             # Check driver health before starting
             try:
@@ -899,7 +902,7 @@ def run_scraper_cycle():
                     # 1. Try standard extract (Includes Section Fallback) with timeout protection
                     extraction_start = time.time()
                     prices = {}
-                    max_extraction_time = 35  # Maximum time for extraction (35 seconds, matches wrapper timeout)
+                    max_extraction_time = 30  # Maximum time for extraction (30 seconds, matches wrapper timeout)
                     try:
                         print(f"      🔍 Starting extraction (max {max_extraction_time}s)...", flush=True)
                         prices = extract_prices_clean(driver, timeout=max_extraction_time)
