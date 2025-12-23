@@ -70,7 +70,7 @@ def _extract_prices_clean_internal(driver):
             try:
                 # Add aggressive timeout protection for find_elements
                 search_start = time.time()
-                max_search_time = 8  # Maximum time for a single search
+                max_search_time = 5  # Reduced to 5 seconds - fail fast
                 
                 # Set very short implicit wait for this search
                 original_wait = 10
@@ -79,10 +79,10 @@ def _extract_prices_clean_internal(driver):
                 except:
                     pass
                 
-                driver.implicitly_wait(2)  # Very short wait - 2 seconds max
+                driver.implicitly_wait(1)  # Very short wait - 1 second max
                 try:
                     # Use a thread with timeout for find_elements to prevent hanging
-                    search_result = {'elements': [], 'done': False}
+                    search_result = {'elements': [], 'done': False, 'error': None}
                     def search_worker():
                         try:
                             search_result['elements'] = driver.find_elements(By.XPATH, xpath_query)
@@ -96,10 +96,14 @@ def _extract_prices_clean_internal(driver):
                     search_thread.join(timeout=max_search_time)
                     
                     if search_thread.is_alive():
-                        print(f"      ⚠️ Search for {cat_name} exceeded {max_search_time}s, skipping...")
+                        print(f"      ⚠️ Search for {cat_name} exceeded {max_search_time}s, skipping...", flush=True)
                         anchors = []
-                    elif 'error' in search_result:
-                        raise search_result['error']
+                    elif search_result['error']:
+                        msg = str(search_result['error']).lower()
+                        if 'crashed' in msg or 'disconnected' in msg:
+                            raise search_result['error']
+                        print(f"      ⚠️ Search error for {cat_name}: {str(search_result['error'])[:30]}")
+                        anchors = []
                     else:
                         anchors = search_result['elements']
                 finally:
@@ -109,11 +113,11 @@ def _extract_prices_clean_internal(driver):
                         pass
                 
                 search_time = time.time() - search_start
-                if search_time > 5:
-                    print(f"      ⚠️ Search took {search_time:.1f}s (slow), limiting results")
-                    anchors = anchors[:3]  # Limit to 3 if too slow
+                if search_time > 3:
+                    print(f"      ⚠️ Search took {search_time:.1f}s (slow), limiting results", flush=True)
+                    anchors = anchors[:2]  # Limit to 2 if too slow
                 if search_time > max_search_time:
-                    print(f"      ⚠️ Search took {search_time:.1f}s (very slow), skipping this category")
+                    print(f"      ⚠️ Search took {search_time:.1f}s (very slow), skipping this category", flush=True)
                     anchors = []  # Skip if extremely slow
             except Exception as find_err:
                 msg = str(find_err).lower()
@@ -819,21 +823,20 @@ def run_scraper_cycle():
 
     try:
         for i, game in enumerate(games, 1):
-            # Proactive driver restart every 5 games to prevent memory buildup and crashes
-            if i > 1 and i % 5 == 0:
-                print(f"      🔄 Proactive driver restart (game {i}/{len(games)})...")
+            # Restart driver before EACH match to ensure fresh state (prevents slowdowns)
+            if i > 1:  # Skip restart for first match
+                print(f"      🔄 Restarting driver for fresh state (match {i}/{len(games)})...")
                 try: 
                     driver.quit()
                 except: 
                     pass
-                time.sleep(2)
-                driver = get_driver()
-                if not driver:
-                    print(f"      ❌ Failed to restart driver")
-                    break
-
-            if driver is None: driver = get_driver()
-            if not driver: continue
+                time.sleep(2)  # Brief pause to ensure cleanup
+            
+            # Always get a fresh driver
+            driver = get_driver()
+            if not driver:
+                print(f"      ❌ Failed to get driver, skipping match {i}")
+                continue
 
             # Check driver health before starting
             try:
