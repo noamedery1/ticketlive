@@ -203,14 +203,27 @@ def get_driver():
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
         options.add_argument('--disable-gpu')
-        # options.add_argument('--disable-software-rasterizer') # optional
+        options.add_argument('--disable-software-rasterizer')
         options.add_argument('--disable-extensions')
         options.add_argument('--window-size=1920,1080')
+        # Additional stability flags for Docker/server environments
+        options.add_argument('--disable-background-timer-throttling')
+        options.add_argument('--disable-backgrounding-occluded-windows')
+        options.add_argument('--disable-renderer-backgrounding')
+        options.add_argument('--disable-features=TranslateUI')
+        options.add_argument('--disable-ipc-flooding-protection')
+        options.add_argument('--disable-hang-monitor')
+        options.add_argument('--disable-prompt-on-repost')
+        options.add_argument('--disable-sync')
+        options.add_argument('--disable-web-security')
+        options.add_argument('--disable-features=VizDisplayCompositor')
+        # Memory and performance optimizations
+        options.add_argument('--memory-pressure-off')
         # options.add_argument('--user-agent=...') # REMOVED: Let UC/Chrome handle this to avoid fingerprint mismatches
         
         # Add persistent profile to build "trust" and avoid repetitive CAPTCHAs
         profile_dir = os.path.join(os.getcwd(), 'chrome_profile_viagogo')
-        options.add_argument(f'--user-data-dir={profile_dir}')
+        # options.add_argument(f'--user-data-dir={profile_dir}')
         
         # BLOCK IMAGES to save CPU/Bandwidth
         prefs = {"profile.managed_default_content_settings.images": 2}
@@ -224,7 +237,10 @@ def get_driver():
         for attempt in range(3):
             try:
                 driver = uc.Chrome(options=options, version_main=None, browser_executable_path=browser_path, driver_executable_path=driver_path)
-                driver.set_page_load_timeout(60)
+                # Increased timeout for server environments (Railways can be slower)
+                driver.set_page_load_timeout(120)  # Increased from 60 to 120 seconds
+                driver.implicitly_wait(10)  # Add implicit wait for element finding
+                driver.set_script_timeout(60)  # Set script execution timeout
                 return driver
             except OSError as e:
                 time.sleep(5)
@@ -277,14 +293,28 @@ def run_scraper_cycle():
             
             for attempt in range(3):
                 try:
-                    driver.get(target_url)
-                    
-                    # 🛑 FORCE STOP LOADING after 8 seconds to kill heavy JS/Ads
+                    # Use execute_cdp_cmd for better timeout handling
                     try:
-                        time.sleep(8)
+                        driver.set_page_load_timeout(120)
+                        driver.get(target_url)
+                    except Exception as load_error:
+                        # If page load times out, try to continue anyway
+                        if 'timeout' in str(load_error).lower():
+                            print(f"      ⚠️ Page load timeout, continuing anyway...")
+                            try:
+                                driver.execute_script("window.stop();")
+                            except:
+                                pass
+                        else:
+                            raise load_error
+                    
+                    # 🛑 FORCE STOP LOADING after 15 seconds to kill heavy JS/Ads (increased from 10)
+                    try:
+                        time.sleep(15)  # Increased wait time for slower servers
                         driver.execute_script("window.stop();")
                         print("      🛑 Executed window.stop() to clear resources")
-                    except: pass
+                    except Exception: 
+                        pass
 
                     print(f"      🔎 Title: {driver.title}")
                     
@@ -343,11 +373,25 @@ def run_scraper_cycle():
                 except Exception as e: 
                     msg = str(e).lower()
                     print(f"      ⚠️ Driver Error: {msg}")
-                    # Force restart driver on critical errors
-                    try: driver.quit()
-                    except: pass
-                    driver = get_driver()
-                    time.sleep(5)
+                    # Handle timeout errors more gracefully
+                    if 'timeout' in msg or 'timed out receiving message from renderer' in msg:
+                        print(f"      🔄 Renderer timeout detected, restarting driver...")
+                        try: 
+                            driver.quit()
+                        except: 
+                            pass
+                        time.sleep(3)
+                        driver = get_driver()
+                        if not driver:
+                            print(f"      ❌ Failed to restart driver, skipping this match")
+                            break
+                        time.sleep(5)
+                    else:
+                        # Force restart driver on other critical errors
+                        try: driver.quit()
+                        except: pass
+                        driver = get_driver()
+                        time.sleep(5)
             time.sleep(1) 
         
         time.sleep(1.0)
