@@ -15,7 +15,7 @@ from datetime import datetime, timezone
 # =========================
 GAMES_FILE = "all_games_to_scrape.json"
 OUTPUT_FILE = "prices.json"
-PAGE_LOAD_TIMEOUT = 40
+PAGE_LOAD_TIMEOUT = 90  # Increased for Render's slower environment - need more time for page loads
 
 # =========================
 # UTILS
@@ -91,12 +91,46 @@ def get_driver():
                 options.add_argument("--js-flags=--max-old-space-size=2048")
                 options.add_argument("--disable-background-timer-throttling")
                 options.add_argument("--disable-renderer-backgrounding")
+                # Timeout prevention flags
+                options.add_argument("--disable-hang-monitor")
+                options.add_argument("--disable-prompt-on-repost")
+                options.add_argument("--disable-client-side-phishing-detection")
+                options.add_argument("--disable-component-update")
+                options.add_argument("--disable-default-apps")
+                options.add_argument("--disable-sync")
+                options.add_argument("--no-first-run")
+                options.add_argument("--no-default-browser-check")
+                options.add_argument("--disable-infobars")
+                # Network and renderer stability
+                options.add_argument("--disable-features=TranslateUI")
+                options.add_argument("--disable-ipc-flooding-protection")
+                # Additional Render-specific flags
+                options.add_argument("--disable-setuid-sandbox")
+                options.add_argument("--remote-debugging-port=9222")
+                options.add_argument("--disable-background-networking")
+                options.add_argument("--disable-breakpad")
+                options.add_argument("--disable-client-side-phishing-detection")
+                options.add_argument("--disable-default-apps")
+                options.add_argument("--disable-domain-reliability")
+                options.add_argument("--disable-features=AudioServiceOutOfProcess")
+                options.add_argument("--disable-hang-monitor")
+                options.add_argument("--disable-popup-blocking")
+                options.add_argument("--disable-prompt-on-repost")
+                options.add_argument("--disable-sync")
+                options.add_argument("--metrics-recording-only")
+                options.add_argument("--no-first-run")
+                options.add_argument("--safebrowsing-disable-auto-update")
+                options.add_argument("--enable-automation")
+                options.add_argument("--password-store=basic")
+                options.add_argument("--use-mock-keychain")
                 
                 # Block images to save resources
                 prefs = {"profile.managed_default_content_settings.images": 2}
                 options.add_experimental_option("prefs", prefs)
                 
-                options.page_load_strategy = 'eager'
+                # Use 'normal' strategy for better compatibility on Render
+                # 'eager' can cause issues with dynamic content loading
+                options.page_load_strategy = 'normal'
                 
                 # Use threading to add timeout for driver initialization (prevents hanging)
                 init_result = {'driver': None, 'error': None, 'done': False}
@@ -138,8 +172,8 @@ def get_driver():
                 
                 # Test if driver is actually working
                 driver.set_page_load_timeout(PAGE_LOAD_TIMEOUT)
-                driver.implicitly_wait(5)
-                driver.set_script_timeout(30)
+                driver.implicitly_wait(3)  # Reduced for faster failure detection
+                driver.set_script_timeout(45)  # Increased for Render's slower environment
                 
                 # Quick test to ensure driver is responsive
                 try:
@@ -559,53 +593,121 @@ def run():
             if "Currency=USD" not in url:
                 url += "&Currency=USD" if "?" in url else "?Currency=USD"
 
-            try:
-                print(f"   Loading page...", flush=True)
-                # Check driver health before loading
+            # Retry page load up to 3 times
+            page_loaded = False
+            for load_attempt in range(3):
                 try:
-                    driver.current_url
-                except Exception as health_err:
-                    print(f"   ERROR: Driver unhealthy before page load: {str(health_err)[:50]}", flush=True)
-                    # Try to restart driver
+                    print(f"   Loading page (attempt {load_attempt + 1}/3)...", flush=True)
+                    # Check driver health before loading
                     try:
-                        driver.quit()
-                    except:
-                        pass
-                    time.sleep(2)
-                    driver = get_driver()
-                    if not driver:
-                        print(f"   ERROR: Failed to restart driver, skipping match", flush=True)
+                        driver.current_url
+                    except Exception as health_err:
+                        print(f"   ERROR: Driver unhealthy before page load: {str(health_err)[:50]}", flush=True)
+                        # Try to restart driver
+                        try:
+                            driver.quit()
+                        except:
+                            pass
+                        time.sleep(2)
+                        driver = get_driver()
+                        if not driver:
+                            print(f"   ERROR: Failed to restart driver, skipping match", flush=True)
+                            break
+                    
+                    # Use threading to add timeout protection for page load
+                    load_result = {'success': False, 'error': None, 'done': False}
+                    
+                    def load_worker():
+                        try:
+                            # Use explicit wait for page load
+                            driver.get(url)
+                            # Wait a bit for initial page load
+                            time.sleep(2)
+                            # Verify page actually loaded by checking title or URL
+                            try:
+                                _ = driver.title  # This will fail if page didn't load
+                            except:
+                                raise Exception("Page title not accessible - page may not have loaded")
+                            load_result['success'] = True
+                            load_result['done'] = True
+                        except Exception as e:
+                            load_result['error'] = e
+                            load_result['done'] = True
+                    
+                    load_thread = threading.Thread(target=load_worker, daemon=True)
+                    load_thread.start()
+                    load_thread.join(timeout=PAGE_LOAD_TIMEOUT + 20)  # Extra 20s buffer for Render
+                    
+                    if load_thread.is_alive():
+                        print(f"   ERROR: Page load timed out after {PAGE_LOAD_TIMEOUT + 10}s", flush=True)
+                        if load_attempt < 2:
+                            print(f"   Retrying page load in 5 seconds...", flush=True)
+                            time.sleep(5)
+                            continue
+                        else:
+                            print(f"   Failed to load page after 3 attempts, skipping match", flush=True)
+                            break
+                    
+                    if load_result['error']:
+                        raise load_result['error']
+                    
+                    if load_result['success']:
+                        page_loaded = True
+                        break
+                        
+                except Exception as e:
+                    error_msg = str(e).lower()
+                    print(f"   ERROR: Failed to load page (attempt {load_attempt + 1}): {str(e)[:100]}", flush=True)
+                    
+                    # Check if it's a critical error requiring driver restart
+                    is_critical = any(keyword in error_msg for keyword in [
+                        'httpconnectionpool', 'timeout', 'connection', 'disconnected', 
+                        'crashed', 'target closed', 'chrome not reachable', 'timed out receiving message'
+                    ])
+                    
+                    if is_critical:
+                        if load_attempt < 2:
+                            print(f"   🔥 Critical Driver Error detected. Restarting driver and retrying...", flush=True)
+                            try:
+                                driver.quit()
+                            except:
+                                pass
+                            time.sleep(3)
+                            driver = get_driver()
+                            if not driver:
+                                print(f"   ERROR: Failed to restart driver, skipping match", flush=True)
+                                break
+                            continue
+                        else:
+                            print(f"   🔥 Critical Driver Error after 3 attempts: {str(e)[:100]}", flush=True)
+                            print(f"   ⚠️ Driver Unstable. Restarting...", flush=True)
+                            try:
+                                driver.quit()
+                            except:
+                                pass
+                            time.sleep(3)
+                            driver = get_driver()
+                            if not driver:
+                                print(f"   ERROR: Failed to restart driver, skipping match", flush=True)
+                                break
+                            # Don't continue to next match, try one more time with fresh driver
+                            continue
+                    elif load_attempt < 2:
+                        # Non-critical error, retry
+                        print(f"   Retrying page load in 3 seconds...", flush=True)
+                        time.sleep(3)
                         continue
-                
-                driver.get(url)
-            except Exception as e:
-                error_msg = str(e).lower()
-                print(f"   ERROR: Failed to load page: {str(e)[:100]}", flush=True)
-                
-                # Check if it's a critical error requiring driver restart
-                is_critical = any(keyword in error_msg for keyword in [
-                    'httpconnectionpool', 'timeout', 'connection', 'disconnected', 
-                    'crashed', 'target closed', 'chrome not reachable'
-                ])
-                
-                if is_critical:
-                    print(f"   🔥 Critical Driver Error: {str(e)[:100]}", flush=True)
-                    print(f"   ⚠️ Driver Unstable (Critical Driver Error detected in worker). Restarting...", flush=True)
-                    try:
-                        driver.quit()
-                    except:
-                        pass
-                    time.sleep(3)
-                    driver = get_driver()
-                    if not driver:
-                        print(f"   ERROR: Failed to restart driver, skipping match", flush=True)
-                        continue
-                
+                    else:
+                        # Last attempt failed
+                        break
+            
+            if not page_loaded:
+                print(f"   ❌ Failed to load page after all retries, skipping match", flush=True)
                 continue
 
-            # Allow XHRs to load (reduced to 6s for speed)
-            print(f"   Waiting for page to load...", flush=True)
-            time.sleep(6)
+            # Allow XHRs to load - increased wait for Render's slower environment
+            print(f"   Waiting for page to stabilize...", flush=True)
+            time.sleep(8)  # Increased from 6s to 8s for Render
 
             print(f"   Extracting prices...", flush=True)
             extraction_start = time.time()
@@ -668,7 +770,6 @@ def run():
                     "currency": "USD",
                     "timestamp": timestamp
                 })
-                        
 
     except Exception as e: 
         print(f"ERROR: Fatal error in scraper: {e}", flush=True)
