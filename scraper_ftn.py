@@ -11,20 +11,21 @@ EUR_TO_USD = 1.05  # Approximate rate
 
 def get_driver():
     try:
-        options = uc.ChromeOptions()
-        if os.environ.get('HEADLESS') == 'true':
-            options.add_argument('--headless')
-            options.add_argument('--no-sandbox')
-            options.add_argument('--disable-dev-shm-usage')
-            options.add_argument('--disable-gpu')
-            options.add_argument('--disable-software-rasterizer')
-            options.add_argument('--disable-extensions')
-        
         browser_path = '/usr/bin/chromium' if os.path.exists('/usr/bin/chromium') else None
         driver_path = '/usr/bin/chromedriver' if os.path.exists('/usr/bin/chromedriver') else None
 
         for attempt in range(3):
             try:
+                # Create fresh options object each time to avoid reuse error
+                options = uc.ChromeOptions()
+                if os.environ.get('HEADLESS') == 'true':
+                    options.add_argument('--headless')
+                    options.add_argument('--no-sandbox')
+                    options.add_argument('--disable-dev-shm-usage')
+                    options.add_argument('--disable-gpu')
+                    options.add_argument('--disable-software-rasterizer')
+                    options.add_argument('--disable-extensions')
+                
                 driver = uc.Chrome(
                     options=options, 
                     version_main=None, 
@@ -38,6 +39,14 @@ def get_driver():
                     time.sleep(5)
                 else:
                     raise e
+            except Exception as e:
+                error_msg = str(e).lower()
+                if 'cannot reuse' in error_msg or 'chromeoptions' in error_msg:
+                    # Options reuse error - wait and retry with fresh options
+                    print(f'   ⚠️ Options reuse error (attempt {attempt+1}/3). Retrying...')
+                    time.sleep(3)
+                    continue
+                raise e
         return None
     except Exception as e:
         print(f'❌ [ERROR] Chrome Driver init failed: {e}')
@@ -53,8 +62,13 @@ def scrape_ftn_single(driver, url, match_name):
         
         try:
             body_text = driver.find_element(By.TAG_NAME, 'body').text
-        except:
-            print('      ❌ Could not read page body')
+        except Exception as body_err:
+            error_msg = str(body_err).lower()
+            print(f'      ❌ Could not read page body: {error_msg[:50]}')
+            # Check if it's a critical error that requires driver restart
+            if 'crashed' in error_msg or 'disconnected' in error_msg or 'target closed' in error_msg or 'tab crashed' in error_msg:
+                print('      🔥 Critical error detected, signal for driver restart')
+                return None  # Signal for driver restart
             return []
 
         lines = body_text.split('\n')
