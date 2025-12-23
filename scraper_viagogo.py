@@ -45,23 +45,26 @@ def extract_prices_clean(driver):
         for i in range(1, 5):
             cat_name = f"Category {i}"
             
-            # Find all elements containing this text - OPTIMIZED XPATH
-            # Instead of //*, we look for common text containers to save CPU
-            xpath_query = f"//div[contains(text(), '{cat_name}')] | //span[contains(text(), '{cat_name}')] | //button[contains(text(), '{cat_name}')]"
+            # Skip if already found
+            if cat_name in prices:
+                continue
+            
+            # Find all elements containing this text - EXPANDED XPATH to include more element types
+            xpath_query = f"//div[contains(text(), '{cat_name}')] | //span[contains(text(), '{cat_name}')] | //button[contains(text(), '{cat_name}')] | //a[contains(text(), '{cat_name}')] | //li[contains(text(), '{cat_name}')] | //p[contains(text(), '{cat_name}')] | //label[contains(text(), '{cat_name}')]"
             
             print(f"      ... searching for {cat_name} ...")
             anchors = driver.find_elements(By.XPATH, xpath_query)
             
             # Fallback for "Cat 1" etc
             if not anchors:
-                 xpath_short = f"//div[contains(text(), 'Cat {i}')] | //span[contains(text(), 'Cat {i}')]"
+                 xpath_short = f"//div[contains(text(), 'Cat {i}')] | //span[contains(text(), 'Cat {i}')] | //button[contains(text(), 'Cat {i}')] | //a[contains(text(), 'Cat {i}')]"
                  anchors = driver.find_elements(By.XPATH, xpath_short)
             
-            # DEBUG: Why is Cat 1 missing?
-            if i == 1 and not anchors:
-                print("      ⚠️ No 'Category 1' anchors found.")
-            elif i == 1:
-                print(f"      found {len(anchors)} potential anchors for Cat 1")
+            # DEBUG
+            if not anchors:
+                print(f"      ⚠️ No '{cat_name}' anchors found.")
+            else:
+                print(f"      Found {len(anchors)} potential anchors for {cat_name}")
 
             best_price = None
             
@@ -70,11 +73,9 @@ def extract_prices_clean(driver):
                     container = anchor
                     valid_price = None
                     
-                    # Check Anchor, Parent, Grandparent
-                    for level in range(3):
+                    # Check Anchor, Parent, Grandparent, and siblings (expanded to 4 levels)
+                    for level in range(4):
                         txt = container.text.replace('\n', ' ').strip()
-                        if i == 1:
-                            print(f"      [DEBUG CAT1] '{txt[:50]}'")
                         
                         price_matches = re.finditer(r'(?:\$|₪|USD|ILS|NIS)?\s*([\d,]{2,})', txt)
                         min_p = float('inf')
@@ -102,77 +103,112 @@ def extract_prices_clean(driver):
                             valid_price = min_p
                             break 
                         
-                        try: container = container.find_element(By.XPATH, "..")
-                        except: break
+                        # Try parent
+                        try: 
+                            container = container.find_element(By.XPATH, "..")
+                        except: 
+                            break
 
                     if valid_price:
                         if best_price is None or valid_price < best_price:
                             best_price = valid_price
                 except: pass
             
-            # Fallback ONLY for Category 1 if best_price is missing
-            if not best_price and i == 1:
+            # Fallback: Check aria-label for ALL categories (not just Category 1)
+            if not best_price:
                 try:
-                     print("      🔍 Checking fallback for Category 1...")
-                     aria_pills = driver.find_elements(By.XPATH, "//*[@aria-label and contains(@aria-label, 'Category 1')]")
+                     print(f"      🔍 Checking aria-label fallback for {cat_name}...")
+                     aria_pills = driver.find_elements(By.XPATH, f"//*[@aria-label and contains(@aria-label, '{cat_name}')]")
+                     if not aria_pills:
+                         # Try short form
+                         aria_pills = driver.find_elements(By.XPATH, f"//*[@aria-label and contains(@aria-label, 'Cat {i}')]")
+                     
                      for el in aria_pills:
                          txt = el.get_attribute('aria-label')
                          m = re.search(r'(?:\$|₪|USD)?\s*([\d,]{2,})', txt)
                          if m:
                              p = float(m.group(1).replace(',', ''))
                              if '₪' in txt: p = round(p * ILS_TO_USD, 2)
-                             if p > 35:
+                             if p > 35 and p < 50000:
                                  best_price = p
-                                 print(f"      ✅ Fallback found Cat 1: {best_price}")
+                                 print(f"      ✅ Aria-label fallback found {cat_name}: {best_price}")
                                  break
-                except: pass
+                except Exception as e:
+                    pass
 
             if best_price:
                 prices[cat_name] = best_price
+                print(f"      ✅ Found {cat_name}: ${best_price}")
 
         # ------------------------------------------------------------------
-        # APPROACH 2: Interactive Section Mapping (Fallback if No Categories Found)
+        # APPROACH 2: Interactive Section Mapping (Fill in missing categories)
         # ------------------------------------------------------------------
-        if not prices:
-            # Map of Section Series -> Category
-            series_map = {'1': 'Category 1', '2': 'Category 2', '3': 'Category 3', '4': 'Category 4'}
+        # Now run section mapping for ANY missing categories (not just when prices is empty)
+        series_map = {'1': 'Category 1', '2': 'Category 2', '3': 'Category 3', '4': 'Category 4'}
+        
+        for prefix, cat_label in series_map.items():
+            # Skip if already found
+            if cat_label in prices: 
+                continue
             
-            for prefix, cat_label in series_map.items():
-                if cat_label in prices: continue 
-                
-                # Check typical sections: 101, 102, 103...
-                for suffix in ['01', '02', '03', '04', '05', '10']: 
-                    sec_id = f"{prefix}{suffix}"
-                    try:
-                        # Optimized Search
-                        els = driver.find_elements(By.XPATH, f"//div[contains(text(), '{sec_id}')] | //span[contains(text(), '{sec_id}')]")
-                        target_el = None
-                        for el in els:
-                            t = el.text.strip()
-                            if t == sec_id or t == f"Section {sec_id}":
+            print(f"      🔄 Trying section mapping for missing {cat_label}...")
+            
+            # Check typical sections: 101, 102, 103...
+            for suffix in ['01', '02', '03', '04', '05', '10', '11', '12']: 
+                sec_id = f"{prefix}{suffix}"
+                try:
+                    # Expanded search for section elements
+                    els = driver.find_elements(By.XPATH, f"//div[contains(text(), '{sec_id}')] | //span[contains(text(), '{sec_id}')] | //button[contains(text(), '{sec_id}')] | //a[contains(text(), '{sec_id}')]")
+                    target_el = None
+                    for el in els:
+                        t = el.text.strip()
+                        if sec_id in t or f"Section {sec_id}" in t:
+                            if el.is_displayed():
                                 target_el = el
                                 break
+                    
+                    if target_el:
+                        print(f"      🖱️ Clicking Section {sec_id} to find {cat_label}...")
+                        try: 
+                            driver.execute_script("arguments[0].scrollIntoView(true);", target_el)
+                            time.sleep(0.5)
+                            driver.execute_script("arguments[0].click();", target_el)
+                        except: 
+                            try:
+                                target_el.click()
+                            except:
+                                continue
                         
-                        if target_el and target_el.is_displayed():
-                            print(f"      🖱️ Mapping Section {sec_id} -> {cat_label}...")
-                            try: driver.execute_script("arguments[0].click();", target_el)
-                            except: target_el.click()
-                            time.sleep(3.0) 
-                            
-                            # Scan body for NEW price
+                        time.sleep(2.5)  # Reduced from 3.0 for faster processing
+                        
+                        # Scan body for NEW price - look for prices near the category text
+                        try:
                             body_txt = driver.find_element(By.TAG_NAME, 'body').text
-                            pm = re.findall(r'(?:\$|₪|USD)?\s*([\d,]{2,})', body_txt)
+                            
+                            # Look for prices that appear after clicking this section
+                            # Try to find prices near "Category X" text in the updated page
+                            cat_pattern = rf"Category\s+{prefix}\b"
+                            cat_match = re.search(cat_pattern, body_txt, re.IGNORECASE)
+                            
+                            if cat_match:
+                                # Look for prices near this category mention
+                                start_pos = cat_match.end()
+                                search_window = body_txt[start_pos:start_pos + 500]  # 500 chars after category
+                                pm = re.findall(r'(?:\$|₪|USD)?\s*([\d,]{2,})', search_window)
+                            else:
+                                # Fallback: scan all prices and take minimum
+                                pm = re.findall(r'(?:\$|₪|USD)?\s*([\d,]{2,})', body_txt)
+                            
                             found_p = None
                             curr_min = float('inf')
                             
                             for p_str in pm:
                                 try:
                                     v = float(p_str.replace(',', ''))
-                                    if v < 35: 
-                                        # print(f"         ⚠️ Saw {v} but < 35 (ignored)")
-                                        continue
+                                    if v < 35: continue
                                     if v > 50000: continue
-                                    if '₪' in body_txt: v = round(v * ILS_TO_USD, 2)
+                                    if '₪' in body_txt or 'ILS' in body_txt or 'NIS' in body_txt: 
+                                        v = round(v * ILS_TO_USD, 2)
                                     if v < curr_min:
                                         curr_min = v
                                         found_p = v
@@ -180,9 +216,52 @@ def extract_prices_clean(driver):
                                 
                             if found_p:
                                 prices[cat_label] = found_p
-                                print(f"      ✅ Mapped: {cat_label} = {found_p}")
-                                break # Done with this category
-                    except: pass
+                                print(f"      ✅ Section mapping found {cat_label}: ${found_p}")
+                                break  # Done with this category
+                        except Exception as scan_error:
+                            print(f"      ⚠️ Error scanning prices: {scan_error}")
+                            pass
+                except Exception as e:
+                    pass
+        
+        # ------------------------------------------------------------------
+        # APPROACH 3: Comprehensive body text scan for any remaining missing categories
+        # ------------------------------------------------------------------
+        missing_cats = [cat for cat in ['Category 1', 'Category 2', 'Category 3', 'Category 4'] if cat not in prices]
+        if missing_cats:
+            print(f"      🔍 Performing comprehensive text scan for: {', '.join(missing_cats)}...")
+            try:
+                body_txt = driver.find_element(By.TAG_NAME, 'body').text
+                
+                for cat_label in missing_cats:
+                    cat_num = cat_label.split()[-1]
+                    # Look for "Category X" followed by prices within reasonable distance
+                    pattern = rf"Category\s+{cat_num}\b[^$]*?(?:\$|₪|USD)?\s*([\d,]{{2,}})"
+                    matches = re.finditer(pattern, body_txt, re.IGNORECASE | re.DOTALL)
+                    
+                    best_price = None
+                    for match in matches:
+                        try:
+                            p_str = match.group(1)
+                            val = float(p_str.replace(',', ''))
+                            if val < 35 or val > 50000:
+                                continue
+                            
+                            # Check if ILS currency
+                            context = body_txt[max(0, match.start()-50):match.end()+50]
+                            if '₪' in context or 'ILS' in context or 'NIS' in context:
+                                val = round(val * ILS_TO_USD, 2)
+                            
+                            if best_price is None or val < best_price:
+                                best_price = val
+                        except:
+                            continue
+                    
+                    if best_price:
+                        prices[cat_label] = best_price
+                        print(f"      ✅ Text scan found {cat_label}: ${best_price}")
+            except Exception as e:
+                print(f"      ⚠️ Text scan error: {e}")
 
         return prices
 
