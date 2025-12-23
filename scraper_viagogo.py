@@ -199,7 +199,12 @@ def get_driver():
         # options.add_argument('--disable-software-rasterizer') # optional
         options.add_argument('--disable-extensions')
         options.add_argument('--window-size=1920,1080')
-        options.add_argument('--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36')
+        # options.add_argument('--user-agent=...') # REMOVED: Let UC/Chrome handle this to avoid fingerprint mismatches
+        
+        # Add persistent profile to build "trust" and avoid repetitive CAPTCHAs
+        profile_dir = os.path.join(os.getcwd(), 'chrome_profile_viagogo')
+        options.add_argument(f'--user-data-dir={profile_dir}')
+        
         options.page_load_strategy = 'eager' 
 
         browser_path = '/usr/bin/chromium' if os.path.exists('/usr/bin/chromium') else None
@@ -262,8 +267,11 @@ def run_scraper_cycle():
             for attempt in range(3):
                 try:
                     driver.get(target_url)
-                    if '502' in driver.title:
-                        time.sleep(5); continue
+                    print(f"      🔎 Title: {driver.title}")
+                    
+                    if '502' in driver.title or '403' in driver.title or 'Just a moment' in driver.title:
+                        print(f"      ⚠️ Blocked/Error Page detected ('{driver.title}'). waiting...")
+                        time.sleep(10)
                         
                     # 1. Try standard extract (Includes Section Fallback)
                     prices = extract_prices_clean(driver)
@@ -301,8 +309,14 @@ def run_scraper_cycle():
                              new_records_buffer = [] 
                         break 
                         break 
+                        break 
                     else:
                         print('❌ No data found (will retry)...')
+                        try:
+                            sample_txt = driver.find_element(By.TAG_NAME, 'body').text[:100].replace('\n', ' ')
+                            print(f"      [DEBUG BODY]: {sample_txt}...")
+                        except: pass
+                        
                         # Do NOT break; let it retry naturally
                         if attempt == 2:
                              print("      Giving up on this match.")
