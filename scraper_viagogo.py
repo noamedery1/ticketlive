@@ -257,7 +257,29 @@ def extract_prices_clean(driver):
                         
                         # Scan body for NEW price - look for prices near the category text
                         try:
-                            body_txt = driver.find_element(By.TAG_NAME, 'body').text
+                            # Check driver health before reading body
+                            try:
+                                driver.current_url
+                            except:
+                                print(f"      ⚠️ Driver unhealthy before reading body, skipping section {sec_id}")
+                                continue
+                            
+                            # Read body text with protection
+                            try:
+                                driver.implicitly_wait(3)  # Reduce timeout
+                                body_txt = driver.find_element(By.TAG_NAME, 'body').text
+                                driver.implicitly_wait(10)  # Restore timeout
+                            except Exception as body_read_err:
+                                try:
+                                    driver.implicitly_wait(10)  # Restore timeout
+                                except:
+                                    pass
+                                msg = str(body_read_err).lower()
+                                if 'crashed' in msg or 'disconnected' in msg:
+                                    print(f"      ⚠️ Driver crashed while reading body, skipping section {sec_id}")
+                                    raise body_read_err  # Re-raise to trigger restart
+                                print(f"      ⚠️ Could not read body text for section {sec_id}")
+                                continue
                             
                             # Look for prices that appear after clicking this section
                             # Try to find prices near "Category X" text in the updated page
@@ -311,7 +333,26 @@ def extract_prices_clean(driver):
                                             driver.execute_script("arguments[0].click();", alt_el)
                                             time.sleep(2.5)
                                             
-                                            body_txt = driver.find_element(By.TAG_NAME, 'body').text
+                                            # Check driver health before reading body
+                                            try:
+                                                driver.current_url
+                                            except:
+                                                continue
+                                            
+                                            # Read body text with protection
+                                            try:
+                                                driver.implicitly_wait(3)
+                                                body_txt = driver.find_element(By.TAG_NAME, 'body').text
+                                                driver.implicitly_wait(10)
+                                            except Exception as body_err:
+                                                try:
+                                                    driver.implicitly_wait(10)
+                                                except:
+                                                    pass
+                                                msg = str(body_err).lower()
+                                                if 'crashed' in msg or 'disconnected' in msg:
+                                                    raise body_err
+                                                continue
                                             cat_pattern = rf"Category\s+{prefix}\b"
                                             if re.search(cat_pattern, body_txt, re.IGNORECASE):
                                                 pm = re.findall(r'(?:\$|₪|USD)?\s*([\d,]{2,})', body_txt)
@@ -350,39 +391,80 @@ def extract_prices_clean(driver):
         # ------------------------------------------------------------------
         missing_cats = [cat for cat in ['Category 1', 'Category 2', 'Category 3', 'Category 4'] if cat not in prices]
         if missing_cats:
-            print(f"      🔍 Performing comprehensive text scan for: {', '.join(missing_cats)}...")
-            try:
-                body_txt = driver.find_element(By.TAG_NAME, 'body').text
-                
-                for cat_label in missing_cats:
-                    cat_num = cat_label.split()[-1]
-                    # Look for "Category X" followed by prices within reasonable distance
-                    pattern = rf"Category\s+{cat_num}\b[^$]*?(?:\$|₪|USD)?\s*([\d,]{{2,}})"
-                    matches = re.finditer(pattern, body_txt, re.IGNORECASE | re.DOTALL)
+            # Skip text scan if we already found most categories (to reduce memory pressure)
+            if len(prices) >= 2:
+                print(f"      ⏭️ Skipping text scan (already found {len(prices)} categories, avoiding memory pressure)")
+            else:
+                print(f"      🔍 Performing comprehensive text scan for: {', '.join(missing_cats)}...")
+                try:
+                    # Check driver health before expensive operation
+                    try:
+                        driver.current_url
+                    except:
+                        print(f"      ⚠️ Driver unhealthy before text scan, skipping...")
+                        raise Exception("Driver unhealthy")
                     
-                    best_price = None
-                    for match in matches:
+                    # Try to get body text with timeout protection
+                    try:
+                        driver.implicitly_wait(3)  # Reduce timeout for this operation
+                        body_element = driver.find_element(By.TAG_NAME, 'body')
+                        body_txt = body_element.text
+                        driver.implicitly_wait(10)  # Restore timeout
+                    except Exception as body_err:
                         try:
-                            p_str = match.group(1)
-                            val = float(p_str.replace(',', ''))
-                            if val < 35 or val > 50000:
-                                continue
-                            
-                            # Check if ILS currency
-                            context = body_txt[max(0, match.start()-50):match.end()+50]
-                            if '₪' in context or 'ILS' in context or 'NIS' in context:
-                                val = round(val * ILS_TO_USD, 2)
-                            
-                            if best_price is None or val < best_price:
-                                best_price = val
+                            driver.implicitly_wait(10)  # Restore timeout even on error
                         except:
-                            continue
+                            pass
+                        msg = str(body_err).lower()
+                        if 'crashed' in msg or 'disconnected' in msg:
+                            print(f"      ⚠️ Driver crashed while reading body text, skipping text scan...")
+                            raise body_err
+                        print(f"      ⚠️ Could not read body text: {msg[:50]}")
+                        return prices  # Return what we have
                     
-                    if best_price:
-                        prices[cat_label] = best_price
-                        print(f"      ✅ Text scan found {cat_label}: ${best_price}")
-            except Exception as e:
-                print(f"      ⚠️ Text scan error: {e}")
+                    # Limit text scan to first 50000 chars to reduce memory usage
+                    if len(body_txt) > 50000:
+                        body_txt = body_txt[:50000]
+                        print(f"      ⚠️ Body text truncated to 50000 chars to reduce memory usage")
+                    
+                    for cat_label in missing_cats:
+                        cat_num = cat_label.split()[-1]
+                        # Look for "Category X" followed by prices within reasonable distance
+                        pattern = rf"Category\s+{cat_num}\b[^$]*?(?:\$|₪|USD)?\s*([\d,]{{2,}})"
+                        matches = re.finditer(pattern, body_txt, re.IGNORECASE | re.DOTALL)
+                        
+                        best_price = None
+                        match_count = 0
+                        for match in matches:
+                            match_count += 1
+                            if match_count > 10:  # Limit matches to prevent excessive processing
+                                break
+                            try:
+                                p_str = match.group(1)
+                                val = float(p_str.replace(',', ''))
+                                if val < 35 or val > 50000:
+                                    continue
+                                
+                                # Check if ILS currency
+                                context = body_txt[max(0, match.start()-50):match.end()+50]
+                                if '₪' in context or 'ILS' in context or 'NIS' in context:
+                                    val = round(val * ILS_TO_USD, 2)
+                                
+                                if best_price is None or val < best_price:
+                                    best_price = val
+                            except:
+                                continue
+                        
+                        if best_price:
+                            prices[cat_label] = best_price
+                            print(f"      ✅ Text scan found {cat_label}: ${best_price}")
+                except Exception as e:
+                    msg = str(e).lower()
+                    if 'crashed' in msg or 'disconnected' in msg or 'unhealthy' in msg:
+                        print(f"      ⚠️ Text scan skipped due to driver instability: {msg[:50]}")
+                        # Don't raise - return what we have
+                    else:
+                        print(f"      ⚠️ Text scan error: {msg[:50]}")
 
         return prices
 
