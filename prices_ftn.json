@@ -6973,5 +6973,3389 @@
     "currency": "USD",
     "source": "FootballTicketNet",
     "timestamp": "2025-12-24T12:53:41.754581"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-1-mexico-vs-south-africa",
+    "match_name": "Match 1 - Mexico vs South Africa",
+    "category": "Category 4",
+    "price": 2199.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:54:07.002294"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-1-mexico-vs-south-africa",
+    "match_name": "Match 1 - Mexico vs South Africa",
+    "category": "Category 3",
+    "price": 2252.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:54:07.002294"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-1-mexico-vs-south-africa",
+    "match_name": "Match 1 - Mexico vs South Africa",
+    "category": "Category 2",
+    "price": 2520.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:54:07.002294"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-1-mexico-vs-south-africa",
+    "match_name": "Match 1 - Mexico vs South Africa",
+    "category": "Category 1",
+    "price": 3181.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:54:07.002294"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-2-south-korea-vs-european-play-off-d",
+    "match_name": "Match 2 - South Korea vs European Play Off D",
+    "category": "Category 3",
+    "price": 299.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:54:21.013088"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-2-south-korea-vs-european-play-off-d",
+    "match_name": "Match 2 - South Korea vs European Play Off D",
+    "category": "Category 4",
+    "price": 320.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:54:21.013088"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-2-south-korea-vs-european-play-off-d",
+    "match_name": "Match 2 - South Korea vs European Play Off D",
+    "category": "Category 2",
+    "price": 466.2,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:54:21.013088"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-3-canada-vs-european-play-off-a",
+    "match_name": "Match 3 - Canada vs European Play Off A",
+    "category": "Category 4",
+    "price": 939.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:54:34.230406"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-3-canada-vs-european-play-off-a",
+    "match_name": "Match 3 - Canada vs European Play Off A",
+    "category": "Category 3",
+    "price": 992.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:54:34.230406"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-3-canada-vs-european-play-off-a",
+    "match_name": "Match 3 - Canada vs European Play Off A",
+    "category": "Category 2",
+    "price": 1737.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:54:34.230406"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-4-united-states-vs-paraguay",
+    "match_name": "Match 4 - United States vs Paraguay",
+    "category": "Category 4",
+    "price": 971.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:54:51.875034"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-4-united-states-vs-paraguay",
+    "match_name": "Match 4 - United States vs Paraguay",
+    "category": "Category 3",
+    "price": 992.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:54:51.875034"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-4-united-states-vs-paraguay",
+    "match_name": "Match 4 - United States vs Paraguay",
+    "category": "Category 2",
+    "price": 1522.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:54:51.875034"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-8-qatar-vs-switzerland",
+    "match_name": "Match 8 - Qatar vs Switzerland",
+    "category": "Category 4",
+    "price": 252.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:55:04.200912"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-8-qatar-vs-switzerland",
+    "match_name": "Match 8 - Qatar vs Switzerland",
+    "category": "Category 3",
+    "price": 267.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:55:04.200912"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-8-qatar-vs-switzerland",
+    "match_name": "Match 8 - Qatar vs Switzerland",
+    "category": "Category 2",
+    "price": 420.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:55:04.200912"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-8-qatar-vs-switzerland",
+    "match_name": "Match 8 - Qatar vs Switzerland",
+    "category": "Category 1",
+    "price": 577.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:55:04.200912"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-7-brazil-vs-morocco",
+    "match_name": "Match 7 - Brazil vs Morocco",
+    "category": "Category 3",
+    "price": 723.45,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:55:17.015123"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-7-brazil-vs-morocco",
+    "match_name": "Match 7 - Brazil vs Morocco",
+    "category": "Category 4",
+    "price": 750.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:55:17.015123"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-6-australia-vs-european-play-off-c",
+    "match_name": "Match 6 - Australia vs European Play Off C",
+    "category": "Category 4",
+    "price": 288.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:55:29.030779"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-6-australia-vs-european-play-off-c",
+    "match_name": "Match 6 - Australia vs European Play Off C",
+    "category": "Category 3",
+    "price": 288.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:55:29.030779"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-6-australia-vs-european-play-off-c",
+    "match_name": "Match 6 - Australia vs European Play Off C",
+    "category": "Category 2",
+    "price": 393.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:55:29.030779"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-6-australia-vs-european-play-off-c",
+    "match_name": "Match 6 - Australia vs European Play Off C",
+    "category": "Category 1",
+    "price": 572.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:55:29.030779"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-5-haiti-vs-scotland",
+    "match_name": "Match 5 - Haiti vs Scotland",
+    "category": "Category 3",
+    "price": 661.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:55:41.135081"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-5-haiti-vs-scotland",
+    "match_name": "Match 5 - Haiti vs Scotland",
+    "category": "Category 4",
+    "price": 682.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:55:41.135081"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-5-haiti-vs-scotland",
+    "match_name": "Match 5 - Haiti vs Scotland",
+    "category": "Category 2",
+    "price": 703.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:55:41.135081"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-10-germany-vs-curacao",
+    "match_name": "Match 10 - Germany vs Curacao",
+    "category": "Category 3",
+    "price": 430.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:55:57.642468"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-10-germany-vs-curacao",
+    "match_name": "Match 10 - Germany vs Curacao",
+    "category": "Category 4",
+    "price": 435.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:55:57.642468"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-10-germany-vs-curacao",
+    "match_name": "Match 10 - Germany vs Curacao",
+    "category": "Category 2",
+    "price": 577.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:55:57.642468"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-11-netherlands-vs-japan",
+    "match_name": "Match 11 - Netherlands vs Japan",
+    "category": "Category 4",
+    "price": 546.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:56:12.818720"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-11-netherlands-vs-japan",
+    "match_name": "Match 11 - Netherlands vs Japan",
+    "category": "Category 3",
+    "price": 561.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:56:12.818720"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-11-netherlands-vs-japan",
+    "match_name": "Match 11 - Netherlands vs Japan",
+    "category": "Category 2",
+    "price": 572.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:56:12.818720"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-9-ivory-coast-vs-ecuador",
+    "match_name": "Match 9 - Ivory Coast vs Ecuador",
+    "category": "Category 4",
+    "price": 456.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:56:30.013913"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-9-ivory-coast-vs-ecuador",
+    "match_name": "Match 9 - Ivory Coast vs Ecuador",
+    "category": "Category 3",
+    "price": 472.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:56:30.013913"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-9-ivory-coast-vs-ecuador",
+    "match_name": "Match 9 - Ivory Coast vs Ecuador",
+    "category": "Category 2",
+    "price": 556.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:56:30.013913"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-12-european-play-off-b-vs-tunisia",
+    "match_name": "Match 12 - European Play Off B vs Tunisia",
+    "category": "Category 3",
+    "price": 287.7,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:56:42.764951"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-12-european-play-off-b-vs-tunisia",
+    "match_name": "Match 12 - European Play Off B vs Tunisia",
+    "category": "Category 4",
+    "price": 288.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:56:42.764951"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-12-european-play-off-b-vs-tunisia",
+    "match_name": "Match 12 - European Play Off B vs Tunisia",
+    "category": "Category 2",
+    "price": 320.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:56:42.764951"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-12-european-play-off-b-vs-tunisia",
+    "match_name": "Match 12 - European Play Off B vs Tunisia",
+    "category": "Category 1",
+    "price": 409.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:56:42.764951"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-14-spain-vs-cabo-verde",
+    "match_name": "Match 14 - Spain vs Cabo Verde",
+    "category": "Category 3",
+    "price": 336.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:56:58.129162"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-14-spain-vs-cabo-verde",
+    "match_name": "Match 14 - Spain vs Cabo Verde",
+    "category": "Category 4",
+    "price": 341.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:56:58.129162"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-14-spain-vs-cabo-verde",
+    "match_name": "Match 14 - Spain vs Cabo Verde",
+    "category": "Category 2",
+    "price": 628.95,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:56:58.129162"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-16-belgium-vs-egypt",
+    "match_name": "Match 16 - Belgium vs Egypt",
+    "category": "Category 3",
+    "price": 407.4,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:57:12.620342"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-16-belgium-vs-egypt",
+    "match_name": "Match 16 - Belgium vs Egypt",
+    "category": "Category 4",
+    "price": 409.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:57:12.620342"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-16-belgium-vs-egypt",
+    "match_name": "Match 16 - Belgium vs Egypt",
+    "category": "Category 2",
+    "price": 472.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:57:12.620342"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-15-iran-vs-new-zealand",
+    "match_name": "Match 15 - Iran vs New Zealand",
+    "category": "Category 4",
+    "price": 357.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:57:31.571371"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-15-iran-vs-new-zealand",
+    "match_name": "Match 15 - Iran vs New Zealand",
+    "category": "Category 3",
+    "price": 362.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:57:31.571371"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-15-iran-vs-new-zealand",
+    "match_name": "Match 15 - Iran vs New Zealand",
+    "category": "Category 2",
+    "price": 483.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:57:31.571371"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-15-iran-vs-new-zealand",
+    "match_name": "Match 15 - Iran vs New Zealand",
+    "category": "Category 1",
+    "price": 819.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:57:31.571371"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-13-saudi-arabia-vs-uruguay",
+    "match_name": "Match 13 - Saudi Arabia vs Uruguay",
+    "category": "Category 4",
+    "price": 357.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:57:46.184188"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-13-saudi-arabia-vs-uruguay",
+    "match_name": "Match 13 - Saudi Arabia vs Uruguay",
+    "category": "Category 3",
+    "price": 362.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:57:46.184188"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-13-saudi-arabia-vs-uruguay",
+    "match_name": "Match 13 - Saudi Arabia vs Uruguay",
+    "category": "Category 2",
+    "price": 420.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:57:46.184188"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-13-saudi-arabia-vs-uruguay",
+    "match_name": "Match 13 - Saudi Arabia vs Uruguay",
+    "category": "Category 1",
+    "price": 498.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:57:46.184188"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-17-france-vs-senegal",
+    "match_name": "Match 17 - France vs Senegal",
+    "category": "Category 4",
+    "price": 435.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:58:01.526222"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-17-france-vs-senegal",
+    "match_name": "Match 17 - France vs Senegal",
+    "category": "Category 3",
+    "price": 456.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:58:01.526222"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-17-france-vs-senegal",
+    "match_name": "Match 17 - France vs Senegal",
+    "category": "Category 2",
+    "price": 682.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:58:01.526222"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-18-fifa-play-off-2-vs-norway",
+    "match_name": "Match 18 - FIFA Play Off 2 vs Norway",
+    "category": "Category 4",
+    "price": 409.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:58:14.817773"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-18-fifa-play-off-2-vs-norway",
+    "match_name": "Match 18 - FIFA Play Off 2 vs Norway",
+    "category": "Category 3",
+    "price": 456.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:58:14.817773"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-18-fifa-play-off-2-vs-norway",
+    "match_name": "Match 18 - FIFA Play Off 2 vs Norway",
+    "category": "Category 2",
+    "price": 555.45,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:58:14.817773"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-18-fifa-play-off-2-vs-norway",
+    "match_name": "Match 18 - FIFA Play Off 2 vs Norway",
+    "category": "Category 1",
+    "price": 742.35,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:58:14.817773"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-19-argentina-vs-algeria",
+    "match_name": "Match 19 - Argentina vs Algeria",
+    "category": "Category 4",
+    "price": 640.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:58:28.731543"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-19-argentina-vs-algeria",
+    "match_name": "Match 19 - Argentina vs Algeria",
+    "category": "Category 3",
+    "price": 645.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:58:28.731543"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-19-argentina-vs-algeria",
+    "match_name": "Match 19 - Argentina vs Algeria",
+    "category": "Category 2",
+    "price": 945.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:58:28.731543"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-20-austria-vs-jordan",
+    "match_name": "Match 20 - Austria vs Jordan",
+    "category": "Category 3",
+    "price": 246.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:58:42.568369"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-20-austria-vs-jordan",
+    "match_name": "Match 20 - Austria vs Jordan",
+    "category": "Category 4",
+    "price": 252.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:58:42.568369"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-20-austria-vs-jordan",
+    "match_name": "Match 20 - Austria vs Jordan",
+    "category": "Category 2",
+    "price": 367.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:58:42.568369"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-20-austria-vs-jordan",
+    "match_name": "Match 20 - Austria vs Jordan",
+    "category": "Category 1",
+    "price": 577.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:58:42.568369"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-23-portugal-vs-fifa-play-off-1",
+    "match_name": "Match 23 - Portugal vs FIFA Play Off 1",
+    "category": "Category 3",
+    "price": 624.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:59:01.413696"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-23-portugal-vs-fifa-play-off-1",
+    "match_name": "Match 23 - Portugal vs FIFA Play Off 1",
+    "category": "Category 4",
+    "price": 640.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:59:01.413696"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-23-portugal-vs-fifa-play-off-1",
+    "match_name": "Match 23 - Portugal vs FIFA Play Off 1",
+    "category": "Category 2",
+    "price": 840.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:59:01.413696"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-22-england-vs-croatia",
+    "match_name": "Match 22 - England vs Croatia",
+    "category": "Category 3",
+    "price": 731.85,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:59:14.932437"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-22-england-vs-croatia",
+    "match_name": "Match 22 - England vs Croatia",
+    "category": "Category 4",
+    "price": 834.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:59:14.932437"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-22-england-vs-croatia",
+    "match_name": "Match 22 - England vs Croatia",
+    "category": "Category 2",
+    "price": 997.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:59:14.932437"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-21-ghana-vs-panama",
+    "match_name": "Match 21 - Ghana vs Panama",
+    "category": "Category 4",
+    "price": 346.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:59:27.810898"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-21-ghana-vs-panama",
+    "match_name": "Match 21 - Ghana vs Panama",
+    "category": "Category 3",
+    "price": 357.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:59:27.810898"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-21-ghana-vs-panama",
+    "match_name": "Match 21 - Ghana vs Panama",
+    "category": "Category 2",
+    "price": 403.2,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:59:27.810898"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-21-ghana-vs-panama",
+    "match_name": "Match 21 - Ghana vs Panama",
+    "category": "Category 1",
+    "price": 660.45,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:59:27.810898"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-24-uzbekistan-vs-colombia",
+    "match_name": "Match 24 - Uzbekistan vs Colombia",
+    "category": "Category 4",
+    "price": 572.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:59:43.672066"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-24-uzbekistan-vs-colombia",
+    "match_name": "Match 24 - Uzbekistan vs Colombia",
+    "category": "Category 3",
+    "price": 582.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:59:43.672066"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-24-uzbekistan-vs-colombia",
+    "match_name": "Match 24 - Uzbekistan vs Colombia",
+    "category": "Category 2",
+    "price": 992.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:59:43.672066"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-25-european-play-off-d-vs-south-africa",
+    "match_name": "Match 25 - European Play Off D vs South Africa",
+    "category": "Category 4",
+    "price": 236.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:59:57.210910"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-25-european-play-off-d-vs-south-africa",
+    "match_name": "Match 25 - European Play Off D vs South Africa",
+    "category": "Category 3",
+    "price": 241.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:59:57.210910"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-25-european-play-off-d-vs-south-africa",
+    "match_name": "Match 25 - European Play Off D vs South Africa",
+    "category": "Category 2",
+    "price": 315.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:59:57.210910"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-25-european-play-off-d-vs-south-africa",
+    "match_name": "Match 25 - European Play Off D vs South Africa",
+    "category": "Category 1",
+    "price": 556.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T14:59:57.210910"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-26-switzerland-vs-european-play-off-a",
+    "match_name": "Match 26 - Switzerland vs European Play Off A",
+    "category": "Category 4",
+    "price": 404.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:00:13.868739"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-26-switzerland-vs-european-play-off-a",
+    "match_name": "Match 26 - Switzerland vs European Play Off A",
+    "category": "Category 3",
+    "price": 404.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:00:13.868739"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-26-switzerland-vs-european-play-off-a",
+    "match_name": "Match 26 - Switzerland vs European Play Off A",
+    "category": "Category 2",
+    "price": 504.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:00:13.868739"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-26-switzerland-vs-european-play-off-a",
+    "match_name": "Match 26 - Switzerland vs European Play Off A",
+    "category": "Category 1",
+    "price": 733.95,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:00:13.868739"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-27-canada-vs-qatar",
+    "match_name": "Match 27 - Canada vs Qatar",
+    "category": "Category 4",
+    "price": 456.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:00:26.653229"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-27-canada-vs-qatar",
+    "match_name": "Match 27 - Canada vs Qatar",
+    "category": "Category 3",
+    "price": 477.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:00:26.653229"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-27-canada-vs-qatar",
+    "match_name": "Match 27 - Canada vs Qatar",
+    "category": "Category 2",
+    "price": 593.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:00:26.653229"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-28-mexico-vs-south-korea",
+    "match_name": "Match 28 - Mexico vs South Korea",
+    "category": "Category 2",
+    "price": 1361.85,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:00:39.058871"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-28-mexico-vs-south-korea",
+    "match_name": "Match 28 - Mexico vs South Korea",
+    "category": "Category 3",
+    "price": 1362.9,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:00:39.058871"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-28-mexico-vs-south-korea",
+    "match_name": "Match 28 - Mexico vs South Korea",
+    "category": "Category 4",
+    "price": 1454.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:00:39.058871"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-32-united-states-vs-australia",
+    "match_name": "Match 32 - United States vs Australia",
+    "category": "Category 3",
+    "price": 837.9,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:00:52.959865"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-32-united-states-vs-australia",
+    "match_name": "Match 32 - United States vs Australia",
+    "category": "Category 4",
+    "price": 1050.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:00:52.959865"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-32-united-states-vs-australia",
+    "match_name": "Match 32 - United States vs Australia",
+    "category": "Category 2",
+    "price": 1165.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:00:52.959865"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-30-scotland-vs-morocco",
+    "match_name": "Match 30 - Scotland vs Morocco",
+    "category": "Category 4",
+    "price": 640.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:01:11.589607"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-30-scotland-vs-morocco",
+    "match_name": "Match 30 - Scotland vs Morocco",
+    "category": "Category 3",
+    "price": 645.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:01:11.589607"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-30-scotland-vs-morocco",
+    "match_name": "Match 30 - Scotland vs Morocco",
+    "category": "Category 2",
+    "price": 761.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:01:11.589607"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-30-scotland-vs-morocco",
+    "match_name": "Match 30 - Scotland vs Morocco",
+    "category": "Category 1",
+    "price": 928.2,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:01:11.589607"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-29-brazil-vs-haiti",
+    "match_name": "Match 29 - Brazil vs Haiti",
+    "category": "Category 3",
+    "price": 592.2,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:01:27.828865"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-29-brazil-vs-haiti",
+    "match_name": "Match 29 - Brazil vs Haiti",
+    "category": "Category 4",
+    "price": 593.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:01:27.828865"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-29-brazil-vs-haiti",
+    "match_name": "Match 29 - Brazil vs Haiti",
+    "category": "Category 2",
+    "price": 1050.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:01:27.828865"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-31-european-play-off-c-vs-paraguay",
+    "match_name": "Match 31 - European Play Off C vs Paraguay",
+    "category": "Category 4",
+    "price": 246.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:01:39.911109"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-31-european-play-off-c-vs-paraguay",
+    "match_name": "Match 31 - European Play Off C vs Paraguay",
+    "category": "Category 3",
+    "price": 246.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:01:39.911109"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-31-european-play-off-c-vs-paraguay",
+    "match_name": "Match 31 - European Play Off C vs Paraguay",
+    "category": "Category 2",
+    "price": 420.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:01:39.911109"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-31-european-play-off-c-vs-paraguay",
+    "match_name": "Match 31 - European Play Off C vs Paraguay",
+    "category": "Category 1",
+    "price": 525.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:01:39.911109"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-35-netherlands-vs-european-play-off-b",
+    "match_name": "Match 35 - Netherlands vs European Play Off B",
+    "category": "Category 4",
+    "price": 409.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:01:53.658937"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-35-netherlands-vs-european-play-off-b",
+    "match_name": "Match 35 - Netherlands vs European Play Off B",
+    "category": "Category 3",
+    "price": 420.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:01:53.658937"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-35-netherlands-vs-european-play-off-b",
+    "match_name": "Match 35 - Netherlands vs European Play Off B",
+    "category": "Category 2",
+    "price": 577.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:01:53.658937"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-35-netherlands-vs-european-play-off-b",
+    "match_name": "Match 35 - Netherlands vs European Play Off B",
+    "category": "Category 1",
+    "price": 614.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:01:53.658937"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-33-germany-vs-ivory-coast",
+    "match_name": "Match 33 - Germany vs Ivory Coast",
+    "category": "Category 3",
+    "price": 572.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:02:06.279690"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-33-germany-vs-ivory-coast",
+    "match_name": "Match 33 - Germany vs Ivory Coast",
+    "category": "Category 4",
+    "price": 593.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:02:06.279690"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-33-germany-vs-ivory-coast",
+    "match_name": "Match 33 - Germany vs Ivory Coast",
+    "category": "Category 2",
+    "price": 781.2,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:02:06.279690"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-33-germany-vs-ivory-coast",
+    "match_name": "Match 33 - Germany vs Ivory Coast",
+    "category": "Category 1",
+    "price": 1092.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:02:06.279690"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-34-ecuador-vs-curacao",
+    "match_name": "Match 34 - Ecuador vs Curacao",
+    "category": "Category 3",
+    "price": 249.9,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:02:20.306477"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-34-ecuador-vs-curacao",
+    "match_name": "Match 34 - Ecuador vs Curacao",
+    "category": "Category 4",
+    "price": 273.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:02:20.306477"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-34-ecuador-vs-curacao",
+    "match_name": "Match 34 - Ecuador vs Curacao",
+    "category": "Category 2",
+    "price": 367.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:02:20.306477"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-36-tunisia-vs-japan",
+    "match_name": "Match 36 - Tunisia vs Japan",
+    "category": "Category 4",
+    "price": 267.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:02:34.177708"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-36-tunisia-vs-japan",
+    "match_name": "Match 36 - Tunisia vs Japan",
+    "category": "Category 3",
+    "price": 267.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:02:34.177708"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-36-tunisia-vs-japan",
+    "match_name": "Match 36 - Tunisia vs Japan",
+    "category": "Category 2",
+    "price": 340.2,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:02:34.177708"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-36-tunisia-vs-japan",
+    "match_name": "Match 36 - Tunisia vs Japan",
+    "category": "Category 1",
+    "price": 420.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:02:34.177708"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-38-spain-vs-saudi-arabia",
+    "match_name": "Match 38 - Spain vs Saudi Arabia",
+    "category": "Category 4",
+    "price": 383.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:02:48.583140"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-38-spain-vs-saudi-arabia",
+    "match_name": "Match 38 - Spain vs Saudi Arabia",
+    "category": "Category 3",
+    "price": 393.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:02:48.583140"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-38-spain-vs-saudi-arabia",
+    "match_name": "Match 38 - Spain vs Saudi Arabia",
+    "category": "Category 2",
+    "price": 630.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:02:48.583140"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-39-belgium-vs-iran",
+    "match_name": "Match 39 - Belgium vs Iran",
+    "category": "Category 3",
+    "price": 442.05,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:03:06.301019"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-39-belgium-vs-iran",
+    "match_name": "Match 39 - Belgium vs Iran",
+    "category": "Category 4",
+    "price": 525.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:03:06.301019"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-39-belgium-vs-iran",
+    "match_name": "Match 39 - Belgium vs Iran",
+    "category": "Category 2",
+    "price": 619.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:03:06.301019"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-37-uruguay-vs-cabo-verde",
+    "match_name": "Match 37 - Uruguay vs Cabo Verde",
+    "category": "Category 3",
+    "price": 367.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:03:20.733914"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-37-uruguay-vs-cabo-verde",
+    "match_name": "Match 37 - Uruguay vs Cabo Verde",
+    "category": "Category 4",
+    "price": 371.7,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:03:20.733914"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-37-uruguay-vs-cabo-verde",
+    "match_name": "Match 37 - Uruguay vs Cabo Verde",
+    "category": "Category 2",
+    "price": 472.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:03:20.733914"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-37-uruguay-vs-cabo-verde",
+    "match_name": "Match 37 - Uruguay vs Cabo Verde",
+    "category": "Category 1",
+    "price": 682.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:03:20.733914"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-40-new-zealand-vs-egypt",
+    "match_name": "Match 40 - New Zealand vs Egypt",
+    "category": "Category 3",
+    "price": 320.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:03:33.745624"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-40-new-zealand-vs-egypt",
+    "match_name": "Match 40 - New Zealand vs Egypt",
+    "category": "Category 4",
+    "price": 334.95,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:03:33.745624"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-40-new-zealand-vs-egypt",
+    "match_name": "Match 40 - New Zealand vs Egypt",
+    "category": "Category 2",
+    "price": 420.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:03:33.745624"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-43-argentina-vs-austria",
+    "match_name": "Match 43 - Argentina vs Austria",
+    "category": "Category 4",
+    "price": 939.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:03:55.247780"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-43-argentina-vs-austria",
+    "match_name": "Match 43 - Argentina vs Austria",
+    "category": "Category 3",
+    "price": 971.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:03:55.247780"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-43-argentina-vs-austria",
+    "match_name": "Match 43 - Argentina vs Austria",
+    "category": "Category 2",
+    "price": 1248.45,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:03:55.247780"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-43-argentina-vs-austria",
+    "match_name": "Match 43 - Argentina vs Austria",
+    "category": "Category 1",
+    "price": 1337.7,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:03:55.247780"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-42-france-vs-fifa-play-off-2",
+    "match_name": "Match 42 - France vs FIFA Play Off 2",
+    "category": "Category 4",
+    "price": 446.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:04:10.935435"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-42-france-vs-fifa-play-off-2",
+    "match_name": "Match 42 - France vs FIFA Play Off 2",
+    "category": "Category 3",
+    "price": 456.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:04:10.935435"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-42-france-vs-fifa-play-off-2",
+    "match_name": "Match 42 - France vs FIFA Play Off 2",
+    "category": "Category 2",
+    "price": 546.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:04:10.935435"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-41-norway-vs-senegal",
+    "match_name": "Match 41 - Norway vs Senegal",
+    "category": "Category 3",
+    "price": 383.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:04:26.139326"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-41-norway-vs-senegal",
+    "match_name": "Match 41 - Norway vs Senegal",
+    "category": "Category 4",
+    "price": 403.2,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:04:26.139326"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-41-norway-vs-senegal",
+    "match_name": "Match 41 - Norway vs Senegal",
+    "category": "Category 2",
+    "price": 467.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:04:26.139326"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-41-norway-vs-senegal",
+    "match_name": "Match 41 - Norway vs Senegal",
+    "category": "Category 1",
+    "price": 787.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:04:26.139326"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-44-jordan-vs-algeria",
+    "match_name": "Match 44 - Jordan vs Algeria",
+    "category": "Category 3",
+    "price": 252.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:04:40.238485"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-44-jordan-vs-algeria",
+    "match_name": "Match 44 - Jordan vs Algeria",
+    "category": "Category 4",
+    "price": 254.1,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:04:40.238485"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-44-jordan-vs-algeria",
+    "match_name": "Match 44 - Jordan vs Algeria",
+    "category": "Category 2",
+    "price": 540.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:04:40.238485"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-44-jordan-vs-algeria",
+    "match_name": "Match 44 - Jordan vs Algeria",
+    "category": "Category 1",
+    "price": 630.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:04:40.238485"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-47-portugal-vs-uzbekistan",
+    "match_name": "Match 47 - Portugal vs Uzbekistan",
+    "category": "Category 4",
+    "price": 603.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:04:57.043683"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-47-portugal-vs-uzbekistan",
+    "match_name": "Match 47 - Portugal vs Uzbekistan",
+    "category": "Category 3",
+    "price": 619.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:04:57.043683"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-47-portugal-vs-uzbekistan",
+    "match_name": "Match 47 - Portugal vs Uzbekistan",
+    "category": "Category 2",
+    "price": 787.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:04:57.043683"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-47-portugal-vs-uzbekistan",
+    "match_name": "Match 47 - Portugal vs Uzbekistan",
+    "category": "Category 1",
+    "price": 1048.95,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:04:57.043683"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-45-england-vs-ghana",
+    "match_name": "Match 45 - England vs Ghana",
+    "category": "Category 3",
+    "price": 576.45,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:05:09.940585"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-45-england-vs-ghana",
+    "match_name": "Match 45 - England vs Ghana",
+    "category": "Category 4",
+    "price": 577.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:05:09.940585"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-45-england-vs-ghana",
+    "match_name": "Match 45 - England vs Ghana",
+    "category": "Category 2",
+    "price": 840.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:05:09.940585"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-46-panama-vs-croatia",
+    "match_name": "Match 46 - Panama vs Croatia",
+    "category": "Category 4",
+    "price": 640.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:05:22.186031"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-46-panama-vs-croatia",
+    "match_name": "Match 46 - Panama vs Croatia",
+    "category": "Category 3",
+    "price": 656.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:05:22.186031"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-46-panama-vs-croatia",
+    "match_name": "Match 46 - Panama vs Croatia",
+    "category": "Category 2",
+    "price": 892.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:05:22.186031"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-46-panama-vs-croatia",
+    "match_name": "Match 46 - Panama vs Croatia",
+    "category": "Category 1",
+    "price": 1312.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:05:22.186031"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-48-colombia-vs-fifa-play-off-1",
+    "match_name": "Match 48 - Colombia vs FIFA Play Off 1",
+    "category": "Category 4",
+    "price": 640.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:05:34.509381"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-48-colombia-vs-fifa-play-off-1",
+    "match_name": "Match 48 - Colombia vs FIFA Play Off 1",
+    "category": "Category 3",
+    "price": 682.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:05:34.509381"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-48-colombia-vs-fifa-play-off-1",
+    "match_name": "Match 48 - Colombia vs FIFA Play Off 1",
+    "category": "Category 2",
+    "price": 918.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:05:34.509381"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-48-colombia-vs-fifa-play-off-1",
+    "match_name": "Match 48 - Colombia vs FIFA Play Off 1",
+    "category": "Category 1",
+    "price": 1155.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:05:34.509381"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-51-switzerland-vs-canada",
+    "match_name": "Match 51 - Switzerland vs Canada",
+    "category": "Category 4",
+    "price": 441.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:05:47.573385"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-51-switzerland-vs-canada",
+    "match_name": "Match 51 - Switzerland vs Canada",
+    "category": "Category 3",
+    "price": 446.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:05:47.573385"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-51-switzerland-vs-canada",
+    "match_name": "Match 51 - Switzerland vs Canada",
+    "category": "Category 2",
+    "price": 456.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:05:47.573385"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-52-european-play-off-a-vs-qatar",
+    "match_name": "Match 52 - European Play Off A vs Qatar",
+    "category": "Category 3",
+    "price": 323.4,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:06:01.604919"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-52-european-play-off-a-vs-qatar",
+    "match_name": "Match 52 - European Play Off A vs Qatar",
+    "category": "Category 4",
+    "price": 324.45,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:06:01.604919"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-52-european-play-off-a-vs-qatar",
+    "match_name": "Match 52 - European Play Off A vs Qatar",
+    "category": "Category 2",
+    "price": 472.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:06:01.604919"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-52-european-play-off-a-vs-qatar",
+    "match_name": "Match 52 - European Play Off A vs Qatar",
+    "category": "Category 1",
+    "price": 743.4,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:06:01.604919"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-49-scotland-vs-brazil",
+    "match_name": "Match 49 - Scotland vs Brazil",
+    "category": "Category 4",
+    "price": 1023.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:06:18.964383"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-49-scotland-vs-brazil",
+    "match_name": "Match 49 - Scotland vs Brazil",
+    "category": "Category 3",
+    "price": 1044.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:06:18.964383"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-49-scotland-vs-brazil",
+    "match_name": "Match 49 - Scotland vs Brazil",
+    "category": "Category 2",
+    "price": 1365.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:06:18.964383"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-50-morocco-vs-haiti",
+    "match_name": "Match 50 - Morocco vs Haiti",
+    "category": "Category 4",
+    "price": 409.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:06:31.667421"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-50-morocco-vs-haiti",
+    "match_name": "Match 50 - Morocco vs Haiti",
+    "category": "Category 3",
+    "price": 435.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:06:31.667421"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-50-morocco-vs-haiti",
+    "match_name": "Match 50 - Morocco vs Haiti",
+    "category": "Category 2",
+    "price": 787.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:06:31.667421"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-50-morocco-vs-haiti",
+    "match_name": "Match 50 - Morocco vs Haiti",
+    "category": "Category 1",
+    "price": 955.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:06:31.667421"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-54-south-africa-vs-south-korea",
+    "match_name": "Match 54 - South Africa vs South Korea",
+    "category": "Category 3",
+    "price": 301.35,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:06:46.544533"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-54-south-africa-vs-south-korea",
+    "match_name": "Match 54 - South Africa vs South Korea",
+    "category": "Category 4",
+    "price": 303.45,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:06:46.544533"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-54-south-africa-vs-south-korea",
+    "match_name": "Match 54 - South Africa vs South Korea",
+    "category": "Category 2",
+    "price": 383.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:06:46.544533"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-54-south-africa-vs-south-korea",
+    "match_name": "Match 54 - South Africa vs South Korea",
+    "category": "Category 1",
+    "price": 418.95,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:06:46.544533"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-53-european-play-off-d-vs-mexico",
+    "match_name": "Match 53 - European Play Off D vs Mexico",
+    "category": "Category 3",
+    "price": 1307.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:07:01.622170"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-53-european-play-off-d-vs-mexico",
+    "match_name": "Match 53 - European Play Off D vs Mexico",
+    "category": "Category 4",
+    "price": 1317.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:07:01.622170"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-53-european-play-off-d-vs-mexico",
+    "match_name": "Match 53 - European Play Off D vs Mexico",
+    "category": "Category 2",
+    "price": 1359.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:07:01.622170"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-56-ecuador-vs-germany",
+    "match_name": "Match 56 - Ecuador vs Germany",
+    "category": "Category 4",
+    "price": 819.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:07:16.066320"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-56-ecuador-vs-germany",
+    "match_name": "Match 56 - Ecuador vs Germany",
+    "category": "Category 3",
+    "price": 840.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:07:16.066320"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-56-ecuador-vs-germany",
+    "match_name": "Match 56 - Ecuador vs Germany",
+    "category": "Category 2",
+    "price": 1155.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:07:16.066320"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-55-curacao-vs-ivory-coast",
+    "match_name": "Match 55 - Curacao vs Ivory Coast",
+    "category": "Category 3",
+    "price": 227.85,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:07:30.387026"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-55-curacao-vs-ivory-coast",
+    "match_name": "Match 55 - Curacao vs Ivory Coast",
+    "category": "Category 4",
+    "price": 257.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:07:30.387026"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-55-curacao-vs-ivory-coast",
+    "match_name": "Match 55 - Curacao vs Ivory Coast",
+    "category": "Category 2",
+    "price": 320.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:07:30.387026"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-55-curacao-vs-ivory-coast",
+    "match_name": "Match 55 - Curacao vs Ivory Coast",
+    "category": "Category 1",
+    "price": 577.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:07:30.387026"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-57-japan-vs-european-play-off-b",
+    "match_name": "Match 57 - Japan vs European Play Off B",
+    "category": "Category 3",
+    "price": 383.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:07:44.994016"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-57-japan-vs-european-play-off-b",
+    "match_name": "Match 57 - Japan vs European Play Off B",
+    "category": "Category 4",
+    "price": 418.95,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:07:44.994016"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-57-japan-vs-european-play-off-b",
+    "match_name": "Match 57 - Japan vs European Play Off B",
+    "category": "Category 2",
+    "price": 577.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:07:44.994016"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-57-japan-vs-european-play-off-b",
+    "match_name": "Match 57 - Japan vs European Play Off B",
+    "category": "Category 1",
+    "price": 819.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:07:44.994016"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-58-tunisia-vs-netherlands",
+    "match_name": "Match 58 - Tunisia vs Netherlands",
+    "category": "Category 3",
+    "price": 294.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:07:58.536493"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-58-tunisia-vs-netherlands",
+    "match_name": "Match 58 - Tunisia vs Netherlands",
+    "category": "Category 4",
+    "price": 319.2,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:07:58.536493"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-58-tunisia-vs-netherlands",
+    "match_name": "Match 58 - Tunisia vs Netherlands",
+    "category": "Category 2",
+    "price": 577.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:07:58.536493"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-58-tunisia-vs-netherlands",
+    "match_name": "Match 58 - Tunisia vs Netherlands",
+    "category": "Category 1",
+    "price": 808.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:07:58.536493"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-59-european-play-off-c-vs-united-states",
+    "match_name": "Match 59 - European Play Off C vs United States",
+    "category": "Category 4",
+    "price": 708.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:08:15.387649"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-59-european-play-off-c-vs-united-states",
+    "match_name": "Match 59 - European Play Off C vs United States",
+    "category": "Category 3",
+    "price": 729.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:08:15.387649"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-59-european-play-off-c-vs-united-states",
+    "match_name": "Match 59 - European Play Off C vs United States",
+    "category": "Category 2",
+    "price": 1050.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:08:15.387649"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-60-paraguay-vs-australia",
+    "match_name": "Match 60 - Paraguay vs Australia",
+    "category": "Category 3",
+    "price": 294.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:08:28.927737"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-60-paraguay-vs-australia",
+    "match_name": "Match 60 - Paraguay vs Australia",
+    "category": "Category 4",
+    "price": 315.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:08:28.927737"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-60-paraguay-vs-australia",
+    "match_name": "Match 60 - Paraguay vs Australia",
+    "category": "Category 2",
+    "price": 525.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:08:28.927737"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-60-paraguay-vs-australia",
+    "match_name": "Match 60 - Paraguay vs Australia",
+    "category": "Category 1",
+    "price": 787.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:08:28.927737"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-61-norway-vs-france",
+    "match_name": "Match 61 - Norway vs France",
+    "category": "Category 4",
+    "price": 729.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:08:45.000677"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-61-norway-vs-france",
+    "match_name": "Match 61 - Norway vs France",
+    "category": "Category 3",
+    "price": 782.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:08:45.000677"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-61-norway-vs-france",
+    "match_name": "Match 61 - Norway vs France",
+    "category": "Category 2",
+    "price": 866.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:08:45.000677"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-62-senegal-vs-fifa-play-off-2",
+    "match_name": "Match 62 - Senegal vs FIFA Play Off 2",
+    "category": "Category 3",
+    "price": 367.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:08:56.865361"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-62-senegal-vs-fifa-play-off-2",
+    "match_name": "Match 62 - Senegal vs FIFA Play Off 2",
+    "category": "Category 4",
+    "price": 383.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:08:56.865361"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-62-senegal-vs-fifa-play-off-2",
+    "match_name": "Match 62 - Senegal vs FIFA Play Off 2",
+    "category": "Category 2",
+    "price": 413.7,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:08:56.865361"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-62-senegal-vs-fifa-play-off-2",
+    "match_name": "Match 62 - Senegal vs FIFA Play Off 2",
+    "category": "Category 1",
+    "price": 735.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:08:56.865361"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-66-uruguay-vs-spain",
+    "match_name": "Match 66 - Uruguay vs Spain",
+    "category": "Category 4",
+    "price": 918.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:09:08.934486"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-66-uruguay-vs-spain",
+    "match_name": "Match 66 - Uruguay vs Spain",
+    "category": "Category 3",
+    "price": 929.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:09:08.934486"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-66-uruguay-vs-spain",
+    "match_name": "Match 66 - Uruguay vs Spain",
+    "category": "Category 2",
+    "price": 939.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:09:08.934486"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-65-cabo-verde-vs-saudi-arabia",
+    "match_name": "Match 65 - Cabo Verde vs Saudi Arabia",
+    "category": "Category 3",
+    "price": 239.4,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:09:28.846240"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-65-cabo-verde-vs-saudi-arabia",
+    "match_name": "Match 65 - Cabo Verde vs Saudi Arabia",
+    "category": "Category 4",
+    "price": 240.45,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:09:28.846240"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-65-cabo-verde-vs-saudi-arabia",
+    "match_name": "Match 65 - Cabo Verde vs Saudi Arabia",
+    "category": "Category 1",
+    "price": 320.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:09:28.846240"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-65-cabo-verde-vs-saudi-arabia",
+    "match_name": "Match 65 - Cabo Verde vs Saudi Arabia",
+    "category": "Category 2",
+    "price": 472.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:09:28.846240"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-64-new-zealand-vs-belgium",
+    "match_name": "Match 64 - New Zealand vs Belgium",
+    "category": "Category 3",
+    "price": 344.4,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:09:41.613810"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-64-new-zealand-vs-belgium",
+    "match_name": "Match 64 - New Zealand vs Belgium",
+    "category": "Category 4",
+    "price": 346.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:09:41.613810"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-64-new-zealand-vs-belgium",
+    "match_name": "Match 64 - New Zealand vs Belgium",
+    "category": "Category 2",
+    "price": 409.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:09:41.613810"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-64-new-zealand-vs-belgium",
+    "match_name": "Match 64 - New Zealand vs Belgium",
+    "category": "Category 1",
+    "price": 530.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:09:41.613810"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-63-egypt-vs-iran",
+    "match_name": "Match 63 - Egypt vs Iran",
+    "category": "Category 3",
+    "price": 363.3,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:09:55.000920"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-63-egypt-vs-iran",
+    "match_name": "Match 63 - Egypt vs Iran",
+    "category": "Category 4",
+    "price": 367.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:09:55.000920"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-63-egypt-vs-iran",
+    "match_name": "Match 63 - Egypt vs Iran",
+    "category": "Category 2",
+    "price": 435.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:09:55.000920"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-63-egypt-vs-iran",
+    "match_name": "Match 63 - Egypt vs Iran",
+    "category": "Category 1",
+    "price": 892.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:09:55.000920"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-67-panama-vs-england",
+    "match_name": "Match 67 - Panama vs England",
+    "category": "Category 4",
+    "price": 525.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:10:10.172555"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-67-panama-vs-england",
+    "match_name": "Match 67 - Panama vs England",
+    "category": "Category 3",
+    "price": 530.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:10:10.172555"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-67-panama-vs-england",
+    "match_name": "Match 67 - Panama vs England",
+    "category": "Category 2",
+    "price": 693.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:10:10.172555"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-68-croatia-vs-ghana",
+    "match_name": "Match 68 - Croatia vs Ghana",
+    "category": "Category 3",
+    "price": 435.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:10:24.575567"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-68-croatia-vs-ghana",
+    "match_name": "Match 68 - Croatia vs Ghana",
+    "category": "Category 4",
+    "price": 456.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:10:24.575567"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-68-croatia-vs-ghana",
+    "match_name": "Match 68 - Croatia vs Ghana",
+    "category": "Category 2",
+    "price": 577.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:10:24.575567"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-68-croatia-vs-ghana",
+    "match_name": "Match 68 - Croatia vs Ghana",
+    "category": "Category 1",
+    "price": 833.7,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:10:24.575567"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-72-fifa-play-off-1-vs-uzbekistan",
+    "match_name": "Match 72 - FIFA Play Off 1 vs Uzbekistan",
+    "category": "Category 4",
+    "price": 195.3,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:10:40.409161"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-72-fifa-play-off-1-vs-uzbekistan",
+    "match_name": "Match 72 - FIFA Play Off 1 vs Uzbekistan",
+    "category": "Category 3",
+    "price": 236.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:10:40.409161"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-72-fifa-play-off-1-vs-uzbekistan",
+    "match_name": "Match 72 - FIFA Play Off 1 vs Uzbekistan",
+    "category": "Category 2",
+    "price": 420.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:10:40.409161"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-72-fifa-play-off-1-vs-uzbekistan",
+    "match_name": "Match 72 - FIFA Play Off 1 vs Uzbekistan",
+    "category": "Category 1",
+    "price": 630.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:10:40.409161"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-71-colombia-vs-portugal",
+    "match_name": "Match 71 - Colombia vs Portugal",
+    "category": "Category 4",
+    "price": 1359.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:10:54.611860"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-71-colombia-vs-portugal",
+    "match_name": "Match 71 - Colombia vs Portugal",
+    "category": "Category 3",
+    "price": 1412.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:10:54.611860"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-71-colombia-vs-portugal",
+    "match_name": "Match 71 - Colombia vs Portugal",
+    "category": "Category 2",
+    "price": 1837.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:10:54.611860"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-69-algeria-vs-austria",
+    "match_name": "Match 69 - Algeria vs Austria",
+    "category": "Category 3",
+    "price": 194.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:11:13.142435"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-69-algeria-vs-austria",
+    "match_name": "Match 69 - Algeria vs Austria",
+    "category": "Category 4",
+    "price": 231.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:11:13.142435"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-69-algeria-vs-austria",
+    "match_name": "Match 69 - Algeria vs Austria",
+    "category": "Category 2",
+    "price": 577.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:11:13.142435"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-69-algeria-vs-austria",
+    "match_name": "Match 69 - Algeria vs Austria",
+    "category": "Category 1",
+    "price": 682.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:11:13.142435"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-70-jordan-vs-argentina",
+    "match_name": "Match 70 - Jordan vs Argentina",
+    "category": "Category 4",
+    "price": 782.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:11:26.166124"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-70-jordan-vs-argentina",
+    "match_name": "Match 70 - Jordan vs Argentina",
+    "category": "Category 3",
+    "price": 824.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:11:26.166124"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-70-jordan-vs-argentina",
+    "match_name": "Match 70 - Jordan vs Argentina",
+    "category": "Category 2",
+    "price": 1050.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:11:26.166124"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-70-jordan-vs-argentina",
+    "match_name": "Match 70 - Jordan vs Argentina",
+    "category": "Category 1",
+    "price": 1076.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:11:26.166124"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-73-group-a-runners-up-vs-group-b-runners-up",
+    "match_name": "Match 73 - Group A runners up vs Group B runners up",
+    "category": "Category 3",
+    "price": 619.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:11:39.896206"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-73-group-a-runners-up-vs-group-b-runners-up",
+    "match_name": "Match 73 - Group A runners up vs Group B runners up",
+    "category": "Category 4",
+    "price": 640.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:11:39.896206"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-73-group-a-runners-up-vs-group-b-runners-up",
+    "match_name": "Match 73 - Group A runners up vs Group B runners up",
+    "category": "Category 2",
+    "price": 787.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:11:39.896206"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-73-group-a-runners-up-vs-group-b-runners-up",
+    "match_name": "Match 73 - Group A runners up vs Group B runners up",
+    "category": "Category 1",
+    "price": 1541.4,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:11:39.896206"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-76-group-c-winners-vs-group-f-runners-up",
+    "match_name": "Match 76 - Group C winners vs Group F runners up",
+    "category": "Category 3",
+    "price": 756.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:11:54.457885"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-76-group-c-winners-vs-group-f-runners-up",
+    "match_name": "Match 76 - Group C winners vs Group F runners up",
+    "category": "Category 4",
+    "price": 787.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:11:54.457885"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-76-group-c-winners-vs-group-f-runners-up",
+    "match_name": "Match 76 - Group C winners vs Group F runners up",
+    "category": "Category 2",
+    "price": 840.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:11:54.457885"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-76-group-c-winners-vs-group-f-runners-up",
+    "match_name": "Match 76 - Group C winners vs Group F runners up",
+    "category": "Category 1",
+    "price": 1312.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:11:54.457885"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-74-group-e-winners-vs-group-a-b-c-d-f-third-place",
+    "match_name": "Match 74 - Group E winners vs Group A/B/C/D/F third place",
+    "category": "Category 3",
+    "price": 728.7,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:12:07.851698"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-74-group-e-winners-vs-group-a-b-c-d-f-third-place",
+    "match_name": "Match 74 - Group E winners vs Group A/B/C/D/F third place",
+    "category": "Category 4",
+    "price": 729.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:12:07.851698"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-74-group-e-winners-vs-group-a-b-c-d-f-third-place",
+    "match_name": "Match 74 - Group E winners vs Group A/B/C/D/F third place",
+    "category": "Category 2",
+    "price": 945.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:12:07.851698"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-74-group-e-winners-vs-group-a-b-c-d-f-third-place",
+    "match_name": "Match 74 - Group E winners vs Group A/B/C/D/F third place",
+    "category": "Category 1",
+    "price": 1076.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:12:07.851698"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-75-group-f-winners-vs-group-c-runners-up",
+    "match_name": "Match 75 - Group F winners vs Group C runners up",
+    "category": "Category 3",
+    "price": 693.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:12:20.220941"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-75-group-f-winners-vs-group-c-runners-up",
+    "match_name": "Match 75 - Group F winners vs Group C runners up",
+    "category": "Category 4",
+    "price": 708.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:12:20.220941"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-75-group-f-winners-vs-group-c-runners-up",
+    "match_name": "Match 75 - Group F winners vs Group C runners up",
+    "category": "Category 2",
+    "price": 787.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:12:20.220941"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-75-group-f-winners-vs-group-c-runners-up",
+    "match_name": "Match 75 - Group F winners vs Group C runners up",
+    "category": "Category 1",
+    "price": 1076.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:12:20.220941"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-78-group-e-runners-up-vs-group-i-runners-up",
+    "match_name": "Match 78 - Group E runners up vs Group I runners up",
+    "category": "Category 3",
+    "price": 504.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:12:34.468058"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-78-group-e-runners-up-vs-group-i-runners-up",
+    "match_name": "Match 78 - Group E runners up vs Group I runners up",
+    "category": "Category 4",
+    "price": 509.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:12:34.468058"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-78-group-e-runners-up-vs-group-i-runners-up",
+    "match_name": "Match 78 - Group E runners up vs Group I runners up",
+    "category": "Category 2",
+    "price": 651.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:12:34.468058"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-78-group-e-runners-up-vs-group-i-runners-up",
+    "match_name": "Match 78 - Group E runners up vs Group I runners up",
+    "category": "Category 1",
+    "price": 955.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:12:34.468058"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-77-group-i-winners-vs-group-c-d-f-g-h-third-place",
+    "match_name": "Match 77 - Group I winners vs Group C/D/F/G/H third place",
+    "category": "Category 3",
+    "price": 582.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:12:48.078510"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-77-group-i-winners-vs-group-c-d-f-g-h-third-place",
+    "match_name": "Match 77 - Group I winners vs Group C/D/F/G/H third place",
+    "category": "Category 4",
+    "price": 593.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:12:48.078510"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-77-group-i-winners-vs-group-c-d-f-g-h-third-place",
+    "match_name": "Match 77 - Group I winners vs Group C/D/F/G/H third place",
+    "category": "Category 2",
+    "price": 787.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:12:48.078510"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-77-group-i-winners-vs-group-c-d-f-g-h-third-place",
+    "match_name": "Match 77 - Group I winners vs Group C/D/F/G/H third place",
+    "category": "Category 1",
+    "price": 1018.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:12:48.078510"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-79-group-a-winners-vs-group-c-e-f-h-i-third-place",
+    "match_name": "Match 79 - Group A winners vs Group C/E/F/H/I third place",
+    "category": "Category 3",
+    "price": 1165.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:13:02.666421"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-79-group-a-winners-vs-group-c-e-f-h-i-third-place",
+    "match_name": "Match 79 - Group A winners vs Group C/E/F/H/I third place",
+    "category": "Category 4",
+    "price": 1181.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:13:02.666421"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-79-group-a-winners-vs-group-c-e-f-h-i-third-place",
+    "match_name": "Match 79 - Group A winners vs Group C/E/F/H/I third place",
+    "category": "Category 2",
+    "price": 1295.7,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:13:02.666421"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-79-group-a-winners-vs-group-c-e-f-h-i-third-place",
+    "match_name": "Match 79 - Group A winners vs Group C/E/F/H/I third place",
+    "category": "Category 1",
+    "price": 1806.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:13:02.666421"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-80-group-l-winners-vs-group-e-h-i-j-k-third-place",
+    "match_name": "Match 80 - Group L winners vs Group E/H/I/J/K third place",
+    "category": "Category 3",
+    "price": 535.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:13:16.007517"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-80-group-l-winners-vs-group-e-h-i-j-k-third-place",
+    "match_name": "Match 80 - Group L winners vs Group E/H/I/J/K third place",
+    "category": "Category 4",
+    "price": 546.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:13:16.007517"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-80-group-l-winners-vs-group-e-h-i-j-k-third-place",
+    "match_name": "Match 80 - Group L winners vs Group E/H/I/J/K third place",
+    "category": "Category 2",
+    "price": 580.65,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:13:16.007517"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-80-group-l-winners-vs-group-e-h-i-j-k-third-place",
+    "match_name": "Match 80 - Group L winners vs Group E/H/I/J/K third place",
+    "category": "Category 1",
+    "price": 866.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:13:16.007517"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-82-group-g-winners-vs-group-a-e-h-i-j-third-place",
+    "match_name": "Match 82 - Group G winners vs Group A/E/H/I/J third place",
+    "category": "Category 3",
+    "price": 487.2,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:13:32.271439"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-82-group-g-winners-vs-group-a-e-h-i-j-third-place",
+    "match_name": "Match 82 - Group G winners vs Group A/E/H/I/J third place",
+    "category": "Category 4",
+    "price": 488.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:13:32.271439"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-82-group-g-winners-vs-group-a-e-h-i-j-third-place",
+    "match_name": "Match 82 - Group G winners vs Group A/E/H/I/J third place",
+    "category": "Category 2",
+    "price": 577.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:13:32.271439"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-82-group-g-winners-vs-group-a-e-h-i-j-third-place",
+    "match_name": "Match 82 - Group G winners vs Group A/E/H/I/J third place",
+    "category": "Category 1",
+    "price": 708.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:13:32.271439"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-81-group-d-winners-vs-group-b-e-f-i-j-third-place",
+    "match_name": "Match 81 - Group D winners vs Group B/E/F/I/J third place",
+    "category": "Category 3",
+    "price": 697.2,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:13:45.082827"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-81-group-d-winners-vs-group-b-e-f-i-j-third-place",
+    "match_name": "Match 81 - Group D winners vs Group B/E/F/I/J third place",
+    "category": "Category 4",
+    "price": 698.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:13:45.082827"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-81-group-d-winners-vs-group-b-e-f-i-j-third-place",
+    "match_name": "Match 81 - Group D winners vs Group B/E/F/I/J third place",
+    "category": "Category 2",
+    "price": 766.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:13:45.082827"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-81-group-d-winners-vs-group-b-e-f-i-j-third-place",
+    "match_name": "Match 81 - Group D winners vs Group B/E/F/I/J third place",
+    "category": "Category 1",
+    "price": 1412.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:13:45.082827"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-84-group-h-winners-vs-group-j-runners-up",
+    "match_name": "Match 84 - Group H winners vs Group J runners up",
+    "category": "Category 3",
+    "price": 765.45,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:13:57.657996"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-84-group-h-winners-vs-group-j-runners-up",
+    "match_name": "Match 84 - Group H winners vs Group J runners up",
+    "category": "Category 4",
+    "price": 766.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:13:57.657996"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-84-group-h-winners-vs-group-j-runners-up",
+    "match_name": "Match 84 - Group H winners vs Group J runners up",
+    "category": "Category 2",
+    "price": 803.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:13:57.657996"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-84-group-h-winners-vs-group-j-runners-up",
+    "match_name": "Match 84 - Group H winners vs Group J runners up",
+    "category": "Category 1",
+    "price": 1575.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:13:57.657996"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-83-group-k-runners-up-vs-group-l-runners-up",
+    "match_name": "Match 83 - Group K runners up vs Group L runners up",
+    "category": "Category 3",
+    "price": 1664.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:14:08.753120"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-83-group-k-runners-up-vs-group-l-runners-up",
+    "match_name": "Match 83 - Group K runners up vs Group L runners up",
+    "category": "Category 4",
+    "price": 1674.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:14:08.753120"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-83-group-k-runners-up-vs-group-l-runners-up",
+    "match_name": "Match 83 - Group K runners up vs Group L runners up",
+    "category": "Category 2",
+    "price": 1701.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:14:08.753120"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-83-group-k-runners-up-vs-group-l-runners-up",
+    "match_name": "Match 83 - Group K runners up vs Group L runners up",
+    "category": "Category 1",
+    "price": 2226.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:14:08.753120"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-85-group-b-winners-vs-group-e-f-g-i-j-third-place",
+    "match_name": "Match 85 - Group B winners vs Group E/F/G/I/J third place",
+    "category": "Category 3",
+    "price": 509.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:14:20.073590"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-85-group-b-winners-vs-group-e-f-g-i-j-third-place",
+    "match_name": "Match 85 - Group B winners vs Group E/F/G/I/J third place",
+    "category": "Category 4",
+    "price": 609.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:14:20.073590"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-85-group-b-winners-vs-group-e-f-g-i-j-third-place",
+    "match_name": "Match 85 - Group B winners vs Group E/F/G/I/J third place",
+    "category": "Category 2",
+    "price": 640.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:14:20.073590"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-85-group-b-winners-vs-group-e-f-g-i-j-third-place",
+    "match_name": "Match 85 - Group B winners vs Group E/F/G/I/J third place",
+    "category": "Category 1",
+    "price": 803.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:14:20.073590"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-88-group-d-runners-up-vs-group-g-runners-up",
+    "match_name": "Match 88 - Group D runners up vs Group G runners up",
+    "category": "Category 3",
+    "price": 707.7,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:14:32.590604"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-88-group-d-runners-up-vs-group-g-runners-up",
+    "match_name": "Match 88 - Group D runners up vs Group G runners up",
+    "category": "Category 4",
+    "price": 708.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:14:32.590604"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-88-group-d-runners-up-vs-group-g-runners-up",
+    "match_name": "Match 88 - Group D runners up vs Group G runners up",
+    "category": "Category 2",
+    "price": 840.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:14:32.590604"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-88-group-d-runners-up-vs-group-g-runners-up",
+    "match_name": "Match 88 - Group D runners up vs Group G runners up",
+    "category": "Category 1",
+    "price": 945.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:14:32.590604"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-86-group-j-winners-vs-group-h-runners-up",
+    "match_name": "Match 86 - Group J winners vs Group H runners up",
+    "category": "Category 3",
+    "price": 1391.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:14:44.435220"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-86-group-j-winners-vs-group-h-runners-up",
+    "match_name": "Match 86 - Group J winners vs Group H runners up",
+    "category": "Category 4",
+    "price": 1412.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:14:44.435220"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-86-group-j-winners-vs-group-h-runners-up",
+    "match_name": "Match 86 - Group J winners vs Group H runners up",
+    "category": "Category 2",
+    "price": 1614.9,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:14:44.435220"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-86-group-j-winners-vs-group-h-runners-up",
+    "match_name": "Match 86 - Group J winners vs Group H runners up",
+    "category": "Category 1",
+    "price": 1806.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:14:44.435220"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-87-group-k-winners-vs-group-d-e-i-j-l-third-place",
+    "match_name": "Match 87 - Group K winners vs Group D/E/I/J/L third place",
+    "category": "Category 3",
+    "price": 719.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:14:56.065084"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-87-group-k-winners-vs-group-d-e-i-j-l-third-place",
+    "match_name": "Match 87 - Group K winners vs Group D/E/I/J/L third place",
+    "category": "Category 4",
+    "price": 729.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:14:56.065084"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-87-group-k-winners-vs-group-d-e-i-j-l-third-place",
+    "match_name": "Match 87 - Group K winners vs Group D/E/I/J/L third place",
+    "category": "Category 2",
+    "price": 918.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:14:56.065084"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-87-group-k-winners-vs-group-d-e-i-j-l-third-place",
+    "match_name": "Match 87 - Group K winners vs Group D/E/I/J/L third place",
+    "category": "Category 1",
+    "price": 1454.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:14:56.065084"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-90-winner-match-73-vs-winner-match-75",
+    "match_name": "Match 90 - Winner match 73 vs Winner match 75",
+    "category": "Category 3",
+    "price": 854.7,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:15:09.661432"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-90-winner-match-73-vs-winner-match-75",
+    "match_name": "Match 90 - Winner match 73 vs Winner match 75",
+    "category": "Category 4",
+    "price": 855.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:15:09.661432"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-90-winner-match-73-vs-winner-match-75",
+    "match_name": "Match 90 - Winner match 73 vs Winner match 75",
+    "category": "Category 2",
+    "price": 981.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:15:09.661432"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-90-winner-match-73-vs-winner-match-75",
+    "match_name": "Match 90 - Winner match 73 vs Winner match 75",
+    "category": "Category 1",
+    "price": 1291.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:15:09.661432"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-89-winner-match-74-vs-winner-match-77",
+    "match_name": "Match 89 - Winner match 74 vs Winner match 77",
+    "category": "Category 3",
+    "price": 849.45,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:15:21.718923"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-89-winner-match-74-vs-winner-match-77",
+    "match_name": "Match 89 - Winner match 74 vs Winner match 77",
+    "category": "Category 4",
+    "price": 850.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:15:21.718923"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-89-winner-match-74-vs-winner-match-77",
+    "match_name": "Match 89 - Winner match 74 vs Winner match 77",
+    "category": "Category 1",
+    "price": 1139.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:15:21.718923"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-89-winner-match-74-vs-winner-match-77",
+    "match_name": "Match 89 - Winner match 74 vs Winner match 77",
+    "category": "Category 2",
+    "price": 1227.45,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:15:21.718923"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-91-winner-match-76-vs-winner-match-78",
+    "match_name": "Match 91 - Winner match 76 vs Winner match 78",
+    "category": "Category 3",
+    "price": 1017.45,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:15:39.210530"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-91-winner-match-76-vs-winner-match-78",
+    "match_name": "Match 91 - Winner match 76 vs Winner match 78",
+    "category": "Category 4",
+    "price": 1018.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:15:39.210530"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-91-winner-match-76-vs-winner-match-78",
+    "match_name": "Match 91 - Winner match 76 vs Winner match 78",
+    "category": "Category 2",
+    "price": 1092.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:15:39.210530"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-91-winner-match-76-vs-winner-match-78",
+    "match_name": "Match 91 - Winner match 76 vs Winner match 78",
+    "category": "Category 1",
+    "price": 2098.95,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:15:39.210530"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-92-winner-match-79-vs-winner-match-80",
+    "match_name": "Match 92 - Winner match 79 vs Winner match 80",
+    "category": "Category 3",
+    "price": 1475.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:15:52.456575"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-92-winner-match-79-vs-winner-match-80",
+    "match_name": "Match 92 - Winner match 79 vs Winner match 80",
+    "category": "Category 4",
+    "price": 1491.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:15:52.456575"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-92-winner-match-79-vs-winner-match-80",
+    "match_name": "Match 92 - Winner match 79 vs Winner match 80",
+    "category": "Category 2",
+    "price": 1527.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:15:52.456575"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-92-winner-match-79-vs-winner-match-80",
+    "match_name": "Match 92 - Winner match 79 vs Winner match 80",
+    "category": "Category 1",
+    "price": 2136.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:15:52.456575"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-93-winner-match-83-vs-winner-match-84",
+    "match_name": "Match 93 - Winner match 83 vs Winner match 84",
+    "category": "Category 3",
+    "price": 1018.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:16:05.413981"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-93-winner-match-83-vs-winner-match-84",
+    "match_name": "Match 93 - Winner match 83 vs Winner match 84",
+    "category": "Category 4",
+    "price": 1039.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:16:05.413981"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-93-winner-match-83-vs-winner-match-84",
+    "match_name": "Match 93 - Winner match 83 vs Winner match 84",
+    "category": "Category 2",
+    "price": 1065.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:16:05.413981"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-93-winner-match-83-vs-winner-match-84",
+    "match_name": "Match 93 - Winner match 83 vs Winner match 84",
+    "category": "Category 1",
+    "price": 1317.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:16:05.413981"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-94-winner-match-81-vs-winner-match-82",
+    "match_name": "Match 94 - Winner match 81 vs Winner match 82",
+    "category": "Category 3",
+    "price": 849.45,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:16:17.056682"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-94-winner-match-81-vs-winner-match-82",
+    "match_name": "Match 94 - Winner match 81 vs Winner match 82",
+    "category": "Category 4",
+    "price": 850.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:16:17.056682"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-94-winner-match-81-vs-winner-match-82",
+    "match_name": "Match 94 - Winner match 81 vs Winner match 82",
+    "category": "Category 2",
+    "price": 939.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:16:17.056682"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-94-winner-match-81-vs-winner-match-82",
+    "match_name": "Match 94 - Winner match 81 vs Winner match 82",
+    "category": "Category 1",
+    "price": 1291.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:16:17.056682"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-95-winner-match-86-vs-winner-match-88",
+    "match_name": "Match 95 - Winner match 86 vs Winner match 88",
+    "category": "Category 3",
+    "price": 833.7,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:16:29.305232"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-95-winner-match-86-vs-winner-match-88",
+    "match_name": "Match 95 - Winner match 86 vs Winner match 88",
+    "category": "Category 4",
+    "price": 834.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:16:29.305232"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-95-winner-match-86-vs-winner-match-88",
+    "match_name": "Match 95 - Winner match 86 vs Winner match 88",
+    "category": "Category 2",
+    "price": 882.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:16:29.305232"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-95-winner-match-86-vs-winner-match-88",
+    "match_name": "Match 95 - Winner match 86 vs Winner match 88",
+    "category": "Category 1",
+    "price": 1596.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:16:29.305232"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-96-winner-match-85-vs-winner-match-87",
+    "match_name": "Match 96 - Winner match 85 vs Winner match 87",
+    "category": "Category 3",
+    "price": 1017.45,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:16:43.339816"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-96-winner-match-85-vs-winner-match-87",
+    "match_name": "Match 96 - Winner match 85 vs Winner match 87",
+    "category": "Category 4",
+    "price": 1018.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:16:43.339816"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-96-winner-match-85-vs-winner-match-87",
+    "match_name": "Match 96 - Winner match 85 vs Winner match 87",
+    "category": "Category 2",
+    "price": 1076.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:16:43.339816"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-96-winner-match-85-vs-winner-match-87",
+    "match_name": "Match 96 - Winner match 85 vs Winner match 87",
+    "category": "Category 1",
+    "price": 1428.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:16:43.339816"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-97-winner-match-89-vs-winner-match-90",
+    "match_name": "Match 97 - Winner match 89 vs Winner match 90",
+    "category": "Category 2",
+    "price": 1337.7,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:16:54.847736"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-97-winner-match-89-vs-winner-match-90",
+    "match_name": "Match 97 - Winner match 89 vs Winner match 90",
+    "category": "Category 4",
+    "price": 1338.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:16:54.847736"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-97-winner-match-89-vs-winner-match-90",
+    "match_name": "Match 97 - Winner match 89 vs Winner match 90",
+    "category": "Category 3",
+    "price": 1438.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:16:54.847736"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-97-winner-match-89-vs-winner-match-90",
+    "match_name": "Match 97 - Winner match 89 vs Winner match 90",
+    "category": "Category 1",
+    "price": 1727.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:16:54.847736"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-98-winner-match-93-vs-winner-match-94",
+    "match_name": "Match 98 - Winner match 93 vs Winner match 94",
+    "category": "Category 3",
+    "price": 1327.2,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:17:08.705091"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-98-winner-match-93-vs-winner-match-94",
+    "match_name": "Match 98 - Winner match 93 vs Winner match 94",
+    "category": "Category 2",
+    "price": 1328.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:17:08.705091"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-98-winner-match-93-vs-winner-match-94",
+    "match_name": "Match 98 - Winner match 93 vs Winner match 94",
+    "category": "Category 4",
+    "price": 1542.45,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:17:08.705091"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-98-winner-match-93-vs-winner-match-94",
+    "match_name": "Match 98 - Winner match 93 vs Winner match 94",
+    "category": "Category 1",
+    "price": 1937.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:17:08.705091"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-99-winner-match-91-vs-winner-match-92",
+    "match_name": "Match 99 - Winner match 91 vs Winner match 92",
+    "category": "Category 3",
+    "price": 1521.45,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:17:20.831413"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-99-winner-match-91-vs-winner-match-92",
+    "match_name": "Match 99 - Winner match 91 vs Winner match 92",
+    "category": "Category 4",
+    "price": 1527.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:17:20.831413"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-99-winner-match-91-vs-winner-match-92",
+    "match_name": "Match 99 - Winner match 91 vs Winner match 92",
+    "category": "Category 1",
+    "price": 1911.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:17:20.831413"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-99-winner-match-91-vs-winner-match-92",
+    "match_name": "Match 99 - Winner match 91 vs Winner match 92",
+    "category": "Category 2",
+    "price": 2047.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:17:20.831413"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-100-winner-match-95-vs-winner-match-96",
+    "match_name": "Match 100 - Winner match 95 vs Winner match 96",
+    "category": "Category 3",
+    "price": 1484.7,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:17:32.665848"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-100-winner-match-95-vs-winner-match-96",
+    "match_name": "Match 100 - Winner match 95 vs Winner match 96",
+    "category": "Category 4",
+    "price": 1485.75,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:17:32.665848"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-100-winner-match-95-vs-winner-match-96",
+    "match_name": "Match 100 - Winner match 95 vs Winner match 96",
+    "category": "Category 2",
+    "price": 1816.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:17:32.665848"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-100-winner-match-95-vs-winner-match-96",
+    "match_name": "Match 100 - Winner match 95 vs Winner match 96",
+    "category": "Category 1",
+    "price": 2625.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:17:32.665848"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-101-winner-match-97-vs-winner-match-98",
+    "match_name": "Match 101 - Winner match 97 vs Winner match 98",
+    "category": "Category 3",
+    "price": 2272.2,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:17:50.952365"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-101-winner-match-97-vs-winner-match-98",
+    "match_name": "Match 101 - Winner match 97 vs Winner match 98",
+    "category": "Category 4",
+    "price": 2273.25,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:17:50.952365"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-101-winner-match-97-vs-winner-match-98",
+    "match_name": "Match 101 - Winner match 97 vs Winner match 98",
+    "category": "Category 2",
+    "price": 2362.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:17:50.952365"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-101-winner-match-97-vs-winner-match-98",
+    "match_name": "Match 101 - Winner match 97 vs Winner match 98",
+    "category": "Category 1",
+    "price": 3576.3,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:17:50.952365"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-102-winner-match-99-vs-winner-match-100",
+    "match_name": "Match 102 - Winner match 99 vs Winner match 100",
+    "category": "Category 3",
+    "price": 2562.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:18:03.233479"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-102-winner-match-99-vs-winner-match-100",
+    "match_name": "Match 102 - Winner match 99 vs Winner match 100",
+    "category": "Category 4",
+    "price": 2614.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:18:03.233479"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-102-winner-match-99-vs-winner-match-100",
+    "match_name": "Match 102 - Winner match 99 vs Winner match 100",
+    "category": "Category 2",
+    "price": 3576.3,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:18:03.233479"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-103-world-cup-2026-bronze-final",
+    "match_name": "Match 103 - World Cup 2026 Bronze Final",
+    "category": "Category 4",
+    "price": 819.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:18:15.589752"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-103-world-cup-2026-bronze-final",
+    "match_name": "Match 103 - World Cup 2026 Bronze Final",
+    "category": "Category 3",
+    "price": 840.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:18:15.589752"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-103-world-cup-2026-bronze-final",
+    "match_name": "Match 103 - World Cup 2026 Bronze Final",
+    "category": "Category 2",
+    "price": 1155.0,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:18:15.589752"
+  },
+  {
+    "match_url": "https://www.footballticketnet.com/world-cup-2026/match-103-world-cup-2026-bronze-final",
+    "match_name": "Match 103 - World Cup 2026 Bronze Final",
+    "category": "Category 1",
+    "price": 1669.5,
+    "currency": "USD",
+    "source": "FootballTicketNet",
+    "timestamp": "2025-12-24T15:18:15.589752"
   }
 ]
