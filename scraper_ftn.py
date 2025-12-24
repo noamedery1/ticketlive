@@ -4,17 +4,29 @@ import time
 import re
 import json
 import os
+import sys
 from collections import defaultdict
 from datetime import datetime
+
+# Fix encoding for Windows (cp1252 can't handle emojis)
+if sys.platform == 'win32':
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
 EUR_TO_USD = 1.05  # Approximate rate
 
 def get_driver():
+    import random
+    
+    # Add small random delay to prevent both scrapers from initializing at exact same time
+    time.sleep(random.uniform(0.5, 2.0))
+    
     try:
         browser_path = '/usr/bin/chromium' if os.path.exists('/usr/bin/chromium') else None
         driver_path = '/usr/bin/chromedriver' if os.path.exists('/usr/bin/chromedriver') else None
 
-        for attempt in range(3):
+        for attempt in range(5):  # Increased retries
             try:
                 # Create fresh options object each time to avoid reuse error
                 options = uc.ChromeOptions()
@@ -32,28 +44,46 @@ def get_driver():
                     browser_executable_path=browser_path, 
                     driver_executable_path=driver_path
                 )
+                print(f'   ✅ Driver initialized successfully (attempt {attempt+1})', flush=True)
                 return driver
             except OSError as e:
-                if 'Text file busy' in str(e):
-                    print(f'   ⚠️ Driver file busy (attempt {attempt+1}/3). Waiting...')
-                    time.sleep(5)
+                error_str = str(e)
+                # Handle Windows file lock errors
+                if 'Text file busy' in error_str or 'WinError 32' in error_str or 'WinError 183' in error_str or 'being used by another process' in error_str or 'already exists' in error_str:
+                    wait_time = (attempt + 1) * 2  # Exponential backoff: 2s, 4s, 6s, 8s, 10s
+                    print(f'   ⚠️ Driver file locked by another process (attempt {attempt+1}/5). Waiting {wait_time}s...', flush=True)
+                    time.sleep(wait_time)
+                    if attempt < 4:
+                        continue
+                    else:
+                        raise e
                 else:
                     raise e
             except Exception as e:
                 error_msg = str(e).lower()
+                error_str = str(e)
                 if 'cannot reuse' in error_msg or 'chromeoptions' in error_msg:
-                    # Options reuse error - wait and retry with fresh options
-                    print(f'   ⚠️ Options reuse error (attempt {attempt+1}/3). Retrying...')
-                    time.sleep(3)
+                    wait_time = (attempt + 1) * 1.5
+                    print(f'   ⚠️ Options reuse error (attempt {attempt+1}/5). Retrying in {wait_time:.1f}s...', flush=True)
+                    time.sleep(wait_time)
                     continue
+                # Check for file lock errors in exception message too
+                if 'WinError 32' in error_str or 'WinError 183' in error_str or 'being used by another process' in error_str:
+                    wait_time = (attempt + 1) * 2
+                    print(f'   ⚠️ File lock error (attempt {attempt+1}/5). Waiting {wait_time}s...', flush=True)
+                    time.sleep(wait_time)
+                    if attempt < 4:
+                        continue
                 raise e
+        print(f'❌ [ERROR] Chrome Driver init failed after all retries', flush=True)
         return None
     except Exception as e:
-        print(f'❌ [ERROR] Chrome Driver init failed: {e}')
+        print(f'❌ [ERROR] Chrome Driver init failed: {e}', flush=True)
+        import traceback
+        traceback.print_exc()
         return None
 
 def scrape_ftn_single(driver, url, match_name):
-    print(f'   Scraping {match_name[:30]}...')
     prices_found_for_match = defaultdict(lambda: float('inf'))
 
     try:
@@ -97,7 +127,7 @@ def scrape_ftn_single(driver, url, match_name):
 
         records = []
         if prices_found_for_match:
-            print(f'      ✅ Found prices: {dict(prices_found_for_match)}')
+            print(f'      ✅ Found prices: {dict(prices_found_for_match)}', flush=True)
             timestamp = datetime.now().isoformat()
             for cat, price in prices_found_for_match.items():
                 records.append({
@@ -110,35 +140,42 @@ def scrape_ftn_single(driver, url, match_name):
                     'timestamp': timestamp
                 })
         else:
-            print('      ❌ No valid prices found.')
+            print('      ❌ No valid prices found.', flush=True)
             
         return records
 
     except Exception as e:
         msg = str(e).lower()
         if 'crashed' in msg or 'disconnected' in msg or 'timeout' in msg:
-            print(f'      🔥 Critical Driver Error: {e}')
+            print(f'      🔥 Critical Driver Error: {e}', flush=True)
             return None # Signal to restart driver
-        print(f'      ❌ Error: {e}')
+        print(f'      ❌ Error: {e}', flush=True)
         return []
 
 def run_ftn_scraper_cycle():
     GAMES_FILE = 'all_games_ftn_to_scrape.json'
     OUTPUT_FILE = 'prices_ftn.json'
     
-    print(f'\n[{datetime.now().strftime("%H:%M")}] 🚀 FTN SCRAPER STARTING...')
+    print(f'\n[{datetime.now().strftime("%H:%M")}] 🚀 FTN SCRAPER STARTING...', flush=True)
     
     if not os.path.exists(GAMES_FILE):
-        print(f'❌ [ERROR] {GAMES_FILE} not found. Run get_ftn_urls.py first.')
+        print(f'❌ [ERROR] {GAMES_FILE} not found. Run get_ftn_urls.py first.', flush=True)
         return
 
     with open(GAMES_FILE, 'r') as f:
         games = json.load(f)
         
-    print(f'   Target: {len(games)} games...')
+    print(f'   Target: {len(games)} games...', flush=True)
     
     # Initialize driver
+    print('   Initializing Chrome driver...', flush=True)
     driver = get_driver()
+    
+    if not driver:
+        print('   ❌ [ERROR] Failed to initialize driver at startup. Exiting.', flush=True)
+        return
+    
+    print('   ✅ Driver initialized successfully', flush=True)
     
     try:
         existing_data = []
@@ -147,20 +184,29 @@ def run_ftn_scraper_cycle():
                 with open(OUTPUT_FILE, 'r') as f: existing_data = json.load(f)
             except: pass
         
-        for i, game in enumerate(games):
+        for i, game in enumerate(games, 1):
             # 🔄 BATCH RESTART: Proactively restart driver every 10 games to free memory
-            if i > 0 and i % 10 == 0:
-                print(f'   🔄 Scheduled Batch Restart (Match {i})...')
-                try: driver.quit()
-                except: pass
+            if i > 1 and i % 10 == 1:
+                print(f'   🔄 Scheduled Batch Restart (Match {i})...', flush=True)
+                try: 
+                    driver.quit()
+                    print(f'   ✅ Old driver closed', flush=True)
+                except Exception as quit_err:
+                    print(f'   ⚠️ Error closing driver: {quit_err}', flush=True)
                 driver = None
+                time.sleep(1)  # Brief pause before getting new driver
 
             # 1. Check if driver is alive/healthy before starting
             if driver is None:
+                print(f'   [RESTART] Getting new driver for match {i}...', flush=True)
                 driver = get_driver()
                 if not driver:
-                    print('   ❌ Could not restart driver, skipping...')
+                    print(f'   ❌ Could not restart driver for match {i}, skipping...', flush=True)
                     continue
+            
+            # Show progress
+            match_name = game.get('match_name', 'Unknown')
+            print(f'   [{i}/{len(games)}] Scraping {match_name[:40]}...', flush=True)
             
             # 2. Scrape with retry/recovery logic
             try:
@@ -174,24 +220,34 @@ def run_ftn_scraper_cycle():
                     existing_data.extend(new_records)
                     with open(OUTPUT_FILE, 'w') as f:
                         json.dump(existing_data, f, indent=2)
+                    print(f'      ✅ Saved {len(new_records)} price records', flush=True)
+                else:
+                    print(f'      ⚠️ No prices found for this match', flush=True)
             
             except Exception as e:
-                print(f'   ⚠️ Driver Unstable ({e}). Restarting...')
-                try: driver.quit()
-                except: pass
+                print(f'   ⚠️ Driver Unstable ({e}). Restarting...', flush=True)
+                try: 
+                    driver.quit()
+                except: 
+                    pass
                 driver = None # Force create new one next loop
                 continue
             
             time.sleep(2) 
             
     except Exception as e:
-        print(f'🔥 Fatal Error in FTN Cycle: {e}')
+        print(f'🔥 Fatal Error in FTN Cycle: {e}', flush=True)
+        import traceback
+        traceback.print_exc()
     finally:
         if driver:
-            try: driver.quit()
-            except: pass
+            try:
+                driver.quit()
+                print('   ✅ Driver closed', flush=True)
+            except: 
+                pass
     
-    print(f'[{datetime.now().strftime("%H:%M")}] 💤 FTN CYCLE COMPLETE.')
+    print(f'[{datetime.now().strftime("%H:%M")}] 💤 FTN CYCLE COMPLETE.', flush=True)
 
 if __name__ == '__main__':
     run_ftn_scraper_cycle()

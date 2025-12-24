@@ -2,27 +2,28 @@ import json
 import os
 import re
 import time
-import threading
-import requests
+import sys
 import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from datetime import datetime, timezone
+from datetime import datetime
 
-# Global lock for driver initialization to prevent "file busy" errors
-_driver_init_lock = threading.Lock()
+# Fix encoding for Windows
+if sys.platform == 'win32':
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
-# =========================
-# CONFIG
-# =========================
-GAMES_FILE = "all_games_to_scrape.json"
-OUTPUT_FILE = "prices.json"
-PAGE_LOAD_TIMEOUT = 90  # Increased for Render's slower environment - need more time for page loads
+# ==========================================
+# ⚙️ CONFIGURATION
+# ==========================================
+OUTPUT_FILE = 'prices.json'
+GAMES_FILE = 'all_games_to_scrape.json'
 
-# =========================
+# ==========================================
 # UTILS
-# =========================
+# ==========================================
 def load_json(path, default):
     if not os.path.exists(path):
         return default
@@ -38,415 +39,41 @@ def append_json(path, rows):
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2)
 
-# =========================
-# DRIVER
-# =========================
-def get_driver():
-    """Get Chrome driver with network logging enabled"""
-    try:
-        # Check for Chromium/Chrome paths (Render might not have them)
-        browser_path = None
-        driver_path = None
-        
-        # Try common paths
-        chromium_paths = ['/usr/bin/chromium', '/usr/bin/chromium-browser', '/usr/bin/google-chrome']
-        for path in chromium_paths:
-            if os.path.exists(path):
-                browser_path = path
-                break
-        
-        chromedriver_paths = ['/usr/bin/chromedriver', '/usr/local/bin/chromedriver']
-        for path in chromedriver_paths:
-            if os.path.exists(path):
-                driver_path = path
-                break
-        
-        print(f"   Initializing Chrome driver...", flush=True)
-        print(f"   Browser path: {browser_path or 'auto-detect'}", flush=True)
-        print(f"   Driver path: {driver_path or 'auto-detect'}", flush=True)
-        
-        # Try to initialize driver with retries and timeout protection
-        driver = None
-        for attempt in range(3):
-            try:
-                print(f"   Attempt {attempt + 1}/3 to initialize driver...", flush=True)
-                
-                # Create FRESH ChromeOptions for each attempt (cannot reuse!)
-                options = uc.ChromeOptions()
-
-                # Always use headless on server environments (Render, Docker, etc.)
-                # Render doesn't have display, so headless is required
-                options.add_argument("--headless=new")
-                options.add_argument("--no-sandbox")
-                options.add_argument("--disable-dev-shm-usage")
-                options.add_argument("--disable-gpu")
-                options.add_argument("--window-size=1920,1080")
-                options.add_argument("--lang=en-US")
-                options.add_argument("--disable-software-rasterizer")
-                options.add_argument("--disable-extensions")
-
-                options.add_argument("--disable-blink-features=AutomationControlled")
-                options.add_argument("--disable-features=IsolateOrigins,site-per-process")
-                
-                # Additional stability flags for Render
-                options.add_argument("--disable-session-crashed-bubble")
-                options.add_argument("--disable-crash-reporter")
-                options.add_argument("--js-flags=--max-old-space-size=2048")
-                options.add_argument("--disable-background-timer-throttling")
-                options.add_argument("--disable-renderer-backgrounding")
-                # Timeout prevention flags
-                options.add_argument("--disable-hang-monitor")
-                options.add_argument("--disable-prompt-on-repost")
-                options.add_argument("--disable-client-side-phishing-detection")
-                options.add_argument("--disable-component-update")
-                options.add_argument("--disable-default-apps")
-                options.add_argument("--disable-sync")
-                options.add_argument("--no-first-run")
-                options.add_argument("--no-default-browser-check")
-                options.add_argument("--disable-infobars")
-                # Network and renderer stability
-                options.add_argument("--disable-features=TranslateUI")
-                options.add_argument("--disable-ipc-flooding-protection")
-                # Additional Render-specific flags (no duplicates)
-                options.add_argument("--disable-setuid-sandbox")
-                options.add_argument("--disable-background-networking")
-                options.add_argument("--disable-breakpad")
-                options.add_argument("--disable-domain-reliability")
-                options.add_argument("--disable-features=AudioServiceOutOfProcess")
-                options.add_argument("--disable-popup-blocking")
-                options.add_argument("--metrics-recording-only")
-                options.add_argument("--safebrowsing-disable-auto-update")
-                options.add_argument("--enable-automation")
-                options.add_argument("--password-store=basic")
-                options.add_argument("--use-mock-keychain")
-                # Reduce startup overhead
-                options.add_argument("--disable-logging")
-                options.add_argument("--log-level=3")  # Only fatal errors
-                options.add_argument("--silent")
-                
-                # Block images to save resources
-                prefs = {"profile.managed_default_content_settings.images": 2}
-                options.add_experimental_option("prefs", prefs)
-                
-                # Use 'normal' strategy for better compatibility on Render
-                # 'eager' can cause issues with dynamic content loading
-                options.page_load_strategy = 'normal'
-                
-                # Use threading to add timeout for driver initialization (prevents hanging)
-                # Use lock to prevent concurrent driver initialization
-                init_result = {'driver': None, 'error': None, 'done': False}
-                
-                def init_worker():
-                    try:
-                        # Acquire lock to prevent concurrent driver initialization
-                        with _driver_init_lock:
-                            print(f"   🔒 Acquired driver initialization lock...", flush=True)
-                            # Add retry for "file busy" errors
-                            max_retries = 5  # Increased retries
-                            for retry in range(max_retries):
-                                try:
-                                    init_result['driver'] = uc.Chrome(
-                                        options=options,
-                                        browser_executable_path=browser_path,
-                                        driver_executable_path=driver_path,
-                                        version_main=None,
-                                        use_subprocess=True  # Use subprocess to avoid connection issues
-                                    )
-                                    init_result['done'] = True
-                                    print(f"   🔓 Released driver initialization lock", flush=True)
-                                    break
-                                except OSError as e:
-                                    if 'Text file busy' in str(e) or 'file busy' in str(e).lower():
-                                        if retry < max_retries - 1:
-                                            wait_time = 3 * (retry + 1)  # Increasing wait: 3s, 6s, 9s, 12s
-                                            print(f"   ⚠️ Driver file busy (retry {retry + 1}/{max_retries}). Waiting {wait_time}s...", flush=True)
-                                            time.sleep(wait_time)
-                                            continue
-                                        else:
-                                            raise
-                                    else:
-                                        raise
-                                except Exception as e:
-                                    # Release lock on error
-                                    print(f"   🔓 Released driver initialization lock (error)", flush=True)
-                                    raise
-                    except Exception as e:
-                        init_result['error'] = e
-                        init_result['done'] = True
-                        if _driver_init_lock.locked():
-                            try:
-                                _driver_init_lock.release()
-                            except:
-                                pass
-                
-                init_thread = threading.Thread(target=init_worker, daemon=True)
-                init_thread.start()
-                init_thread.join(timeout=120)  # Increased to 120s for Render with lock contention
-                
-                if init_thread.is_alive():
-                    print(f"   ERROR: Driver initialization timed out after 120s", flush=True)
-                    # Release lock if still held
-                    try:
-                        if _driver_init_lock.locked():
-                            _driver_init_lock.release()
-                    except:
-                        pass
-                    if attempt < 2:
-                        wait_time = 10 * (attempt + 1)  # Increased wait: 10s, 20s
-                        print(f"   Retrying in {wait_time} seconds...", flush=True)
-                        time.sleep(wait_time)
-                        continue
-                    else:
-                        raise Exception("Driver initialization timed out after 3 attempts (120s each)")
-                
-                if init_result['error']:
-                    raise init_result['error']
-                
-                driver = init_result['driver']
-                if not driver:
-                    raise Exception("Driver is None after initialization")
-                
-                # Test if driver is actually working
-                driver.set_page_load_timeout(PAGE_LOAD_TIMEOUT)
-                driver.implicitly_wait(3)  # Reduced for faster failure detection
-                driver.set_script_timeout(45)  # Increased for Render's slower environment
-                
-                # Quick test to ensure driver is responsive
-                try:
-                    test_result = driver.execute_script("return 'test';")
-                    if test_result != 'test':
-                        raise Exception("Driver test failed - wrong result")
-                except Exception as test_err:
-                    print(f"   Driver test failed: {str(test_err)[:50]}", flush=True)
-                    if driver:
-                        try:
-                            driver.quit()
-                        except:
-                            pass
-                    driver = None
-                    if attempt < 2:
-                        time.sleep(3)
-                        continue
-                    raise test_err
-                
-                # Enable performance logging BEFORE page loads (required for get_log to work)
-                try:
-                    driver.execute_cdp_cmd("Performance.enable", {})
-                    driver.execute_cdp_cmd("Network.enable", {})
-                    print(f"   CDP logging enabled", flush=True)
-                except Exception as e:
-                    print(f"   CDP logging not available (will use DOM): {str(e)[:50]}", flush=True)
-                
-                print(f"   ✅ Driver initialized successfully", flush=True)
-                return driver
-                
-            except Exception as e:
-                error_msg = str(e)
-                print(f"   Attempt {attempt + 1} failed: {error_msg[:150]}", flush=True)
-                
-                if driver:
-                    try:
-                        driver.quit()
-                    except:
-                        pass
-                    driver = None
-                
-                # If it's a connection/timeout error, wait and retry
-                if any(keyword in error_msg.lower() for keyword in ["httpconnectionpool", "timeout", "connection", "timed out", "read timeout"]):
-                    if attempt < 2:
-                        wait_time = 5 * (attempt + 1)  # Increasing wait time: 5s, 10s
-                        print(f"   Connection/timeout error detected. Retrying in {wait_time} seconds...", flush=True)
-                        time.sleep(wait_time)
-                        continue
-                
-                # If it's the last attempt, raise the error
-                if attempt == 2:
-                    raise e
-        
-        return None
-        
-    except Exception as e:
-        print(f"   ❌ ERROR: Failed to initialize driver after 3 attempts: {str(e)}", flush=True)
-        import traceback
-        traceback.print_exc()
-        return None
-
-# =========================
-# API EXTRACTION
-# =========================
-def extract_prices_from_network(driver):
-    """Extract prices by intercepting network API calls, with DOM fallback"""
+# ==========================================
+# PRICE EXTRACTION - Simple HTML/DOM approach
+# ==========================================
+def extract_prices_simple(driver):
+    """
+    Simple, direct approach: Get HTML from browser and extract prices from DOM elements.
+    Works better locally than network interception.
+    """
     prices = {}
-    api_urls = set()
+    start_time = time.time()
     
-    # Try network extraction first
     try:
-        logs = driver.get_log("performance")
-        print(f"      Retrieved {len(logs)} performance log entries", flush=True)
+        print("      ➡️ Starting simple HTML extraction...", flush=True)
         
-        for entry in logs:
-            try:
-                msg = json.loads(entry["message"])["message"]
-                if msg["method"] == "Network.responseReceived":
-                    url = msg["params"]["response"]["url"]
-                    # Look for Viagogo API endpoints
-                    if any(k in url.lower() for k in ["inventory", "eventlisting", "listings", "tickets", "api"]):
-                        # Only add Viagogo domains
-                        if "viagogo.com" in url.lower() or "viagogo" in url.lower():
-                            api_urls.add(url)
-            except:
-                continue
-    except Exception as e:
-        # Performance logs not available, use DOM fallback (this is normal in some environments)
-        error_msg = str(e)[:80]
-        if "HTTPConnectionPool" in error_msg or "performance" in error_msg.lower():
-            # This is expected - CDP not available, use DOM
-            print("      Performance logs not available, using DOM extraction...", flush=True)
-        else:
-            print(f"      Log error: {error_msg}", flush=True)
-        return extract_prices_from_dom(driver)
-
-    if not api_urls:
-        print("      No API URLs found in network logs. Using DOM extraction...", flush=True)
-        return extract_prices_from_dom(driver)
-
-    print(f"      Found {len(api_urls)} potential API URLs", flush=True)
-
-    # Get user agent from driver
-    try:
-        user_agent = driver.execute_script("return navigator.userAgent;")
-    except:
-        user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-
-    headers = {
-        "User-Agent": user_agent,
-        "Accept": "application/json",
-        "Accept-Language": "en-US,en;q=0.9",
-        "Referer": driver.current_url
-    }
-
-    for api_url in api_urls:
+        # Wait for page to be ready
         try:
-            print(f"      Trying API: {api_url[:80]}...", flush=True)
-            r = requests.get(api_url, headers=headers, timeout=10)
-            if r.status_code != 200:
-                continue
-
-            data = r.json()
-            items = []
-
-            # Handle multiple API response formats
-            if isinstance(data, dict):
-                for key in ["listings", "inventory", "items", "rows", "data", "results"]:
-                    if key in data and isinstance(data[key], list):
-                        items = data[key]
-                        break
-                # Also check nested structures
-                if not items and "data" in data and isinstance(data["data"], dict):
-                    for key in ["listings", "inventory", "items", "rows"]:
-                        if key in data["data"] and isinstance(data["data"][key], list):
-                            items = data["data"][key]
-                            break
-            elif isinstance(data, list):
-                items = data
-
-            if not items:
-                continue
-
-            print(f"      Found {len(items)} items in API response", flush=True)
-
-            for item in items:
-                try:
-                    # Try multiple field names for category
-                    cat = (
-                        item.get("category")
-                        or item.get("ticketClass")
-                        or item.get("sectionCategory")
-                        or item.get("section")
-                        or item.get("tier")
-                        or str(item.get("categoryId", ""))
-                    )
-
-                    # Try multiple field names for price
-                    price = (
-                        item.get("price")
-                        or item.get("displayPrice")
-                        or item.get("amount")
-                        or item.get("minPrice")
-                        or item.get("pricePerTicket")
-                    )
-
-                    # Try multiple field names for currency
-                    currency = (
-                        item.get("currency")
-                        or item.get("currencyCode")
-                        or item.get("currencySymbol")
-                        or "USD"
-                    )
-
-                    if not cat or price is None:
-                        continue
-
-                    # Extract category number (1-4)
-                    cat_match = re.search(r"([1-4])", str(cat))
-                    if not cat_match:
-                        continue
-
-                    category = f"Category {cat_match.group(1)}"
-                    
-                    # Convert price to float
-                    try:
-                        price = float(price)
-                    except:
-                        continue
-
-                    # Validate price range (page is already in USD)
-                    if not (35 <= price <= 50000):
-                        continue
-
-                    # Keep minimum price per category
-                    if category not in prices or price < prices[category]:
-                        prices[category] = price
-                        print(f"      Found {category}: ${price}", flush=True)
-
-                except Exception as e:
-                    continue
-
-        except requests.exceptions.RequestException:
-            continue
-        except json.JSONDecodeError:
-            continue
-        except Exception as e:
-            print(f"      API error: {str(e)[:50]}", flush=True)
-            continue
-    
-    return prices
-
-def extract_prices_from_dom(driver):
-    """Fallback: Extract prices from DOM if API extraction fails"""
-    prices = {}
-    
-    try:
-        # Wait for page to stabilize
-        time.sleep(2)
+            WebDriverWait(driver, 5).until(
+                EC.presence_of_element_located((By.TAG_NAME, "body"))
+            )
+        except:
+            pass
         
-        # Strategy 1: Look for elements with aria-label containing Category and price
+        # Strategy 1: Find elements with aria-label containing "Category" and price
+        # This is the most reliable method - Viagogo uses aria-labels for accessibility
         try:
-            driver.implicitly_wait(2)
+            driver.implicitly_wait(2)  # Short wait
             aria_elements = driver.find_elements(By.XPATH, "//*[@aria-label]")
-            driver.implicitly_wait(10)
             
-            if len(aria_elements) > 0:
-                print(f"      Found {len(aria_elements)} elements with aria-label", flush=True)
-            
-            # Process elements
-            for elem in aria_elements[:50]:  # Increased back to 50 for better coverage
+            for elem in aria_elements[:50]:  # Limit to first 50 to avoid hanging
                 try:
                     aria_text = elem.get_attribute('aria-label') or ''
-                    if not aria_text or len(aria_text) < 5:
+                    if not aria_text:
                         continue
                     
-                    # Look for "Category X" pattern
+                    # Look for "Category X" or "Cat X" pattern
                     cat_match = re.search(r'(?:Category|Cat)\s+([1-4])\b', aria_text, re.I)
                     if not cat_match:
                         continue
@@ -458,7 +85,7 @@ def extract_prices_from_dom(driver):
                     if cat_name in prices:
                         continue
                     
-                    # Extract price from aria-label (page is already in USD)
+                    # Extract price from aria-label (page should be in USD)
                     price_match = re.search(r'(?:\$|USD)?\s*([\d,]{2,})', aria_text)
                     if price_match:
                         try:
@@ -467,25 +94,23 @@ def extract_prices_from_dom(driver):
                                 # Keep minimum price per category
                                 if cat_name not in prices or price_val < prices[cat_name]:
                                     prices[cat_name] = price_val
-                                    print(f"      Found {cat_name}: ${price_val} (aria-label)", flush=True)
+                                    print(f"      ✅ Found {cat_name}: ${price_val} (aria-label)", flush=True)
                         except:
                             continue
                 except:
                     continue
         except Exception as e:
-            print(f"      Aria-label search error: {str(e)[:50]}", flush=True)
+            print(f"      ⚠️ Aria-label search error: {str(e)[:50]}", flush=True)
         
-        # Strategy 2: If we don't have all categories, try finding price elements and looking for category nearby
+        # Strategy 2: Find price elements and look for category labels nearby
+        # This handles cases where aria-label doesn't have the price
         if len(prices) < 4:
             try:
-                print(f"      Trying price element search (found {len(prices)}/4 categories)...", flush=True)
-                # Find elements containing price-like text
+                # Find all elements containing price-like text
                 price_elements = driver.find_elements(By.XPATH, 
                     "//*[contains(text(), '$') or contains(@aria-label, '$')]")
                 
-                print(f"      Found {len(price_elements)} price-like elements", flush=True)
-                
-                for price_elem in price_elements[:100]:
+                for price_elem in price_elements[:100]:  # Limit to avoid hanging
                     try:
                         # Get text content
                         elem_text = price_elem.text or price_elem.get_attribute('textContent') or ''
@@ -493,7 +118,7 @@ def extract_prices_from_dom(driver):
                             continue
                         
                         # Extract price
-                        price_match = re.search(r'\$\s*([\d,]{2,})', elem_text)
+                        price_match = re.search(r'(?:\$|USD)?\s*([\d,]{2,})', elem_text)
                         if not price_match:
                             continue
                         
@@ -504,15 +129,16 @@ def extract_prices_from_dom(driver):
                         except:
                             continue
                         
-                        # Look for category label - check parent elements
+                        # Now look for category label - check parent elements
                         category_found = None
                         current = price_elem
                         
                         for level in range(5):  # Check up to 5 levels up
                             try:
+                                # Get parent's text
                                 parent_text = current.get_attribute('textContent') or current.text or ''
                                 
-                                # Look for "Category X" in parent text
+                                # Look for "Category X" or "Cat X" in parent text
                                 cat_match = re.search(r'(?:Category|Cat)\s+([1-4])\b', parent_text, re.I)
                                 if cat_match:
                                     cat_num = cat_match.group(1)
@@ -535,19 +161,19 @@ def extract_prices_from_dom(driver):
                             # Keep minimum price per category
                             if category_found not in prices or price_val < prices[category_found]:
                                 prices[category_found] = price_val
-                                print(f"      Found {category_found}: ${price_val} (DOM traversal)", flush=True)
+                                print(f"      ✅ Found {category_found}: ${price_val} (DOM traversal)", flush=True)
                     except:
                         continue
             except Exception as e:
-                print(f"      Price element search error: {str(e)[:50]}", flush=True)
+                print(f"      ⚠️ Price element search error: {str(e)[:50]}", flush=True)
         
         # Strategy 3: Simple text scan for remaining categories
-        if len(prices) < 2:
+        if len(prices) < 3 or 'Category 1' not in prices:
             try:
-                print(f"      Trying text scan (found {len(prices)}/4 categories)...", flush=True)
+                print("      🔍 Trying text scan for missing categories...", flush=True)
                 body_text = driver.find_element(By.TAG_NAME, 'body').text
                 
-                # Limit text length
+                # Limit text length to avoid memory issues
                 if len(body_text) > 50000:
                     body_text = body_text[:50000]
                 
@@ -556,12 +182,12 @@ def extract_prices_from_dom(driver):
                     if cat_name in prices:
                         continue
                     
-                    # Find "Category X" followed by price
-                    pattern = rf"(?:Category|Cat)\s+{cat_num}\b[^$]*?\$\s*([\d,]{{2,}})"
+                    # Find "Category X" or "Cat X" followed by price within reasonable distance
+                    pattern = rf"(?:Category|Cat)\s+{cat_num}\b[^$]*?(?:\$|USD)?\s*([\d,]{{2,}})"
                     matches = list(re.finditer(pattern, body_text, re.I | re.DOTALL))
                     
                     best_price = None
-                    for match in matches[:5]:
+                    for match in matches[:5]:  # Limit matches
                         try:
                             price_str = match.group(1)
                             price_val = float(price_str.replace(',', ''))
@@ -573,20 +199,95 @@ def extract_prices_from_dom(driver):
                     
                     if best_price:
                         prices[cat_name] = best_price
-                        print(f"      Found {cat_name}: ${best_price} (text scan)", flush=True)
+                        print(f"      ✅ Found {cat_name}: ${best_price} (text scan)", flush=True)
             except Exception as e:
-                print(f"      Text scan error: {str(e)[:50]}", flush=True)
-    
+                print(f"      ⚠️ Text scan error: {str(e)[:50]}", flush=True)
+        
+        elapsed = time.time() - start_time
+        print(f"      ✅ Extraction complete in {elapsed:.1f}s: found {len(prices)} categories", flush=True)
+        return prices
+        
     except Exception as e:
-        print(f"      DOM fallback error: {str(e)[:50]}", flush=True)
-    
-    return prices
+        elapsed = time.time() - start_time
+        msg = str(e).lower()
+        if 'crashed' in msg or 'disconnected' in msg:
+            print(f"      🔥 Critical error after {elapsed:.1f}s: {msg[:50]}", flush=True)
+            raise e
+        print(f"      ⚠️ Extraction error after {elapsed:.1f}s: {str(e)[:50]}", flush=True)
+        return prices  # Return what we have
 
-# =========================
-# MAIN
-# =========================
+# ==========================================
+# DRIVER SETUP - Simple for local use
+# ==========================================
+def get_driver():
+    """Get a Chrome driver instance - optimized for local use"""
+    import random
+    
+    # Add small random delay to prevent both scrapers from initializing at exact same time
+    time.sleep(random.uniform(0.5, 2.0))
+    
+    try:
+        options = uc.ChromeOptions()
+        
+        # Basic options for local use (no headless needed)
+        options.add_argument('--start-maximized')
+        options.add_argument('--disable-blink-features=AutomationControlled')
+        
+        # Optional: Block images to save resources
+        prefs = {"profile.managed_default_content_settings.images": 2}
+        options.add_experimental_option("prefs", prefs)
+        
+        options.page_load_strategy = 'eager'
+        
+        for attempt in range(5):  # Increased retries
+            try:
+                driver = uc.Chrome(
+                    options=options, 
+                    version_main=None
+                )
+                driver.set_page_load_timeout(60)
+                driver.implicitly_wait(5)
+                driver.set_script_timeout(30)
+                return driver
+            except OSError as e:
+                error_str = str(e)
+                # Handle Windows file lock errors
+                if 'Text file busy' in error_str or 'WinError 32' in error_str or 'WinError 183' in error_str or 'being used by another process' in error_str or 'already exists' in error_str:
+                    wait_time = (attempt + 1) * 2  # Exponential backoff: 2s, 4s, 6s, 8s, 10s
+                    print(f'      ⚠️ Driver file locked by another process (attempt {attempt+1}/5). Waiting {wait_time}s...', flush=True)
+                    time.sleep(wait_time)
+                    if attempt < 4:
+                        continue
+                    else:
+                        raise e
+                else:
+                    raise e
+            except Exception as e:
+                error_msg = str(e).lower()
+                if 'cannot reuse' in error_msg or 'chromeoptions' in error_msg:
+                    wait_time = (attempt + 1) * 1.5
+                    print(f'      ⚠️ Options reuse error (attempt {attempt+1}/5). Retrying in {wait_time:.1f}s...', flush=True)
+                    time.sleep(wait_time)
+                    continue
+                # Check for file lock errors in exception message too
+                error_str = str(e)
+                if 'WinError 32' in error_str or 'WinError 183' in error_str or 'being used by another process' in error_str:
+                    wait_time = (attempt + 1) * 2
+                    print(f'      ⚠️ File lock error (attempt {attempt+1}/5). Waiting {wait_time}s...', flush=True)
+                    time.sleep(wait_time)
+                    if attempt < 4:
+                        continue
+                raise e
+    except Exception as e:
+        print(f'❌ [ERROR] Failed to start Chrome Driver: {e}', flush=True)
+        return None
+
+# ==========================================
+# MAIN SCRAPER
+# ==========================================
 def run():
-    print(f'\n[{datetime.now().strftime("%H:%M")}] 🚀 VIAGOGO SCRAPER STARTING...', flush=True)
+    start_time = time.time()
+    print(f'\n[{datetime.now().strftime("%H:%M")}] 🚀 VIAGOGO SCRAPER STARTING (SIMPLE HTML APPROACH)...', flush=True)
     
     games = load_json(GAMES_FILE, [])
     if not games:
@@ -595,233 +296,167 @@ def run():
 
     print(f"   Target: {len(games)} games...", flush=True)
 
-    print(f"   Initializing Chrome driver...", flush=True)
-    driver = get_driver()
-    if not driver:
-        print("ERROR: Failed to initialize driver - cannot continue", flush=True)
-        return
-    
-    print(f"   ✅ Driver ready, starting to process games...", flush=True)
+    driver = None
+    timestamp = datetime.now().isoformat()
     results = []
-    timestamp = datetime.now(timezone.utc).isoformat()
 
     try:
-        for idx, game in enumerate(games, 1):
-            print(f"   Processing match {idx}/{len(games)}...", flush=True)
-            # Restart driver every 5 matches to prevent slowdowns
-            if idx > 1 and idx % 5 == 1:
-                print(f"   🔄 Restarting driver (match {idx})...", flush=True)
+        for i, game in enumerate(games, 1):
+            # Restart driver every 5 matches to prevent crashes (more frequent restarts)
+            if i > 1 and i % 5 == 1:
+                if driver:
+                    try:
+                        driver.quit()
+                    except:
+                        pass
+                    driver = None
+                    time.sleep(2)  # Wait before restart
+                
+                print(f"   [RESTART] Scheduled driver restart (match {i})...", flush=True)
+            
+            # Check if driver is still alive before using it
+            if driver:
                 try:
-                    driver.quit()
-                except:
-                    pass
-                time.sleep(2)
+                    # Quick health check
+                    driver.current_url
+                except Exception as health_check:
+                    print(f"   ⚠️ Driver unhealthy, restarting... ({str(health_check)[:50]})", flush=True)
+                    try:
+                        driver.quit()
+                    except:
+                        pass
+                    driver = None
+            
+            if not driver:
                 driver = get_driver()
                 if not driver:
-                    print(f"   ERROR: Failed to restart driver, skipping", flush=True)
+                    print(f"   ❌ Failed to get driver, skipping match {i}", flush=True)
                     continue
             
-            url = game["url"]
-            name = game.get("match_name", "Unknown Match")
-
-            print(f"[{idx}/{len(games)}] {name}", flush=True)
-
-            if "Currency=USD" not in url:
-                url += "&Currency=USD" if "?" in url else "?Currency=USD"
-
-            # Retry page load up to 3 times
-            page_loaded = False
-            for load_attempt in range(3):
+            match_name = game.get('match_name', 'Unknown Match')
+            url = game['url']
+            clean_url = url.split('&Currency')[0].split('?Currency')[0]
+            
+            # Ensure USD currency in URL
+            target_url = url + ('&Currency=USD' if '?' in url else '?Currency=USD')
+            
+            print(f'[{i}/{len(games)}] {match_name[:40]}... ', end='', flush=True)
+            
+            for attempt in range(2):  # 2 attempts per match
                 try:
-                    print(f"   Loading page (attempt {load_attempt + 1}/3)...", flush=True)
-                    # Check driver health before loading
+                    # Load page
                     try:
-                        driver.current_url
-                    except Exception as health_err:
-                        print(f"   ERROR: Driver unhealthy before page load: {str(health_err)[:50]}", flush=True)
-                        # Try to restart driver
+                        driver.get(target_url)
+                    except Exception as load_error:
+                        if 'timeout' in str(load_error).lower():
+                            try:
+                                driver.execute_script("window.stop();")
+                            except:
+                                pass
+                        else:
+                            raise load_error
+                    
+                    # Wait for page to load
+                    time.sleep(8)
+                    
+                    # Extract prices with simple HTML method
+                    prices = extract_prices_simple(driver)
+                    
+                    if prices:
+                        # Save results
+                        for cat, price in prices.items():
+                            results.append({
+                                'match_url': clean_url,
+                                'match_name': match_name,
+                                'category': cat,
+                                'price': price,
+                                'currency': 'USD',
+                                'timestamp': timestamp
+                            })
+                        
+                        print(f'✅ {json.dumps(prices)}', flush=True)
+                        break  # Success, move to next match
+                    else:
+                        if attempt == 0:
+                            # Try clicking listings button on first attempt
+                            try:
+                                listings_els = driver.find_elements(By.XPATH, 
+                                    "//*[contains(text(), 'listings') and string-length(text()) < 30]")
+                                for le in listings_els[:3]:
+                                    if le.is_displayed():
+                                        try:
+                                            driver.execute_script("arguments[0].click();", le)
+                                            time.sleep(2)
+                                            prices = extract_prices_simple(driver)
+                                            if prices:
+                                                break
+                                        except:
+                                            continue
+                            except:
+                                pass
+                        
+                        if not prices:
+                            print('❌ No data found', flush=True)
+                            if attempt == 1:
+                                break  # Give up after 2 attempts
+                
+                except Exception as e:
+                    msg = str(e).lower()
+                    error_str = str(e)
+                    print(f"      ⚠️ Error (attempt {attempt+1}/2): {msg[:80]}", flush=True)
+                    
+                    # Check if critical error requiring restart (including connection pool errors)
+                    is_critical = any(keyword in msg or keyword in error_str.lower() for keyword in [
+                        'crashed', 'disconnected', 'tab crashed', 'target closed',
+                        'chrome not reachable', 'timeout: timed out receiving message',
+                        'httpconnectionpool', 'connectionpool', 'max retries exceeded',
+                        'connection refused', 'connection aborted', 'broken pipe',
+                        'localhost', 'port 6'  # Chrome DevTools Protocol port errors
+                    ])
+                    
+                    if is_critical:
+                        print(f"      🔥 Critical driver error detected, restarting driver...", flush=True)
                         try:
                             driver.quit()
                         except:
                             pass
-                        time.sleep(2)
+                        driver = None
+                        time.sleep(3)  # Wait longer before restart
                         driver = get_driver()
                         if not driver:
-                            print(f"   ERROR: Failed to restart driver, skipping match", flush=True)
-                            break
+                            print(f"      ❌ Failed to restart driver, skipping match {i}", flush=True)
+                            break  # Skip this match
+                        # Continue to retry with new driver
+                        if attempt == 0:
+                            continue  # Retry with new driver
                     
-                    # Use threading to add timeout protection for page load
-                    load_result = {'success': False, 'error': None, 'done': False}
-                    
-                    def load_worker():
-                        try:
-                            # Use explicit wait for page load
-                            driver.get(url)
-                            # Wait a bit for initial page load
-                            time.sleep(2)
-                            # Verify page actually loaded by checking title or URL
-                            try:
-                                _ = driver.title  # This will fail if page didn't load
-                            except:
-                                raise Exception("Page title not accessible - page may not have loaded")
-                            load_result['success'] = True
-                            load_result['done'] = True
-                        except Exception as e:
-                            load_result['error'] = e
-                            load_result['done'] = True
-                    
-                    load_thread = threading.Thread(target=load_worker, daemon=True)
-                    load_thread.start()
-                    load_thread.join(timeout=PAGE_LOAD_TIMEOUT + 20)  # Extra 20s buffer for Render
-                    
-                    if load_thread.is_alive():
-                        print(f"   ERROR: Page load timed out after {PAGE_LOAD_TIMEOUT + 10}s", flush=True)
-                        if load_attempt < 2:
-                            print(f"   Retrying page load in 5 seconds...", flush=True)
-                            time.sleep(5)
-                            continue
-                        else:
-                            print(f"   Failed to load page after 3 attempts, skipping match", flush=True)
-                            break
-                    
-                    if load_result['error']:
-                        raise load_result['error']
-                    
-                    if load_result['success']:
-                        page_loaded = True
-                        break
-                        
-                except Exception as e:
-                    error_msg = str(e).lower()
-                    print(f"   ERROR: Failed to load page (attempt {load_attempt + 1}): {str(e)[:100]}", flush=True)
-                    
-                    # Check if it's a critical error requiring driver restart
-                    is_critical = any(keyword in error_msg for keyword in [
-                        'httpconnectionpool', 'timeout', 'connection', 'disconnected', 
-                        'crashed', 'target closed', 'chrome not reachable', 'timed out receiving message'
-                    ])
-                    
-                    if is_critical:
-                        if load_attempt < 2:
-                            print(f"   🔥 Critical Driver Error detected. Restarting driver and retrying...", flush=True)
-                            try:
-                                driver.quit()
-                            except:
-                                pass
-                            time.sleep(3)
-                            driver = get_driver()
-                            if not driver:
-                                print(f"   ERROR: Failed to restart driver, skipping match", flush=True)
-                                break
-                            continue
-                        else:
-                            print(f"   🔥 Critical Driver Error after 3 attempts: {str(e)[:100]}", flush=True)
-                            print(f"   ⚠️ Driver Unstable. Restarting...", flush=True)
-                            try:
-                                driver.quit()
-                            except:
-                                pass
-                            time.sleep(3)
-                            driver = get_driver()
-                            if not driver:
-                                print(f"   ERROR: Failed to restart driver, skipping match", flush=True)
-                                break
-                            # Don't continue to next match, try one more time with fresh driver
-                            continue
-                    elif load_attempt < 2:
-                        # Non-critical error, retry
-                        print(f"   Retrying page load in 3 seconds...", flush=True)
-                        time.sleep(3)
-                        continue
-                    else:
-                        # Last attempt failed
-                        break
+                    if attempt == 1:
+                        break  # Move to next match after 2 attempts
             
-            if not page_loaded:
-                print(f"   ❌ Failed to load page after all retries, skipping match", flush=True)
-                continue
-
-            # Allow XHRs to load - increased wait for Render's slower environment
-            print(f"   Waiting for page to stabilize...", flush=True)
-            time.sleep(8)  # Increased from 6s to 8s for Render
-
-            print(f"   Extracting prices...", flush=True)
-            extraction_start = time.time()
-            
-            # Add timeout protection for extraction (max 30 seconds)
-            extraction_result = {'prices': {}, 'done': False, 'error': None}
-            
-            def extract_worker():
-                try:
-                    extraction_result['prices'] = extract_prices_from_network(driver)
-                    extraction_result['done'] = True
-                except Exception as e:
-                    extraction_result['error'] = e
-                    extraction_result['done'] = True
-            
-            extract_thread = threading.Thread(target=extract_worker, daemon=True)
-            extract_thread.start()
-            extract_thread.join(timeout=30)
-            
-            if extract_thread.is_alive():
-                print(f"   ERROR: Extraction exceeded 30s timeout, aborting...", flush=True)
-                prices = {}
-            elif extraction_result['error']:
-                print(f"   ERROR: Extraction error: {str(extraction_result['error'])[:80]}", flush=True)
-                prices = {}
-            else:
-                prices = extraction_result['prices']
-            
-            extraction_time = time.time() - extraction_start
-            
-            if extraction_time > 10:
-                print(f"   WARNING: Extraction took {extraction_time:.1f}s (slow)", flush=True)
-
-            if not prices:
-                print(f"   ❌ No prices found for {name} (tried network + DOM)", flush=True)
-                # Try one more time with a longer wait if first attempt failed
-                if idx == 1:  # Only retry for first match
-                    print(f"   Retrying first match with longer wait...", flush=True)
-                    time.sleep(5)
-                    prices = extract_prices_from_network(driver)
-                    if prices:
-                        print(f"   ✅ Found prices on retry: {prices}", flush=True)
-                    else:
-                        print(f"   ❌ Still no prices after retry", flush=True)
-                        continue
-                else:
-                    continue
-
-            print(f"   ✅ Found prices: {prices}", flush=True)
-
-            for cat, price in prices.items():
-                # Clean URL (remove Currency parameter)
-                clean_url = url.split("&Currency")[0].split("?Currency")[0]
-                
-                results.append({
-                    "match_name": name,
-                    "match_url": clean_url,
-                    "category": cat,
-                    "price": price,
-                    "currency": "USD",
-                    "timestamp": timestamp
-                })
-
+            time.sleep(0.5)  # Brief pause between matches
+        
+    except KeyboardInterrupt:
+        print(f"\n[WARN] Scraper interrupted by user", flush=True)
     except Exception as e: 
         print(f"ERROR: Fatal error in scraper: {e}", flush=True)
         import traceback
         traceback.print_exc()
     finally:
         try:
-            driver.quit()
+            if driver:
+                driver.quit()
         except:
             pass
 
     if results:
-        append_json(OUTPUT_FILE, results)
-        print(f"\nSaved {len(results)} rows to {OUTPUT_FILE}", flush=True)
+        try:
+            append_json(OUTPUT_FILE, results)
+            print(f"\n[OK] Saved {len(results)} rows to {OUTPUT_FILE}", flush=True)
+        except Exception as save_err:
+            print(f"\n[ERROR] Error saving results: {str(save_err)[:50]}", flush=True)
     
-    print(f'[{datetime.now().strftime("%H:%M")}] 💤 VIAGOGO SCRAPER COMPLETE.', flush=True)
+    runtime = time.time() - start_time
+    print(f'[{datetime.now().strftime("%H:%M")}] [DONE] VIAGOGO SCRAPER COMPLETE (runtime: {int(runtime)}s).', flush=True)
 
 # =========================
 if __name__ == "__main__":

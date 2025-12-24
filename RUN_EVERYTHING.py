@@ -4,12 +4,19 @@ import uvicorn
 import json
 import os
 import re
+import sys
 from datetime import datetime
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 import subprocess
+
+# Fix encoding for Windows (cp1252 can't handle emojis)
+if sys.platform == 'win32':
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
 # ==========================================
 # ⚙️ CONFIGURATION
@@ -149,39 +156,65 @@ def get_history(match_url: str):
 def run_scraper_viagogo():
     """Run Viagogo scraper in a thread"""
     try:
-        print('   👉 Starting Viagogo Scraper...', flush=True)
+        print('   [ACTION] Starting Viagogo Scraper...', flush=True)
         # Use Popen to stream output in real-time
         process = subprocess.Popen(
             ['python', 'scraper_viagogo.py'],
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             universal_newlines=True,
-            bufsize=1
+            bufsize=1,
+            encoding='utf-8',
+            errors='replace'  # Handle encoding errors gracefully
         )
         # Stream output line by line
-        for line in process.stdout:
-            print(line.rstrip(), flush=True)
-        process.wait()
+        try:
+            for line in process.stdout:
+                if line:
+                    print(line.rstrip(), flush=True)
+        except Exception as stream_err:
+            print(f'   [WARN] Output streaming error: {stream_err}', flush=True)
+        
+        process.wait(timeout=None)  # Wait indefinitely for process to complete
         if process.returncode == 0:
-            print('   ✅ Viagogo Scraper finished.', flush=True)
+            print('   [OK] Viagogo Scraper finished.', flush=True)
         else:
-            print(f'   ❌ Viagogo Scraper exited with code {process.returncode}', flush=True)
+            print(f'   [ERROR] Viagogo Scraper exited with code {process.returncode}', flush=True)
+    except subprocess.TimeoutExpired:
+        print('   [WARN] Viagogo Scraper process timeout', flush=True)
+        process.kill()
     except Exception as e:
-        print(f'   ❌ Viagogo Scraper Error: {e}', flush=True)
+        print(f'   [ERROR] Viagogo Scraper Error: {e}', flush=True)
+        import traceback
+        traceback.print_exc()
 
 def run_scraper_ftn():
     """Run FTN scraper in a thread"""
     try:
-        print('   👉 Starting FTN Scraper...')
+        print('   [ACTION] Starting FTN Scraper...')
         subprocess.run(['python', 'scraper_ftn.py'], check=True)
-        print('   ✅ FTN Scraper finished.')
+        print('   [OK] FTN Scraper finished.')
     except Exception as e:
-        print(f'   ❌ FTN Scraper Error: {e}')
+        print(f'   [ERROR] FTN Scraper Error: {e}')
 
 def run_scrapers_parallel():
+    last_start_time = 0
+    min_restart_interval = 300  # Minimum 5 minutes between restarts if scraper fails quickly
+    
     while True:
         try:
-            print(f'\\n[{datetime.now().strftime("%H:%M")}] 🚀 STARTING PARALLEL SCAPERS...')
+            current_time = time.time()
+            time_since_last_start = current_time - last_start_time
+            
+            # If scraper failed very quickly (< 2 minutes), wait before restarting
+            if 0 < time_since_last_start < 120:
+                wait_time = min_restart_interval - time_since_last_start
+                if wait_time > 0:
+                    print(f'[WARN] Previous scraper run was very short ({int(time_since_last_start)}s). Waiting {int(wait_time)}s before restart...', flush=True)
+                    time.sleep(wait_time)
+            
+            last_start_time = time.time()
+            print(f'\\n[{datetime.now().strftime("%H:%M")}] [START] STARTING PARALLEL SCAPERS...', flush=True)
             
             # Launch in parallel using threads
             viagogo_thread = threading.Thread(target=run_scraper_viagogo, daemon=False)
@@ -194,12 +227,15 @@ def run_scrapers_parallel():
             viagogo_thread.join()
             ftn_thread.join()
             
-            print(f'[{datetime.now().strftime("%H:%M")}] ✅ ALL SCRAPERS FINISHED.')
+            runtime = time.time() - last_start_time
+            print(f'[{datetime.now().strftime("%H:%M")}] [OK] ALL SCRAPERS FINISHED (runtime: {int(runtime)}s).', flush=True)
             
         except Exception as e:
-            print(f'Orchestrator Error: {e}')
+            print(f'Orchestrator Error: {e}', flush=True)
+            import traceback
+            traceback.print_exc()
             
-        print(f'Next run in {SCRAPE_INTERVAL_HOURS} hours...')
+        print(f'Next run in {SCRAPE_INTERVAL_HOURS} hours...', flush=True)
         time.sleep(SCRAPE_INTERVAL_HOURS * 3600)
 
 # ---------------------------------------------------------
@@ -208,18 +244,18 @@ def run_scrapers_parallel():
 client_dist = 'frontend/dist'
 
 def build_frontend():
-    print('⚠️  Frontend build not found. Building now... (This may take a minute)')
+    print('[WARN] Frontend build not found. Building now... (This may take a minute)')
     try:
         if not os.path.exists('frontend'):
-            print('❌ Error: frontend folder missing!')
+            print('[ERROR] Error: frontend folder missing!')
             return
             
         npm_cmd = 'npm.cmd' if os.name == 'nt' else 'npm'
         subprocess.check_call([npm_cmd, 'install'], cwd='frontend', shell=True)
         subprocess.check_call([npm_cmd, 'run', 'build'], cwd='frontend', shell=True)
-        print('✅ Build complete!')
+        print('[OK] Build complete!')
     except Exception as e:
-        print(f'❌ Build Failed: {e}')
+        print(f'[ERROR] Build Failed: {e}')
 
 if not os.path.exists(f'{client_dist}/index.html'):
     build_frontend()
@@ -240,7 +276,7 @@ if __name__ == '__main__':
     t = threading.Thread(target=run_scrapers_parallel, daemon=True)
     t.start()
     print('\\n' + '='*50)
-    print(f'  🚀 VIAGOGO MONITOR (ORCHESTRATOR)')
-    print(f'  📊 Dashboard: http://localhost:{PORT}')
+    print(f'  [START] VIAGOGO MONITOR (ORCHESTRATOR)')
+    print(f'  [DASHBOARD] Dashboard: http://localhost:{PORT}')
     print('='*50 + '\\n')
     uvicorn.run(app, host='0.0.0.0', port=PORT, log_level='warning')

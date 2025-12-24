@@ -1,1 +1,1 @@
-web: python RUN_EVERYTHING.py
+web: python RUN_SERVER_ONLY.py
