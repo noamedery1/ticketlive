@@ -21,11 +21,19 @@ COPY . .
 # Build Frontend
 WORKDIR /app/frontend
 RUN npm install --legacy-peer-deps || npm install
-RUN npm run build
 
-# Verify build was created
-RUN ls -la dist/ || echo "WARNING: dist directory check"
-RUN test -f dist/index.html || (echo "ERROR: Frontend build failed - index.html not found!" && exit 1)
+# Run build with verbose output
+RUN npm run build 2>&1
+
+# Debug: Show what was actually built
+RUN echo "=== Current directory ===" && pwd && \
+    echo "=== All files in frontend/ ===" && ls -la && \
+    echo "=== dist/ directory contents ===" && \
+    (ls -la dist/ 2>&1 || echo "dist/ directory does not exist!") && \
+    echo "=== Checking for index.html ===" && \
+    (test -f dist/index.html && echo "✓ index.html found" || (echo "✗ index.html NOT FOUND!" && ls -la dist/ && exit 1)) && \
+    echo "=== Checking for assets ===" && \
+    (test -d dist/assets && echo "✓ assets directory found" && ls -la dist/assets/ || echo "⚠ assets directory not found")
 
 WORKDIR /app
 

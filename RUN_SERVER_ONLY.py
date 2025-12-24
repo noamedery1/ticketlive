@@ -26,20 +26,27 @@ if sys.platform == 'win32':
 DATA_FILE_VIAGOGO = 'prices.json'
 DATA_FILE_FTN = 'prices_ftn.json'
 GAMES_FILE = 'all_games_to_scrape.json'
-# Railway sets PORT dynamically - use it or default to 8000
-# Railway typically uses PORT environment variable, but if not set, default to 8000
-PORT = int(os.environ.get('PORT', 8000))
+# Railway sets PORT dynamically - use whatever Railway provides
+# Railway will set PORT environment variable automatically
+PORT = int(os.environ.get('PORT', '8000'))  # Railway always sets PORT, but keep default for local dev
 
 # ==========================================
 # FastAPI App
 # ==========================================
-app = FastAPI(title="Viagogo Monitor API")
+from contextlib import asynccontextmanager
 
-# Startup event - verify server is ready
-@app.on_event("startup")
-async def startup_event():
+# Lifespan event handler (replaces deprecated on_event)
+@asynccontextmanager
+async def lifespan(app_instance: FastAPI):
+    # Startup - Railway handles port/IP configuration
     print('[STARTUP] FastAPI application started', flush=True)
-    print(f'[STARTUP] Server is ready and listening on 0.0.0.0:{PORT}', flush=True)
+    try:
+        yield
+    finally:
+        # Shutdown (if needed)
+        print('[SHUTDOWN] FastAPI application shutting down', flush=True)
+
+app = FastAPI(title="Viagogo Monitor API", lifespan=lifespan)
 
 # Request logging middleware
 class LoggingMiddleware(BaseHTTPMiddleware):
@@ -407,17 +414,22 @@ if __name__ == '__main__':
         print(f'[INFO] Startup checks completed in {elapsed:.2f}s', flush=True)
         
         print(f'[INFO] Starting server on 0.0.0.0:{PORT}...', flush=True)
-        print(f'[INFO] Railway PORT env: {os.environ.get("PORT", "NOT SET")}', flush=True)
-        print(f'[INFO] Server will be available at http://0.0.0.0:{PORT}', flush=True)
         print('[INFO] Server starting now...', flush=True)
         
-        uvicorn.run(
-            app, 
-            host='0.0.0.0', 
-            port=PORT, 
-            log_level='info', 
-            access_log=True
-        )
+        # Start uvicorn server - this blocks until server stops
+        try:
+            uvicorn.run(
+                app, 
+                host='0.0.0.0', 
+                port=PORT, 
+                log_level='info', 
+                access_log=True
+            )
+        except Exception as server_error:
+            print(f'[FATAL] Uvicorn server error: {server_error}', flush=True)
+            import traceback
+            traceback.print_exc()
+            raise
     except KeyboardInterrupt:
         print('\n[INFO] Server stopped by user', flush=True)
     except Exception as e:
