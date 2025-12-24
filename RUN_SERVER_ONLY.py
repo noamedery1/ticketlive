@@ -38,8 +38,8 @@ app = FastAPI(title="Viagogo Monitor API")
 # Startup event - verify server is ready
 @app.on_event("startup")
 async def startup_event():
-    print('[STARTUP] FastAPI application started')
-    print(f'[STARTUP] Server will listen on 0.0.0.0:{PORT}')
+    print('[STARTUP] FastAPI application started', flush=True)
+    print(f'[STARTUP] Server is ready and listening on 0.0.0.0:{PORT}', flush=True)
 
 # Request logging middleware
 class LoggingMiddleware(BaseHTTPMiddleware):
@@ -306,10 +306,11 @@ async def serve_vite_svg():
         return FileResponse(vite_svg_path, media_type='image/svg+xml')
     return {'error': 'vite.svg not found'}
 
-# Test endpoint to verify server is working
+# Test endpoint to verify server is working - lightweight, no data loading
 @app.get('/health')
 def health_check():
-    return {'status': 'ok', 'viagogo_records': len(load_data(DATA_FILE_VIAGOGO)), 'ftn_records': len(load_data(DATA_FILE_FTN))}
+    """Lightweight health check for Railway"""
+    return {'status': 'ok', 'message': 'Server is running'}
 
 # API routes must be defined before catch-all route
 @app.get('/')
@@ -370,39 +371,57 @@ async def serve_react_app(full_path: str):
 
 if __name__ == '__main__':
     try:
-        print('\n' + '='*60)
-        print(f'  [START] VIAGOGO MONITOR - SERVER ONLY (NO SCRAPERS)')
-        print(f'  [PORT] {PORT}')
-        print(f'  [DATA] Loading from {DATA_FILE_VIAGOGO} and {DATA_FILE_FTN}')
-        print('='*60 + '\n')
+        import time
+        startup_time = time.time()
         
-        # Load data once at startup to verify
-        print('[INFO] Loading data files...')
-        v_data = load_data(DATA_FILE_VIAGOGO)
-        f_data = load_data(DATA_FILE_FTN)
-        print(f'[INFO] Startup: {len(v_data)} Viagogo records, {len(f_data)} FTN records\n')
+        print('\n' + '='*60, flush=True)
+        print(f'  [START] VIAGOGO MONITOR - SERVER ONLY (NO SCRAPERS)', flush=True)
+        print(f'  [PORT] {PORT}', flush=True)
+        print(f'  [DATA] Loading from {DATA_FILE_VIAGOGO} and {DATA_FILE_FTN}', flush=True)
+        print('='*60 + '\n', flush=True)
+        
+        # Quick check - don't load full data at startup, just verify files exist
+        print('[INFO] Verifying data files exist...', flush=True)
+        if os.path.exists(DATA_FILE_VIAGOGO):
+            file_size = os.path.getsize(DATA_FILE_VIAGOGO)
+            print(f'[OK] {DATA_FILE_VIAGOGO} exists ({file_size} bytes)', flush=True)
+        else:
+            print(f'[WARN] {DATA_FILE_VIAGOGO} not found', flush=True)
+        
+        if os.path.exists(DATA_FILE_FTN):
+            file_size = os.path.getsize(DATA_FILE_FTN)
+            print(f'[OK] {DATA_FILE_FTN} exists ({file_size} bytes)', flush=True)
+        else:
+            print(f'[WARN] {DATA_FILE_FTN} not found', flush=True)
         
         # Verify frontend build exists
+        print('[INFO] Verifying frontend build...', flush=True)
         if not os.path.exists(client_dist):
-            print(f'[ERROR] Frontend dist directory not found: {client_dist}')
+            print(f'[ERROR] Frontend dist directory not found: {client_dist}', flush=True)
         elif not os.path.exists(f'{client_dist}/index.html'):
-            print(f'[ERROR] Frontend index.html not found at {client_dist}/index.html')
+            print(f'[ERROR] Frontend index.html not found at {client_dist}/index.html', flush=True)
         else:
-            print(f'[OK] Frontend build verified: {client_dist}/index.html')
+            print(f'[OK] Frontend build verified: {client_dist}/index.html', flush=True)
         
-        print(f'[INFO] Starting server on 0.0.0.0:{PORT}...')
-        print(f'[INFO] Railway PORT env: {os.environ.get("PORT", "NOT SET")}')
-        print(f'[INFO] Server will be available at http://0.0.0.0:{PORT}')
+        elapsed = time.time() - startup_time
+        print(f'[INFO] Startup checks completed in {elapsed:.2f}s', flush=True)
+        
+        print(f'[INFO] Starting server on 0.0.0.0:{PORT}...', flush=True)
+        print(f'[INFO] Railway PORT env: {os.environ.get("PORT", "NOT SET")}', flush=True)
+        print(f'[INFO] Server will be available at http://0.0.0.0:{PORT}', flush=True)
+        print('[INFO] Server starting now...', flush=True)
+        
         uvicorn.run(
             app, 
             host='0.0.0.0', 
             port=PORT, 
             log_level='info', 
-            access_log=True,
-            loop='asyncio'
+            access_log=True
         )
+    except KeyboardInterrupt:
+        print('\n[INFO] Server stopped by user', flush=True)
     except Exception as e:
-        print(f'[FATAL] Server startup failed: {e}')
+        print(f'[FATAL] Server startup failed: {e}', flush=True)
         import traceback
         traceback.print_exc()
         sys.exit(1)
