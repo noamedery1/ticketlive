@@ -20,7 +20,12 @@ COPY . .
 
 # Build Frontend
 WORKDIR /app/frontend
-RUN npm install && npm run build
+RUN npm install --legacy-peer-deps || npm install
+RUN npm run build
+
+# Verify build was created
+RUN ls -la dist/ || echo "WARNING: dist directory check"
+RUN test -f dist/index.html || (echo "ERROR: Frontend build failed - index.html not found!" && exit 1)
 
 WORKDIR /app
 

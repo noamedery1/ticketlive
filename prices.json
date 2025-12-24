@@ -3294,5 +3294,349 @@
     "price": 3084.0,
     "currency": "USD",
     "timestamp": "2025-12-24T10:23:17.951298"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020498?quantity=1",
+    "match_name": "1B vs 3E/F/G/I/J (Match 85)",
+    "category": "Category 1",
+    "price": 898.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020498?quantity=1",
+    "match_name": "1B vs 3E/F/G/I/J (Match 85)",
+    "category": "Category 2",
+    "price": 546.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020498?quantity=1",
+    "match_name": "1B vs 3E/F/G/I/J (Match 85)",
+    "category": "Category 3",
+    "price": 421.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020498?quantity=1",
+    "match_name": "1B vs 3E/F/G/I/J (Match 85)",
+    "category": "Category 4",
+    "price": 488.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021172?quantity=1",
+    "match_name": "1C vs 2F (Match 76)",
+    "category": "Category 1",
+    "price": 995.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021172?quantity=1",
+    "match_name": "1C vs 2F (Match 76)",
+    "category": "Category 2",
+    "price": 1087.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021172?quantity=1",
+    "match_name": "1C vs 2F (Match 76)",
+    "category": "Category 3",
+    "price": 780.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021172?quantity=1",
+    "match_name": "1C vs 2F (Match 76)",
+    "category": "Category 4",
+    "price": 772.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020696?quantity=1",
+    "match_name": "1D vs 3B/E/F/I/J (Match 81)",
+    "category": "Category 1",
+    "price": 1563.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020696?quantity=1",
+    "match_name": "1D vs 3B/E/F/I/J (Match 81)",
+    "category": "Category 2",
+    "price": 1347.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020696?quantity=1",
+    "match_name": "1D vs 3B/E/F/I/J (Match 81)",
+    "category": "Category 3",
+    "price": 808.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020696?quantity=1",
+    "match_name": "1D vs 3B/E/F/I/J (Match 81)",
+    "category": "Category 4",
+    "price": 868.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023830?quantity=1",
+    "match_name": "1E vs 3A/B/C/D/F (Match 74)",
+    "category": "Category 1",
+    "price": 1136.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023830?quantity=1",
+    "match_name": "1E vs 3A/B/C/D/F (Match 74)",
+    "category": "Category 2",
+    "price": 888.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023830?quantity=1",
+    "match_name": "1E vs 3A/B/C/D/F (Match 74)",
+    "category": "Category 3",
+    "price": 796.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023830?quantity=1",
+    "match_name": "1E vs 3A/B/C/D/F (Match 74)",
+    "category": "Category 4",
+    "price": 770.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033502?quantity=1",
+    "match_name": "1F vs 2C (Match 75)",
+    "category": "Category 1",
+    "price": 759.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033502?quantity=1",
+    "match_name": "1F vs 2C (Match 75)",
+    "category": "Category 2",
+    "price": 710.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033502?quantity=1",
+    "match_name": "1F vs 2C (Match 75)",
+    "category": "Category 3",
+    "price": 453.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020573?quantity=1",
+    "match_name": "1G vs 3A/E/H/I/J (Match 82)",
+    "category": "Category 1",
+    "price": 927.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020573?quantity=1",
+    "match_name": "1G vs 3A/E/H/I/J (Match 82)",
+    "category": "Category 2",
+    "price": 759.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020573?quantity=1",
+    "match_name": "1G vs 3A/E/H/I/J (Match 82)",
+    "category": "Category 3",
+    "price": 475.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020573?quantity=1",
+    "match_name": "1G vs 3A/E/H/I/J (Match 82)",
+    "category": "Category 4",
+    "price": 888.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020726?quantity=1",
+    "match_name": "1H vs 2J (Match 84)",
+    "category": "Category 1",
+    "price": 1907.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020726?quantity=1",
+    "match_name": "1H vs 2J (Match 84)",
+    "category": "Category 2",
+    "price": 1065.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020726?quantity=1",
+    "match_name": "1H vs 2J (Match 84)",
+    "category": "Category 3",
+    "price": 835.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020726?quantity=1",
+    "match_name": "1H vs 2J (Match 84)",
+    "category": "Category 4",
+    "price": 820.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023840?quantity=1",
+    "match_name": "1I vs 3C/D/F/G/H (Match 77)",
+    "category": "Category 1",
+    "price": 1661.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023840?quantity=1",
+    "match_name": "1I vs 3C/D/F/G/H (Match 77)",
+    "category": "Category 2",
+    "price": 1158.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023840?quantity=1",
+    "match_name": "1I vs 3C/D/F/G/H (Match 77)",
+    "category": "Category 3",
+    "price": 681.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023840?quantity=1",
+    "match_name": "1I vs 3C/D/F/G/H (Match 77)",
+    "category": "Category 4",
+    "price": 754.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023861?quantity=1",
+    "match_name": "1J vs 2H (Match 86)",
+    "category": "Category 1",
+    "price": 1872.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023861?quantity=1",
+    "match_name": "1J vs 2H (Match 86)",
+    "category": "Category 2",
+    "price": 1787.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023861?quantity=1",
+    "match_name": "1J vs 2H (Match 86)",
+    "category": "Category 3",
+    "price": 1270.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023861?quantity=1",
+    "match_name": "1J vs 2H (Match 86)",
+    "category": "Category 4",
+    "price": 711.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021573?quantity=1",
+    "match_name": "1K vs 3D/E/I/J/L (Match 87)",
+    "category": "Category 1",
+    "price": 1695.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021573?quantity=1",
+    "match_name": "1K vs 3D/E/I/J/L (Match 87)",
+    "category": "Category 2",
+    "price": 1157.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021573?quantity=1",
+    "match_name": "1K vs 3D/E/I/J/L (Match 87)",
+    "category": "Category 3",
+    "price": 704.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021573?quantity=1",
+    "match_name": "1K vs 3D/E/I/J/L (Match 87)",
+    "category": "Category 4",
+    "price": 704.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023846?quantity=1",
+    "match_name": "1L vs 3E/H/I/J/K (Match 80)",
+    "category": "Category 1",
+    "price": 1463.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023846?quantity=1",
+    "match_name": "1L vs 3E/H/I/J/K (Match 80)",
+    "category": "Category 2",
+    "price": 1031.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023846?quantity=1",
+    "match_name": "1L vs 3E/H/I/J/K (Match 80)",
+    "category": "Category 3",
+    "price": 629.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023846?quantity=1",
+    "match_name": "1L vs 3E/H/I/J/K (Match 80)",
+    "category": "Category 4",
+    "price": 667.0,
+    "currency": "USD",
+    "timestamp": "2025-12-24T10:54:37.449170"
   }
 ]

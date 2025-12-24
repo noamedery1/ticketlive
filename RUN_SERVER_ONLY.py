@@ -244,23 +244,64 @@ def build_frontend():
 # Build frontend if needed
 if not os.path.exists(f'{client_dist}/index.html'):
     print('[WARN] Frontend build not found. Building now...')
-    build_frontend()
+    if not build_frontend():
+        print('[ERROR] Frontend build failed! Dashboard may not work.')
 else:
     print('[OK] Frontend build found.')
+    # Verify it's a valid build
+    if not os.path.exists(f'{client_dist}/index.html'):
+        print('[ERROR] Frontend dist/index.html missing!')
+    else:
+        print(f'[OK] Frontend index.html found at {client_dist}/index.html')
 
-# Mount static files
+# Mount static files - MUST be done before catch-all route
 if os.path.exists(client_dist):
-    app.mount('/assets', StaticFiles(directory=f'{client_dist}/assets'), name='assets')
-    print('[OK] Static assets mounted')
+    # Mount assets directory
+    assets_path = f'{client_dist}/assets'
+    if os.path.exists(assets_path):
+        try:
+            app.mount('/assets', StaticFiles(directory=assets_path), name='assets')
+            print('[OK] Static assets mounted at /assets')
+        except Exception as e:
+            print(f'[WARN] Failed to mount assets: {e}')
+    else:
+        print(f'[WARN] Assets directory not found: {assets_path}')
+    
+    # Mount other static files (vite.svg, etc.) from dist root
+    try:
+        app.mount('/static', StaticFiles(directory=client_dist), name='static')
+        print('[OK] Static files mounted at /static')
+    except Exception as e:
+        print(f'[WARN] Failed to mount static files: {e}')
+else:
+    print(f'[ERROR] Frontend dist directory not found: {client_dist}')
 
-@app.get('/{full_path:path}')
-async def serve_react_app(full_path: str):
-    if full_path.startswith('matches') or full_path.startswith('history'):
-        return {'error': 'Not found'}
+# API routes must be defined before catch-all route
+@app.get('/')
+async def serve_root():
+    """Serve root path - React app"""
     index_path = f'{client_dist}/index.html'
     if os.path.exists(index_path):
-        return FileResponse(index_path)
-    return {'message': 'Build Not Found.'}
+        return FileResponse(index_path, media_type='text/html')
+    return {'message': 'Build Not Found.', 'dist_path': client_dist, 'exists': os.path.exists(client_dist)}
+
+# Catch-all route for React SPA - MUST be last
+@app.get('/{full_path:path}')
+async def serve_react_app(full_path: str):
+    """Serve React app for all non-API routes (SPA routing)"""
+    # Don't interfere with API routes
+    if full_path in ['matches', 'history'] or full_path.startswith('matches/') or full_path.startswith('history/'):
+        return {'error': 'Not found'}
+    
+    # Don't serve API routes
+    if full_path.startswith('api/'):
+        return {'error': 'Not found'}
+    
+    # Serve index.html for all other routes (React Router handles routing)
+    index_path = f'{client_dist}/index.html'
+    if os.path.exists(index_path):
+        return FileResponse(index_path, media_type='text/html')
+    return {'message': 'Build Not Found.', 'path': full_path, 'dist_exists': os.path.exists(client_dist)}
 
 if __name__ == '__main__':
     print('\n' + '='*60)
