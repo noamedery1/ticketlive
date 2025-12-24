@@ -7,11 +7,12 @@ import json
 import os
 import re
 import sys
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 import subprocess
+from starlette.middleware.base import BaseHTTPMiddleware
 
 # Fix encoding for Windows
 if sys.platform == 'win32':
@@ -25,12 +26,30 @@ if sys.platform == 'win32':
 DATA_FILE_VIAGOGO = 'prices.json'
 DATA_FILE_FTN = 'prices_ftn.json'
 GAMES_FILE = 'all_games_to_scrape.json'
+# Railway sets PORT dynamically - use it or default to 8000
+# Railway typically uses PORT environment variable, but if not set, default to 8000
 PORT = int(os.environ.get('PORT', 8000))
 
 # ==========================================
 # FastAPI App
 # ==========================================
-app = FastAPI()
+app = FastAPI(title="Viagogo Monitor API")
+
+# Startup event - verify server is ready
+@app.on_event("startup")
+async def startup_event():
+    print('[STARTUP] FastAPI application started')
+    print(f'[STARTUP] Server will listen on 0.0.0.0:{PORT}')
+
+# Request logging middleware
+class LoggingMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next):
+        print(f'[REQUEST] {request.method} {request.url.path}')
+        response = await call_next(request)
+        print(f'[RESPONSE] {request.method} {request.url.path} -> {response.status_code}')
+        return response
+
+app.add_middleware(LoggingMiddleware)
 
 app.add_middleware(
     CORSMiddleware,
@@ -62,6 +81,7 @@ def load_data(file_path):
 @app.get('/matches')
 def get_matches():
     try:
+        print('[API] /matches endpoint called')
         if not os.path.exists(GAMES_FILE): 
             print(f'[WARN] {GAMES_FILE} not found')
             return []
@@ -74,7 +94,7 @@ def get_matches():
 
         matches_list = [{'match_name': g['match_name'], 'match_url': g['url']} for g in games]
         matches_list.sort(key=lambda x: get_match_number(x['match_name']))
-        print(f'[INFO] Returning {len(matches_list)} matches')
+        print(f'[API] Returning {len(matches_list)} matches')
         return matches_list
     except Exception as e:
         print(f'[ERROR] API Error: {e}')
@@ -286,61 +306,104 @@ async def serve_vite_svg():
         return FileResponse(vite_svg_path, media_type='image/svg+xml')
     return {'error': 'vite.svg not found'}
 
+# Test endpoint to verify server is working
+@app.get('/health')
+def health_check():
+    return {'status': 'ok', 'viagogo_records': len(load_data(DATA_FILE_VIAGOGO)), 'ftn_records': len(load_data(DATA_FILE_FTN))}
+
 # API routes must be defined before catch-all route
 @app.get('/')
 async def serve_root():
     """Serve root path - React app"""
+    print('[ROUTE] Root path (/) requested')
     index_path = f'{client_dist}/index.html'
     if os.path.exists(index_path):
         print(f'[INFO] Serving index.html from {index_path}')
         return FileResponse(
             index_path, 
             media_type='text/html',
-            headers={'Cache-Control': 'no-cache'}
+            headers={
+                'Cache-Control': 'no-cache',
+                'Content-Type': 'text/html; charset=utf-8'
+            }
         )
     print(f'[ERROR] index.html not found at {index_path}')
     return {'message': 'Build Not Found.', 'dist_path': client_dist, 'exists': os.path.exists(client_dist)}
 
 # Catch-all route for React SPA - MUST be last
+# Note: FastAPI matches routes in order, so /matches and /history will be matched by their routes above
 @app.get('/{full_path:path}')
 async def serve_react_app(full_path: str):
     """Serve React app for all non-API routes (SPA routing)"""
+    print(f'[ROUTE] Catch-all route called for: {full_path}')
+    
     # Skip assets (already handled by StaticFiles mount)
     if full_path.startswith('assets/'):
+        print(f'[ROUTE] Asset requested via catch-all: {full_path} - should be handled by StaticFiles')
         return {'error': 'Asset not found'}
     
     # Skip vite.svg (already handled above)
     if full_path == 'vite.svg':
+        print(f'[ROUTE] vite.svg requested via catch-all - should be handled by route above')
         return {'error': 'Not found'}
     
-    # Don't interfere with API routes
-    if full_path in ['matches', 'history']:
-        return {'error': 'Not found'}
-    
-    if full_path.startswith('matches/') or full_path.startswith('history/'):
-        return {'error': 'Not found'}
-    
-    # Don't serve API routes
-    if full_path.startswith('api/'):
+    # These should never be reached because /matches and /history are defined above
+    # But just in case, log a warning
+    if full_path == 'matches' or full_path == 'history':
+        print(f'[WARN] Catch-all caught API route: {full_path} - this should not happen!')
         return {'error': 'Not found'}
     
     # Serve index.html for all other routes (React Router handles routing)
     index_path = f'{client_dist}/index.html'
     if os.path.exists(index_path):
-        return FileResponse(index_path, media_type='text/html')
+        print(f'[ROUTE] Serving index.html for SPA route: {full_path}')
+        return FileResponse(
+            index_path, 
+            media_type='text/html',
+            headers={
+                'Cache-Control': 'no-cache',
+                'Content-Type': 'text/html; charset=utf-8'
+            }
+        )
+    print(f'[ERROR] index.html not found for path: {full_path}')
     return {'message': 'Build Not Found.', 'path': full_path, 'dist_exists': os.path.exists(client_dist)}
 
 if __name__ == '__main__':
-    print('\n' + '='*60)
-    print(f'  [START] VIAGOGO MONITOR - SERVER ONLY (NO SCRAPERS)')
-    print(f'  [PORT] {PORT}')
-    print(f'  [DATA] Loading from {DATA_FILE_VIAGOGO} and {DATA_FILE_FTN}')
-    print('='*60 + '\n')
-    
-    # Load data once at startup to verify
-    v_data = load_data(DATA_FILE_VIAGOGO)
-    f_data = load_data(DATA_FILE_FTN)
-    print(f'[INFO] Startup: {len(v_data)} Viagogo records, {len(f_data)} FTN records\n')
-    
-    uvicorn.run(app, host='0.0.0.0', port=PORT, log_level='info')
+    try:
+        print('\n' + '='*60)
+        print(f'  [START] VIAGOGO MONITOR - SERVER ONLY (NO SCRAPERS)')
+        print(f'  [PORT] {PORT}')
+        print(f'  [DATA] Loading from {DATA_FILE_VIAGOGO} and {DATA_FILE_FTN}')
+        print('='*60 + '\n')
+        
+        # Load data once at startup to verify
+        print('[INFO] Loading data files...')
+        v_data = load_data(DATA_FILE_VIAGOGO)
+        f_data = load_data(DATA_FILE_FTN)
+        print(f'[INFO] Startup: {len(v_data)} Viagogo records, {len(f_data)} FTN records\n')
+        
+        # Verify frontend build exists
+        if not os.path.exists(client_dist):
+            print(f'[ERROR] Frontend dist directory not found: {client_dist}')
+        elif not os.path.exists(f'{client_dist}/index.html'):
+            print(f'[ERROR] Frontend index.html not found at {client_dist}/index.html')
+        else:
+            print(f'[OK] Frontend build verified: {client_dist}/index.html')
+        
+        print(f'[INFO] Starting server on 0.0.0.0:{PORT}...')
+        print(f'[INFO] Railway PORT env: {os.environ.get("PORT", "NOT SET")}')
+        print(f'[INFO] Server will be available at http://0.0.0.0:{PORT}')
+        uvicorn.run(
+            app, 
+            host='0.0.0.0', 
+            port=PORT, 
+            log_level='info', 
+            access_log=True,
+            loop='asyncio'
+        )
+    except Exception as e:
+        print(f'[FATAL] Server startup failed: {e}')
+        import traceback
+        traceback.print_exc()
+        sys.exit(1)
 
