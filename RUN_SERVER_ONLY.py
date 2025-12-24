@@ -319,62 +319,24 @@ def health_check():
     """Lightweight health check for Railway"""
     return {'status': 'ok', 'message': 'Server is running'}
 
-# API routes must be defined before catch-all route
-@app.get('/')
-async def serve_root():
-    """Serve root path - React app"""
-    print('[ROUTE] Root path (/) requested')
-    index_path = f'{client_dist}/index.html'
-    if os.path.exists(index_path):
-        print(f'[INFO] Serving index.html from {index_path}')
-        return FileResponse(
-            index_path, 
-            media_type='text/html',
-            headers={
-                'Cache-Control': 'no-cache',
-                'Content-Type': 'text/html; charset=utf-8'
-            }
-        )
-    print(f'[ERROR] index.html not found at {index_path}')
-    return {'message': 'Build Not Found.', 'dist_path': client_dist, 'exists': os.path.exists(client_dist)}
-
-# Catch-all route for React SPA - MUST be last
-# Note: FastAPI matches routes in order, so /matches and /history will be matched by their routes above
+# Catch-all route for React SPA - MUST be last (after API routes)
+# This matches the working setup from RUN_EVERYTHING.py
 @app.get('/{full_path:path}')
 async def serve_react_app(full_path: str):
     """Serve React app for all non-API routes (SPA routing)"""
-    print(f'[ROUTE] Catch-all route called for: {full_path}')
-    
-    # Skip assets (already handled by StaticFiles mount)
-    if full_path.startswith('assets/'):
-        print(f'[ROUTE] Asset requested via catch-all: {full_path} - should be handled by StaticFiles')
-        return {'error': 'Asset not found'}
-    
-    # Skip vite.svg (already handled above)
-    if full_path == 'vite.svg':
-        print(f'[ROUTE] vite.svg requested via catch-all - should be handled by route above')
-        return {'error': 'Not found'}
-    
-    # These should never be reached because /matches and /history are defined above
-    # But just in case, log a warning
-    if full_path == 'matches' or full_path == 'history':
-        print(f'[WARN] Catch-all caught API route: {full_path} - this should not happen!')
+    # Don't interfere with API routes
+    if full_path.startswith('matches') or full_path.startswith('history'):
         return {'error': 'Not found'}
     
     # Serve index.html for all other routes (React Router handles routing)
     index_path = f'{client_dist}/index.html'
     if os.path.exists(index_path):
-        print(f'[ROUTE] Serving index.html for SPA route: {full_path}')
         return FileResponse(
-            index_path, 
+            index_path,
             media_type='text/html',
-            headers={
-                'Cache-Control': 'no-cache',
-                'Content-Type': 'text/html; charset=utf-8'
-            }
+            headers={'Cache-Control': 'no-cache'}
         )
-    print(f'[ERROR] index.html not found for path: {full_path}')
-    return {'message': 'Build Not Found.', 'path': full_path, 'dist_exists': os.path.exists(client_dist)}
+    return {'message': 'Build Not Found.'}
 
 if __name__ == '__main__':
     try:

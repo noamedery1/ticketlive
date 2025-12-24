@@ -25,15 +25,20 @@ RUN npm install --legacy-peer-deps || npm install
 # Run build with verbose output
 RUN npm run build 2>&1
 
-# Debug: Show what was actually built
-RUN echo "=== Current directory ===" && pwd && \
-    echo "=== All files in frontend/ ===" && ls -la && \
+# Verify build output - fail if critical files are missing
+RUN echo "=== Verifying build output ===" && \
+    echo "Current directory: $(pwd)" && \
     echo "=== dist/ directory contents ===" && \
-    (ls -la dist/ 2>&1 || echo "dist/ directory does not exist!") && \
+    ls -la dist/ && \
     echo "=== Checking for index.html ===" && \
-    (test -f dist/index.html && echo "✓ index.html found" || (echo "✗ index.html NOT FOUND!" && ls -la dist/ && exit 1)) && \
-    echo "=== Checking for assets ===" && \
-    (test -d dist/assets && echo "✓ assets directory found" && ls -la dist/assets/ || echo "⚠ assets directory not found")
+    test -f dist/index.html || (echo "ERROR: index.html NOT FOUND!" && ls -la dist/ && exit 1) && \
+    echo "✓ index.html found" && \
+    echo "=== Checking for assets directory ===" && \
+    test -d dist/assets || (echo "ERROR: assets directory NOT FOUND!" && exit 1) && \
+    echo "✓ assets directory found" && \
+    echo "=== Assets files ===" && \
+    ls -la dist/assets/ && \
+    echo "=== Build verification complete ==="
 
 WORKDIR /app
 
