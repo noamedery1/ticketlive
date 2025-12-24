@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
+import { LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts'
 import './App.css'
 
-const API_URL = ''
+// Use local backend for development, empty for production (same origin)
+const API_URL = import.meta.env.DEV ? 'http://localhost:8000' : ''
+console.log('API_URL:', API_URL, 'DEV mode:', import.meta.env.DEV)
 
 function App() {
   const [matches, setMatches] = useState([])
   const [selectedMatch, setSelectedMatch] = useState(null)
   const [history, setHistory] = useState(null)
   const [timeRange, setTimeRange] = useState('all')
+  const [selectedDate, setSelectedDate] = useState(null)
 
 
   useEffect(() => {
@@ -30,29 +33,72 @@ function App() {
 
   const fetchMatches = async () => {
     try {
-      const res = await axios.get(API_URL + '/matches')
+      const url = API_URL + '/matches'
+      console.log('Fetching matches from:', url)
+      const res = await axios.get(url)
+      console.log('Matches received:', res.data.length)
       setMatches(res.data)
       if (res.data.length > 0 && !selectedMatch) {
         setSelectedMatch(res.data[0])
       }
-    } catch (err) { console.error(err) }
+    } catch (err) { 
+      console.error('Error fetching matches:', err)
+      console.error('API_URL was:', API_URL)
+    }
   }
 
   const fetchHistory = async (url) => {
     try {
-      const res = await axios.get(API_URL + '/history', { params: { match_url: url } })
+      const apiUrl = API_URL + '/history'
+      console.log('Fetching history from:', apiUrl, 'for match:', url)
+      const res = await axios.get(apiUrl, { params: { match_url: url } })
+      console.log('History received:', res.data)
       setHistory(res.data)
-    } catch (err) { console.error(err) }
+    } catch (err) { 
+      console.error('Error fetching history:', err)
+      console.error('API_URL was:', API_URL)
+    }
   }
 
   const processChartData = (sourcePrefix) => {
     if (!history) return []
     const now = new Date().getTime()
-    const cutoff = timeRange === '24h' ? now - 24 * 3600 * 1000 :
-      timeRange === '7d' ? now - 7 * 24 * 3600 * 1000 : 0
+    let cutoff = 0
+    
+    if (selectedDate) {
+      // Jump to specific date - show data for that day
+      const selected = new Date(selectedDate)
+      selected.setHours(0, 0, 0, 0)
+      const dayStart = selected.getTime()
+      const dayEnd = dayStart + 24 * 3600 * 1000
+      cutoff = dayStart
+      // Filter to only show data within the selected day
+      const merged = {}
+      const sourceKey = sourcePrefix === 'Via_' ? 'viagogo' : 'ftn'
+      if (history[sourceKey] && history[sourceKey].data) {
+        Object.keys(history[sourceKey].data).forEach(cat => {
+          history[sourceKey].data[cat].forEach(pt => {
+            const date = new Date(pt.timestamp)
+            const ts = date.getTime()
+            if (ts >= dayStart && ts < dayEnd) {
+              const timeStr = date.toLocaleString('en-US', {
+                month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+              })
+              if (!merged[ts]) merged[ts] = { time: timeStr, sortTime: ts, isNewPrice: true }
+              const key = sourcePrefix + cat
+              merged[ts][key] = pt.price
+            }
+          })
+        })
+      }
+      return Object.values(merged).sort((a, b) => a.sortTime - b.sortTime)
+    } else {
+      // Normal time range filtering
+      cutoff = timeRange === '24h' ? now - 24 * 3600 * 1000 :
+        timeRange === '7d' ? now - 7 * 24 * 3600 * 1000 : 0
+    }
 
     const merged = {}
-
     const sourceKey = sourcePrefix === 'Via_' ? 'viagogo' : 'ftn'
     if (history[sourceKey] && history[sourceKey].data) {
       Object.keys(history[sourceKey].data).forEach(cat => {
@@ -63,8 +109,7 @@ function App() {
             const timeStr = date.toLocaleString('en-US', {
               month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
             })
-            if (!merged[ts]) merged[ts] = { time: timeStr, sortTime: ts }
-            // AVOID TEMPLATE LITERALS HERE due to python-bash escaping hell
+            if (!merged[ts]) merged[ts] = { time: timeStr, sortTime: ts, isNewPrice: true }
             const key = sourcePrefix + cat
             merged[ts][key] = pt.price
           }
@@ -147,22 +192,60 @@ function App() {
           <>
             <div className='header'>
               <h1>{selectedMatch.match_name}</h1>
-              <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+              <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
                 <span className='last-updated'>Auto-refresh: 10m</span>
-                <div className='time-filters'>
+                <div className='time-filters' style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
                   {['24h', '7d', 'all'].map(r => (
                     <button
-                      key={r} onClick={() => setTimeRange(r)}
-                      className={timeRange === r ? 'active' : ''}
+                      key={r} onClick={() => { setTimeRange(r); setSelectedDate(null); }}
+                      className={timeRange === r && !selectedDate ? 'active' : ''}
                       style={{
                         padding: '4px 8px', margin: '0 2px', borderRadius: '4px', border: 'none',
-                        background: timeRange === r ? '#1f6feb' : '#21262d', color: 'white', cursor: 'pointer'
+                        background: timeRange === r && !selectedDate ? '#1f6feb' : '#21262d', 
+                        color: 'white', cursor: 'pointer'
                       }}
                     >
                       {r}
                     </button>
                   ))}
                 </div>
+                <input
+                  type='date'
+                  value={selectedDate || ''}
+                  onChange={(e) => {
+                    if (e.target.value) {
+                      setSelectedDate(e.target.value)
+                      setTimeRange('all')
+                    } else {
+                      setSelectedDate(null)
+                    }
+                  }}
+                  style={{
+                    padding: '4px 8px',
+                    borderRadius: '4px',
+                    border: '1px solid #30363d',
+                    background: '#161b22',
+                    color: '#c9d1d9',
+                    fontSize: '0.85rem'
+                  }}
+                  title='Jump to specific day'
+                />
+                {selectedDate && (
+                  <button
+                    onClick={() => { setSelectedDate(null); setTimeRange('all'); }}
+                    style={{
+                      padding: '4px 8px',
+                      borderRadius: '4px',
+                      border: 'none',
+                      background: '#d1242f',
+                      color: 'white',
+                      cursor: 'pointer',
+                      fontSize: '0.85rem'
+                    }}
+                  >
+                    Clear Date
+                  </button>
+                )}
               </div>
             </div>
 
@@ -186,17 +269,111 @@ function App() {
                   <div className='chart-container-inner'>
                     {viagogoChartData.length > 0 ? (
                       <ResponsiveContainer width='100%' height='100%'>
-                        <LineChart data={viagogoChartData}>
-                          <CartesianGrid strokeDasharray='3 3' stroke='#30363d' />
-                          <XAxis dataKey='time' stroke='#8b949e' tick={{ fontSize: 10 }} hide={true} />
-                          <YAxis stroke='#8b949e' tick={{ fontSize: 10 }} width={40} />
-                          <Tooltip contentStyle={{ backgroundColor: '#161b22', borderColor: '#30363d' }} itemStyle={{ color: '#c9d1d9' }} />
-                          <Legend wrapperStyle={{ fontSize: '11px' }} />
-                          <Line name='Cat 1' type='monotone' dataKey='Via_Category 1' stroke='#d2a8ff' strokeWidth={2} dot={false} connectNulls />
-                          <Line name='Cat 2' type='monotone' dataKey='Via_Category 2' stroke='#79c0ff' strokeWidth={2} dot={false} connectNulls />
-                          <Line name='Cat 3' type='monotone' dataKey='Via_Category 3' stroke='#56d364' strokeWidth={2} dot={false} connectNulls />
-                          <Line name='Cat 4' type='monotone' dataKey='Via_Category 4' stroke='#ffa657' strokeWidth={2} dot={false} connectNulls />
-                        </LineChart>
+                        <AreaChart data={viagogoChartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+                          <defs>
+                            <linearGradient id='gradVia1' x1='0' y1='0' x2='0' y2='1'>
+                              <stop offset='0%' stopColor='#d2a8ff' stopOpacity={0.4}/>
+                              <stop offset='50%' stopColor='#d2a8ff' stopOpacity={0.15}/>
+                              <stop offset='100%' stopColor='#d2a8ff' stopOpacity={0}/>
+                            </linearGradient>
+                            <linearGradient id='gradVia2' x1='0' y1='0' x2='0' y2='1'>
+                              <stop offset='0%' stopColor='#79c0ff' stopOpacity={0.4}/>
+                              <stop offset='50%' stopColor='#79c0ff' stopOpacity={0.15}/>
+                              <stop offset='100%' stopColor='#79c0ff' stopOpacity={0}/>
+                            </linearGradient>
+                            <linearGradient id='gradVia3' x1='0' y1='0' x2='0' y2='1'>
+                              <stop offset='0%' stopColor='#56d364' stopOpacity={0.4}/>
+                              <stop offset='50%' stopColor='#56d364' stopOpacity={0.15}/>
+                              <stop offset='100%' stopColor='#56d364' stopOpacity={0}/>
+                            </linearGradient>
+                            <linearGradient id='gradVia4' x1='0' y1='0' x2='0' y2='1'>
+                              <stop offset='0%' stopColor='#ffa657' stopOpacity={0.4}/>
+                              <stop offset='50%' stopColor='#ffa657' stopOpacity={0.15}/>
+                              <stop offset='100%' stopColor='#ffa657' stopOpacity={0}/>
+                            </linearGradient>
+                          </defs>
+                          <CartesianGrid strokeDasharray='2 4' stroke='#21262d' opacity={0.4} vertical={false} />
+                          <XAxis 
+                            dataKey='time' 
+                            stroke='#6e7681' 
+                            tick={{ fontSize: 9, fill: '#8b949e' }}
+                            axisLine={{ stroke: '#30363d' }}
+                            tickLine={{ stroke: '#30363d' }}
+                          />
+                          <YAxis 
+                            stroke='#6e7681' 
+                            tick={{ fontSize: 9, fill: '#8b949e' }}
+                            width={45}
+                            axisLine={{ stroke: '#30363d' }}
+                            tickLine={{ stroke: '#30363d' }}
+                            tickFormatter={(value) => `$${value.toLocaleString()}`}
+                          />
+                          <Tooltip 
+                            contentStyle={{ 
+                              backgroundColor: '#0d1117', 
+                              border: '1px solid #30363d',
+                              borderRadius: '8px',
+                              boxShadow: '0 8px 24px rgba(0,0,0,0.5)',
+                              padding: '12px'
+                            }} 
+                            itemStyle={{ color: '#c9d1d9', fontSize: '13px', marginBottom: '4px' }}
+                            labelStyle={{ color: '#f0f6fc', fontWeight: '600', fontSize: '12px', marginBottom: '8px' }}
+                            formatter={(value) => [`$${value?.toLocaleString() || '0'}`, '']}
+                          />
+                          <Legend 
+                            wrapperStyle={{ fontSize: '11px', paddingTop: '15px' }}
+                            iconType='line'
+                            iconSize={12}
+                          />
+                          <Area 
+                            name='Cat 1' 
+                            type='basis' 
+                            dataKey='Via_Category 1' 
+                            stroke='#d2a8ff' 
+                            strokeWidth={2.5}
+                            fill='url(#gradVia1)' 
+                            fillOpacity={1}
+                            dot={{ fill: '#d2a8ff', r: 3, strokeWidth: 1.5, stroke: '#fff' }}
+                            activeDot={{ r: 6, fill: '#d2a8ff', stroke: '#fff', strokeWidth: 2, filter: 'drop-shadow(0 0 4px #d2a8ff)' }} 
+                            connectNulls 
+                          />
+                          <Area 
+                            name='Cat 2' 
+                            type='basis' 
+                            dataKey='Via_Category 2' 
+                            stroke='#79c0ff' 
+                            strokeWidth={2.5}
+                            fill='url(#gradVia2)' 
+                            fillOpacity={1}
+                            dot={{ fill: '#79c0ff', r: 3, strokeWidth: 1.5, stroke: '#fff' }}
+                            activeDot={{ r: 6, fill: '#79c0ff', stroke: '#fff', strokeWidth: 2, filter: 'drop-shadow(0 0 4px #79c0ff)' }} 
+                            connectNulls 
+                          />
+                          <Area 
+                            name='Cat 3' 
+                            type='basis' 
+                            dataKey='Via_Category 3' 
+                            stroke='#56d364' 
+                            strokeWidth={2.5}
+                            fill='url(#gradVia3)' 
+                            fillOpacity={1}
+                            dot={{ fill: '#56d364', r: 3, strokeWidth: 1.5, stroke: '#fff' }}
+                            activeDot={{ r: 6, fill: '#56d364', stroke: '#fff', strokeWidth: 2, filter: 'drop-shadow(0 0 4px #56d364)' }} 
+                            connectNulls 
+                          />
+                          <Area 
+                            name='Cat 4' 
+                            type='basis' 
+                            dataKey='Via_Category 4' 
+                            stroke='#ffa657' 
+                            strokeWidth={2.5}
+                            fill='url(#gradVia4)' 
+                            fillOpacity={1}
+                            dot={{ fill: '#ffa657', r: 3, strokeWidth: 1.5, stroke: '#fff' }}
+                            activeDot={{ r: 6, fill: '#ffa657', stroke: '#fff', strokeWidth: 2, filter: 'drop-shadow(0 0 4px #ffa657)' }} 
+                            connectNulls 
+                          />
+                        </AreaChart>
                       </ResponsiveContainer>
                     ) : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#8b949e' }}>No Data</div>}
                   </div>
@@ -222,17 +399,115 @@ function App() {
                   <div className='chart-container-inner'>
                     {ftnChartData.length > 0 ? (
                       <ResponsiveContainer width='100%' height='100%'>
-                        <LineChart data={ftnChartData}>
-                          <CartesianGrid strokeDasharray='3 3' stroke='#30363d' />
-                          <XAxis dataKey='time' stroke='#8b949e' tick={{ fontSize: 10 }} hide={true} />
-                          <YAxis stroke='#8b949e' tick={{ fontSize: 10 }} width={40} />
-                          <Tooltip contentStyle={{ backgroundColor: '#161b22', borderColor: '#30363d' }} itemStyle={{ color: '#c9d1d9' }} />
-                          <Legend wrapperStyle={{ fontSize: '11px' }} />
-                          <Line name='Cat 1' type='monotone' dataKey='FTN_Category 1' stroke='#d2a8ff' strokeWidth={2} strokeDasharray='3 3' dot={false} connectNulls />
-                          <Line name='Cat 2' type='monotone' dataKey='FTN_Category 2' stroke='#79c0ff' strokeWidth={2} strokeDasharray='3 3' dot={false} connectNulls />
-                          <Line name='Cat 3' type='monotone' dataKey='FTN_Category 3' stroke='#56d364' strokeWidth={2} strokeDasharray='3 3' dot={false} connectNulls />
-                          <Line name='Cat 4' type='monotone' dataKey='FTN_Category 4' stroke='#ffa657' strokeWidth={2} strokeDasharray='3 3' dot={false} connectNulls />
-                        </LineChart>
+                        <AreaChart data={ftnChartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+                          <defs>
+                            <linearGradient id='gradFtn1' x1='0' y1='0' x2='0' y2='1'>
+                              <stop offset='0%' stopColor='#d2a8ff' stopOpacity={0.35}/>
+                              <stop offset='50%' stopColor='#d2a8ff' stopOpacity={0.12}/>
+                              <stop offset='100%' stopColor='#d2a8ff' stopOpacity={0}/>
+                            </linearGradient>
+                            <linearGradient id='gradFtn2' x1='0' y1='0' x2='0' y2='1'>
+                              <stop offset='0%' stopColor='#79c0ff' stopOpacity={0.35}/>
+                              <stop offset='50%' stopColor='#79c0ff' stopOpacity={0.12}/>
+                              <stop offset='100%' stopColor='#79c0ff' stopOpacity={0}/>
+                            </linearGradient>
+                            <linearGradient id='gradFtn3' x1='0' y1='0' x2='0' y2='1'>
+                              <stop offset='0%' stopColor='#56d364' stopOpacity={0.35}/>
+                              <stop offset='50%' stopColor='#56d364' stopOpacity={0.12}/>
+                              <stop offset='100%' stopColor='#56d364' stopOpacity={0}/>
+                            </linearGradient>
+                            <linearGradient id='gradFtn4' x1='0' y1='0' x2='0' y2='1'>
+                              <stop offset='0%' stopColor='#ffa657' stopOpacity={0.35}/>
+                              <stop offset='50%' stopColor='#ffa657' stopOpacity={0.12}/>
+                              <stop offset='100%' stopColor='#ffa657' stopOpacity={0}/>
+                            </linearGradient>
+                          </defs>
+                          <CartesianGrid strokeDasharray='2 4' stroke='#21262d' opacity={0.4} vertical={false} />
+                          <XAxis 
+                            dataKey='time' 
+                            stroke='#6e7681' 
+                            tick={{ fontSize: 9, fill: '#8b949e' }}
+                            axisLine={{ stroke: '#30363d' }}
+                            tickLine={{ stroke: '#30363d' }}
+                          />
+                          <YAxis 
+                            stroke='#6e7681' 
+                            tick={{ fontSize: 9, fill: '#8b949e' }}
+                            width={45}
+                            axisLine={{ stroke: '#30363d' }}
+                            tickLine={{ stroke: '#30363d' }}
+                            tickFormatter={(value) => `$${value.toLocaleString()}`}
+                          />
+                          <Tooltip 
+                            contentStyle={{ 
+                              backgroundColor: '#0d1117', 
+                              border: '1px solid #30363d',
+                              borderRadius: '8px',
+                              boxShadow: '0 8px 24px rgba(0,0,0,0.5)',
+                              padding: '12px'
+                            }} 
+                            itemStyle={{ color: '#c9d1d9', fontSize: '13px', marginBottom: '4px' }}
+                            labelStyle={{ color: '#f0f6fc', fontWeight: '600', fontSize: '12px', marginBottom: '8px' }}
+                            formatter={(value) => [`$${value?.toLocaleString() || '0'}`, '']}
+                          />
+                          <Legend 
+                            wrapperStyle={{ fontSize: '11px', paddingTop: '15px' }}
+                            iconType='line'
+                            iconSize={12}
+                          />
+                          <Area 
+                            name='Cat 1' 
+                            type='basis' 
+                            dataKey='FTN_Category 1' 
+                            stroke='#d2a8ff' 
+                            strokeWidth={2.5}
+                            strokeDasharray='6 4'
+                            fill='url(#gradFtn1)' 
+                            fillOpacity={1}
+                            dot={{ fill: '#d2a8ff', r: 3, strokeWidth: 1.5, stroke: '#fff' }}
+                            activeDot={{ r: 6, fill: '#d2a8ff', stroke: '#fff', strokeWidth: 2, filter: 'drop-shadow(0 0 4px #d2a8ff)' }} 
+                            connectNulls 
+                          />
+                          <Area 
+                            name='Cat 2' 
+                            type='basis' 
+                            dataKey='FTN_Category 2' 
+                            stroke='#79c0ff' 
+                            strokeWidth={2.5}
+                            strokeDasharray='6 4'
+                            fill='url(#gradFtn2)' 
+                            fillOpacity={1}
+                            dot={{ fill: '#79c0ff', r: 3, strokeWidth: 1.5, stroke: '#fff' }}
+                            activeDot={{ r: 6, fill: '#79c0ff', stroke: '#fff', strokeWidth: 2, filter: 'drop-shadow(0 0 4px #79c0ff)' }} 
+                            connectNulls 
+                          />
+                          <Area 
+                            name='Cat 3' 
+                            type='basis' 
+                            dataKey='FTN_Category 3' 
+                            stroke='#56d364' 
+                            strokeWidth={2.5}
+                            strokeDasharray='6 4'
+                            fill='url(#gradFtn3)' 
+                            fillOpacity={1}
+                            dot={{ fill: '#56d364', r: 3, strokeWidth: 1.5, stroke: '#fff' }}
+                            activeDot={{ r: 6, fill: '#56d364', stroke: '#fff', strokeWidth: 2, filter: 'drop-shadow(0 0 4px #56d364)' }} 
+                            connectNulls 
+                          />
+                          <Area 
+                            name='Cat 4' 
+                            type='basis' 
+                            dataKey='FTN_Category 4' 
+                            stroke='#ffa657' 
+                            strokeWidth={2.5}
+                            strokeDasharray='6 4'
+                            fill='url(#gradFtn4)' 
+                            fillOpacity={1}
+                            dot={{ fill: '#ffa657', r: 3, strokeWidth: 1.5, stroke: '#fff' }}
+                            activeDot={{ r: 6, fill: '#ffa657', stroke: '#fff', strokeWidth: 2, filter: 'drop-shadow(0 0 4px #ffa657)' }} 
+                            connectNulls 
+                          />
+                        </AreaChart>
                       </ResponsiveContainer>
                     ) : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#8b949e' }}>No Data</div>}
                   </div>
