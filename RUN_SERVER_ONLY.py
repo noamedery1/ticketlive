@@ -256,25 +256,35 @@ else:
 
 # Mount static files - MUST be done before catch-all route
 if os.path.exists(client_dist):
-    # Mount assets directory
+    # Mount assets directory (JS, CSS files)
     assets_path = f'{client_dist}/assets'
     if os.path.exists(assets_path):
         try:
-            app.mount('/assets', StaticFiles(directory=assets_path), name='assets')
-            print('[OK] Static assets mounted at /assets')
+            app.mount('/assets', StaticFiles(directory=assets_path, html=False), name='assets')
+            # List files in assets for debugging
+            asset_files = os.listdir(assets_path)
+            print(f'[OK] Static assets mounted at /assets ({len(asset_files)} files)')
+            for f in asset_files[:5]:  # Show first 5 files
+                print(f'      - {f}')
         except Exception as e:
             print(f'[WARN] Failed to mount assets: {e}')
+            import traceback
+            traceback.print_exc()
     else:
         print(f'[WARN] Assets directory not found: {assets_path}')
+        print(f'[INFO] Contents of {client_dist}: {os.listdir(client_dist) if os.path.exists(client_dist) else "N/A"}')
     
-    # Mount other static files (vite.svg, etc.) from dist root
-    try:
-        app.mount('/static', StaticFiles(directory=client_dist), name='static')
-        print('[OK] Static files mounted at /static')
-    except Exception as e:
-        print(f'[WARN] Failed to mount static files: {e}')
+    print('[OK] Static file routes configured')
 else:
     print(f'[ERROR] Frontend dist directory not found: {client_dist}')
+
+# Serve vite.svg from root (referenced in index.html)
+@app.get('/vite.svg')
+async def serve_vite_svg():
+    vite_svg_path = f'{client_dist}/vite.svg'
+    if os.path.exists(vite_svg_path):
+        return FileResponse(vite_svg_path, media_type='image/svg+xml')
+    return {'error': 'vite.svg not found'}
 
 # API routes must be defined before catch-all route
 @app.get('/')
@@ -282,15 +292,32 @@ async def serve_root():
     """Serve root path - React app"""
     index_path = f'{client_dist}/index.html'
     if os.path.exists(index_path):
-        return FileResponse(index_path, media_type='text/html')
+        print(f'[INFO] Serving index.html from {index_path}')
+        return FileResponse(
+            index_path, 
+            media_type='text/html',
+            headers={'Cache-Control': 'no-cache'}
+        )
+    print(f'[ERROR] index.html not found at {index_path}')
     return {'message': 'Build Not Found.', 'dist_path': client_dist, 'exists': os.path.exists(client_dist)}
 
 # Catch-all route for React SPA - MUST be last
 @app.get('/{full_path:path}')
 async def serve_react_app(full_path: str):
     """Serve React app for all non-API routes (SPA routing)"""
+    # Skip assets (already handled by StaticFiles mount)
+    if full_path.startswith('assets/'):
+        return {'error': 'Asset not found'}
+    
+    # Skip vite.svg (already handled above)
+    if full_path == 'vite.svg':
+        return {'error': 'Not found'}
+    
     # Don't interfere with API routes
-    if full_path in ['matches', 'history'] or full_path.startswith('matches/') or full_path.startswith('history/'):
+    if full_path in ['matches', 'history']:
+        return {'error': 'Not found'}
+    
+    if full_path.startswith('matches/') or full_path.startswith('history/'):
         return {'error': 'Not found'}
     
     # Don't serve API routes
