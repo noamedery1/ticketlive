@@ -1,0 +1,271 @@
+{
+  "team_name": "FC Barcelona",
+  "team_url": "https://www.footballticketnet.com/fc-barcelona-football-tickets/filter/home_away/home-matches",
+  "games": [
+    {
+      "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-real-oviedo",
+      "match_name": "FC Barcelona vs Real Oviedo",
+      "team": "FC Barcelona",
+      "opponent": "Real Oviedo",
+      "date": "25/01/26",
+      "is_home": true,
+      "price_history": [
+        {
+          "timestamp": "2025-12-24T20:51:51.730482",
+          "prices": {
+            "Category": {
+              "Unknown": 119.7
+            }
+          }
+        }
+      ],
+      "latest_prices": {
+        "Category": {
+          "Unknown": 119.7
+        }
+      },
+      "last_scraped": "2025-12-24T20:51:51.730482"
+    },
+    {
+      "url": "https://www.footballticketnet.com/champions-league/fc-barcelona-vs-fc-copenhagen",
+      "match_name": "FC Barcelona vs FC Copenhagen",
+      "team": "FC Barcelona",
+      "opponent": "FC Copenhagen",
+      "date": "28/01/26",
+      "is_home": true,
+      "price_history": [
+        {
+          "timestamp": "2025-12-24T20:51:51.730482",
+          "prices": {
+            "Category": {
+              "Unknown": 159.6
+            }
+          }
+        }
+      ],
+      "latest_prices": {
+        "Category": {
+          "Unknown": 159.6
+        }
+      },
+      "last_scraped": "2025-12-24T20:51:51.730482"
+    },
+    {
+      "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-rcd-mallorca",
+      "match_name": "FC Barcelona vs RCD Mallorca",
+      "team": "FC Barcelona",
+      "opponent": "RCD Mallorca",
+      "date": "08/02/26",
+      "is_home": true,
+      "price_history": [
+        {
+          "timestamp": "2025-12-24T20:51:51.730482",
+          "prices": {
+            "Category": {
+              "Unknown": 123.89
+            }
+          }
+        }
+      ],
+      "latest_prices": {
+        "Category": {
+          "Unknown": 123.89
+        }
+      },
+      "last_scraped": "2025-12-24T20:51:51.730482"
+    },
+    {
+      "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-levante-ud",
+      "match_name": "FC Barcelona vs Levante UD",
+      "team": "FC Barcelona",
+      "opponent": "Levante UD",
+      "date": "22/02/26",
+      "is_home": true,
+      "price_history": [
+        {
+          "timestamp": "2025-12-24T20:51:51.730482",
+          "prices": {
+            "Category": {
+              "Unknown": 136.5
+            }
+          }
+        }
+      ],
+      "latest_prices": {
+        "Category": {
+          "Unknown": 136.5
+        }
+      },
+      "last_scraped": "2025-12-24T20:51:51.730482"
+    },
+    {
+      "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-villarreal-cf",
+      "match_name": "FC Barcelona vs Villarreal CF",
+      "team": "FC Barcelona",
+      "opponent": "Villarreal CF",
+      "date": "01/03/26",
+      "is_home": true,
+      "price_history": [
+        {
+          "timestamp": "2025-12-24T20:51:51.730482",
+          "prices": {
+            "Category": {
+              "Unknown": 154.35
+            }
+          }
+        }
+      ],
+      "latest_prices": {
+        "Category": {
+          "Unknown": 154.35
+        }
+      },
+      "last_scraped": "2025-12-24T20:51:51.730482"
+    },
+    {
+      "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-sevilla-fc",
+      "match_name": "FC Barcelona vs Sevilla FC",
+      "team": "FC Barcelona",
+      "opponent": "Sevilla FC",
+      "date": "15/03/26",
+      "is_home": true,
+      "price_history": [
+        {
+          "timestamp": "2025-12-24T20:51:51.730482",
+          "prices": {
+            "Category": {
+              "Unknown": 140.7
+            }
+          }
+        }
+      ],
+      "latest_prices": {
+        "Category": {
+          "Unknown": 140.7
+        }
+      },
+      "last_scraped": "2025-12-24T20:51:51.730482"
+    },
+    {
+      "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-rayo-vallecano",
+      "match_name": "FC Barcelona vs Rayo Vallecano",
+      "team": "FC Barcelona",
+      "opponent": "Rayo Vallecano",
+      "date": "22/03/26",
+      "is_home": true,
+      "price_history": [
+        {
+          "timestamp": "2025-12-24T20:51:51.730482",
+          "prices": {
+            "Category": {
+              "Unknown": 181.64
+            }
+          }
+        }
+      ],
+      "latest_prices": {
+        "Category": {
+          "Unknown": 181.64
+        }
+      },
+      "last_scraped": "2025-12-24T20:51:51.730482"
+    },
+    {
+      "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-rcd-espanyol",
+      "match_name": "FC Barcelona vs RCD Espanyol",
+      "team": "FC Barcelona",
+      "opponent": "RCD Espanyol",
+      "date": "12/04/26",
+      "is_home": true,
+      "price_history": [
+        {
+          "timestamp": "2025-12-24T20:51:51.730482",
+          "prices": {
+            "Category": {
+              "Unknown": 215.46
+            }
+          }
+        }
+      ],
+      "latest_prices": {
+        "Category": {
+          "Unknown": 215.46
+        }
+      },
+      "last_scraped": "2025-12-24T20:51:51.730482"
+    },
+    {
+      "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-celta-vigo",
+      "match_name": "FC Barcelona vs Celta Vigo",
+      "team": "FC Barcelona",
+      "opponent": "Celta Vigo",
+      "date": "22/04/26",
+      "is_home": true,
+      "price_history": [
+        {
+          "timestamp": "2025-12-24T20:51:51.730482",
+          "prices": {
+            "Category": {
+              "Unknown": 229.11
+            }
+          }
+        }
+      ],
+      "latest_prices": {
+        "Category": {
+          "Unknown": 229.11
+        }
+      },
+      "last_scraped": "2025-12-24T20:51:51.730482"
+    },
+    {
+      "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-real-madrid",
+      "match_name": "FC Barcelona vs Real Madrid",
+      "team": "FC Barcelona",
+      "opponent": "Real Madrid",
+      "date": "10/05/26",
+      "is_home": true,
+      "price_history": [
+        {
+          "timestamp": "2025-12-24T20:51:51.730482",
+          "prices": {
+            "Category": {
+              "Unknown": 744.66
+            }
+          }
+        }
+      ],
+      "latest_prices": {
+        "Category": {
+          "Unknown": 744.66
+        }
+      },
+      "last_scraped": "2025-12-24T20:51:51.730482"
+    },
+    {
+      "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-real-betis",
+      "match_name": "FC Barcelona vs Real Betis",
+      "team": "FC Barcelona",
+      "opponent": "Real Betis",
+      "date": "17/05/26",
+      "is_home": true,
+      "price_history": [
+        {
+          "timestamp": "2025-12-24T20:51:51.730482",
+          "prices": {
+            "Category": {
+              "Unknown": 233.31
+            }
+          }
+        }
+      ],
+      "latest_prices": {
+        "Category": {
+          "Unknown": 233.31
+        }
+      },
+      "last_scraped": "2025-12-24T20:51:51.730482"
+    }
+  ],
+  "last_updated": "2025-12-24T20:51:51.730482"
+}

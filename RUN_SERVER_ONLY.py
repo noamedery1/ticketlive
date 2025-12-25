@@ -7,7 +7,7 @@ import json
 import os
 import re
 import sys
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
@@ -26,6 +26,7 @@ if sys.platform == 'win32':
 DATA_FILE_VIAGOGO = 'prices.json'
 DATA_FILE_FTN = 'prices_ftn.json'
 GAMES_FILE = 'all_games_to_scrape.json'
+TEAMS_DATA_FILE = 'ftn_teams_data.json'
 # Railway sets PORT dynamically - use whatever Railway provides
 # Railway will set PORT environment variable automatically
 PORT = int(os.environ.get('PORT', '8000'))  # Railway always sets PORT, but keep default for local dev
@@ -306,6 +307,83 @@ else:
     print(f'[ERROR] Frontend dist directory not found: {client_dist}')
 
 # Serve vite.svg from root (referenced in index.html)
+@app.get('/teams')
+def get_teams():
+    """Get list of available teams"""
+    try:
+        if not os.path.exists(TEAMS_DATA_FILE):
+            return []
+        with open(TEAMS_DATA_FILE, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        teams = []
+        for team_key, team_data in data.items():
+            teams.append({
+                'key': team_key,
+                'name': team_data.get('team_name', team_key.title()),
+                'url': team_data.get('team_url', ''),
+                'last_updated': team_data.get('last_updated'),
+                'game_count': len(team_data.get('games', []))
+            })
+        return teams
+    except Exception as e:
+        print(f'[ERROR] /teams error: {e}')
+        return []
+
+@app.get('/teams/{team_key}')
+def get_team_games(team_key: str):
+    """Get all games for a specific team"""
+    try:
+        if not os.path.exists(TEAMS_DATA_FILE):
+            return []
+        with open(TEAMS_DATA_FILE, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        if team_key not in data:
+            return []
+        team_data = data[team_key]
+        games = []
+        for game in team_data.get('games', []):
+            games.append({
+                'url': game.get('url'),
+                'match_name': game.get('match_name'),
+                'opponent': game.get('opponent'),
+                'date': game.get('date'),
+                'latest_prices': game.get('latest_prices', {}),
+                'last_scraped': game.get('last_scraped'),
+                'price_history_count': len(game.get('price_history', []))
+            })
+        return games
+    except Exception as e:
+        print(f'[ERROR] /teams/{team_key} error: {e}')
+        return []
+
+@app.get('/teams/{team_key}/game/{game_index}')
+def get_game_prices(team_key: str, game_index: int):
+    """Get price history for a specific game"""
+    try:
+        if not os.path.exists(TEAMS_DATA_FILE):
+            return {'prices': [], 'game': None}
+        with open(TEAMS_DATA_FILE, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        if team_key not in data:
+            return {'prices': [], 'game': None}
+        games = data[team_key].get('games', [])
+        if game_index < 0 or game_index >= len(games):
+            return {'prices': [], 'game': None}
+        game = games[game_index]
+        return {
+            'game': {
+                'match_name': game.get('match_name'),
+                'url': game.get('url'),
+                'opponent': game.get('opponent'),
+                'date': game.get('date')
+            },
+            'prices': game.get('price_history', []),
+            'latest_prices': game.get('latest_prices', {})
+        }
+    except Exception as e:
+        print(f'[ERROR] /teams/{team_key}/game/{game_index} error: {e}')
+        return {'prices': [], 'game': None}
+
 @app.get('/vite.svg')
 async def serve_vite_svg():
     vite_svg_path = f'{client_dist}/vite.svg'
@@ -320,13 +398,16 @@ def health_check():
     return {'status': 'ok', 'message': 'Server is running'}
 
 # Catch-all route for React SPA - MUST be last (after API routes)
-# This matches the working setup from RUN_EVERYTHING.py
+# FastAPI matches routes in order, so specific routes above will be matched first
 @app.get('/{full_path:path}')
-async def serve_react_app(full_path: str):
+async def serve_react_app(full_path: str, request: Request):
     """Serve React app for all non-API routes (SPA routing)"""
-    # Don't interfere with API routes
-    if full_path.startswith('matches') or full_path.startswith('history'):
-        return {'error': 'Not found'}
+    # Explicitly exclude API routes and static assets
+    # These should never reach here if routes are defined correctly above
+    excluded_paths = ['matches', 'history', 'teams', 'health', 'assets', 'vite.svg']
+    if any(full_path.startswith(excluded) for excluded in excluded_paths):
+        # This shouldn't happen if routes are defined correctly, but just in case
+        raise HTTPException(status_code=404, detail="API route not found")
     
     # Serve index.html for all other routes (React Router handles routing)
     index_path = f'{client_dist}/index.html'
@@ -376,22 +457,17 @@ if __name__ == '__main__':
         print(f'[INFO] Startup checks completed in {elapsed:.2f}s', flush=True)
         
         print(f'[INFO] Starting server on 0.0.0.0:{PORT}...', flush=True)
+        print(f'[INFO] Railway PORT env: {os.environ.get("PORT", "NOT SET")}', flush=True)
         print('[INFO] Server starting now...', flush=True)
         
-        # Start uvicorn server - this blocks until server stops
-        try:
-            uvicorn.run(
-                app, 
-                host='0.0.0.0', 
-                port=PORT, 
-                log_level='info', 
-                access_log=True
-            )
-        except Exception as server_error:
-            print(f'[FATAL] Uvicorn server error: {server_error}', flush=True)
-            import traceback
-            traceback.print_exc()
-            raise
+        # Start uvicorn server - match working version from RUN_EVERYTHING.py
+        # This blocks until server stops
+        uvicorn.run(
+            app, 
+            host='0.0.0.0', 
+            port=PORT, 
+            log_level='info'
+        )
     except KeyboardInterrupt:
         print('\n[INFO] Server stopped by user', flush=True)
     except Exception as e:

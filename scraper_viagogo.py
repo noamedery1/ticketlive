@@ -227,6 +227,22 @@ def get_driver():
     time.sleep(random.uniform(0.5, 2.0))
     
     try:
+        # Windows: Detect Chrome path (handle 32-bit vs 64-bit)
+        if sys.platform == 'win32':
+            # Try 32-bit Chrome first (Program Files x86)
+            browser_path = r'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
+            if not os.path.exists(browser_path):
+                # Try 64-bit Chrome
+                browser_path = r'C:\Program Files\Google\Chrome\Application\chrome.exe'
+            if not os.path.exists(browser_path):
+                browser_path = None
+            # Try to use manually downloaded ChromeDriver (32-bit for 32-bit Chrome)
+            driver_path = r'C:\PythonEnvs\ticketlive\Scripts\chromedriver.exe'
+            if not os.path.exists(driver_path):
+                driver_path = None  # Fall back to auto-download
+        else:
+            browser_path = None
+        
         options = uc.ChromeOptions()
         
         # Basic options for local use (no headless needed)
@@ -242,8 +258,11 @@ def get_driver():
         for attempt in range(5):  # Increased retries
             try:
                 driver = uc.Chrome(
+                    use_subprocess=False,  # Avoid subprocess issues on Windows 7
                     options=options, 
-                    version_main=None
+                    version_main=None,
+                    browser_executable_path=browser_path,  # Explicitly set Chrome path
+                    driver_executable_path=driver_path  # Use manually downloaded ChromeDriver if available
                 )
                 driver.set_page_load_timeout(60)
                 driver.implicitly_wait(5)

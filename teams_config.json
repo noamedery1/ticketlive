@@ -1,0 +1,15 @@
+{
+  "teams": [
+    {
+      "key": "arsenal",
+      "name": "Arsenal",
+      "url": "https://www.footballticketnet.com/arsenal-football-tickets/filter/home_away/home-matches"
+    },
+    {
+      "key": "barcelona",
+      "name": "FC Barcelona",
+      "url": "https://www.footballticketnet.com/fc-barcelona-football-tickets/filter/home_away/home-matches"
+    }
+  ]
+}
+

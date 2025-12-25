@@ -1,0 +1,325 @@
+"""
+Auto Scraper for FTN Teams
+Runs all teams from teams_config.json and pushes to git server
+"""
+import subprocess
+import time
+import os
+import sys
+import shutil
+from datetime import datetime
+import json
+
+# Fix encoding for Windows
+if sys.platform == 'win32':
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
+
+# Detect Python command (py or python)
+def get_python_cmd():
+    """Detect which Python command works: py or python"""
+    if shutil.which('py'):
+        return 'py'
+    elif shutil.which('python'):
+        return 'python'
+    else:
+        # Default to py on Windows
+        return 'py' if sys.platform == 'win32' else 'python'
+
+PYTHON_CMD = get_python_cmd()
+
+# ==========================================
+# ⚙️ CONFIGURATION
+# ==========================================
+SCRAPE_INTERVAL_HOURS = 12.0  # Run every 12 hours (twice a day)
+OUTPUT_FILE = 'ftn_teams_data.json'
+
+# ==========================================
+# Git Functions
+# ==========================================
+def git_add_files(files):
+    """Add files to git staging"""
+    try:
+        for file in files:
+            result = subprocess.run(
+                ['git', 'add', file],
+                capture_output=True,
+                text=True,
+                encoding='utf-8',
+                errors='replace'
+            )
+            if result.returncode != 0:
+                print(f'   [WARN] Failed to add {file}: {result.stderr}', flush=True)
+        return True
+    except Exception as e:
+        print(f'   [ERROR] Git add error: {e}', flush=True)
+        return False
+
+def git_commit(message):
+    """Commit staged changes"""
+    try:
+        result = subprocess.run(
+            ['git', 'commit', '-m', message],
+            capture_output=True,
+            text=True,
+            encoding='utf-8',
+            errors='replace'
+        )
+        if result.returncode == 0:
+            print(f'   [OK] Committed: {message}', flush=True)
+            return True
+        else:
+            if 'nothing to commit' in result.stdout.lower() or 'nothing to commit' in result.stderr.lower():
+                print(f'   [INFO] Nothing to commit (files already up to date)', flush=True)
+                return True  # Not an error
+            print(f'   [ERROR] Commit failed: {result.stderr}', flush=True)
+            return False
+    except Exception as e:
+        print(f'   [ERROR] Git commit error: {e}', flush=True)
+        return False
+
+def git_push():
+    """Push to remote repository"""
+    try:
+        result = subprocess.run(
+            ['git', 'push'],
+            capture_output=True,
+            text=True,
+            encoding='utf-8',
+            errors='replace'
+        )
+        if result.returncode == 0:
+            print(f'   [OK] Pushed to remote repository', flush=True)
+            return True
+        else:
+            print(f'   [ERROR] Push failed: {result.stderr}', flush=True)
+            return False
+    except Exception as e:
+        print(f'   [ERROR] Git push error: {e}', flush=True)
+        return False
+
+def commit_and_push_teams_data():
+    """Commit and push teams data file"""
+    print(f'\n[{datetime.now().strftime("%H:%M:%S")}] [ACTION] Committing and pushing teams data...', flush=True)
+    
+    # Files to commit
+    files_to_commit = [OUTPUT_FILE]
+    
+    # Add all team-specific files (*_prices.json)
+    import glob
+    team_files = glob.glob('*_prices.json')
+    files_to_commit.extend(team_files)
+    
+    # Check if files exist
+    existing_files = []
+    for file in files_to_commit:
+        if os.path.exists(file):
+            existing_files.append(file)
+            print(f'   [INFO] Found file: {file}', flush=True)
+        else:
+            print(f'   [WARN] File not found: {file}', flush=True)
+    
+    if not existing_files:
+        print(f'   [ERROR] No files found to commit', flush=True)
+        return False
+    
+    # Add files
+    print(f'   [INFO] Adding files to git...', flush=True)
+    if not git_add_files(existing_files):
+        print(f'   [ERROR] Failed to add files to git', flush=True)
+        return False
+    
+    # Create commit message with timestamp
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    commit_message = f"Auto-update teams prices - {timestamp}"
+    
+    # Commit
+    print(f'   [INFO] Committing changes...', flush=True)
+    if not git_commit(commit_message):
+        print(f'   [ERROR] Commit failed', flush=True)
+        return False
+    
+    # Push
+    print(f'   [INFO] Pushing to remote...', flush=True)
+    if not git_push():
+        print(f'   [ERROR] Push failed', flush=True)
+        return False
+    
+    print(f'[{datetime.now().strftime("%H:%M:%S")}] [OK] Successfully committed and pushed teams data', flush=True)
+    return True
+
+# ==========================================
+# Scraper Functions
+# ==========================================
+def load_teams_from_files():
+    """Discover teams from existing *_prices.json files"""
+    teams = []
+    
+    # Look for all *_prices.json files
+    import glob
+    pattern = '*_prices.json'
+    team_files = glob.glob(pattern)
+    
+    print(f'   [INFO] Discovering teams from {pattern} files...', flush=True)
+    
+    for file_path in team_files:
+        try:
+            # Extract team_key from filename (e.g., "arsenal_prices.json" -> "arsenal")
+            team_key = os.path.basename(file_path).replace('_prices.json', '')
+            
+            # Read team_name and team_url from the file
+            with open(file_path, 'r', encoding='utf-8') as f:
+                team_data = json.load(f)
+                team_name = team_data.get('team_name', team_key.title())
+                team_url = team_data.get('team_url', '')
+            
+            if team_url:
+                teams.append({
+                    'key': team_key,
+                    'name': team_name,
+                    'url': team_url
+                })
+                print(f'      [OK] Found: {team_name} ({team_key})', flush=True)
+            else:
+                print(f'      [WARN] Skipping {team_key}: missing team_url', flush=True)
+        except Exception as e:
+            print(f'      [ERROR] Error reading {file_path}: {e}', flush=True)
+            continue
+    
+    if not teams:
+        print(f'   [WARN] No teams found. Make sure you have created at least one *_prices.json file.', flush=True)
+        print(f'   [INFO] Example: Create "barcelona_prices.json" with:', flush=True)
+        print(f'          {{"team_name": "FC Barcelona", "team_url": "https://..."}}', flush=True)
+    
+    print(f'   [INFO] Discovered {len(teams)} team(s)', flush=True)
+    return teams
+
+def run_team_scraper(team_key):
+    """Run scraper for a single team"""
+    try:
+        print(f'[{datetime.now().strftime("%H:%M:%S")}] [ACTION] Starting scraper for team: {team_key}...', flush=True)
+        
+        process = subprocess.Popen(
+            [PYTHON_CMD, 'scraper_ftn_teams.py', team_key],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            universal_newlines=True,
+            bufsize=1,
+            encoding='utf-8',
+            errors='replace',
+            cwd=os.getcwd()
+        )
+        
+        # Stream output line by line
+        try:
+            for line in process.stdout:
+                if line:
+                    print(line.rstrip(), flush=True)
+        except Exception as stream_err:
+            print(f'   [WARN] Output streaming error: {stream_err}', flush=True)
+        
+        process.wait(timeout=None)
+        
+        if process.returncode == 0:
+            print(f'[{datetime.now().strftime("%H:%M:%S")}] [OK] Team {team_key} scraper finished.', flush=True)
+            return True
+        else:
+            print(f'[{datetime.now().strftime("%H:%M:%S")}] [ERROR] Team {team_key} scraper exited with code {process.returncode}', flush=True)
+            return False
+    except subprocess.TimeoutExpired:
+        print(f'[{datetime.now().strftime("%H:%M:%S")}] [WARN] Team {team_key} scraper process timeout', flush=True)
+        if 'process' in locals():
+            process.kill()
+        return False
+    except Exception as e:
+        print(f'[{datetime.now().strftime("%H:%M:%S")}] [ERROR] Team {team_key} scraper error: {e}', flush=True)
+        import traceback
+        traceback.print_exc()
+        return False
+
+def run_all_teams():
+    """Run scraper for all teams"""
+    print(f'\n{"="*60}', flush=True)
+    print(f'[{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}] [START] STARTING TEAMS SCRAPER...', flush=True)
+    print(f'{"="*60}\n', flush=True)
+    
+    teams = load_teams_from_files()
+    if not teams:
+        print(f'   [ERROR] No teams found in config. Exiting.', flush=True)
+        return False
+    
+    results = {}
+    for team in teams:
+        team_key = team['key']
+        team_name = team['name']
+        print(f'\n{"="*60}', flush=True)
+        print(f'[{datetime.now().strftime("%H:%M:%S")}] Processing: {team_name} ({team_key})', flush=True)
+        print(f'{"="*60}', flush=True)
+        
+        success = run_team_scraper(team_key)
+        results[team_key] = success
+        
+        # Wait between teams to be nice to the server
+        if team != teams[-1]:  # Don't wait after last team
+            print(f'\n   [INFO] Waiting 5 seconds before next team...', flush=True)
+            time.sleep(5)
+    
+    # Summary
+    print(f'\n{"="*60}', flush=True)
+    print(f'[{datetime.now().strftime("%H:%M:%S")}] [SUMMARY] Scraping Results:', flush=True)
+    print(f'{"="*60}', flush=True)
+    for team_key, success in results.items():
+        status = '✅ SUCCESS' if success else '❌ FAILED'
+        print(f'   {team_key}: {status}', flush=True)
+    
+    # Commit and push
+    print(f'\n{"="*60}', flush=True)
+    commit_and_push_teams_data()
+    print(f'{"="*60}\n', flush=True)
+    
+    return all(results.values())
+
+# ==========================================
+# Main Loop
+# ==========================================
+def run_cycle():
+    """Run one complete cycle: scrape all teams -> commit -> push"""
+    success = run_all_teams()
+    
+    if success:
+        print(f'[{datetime.now().strftime("%H:%M:%S")}] [OK] All teams scraped successfully', flush=True)
+    else:
+        print(f'[{datetime.now().strftime("%H:%M:%S")}] [WARN] Some teams failed, but data was still pushed', flush=True)
+    
+    return success
+
+def main():
+    """Main entry point"""
+    print(f'\n{"="*60}', flush=True)
+    print(f'[START] AUTO SCRAPER - TEAMS PRICE MONITORING & AUTO COMMIT', flush=True)
+    print(f'[INTERVAL] Running every {SCRAPE_INTERVAL_HOURS} hours', flush=True)
+    print(f'[FILES] {OUTPUT_FILE}, teams_config.json', flush=True)
+    print(f'{"="*60}\n', flush=True)
+    
+    # Run immediately on start
+    run_cycle()
+    
+    # Then run on interval
+    while True:
+        wait_seconds = SCRAPE_INTERVAL_HOURS * 3600
+        next_run = datetime.now().timestamp() + wait_seconds
+        next_run_str = datetime.fromtimestamp(next_run).strftime("%Y-%m-%d %H:%M:%S")
+        print(f'\n[{datetime.now().strftime("%H:%M:%S")}] [WAIT] Next run in {SCRAPE_INTERVAL_HOURS} hours ({next_run_str})', flush=True)
+        time.sleep(wait_seconds)
+        run_cycle()
+
+if __name__ == '__main__':
+    # Check if running as one-time or continuous
+    if len(sys.argv) > 1 and sys.argv[1] == '--once':
+        # Run once and exit
+        run_cycle()
+    else:
+        # Run continuously
+        main()
+

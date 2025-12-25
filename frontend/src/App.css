@@ -11,6 +11,15 @@
   color: #c9d1d9;
 }
 
+.app-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #0d1117;
+  color: #c9d1d9;
+}
+
 .dashboard {
   display: flex;
   width: 100%;
@@ -54,21 +63,23 @@
 
 .match-item.active {
   background-color: #1f6feb;
-  color: #ffffff;
+  color: white;
 }
 
 .match-name {
-  font-weight: 600;
   font-size: 0.9rem;
-  margin-bottom: 2px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  word-wrap: break-word;
 }
 
-.match-price-preview {
-  font-size: 0.75rem;
-  opacity: 0.8;
+.resizer {
+  width: 4px;
+  background-color: #30363d;
+  cursor: col-resize;
+  flex-shrink: 0;
+}
+
+.resizer:hover {
+  background-color: #58a6ff;
 }
 
 /* Main Content */
@@ -77,211 +88,346 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  min-width: 0;
+  background-color: #0d1117;
 }
 
 .header {
-  padding: 10px 20px;
+  padding: 15px 20px;
   border-bottom: 1px solid #30363d;
-  background-color: #0d1117;
+  background-color: #161b22;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-shrink: 0;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .header h1 {
   margin: 0;
-  font-size: 1.2rem;
-  color: #f0f6fc;
+  font-size: 1.5rem;
+  color: #c9d1d9;
 }
 
-.last-updated {
-  font-size: 0.75rem;
-  color: #8b949e;
+.header-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
-/* Split Layout */
-.split-container {
-    display: flex;
-    flex: 1;
-    overflow: hidden;
-    position: relative;
-    width: 100%;
+.team-selector {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #30363d;
+  background: #0d1117;
+  color: #c9d1d9;
+  font-size: 14px;
+  cursor: pointer;
 }
 
-.split-pane {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    overflow-y: auto;
-    min-width: 0; /* Crucial for nested flex/grid */
-    border-right: 1px solid #30363d;
-}
-
-.split-pane:last-child {
-    border-right: none;
-}
-
-.pane-title {
-    font-size: 1rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-    padding-bottom: 5px;
-    border-bottom: 2px solid;
-    text-align: center;
-}
-
-.viagogo-title { color: #d2a8ff; border-color: #d2a8ff; }
-.ftn-title { color: #79c0ff; border-color: #79c0ff; }
-
-/* Stats Cards */
+/* Stats Grid */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* All 4 categories in one row if possible, or wrap */
-  gap: 8px;
-  margin-bottom: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  padding: 20px;
 }
 
 .stat-card {
   background-color: #161b22;
   border: 1px solid #30363d;
-  border-radius: 6px;
-  padding: 8px 5px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-width: 0; /* fixes overflow in grid */
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
 }
 
 .stat-label {
-  font-size: 0.7rem;
+  font-size: 0.85rem;
   color: #8b949e;
-  margin-bottom: 2px;
-  white-space: nowrap;
+  margin-bottom: 8px;
 }
 
 .stat-value {
-  font-size: 0.95rem; /* Smaller font to fit */
-  font-weight: 600;
-  color: #f0f6fc;
-  white-space: nowrap;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #c9d1d9;
 }
 
-/* Chart Area */
+/* Chart Section */
 .chart-section {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    background: #161b22;
-    border: 1px solid #30363d;
-    border-radius: 6px;
-    padding: 10px;
-    min-height: 200px;
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.chart-container {
+  flex: 1;
+  min-height: 400px;
+  background-color: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 15px;
 }
 
 .chart-container-inner {
-    flex: 1;
-    width: 100%;
-    min-height: 0;
-}
-
-/* Resizer Handle */
-.resizer {
-  width: 5px;
-  cursor: col-resize;
-  background-color: #21262d; 
+  width: 100%;
   height: 100%;
+  min-height: 400px;
+}
+
+/* Split Pane Layout */
+.split-container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  height: 100%;
+}
+
+.split-pane {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 20px;
+  min-width: 0;
+}
+
+.pane-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #58a6ff;
+  border-bottom: 1px solid #30363d;
+  padding-bottom: 10px;
+}
+
+.viagogo-title {
+  color: #d2a8ff;
+}
+
+.ftn-title {
+  color: #79c0ff;
+}
+
+/* Team View Styles */
+.games-sidebar {
+  width: 300px;
+  background-color: #161b22;
+  border-right: 1px solid #30363d;
+  padding: 20px;
+  overflow-y: auto;
   flex-shrink: 0;
-  transition: background-color 0.2s;
-  z-index: 10;
 }
 
-.resizer:hover, .resizer:active {
-  background-color: #1f6feb;
+.games-sidebar h2 {
+  margin: 0 0 15px 0;
+  font-size: 1.2rem;
+  color: #c9d1d9;
+  border-bottom: 1px solid #30363d;
+  padding-bottom: 10px;
 }
 
-/* =========================================
-   Mobile / Responsive Adaptation
-   ========================================= */
-@media (max-width: 768px) {
-  .dashboard {
-    flex-direction: column; /* Stack sidebar on top of main content */
-    overflow: hidden; /* Manage main scroll in body if needed, or flex children */
-  }
-
-  /* Force Sidebar to be full width on mobile, ignoring inline JS width */
-  .sidebar {
-    width: 100% !important; 
-    height: 180px; /* Fixed height list on top */
-    border-right: none;
-    border-bottom: 2px solid #30363d;
-    flex-shrink: 0;
-  }
-
-  .resizer {
-    display: none; /* No resizing on mobile */
-  }
-
-  .main-content {
-    width: 100%;
-    overflow-y: auto; /* Allow main content to scroll independently */
-  }
-
-  .split-container {
-    flex-direction: column; /* Stack Viagogo on top of FTN */
-    overflow-y: visible; /* Let inner content determine height and scroll main-content */
-  }
-
-  .split-pane {
-    border-right: none;
-    border-bottom: 1px solid #30363d;
-    min-height: 600px; /* Ensure enough height for chart on mobile */
-    overflow: visible; 
-  }
-
-  /* Make header smaller/stack on mobile */
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .header h1 {
-    font-size: 1.1rem;
-    white-space: normal; /* Allow wrapping */
-  }
-
-  /* 2 cols instead of 4 for stats on small screens */
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr); 
-  }
+.games-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-/* Enhanced Chart Dots - Make price points more visible but static */
-.recharts-dot {
-  filter: drop-shadow(0 0 2px currentColor);
-  /* No animation - static dots */
-}
-
-.recharts-active-dot {
-  filter: drop-shadow(0 0 4px currentColor);
-  /* No animation - static active dot */
-}
-
-/* Make chart lines more visible */
-.recharts-line {
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
-}
-
-/* Date picker styling */
-input[type="date"] {
+.game-item {
+  padding: 12px;
+  background-color: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 6px;
   cursor: pointer;
+  transition: all 0.2s;
 }
 
-input[type="date"]:focus {
-  outline: 2px solid #1f6feb;
-  outline-offset: 2px;
+.game-item:hover {
+  background-color: #21262d;
+  border-color: #58a6ff;
+}
+
+.game-item.selected {
+  background-color: #1f6feb;
+  border-color: #58a6ff;
+}
+
+.game-name {
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #c9d1d9;
+}
+
+.game-item.selected .game-name {
+  color: white;
+}
+
+.game-date {
+  font-size: 0.85rem;
+  color: #8b949e;
+  margin-bottom: 8px;
+}
+
+.game-prices-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.price-badge {
+  font-size: 0.75rem;
+  padding: 2px 6px;
+  background-color: #21262d;
+  border-radius: 4px;
+  color: #8b949e;
+}
+
+.game-item.selected .price-badge {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #c9d1d9;
+}
+
+.price-view {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.game-header {
+  border-bottom: 1px solid #30363d;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.game-header h2 {
+  margin: 0 0 8px 0;
+  color: #c9d1d9;
+}
+
+.latest-prices-grid {
+  background-color: #161b22;
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid #30363d;
+  margin-bottom: 30px;
+}
+
+.latest-prices-grid h3 {
+  margin: 0 0 20px 0;
+  color: #c9d1d9;
+  font-size: 1.1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.prices-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.price-card {
+  background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+  border: 1px solid #30363d;
+  border-radius: 10px;
+  padding: 18px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.price-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #58a6ff, #1f6feb);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.price-card:hover {
+  border-color: #58a6ff;
+  background: linear-gradient(135deg, #161b22 0%, #0d1117 100%);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(88, 166, 255, 0.2);
+}
+
+.price-card:hover::before {
+  opacity: 1;
+}
+
+.price-category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.price-category {
+  font-size: 0.95rem;
+  color: #c9d1d9;
+  font-weight: 500;
+  line-height: 1.4;
+  flex: 1;
+}
+
+.price-block-badge {
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  background: rgba(88, 166, 255, 0.15);
+  border: 1px solid rgba(88, 166, 255, 0.3);
+  border-radius: 6px;
+  color: #58a6ff;
+  font-weight: 600;
+  white-space: nowrap;
+  margin-left: 8px;
+}
+
+.price-value-large {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #58a6ff;
+  line-height: 1.2;
+  text-shadow: 0 2px 8px rgba(88, 166, 255, 0.3);
+}
+
+.price-card:hover .price-value-large {
+  color: #79c0ff;
+  text-shadow: 0 2px 12px rgba(121, 192, 255, 0.4);
+}
+
+.no-data {
+  text-align: center;
+  padding: 40px;
+  color: #8b949e;
+  font-size: 1.1rem;
+}
+
+/* Recharts styling */
+.recharts-line {
+  filter: drop-shadow(0 0 2px rgba(0,0,0,0.3));
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .split-container {
+    flex-direction: column;
+  }
+  
+  .games-sidebar {
+    width: 100%;
+    max-height: 300px;
+  }
 }

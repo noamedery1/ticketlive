@@ -23,8 +23,22 @@ def get_driver():
     time.sleep(random.uniform(0.5, 2.0))
     
     try:
-        browser_path = '/usr/bin/chromium' if os.path.exists('/usr/bin/chromium') else None
-        driver_path = '/usr/bin/chromedriver' if os.path.exists('/usr/bin/chromedriver') else None
+        # Windows: Detect Chrome path (handle 32-bit vs 64-bit)
+        if sys.platform == 'win32':
+            # Try 32-bit Chrome first (Program Files x86)
+            browser_path = r'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
+            if not os.path.exists(browser_path):
+                # Try 64-bit Chrome
+                browser_path = r'C:\Program Files\Google\Chrome\Application\chrome.exe'
+            if not os.path.exists(browser_path):
+                browser_path = None
+            # Try to use manually downloaded ChromeDriver (32-bit for 32-bit Chrome)
+            driver_path = r'C:\PythonEnvs\ticketlive\Scripts\chromedriver.exe'
+            if not os.path.exists(driver_path):
+                driver_path = None  # Fall back to auto-download
+        else:
+            browser_path = '/usr/bin/chromium' if os.path.exists('/usr/bin/chromium') else None
+            driver_path = '/usr/bin/chromedriver' if os.path.exists('/usr/bin/chromedriver') else None
 
         for attempt in range(5):  # Increased retries
             try:
@@ -42,7 +56,8 @@ def get_driver():
                     options=options, 
                     version_main=None, 
                     browser_executable_path=browser_path, 
-                    driver_executable_path=driver_path
+                    driver_executable_path=driver_path,
+                    use_subprocess=False  # Avoid subprocess issues on Windows 7
                 )
                 print(f'   ✅ Driver initialized successfully (attempt {attempt+1})', flush=True)
                 return driver
@@ -128,7 +143,7 @@ def scrape_ftn_single(driver, url, match_name):
         records = []
         if prices_found_for_match:
             print(f'      ✅ Found prices: {dict(prices_found_for_match)}', flush=True)
-            timestamp = datetime.now().isoformat()
+            # Note: timestamp will be set by caller to use single run timestamp
             for cat, price in prices_found_for_match.items():
                 records.append({
                     'match_url': url,
@@ -137,7 +152,7 @@ def scrape_ftn_single(driver, url, match_name):
                     'price': price,
                     'currency': 'USD',
                     'source': 'FootballTicketNet',
-                    'timestamp': timestamp
+                    'timestamp': ''  # Will be set by caller with single run timestamp
                 })
         else:
             print('      ❌ No valid prices found.', flush=True)
@@ -177,12 +192,18 @@ def run_ftn_scraper_cycle():
     
     print('   ✅ Driver initialized successfully', flush=True)
     
+    # Create single timestamp for entire scraper run (like Viagogo)
+    run_timestamp = datetime.now().isoformat()
+    print(f'   📅 Run timestamp: {run_timestamp}', flush=True)
+    
     try:
         existing_data = []
         if os.path.exists(OUTPUT_FILE):
             try:
                 with open(OUTPUT_FILE, 'r') as f: existing_data = json.load(f)
             except: pass
+        
+        all_new_records = []  # Collect all records, save at end
         
         for i, game in enumerate(games, 1):
             # 🔄 BATCH RESTART: Proactively restart driver every 10 games to free memory
@@ -217,10 +238,11 @@ def run_ftn_scraper_cycle():
                     raise Exception("Critical Driver Error detected in worker")
 
                 if new_records:
-                    existing_data.extend(new_records)
-                    with open(OUTPUT_FILE, 'w') as f:
-                        json.dump(existing_data, f, indent=2)
-                    print(f'      ✅ Saved {len(new_records)} price records', flush=True)
+                    # Set single timestamp for all records in this run
+                    for record in new_records:
+                        record['timestamp'] = run_timestamp
+                    all_new_records.extend(new_records)
+                    print(f'      ✅ Collected {len(new_records)} price records', flush=True)
                 else:
                     print(f'      ⚠️ No prices found for this match', flush=True)
             
@@ -240,6 +262,16 @@ def run_ftn_scraper_cycle():
         import traceback
         traceback.print_exc()
     finally:
+        # Save all collected records at once at the end (like Viagogo does)
+        if all_new_records:
+            try:
+                existing_data.extend(all_new_records)
+                with open(OUTPUT_FILE, 'w') as f:
+                    json.dump(existing_data, f, indent=2)
+                print(f'\n[OK] Saved {len(all_new_records)} total price records to {OUTPUT_FILE}', flush=True)
+            except Exception as save_err:
+                print(f'\n[ERROR] Error saving results: {str(save_err)[:50]}', flush=True)
+        
         if driver:
             try:
                 driver.quit()

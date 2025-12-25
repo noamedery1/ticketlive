@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts'
+import TeamView from './TeamView'
 import './App.css'
 
 // Use local backend for development, empty for production (same origin)
@@ -8,6 +9,7 @@ const API_URL = import.meta.env.DEV ? 'http://localhost:8000' : ''
 console.log('API_URL:', API_URL, 'DEV mode:', import.meta.env.DEV)
 
 function App() {
+  const [view, setView] = useState('original') // 'original' or 'teams'
   const [matches, setMatches] = useState([])
   const [selectedMatch, setSelectedMatch] = useState(null)
   const [history, setHistory] = useState(null)
@@ -164,10 +166,53 @@ function App() {
     }
   }, [resize, stopResizing])
 
+  // Render TeamView if selected
+  if (view === 'teams') {
+    return (
+      <div className="app-container">
+        <div className="header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '15px 20px', borderBottom: '1px solid #30363d', background: '#161b22' }}>
+          <h1 style={{ margin: 0 }}>🏟️ Team Ticket Prices</h1>
+          <button
+            onClick={() => setView('original')}
+            style={{
+              padding: '8px 16px',
+              borderRadius: '6px',
+              border: '1px solid #30363d',
+              background: '#1f6feb',
+              color: 'white',
+              cursor: 'pointer',
+              fontSize: '14px'
+            }}
+          >
+            ← Back to Original View
+          </button>
+        </div>
+        <TeamView />
+      </div>
+    )
+  }
+
   return (
     <div className='dashboard'>
       <div className='sidebar' style={{ width: sidebarWidth }}>
-        <div className='logo'>ViagogoMonitor</div>
+        <div className='logo' style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span>ViagogoMonitor</span>
+          <button
+            onClick={() => setView('teams')}
+            style={{
+              padding: '4px 8px',
+              borderRadius: '4px',
+              border: '1px solid #30363d',
+              background: '#21262d',
+              color: '#c9d1d9',
+              cursor: 'pointer',
+              fontSize: '11px'
+            }}
+            title="Team View"
+          >
+            🏟️ Teams
+          </button>
+        </div>
         <div className='match-list'>
           {matches.map(m => (
             <div
