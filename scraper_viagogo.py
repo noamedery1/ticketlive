@@ -227,8 +227,6 @@ def get_driver():
     time.sleep(random.uniform(0.5, 2.0))
     
     try:
-<<<<<<< .merge_file_a09388
-=======
         # Windows: Detect Chrome path (handle 32-bit vs 64-bit)
         if sys.platform == 'win32':
             # Try 32-bit Chrome first (Program Files x86)
@@ -244,8 +242,7 @@ def get_driver():
                 driver_path = None  # Fall back to auto-download
         else:
             browser_path = None
-        
->>>>>>> .merge_file_a03364
+            driver_path = None
         options = uc.ChromeOptions()
         
         # Basic options for local use (no headless needed)
@@ -261,16 +258,11 @@ def get_driver():
         for attempt in range(5):  # Increased retries
             try:
                 driver = uc.Chrome(
-<<<<<<< .merge_file_a09388
-                    options=options, 
-                    version_main=None
-=======
                     use_subprocess=False,  # Avoid subprocess issues on Windows 7
                     options=options, 
                     version_main=None,
                     browser_executable_path=browser_path,  # Explicitly set Chrome path
                     driver_executable_path=driver_path  # Use manually downloaded ChromeDriver if available
->>>>>>> .merge_file_a03364
                 )
                 driver.set_page_load_timeout(60)
                 driver.implicitly_wait(5)
