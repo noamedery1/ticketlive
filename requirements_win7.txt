@@ -1,0 +1,7 @@
+# Windows 7 Compatible Requirements (Python 3.7.9)
+# Last tested versions that work with Python 3.7.9
+
+undetected-chromedriver==3.5.4
+selenium==4.11.2
+requests==2.31.0
+
