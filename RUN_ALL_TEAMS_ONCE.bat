@@ -3,7 +3,7 @@ REM Change to the script's directory
 cd /d "%~dp0"
 
 echo ============================================================
-echo RUN ALL TEAMS SCRAPER - FootballTicketNet
+echo RUN ALL TEAMS SCRAPER - FootballTicketNet (ONE TIME)
 echo ============================================================
 echo.
 
@@ -32,7 +32,7 @@ if exist "C:\PythonEnvs\ticketlive\Scripts\activate.bat" (
 )
 
 echo.
-echo [START] Running all teams scraper (continuous, every 3 hours)...
+echo [START] Running all teams from *_prices.json files (one time)...
 echo.
 
 REM Check if the script exists
@@ -45,8 +45,8 @@ if not exist "auto_scraper_teams.py" (
     exit /b 1
 )
 
-REM Run continuously (every 3 hours)
-%PYTHON_CMD% auto_scraper_teams.py
+REM Run once (not continuous loop)
+%PYTHON_CMD% auto_scraper_teams.py --once
 
 if errorlevel 1 (
     echo.

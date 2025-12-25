@@ -201,9 +201,9 @@ function TeamView() {
         </select>
       </div>
 
-      <div className="main-content" style={{ display: 'flex', flexDirection: 'row', flex: 1, overflow: 'hidden', width: '100%', height: '100%', position: 'relative' }}>
+      <div className="main-content team-view-content">
         {/* Games List */}
-        <div className="games-sidebar" style={{ flex: '0 0 300px', minWidth: '300px', maxWidth: '300px', overflowY: 'auto' }}>
+        <div className="games-sidebar">
           <h2>Games {games.length > 0 && `(${games.length})`}</h2>
           {games.length === 0 ? (
             <div className="no-data" style={{ padding: '20px', textAlign: 'center' }}>
@@ -288,19 +288,7 @@ function TeamView() {
         </div>
 
         {/* Price View - Right Side */}
-        <div className="price-view" style={{ 
-          flex: '1 1 0', 
-          padding: '40px', 
-          overflowY: 'auto', 
-          backgroundColor: '#0d1117',
-          display: 'flex', 
-          flexDirection: 'column', 
-          alignItems: 'center', 
-          justifyContent: 'flex-start',
-          minWidth: 0,
-          position: 'relative',
-          height: '100%'
-        }}>
+        <div className="price-view team-price-view">
           {gamePrices && gamePrices.game ? (
             <>
               <div style={{ textAlign: 'center', maxWidth: '600px', width: '100%', marginBottom: '20px' }}>

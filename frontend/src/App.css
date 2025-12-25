@@ -11,8 +11,6 @@
   color: #c9d1d9;
 }
 
-<<<<<<< .merge_file_a11644
-=======
 .app-container {
   width: 100%;
   height: 100vh;
@@ -20,9 +18,9 @@
   flex-direction: column;
   background-color: #0d1117;
   color: #c9d1d9;
+  overflow: hidden;
 }
 
->>>>>>> .merge_file_a03892
 .dashboard {
   display: flex;
   width: 100%;
@@ -31,7 +29,7 @@
 
 /* Sidebar */
 .sidebar {
-  width: 250px; /* Reduced width to give more space to main content */
+  width: 250px;
   background-color: #161b22;
   border-right: 1px solid #30363d;
   display: flex;
@@ -66,29 +64,14 @@
 
 .match-item.active {
   background-color: #1f6feb;
-<<<<<<< .merge_file_a11644
-  color: #ffffff;
+  color: white;
 }
 
 .match-name {
   font-weight: 600;
   font-size: 0.9rem;
-  margin-bottom: 2px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.match-price-preview {
-  font-size: 0.75rem;
-  opacity: 0.8;
-=======
-  color: white;
-}
-
-.match-name {
-  font-size: 0.9rem;
   word-wrap: break-word;
+  white-space: normal;
 }
 
 .resizer {
@@ -100,7 +83,6 @@
 
 .resizer:hover {
   background-color: #58a6ff;
->>>>>>> .merge_file_a03892
 }
 
 /* Main Content */
@@ -109,19 +91,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-<<<<<<< .merge_file_a11644
   min-width: 0;
-}
-
-.header {
-  padding: 10px 20px;
-  border-bottom: 1px solid #30363d;
-  background-color: #0d1117;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-shrink: 0;
-=======
   background-color: #0d1117;
 }
 
@@ -134,14 +104,13 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
->>>>>>> .merge_file_a03892
+  flex-shrink: 0;
 }
 
 .header h1 {
   margin: 0;
-<<<<<<< .merge_file_a11644
-  font-size: 1.2rem;
-  color: #f0f6fc;
+  font-size: 1.5rem;
+  color: #c9d1d9;
 }
 
 .last-updated {
@@ -149,45 +118,60 @@
   color: #8b949e;
 }
 
+.time-filters {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 /* Split Layout */
 .split-container {
-    display: flex;
-    flex: 1;
-    overflow: hidden;
-    position: relative;
-    width: 100%;
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  gap: 0;
 }
 
 .split-pane {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    overflow-y: auto;
-    min-width: 0; /* Crucial for nested flex/grid */
-    border-right: 1px solid #30363d;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  overflow-y: auto;
+  min-width: 0;
+  border-right: 1px solid #30363d;
 }
 
 .split-pane:last-child {
-    border-right: none;
+  border-right: none;
 }
 
 .pane-title {
-    font-size: 1rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-    padding-bottom: 5px;
-    border-bottom: 2px solid;
-    text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid;
+  text-align: center;
 }
 
-.viagogo-title { color: #d2a8ff; border-color: #d2a8ff; }
-.ftn-title { color: #79c0ff; border-color: #79c0ff; }
+.viagogo-title { 
+  color: #d2a8ff; 
+  border-color: #d2a8ff; 
+}
+
+.ftn-title { 
+  color: #79c0ff; 
+  border-color: #79c0ff; 
+}
 
 /* Stats Cards */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* All 4 categories in one row if possible, or wrap */
+  grid-template-columns: repeat(4, 1fr);
   gap: 8px;
   margin-bottom: 15px;
 }
@@ -201,7 +185,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-width: 0; /* fixes overflow in grid */
+  min-width: 0;
 }
 
 .stat-label {
@@ -212,7 +196,7 @@
 }
 
 .stat-value {
-  font-size: 0.95rem; /* Smaller font to fit */
+  font-size: 0.95rem;
   font-weight: 600;
   color: #f0f6fc;
   white-space: nowrap;
@@ -220,236 +204,56 @@
 
 /* Chart Area */
 .chart-section {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    background: #161b22;
-    border: 1px solid #30363d;
-    border-radius: 6px;
-    padding: 10px;
-    min-height: 200px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 10px;
+  min-height: 200px;
 }
 
 .chart-container-inner {
-    flex: 1;
-    width: 100%;
-    min-height: 0;
-}
-
-/* Resizer Handle */
-.resizer {
-  width: 5px;
-  cursor: col-resize;
-  background-color: #21262d; 
-  height: 100%;
-  flex-shrink: 0;
-  transition: background-color 0.2s;
-  z-index: 10;
-}
-
-.resizer:hover, .resizer:active {
-  background-color: #1f6feb;
-}
-
-/* =========================================
-   Mobile / Responsive Adaptation
-   ========================================= */
-@media (max-width: 768px) {
-  .dashboard {
-    flex-direction: column; /* Stack sidebar on top of main content */
-    overflow: hidden; /* Manage main scroll in body if needed, or flex children */
-  }
-
-  /* Force Sidebar to be full width on mobile, ignoring inline JS width */
-  .sidebar {
-    width: 100% !important; 
-    height: 180px; /* Fixed height list on top */
-    border-right: none;
-    border-bottom: 2px solid #30363d;
-    flex-shrink: 0;
-  }
-
-  .resizer {
-    display: none; /* No resizing on mobile */
-  }
-
-  .main-content {
-    width: 100%;
-    overflow-y: auto; /* Allow main content to scroll independently */
-  }
-
-  .split-container {
-    flex-direction: column; /* Stack Viagogo on top of FTN */
-    overflow-y: visible; /* Let inner content determine height and scroll main-content */
-  }
-
-  .split-pane {
-    border-right: none;
-    border-bottom: 1px solid #30363d;
-    min-height: 600px; /* Ensure enough height for chart on mobile */
-    overflow: visible; 
-  }
-
-  /* Make header smaller/stack on mobile */
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .header h1 {
-    font-size: 1.1rem;
-    white-space: normal; /* Allow wrapping */
-  }
-
-  /* 2 cols instead of 4 for stats on small screens */
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr); 
-  }
-}
-
-/* Enhanced Chart Dots - Make price points more visible but static */
-.recharts-dot {
-  filter: drop-shadow(0 0 2px currentColor);
-  /* No animation - static dots */
-}
-
-.recharts-active-dot {
-  filter: drop-shadow(0 0 4px currentColor);
-  /* No animation - static active dot */
-}
-
-/* Make chart lines more visible */
-.recharts-line {
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
-}
-
-/* Date picker styling */
-input[type="date"] {
-  cursor: pointer;
-}
-
-input[type="date"]:focus {
-  outline: 2px solid #1f6feb;
-  outline-offset: 2px;
-}
-=======
-  font-size: 1.5rem;
-  color: #c9d1d9;
-}
-
-.header-controls {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.team-selector {
-  padding: 6px 12px;
-  border-radius: 6px;
-  border: 1px solid #30363d;
-  background: #0d1117;
-  color: #c9d1d9;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-/* Stats Grid */
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 15px;
-  padding: 20px;
-}
-
-.stat-card {
-  background-color: #161b22;
-  border: 1px solid #30363d;
-  border-radius: 8px;
-  padding: 15px;
-  text-align: center;
-}
-
-.stat-label {
-  font-size: 0.85rem;
-  color: #8b949e;
-  margin-bottom: 8px;
-}
-
-.stat-value {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #c9d1d9;
-}
-
-/* Chart Section */
-.chart-section {
   flex: 1;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
+  width: 100%;
   min-height: 0;
 }
 
-.chart-container {
+/* Team View Styles */
+.team-view-content {
+  display: flex;
+  flex-direction: row;
   flex: 1;
-  min-height: 400px;
-  background-color: #161b22;
-  border: 1px solid #30363d;
-  border-radius: 8px;
-  padding: 15px;
-}
-
-.chart-container-inner {
+  overflow: hidden;
   width: 100%;
   height: 100%;
-  min-height: 400px;
+  position: relative;
 }
 
-/* Split Pane Layout */
-.split-container {
-  display: flex;
-  gap: 20px;
-  padding: 20px;
-  height: 100%;
-}
-
-.split-pane {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  background-color: #161b22;
-  border: 1px solid #30363d;
-  border-radius: 8px;
-  padding: 20px;
-  min-width: 0;
-}
-
-.pane-title {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 15px;
-  color: #58a6ff;
-  border-bottom: 1px solid #30363d;
-  padding-bottom: 10px;
-}
-
-.viagogo-title {
-  color: #d2a8ff;
-}
-
-.ftn-title {
-  color: #79c0ff;
-}
-
-/* Team View Styles */
 .games-sidebar {
   width: 300px;
+  min-width: 300px;
+  max-width: 300px;
   background-color: #161b22;
   border-right: 1px solid #30363d;
   padding: 20px;
   overflow-y: auto;
   flex-shrink: 0;
+}
+
+.team-price-view {
+  flex: 1 1 0;
+  padding: 40px;
+  overflow-y: auto;
+  background-color: #0d1117;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 0;
+  position: relative;
+  height: 100%;
 }
 
 .games-sidebar h2 {
@@ -495,32 +299,6 @@ input[type="date"]:focus {
   color: white;
 }
 
-.game-date {
-  font-size: 0.85rem;
-  color: #8b949e;
-  margin-bottom: 8px;
-}
-
-.game-prices-preview {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-top: 8px;
-}
-
-.price-badge {
-  font-size: 0.75rem;
-  padding: 2px 6px;
-  background-color: #21262d;
-  border-radius: 4px;
-  color: #8b949e;
-}
-
-.game-item.selected .price-badge {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #c9d1d9;
-}
-
 .price-view {
   flex: 1;
   padding: 20px;
@@ -528,114 +306,7 @@ input[type="date"]:focus {
   display: flex;
   flex-direction: column;
   gap: 20px;
-}
-
-.game-header {
-  border-bottom: 1px solid #30363d;
-  padding-bottom: 15px;
-  margin-bottom: 20px;
-}
-
-.game-header h2 {
-  margin: 0 0 8px 0;
-  color: #c9d1d9;
-}
-
-.latest-prices-grid {
-  background-color: #161b22;
-  border-radius: 12px;
-  padding: 24px;
-  border: 1px solid #30363d;
-  margin-bottom: 30px;
-}
-
-.latest-prices-grid h3 {
-  margin: 0 0 20px 0;
-  color: #c9d1d9;
-  font-size: 1.1rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.prices-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
-}
-
-.price-card {
-  background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
-  border: 1px solid #30363d;
-  border-radius: 10px;
-  padding: 18px;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.price-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #58a6ff, #1f6feb);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.price-card:hover {
-  border-color: #58a6ff;
-  background: linear-gradient(135deg, #161b22 0%, #0d1117 100%);
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(88, 166, 255, 0.2);
-}
-
-.price-card:hover::before {
-  opacity: 1;
-}
-
-.price-category-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 12px;
-}
-
-.price-category {
-  font-size: 0.95rem;
-  color: #c9d1d9;
-  font-weight: 500;
-  line-height: 1.4;
-  flex: 1;
-}
-
-.price-block-badge {
-  font-size: 0.75rem;
-  padding: 4px 10px;
-  background: rgba(88, 166, 255, 0.15);
-  border: 1px solid rgba(88, 166, 255, 0.3);
-  border-radius: 6px;
-  color: #58a6ff;
-  font-weight: 600;
-  white-space: nowrap;
-  margin-left: 8px;
-}
-
-.price-value-large {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #58a6ff;
-  line-height: 1.2;
-  text-shadow: 0 2px 8px rgba(88, 166, 255, 0.3);
-}
-
-.price-card:hover .price-value-large {
-  color: #79c0ff;
-  text-shadow: 0 2px 12px rgba(121, 192, 255, 0.4);
+  min-width: 0;
 }
 
 .no-data {
@@ -645,20 +316,247 @@ input[type="date"]:focus {
   font-size: 1.1rem;
 }
 
-/* Recharts styling */
-.recharts-line {
-  filter: drop-shadow(0 0 2px rgba(0,0,0,0.3));
+/* Enhanced Chart Dots */
+.recharts-dot {
+  filter: drop-shadow(0 0 2px currentColor);
 }
 
-/* Responsive */
+.recharts-active-dot {
+  filter: drop-shadow(0 0 4px currentColor);
+}
+
+.recharts-line {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+/* Date picker styling */
+input[type="date"] {
+  cursor: pointer;
+}
+
+input[type="date"]:focus {
+  outline: 2px solid #1f6feb;
+  outline-offset: 2px;
+}
+
+/* =========================================
+   Mobile / Responsive Styles
+   ========================================= */
 @media (max-width: 768px) {
+  /* Dashboard - Original View */
+  .dashboard {
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .sidebar {
+    width: 100% !important;
+    height: 200px;
+    max-height: 200px;
+    border-right: none;
+    border-bottom: 2px solid #30363d;
+    flex-shrink: 0;
+  }
+
+  .resizer {
+    display: none;
+  }
+
+  .main-content {
+    width: 100%;
+    overflow-y: auto;
+    flex: 1;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 15px;
+    gap: 8px;
+  }
+
+  .header h1 {
+    font-size: 1.1rem;
+    white-space: normal;
+    word-wrap: break-word;
+  }
+
+  .time-filters {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .time-filters button {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+  }
+
+  input[type="date"] {
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    width: 100%;
+    max-width: 150px;
+  }
+
   .split-container {
     flex-direction: column;
+    overflow-y: visible;
+    padding: 10px;
+    gap: 10px;
   }
-  
+
+  .split-pane {
+    border-right: none;
+    border-bottom: 1px solid #30363d;
+    min-height: 500px;
+    padding: 15px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .stat-card {
+    padding: 10px 5px;
+  }
+
+  .stat-label {
+    font-size: 0.65rem;
+  }
+
+  .stat-value {
+    font-size: 0.85rem;
+  }
+
+  .chart-section {
+    min-height: 300px;
+    padding: 8px;
+  }
+
+  /* Team View - Mobile */
+  .app-container {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .app-container .header {
+    padding: 10px 15px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .app-container .header h1 {
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  .app-container .header button {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+  }
+
+  .team-view-content {
+    flex-direction: column;
+    overflow: hidden;
+  }
+
   .games-sidebar {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    max-height: 250px;
+    border-right: none;
+    border-bottom: 2px solid #30363d;
+    padding: 15px;
+    flex-shrink: 0;
+  }
+
+  .games-sidebar h2 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+  }
+
+  .game-item {
+    padding: 10px;
+  }
+
+  .game-name {
+    font-size: 0.85rem;
+  }
+
+  .team-price-view {
+    padding: 15px;
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
+    align-items: stretch;
+  }
+
+  .team-price-view h2 {
+    font-size: 1.2rem;
+  }
+
+  .team-price-view h3 {
+    font-size: 0.9rem;
+  }
+
+  .team-price-view .chart-section {
     width: 100%;
-    max-height: 300px;
+    max-width: 100%;
+    height: 250px;
+    min-height: 250px;
+    margin-top: 20px;
+  }
+
+  .team-price-view .chart-container {
+    height: 100%;
+    min-height: 250px;
   }
 }
->>>>>>> .merge_file_a03892
+
+/* Extra small devices */
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 0.95rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .stat-card {
+    padding: 8px;
+  }
+
+  .split-pane {
+    padding: 10px;
+    min-height: 400px;
+  }
+
+  .chart-section {
+    min-height: 250px;
+    padding: 5px;
+  }
+
+  .games-sidebar {
+    max-height: 200px;
+    padding: 10px;
+  }
+
+  .price-view {
+    padding: 10px;
+  }
+
+  .price-view h2 {
+    font-size: 1rem;
+  }
+
+  .chart-section {
+    height: 200px;
+    min-height: 200px;
+  }
+}

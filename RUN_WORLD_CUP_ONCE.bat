@@ -3,7 +3,7 @@ REM Change to the script's directory
 cd /d "%~dp0"
 
 echo ============================================================
-echo RUN ALL TEAMS SCRAPER - FootballTicketNet
+echo RUN WORLD CUP SCRAPER - Viagogo (ONE TIME)
 echo ============================================================
 echo.
 
@@ -32,12 +32,12 @@ if exist "C:\PythonEnvs\ticketlive\Scripts\activate.bat" (
 )
 
 echo.
-echo [START] Running all teams scraper (continuous, every 3 hours)...
+echo [START] Running World Cup scraper (Viagogo) - one time...
 echo.
 
 REM Check if the script exists
-if not exist "auto_scraper_teams.py" (
-    echo [ERROR] auto_scraper_teams.py not found in current directory!
+if not exist "auto_scraper_worldcup.py" (
+    echo [ERROR] auto_scraper_worldcup.py not found in current directory!
     echo Current directory: %CD%
     echo.
     echo Please make sure you're running this from the project root directory.
@@ -45,8 +45,8 @@ if not exist "auto_scraper_teams.py" (
     exit /b 1
 )
 
-REM Run continuously (every 3 hours)
-%PYTHON_CMD% auto_scraper_teams.py
+REM Run once (not continuous loop) - includes git commit and push
+%PYTHON_CMD% auto_scraper_worldcup.py --once
 
 if errorlevel 1 (
     echo.
@@ -58,7 +58,7 @@ if errorlevel 1 (
 
 echo.
 echo ============================================================
-echo [DONE] All teams scraper finished!
+echo [DONE] World Cup scraper finished!
 echo ============================================================
 pause
 

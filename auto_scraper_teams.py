@@ -32,7 +32,7 @@ PYTHON_CMD = get_python_cmd()
 # ==========================================
 # ⚙️ CONFIGURATION
 # ==========================================
-SCRAPE_INTERVAL_HOURS = 12.0  # Run every 12 hours (twice a day)
+SCRAPE_INTERVAL_HOURS = 3.0  # Run every 3 hours
 OUTPUT_FILE = 'ftn_teams_data.json'
 
 # ==========================================

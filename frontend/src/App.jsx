@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts'
-<<<<<<< .merge_file_a11588
-=======
 import TeamView from './TeamView'
->>>>>>> .merge_file_a11696
 import './App.css'
 
 // Use local backend for development, empty for production (same origin)
@@ -12,10 +9,7 @@ const API_URL = import.meta.env.DEV ? 'http://localhost:8000' : ''
 console.log('API_URL:', API_URL, 'DEV mode:', import.meta.env.DEV)
 
 function App() {
-<<<<<<< .merge_file_a11588
-=======
   const [view, setView] = useState('original') // 'original' or 'teams'
->>>>>>> .merge_file_a11696
   const [matches, setMatches] = useState([])
   const [selectedMatch, setSelectedMatch] = useState(null)
   const [history, setHistory] = useState(null)
@@ -172,12 +166,6 @@ function App() {
     }
   }, [resize, stopResizing])
 
-<<<<<<< .merge_file_a11588
-  return (
-    <div className='dashboard'>
-      <div className='sidebar' style={{ width: sidebarWidth }}>
-        <div className='logo'>ViagogoMonitor</div>
-=======
   // Render TeamView if selected
   if (view === 'teams') {
     return (
@@ -225,7 +213,6 @@ function App() {
             🏟️ Teams
           </button>
         </div>
->>>>>>> .merge_file_a11696
         <div className='match-list'>
           {matches.map(m => (
             <div

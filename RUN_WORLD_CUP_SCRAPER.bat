@@ -32,7 +32,7 @@ if exist "C:\PythonEnvs\ticketlive\Scripts\activate.bat" (
 )
 
 echo.
-echo [START] Running World Cup scraper (Viagogo)...
+echo [START] Running World Cup scraper (continuous, every 3 hours)...
 echo.
 
 REM Check if the script exists
@@ -45,8 +45,8 @@ if not exist "auto_scraper_worldcup.py" (
     exit /b 1
 )
 
-REM Run once (not continuous loop) - includes git commit and push
-%PYTHON_CMD% auto_scraper_worldcup.py --once
+REM Run continuously (every 3 hours) - includes git commit and push
+%PYTHON_CMD% auto_scraper_worldcup.py
 
 if errorlevel 1 (
     echo.

@@ -32,7 +32,7 @@ PYTHON_CMD = get_python_cmd()
 # ==========================================
 # ⚙️ CONFIGURATION
 # ==========================================
-SCRAPE_INTERVAL_HOURS = 2.0  # Run every 2 hours
+SCRAPE_INTERVAL_HOURS = 3.0  # Run every 3 hours
 PRICES_VIAGOGO_FILE = 'prices.json'
 
 # ==========================================
