@@ -7,11 +7,7 @@ import json
 import os
 import re
 import sys
-<<<<<<< .merge_file_a12468
-from fastapi import FastAPI, Request
-=======
 from fastapi import FastAPI, Request, HTTPException
->>>>>>> .merge_file_a10676
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
@@ -30,10 +26,7 @@ if sys.platform == 'win32':
 DATA_FILE_VIAGOGO = 'prices.json'
 DATA_FILE_FTN = 'prices_ftn.json'
 GAMES_FILE = 'all_games_to_scrape.json'
-<<<<<<< .merge_file_a12468
-=======
 TEAMS_DATA_FILE = 'ftn_teams_data.json'
->>>>>>> .merge_file_a10676
 # Railway sets PORT dynamically - use whatever Railway provides
 # Railway will set PORT environment variable automatically
 PORT = int(os.environ.get('PORT', '8000'))  # Railway always sets PORT, but keep default for local dev
@@ -314,8 +307,6 @@ else:
     print(f'[ERROR] Frontend dist directory not found: {client_dist}')
 
 # Serve vite.svg from root (referenced in index.html)
-<<<<<<< .merge_file_a12468
-=======
 @app.get('/teams')
 def get_teams():
     """Get list of available teams"""
@@ -393,7 +384,6 @@ def get_game_prices(team_key: str, game_index: int):
         print(f'[ERROR] /teams/{team_key}/game/{game_index} error: {e}')
         return {'prices': [], 'game': None}
 
->>>>>>> .merge_file_a10676
 @app.get('/vite.svg')
 async def serve_vite_svg():
     vite_svg_path = f'{client_dist}/vite.svg'
@@ -408,15 +398,6 @@ def health_check():
     return {'status': 'ok', 'message': 'Server is running'}
 
 # Catch-all route for React SPA - MUST be last (after API routes)
-<<<<<<< .merge_file_a12468
-# This matches the working setup from RUN_EVERYTHING.py
-@app.get('/{full_path:path}')
-async def serve_react_app(full_path: str):
-    """Serve React app for all non-API routes (SPA routing)"""
-    # Don't interfere with API routes
-    if full_path.startswith('matches') or full_path.startswith('history'):
-        return {'error': 'Not found'}
-=======
 # FastAPI matches routes in order, so specific routes above will be matched first
 @app.get('/{full_path:path}')
 async def serve_react_app(full_path: str, request: Request):
@@ -427,7 +408,6 @@ async def serve_react_app(full_path: str, request: Request):
     if any(full_path.startswith(excluded) for excluded in excluded_paths):
         # This shouldn't happen if routes are defined correctly, but just in case
         raise HTTPException(status_code=404, detail="API route not found")
->>>>>>> .merge_file_a10676
     
     # Serve index.html for all other routes (React Router handles routing)
     index_path = f'{client_dist}/index.html'
@@ -477,36 +457,16 @@ if __name__ == '__main__':
         print(f'[INFO] Startup checks completed in {elapsed:.2f}s', flush=True)
         
         print(f'[INFO] Starting server on 0.0.0.0:{PORT}...', flush=True)
-<<<<<<< .merge_file_a12468
-        print('[INFO] Server starting now...', flush=True)
-        
-        # Start uvicorn server - this blocks until server stops
-        try:
-            uvicorn.run(
-                app, 
-                host='0.0.0.0', 
-                port=PORT, 
-                log_level='info', 
-                access_log=True
-            )
-        except Exception as server_error:
-            print(f'[FATAL] Uvicorn server error: {server_error}', flush=True)
-            import traceback
-            traceback.print_exc()
-            raise
-=======
         print(f'[INFO] Railway PORT env: {os.environ.get("PORT", "NOT SET")}', flush=True)
         print('[INFO] Server starting now...', flush=True)
         
-        # Start uvicorn server - match working version from RUN_EVERYTHING.py
-        # This blocks until server stops
+        # Start uvicorn server - this blocks until server stops
         uvicorn.run(
             app, 
             host='0.0.0.0', 
             port=PORT, 
             log_level='info'
         )
->>>>>>> .merge_file_a10676
     except KeyboardInterrupt:
         print('\n[INFO] Server stopped by user', flush=True)
     except Exception as e:
