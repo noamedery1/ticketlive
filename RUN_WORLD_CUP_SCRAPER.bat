@@ -1,6 +1,6 @@
 @echo off
 echo ============================================================
-echo RUN ALL TEAMS SCRAPER - FootballTicketNet
+echo RUN WORLD CUP SCRAPER - Viagogo
 echo ============================================================
 echo.
 
@@ -13,15 +13,15 @@ if exist "C:\PythonEnvs\ticketlive\Scripts\activate.bat" (
 )
 
 echo.
-echo [START] Running all teams from *_prices.json files...
+echo [START] Running World Cup scraper (Viagogo)...
 echo.
 
-REM Run once (not continuous loop)
-python auto_scraper_teams.py --once
+REM Run once (not continuous loop) - includes git commit and push
+python auto_scraper_worldcup.py --once
 
 echo.
 echo ============================================================
-echo [DONE] All teams scraper finished!
+echo [DONE] World Cup scraper finished!
 echo ============================================================
 pause
 
