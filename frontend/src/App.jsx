@@ -363,7 +363,7 @@ function App() {
                             }} 
                             itemStyle={{ color: '#c9d1d9', fontSize: '13px', marginBottom: '4px' }}
                             labelStyle={{ color: '#f0f6fc', fontWeight: '600', fontSize: '12px', marginBottom: '8px' }}
-                            formatter={(value) => [`$${value?.toLocaleString() || '0'}`, '']}
+                            formatter={(value, name) => [`$${value?.toLocaleString() || '0'}`, name]}
                           />
                           <Legend 
                             wrapperStyle={{ fontSize: '11px', paddingTop: '15px' }}
@@ -493,7 +493,7 @@ function App() {
                             }} 
                             itemStyle={{ color: '#c9d1d9', fontSize: '13px', marginBottom: '4px' }}
                             labelStyle={{ color: '#f0f6fc', fontWeight: '600', fontSize: '12px', marginBottom: '8px' }}
-                            formatter={(value) => [`$${value?.toLocaleString() || '0'}`, '']}
+                            formatter={(value, name) => [`$${value?.toLocaleString() || '0'}`, name]}
                           />
                           <Legend 
                             wrapperStyle={{ fontSize: '11px', paddingTop: '15px' }}
