@@ -1,4 +1,7 @@
 @echo off
+REM Change to the script's directory
+cd /d "%~dp0"
+
 echo ============================================================
 echo RUN ALL TEAMS SCRAPER - FootballTicketNet
 echo ============================================================
@@ -31,6 +34,16 @@ if exist "C:\PythonEnvs\ticketlive\Scripts\activate.bat" (
 echo.
 echo [START] Running all teams from *_prices.json files...
 echo.
+
+REM Check if the script exists
+if not exist "auto_scraper_teams.py" (
+    echo [ERROR] auto_scraper_teams.py not found in current directory!
+    echo Current directory: %CD%
+    echo.
+    echo Please make sure you're running this from the project root directory.
+    pause
+    exit /b 1
+)
 
 REM Run once (not continuous loop)
 %PYTHON_CMD% auto_scraper_teams.py --once
