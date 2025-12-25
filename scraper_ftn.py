@@ -23,6 +23,10 @@ def get_driver():
     time.sleep(random.uniform(0.5, 2.0))
     
     try:
+<<<<<<< .merge_file_a12552
+        browser_path = '/usr/bin/chromium' if os.path.exists('/usr/bin/chromium') else None
+        driver_path = '/usr/bin/chromedriver' if os.path.exists('/usr/bin/chromedriver') else None
+=======
         # Windows: Detect Chrome path (handle 32-bit vs 64-bit)
         if sys.platform == 'win32':
             # Try 32-bit Chrome first (Program Files x86)
@@ -39,6 +43,7 @@ def get_driver():
         else:
             browser_path = '/usr/bin/chromium' if os.path.exists('/usr/bin/chromium') else None
             driver_path = '/usr/bin/chromedriver' if os.path.exists('/usr/bin/chromedriver') else None
+>>>>>>> .merge_file_a09972
 
         for attempt in range(5):  # Increased retries
             try:
@@ -56,8 +61,12 @@ def get_driver():
                     options=options, 
                     version_main=None, 
                     browser_executable_path=browser_path, 
+<<<<<<< .merge_file_a12552
+                    driver_executable_path=driver_path
+=======
                     driver_executable_path=driver_path,
                     use_subprocess=False  # Avoid subprocess issues on Windows 7
+>>>>>>> .merge_file_a09972
                 )
                 print(f'   ✅ Driver initialized successfully (attempt {attempt+1})', flush=True)
                 return driver
@@ -143,7 +152,11 @@ def scrape_ftn_single(driver, url, match_name):
         records = []
         if prices_found_for_match:
             print(f'      ✅ Found prices: {dict(prices_found_for_match)}', flush=True)
+<<<<<<< .merge_file_a12552
+            timestamp = datetime.now().isoformat()
+=======
             # Note: timestamp will be set by caller to use single run timestamp
+>>>>>>> .merge_file_a09972
             for cat, price in prices_found_for_match.items():
                 records.append({
                     'match_url': url,
@@ -152,7 +165,11 @@ def scrape_ftn_single(driver, url, match_name):
                     'price': price,
                     'currency': 'USD',
                     'source': 'FootballTicketNet',
+<<<<<<< .merge_file_a12552
+                    'timestamp': timestamp
+=======
                     'timestamp': ''  # Will be set by caller with single run timestamp
+>>>>>>> .merge_file_a09972
                 })
         else:
             print('      ❌ No valid prices found.', flush=True)
@@ -192,10 +209,13 @@ def run_ftn_scraper_cycle():
     
     print('   ✅ Driver initialized successfully', flush=True)
     
+<<<<<<< .merge_file_a12552
+=======
     # Create single timestamp for entire scraper run (like Viagogo)
     run_timestamp = datetime.now().isoformat()
     print(f'   📅 Run timestamp: {run_timestamp}', flush=True)
     
+>>>>>>> .merge_file_a09972
     try:
         existing_data = []
         if os.path.exists(OUTPUT_FILE):
@@ -203,8 +223,11 @@ def run_ftn_scraper_cycle():
                 with open(OUTPUT_FILE, 'r') as f: existing_data = json.load(f)
             except: pass
         
+<<<<<<< .merge_file_a12552
+=======
         all_new_records = []  # Collect all records, save at end
         
+>>>>>>> .merge_file_a09972
         for i, game in enumerate(games, 1):
             # 🔄 BATCH RESTART: Proactively restart driver every 10 games to free memory
             if i > 1 and i % 10 == 1:
@@ -238,11 +261,18 @@ def run_ftn_scraper_cycle():
                     raise Exception("Critical Driver Error detected in worker")
 
                 if new_records:
+<<<<<<< .merge_file_a12552
+                    existing_data.extend(new_records)
+                    with open(OUTPUT_FILE, 'w') as f:
+                        json.dump(existing_data, f, indent=2)
+                    print(f'      ✅ Saved {len(new_records)} price records', flush=True)
+=======
                     # Set single timestamp for all records in this run
                     for record in new_records:
                         record['timestamp'] = run_timestamp
                     all_new_records.extend(new_records)
                     print(f'      ✅ Collected {len(new_records)} price records', flush=True)
+>>>>>>> .merge_file_a09972
                 else:
                     print(f'      ⚠️ No prices found for this match', flush=True)
             
@@ -262,6 +292,8 @@ def run_ftn_scraper_cycle():
         import traceback
         traceback.print_exc()
     finally:
+<<<<<<< .merge_file_a12552
+=======
         # Save all collected records at once at the end (like Viagogo does)
         if all_new_records:
             try:
@@ -272,6 +304,7 @@ def run_ftn_scraper_cycle():
             except Exception as save_err:
                 print(f'\n[ERROR] Error saving results: {str(save_err)[:50]}', flush=True)
         
+>>>>>>> .merge_file_a09972
         if driver:
             try:
                 driver.quit()

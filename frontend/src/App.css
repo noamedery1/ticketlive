@@ -11,6 +11,8 @@
   color: #c9d1d9;
 }
 
+<<<<<<< .merge_file_a11644
+=======
 .app-container {
   width: 100%;
   height: 100vh;
@@ -20,6 +22,7 @@
   color: #c9d1d9;
 }
 
+>>>>>>> .merge_file_a03892
 .dashboard {
   display: flex;
   width: 100%;
@@ -63,6 +66,23 @@
 
 .match-item.active {
   background-color: #1f6feb;
+<<<<<<< .merge_file_a11644
+  color: #ffffff;
+}
+
+.match-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.match-price-preview {
+  font-size: 0.75rem;
+  opacity: 0.8;
+=======
   color: white;
 }
 
@@ -80,6 +100,7 @@
 
 .resizer:hover {
   background-color: #58a6ff;
+>>>>>>> .merge_file_a03892
 }
 
 /* Main Content */
@@ -88,6 +109,19 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+<<<<<<< .merge_file_a11644
+  min-width: 0;
+}
+
+.header {
+  padding: 10px 20px;
+  border-bottom: 1px solid #30363d;
+  background-color: #0d1117;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+=======
   background-color: #0d1117;
 }
 
@@ -100,10 +134,206 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
+>>>>>>> .merge_file_a03892
 }
 
 .header h1 {
   margin: 0;
+<<<<<<< .merge_file_a11644
+  font-size: 1.2rem;
+  color: #f0f6fc;
+}
+
+.last-updated {
+  font-size: 0.75rem;
+  color: #8b949e;
+}
+
+/* Split Layout */
+.split-container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.split-pane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    overflow-y: auto;
+    min-width: 0; /* Crucial for nested flex/grid */
+    border-right: 1px solid #30363d;
+}
+
+.split-pane:last-child {
+    border-right: none;
+}
+
+.pane-title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid;
+    text-align: center;
+}
+
+.viagogo-title { color: #d2a8ff; border-color: #d2a8ff; }
+.ftn-title { color: #79c0ff; border-color: #79c0ff; }
+
+/* Stats Cards */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* All 4 categories in one row if possible, or wrap */
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.stat-card {
+  background-color: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 8px 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0; /* fixes overflow in grid */
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  color: #8b949e;
+  margin-bottom: 2px;
+  white-space: nowrap;
+}
+
+.stat-value {
+  font-size: 0.95rem; /* Smaller font to fit */
+  font-weight: 600;
+  color: #f0f6fc;
+  white-space: nowrap;
+}
+
+/* Chart Area */
+.chart-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    padding: 10px;
+    min-height: 200px;
+}
+
+.chart-container-inner {
+    flex: 1;
+    width: 100%;
+    min-height: 0;
+}
+
+/* Resizer Handle */
+.resizer {
+  width: 5px;
+  cursor: col-resize;
+  background-color: #21262d; 
+  height: 100%;
+  flex-shrink: 0;
+  transition: background-color 0.2s;
+  z-index: 10;
+}
+
+.resizer:hover, .resizer:active {
+  background-color: #1f6feb;
+}
+
+/* =========================================
+   Mobile / Responsive Adaptation
+   ========================================= */
+@media (max-width: 768px) {
+  .dashboard {
+    flex-direction: column; /* Stack sidebar on top of main content */
+    overflow: hidden; /* Manage main scroll in body if needed, or flex children */
+  }
+
+  /* Force Sidebar to be full width on mobile, ignoring inline JS width */
+  .sidebar {
+    width: 100% !important; 
+    height: 180px; /* Fixed height list on top */
+    border-right: none;
+    border-bottom: 2px solid #30363d;
+    flex-shrink: 0;
+  }
+
+  .resizer {
+    display: none; /* No resizing on mobile */
+  }
+
+  .main-content {
+    width: 100%;
+    overflow-y: auto; /* Allow main content to scroll independently */
+  }
+
+  .split-container {
+    flex-direction: column; /* Stack Viagogo on top of FTN */
+    overflow-y: visible; /* Let inner content determine height and scroll main-content */
+  }
+
+  .split-pane {
+    border-right: none;
+    border-bottom: 1px solid #30363d;
+    min-height: 600px; /* Ensure enough height for chart on mobile */
+    overflow: visible; 
+  }
+
+  /* Make header smaller/stack on mobile */
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .header h1 {
+    font-size: 1.1rem;
+    white-space: normal; /* Allow wrapping */
+  }
+
+  /* 2 cols instead of 4 for stats on small screens */
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr); 
+  }
+}
+
+/* Enhanced Chart Dots - Make price points more visible but static */
+.recharts-dot {
+  filter: drop-shadow(0 0 2px currentColor);
+  /* No animation - static dots */
+}
+
+.recharts-active-dot {
+  filter: drop-shadow(0 0 4px currentColor);
+  /* No animation - static active dot */
+}
+
+/* Make chart lines more visible */
+.recharts-line {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+/* Date picker styling */
+input[type="date"] {
+  cursor: pointer;
+}
+
+input[type="date"]:focus {
+  outline: 2px solid #1f6feb;
+  outline-offset: 2px;
+}
+=======
   font-size: 1.5rem;
   color: #c9d1d9;
 }
@@ -431,3 +661,4 @@
     max-height: 300px;
   }
 }
+>>>>>>> .merge_file_a03892

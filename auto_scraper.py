@@ -169,10 +169,16 @@ def git_commit(message):
             return True
         else:
             # Check if there are no changes to commit
+<<<<<<< .merge_file_a04156
+            if 'nothing to commit' in result.stdout.lower() or 'nothing to commit' in result.stderr.lower():
+                print(f'   [INFO] No changes to commit', flush=True)
+                return True
+=======
             output = (result.stdout + result.stderr).lower()
             if 'nothing to commit' in output or 'no changes' in output:
                 print(f'   [INFO] No changes to commit (files already up to date)', flush=True)
                 return True  # Return True because this is not an error
+>>>>>>> .merge_file_a11708
             print(f'   [ERROR] Commit failed: {result.stderr}', flush=True)
             return False
     except Exception as e:
