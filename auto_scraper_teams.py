@@ -169,18 +169,46 @@ def load_teams_from_files():
             team_key = os.path.basename(file_path).replace('_prices.json', '')
             
             # Read team_name and team_url from the file
-            with open(file_path, 'r', encoding='utf-8') as f:
-                team_data = json.load(f)
-                team_name = team_data.get('team_name', team_key.title())
-                team_url = team_data.get('team_url', '')
+            # Try to parse JSON, but if it fails, try to extract just the needed fields
+            team_name = None
+            team_url = None
+            
+            try:
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    team_data = json.load(f)
+                    team_name = team_data.get('team_name', team_key.title())
+                    team_url = team_data.get('team_url', '')
+            except json.JSONDecodeError as json_err:
+                # If JSON parsing fails, try to extract team_name and team_url manually
+                print(f'      [WARN] JSON parse error in {file_path}, trying to extract team info...', flush=True)
+                try:
+                    with open(file_path, 'r', encoding='utf-8') as f:
+                        content = f.read()
+                        # Try to find team_name and team_url using regex
+                        import re
+                        name_match = re.search(r'"team_name"\s*:\s*"([^"]+)"', content)
+                        url_match = re.search(r'"team_url"\s*:\s*"([^"]+)"', content)
+                        
+                        if name_match:
+                            team_name = name_match.group(1)
+                        else:
+                            team_name = team_key.title()
+                        
+                        if url_match:
+                            team_url = url_match.group(1)
+                        else:
+                            print(f'      [ERROR] Could not extract team_url from {file_path}', flush=True)
+                except Exception as extract_err:
+                    print(f'      [ERROR] Failed to extract team info: {extract_err}', flush=True)
+                    continue
             
             if team_url:
                 teams.append({
                     'key': team_key,
-                    'name': team_name,
+                    'name': team_name or team_key.title(),
                     'url': team_url
                 })
-                print(f'      [OK] Found: {team_name} ({team_key})', flush=True)
+                print(f'      [OK] Found: {team_name or team_key.title()} ({team_key})', flush=True)
             else:
                 print(f'      [WARN] Skipping {team_key}: missing team_url', flush=True)
         except Exception as e:
