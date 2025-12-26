@@ -99,7 +99,7 @@
           }
         },
         {
-          "timestamp": "2025-12-26T18:02:30.126619",
+          "timestamp": "2025-12-26T18:04:26.904295",
           "prices": {
             "Category": {
               "Unknown": 119.7
@@ -112,7 +112,7 @@
           "Unknown": 119.7
         }
       },
-      "last_scraped": "2025-12-26T18:02:30.126619"
+      "last_scraped": "2025-12-26T18:04:26.904295"
     },
     {
       "url": "https://www.footballticketnet.com/champions-league/fc-barcelona-vs-fc-copenhagen",
@@ -211,7 +211,7 @@
           }
         },
         {
-          "timestamp": "2025-12-26T18:02:30.126619",
+          "timestamp": "2025-12-26T18:04:26.904295",
           "prices": {
             "Category": {
               "Unknown": 159.6
@@ -224,7 +224,7 @@
           "Unknown": 159.6
         }
       },
-      "last_scraped": "2025-12-26T18:02:30.126619"
+      "last_scraped": "2025-12-26T18:04:26.904295"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-rcd-mallorca",
@@ -323,7 +323,7 @@
           }
         },
         {
-          "timestamp": "2025-12-26T18:02:30.126619",
+          "timestamp": "2025-12-26T18:04:26.904295",
           "prices": {
             "Category": {
               "Unknown": 123.89
@@ -336,7 +336,7 @@
           "Unknown": 123.89
         }
       },
-      "last_scraped": "2025-12-26T18:02:30.126619"
+      "last_scraped": "2025-12-26T18:04:26.904295"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-levante-ud",
@@ -435,7 +435,7 @@
           }
         },
         {
-          "timestamp": "2025-12-26T18:02:30.126619",
+          "timestamp": "2025-12-26T18:04:26.904295",
           "prices": {
             "Category": {
               "Unknown": 136.5
@@ -448,7 +448,7 @@
           "Unknown": 136.5
         }
       },
-      "last_scraped": "2025-12-26T18:02:30.126619"
+      "last_scraped": "2025-12-26T18:04:26.904295"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-villarreal-cf",
@@ -547,7 +547,7 @@
           }
         },
         {
-          "timestamp": "2025-12-26T18:02:30.126619",
+          "timestamp": "2025-12-26T18:04:26.904295",
           "prices": {
             "Category": {
               "Unknown": 154.35
@@ -560,7 +560,7 @@
           "Unknown": 154.35
         }
       },
-      "last_scraped": "2025-12-26T18:02:30.126619"
+      "last_scraped": "2025-12-26T18:04:26.904295"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-sevilla-fc",
@@ -659,7 +659,7 @@
           }
         },
         {
-          "timestamp": "2025-12-26T18:02:30.126619",
+          "timestamp": "2025-12-26T18:04:26.904295",
           "prices": {
             "Category": {
               "Unknown": 140.7
@@ -672,7 +672,7 @@
           "Unknown": 140.7
         }
       },
-      "last_scraped": "2025-12-26T18:02:30.126619"
+      "last_scraped": "2025-12-26T18:04:26.904295"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-rayo-vallecano",
@@ -771,7 +771,7 @@
           }
         },
         {
-          "timestamp": "2025-12-26T18:02:30.126619",
+          "timestamp": "2025-12-26T18:04:26.904295",
           "prices": {
             "Category": {
               "Unknown": 181.64
@@ -784,7 +784,7 @@
           "Unknown": 181.64
         }
       },
-      "last_scraped": "2025-12-26T18:02:30.126619"
+      "last_scraped": "2025-12-26T18:04:26.904295"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-rcd-espanyol",
@@ -883,7 +883,7 @@
           }
         },
         {
-          "timestamp": "2025-12-26T18:02:30.126619",
+          "timestamp": "2025-12-26T18:04:26.904295",
           "prices": {
             "Category": {
               "Unknown": 215.46
@@ -896,7 +896,7 @@
           "Unknown": 215.46
         }
       },
-      "last_scraped": "2025-12-26T18:02:30.126619"
+      "last_scraped": "2025-12-26T18:04:26.904295"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-celta-vigo",
@@ -995,7 +995,7 @@
           }
         },
         {
-          "timestamp": "2025-12-26T18:02:30.126619",
+          "timestamp": "2025-12-26T18:04:26.904295",
           "prices": {
             "Category": {
               "Unknown": 229.11
@@ -1008,7 +1008,7 @@
           "Unknown": 229.11
         }
       },
-      "last_scraped": "2025-12-26T18:02:30.126619"
+      "last_scraped": "2025-12-26T18:04:26.904295"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-real-madrid",
@@ -1107,7 +1107,7 @@
           }
         },
         {
-          "timestamp": "2025-12-26T18:02:30.126619",
+          "timestamp": "2025-12-26T18:04:26.904295",
           "prices": {
             "Category": {
               "Unknown": 744.66
@@ -1120,7 +1120,7 @@
           "Unknown": 744.66
         }
       },
-      "last_scraped": "2025-12-26T18:02:30.126619"
+      "last_scraped": "2025-12-26T18:04:26.904295"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-real-betis",
@@ -1219,7 +1219,7 @@
           }
         },
         {
-          "timestamp": "2025-12-26T18:02:30.126619",
+          "timestamp": "2025-12-26T18:04:26.904295",
           "prices": {
             "Category": {
               "Unknown": 233.31
@@ -1232,8 +1232,8 @@
           "Unknown": 233.31
         }
       },
-      "last_scraped": "2025-12-26T18:02:30.126619"
+      "last_scraped": "2025-12-26T18:04:26.904295"
     }
   ],
-  "last_updated": "2025-12-26T18:02:30.126619"
+  "last_updated": "2025-12-26T18:04:26.904295"
 }
