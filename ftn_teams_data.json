@@ -351,7 +351,7 @@
             }
           },
           {
-            "timestamp": "2025-12-27T12:56:22.208807",
+            "timestamp": "2025-12-27T12:59:00.976807",
             "prices": {
               "Longside Upper Level": {
                 "Unknown": 174.97,
@@ -363,9 +363,6 @@
               "Shortside Upper Level": {
                 "97": 200.0,
                 "121,120,102,124": 200.0
-              },
-              "Longside Lower Level": {
-                "29": 200.0
               }
             }
           }
@@ -381,12 +378,9 @@
           "Shortside Upper Level": {
             "97": 200.0,
             "121,120,102,124": 200.0
-          },
-          "Longside Lower Level": {
-            "29": 200.0
           }
         },
-        "last_scraped": "2025-12-27T12:56:22.208807"
+        "last_scraped": "2025-12-27T12:59:00.976807"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-aston-villa",
@@ -752,7 +746,7 @@
             }
           },
           {
-            "timestamp": "2025-12-27T12:56:22.208807",
+            "timestamp": "2025-12-27T12:59:00.976807",
             "prices": {
               "Shortside Upper Level": {
                 "Unknown": 224.86,
@@ -793,7 +787,7 @@
             "Unknown": 255.0
           }
         },
-        "last_scraped": "2025-12-27T12:56:22.208807"
+        "last_scraped": "2025-12-27T12:59:00.976807"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-liverpool-fc",
@@ -837,7 +831,7 @@
             }
           },
           {
-            "timestamp": "2025-12-27T12:56:22.208807",
+            "timestamp": "2025-12-27T12:59:00.976807",
             "prices": {
               "Shortside Upper Level": {
                 "106": 350.0
@@ -856,7 +850,7 @@
             "110": 363.0
           }
         },
-        "last_scraped": "2025-12-27T12:56:22.208807"
+        "last_scraped": "2025-12-27T12:59:00.976807"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-manchester-united",
@@ -1056,7 +1050,7 @@
             }
           },
           {
-            "timestamp": "2025-12-27T12:56:22.208807",
+            "timestamp": "2025-12-27T12:59:00.976807",
             "prices": {
               "Longside Upper Level": {
                 "116,115,110,109": 391.88
@@ -1075,7 +1069,7 @@
             "Unknown": 419.0
           }
         },
-        "last_scraped": "2025-12-27T12:56:22.208807"
+        "last_scraped": "2025-12-27T12:59:00.976807"
       },
       {
         "url": "https://www.footballticketnet.com/champions-league/arsenal-vs-kairat-almaty",
@@ -1337,7 +1331,7 @@
             }
           },
           {
-            "timestamp": "2025-12-27T12:56:22.208807",
+            "timestamp": "2025-12-27T12:59:00.976807",
             "prices": {
               "Shortside Lower Level": {
                 "27": 130.0
@@ -1364,7 +1358,7 @@
             "14": 150.0
           }
         },
-        "last_scraped": "2025-12-27T12:56:22.208807"
+        "last_scraped": "2025-12-27T12:59:00.976807"
       },
       {
         "url": "https://www.footballticketnet.com/carabao-cup/arsenal-vs-chelsea",
@@ -1663,7 +1657,7 @@
             }
           },
           {
-            "timestamp": "2025-12-27T12:56:22.208807",
+            "timestamp": "2025-12-27T12:59:00.976807",
             "prices": {
               "Shortside Upper Level": {
                 "Unknown": 254.94
@@ -1694,7 +1688,7 @@
             "Unknown": 320.0
           }
         },
-        "last_scraped": "2025-12-27T12:56:22.208807"
+        "last_scraped": "2025-12-27T12:59:00.976807"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-sunderland",
@@ -2011,7 +2005,7 @@
             }
           },
           {
-            "timestamp": "2025-12-27T12:56:22.208807",
+            "timestamp": "2025-12-27T12:59:00.976807",
             "prices": {
               "Shortside Upper Level": {
                 "Unknown": 364.97
@@ -2044,7 +2038,7 @@
             "Unknown": 399.95
           }
         },
-        "last_scraped": "2025-12-27T12:56:22.208807"
+        "last_scraped": "2025-12-27T12:59:00.976807"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-chelsea",
@@ -2327,7 +2321,7 @@
             }
           },
           {
-            "timestamp": "2025-12-27T12:56:22.208807",
+            "timestamp": "2025-12-27T12:59:00.976807",
             "prices": {
               "Category": {
                 "Unknown": 432.03
@@ -2356,7 +2350,7 @@
             "Unknown": 539.96
           }
         },
-        "last_scraped": "2025-12-27T12:56:22.208807"
+        "last_scraped": "2025-12-27T12:59:00.976807"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-everton",
@@ -2797,7 +2791,7 @@
             }
           },
           {
-            "timestamp": "2025-12-27T12:56:22.208807",
+            "timestamp": "2025-12-27T12:59:00.976807",
             "prices": {
               "Category": {
                 "Unknown": 255.0
@@ -2846,7 +2840,7 @@
             "Unknown": 439.97
           }
         },
-        "last_scraped": "2025-12-27T12:56:22.208807"
+        "last_scraped": "2025-12-27T12:59:00.976807"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-bournemouth",
@@ -3299,7 +3293,7 @@
             }
           },
           {
-            "timestamp": "2025-12-27T12:56:22.208807",
+            "timestamp": "2025-12-27T12:59:00.976807",
             "prices": {
               "Shortside Upper Level": {
                 "Unknown": 350.0
@@ -3348,7 +3342,7 @@
             "12": 540.0
           }
         },
-        "last_scraped": "2025-12-27T12:56:22.208807"
+        "last_scraped": "2025-12-27T12:59:00.976807"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-newcastle-united",
@@ -3718,10 +3712,10 @@
             }
           },
           {
-            "timestamp": "2025-12-27T12:56:22.208807",
+            "timestamp": "2025-12-27T12:59:00.976807",
             "prices": {
               "Longside Upper Level": {
-                "Unknown": 425.74,
+                "Unknown": 449.9,
                 "110": 450.0,
                 "109": 460.0,
                 "132": 470.0
@@ -3731,18 +3725,15 @@
                 "111": 473.0,
                 "92": 483.0
               },
-              "Shortside Upper Level": {
-                "Unknown": 500.0
-              },
               "Longside Lower Level": {
-                "12": 540.0
+                "Unknown": 534.91
               }
             }
           }
         ],
         "latest_prices": {
           "Longside Upper Level": {
-            "Unknown": 425.74,
+            "Unknown": 449.9,
             "110": 450.0,
             "109": 460.0,
             "132": 470.0
@@ -3752,14 +3743,11 @@
             "111": 473.0,
             "92": 483.0
           },
-          "Shortside Upper Level": {
-            "Unknown": 500.0
-          },
           "Longside Lower Level": {
-            "12": 540.0
+            "Unknown": 534.91
           }
         },
-        "last_scraped": "2025-12-27T12:56:22.208807"
+        "last_scraped": "2025-12-27T12:59:00.976807"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-fulham",
@@ -4229,7 +4217,7 @@
             }
           },
           {
-            "timestamp": "2025-12-27T12:56:22.208807",
+            "timestamp": "2025-12-27T12:59:00.976807",
             "prices": {
               "Longside Upper Level": {
                 "110": 450.0,
@@ -4280,7 +4268,7 @@
             "Unknown": 999.3
           }
         },
-        "last_scraped": "2025-12-27T12:56:22.208807"
+        "last_scraped": "2025-12-27T12:59:00.976807"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-burnley",
@@ -4716,7 +4704,7 @@
             }
           },
           {
-            "timestamp": "2025-12-27T12:56:22.208807",
+            "timestamp": "2025-12-27T12:59:00.976807",
             "prices": {
               "Shortside Upper Level": {
                 "Unknown": 795.0
@@ -4763,10 +4751,10 @@
             "16": 1215.0
           }
         },
-        "last_scraped": "2025-12-27T12:56:22.208807"
+        "last_scraped": "2025-12-27T12:59:00.976807"
       }
     ],
-    "last_updated": "2025-12-27T12:56:22.208807"
+    "last_updated": "2025-12-27T12:59:00.976807"
   },
   "barcelona": {
     "team_name": "FC Barcelona",
@@ -4917,7 +4905,7 @@
             }
           },
           {
-            "timestamp": "2025-12-27T13:01:47.570807",
+            "timestamp": "2025-12-27T13:04:26.424807",
             "prices": {
               "Category": {
                 "Unknown": 119.7
@@ -4930,7 +4918,7 @@
             "Unknown": 119.7
           }
         },
-        "last_scraped": "2025-12-27T13:01:47.570807"
+        "last_scraped": "2025-12-27T13:04:26.424807"
       },
       {
         "url": "https://www.footballticketnet.com/champions-league/fc-barcelona-vs-fc-copenhagen",
@@ -5077,7 +5065,7 @@
             }
           },
           {
-            "timestamp": "2025-12-27T13:01:47.570807",
+            "timestamp": "2025-12-27T13:04:26.424807",
             "prices": {
               "Category": {
                 "Unknown": 159.6
@@ -5090,7 +5078,7 @@
             "Unknown": 159.6
           }
         },
-        "last_scraped": "2025-12-27T13:01:47.570807"
+        "last_scraped": "2025-12-27T13:04:26.424807"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-rcd-mallorca",
@@ -5237,7 +5225,7 @@
             }
           },
           {
-            "timestamp": "2025-12-27T13:01:47.570807",
+            "timestamp": "2025-12-27T13:04:26.424807",
             "prices": {
               "Category": {
                 "Unknown": 123.89
@@ -5250,7 +5238,7 @@
             "Unknown": 123.89
           }
         },
-        "last_scraped": "2025-12-27T13:01:47.570807"
+        "last_scraped": "2025-12-27T13:04:26.424807"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-levante-ud",
@@ -5397,7 +5385,7 @@
             }
           },
           {
-            "timestamp": "2025-12-27T13:01:47.570807",
+            "timestamp": "2025-12-27T13:04:26.424807",
             "prices": {
               "Category": {
                 "Unknown": 136.5
@@ -5410,7 +5398,7 @@
             "Unknown": 136.5
           }
         },
-        "last_scraped": "2025-12-27T13:01:47.570807"
+        "last_scraped": "2025-12-27T13:04:26.424807"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-villarreal-cf",
@@ -5557,7 +5545,7 @@
             }
           },
           {
-            "timestamp": "2025-12-27T13:01:47.570807",
+            "timestamp": "2025-12-27T13:04:26.424807",
             "prices": {
               "Category": {
                 "Unknown": 154.35
@@ -5570,7 +5558,7 @@
             "Unknown": 154.35
           }
         },
-        "last_scraped": "2025-12-27T13:01:47.570807"
+        "last_scraped": "2025-12-27T13:04:26.424807"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-sevilla-fc",
@@ -5717,7 +5705,7 @@
             }
           },
           {
-            "timestamp": "2025-12-27T13:01:47.570807",
+            "timestamp": "2025-12-27T13:04:26.424807",
             "prices": {
               "Category": {
                 "Unknown": 140.7
@@ -5730,7 +5718,7 @@
             "Unknown": 140.7
           }
         },
-        "last_scraped": "2025-12-27T13:01:47.570807"
+        "last_scraped": "2025-12-27T13:04:26.424807"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-rayo-vallecano",
@@ -5877,7 +5865,7 @@
             }
           },
           {
-            "timestamp": "2025-12-27T13:01:47.570807",
+            "timestamp": "2025-12-27T13:04:26.424807",
             "prices": {
               "Category": {
                 "Unknown": 181.64
@@ -5890,7 +5878,7 @@
             "Unknown": 181.64
           }
         },
-        "last_scraped": "2025-12-27T13:01:47.570807"
+        "last_scraped": "2025-12-27T13:04:26.424807"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-rcd-espanyol",
@@ -6037,7 +6025,7 @@
             }
           },
           {
-            "timestamp": "2025-12-27T13:01:47.570807",
+            "timestamp": "2025-12-27T13:04:26.424807",
             "prices": {
               "Category": {
                 "Unknown": 215.46
@@ -6050,7 +6038,7 @@
             "Unknown": 215.46
           }
         },
-        "last_scraped": "2025-12-27T13:01:47.570807"
+        "last_scraped": "2025-12-27T13:04:26.424807"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-celta-vigo",
@@ -6197,7 +6185,7 @@
             }
           },
           {
-            "timestamp": "2025-12-27T13:01:47.570807",
+            "timestamp": "2025-12-27T13:04:26.424807",
             "prices": {
               "Category": {
                 "Unknown": 229.11
@@ -6210,7 +6198,7 @@
             "Unknown": 229.11
           }
         },
-        "last_scraped": "2025-12-27T13:01:47.570807"
+        "last_scraped": "2025-12-27T13:04:26.424807"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-real-madrid",
@@ -6357,7 +6345,7 @@
             }
           },
           {
-            "timestamp": "2025-12-27T13:01:47.570807",
+            "timestamp": "2025-12-27T13:04:26.424807",
             "prices": {
               "Category": {
                 "Unknown": 744.66
@@ -6370,7 +6358,7 @@
             "Unknown": 744.66
           }
         },
-        "last_scraped": "2025-12-27T13:01:47.570807"
+        "last_scraped": "2025-12-27T13:04:26.424807"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-real-betis",
@@ -6517,7 +6505,7 @@
             }
           },
           {
-            "timestamp": "2025-12-27T13:01:47.570807",
+            "timestamp": "2025-12-27T13:04:26.424807",
             "prices": {
               "Category": {
                 "Unknown": 233.31
@@ -6530,9 +6518,9 @@
             "Unknown": 233.31
           }
         },
-        "last_scraped": "2025-12-27T13:01:47.570807"
+        "last_scraped": "2025-12-27T13:04:26.424807"
       }
     ],
-    "last_updated": "2025-12-27T13:01:47.570807"
+    "last_updated": "2025-12-27T13:04:26.424807"
   }
 }
