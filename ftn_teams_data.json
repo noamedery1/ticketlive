@@ -9905,5 +9905,540 @@
       }
     ],
     "last_updated": "2025-12-28T15:20:25.662807"
+  },
+  "real-madrid": {
+    "team_name": "Real Madrid",
+    "team_url": "https://www.footballticketnet.com/real-madrid-football-tickets/filter/home_away/home-matches",
+    "games": [
+      {
+        "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-real-betis",
+        "match_name": "Real Madrid vs Real Betis",
+        "team": "Real Madrid",
+        "opponent": "Real Betis",
+        "date": "04/01/26",
+        "is_home": true,
+        "price_history": [
+          {
+            "timestamp": "2025-12-28T14:23:16.665276",
+            "prices": {
+              "Category 4": {
+                "Unknown": 123.1
+              },
+              "Category 3": {
+                "Unknown": 136.0
+              },
+              "Category 2": {
+                "Unknown": 155.3
+              }
+            }
+          },
+          {
+            "timestamp": "2025-12-28T15:20:59.544807",
+            "prices": {
+              "Category 4": {
+                "Unknown": 123.1
+              },
+              "Category 3": {
+                "Unknown": 136.0
+              },
+              "Category 2": {
+                "Unknown": 155.3
+              }
+            }
+          }
+        ],
+        "latest_prices": {
+          "Category 4": {
+            "Unknown": 123.1
+          },
+          "Category 3": {
+            "Unknown": 136.0
+          },
+          "Category 2": {
+            "Unknown": 155.3
+          }
+        },
+        "last_scraped": "2025-12-28T15:20:59.544807"
+      },
+      {
+        "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-levante-ud",
+        "match_name": "Real Madrid vs Levante UD",
+        "team": "Real Madrid",
+        "opponent": "Levante UD",
+        "date": "17/01/26",
+        "is_home": true,
+        "price_history": [
+          {
+            "timestamp": "2025-12-28T14:23:16.665276",
+            "prices": {
+              "Category 4": {
+                "Unknown": 117.1
+              },
+              "Category 3": {
+                "Unknown": 143.0
+              }
+            }
+          },
+          {
+            "timestamp": "2025-12-28T15:20:59.544807",
+            "prices": {
+              "Category 4": {
+                "Unknown": 117.1
+              },
+              "Category 3": {
+                "Unknown": 143.0
+              }
+            }
+          }
+        ],
+        "latest_prices": {
+          "Category 4": {
+            "Unknown": 117.1
+          },
+          "Category 3": {
+            "Unknown": 143.0
+          }
+        },
+        "last_scraped": "2025-12-28T15:20:59.544807"
+      },
+      {
+        "url": "https://www.footballticketnet.com/champions-league/real-madrid-vs-as-monaco",
+        "match_name": "Real Madrid vs AS Monaco",
+        "team": "Real Madrid",
+        "opponent": "AS Monaco",
+        "date": "20/01/26",
+        "is_home": true,
+        "price_history": [
+          {
+            "timestamp": "2025-12-28T14:23:16.665276",
+            "prices": {
+              "Category 4": {
+                "Unknown": 161.98
+              },
+              "Category 3": {
+                "Unknown": 164.95
+              },
+              "Category 2": {
+                "Unknown": 190.3
+              }
+            }
+          },
+          {
+            "timestamp": "2025-12-28T15:20:59.544807",
+            "prices": {
+              "Category 4": {
+                "Unknown": 161.98
+              },
+              "Category 3": {
+                "Unknown": 164.95
+              },
+              "Category 2": {
+                "Unknown": 190.3
+              }
+            }
+          }
+        ],
+        "latest_prices": {
+          "Category 4": {
+            "Unknown": 161.98
+          },
+          "Category 3": {
+            "Unknown": 164.95
+          },
+          "Category 2": {
+            "Unknown": 190.3
+          }
+        },
+        "last_scraped": "2025-12-28T15:20:59.544807"
+      },
+      {
+        "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-rayo-vallecano",
+        "match_name": "Real Madrid vs Rayo Vallecano",
+        "team": "Real Madrid",
+        "opponent": "Rayo Vallecano",
+        "date": "01/02/26",
+        "is_home": true,
+        "price_history": [
+          {
+            "timestamp": "2025-12-28T14:23:16.665276",
+            "prices": {
+              "Category 4": {
+                "Unknown": 129.0
+              },
+              "Category 3": {
+                "Unknown": 136.0
+              },
+              "Category 2": {
+                "Unknown": 162.0
+              }
+            }
+          },
+          {
+            "timestamp": "2025-12-28T15:20:59.544807",
+            "prices": {
+              "Category 4": {
+                "Unknown": 129.0
+              },
+              "Category 3": {
+                "Unknown": 136.0
+              },
+              "Category 2": {
+                "Unknown": 162.0
+              }
+            }
+          }
+        ],
+        "latest_prices": {
+          "Category 4": {
+            "Unknown": 129.0
+          },
+          "Category 3": {
+            "Unknown": 136.0
+          },
+          "Category 2": {
+            "Unknown": 162.0
+          }
+        },
+        "last_scraped": "2025-12-28T15:20:59.544807"
+      },
+      {
+        "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-real-sociedad",
+        "match_name": "Real Madrid vs Real Sociedad",
+        "team": "Real Madrid",
+        "opponent": "Real Sociedad",
+        "date": "15/02/26",
+        "is_home": true,
+        "price_history": [
+          {
+            "timestamp": "2025-12-28T14:23:16.665276",
+            "prices": {
+              "Category 4": {
+                "Unknown": 139.0
+              },
+              "Category 3": {
+                "Unknown": 160.0
+              },
+              "Category 2": {
+                "Unknown": 170.0
+              }
+            }
+          },
+          {
+            "timestamp": "2025-12-28T15:20:59.544807",
+            "prices": {
+              "Category 4": {
+                "Unknown": 139.0
+              },
+              "Category 3": {
+                "Unknown": 160.0
+              },
+              "Category 2": {
+                "Unknown": 170.0
+              }
+            }
+          }
+        ],
+        "latest_prices": {
+          "Category 4": {
+            "Unknown": 139.0
+          },
+          "Category 3": {
+            "Unknown": 160.0
+          },
+          "Category 2": {
+            "Unknown": 170.0
+          }
+        },
+        "last_scraped": "2025-12-28T15:20:59.544807"
+      },
+      {
+        "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-getafe-cf",
+        "match_name": "Real Madrid vs Getafe CF",
+        "team": "Real Madrid",
+        "opponent": "Getafe CF",
+        "date": "01/03/26",
+        "is_home": true,
+        "price_history": [
+          {
+            "timestamp": "2025-12-28T14:23:16.665276",
+            "prices": {
+              "Category 4": {
+                "Unknown": 144.0
+              },
+              "Category 3": {
+                "Unknown": 160.0
+              },
+              "Category 2": {
+                "Unknown": 170.0
+              }
+            }
+          },
+          {
+            "timestamp": "2025-12-28T15:20:59.544807",
+            "prices": {
+              "Category 4": {
+                "Unknown": 144.0
+              },
+              "Category 3": {
+                "Unknown": 160.0
+              },
+              "Category 2": {
+                "Unknown": 170.0
+              }
+            }
+          }
+        ],
+        "latest_prices": {
+          "Category 4": {
+            "Unknown": 144.0
+          },
+          "Category 3": {
+            "Unknown": 160.0
+          },
+          "Category 2": {
+            "Unknown": 170.0
+          }
+        },
+        "last_scraped": "2025-12-28T15:20:59.544807"
+      },
+      {
+        "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-elche",
+        "match_name": "Real Madrid vs Elche",
+        "team": "Real Madrid",
+        "opponent": "Elche",
+        "date": "15/03/26",
+        "is_home": true,
+        "price_history": [
+          {
+            "timestamp": "2025-12-28T14:23:16.665276",
+            "prices": {
+              "Category 4": {
+                "Unknown": 134.0
+              },
+              "Category 3": {
+                "Unknown": 160.0
+              },
+              "Category 2": {
+                "Unknown": 172.0
+              }
+            }
+          },
+          {
+            "timestamp": "2025-12-28T15:20:59.544807",
+            "prices": {
+              "Category 4": {
+                "Unknown": 134.0
+              },
+              "Category 3": {
+                "Unknown": 160.0
+              },
+              "Category 2": {
+                "Unknown": 172.0
+              }
+            }
+          }
+        ],
+        "latest_prices": {
+          "Category 4": {
+            "Unknown": 134.0
+          },
+          "Category 3": {
+            "Unknown": 160.0
+          },
+          "Category 2": {
+            "Unknown": 172.0
+          }
+        },
+        "last_scraped": "2025-12-28T15:20:59.544807"
+      },
+      {
+        "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-atletico-madrid",
+        "match_name": "Real Madrid vs Atletico Madrid",
+        "team": "Real Madrid",
+        "opponent": "Atletico Madrid",
+        "date": "22/03/26",
+        "is_home": true,
+        "price_history": [
+          {
+            "timestamp": "2025-12-28T14:23:16.665276",
+            "prices": {
+              "Category 4": {
+                "Unknown": 344.0
+              }
+            }
+          },
+          {
+            "timestamp": "2025-12-28T15:20:59.544807",
+            "prices": {
+              "Category 4": {
+                "Unknown": 344.0
+              }
+            }
+          }
+        ],
+        "latest_prices": {
+          "Category 4": {
+            "Unknown": 344.0
+          }
+        },
+        "last_scraped": "2025-12-28T15:20:59.544807"
+      },
+      {
+        "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-girona",
+        "match_name": "Real Madrid vs Girona",
+        "team": "Real Madrid",
+        "opponent": "Girona",
+        "date": "12/04/26",
+        "is_home": true,
+        "price_history": [
+          {
+            "timestamp": "2025-12-28T14:23:16.665276",
+            "prices": {
+              "Category 4": {
+                "Unknown": 160.0
+              }
+            }
+          },
+          {
+            "timestamp": "2025-12-28T15:20:59.544807",
+            "prices": {
+              "Category 4": {
+                "Unknown": 160.0
+              }
+            }
+          }
+        ],
+        "latest_prices": {
+          "Category 4": {
+            "Unknown": 160.0
+          }
+        },
+        "last_scraped": "2025-12-28T15:20:59.544807"
+      },
+      {
+        "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-deportivo-alaves",
+        "match_name": "Real Madrid vs Deportivo Alaves",
+        "team": "Real Madrid",
+        "opponent": "Deportivo Alaves",
+        "date": "22/04/26",
+        "is_home": true,
+        "price_history": [
+          {
+            "timestamp": "2025-12-28T14:23:16.665276",
+            "prices": {
+              "Category 3": {
+                "Unknown": 170.3
+              },
+              "Category 4": {
+                "Unknown": 173.0
+              },
+              "Category 2 Lateral": {
+                "Unknown": 174.3
+              }
+            }
+          },
+          {
+            "timestamp": "2025-12-28T15:20:59.544807",
+            "prices": {
+              "Category 3": {
+                "Unknown": 170.3
+              },
+              "Category 4": {
+                "Unknown": 173.0
+              },
+              "Category 2 Lateral": {
+                "Unknown": 174.3
+              }
+            }
+          }
+        ],
+        "latest_prices": {
+          "Category 3": {
+            "Unknown": 170.3
+          },
+          "Category 4": {
+            "Unknown": 173.0
+          },
+          "Category 2 Lateral": {
+            "Unknown": 174.3
+          }
+        },
+        "last_scraped": "2025-12-28T15:20:59.544807"
+      },
+      {
+        "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-real-oviedo",
+        "match_name": "Real Madrid vs Real Oviedo",
+        "team": "Real Madrid",
+        "opponent": "Real Oviedo",
+        "date": "13/05/26",
+        "is_home": true,
+        "price_history": [
+          {
+            "timestamp": "2025-12-28T14:23:16.665276",
+            "prices": {
+              "Category 4": {
+                "Unknown": 142.0
+              }
+            }
+          },
+          {
+            "timestamp": "2025-12-28T15:20:59.544807",
+            "prices": {
+              "Category 4": {
+                "Unknown": 142.0
+              }
+            }
+          }
+        ],
+        "latest_prices": {
+          "Category 4": {
+            "Unknown": 142.0
+          }
+        },
+        "last_scraped": "2025-12-28T15:20:59.544807"
+      },
+      {
+        "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-athletic-bilbao",
+        "match_name": "Real Madrid vs Athletic Bilbao",
+        "team": "Real Madrid",
+        "opponent": "Athletic Bilbao",
+        "date": "24/05/26",
+        "is_home": true,
+        "price_history": [
+          {
+            "timestamp": "2025-12-28T14:23:16.665276",
+            "prices": {
+              "Category 4": {
+                "Unknown": 155.0
+              },
+              "Category 2 Lateral": {
+                "Unknown": 181.0
+              }
+            }
+          },
+          {
+            "timestamp": "2025-12-28T15:20:59.544807",
+            "prices": {
+              "Category 4": {
+                "Unknown": 155.0
+              },
+              "Category 2 Lateral": {
+                "Unknown": 181.0
+              }
+            }
+          }
+        ],
+        "latest_prices": {
+          "Category 4": {
+            "Unknown": 155.0
+          },
+          "Category 2 Lateral": {
+            "Unknown": 181.0
+          }
+        },
+        "last_scraped": "2025-12-28T15:20:59.544807"
+      }
+    ],
+    "last_updated": "2025-12-28T15:20:59.544807"
   }
 }
