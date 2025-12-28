@@ -306,8 +306,6 @@ if os.path.exists(client_dist):
 else:
     print(f'[ERROR] Frontend dist directory not found: {client_dist}')
 
-# Serve vite.svg from root (referenced in index.html)
-@app.get('/teams')
 def get_team_currency(team_key):
     """Get currency for a team from teams_list.json"""
     try:
@@ -339,27 +337,58 @@ def get_team_currency(team_key):
     
     return 'USD'  # Default
 
+@app.get('/teams')
 def get_teams():
     """Get list of available teams"""
     try:
         if not os.path.exists(TEAMS_DATA_FILE):
+            print(f'[INFO] /teams: {TEAMS_DATA_FILE} not found, returning empty list')
             return []
-        with open(TEAMS_DATA_FILE, 'r', encoding='utf-8') as f:
-            data = json.load(f)
+        
+        # Try to load JSON, handle merge conflicts
+        try:
+            with open(TEAMS_DATA_FILE, 'r', encoding='utf-8') as f:
+                content = f.read()
+                # Check for merge conflicts
+                if '<<<<<<<' in content or '=======' in content or '>>>>>>>' in content:
+                    print(f'[WARN] /teams: {TEAMS_DATA_FILE} contains merge conflicts, returning empty list')
+                    return []
+                data = json.loads(content)
+        except json.JSONDecodeError as json_err:
+            print(f'[ERROR] /teams: JSON decode error: {json_err}')
+            return []
+        except Exception as file_err:
+            print(f'[ERROR] /teams: File read error: {file_err}')
+            return []
+        
+        if not isinstance(data, dict):
+            print(f'[ERROR] /teams: Expected dict, got {type(data)}')
+            return []
+        
         teams = []
         for team_key, team_data in data.items():
-            currency = get_team_currency(team_key)
-            teams.append({
-                'key': team_key,
-                'name': team_data.get('team_name', team_key.title()),
-                'url': team_data.get('team_url', ''),
-                'last_updated': team_data.get('last_updated'),
-                'game_count': len(team_data.get('games', [])),
-                'currency': currency
-            })
+            if not isinstance(team_data, dict):
+                continue
+            try:
+                currency = get_team_currency(team_key)
+                teams.append({
+                    'key': str(team_key),
+                    'name': str(team_data.get('team_name', team_key.title())),
+                    'url': str(team_data.get('team_url', '')),
+                    'last_updated': team_data.get('last_updated'),
+                    'game_count': len(team_data.get('games', [])) if isinstance(team_data.get('games'), list) else 0,
+                    'currency': str(currency)
+                })
+            except Exception as team_err:
+                print(f'[WARN] /teams: Error processing team {team_key}: {team_err}')
+                continue
+        
+        print(f'[INFO] /teams: Returning {len(teams)} teams')
         return teams
     except Exception as e:
         print(f'[ERROR] /teams error: {e}')
+        import traceback
+        traceback.print_exc()
         return []
 
 def parse_game_date(date_str):

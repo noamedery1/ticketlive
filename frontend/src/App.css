@@ -217,7 +217,9 @@
 .chart-container-inner {
   flex: 1;
   width: 100%;
-  min-height: 0;
+  min-height: 200px;
+  height: 100%;
+  position: relative;
 }
 
 /* Team View Styles */
