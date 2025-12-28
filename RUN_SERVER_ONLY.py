@@ -308,6 +308,37 @@ else:
 
 # Serve vite.svg from root (referenced in index.html)
 @app.get('/teams')
+def get_team_currency(team_key):
+    """Get currency for a team from teams_list.json"""
+    try:
+        teams_list_file = 'teams_list.json'
+        if os.path.exists(teams_list_file):
+            with open(teams_list_file, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                for team in data.get('teams', []):
+                    if team.get('team_key') == team_key:
+                        return team.get('currency', 'USD')
+    except Exception as e:
+        print(f'[WARN] Could not load currency for {team_key}: {e}')
+    
+    # Default currency mapping based on team name/country
+    default_currencies = {
+        'arsenal': 'GBP',
+        'barcelona': 'EUR',
+        'real-madrid': 'EUR',
+        'manchester': 'GBP',
+        'liverpool': 'GBP',
+        'chelsea': 'GBP',
+        'tottenham': 'GBP',
+    }
+    
+    # Check if team_key matches any default
+    for key, currency in default_currencies.items():
+        if key in team_key.lower():
+            return currency
+    
+    return 'USD'  # Default
+
 def get_teams():
     """Get list of available teams"""
     try:
@@ -317,21 +348,43 @@ def get_teams():
             data = json.load(f)
         teams = []
         for team_key, team_data in data.items():
+            currency = get_team_currency(team_key)
             teams.append({
                 'key': team_key,
                 'name': team_data.get('team_name', team_key.title()),
                 'url': team_data.get('team_url', ''),
                 'last_updated': team_data.get('last_updated'),
-                'game_count': len(team_data.get('games', []))
+                'game_count': len(team_data.get('games', [])),
+                'currency': currency
             })
         return teams
     except Exception as e:
         print(f'[ERROR] /teams error: {e}')
         return []
 
+def parse_game_date(date_str):
+    """Parse date string in format DD/MM/YY to datetime"""
+    try:
+        if not date_str:
+            return None
+        # Format: "27/12/25" -> DD/MM/YY
+        parts = date_str.split('/')
+        if len(parts) == 3:
+            day, month, year = int(parts[0]), int(parts[1]), int(parts[2])
+            # Convert 2-digit year to 4-digit (assuming 20xx for years < 50, 19xx otherwise)
+            if year < 50:
+                year += 2000
+            else:
+                year += 1900
+            from datetime import datetime
+            return datetime(year, month, day)
+    except Exception as e:
+        print(f'[WARN] Could not parse date {date_str}: {e}')
+    return None
+
 @app.get('/teams/{team_key}')
 def get_team_games(team_key: str):
-    """Get all games for a specific team"""
+    """Get all games for a specific team (filter out past games)"""
     try:
         if not os.path.exists(TEAMS_DATA_FILE):
             return []
@@ -341,7 +394,15 @@ def get_team_games(team_key: str):
             return []
         team_data = data[team_key]
         games = []
+        from datetime import datetime
+        today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+        
         for game in team_data.get('games', []):
+            game_date = parse_game_date(game.get('date'))
+            # Filter out past games (games before today)
+            if game_date and game_date < today:
+                continue  # Skip past games
+            
             games.append({
                 'url': game.get('url'),
                 'match_name': game.get('match_name'),
@@ -361,15 +422,27 @@ def get_game_prices(team_key: str, game_index: int):
     """Get price history for a specific game"""
     try:
         if not os.path.exists(TEAMS_DATA_FILE):
-            return {'prices': [], 'game': None}
+            return {'prices': [], 'game': None, 'currency': 'USD'}
         with open(TEAMS_DATA_FILE, 'r', encoding='utf-8') as f:
             data = json.load(f)
         if team_key not in data:
-            return {'prices': [], 'game': None}
-        games = data[team_key].get('games', [])
-        if game_index < 0 or game_index >= len(games):
-            return {'prices': [], 'game': None}
-        game = games[game_index]
+            return {'prices': [], 'game': None, 'currency': 'USD'}
+        
+        # Filter out past games when getting the list
+        from datetime import datetime
+        today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+        all_games = data[team_key].get('games', [])
+        future_games = []
+        for game in all_games:
+            game_date = parse_game_date(game.get('date'))
+            if game_date and game_date >= today:
+                future_games.append(game)
+        
+        if game_index < 0 or game_index >= len(future_games):
+            return {'prices': [], 'game': None, 'currency': 'USD'}
+        
+        game = future_games[game_index]
+        currency = get_team_currency(team_key)
         return {
             'game': {
                 'match_name': game.get('match_name'),
@@ -378,11 +451,12 @@ def get_game_prices(team_key: str, game_index: int):
                 'date': game.get('date')
             },
             'prices': game.get('price_history', []),
-            'latest_prices': game.get('latest_prices', {})
+            'latest_prices': game.get('latest_prices', {}),
+            'currency': currency
         }
     except Exception as e:
         print(f'[ERROR] /teams/{team_key}/game/{game_index} error: {e}')
-        return {'prices': [], 'game': None}
+        return {'prices': [], 'game': None, 'currency': 'USD'}
 
 @app.get('/vite.svg')
 async def serve_vite_svg():

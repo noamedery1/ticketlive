@@ -13,6 +13,8 @@ function TeamView() {
   const [gamePrices, setGamePrices] = useState(null)
   const [selectedDate, setSelectedDate] = useState(null)
   const [availableDates, setAvailableDates] = useState([])
+  const [selectedCategories, setSelectedCategories] = useState([]) // Array of selected categories
+  const [availableCategories, setAvailableCategories] = useState([])
 
   useEffect(() => {
     fetchTeams()
@@ -88,27 +90,81 @@ function TeamView() {
     }
   }
 
-  const formatPrice = (price) => {
-    if (!price) return 'N/A'
-    return `$${price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+  // Currency conversion rates (USD is base currency in storage)
+  const CURRENCY_RATES = {
+    'USD': 1.0,
+    'GBP': 0.79,  // 1 USD = 0.79 GBP (approximate)
+    'EUR': 0.95   // 1 USD = 0.95 EUR (approximate)
   }
 
-  // Extract available dates from price history
+  const getCurrencySymbol = (currency) => {
+    const symbols = {
+      'USD': '$',
+      'GBP': '£',
+      'EUR': '€'
+    }
+    return symbols[currency] || '$'
+  }
+
+  const convertPrice = (priceUSD, targetCurrency) => {
+    if (!priceUSD || !targetCurrency) return priceUSD
+    const rate = CURRENCY_RATES[targetCurrency] || 1.0
+    return priceUSD * rate
+  }
+
+  const formatPrice = (price, currency = 'USD') => {
+    if (!price) return 'N/A'
+    const convertedPrice = convertPrice(price, currency)
+    const symbol = getCurrencySymbol(currency)
+    return `${symbol}${convertedPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+  }
+
+  // Extract available dates and categories from price history
   useEffect(() => {
     if (gamePrices && gamePrices.prices && Array.isArray(gamePrices.prices)) {
       const dates = new Set()
+      const categories = new Set()
+      
       gamePrices.prices.forEach(snapshot => {
         const date = new Date(snapshot.timestamp)
         const dateStr = date.toISOString().split('T')[0] // YYYY-MM-DD
         dates.add(dateStr)
+        
+        // Extract categories
+        if (snapshot.prices && typeof snapshot.prices === 'object') {
+          Object.keys(snapshot.prices).forEach(cat => {
+            if (snapshot.prices[cat] && typeof snapshot.prices[cat] === 'object') {
+              // Block-based: add category and category-block combinations
+              categories.add(cat)
+              Object.keys(snapshot.prices[cat]).forEach(block => {
+                categories.add(`${cat} - Block ${block}`)
+              })
+            } else {
+              // Simple category
+              categories.add(cat)
+            }
+          })
+        }
       })
+      
       const sortedDates = Array.from(dates).sort()
+      const sortedCategories = Array.from(categories).sort()
+      
       setAvailableDates(sortedDates)
+      setAvailableCategories(sortedCategories)
+      
+      // Select all categories by default
+      if (sortedCategories.length > 0 && selectedCategories.length === 0) {
+        setSelectedCategories(sortedCategories)
+      }
+      
       if (sortedDates.length > 0 && !selectedDate) {
         setSelectedDate(sortedDates[sortedDates.length - 1]) // Default to latest date
       }
     } else {
       setAvailableDates([])
+      setAvailableCategories([])
+      setSelectedCategories([])
       setSelectedDate(null)
     }
   }, [gamePrices])
@@ -126,6 +182,9 @@ function TeamView() {
     }
     
     if (filteredSnapshots.length === 0) return []
+    
+    // Get currency from gamePrices or default to USD
+    const currency = gamePrices?.currency || selectedTeam?.currency || 'USD'
     
     // Group by day
     const dailyData = {}
@@ -187,13 +246,18 @@ function TeamView() {
       })
     })
     
+    // Filter categoryBlocks by selectedCategories
+    const filteredCategoryBlocks = Array.from(categoryBlocks).filter(catBlock => {
+      return selectedCategories.length === 0 || selectedCategories.includes(catBlock)
+    })
+    
     // Build chart data with daily averages
     const chartData = []
     Object.keys(dailyData).sort().forEach(dayKey => {
       const day = dailyData[dayKey]
       const dataPoint = { time: day.displayDate, date: dayKey }
       
-      categoryBlocks.forEach(catBlock => {
+      filteredCategoryBlocks.forEach(catBlock => {
         const [cat, blockPart] = catBlock.split(' - Block ')
         if (blockPart) {
           // Block-based price - calculate average
@@ -202,7 +266,9 @@ function TeamView() {
             const prices = day.prices[cat][block].filter(p => typeof p === 'number')
             if (prices.length > 0) {
               const avg = prices.reduce((a, b) => a + b, 0) / prices.length
-              dataPoint[catBlock] = Math.round(avg * 100) / 100
+              // Convert to target currency
+              const convertedAvg = convertPrice(avg, currency)
+              dataPoint[catBlock] = Math.round(convertedAvg * 100) / 100
             } else {
               dataPoint[catBlock] = null
             }
@@ -215,7 +281,9 @@ function TeamView() {
             const prices = day.prices[cat]['_simple'].filter(p => typeof p === 'number')
             if (prices.length > 0) {
               const avg = prices.reduce((a, b) => a + b, 0) / prices.length
-              dataPoint[cat] = Math.round(avg * 100) / 100
+              // Convert to target currency
+              const convertedAvg = convertPrice(avg, currency)
+              dataPoint[cat] = Math.round(convertedAvg * 100) / 100
             } else {
               dataPoint[cat] = null
             }
@@ -377,21 +445,24 @@ function TeamView() {
                             fontSize: '0.85rem',
                             marginTop: '4px'
                           }}>
-                            {minPrice === maxPrice ? (
-                              <span style={{ color: selectedGame === index ? '#fff' : '#58a6ff', fontWeight: '600' }}>
-                                {formatPrice(minPrice)}
-                              </span>
-                            ) : (
-                              <span>
-                                <span style={{ color: selectedGame === index ? '#fff' : '#56d364', fontWeight: '600' }}>
-                                  {formatPrice(minPrice)}
+                            {(() => {
+                              const currency = selectedTeam?.currency || 'USD'
+                              return minPrice === maxPrice ? (
+                                <span style={{ color: selectedGame === index ? '#fff' : '#58a6ff', fontWeight: '600' }}>
+                                  {formatPrice(minPrice, currency)}
                                 </span>
-                                <span style={{ margin: '0 6px', color: selectedGame === index ? '#c9d1d9' : '#6e7681' }}>→</span>
-                                <span style={{ color: selectedGame === index ? '#fff' : '#ff7b72', fontWeight: '600' }}>
-                                  {formatPrice(maxPrice)}
+                              ) : (
+                                <span>
+                                  <span style={{ color: selectedGame === index ? '#fff' : '#56d364', fontWeight: '600' }}>
+                                    {formatPrice(minPrice, currency)}
+                                  </span>
+                                  <span style={{ margin: '0 6px', color: selectedGame === index ? '#c9d1d9' : '#6e7681' }}>→</span>
+                                  <span style={{ color: selectedGame === index ? '#fff' : '#ff7b72', fontWeight: '600' }}>
+                                    {formatPrice(maxPrice, currency)}
+                                  </span>
                                 </span>
-                              </span>
-                            )}
+                              )
+                            })()}
                           </div>
                         )}
                       </div>
@@ -426,43 +497,86 @@ function TeamView() {
                     <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#c9d1d9', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }}>
                       <span>📊</span>
                       <span>Daily Price History</span>
+                      {gamePrices?.currency && (
+                        <span style={{ fontSize: '0.85rem', color: '#8b949e', fontWeight: '400', marginLeft: '8px' }}>
+                          ({getCurrencySymbol(gamePrices.currency)})
+                        </span>
+                      )}
                     </h3>
-                    {availableDates.length > 0 && (
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
-                        <label style={{ fontSize: '0.9rem', color: '#8b949e', fontWeight: '500' }}>Jump to date:</label>
-                        <select
-                          value={selectedDate || ''}
-                          onChange={(e) => setSelectedDate(e.target.value)}
-                          style={{
-                            padding: '8px 12px',
-                            borderRadius: '6px',
-                            border: '1px solid #30363d',
-                            background: '#0d1117',
-                            color: '#c9d1d9',
-                            fontSize: '0.9rem',
-                            cursor: 'pointer',
-                            transition: 'all 0.2s'
-                          }}
-                          onMouseEnter={(e) => e.target.style.borderColor = '#58a6ff'}
-                          onMouseLeave={(e) => e.target.style.borderColor = '#30363d'}
-                        >
-                          <option value="">All dates</option>
-                          {availableDates.map(date => {
-                            const dateObj = new Date(date)
-                            const displayDate = dateObj.toLocaleDateString('en-US', {
-                              month: 'short',
-                              day: 'numeric',
-                              year: 'numeric'
-                            })
-                            return (
-                              <option key={date} value={date}>
-                                {displayDate}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+                      {availableDates.length > 0 && (
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <label style={{ fontSize: '0.9rem', color: '#8b949e', fontWeight: '500' }}>Date:</label>
+                          <select
+                            value={selectedDate || ''}
+                            onChange={(e) => setSelectedDate(e.target.value)}
+                            style={{
+                              padding: '6px 10px',
+                              borderRadius: '6px',
+                              border: '1px solid #30363d',
+                              background: '#0d1117',
+                              color: '#c9d1d9',
+                              fontSize: '0.85rem',
+                              cursor: 'pointer',
+                              transition: 'all 0.2s'
+                            }}
+                            onMouseEnter={(e) => e.target.style.borderColor = '#58a6ff'}
+                            onMouseLeave={(e) => e.target.style.borderColor = '#30363d'}
+                          >
+                            <option value="">All dates</option>
+                            {availableDates.map(date => {
+                              const dateObj = new Date(date)
+                              const displayDate = dateObj.toLocaleDateString('en-US', {
+                                month: 'short',
+                                day: 'numeric',
+                                year: 'numeric'
+                              })
+                              return (
+                                <option key={date} value={date}>
+                                  {displayDate}
+                                </option>
+                              )
+                            })}
+                          </select>
+                        </div>
+                      )}
+                      {availableCategories.length > 0 && (
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <label style={{ fontSize: '0.9rem', color: '#8b949e', fontWeight: '500' }}>Categories:</label>
+                          <select
+                            multiple
+                            value={selectedCategories}
+                            onChange={(e) => {
+                              const selected = Array.from(e.target.selectedOptions, option => option.value)
+                              setSelectedCategories(selected.length > 0 ? selected : availableCategories)
+                            }}
+                            style={{
+                              padding: '6px 10px',
+                              borderRadius: '6px',
+                              border: '1px solid #30363d',
+                              background: '#0d1117',
+                              color: '#c9d1d9',
+                              fontSize: '0.85rem',
+                              cursor: 'pointer',
+                              transition: 'all 0.2s',
+                              minWidth: '200px',
+                              maxHeight: '120px'
+                            }}
+                            onMouseEnter={(e) => e.target.style.borderColor = '#58a6ff'}
+                            onMouseLeave={(e) => e.target.style.borderColor = '#30363d'}
+                          >
+                            {availableCategories.map(cat => (
+                              <option key={cat} value={cat}>
+                                {cat}
                               </option>
-                            )
-                          })}
-                        </select>
-                      </div>
-                    )}
+                            ))}
+                          </select>
+                          <span style={{ fontSize: '0.75rem', color: '#6e7681' }}>
+                            ({selectedCategories.length}/{availableCategories.length})
+                          </span>
+                        </div>
+                      )}
+                    </div>
                   </div>
                   {selectedDate && (
                     <div style={{ marginBottom: '12px', padding: '8px 12px', background: '#1f6feb20', border: '1px solid #1f6feb40', borderRadius: '4px', fontSize: '0.85rem', color: '#58a6ff' }}>
@@ -503,7 +617,11 @@ function TeamView() {
                           width={45}
                           axisLine={{ stroke: '#30363d' }}
                           tickLine={{ stroke: '#30363d' }}
-                          tickFormatter={(value) => `$${value.toLocaleString()}`}
+                          tickFormatter={(value) => {
+                            const currency = gamePrices?.currency || selectedTeam?.currency || 'USD'
+                            const symbol = getCurrencySymbol(currency)
+                            return `${symbol}${value.toLocaleString()}`
+                          }}
                         />
                         <Tooltip 
                           contentStyle={{ 
@@ -515,7 +633,11 @@ function TeamView() {
                           }} 
                           itemStyle={{ color: '#c9d1d9', fontSize: '13px', marginBottom: '4px' }}
                           labelStyle={{ color: '#f0f6fc', fontWeight: '600', fontSize: '12px', marginBottom: '8px' }}
-                          formatter={(value, name) => [`$${value?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) || '0'}`, name]}
+                          formatter={(value, name) => {
+                            const currency = gamePrices?.currency || selectedTeam?.currency || 'USD'
+                            const symbol = getCurrencySymbol(currency)
+                            return [`${symbol}${value?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) || '0'}`, name]
+                          }}
                           labelFormatter={(label) => `${label} (Daily Average)`}
                         />
                         <Legend 

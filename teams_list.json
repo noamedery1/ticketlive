@@ -1,0 +1,19 @@
+{
+  "teams": [
+    {
+      "team_key": "arsenal",
+      "team_name": "Arsenal",
+      "team_url": "https://www.footballticketnet.com/arsenal-football-tickets/filter/home_away/home-matches",
+      "currency": "GBP",
+      "country": "England"
+    },
+    {
+      "team_key": "barcelona",
+      "team_name": "FC Barcelona",
+      "team_url": "https://www.footballticketnet.com/barcelona-football-tickets/filter/home_away/home-matches",
+      "currency": "EUR",
+      "country": "Spain"
+    }
+  ]
+}
+

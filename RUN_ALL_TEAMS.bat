@@ -4,6 +4,8 @@ cd /d "%~dp0"
 
 echo ============================================================
 echo RUN ALL TEAMS SCRAPER - FootballTicketNet
+echo Scrapes all teams from teams_list.json (or *_prices.json files)
+echo Runs continuously every 3 hours
 echo ============================================================
 echo.
 

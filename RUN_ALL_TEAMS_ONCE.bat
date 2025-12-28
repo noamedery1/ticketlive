@@ -4,6 +4,8 @@ cd /d "%~dp0"
 
 echo ============================================================
 echo RUN ALL TEAMS SCRAPER - FootballTicketNet (ONE TIME)
+echo Scrapes all teams from teams_list.json (or *_prices.json files)
+echo Runs once and exits
 echo ============================================================
 echo.
 
@@ -32,7 +34,7 @@ if exist "C:\PythonEnvs\ticketlive\Scripts\activate.bat" (
 )
 
 echo.
-echo [START] Running all teams from *_prices.json files (one time)...
+echo [START] Running all teams from teams_list.json (or *_prices.json files)...
 echo.
 
 REM Check if the script exists
