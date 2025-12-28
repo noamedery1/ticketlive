@@ -48,6 +48,12 @@ if not exist "auto_scraper_teams.py" (
 )
 
 REM Run continuously (every 3 hours)
+REM The script will:
+REM   1. Run immediately on start
+REM   2. Wait 3 hours
+REM   3. Run again
+REM   4. Repeat forever
+REM To stop, press Ctrl+C in the console window
 %PYTHON_CMD% auto_scraper_teams.py
 
 if errorlevel 1 (
