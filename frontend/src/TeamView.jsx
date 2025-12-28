@@ -11,6 +11,8 @@ function TeamView() {
   const [games, setGames] = useState([])
   const [selectedGame, setSelectedGame] = useState(null)
   const [gamePrices, setGamePrices] = useState(null)
+  const [selectedDate, setSelectedDate] = useState(null)
+  const [availableDates, setAvailableDates] = useState([])
 
   useEffect(() => {
     fetchTeams()
@@ -25,6 +27,7 @@ function TeamView() {
   useEffect(() => {
     if (selectedTeam && selectedGame !== null) {
       console.log('useEffect triggered - fetching prices for game index:', selectedGame)
+      setSelectedDate(null) // Reset date filter when game changes
       fetchGamePrices(selectedTeam.key, selectedGame)
     } else {
       console.log('useEffect - conditions not met:', { selectedTeam: !!selectedTeam, selectedGame })
@@ -90,62 +93,137 @@ function TeamView() {
     return `$${price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
   }
 
+  // Extract available dates from price history
+  useEffect(() => {
+    if (gamePrices && gamePrices.prices && Array.isArray(gamePrices.prices)) {
+      const dates = new Set()
+      gamePrices.prices.forEach(snapshot => {
+        const date = new Date(snapshot.timestamp)
+        const dateStr = date.toISOString().split('T')[0] // YYYY-MM-DD
+        dates.add(dateStr)
+      })
+      const sortedDates = Array.from(dates).sort()
+      setAvailableDates(sortedDates)
+      if (sortedDates.length > 0 && !selectedDate) {
+        setSelectedDate(sortedDates[sortedDates.length - 1]) // Default to latest date
+      }
+    } else {
+      setAvailableDates([])
+      setSelectedDate(null)
+    }
+  }, [gamePrices])
+
   const prepareChartData = () => {
     if (!gamePrices || !gamePrices.prices || !Array.isArray(gamePrices.prices)) return []
     
-    const chartData = []
+    // Filter by selected date if specified
+    let filteredSnapshots = gamePrices.prices
+    if (selectedDate) {
+      filteredSnapshots = gamePrices.prices.filter(snapshot => {
+        const snapshotDate = new Date(snapshot.timestamp).toISOString().split('T')[0]
+        return snapshotDate === selectedDate
+      })
+    }
     
-    // Collect all unique categories and blocks
-    const categoryBlocks = new Set()
-    gamePrices.prices.forEach(snapshot => {
+    if (filteredSnapshots.length === 0) return []
+    
+    // Group by day
+    const dailyData = {}
+    
+    filteredSnapshots.forEach(snapshot => {
+      const date = new Date(snapshot.timestamp)
+      const dayKey = date.toISOString().split('T')[0] // YYYY-MM-DD
+      
+      if (!dailyData[dayKey]) {
+        dailyData[dayKey] = {
+          date: dayKey,
+          displayDate: date.toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric'
+          }),
+          prices: {}
+        }
+      }
+      
+      // Collect all prices for each category/block
       if (snapshot.prices && typeof snapshot.prices === 'object') {
         Object.keys(snapshot.prices).forEach(cat => {
+          if (!dailyData[dayKey].prices[cat]) {
+            dailyData[dayKey].prices[cat] = {}
+          }
+          
           if (snapshot.prices[cat] && typeof snapshot.prices[cat] === 'object') {
             // Block-based prices: {category: {block: price}}
             Object.keys(snapshot.prices[cat]).forEach(block => {
-              categoryBlocks.add(`${cat} - Block ${block}`)
+              const blockKey = block
+              if (!dailyData[dayKey].prices[cat][blockKey]) {
+                dailyData[dayKey].prices[cat][blockKey] = []
+              }
+              dailyData[dayKey].prices[cat][blockKey].push(snapshot.prices[cat][block])
             })
           } else if (typeof snapshot.prices[cat] === 'number') {
             // Simple category prices: {category: price}
-            categoryBlocks.add(cat)
+            if (!dailyData[dayKey].prices[cat]['_simple']) {
+              dailyData[dayKey].prices[cat]['_simple'] = []
+            }
+            dailyData[dayKey].prices[cat]['_simple'].push(snapshot.prices[cat])
           }
         })
       }
     })
     
-    // Build chart data
-    gamePrices.prices.forEach(snapshot => {
-      const time = new Date(snapshot.timestamp).toLocaleString('en-US', {
-        month: 'short',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
+    // Collect all unique categories and blocks
+    const categoryBlocks = new Set()
+    Object.values(dailyData).forEach(day => {
+      Object.keys(day.prices).forEach(cat => {
+        Object.keys(day.prices[cat]).forEach(block => {
+          if (block === '_simple') {
+            categoryBlocks.add(cat)
+          } else {
+            categoryBlocks.add(`${cat} - Block ${block}`)
+          }
+        })
       })
+    })
+    
+    // Build chart data with daily averages
+    const chartData = []
+    Object.keys(dailyData).sort().forEach(dayKey => {
+      const day = dailyData[dayKey]
+      const dataPoint = { time: day.displayDate, date: dayKey }
       
-      const dataPoint = { time }
-      
-      if (snapshot.prices && typeof snapshot.prices === 'object') {
-        categoryBlocks.forEach(catBlock => {
-          // Check if it's a block-based category
-          const [cat, blockPart] = catBlock.split(' - Block ')
-          if (blockPart) {
-            // Block-based price
-            const block = blockPart
-            if (snapshot.prices[cat] && snapshot.prices[cat][block]) {
-              dataPoint[catBlock] = snapshot.prices[cat][block]
+      categoryBlocks.forEach(catBlock => {
+        const [cat, blockPart] = catBlock.split(' - Block ')
+        if (blockPart) {
+          // Block-based price - calculate average
+          const block = blockPart
+          if (day.prices[cat] && day.prices[cat][block] && day.prices[cat][block].length > 0) {
+            const prices = day.prices[cat][block].filter(p => typeof p === 'number')
+            if (prices.length > 0) {
+              const avg = prices.reduce((a, b) => a + b, 0) / prices.length
+              dataPoint[catBlock] = Math.round(avg * 100) / 100
             } else {
               dataPoint[catBlock] = null
             }
           } else {
-            // Simple category price
-            if (snapshot.prices[cat] && typeof snapshot.prices[cat] === 'number') {
-              dataPoint[cat] = snapshot.prices[cat]
+            dataPoint[catBlock] = null
+          }
+        } else {
+          // Simple category price - calculate average
+          if (day.prices[cat] && day.prices[cat]['_simple'] && day.prices[cat]['_simple'].length > 0) {
+            const prices = day.prices[cat]['_simple'].filter(p => typeof p === 'number')
+            if (prices.length > 0) {
+              const avg = prices.reduce((a, b) => a + b, 0) / prices.length
+              dataPoint[cat] = Math.round(avg * 100) / 100
             } else {
               dataPoint[cat] = null
             }
+          } else {
+            dataPoint[cat] = null
           }
-        })
-      }
+        }
+      })
       
       chartData.push(dataPoint)
     })
@@ -204,10 +282,26 @@ function TeamView() {
       <div className="main-content team-view-content">
         {/* Games List */}
         <div className="games-sidebar">
-          <h2>Games {games.length > 0 && `(${games.length})`}</h2>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '15px', paddingBottom: '12px', borderBottom: '1px solid #30363d' }}>
+            <h2 style={{ margin: 0, fontSize: '1.2rem', color: '#c9d1d9', fontWeight: '600' }}>
+              Games
+            </h2>
+            {games.length > 0 && (
+              <span style={{ 
+                fontSize: '0.85rem', 
+                color: '#8b949e', 
+                background: '#21262d',
+                padding: '4px 8px',
+                borderRadius: '12px',
+                fontWeight: '500'
+              }}>
+                {games.length}
+              </span>
+            )}
+          </div>
           {games.length === 0 ? (
             <div className="no-data" style={{ padding: '20px', textAlign: 'center' }}>
-              No games found for this team.
+              <p style={{ color: '#8b949e', fontSize: '0.9rem' }}>No games found for this team.</p>
             </div>
           ) : (
             <div className="games-list">
@@ -242,44 +336,66 @@ function TeamView() {
                     key={index}
                     className={`game-item ${selectedGame === index ? 'selected' : ''}`}
                     onClick={() => setSelectedGame(index)}
-                    style={{ padding: '16px', cursor: 'pointer' }}
+                    style={{ 
+                      padding: '14px', 
+                      cursor: 'pointer',
+                      borderRadius: '6px',
+                      transition: 'all 0.2s ease'
+                    }}
                   >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
+                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', marginBottom: '8px' }}>
                       <span style={{ 
-                        fontSize: '0.85rem', 
-                        color: '#6e7681', 
+                        fontSize: '0.8rem', 
+                        color: selectedGame === index ? '#fff' : '#6e7681', 
                         fontWeight: '600',
-                        minWidth: '24px'
+                        minWidth: '20px',
+                        paddingTop: '2px'
                       }}>
-                        {index}.
+                        {index + 1}.
                       </span>
-                      <div className="game-name" style={{ flex: 1, fontSize: '1rem', fontWeight: '500', color: '#c9d1d9' }}>
-                        {game.match_name}
-                      </div>
-                    </div>
-                    {minPrice !== null && maxPrice !== null && (
-                      <div style={{ 
-                        marginLeft: '36px',
-                        fontSize: '0.9rem',
-                        color: '#8b949e'
-                      }}>
-                        {minPrice === maxPrice ? (
-                          <span style={{ color: '#58a6ff', fontWeight: '600' }}>
-                            {formatPrice(minPrice)}
-                          </span>
-                        ) : (
-                          <span>
-                            <span style={{ color: '#56d364', fontWeight: '600' }}>
-                              {formatPrice(minPrice)}
-                            </span>
-                            <span style={{ margin: '0 8px', color: '#6e7681' }}>→</span>
-                            <span style={{ color: '#ff7b72', fontWeight: '600' }}>
-                              {formatPrice(maxPrice)}
-                            </span>
-                          </span>
+                      <div style={{ flex: 1 }}>
+                        <div className="game-name" style={{ 
+                          fontSize: '0.95rem', 
+                          fontWeight: '500', 
+                          color: selectedGame === index ? '#fff' : '#c9d1d9',
+                          lineHeight: '1.4',
+                          marginBottom: '6px'
+                        }}>
+                          {game.match_name}
+                        </div>
+                        {game.date && (
+                          <div style={{ 
+                            fontSize: '0.75rem', 
+                            color: selectedGame === index ? '#c9d1d9' : '#8b949e',
+                            marginBottom: '4px'
+                          }}>
+                            📅 {game.date}
+                          </div>
+                        )}
+                        {minPrice !== null && maxPrice !== null && (
+                          <div style={{ 
+                            fontSize: '0.85rem',
+                            marginTop: '4px'
+                          }}>
+                            {minPrice === maxPrice ? (
+                              <span style={{ color: selectedGame === index ? '#fff' : '#58a6ff', fontWeight: '600' }}>
+                                {formatPrice(minPrice)}
+                              </span>
+                            ) : (
+                              <span>
+                                <span style={{ color: selectedGame === index ? '#fff' : '#56d364', fontWeight: '600' }}>
+                                  {formatPrice(minPrice)}
+                                </span>
+                                <span style={{ margin: '0 6px', color: selectedGame === index ? '#c9d1d9' : '#6e7681' }}>→</span>
+                                <span style={{ color: selectedGame === index ? '#fff' : '#ff7b72', fontWeight: '600' }}>
+                                  {formatPrice(maxPrice)}
+                                </span>
+                              </span>
+                            )}
+                          </div>
                         )}
                       </div>
-                    )}
+                    </div>
                   </div>
                 )
               })}
@@ -291,26 +407,76 @@ function TeamView() {
         <div className="price-view team-price-view">
           {gamePrices && gamePrices.game ? (
             <>
-              <div style={{ textAlign: 'center', maxWidth: '600px', width: '100%', marginBottom: '20px' }}>
-                <h2 style={{ margin: '0 0 8px 0', color: '#c9d1d9', fontSize: '1.5rem', fontWeight: '600' }}>
+              <div style={{ textAlign: 'center', maxWidth: '800px', width: '100%', marginBottom: '30px', paddingBottom: '20px', borderBottom: '1px solid #30363d' }}>
+                <h2 style={{ margin: '0 0 8px 0', color: '#c9d1d9', fontSize: '1.75rem', fontWeight: '600' }}>
                   {gamePrices.game.match_name}
                 </h2>
                 {gamePrices.game.date && (
-                  <div style={{ fontSize: '0.9rem', color: '#8b949e' }}>
-                    📅 {gamePrices.game.date}
+                  <div style={{ fontSize: '1rem', color: '#8b949e', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+                    <span>📅</span>
+                    <span>{gamePrices.game.date}</span>
                   </div>
                 )}
               </div>
 
               {/* Price History Chart */}
               {chartData.length > 0 && (
-                <div className="chart-section" style={{ marginTop: '40px', width: '100%', maxWidth: '600px' }}>
-                  <h3 style={{ marginBottom: '16px', fontSize: '1rem', color: '#c9d1d9', fontWeight: '600' }}>
-                    📊 Price History
-                  </h3>
-                  <div className="chart-container" style={{ width: '100%', height: '300px', minHeight: '300px' }}>
+                <div className="chart-section" style={{ marginTop: '20px', width: '100%', maxWidth: '900px', background: '#161b22', border: '1px solid #30363d', borderRadius: '8px', padding: '20px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
+                    <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#c9d1d9', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span>📊</span>
+                      <span>Daily Price History</span>
+                    </h3>
+                    {availableDates.length > 0 && (
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+                        <label style={{ fontSize: '0.9rem', color: '#8b949e', fontWeight: '500' }}>Jump to date:</label>
+                        <select
+                          value={selectedDate || ''}
+                          onChange={(e) => setSelectedDate(e.target.value)}
+                          style={{
+                            padding: '8px 12px',
+                            borderRadius: '6px',
+                            border: '1px solid #30363d',
+                            background: '#0d1117',
+                            color: '#c9d1d9',
+                            fontSize: '0.9rem',
+                            cursor: 'pointer',
+                            transition: 'all 0.2s'
+                          }}
+                          onMouseEnter={(e) => e.target.style.borderColor = '#58a6ff'}
+                          onMouseLeave={(e) => e.target.style.borderColor = '#30363d'}
+                        >
+                          <option value="">All dates</option>
+                          {availableDates.map(date => {
+                            const dateObj = new Date(date)
+                            const displayDate = dateObj.toLocaleDateString('en-US', {
+                              month: 'short',
+                              day: 'numeric',
+                              year: 'numeric'
+                            })
+                            return (
+                              <option key={date} value={date}>
+                                {displayDate}
+                              </option>
+                            )
+                          })}
+                        </select>
+                      </div>
+                    )}
+                  </div>
+                  {selectedDate && (
+                    <div style={{ marginBottom: '12px', padding: '8px 12px', background: '#1f6feb20', border: '1px solid #1f6feb40', borderRadius: '4px', fontSize: '0.85rem', color: '#58a6ff' }}>
+                      📍 Showing data for: <strong>{new Date(selectedDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</strong>
+                    </div>
+                  )}
+                  {!selectedDate && availableDates.length > 1 && (
+                    <div style={{ marginBottom: '12px', padding: '8px 12px', background: '#21262d', border: '1px solid #30363d', borderRadius: '4px', fontSize: '0.85rem', color: '#8b949e' }}>
+                      💡 Showing daily averages across all dates. Use the date selector to focus on a specific day.
+                    </div>
+                  )}
+                  <div className="chart-container" style={{ width: '100%', height: '450px', minHeight: '450px' }}>
                     <ResponsiveContainer width="100%" height="100%">
-                      <AreaChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+                      <AreaChart data={chartData} margin={{ top: 10, right: 20, left: 10, bottom: 10 }}>
                         <defs>
                           {Array.from(new Set(chartData.flatMap(d => Object.keys(d).filter(k => k !== 'time')))).map((cat, i) => (
                             <linearGradient key={cat} id={`grad${i}`} x1="0" y1="0" x2="0" y2="1">
@@ -324,9 +490,12 @@ function TeamView() {
                         <XAxis 
                           dataKey="time" 
                           stroke="#6e7681" 
-                          tick={{ fontSize: 9, fill: '#8b949e' }}
+                          tick={{ fontSize: 10, fill: '#8b949e' }}
                           axisLine={{ stroke: '#30363d' }}
                           tickLine={{ stroke: '#30363d' }}
+                          angle={-45}
+                          textAnchor="end"
+                          height={80}
                         />
                         <YAxis 
                           stroke="#6e7681" 
@@ -346,7 +515,8 @@ function TeamView() {
                           }} 
                           itemStyle={{ color: '#c9d1d9', fontSize: '13px', marginBottom: '4px' }}
                           labelStyle={{ color: '#f0f6fc', fontWeight: '600', fontSize: '12px', marginBottom: '8px' }}
-                          formatter={(value, name) => [`$${value?.toLocaleString() || '0'}`, name]}
+                          formatter={(value, name) => [`$${value?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) || '0'}`, name]}
+                          labelFormatter={(label) => `${label} (Daily Average)`}
                         />
                         <Legend 
                           wrapperStyle={{ fontSize: '11px', paddingTop: '15px' }}
@@ -376,8 +546,16 @@ function TeamView() {
 
               {chartData.length === 0 && gamePrices && gamePrices.game && (
                 <div style={{ padding: '40px', textAlign: 'center', color: '#6e7681', fontSize: '1rem' }}>
-                  <p>No price history available yet.</p>
-                  <p style={{ fontSize: '0.85rem', marginTop: '8px' }}>History will appear here as more prices are collected.</p>
+                  <p>
+                    {selectedDate 
+                      ? `No price data available for ${new Date(selectedDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}.`
+                      : 'No price history available yet.'}
+                  </p>
+                  <p style={{ fontSize: '0.85rem', marginTop: '8px' }}>
+                    {selectedDate 
+                      ? 'Try selecting a different date or view all dates.'
+                      : 'History will appear here as more prices are collected.'}
+                  </p>
                 </div>
               )}
             </>

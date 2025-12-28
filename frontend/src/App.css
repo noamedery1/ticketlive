@@ -276,17 +276,20 @@
   border: 1px solid #30363d;
   border-radius: 6px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
+  margin-bottom: 8px;
 }
 
 .game-item:hover {
   background-color: #21262d;
   border-color: #58a6ff;
+  transform: translateX(2px);
 }
 
 .game-item.selected {
   background-color: #1f6feb;
   border-color: #58a6ff;
+  box-shadow: 0 0 0 1px #58a6ff40;
 }
 
 .game-name {
