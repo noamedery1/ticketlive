@@ -65,6 +65,20 @@
               "Unknown": 155.3
             }
           }
+        },
+        {
+          "timestamp": "2025-12-29T01:05:03.185250",
+          "prices": {
+            "Category 4": {
+              "Unknown": 123.1
+            },
+            "Category 3": {
+              "Unknown": 136.0
+            },
+            "Category 2": {
+              "Unknown": 155.3
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -78,7 +92,7 @@
           "Unknown": 155.3
         }
       },
-      "last_scraped": "2025-12-28T21:50:11.609730"
+      "last_scraped": "2025-12-29T01:05:03.185250"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-levante-ud",
@@ -131,17 +145,28 @@
               "Unknown": 143.0
             }
           }
+        },
+        {
+          "timestamp": "2025-12-29T01:05:03.185250",
+          "prices": {
+            "Category 4": {
+              "Unknown": 117.2
+            },
+            "Category 3": {
+              "Unknown": 143.0
+            }
+          }
         }
       ],
       "latest_prices": {
         "Category 4": {
-          "Unknown": 117.1
+          "Unknown": 117.2
         },
         "Category 3": {
           "Unknown": 143.0
         }
       },
-      "last_scraped": "2025-12-28T21:50:11.609730"
+      "last_scraped": "2025-12-29T01:05:03.185250"
     },
     {
       "url": "https://www.footballticketnet.com/champions-league/real-madrid-vs-as-monaco",
@@ -206,6 +231,20 @@
               "Unknown": 190.3
             }
           }
+        },
+        {
+          "timestamp": "2025-12-29T01:05:03.185250",
+          "prices": {
+            "Category 4": {
+              "Unknown": 161.98
+            },
+            "Category 3": {
+              "Unknown": 164.95
+            },
+            "Category 2": {
+              "Unknown": 190.3
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -219,7 +258,7 @@
           "Unknown": 190.3
         }
       },
-      "last_scraped": "2025-12-28T21:50:11.609730"
+      "last_scraped": "2025-12-29T01:05:03.185250"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-rayo-vallecano",
@@ -284,6 +323,20 @@
               "Unknown": 162.0
             }
           }
+        },
+        {
+          "timestamp": "2025-12-29T01:05:03.185250",
+          "prices": {
+            "Category 4": {
+              "Unknown": 129.0
+            },
+            "Category 3": {
+              "Unknown": 136.0
+            },
+            "Category 2": {
+              "Unknown": 162.0
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -297,7 +350,7 @@
           "Unknown": 162.0
         }
       },
-      "last_scraped": "2025-12-28T21:50:11.609730"
+      "last_scraped": "2025-12-29T01:05:03.185250"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-real-sociedad",
@@ -362,6 +415,20 @@
               "Unknown": 170.0
             }
           }
+        },
+        {
+          "timestamp": "2025-12-29T01:05:03.185250",
+          "prices": {
+            "Category 4": {
+              "Unknown": 139.0
+            },
+            "Category 3": {
+              "Unknown": 160.0
+            },
+            "Category 2": {
+              "Unknown": 170.0
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -375,7 +442,7 @@
           "Unknown": 170.0
         }
       },
-      "last_scraped": "2025-12-28T21:50:11.609730"
+      "last_scraped": "2025-12-29T01:05:03.185250"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-getafe-cf",
@@ -440,6 +507,20 @@
               "Unknown": 170.0
             }
           }
+        },
+        {
+          "timestamp": "2025-12-29T01:05:03.185250",
+          "prices": {
+            "Category 4": {
+              "Unknown": 144.0
+            },
+            "Category 3": {
+              "Unknown": 160.0
+            },
+            "Category 2": {
+              "Unknown": 170.0
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -453,7 +534,7 @@
           "Unknown": 170.0
         }
       },
-      "last_scraped": "2025-12-28T21:50:11.609730"
+      "last_scraped": "2025-12-29T01:05:03.185250"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-elche",
@@ -518,6 +599,20 @@
               "Unknown": 172.0
             }
           }
+        },
+        {
+          "timestamp": "2025-12-29T01:05:03.185250",
+          "prices": {
+            "Category 4": {
+              "Unknown": 134.0
+            },
+            "Category 3": {
+              "Unknown": 160.0
+            },
+            "Category 2": {
+              "Unknown": 172.0
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -531,7 +626,7 @@
           "Unknown": 172.0
         }
       },
-      "last_scraped": "2025-12-28T21:50:11.609730"
+      "last_scraped": "2025-12-29T01:05:03.185250"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-atletico-madrid",
@@ -572,6 +667,14 @@
               "Unknown": 344.0
             }
           }
+        },
+        {
+          "timestamp": "2025-12-29T01:05:03.185250",
+          "prices": {
+            "Category 4": {
+              "Unknown": 344.0
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -579,7 +682,7 @@
           "Unknown": 344.0
         }
       },
-      "last_scraped": "2025-12-28T21:50:11.609730"
+      "last_scraped": "2025-12-29T01:05:03.185250"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-girona",
@@ -620,6 +723,14 @@
               "Unknown": 160.0
             }
           }
+        },
+        {
+          "timestamp": "2025-12-29T01:05:03.185250",
+          "prices": {
+            "Category 4": {
+              "Unknown": 160.0
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -627,7 +738,7 @@
           "Unknown": 160.0
         }
       },
-      "last_scraped": "2025-12-28T21:50:11.609730"
+      "last_scraped": "2025-12-29T01:05:03.185250"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-deportivo-alaves",
@@ -692,6 +803,20 @@
               "Unknown": 174.3
             }
           }
+        },
+        {
+          "timestamp": "2025-12-29T01:05:03.185250",
+          "prices": {
+            "Category 3": {
+              "Unknown": 170.3
+            },
+            "Category 4": {
+              "Unknown": 173.0
+            },
+            "Category 2 Lateral": {
+              "Unknown": 174.3
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -705,7 +830,7 @@
           "Unknown": 174.3
         }
       },
-      "last_scraped": "2025-12-28T21:50:11.609730"
+      "last_scraped": "2025-12-29T01:05:03.185250"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-real-oviedo",
@@ -746,6 +871,14 @@
               "Unknown": 142.0
             }
           }
+        },
+        {
+          "timestamp": "2025-12-29T01:05:03.185250",
+          "prices": {
+            "Category 4": {
+              "Unknown": 142.0
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -753,7 +886,7 @@
           "Unknown": 142.0
         }
       },
-      "last_scraped": "2025-12-28T21:50:11.609730"
+      "last_scraped": "2025-12-29T01:05:03.185250"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-athletic-bilbao",
@@ -806,18 +939,29 @@
               "Unknown": 181.0
             }
           }
+        },
+        {
+          "timestamp": "2025-12-29T01:05:03.185250",
+          "prices": {
+            "Category 4": {
+              "Unknown": 167.0
+            },
+            "Category 2 Lateral": {
+              "Unknown": 181.0
+            }
+          }
         }
       ],
       "latest_prices": {
         "Category 4": {
-          "Unknown": 155.0
+          "Unknown": 167.0
         },
         "Category 2 Lateral": {
           "Unknown": 181.0
         }
       },
-      "last_scraped": "2025-12-28T21:50:11.609730"
+      "last_scraped": "2025-12-29T01:05:03.185250"
     }
   ],
-  "last_updated": "2025-12-28T21:50:11.609730"
+  "last_updated": "2025-12-29T01:05:03.185250"
 }
