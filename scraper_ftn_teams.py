@@ -25,10 +25,31 @@ OUTPUT_FILE = 'ftn_teams_data.json'
 TEAMS_LIST_FILE = 'teams_list.json'
 
 def discover_teams_from_files():
-    """Discover teams from existing *_prices.json files"""
+    """Discover teams from teams_list.json first, then fall back to *_prices.json files"""
     teams_dict = {}
     
-    # Look for all *_prices.json files
+    # First, try to load from teams_list.json
+    if os.path.exists(TEAMS_LIST_FILE):
+        try:
+            with open(TEAMS_LIST_FILE, 'r', encoding='utf-8') as f:
+                teams_list_data = json.load(f)
+                for team in teams_list_data.get('teams', []):
+                    team_key = team.get('team_key')
+                    team_name = team.get('team_name')
+                    team_url = team.get('team_url')
+                    if team_key and team_url:
+                        teams_dict[team_key] = {
+                            'url': team_url,
+                            'name': team_name or team_key.title()
+                        }
+                        print(f'      ✅ Loaded from teams_list.json: {team_name or team_key.title()} ({team_key})', flush=True)
+            if teams_dict:
+                print(f'   ✅ Loaded {len(teams_dict)} team(s) from teams_list.json', flush=True)
+                return teams_dict
+        except Exception as e:
+            print(f'   ⚠️ Error loading {TEAMS_LIST_FILE}: {e}', flush=True)
+    
+    # Fallback: Look for all *_prices.json files
     import glob
     pattern = '*_prices.json'
     team_files = glob.glob(pattern)

@@ -13,6 +13,13 @@
       "team_url": "https://www.footballticketnet.com/barcelona-football-tickets/filter/home_away/home-matches",
       "currency": "EUR",
       "country": "Spain"
+    },
+    {
+      "team_key": "real-madrid",
+      "team_name": "Real Madrid",
+      "team_url": "https://www.footballticketnet.com/real-madrid-football-tickets/filter/home_away/home-matches",
+      "currency": "EUR",
+      "country": "Spain"
     }
   ]
 }
