@@ -21,8 +21,8 @@ if sys.platform == 'win32':
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
     sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
-EUR_TO_USD = 1.05
 OUTPUT_FILE = 'ftn_teams_data.json'
+TEAMS_LIST_FILE = 'teams_list.json'
 
 def discover_teams_from_files():
     """Discover teams from existing *_prices.json files"""
@@ -502,17 +502,93 @@ def extract_home_game_urls(driver, team_url, team_name):
         traceback.print_exc()
         return []
 
-def scrape_game_prices(driver, game_url, game_name):
+def set_currency_on_page(driver, currency):
+    """
+    Set currency on FootballTicketNet page.
+    Tries URL parameter first, then looks for currency selector on page.
+    """
+    try:
+        current_url = driver.current_url
+        # Try URL parameter method
+        currency_param = currency.upper()
+        if f'currency={currency_param}' not in current_url.lower():
+            separator = '&' if '?' in current_url else '?'
+            new_url = f'{current_url}{separator}currency={currency_param}'
+            driver.get(new_url)
+            time.sleep(3)
+            print(f'      💱 Set currency to {currency_param} via URL', flush=True)
+        
+        # Also try to find and click currency selector on page
+        try:
+            currency_selectors = [
+                f"//*[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '{currency_param.lower()}')]",
+                f"//select[contains(@name, 'currency') or contains(@id, 'currency')]",
+                f"//*[@data-currency='{currency_param}']",
+                f"//*[@data-currency='{currency_param.lower()}']"
+            ]
+            for selector in currency_selectors:
+                try:
+                    elem = driver.find_element(By.XPATH, selector)
+                    if elem.is_displayed():
+                        elem.click()
+                        time.sleep(2)
+                        print(f'      💱 Clicked currency selector for {currency_param}', flush=True)
+                        break
+                except:
+                    continue
+        except:
+            pass  # URL parameter method is sufficient
+    except Exception as e:
+        print(f'      ⚠️ Could not set currency: {e}', flush=True)
+
+def get_team_currency(team_key):
+    """Get currency for a team from teams_list.json"""
+    try:
+        if os.path.exists(TEAMS_LIST_FILE):
+            with open(TEAMS_LIST_FILE, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                for team in data.get('teams', []):
+                    if team.get('team_key') == team_key:
+                        return team.get('currency', 'USD')
+    except Exception as e:
+        print(f'      [WARN] Could not load currency for {team_key}: {e}', flush=True)
+    
+    # Default currency mapping
+    default_currencies = {
+        'arsenal': 'GBP',
+        'barcelona': 'EUR',
+        'real-madrid': 'EUR',
+        'manchester': 'GBP',
+        'liverpool': 'GBP',
+        'chelsea': 'GBP',
+        'tottenham': 'GBP',
+    }
+    
+    for key, currency in default_currencies.items():
+        if key in team_key.lower():
+            return currency
+    
+    return 'USD'  # Default
+
+def scrape_game_prices(driver, game_url, game_name, team_key=None):
     """
     Scrape prices for a single game.
     Filters by "Up To 2 Seats Together" and groups lowest prices by block/category.
+    Stores prices in original currency (no conversion).
     """
     # Structure: {category: {block: min_price}}
     prices_by_block = defaultdict(lambda: defaultdict(lambda: float('inf')))
     
+    # Get team currency
+    currency = get_team_currency(team_key) if team_key else 'USD'
+    
     try:
         driver.get(game_url)
-        time.sleep(8)  # Wait for page to fully load
+        time.sleep(5)  # Wait for page to load
+        
+        # Set currency on page before scraping
+        set_currency_on_page(driver, currency)
+        time.sleep(3)  # Wait for currency to apply
         
         # Wait for page to load
         WebDriverWait(driver, 15).until(
@@ -594,15 +670,14 @@ def scrape_game_prices(driver, game_url, game_name):
                             currency_sym = price_match.group(1)
                             raw_val = float(price_match.group(2).replace(',', ''))
                             
-                            price_usd = raw_val
-                            if '€' in currency_sym:
-                                price_usd = round(raw_val * EUR_TO_USD, 2)
+                            # Store price in original currency (no conversion)
+                            price = raw_val
                             
                             # Store price by category and block
                             if current_category:
                                 block_key = current_block if current_block else 'Unknown'
-                                if price_usd < prices_by_block[current_category][block_key]:
-                                    prices_by_block[current_category][block_key] = price_usd
+                                if price < prices_by_block[current_category][block_key]:
+                                    prices_by_block[current_category][block_key] = price
                             break
             
             # Also look for prices directly (might be in table format)
@@ -614,13 +689,12 @@ def scrape_game_prices(driver, game_url, game_name):
                     currency_sym = price_match.group(1)
                     raw_val = float(price_match.group(2).replace(',', ''))
                     
-                    price_usd = raw_val
-                    if '€' in currency_sym:
-                        price_usd = round(raw_val * EUR_TO_USD, 2)
+                    # Store price in original currency (no conversion)
+                    price = raw_val
                     
                     block_key = current_block if current_block else 'Unknown'
-                    if price_usd < prices_by_block[current_category][block_key]:
-                        prices_by_block[current_category][block_key] = price_usd
+                    if price < prices_by_block[current_category][block_key]:
+                        prices_by_block[current_category][block_key] = price
         
         # Convert to final format: {category: {block: price}}
         result = {}
@@ -642,13 +716,14 @@ def scrape_game_prices(driver, game_url, game_name):
                             if price_match:
                                 currency_sym = price_match.group(1)
                                 raw_val = float(price_match.group(2).replace(',', ''))
-                                price_usd = raw_val
-                                if '€' in currency_sym:
-                                    price_usd = round(raw_val * EUR_TO_USD, 2)
+                                
+                                # Store price in original currency (no conversion)
+                                price = raw_val
+                                
                                 if normalized_cat not in result:
                                     result[normalized_cat] = {}
-                                if 'Unknown' not in result[normalized_cat] or price_usd < result[normalized_cat].get('Unknown', float('inf')):
-                                    result[normalized_cat]['Unknown'] = price_usd
+                                if 'Unknown' not in result[normalized_cat] or price < result[normalized_cat].get('Unknown', float('inf')):
+                                    result[normalized_cat]['Unknown'] = price
         
         return result
         
@@ -752,7 +827,7 @@ def run_team_scraper(team_key='arsenal'):
             game_data = existing_games[url]
             print(f'   [{i}/{len(current_urls)}] {game_data["match_name"]}...', flush=True)
             
-            prices = scrape_game_prices(driver, url, game_data['match_name'])
+            prices = scrape_game_prices(driver, url, game_data['match_name'], team_key)
             
             if prices:
                 # Count total blocks/categories
@@ -769,7 +844,9 @@ def run_team_scraper(team_key='arsenal'):
                 # Show sample prices
                 for cat, blocks in list(prices.items())[:3]:
                     for block, price in list(blocks.items())[:2]:
-                        print(f'         {cat} - Block {block}: ${price:.2f}', flush=True)
+                        currency_symbol = get_team_currency(team_key)
+                        currency_display = {'GBP': '£', 'EUR': '€', 'USD': '$'}.get(currency_symbol, '$')
+                        print(f'         {cat} - Block {block}: {currency_display}{price:.2f}', flush=True)
             else:
                 print(f'      ⚠️ No prices found', flush=True)
             

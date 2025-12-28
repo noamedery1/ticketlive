@@ -105,13 +105,6 @@ function TeamView() {
     }
   }
 
-  // Currency conversion rates (USD is base currency in storage)
-  const CURRENCY_RATES = {
-    'USD': 1.0,
-    'GBP': 0.79,  // 1 USD = 0.79 GBP (approximate)
-    'EUR': 0.95   // 1 USD = 0.95 EUR (approximate)
-  }
-
   const getCurrencySymbol = (currency) => {
     const symbols = {
       'USD': '$',
@@ -121,17 +114,11 @@ function TeamView() {
     return symbols[currency] || '$'
   }
 
-  const convertPrice = (priceUSD, targetCurrency) => {
-    if (!priceUSD || !targetCurrency) return priceUSD
-    const rate = CURRENCY_RATES[targetCurrency] || 1.0
-    return priceUSD * rate
-  }
-
   const formatPrice = (price, currency = 'USD') => {
+    // Prices are now stored in original currency, no conversion needed
     if (!price) return 'N/A'
-    const convertedPrice = convertPrice(price, currency)
     const symbol = getCurrencySymbol(currency)
-    return `${symbol}${convertedPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+    return `${symbol}${price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
   }
 
   // Extract available dates and categories from price history
@@ -281,8 +268,8 @@ function TeamView() {
             const prices = day.prices[cat][block].filter(p => typeof p === 'number')
             if (prices.length > 0) {
               const avg = prices.reduce((a, b) => a + b, 0) / prices.length
-              // Convert to target currency
-              const convertedAvg = convertPrice(avg, currency)
+              // Prices already in correct currency, no conversion needed
+              const convertedAvg = avg
               dataPoint[catBlock] = Math.round(convertedAvg * 100) / 100
             } else {
               dataPoint[catBlock] = null
@@ -296,8 +283,8 @@ function TeamView() {
             const prices = day.prices[cat]['_simple'].filter(p => typeof p === 'number')
             if (prices.length > 0) {
               const avg = prices.reduce((a, b) => a + b, 0) / prices.length
-              // Convert to target currency
-              const convertedAvg = convertPrice(avg, currency)
+              // Prices already in correct currency, no conversion needed
+              const convertedAvg = avg
               dataPoint[cat] = Math.round(convertedAvg * 100) / 100
             } else {
               dataPoint[cat] = null
