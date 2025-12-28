@@ -1,6 +1,6 @@
 """
-Auto Scraper for World Cup (Viagogo)
-Runs the viagogo scraper and pushes to git server
+Auto Scraper for World Cup (Viagogo + FTN)
+Runs both viagogo and FTN scrapers for World Cup games and pushes to git server
 """
 import subprocess
 import time
@@ -33,7 +33,8 @@ PYTHON_CMD = get_python_cmd()
 # ⚙️ CONFIGURATION
 # ==========================================
 SCRAPE_INTERVAL_HOURS = 3.0  # Run every 3 hours
-PRICES_VIAGOGO_FILE = 'prices.json'
+PRICES_VIAGOGO_FILE = 'prices.json'  # Viagogo World Cup prices file
+PRICES_FTN_FILE = 'prices_ftn.json'  # FTN World Cup prices file
 
 # ==========================================
 # Git Functions
@@ -79,9 +80,37 @@ def git_commit(message):
         print(f'   [ERROR] Git commit error: {e}', flush=True)
         return False
 
-def git_push():
-    """Push to remote repository"""
+def git_pull():
+    """Pull latest changes from remote repository"""
     try:
+        print(f'   [INFO] Pulling latest changes from remote...', flush=True)
+        result = subprocess.run(
+            ['git', 'pull', '--no-edit', '--no-rebase'],
+            capture_output=True,
+            text=True,
+            encoding='utf-8',
+            errors='replace'
+        )
+        if result.returncode == 0:
+            if 'Already up to date' in result.stdout or 'Already up to date' in result.stderr:
+                print(f'   [INFO] Repository already up to date', flush=True)
+            else:
+                print(f'   [OK] Pulled latest changes from remote', flush=True)
+            return True
+        else:
+            print(f'   [WARN] Pull failed: {result.stderr}', flush=True)
+            return True  # Continue anyway
+    except Exception as e:
+        print(f'   [WARN] Git pull error: {e}', flush=True)
+        return True  # Continue anyway
+
+def git_push():
+    """Push to remote repository (with pull first to sync)"""
+    try:
+        # First, pull to sync with remote
+        git_pull()
+        
+        # Now try to push
         result = subprocess.run(
             ['git', 'push'],
             capture_output=True,
@@ -93,18 +122,55 @@ def git_push():
             print(f'   [OK] Pushed to remote repository', flush=True)
             return True
         else:
-            print(f'   [ERROR] Push failed: {result.stderr}', flush=True)
-            return False
+            # If push still fails, try pull again and retry
+            if 'non-fast-forward' in result.stderr or 'rejected' in result.stderr:
+                print(f'   [INFO] Push rejected, pulling again and retrying...', flush=True)
+                git_pull()
+                # Retry push
+                retry_result = subprocess.run(
+                    ['git', 'push'],
+                    capture_output=True,
+                    text=True,
+                    encoding='utf-8',
+                    errors='replace'
+                )
+                if retry_result.returncode == 0:
+                    print(f'   [OK] Pushed to remote repository (after retry)', flush=True)
+                    return True
+                else:
+                    print(f'   [ERROR] Push failed after retry: {retry_result.stderr}', flush=True)
+                    return False
+            else:
+                print(f'   [ERROR] Push failed: {result.stderr}', flush=True)
+                return False
     except Exception as e:
         print(f'   [ERROR] Git push error: {e}', flush=True)
         return False
 
 def commit_and_push_worldcup_data():
-    """Commit and push World Cup data file"""
-    print(f'\n[{datetime.now().strftime("%H:%M:%S")}] [ACTION] Committing and pushing World Cup data...', flush=True)
+    """Commit and push World Cup data files (both Viagogo and FTN) - with pull first to sync"""
+    print(f'\n[{datetime.now().strftime("%H:%M:%S")}] [ACTION] Committing and pushing World Cup data (Viagogo + FTN)...', flush=True)
+    
+    # Pull first to sync with remote
+    print(f'   [INFO] Syncing with remote repository...', flush=True)
+    git_pull()
     
     # Files to commit
-    files_to_commit = [PRICES_VIAGOGO_FILE]
+    files_to_commit = []
+    
+    # Add Viagogo file if it exists
+    if os.path.exists(PRICES_VIAGOGO_FILE):
+        files_to_commit.append(PRICES_VIAGOGO_FILE)
+    
+    # Add FTN file if it exists
+    if os.path.exists(PRICES_FTN_FILE):
+        files_to_commit.append(PRICES_FTN_FILE)
+    
+    # Also check for game list files if they exist
+    if os.path.exists('all_games_to_scrape.json'):
+        files_to_commit.append('all_games_to_scrape.json')
+    if os.path.exists('all_games_ftn_to_scrape.json'):
+        files_to_commit.append('all_games_ftn_to_scrape.json')
     
     # Check if files exist
     existing_files = []
@@ -127,7 +193,7 @@ def commit_and_push_worldcup_data():
     
     # Create commit message with timestamp
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    commit_message = f"Auto-update World Cup prices - {timestamp}"
+    commit_message = f"Auto-update World Cup prices (Viagogo + FTN) - {timestamp}"
     
     # Commit
     print(f'   [INFO] Committing changes...', flush=True)
@@ -135,7 +201,7 @@ def commit_and_push_worldcup_data():
         print(f'   [ERROR] Commit failed', flush=True)
         return False
     
-    # Push
+    # Push (which will also pull again before pushing)
     print(f'   [INFO] Pushing to remote...', flush=True)
     if not git_push():
         print(f'   [ERROR] Push failed', flush=True)
@@ -147,13 +213,13 @@ def commit_and_push_worldcup_data():
 # ==========================================
 # Scraper Functions
 # ==========================================
-def run_worldcup_scraper():
-    """Run World Cup scraper"""
+def run_scraper(script_name, scraper_name):
+    """Run a scraper script"""
     try:
-        print(f'[{datetime.now().strftime("%H:%M:%S")}] [ACTION] Starting World Cup scraper (Viagogo)...', flush=True)
+        print(f'[{datetime.now().strftime("%H:%M:%S")}] [ACTION] Starting {scraper_name} scraper...', flush=True)
         
         process = subprocess.Popen(
-            [PYTHON_CMD, 'scraper_viagogo.py'],
+            [PYTHON_CMD, script_name],
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             universal_newlines=True,
@@ -174,51 +240,84 @@ def run_worldcup_scraper():
         process.wait(timeout=None)
         
         if process.returncode == 0:
-            print(f'[{datetime.now().strftime("%H:%M:%S")}] [OK] World Cup scraper finished.', flush=True)
+            print(f'[{datetime.now().strftime("%H:%M:%S")}] [OK] {scraper_name} scraper finished.', flush=True)
             return True
         else:
-            print(f'[{datetime.now().strftime("%H:%M:%S")}] [ERROR] World Cup scraper exited with code {process.returncode}', flush=True)
+            print(f'[{datetime.now().strftime("%H:%M:%S")}] [ERROR] {scraper_name} scraper exited with code {process.returncode}', flush=True)
             return False
     except subprocess.TimeoutExpired:
-        print(f'[{datetime.now().strftime("%H:%M:%S")}] [WARN] World Cup scraper process timeout', flush=True)
+        print(f'[{datetime.now().strftime("%H:%M:%S")}] [WARN] {scraper_name} scraper process timeout', flush=True)
         if 'process' in locals():
             process.kill()
         return False
     except Exception as e:
-        print(f'[{datetime.now().strftime("%H:%M:%S")}] [ERROR] World Cup scraper error: {e}', flush=True)
+        print(f'[{datetime.now().strftime("%H:%M:%S")}] [ERROR] {scraper_name} scraper error: {e}', flush=True)
         import traceback
         traceback.print_exc()
         return False
+
+def run_worldcup_scrapers():
+    """Run both Viagogo and FTN World Cup scrapers"""
+    results = {}
+    
+    # Run Viagogo scraper
+    print(f'\n{"="*60}', flush=True)
+    print(f'[{datetime.now().strftime("%H:%M:%S")}] [1/2] Running Viagogo World Cup scraper...', flush=True)
+    print(f'{"="*60}', flush=True)
+    results['viagogo'] = run_scraper('scraper_viagogo.py', 'Viagogo')
+    
+    # Wait between scrapers
+    if results['viagogo']:
+        print(f'\n   [INFO] Waiting 5 seconds before next scraper...', flush=True)
+        time.sleep(5)
+    
+    # Run FTN scraper
+    print(f'\n{"="*60}', flush=True)
+    print(f'[{datetime.now().strftime("%H:%M:%S")}] [2/2] Running FTN World Cup scraper...', flush=True)
+    print(f'{"="*60}', flush=True)
+    results['ftn'] = run_scraper('scraper_ftn.py', 'FTN')
+    
+    return results
 
 # ==========================================
 # Main Loop
 # ==========================================
 def run_cycle():
-    """Run one complete cycle: scrape -> commit -> push"""
+    """Run one complete cycle: scrape both Viagogo and FTN -> commit -> push"""
     print(f'\n{"="*60}', flush=True)
-    print(f'[{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}] [START] STARTING WORLD CUP SCRAPER...', flush=True)
+    print(f'[{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}] [START] STARTING WORLD CUP SCRAPERS (Viagogo + FTN)...', flush=True)
     print(f'{"="*60}\n', flush=True)
     
-    success = run_worldcup_scraper()
+    results = run_worldcup_scrapers()
+    
+    # Summary
+    print(f'\n{"="*60}', flush=True)
+    print(f'[{datetime.now().strftime("%H:%M:%S")}] [SUMMARY] Scraping Results:', flush=True)
+    print(f'{"="*60}', flush=True)
+    for scraper_name, success in results.items():
+        status = 'SUCCESS' if success else 'FAILED'
+        print(f'   {scraper_name}: {status}', flush=True)
+    print(f'{"="*60}', flush=True)
     
     # Commit and push
     print(f'\n{"="*60}', flush=True)
     commit_and_push_worldcup_data()
     print(f'{"="*60}\n', flush=True)
     
-    if success:
-        print(f'[{datetime.now().strftime("%H:%M:%S")}] [OK] World Cup scraper completed successfully', flush=True)
+    all_success = all(results.values())
+    if all_success:
+        print(f'[{datetime.now().strftime("%H:%M:%S")}] [OK] World Cup scrapers completed successfully', flush=True)
     else:
-        print(f'[{datetime.now().strftime("%H:%M:%S")}] [WARN] World Cup scraper had errors, but data was still pushed', flush=True)
+        print(f'[{datetime.now().strftime("%H:%M:%S")}] [WARN] Some World Cup scrapers had errors, but data was still pushed', flush=True)
     
-    return success
+    return all_success
 
 def main():
     """Main entry point"""
     print(f'\n{"="*60}', flush=True)
-    print(f'[START] AUTO SCRAPER - WORLD CUP PRICE MONITORING & AUTO COMMIT', flush=True)
+    print(f'[START] AUTO SCRAPER - WORLD CUP PRICE MONITORING & AUTO COMMIT (Viagogo + FTN)', flush=True)
     print(f'[INTERVAL] Running every {SCRAPE_INTERVAL_HOURS} hours', flush=True)
-    print(f'[FILES] {PRICES_VIAGOGO_FILE}', flush=True)
+    print(f'[FILES] {PRICES_VIAGOGO_FILE}, {PRICES_FTN_FILE}', flush=True)
     print(f'{"="*60}\n', flush=True)
     
     # Run immediately on start

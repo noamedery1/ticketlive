@@ -3,7 +3,7 @@ REM Change to the script's directory
 cd /d "%~dp0"
 
 echo ============================================================
-echo RUN WORLD CUP SCRAPER - Viagogo (ONE TIME)
+echo RUN WORLD CUP SCRAPERS - Viagogo + FTN (ONE TIME)
 echo ============================================================
 echo.
 
@@ -32,7 +32,7 @@ if exist "C:\PythonEnvs\ticketlive\Scripts\activate.bat" (
 )
 
 echo.
-echo [START] Running World Cup scraper (Viagogo) - one time...
+echo [START] Running World Cup scrapers (Viagogo + FTN) - one time...
 echo.
 
 REM Check if the script exists
