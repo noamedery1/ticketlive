@@ -1282,27 +1282,70 @@
                 "Unknown": 275.0
               }
             }
+          },
+          {
+            "timestamp": "2025-12-30T18:27:40.727417",
+            "prices": {
+              "Central Longside Upper": {
+                "Row: AMAZING VIEW": 239.99,
+                "134": 250.0,
+                "Row: AMAZING CENTRAL VIEW!": 375.0,
+                "134,91,113,112": 400.0
+              },
+              "Shortside Upper Level": {
+                "Row: AMAZING VIEW": 299.95,
+                "Unknown": 345.0
+              },
+              "Longside Upper Level": {
+                "Row: AMAZING VIEW": 299.95,
+                "Unknown": 300.0,
+                "115": 395.0,
+                "132,131,93,94": 400.0
+              },
+              "Shortside Lower Level": {
+                "Row: PITCHSIDE BEST!": 324.95,
+                "Unknown": 325.0
+              },
+              "Club Level Shortside": {
+                "53B": 350.0,
+                "Row: VIP ROWS 1-10": 425.0
+              },
+              "Central Longside Lower": {
+                "31,2": 430.0
+              }
+            }
           }
         ],
         "latest_prices": {
-          "Shortside Upper Level": {
-            "Unknown": 209.99,
-            "122": 225.0
-          },
-          "Shortside Lower Level": {
-            "Unknown": 239.0,
-            "10": 240.0
-          },
           "Central Longside Upper": {
             "Row: AMAZING VIEW": 239.99,
-            "Unknown": 250.0,
-            "134": 250.0
+            "134": 250.0,
+            "Row: AMAZING CENTRAL VIEW!": 375.0,
+            "134,91,113,112": 400.0
+          },
+          "Shortside Upper Level": {
+            "Row: AMAZING VIEW": 299.95,
+            "Unknown": 345.0
           },
           "Longside Upper Level": {
-            "Unknown": 275.0
+            "Row: AMAZING VIEW": 299.95,
+            "Unknown": 300.0,
+            "115": 395.0,
+            "132,131,93,94": 400.0
+          },
+          "Shortside Lower Level": {
+            "Row: PITCHSIDE BEST!": 324.95,
+            "Unknown": 325.0
+          },
+          "Club Level Shortside": {
+            "53B": 350.0,
+            "Row: VIP ROWS 1-10": 425.0
+          },
+          "Central Longside Lower": {
+            "31,2": 430.0
           }
         },
-        "last_scraped": "2025-12-30T15:11:03.223215"
+        "last_scraped": "2025-12-30T18:27:40.727417"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-liverpool-fc",
@@ -1635,6 +1678,15 @@
                 "110": 363.0
               }
             }
+          },
+          {
+            "timestamp": "2025-12-30T18:27:40.727417",
+            "prices": {
+              "Longside Upper Level": {
+                "Unknown": 362.91,
+                "110": 363.0
+              }
+            }
           }
         ],
         "latest_prices": {
@@ -1643,7 +1695,7 @@
             "110": 363.0
           }
         },
-        "last_scraped": "2025-12-30T15:11:03.223215"
+        "last_scraped": "2025-12-30T18:27:40.727417"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-manchester-united",
@@ -2103,6 +2155,14 @@
                 "Unknown": 420.0
               }
             }
+          },
+          {
+            "timestamp": "2025-12-30T18:27:40.727417",
+            "prices": {
+              "Shortside Upper Level": {
+                "Unknown": 420.0
+              }
+            }
           }
         ],
         "latest_prices": {
@@ -2110,7 +2170,7 @@
             "Unknown": 420.0
           }
         },
-        "last_scraped": "2025-12-30T15:11:03.223215"
+        "last_scraped": "2025-12-30T18:27:40.727417"
       },
       {
         "url": "https://www.footballticketnet.com/champions-league/arsenal-vs-kairat-almaty",
@@ -2712,6 +2772,14 @@
                 "Unknown": 144.97
               }
             }
+          },
+          {
+            "timestamp": "2025-12-30T18:27:40.727417",
+            "prices": {
+              "Shortside Upper Level": {
+                "Unknown": 144.97
+              }
+            }
           }
         ],
         "latest_prices": {
@@ -2719,7 +2787,7 @@
             "Unknown": 144.97
           }
         },
-        "last_scraped": "2025-12-30T15:11:03.223215"
+        "last_scraped": "2025-12-30T18:27:40.727417"
       },
       {
         "url": "https://www.footballticketnet.com/carabao-cup/arsenal-vs-chelsea",
@@ -3424,6 +3492,26 @@
                 "Unknown": 290.0
               }
             }
+          },
+          {
+            "timestamp": "2025-12-30T18:27:40.727417",
+            "prices": {
+              "Shortside Upper Level": {
+                "Unknown": 235.0,
+                "Row: ARSENAL FANS SEATED TOGETHER": 265.0,
+                "Row: AMAZING VIEW": 269.95
+              },
+              "Central Longside Upper": {
+                "Unknown": 265.0
+              },
+              "Longside Upper Level": {
+                "Unknown": 279.94
+              },
+              "Away Section": {
+                "Row: CHELSEA FANS!": 289.95,
+                "Unknown": 290.0
+              }
+            }
           }
         ],
         "latest_prices": {
@@ -3443,7 +3531,7 @@
             "Unknown": 290.0
           }
         },
-        "last_scraped": "2025-12-30T15:11:03.223215"
+        "last_scraped": "2025-12-30T18:27:40.727417"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-sunderland",
@@ -4244,6 +4332,24 @@
                 "Unknown": 399.99
               }
             }
+          },
+          {
+            "timestamp": "2025-12-30T18:27:40.727417",
+            "prices": {
+              "Shortside Upper Level": {
+                "Unknown": 364.92
+              },
+              "Central Longside Upper": {
+                "Unknown": 379.91,
+                "111": 392.0
+              },
+              "Shortside Lower Level": {
+                "Unknown": 399.91
+              },
+              "Longside Upper Level": {
+                "Unknown": 399.99
+              }
+            }
           }
         ],
         "latest_prices": {
@@ -4261,7 +4367,7 @@
             "Unknown": 399.99
           }
         },
-        "last_scraped": "2025-12-30T15:11:03.223215"
+        "last_scraped": "2025-12-30T18:27:40.727417"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-chelsea",
@@ -4919,6 +5025,23 @@
                 "Unknown": 538.97
               }
             }
+          },
+          {
+            "timestamp": "2025-12-30T18:27:40.727417",
+            "prices": {
+              "Away Section": {
+                "Unknown": 432.13,
+                "Row: CHELSEA FANS - STANDING SECTION": 550.0
+              },
+              "Shortside Upper Level": {
+                "Unknown": 484.97,
+                "101": 500.0,
+                "Row: UP TO 2 SEATS TOGETHER": 549.99
+              },
+              "Longside Upper Level": {
+                "Unknown": 538.97
+              }
+            }
           }
         ],
         "latest_prices": {
@@ -4935,7 +5058,7 @@
             "Unknown": 538.97
           }
         },
-        "last_scraped": "2025-12-30T15:11:03.223215"
+        "last_scraped": "2025-12-30T18:27:40.727417"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-everton",
@@ -6067,6 +6190,32 @@
                 "Unknown": 444.92
               }
             }
+          },
+          {
+            "timestamp": "2025-12-30T18:27:40.727417",
+            "prices": {
+              "Away Section": {
+                "Unknown": 260.0
+              },
+              "Longside Upper Level": {
+                "Unknown": 394.91,
+                "110": 405.0,
+                "109": 415.0,
+                "132": 420.0
+              },
+              "Central Longside Upper": {
+                "Unknown": 413.99,
+                "111": 414.0,
+                "92": 424.0,
+                "91": 435.0
+              },
+              "Shortside Lower Level": {
+                "Unknown": 439.97
+              },
+              "Shortside Upper Level": {
+                "Unknown": 444.92
+              }
+            }
           }
         ],
         "latest_prices": {
@@ -6092,7 +6241,7 @@
             "Unknown": 444.92
           }
         },
-        "last_scraped": "2025-12-30T15:11:03.223215"
+        "last_scraped": "2025-12-30T18:27:40.727417"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-bournemouth",
@@ -7206,6 +7355,31 @@
                 "Unknown": 574.92
               }
             }
+          },
+          {
+            "timestamp": "2025-12-30T18:27:40.727417",
+            "prices": {
+              "Longside Upper Level": {
+                "Unknown": 449.93,
+                "110": 450.0,
+                "109": 460.0,
+                "132": 470.0
+              },
+              "Central Longside Upper": {
+                "Unknown": 472.93,
+                "111": 473.0,
+                "92": 483.0,
+                "91": 518.0
+              },
+              "Longside Lower Level": {
+                "Unknown": 499.92,
+                "13": 500.0,
+                "12": 540.0
+              },
+              "Shortside Upper Level": {
+                "Unknown": 574.92
+              }
+            }
           }
         ],
         "latest_prices": {
@@ -7230,7 +7404,7 @@
             "Unknown": 574.92
           }
         },
-        "last_scraped": "2025-12-30T15:11:03.223215"
+        "last_scraped": "2025-12-30T18:27:40.727417"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-newcastle-united",
@@ -8155,6 +8329,26 @@
                 "12": 540.0
               }
             }
+          },
+          {
+            "timestamp": "2025-12-30T18:27:40.727417",
+            "prices": {
+              "Longside Upper Level": {
+                "Unknown": 449.94,
+                "110": 450.0,
+                "109": 460.0,
+                "132": 470.0
+              },
+              "Central Longside Upper": {
+                "Unknown": 471.32,
+                "111": 473.0,
+                "92": 483.0
+              },
+              "Longside Lower Level": {
+                "Unknown": 534.91,
+                "12": 540.0
+              }
+            }
           }
         ],
         "latest_prices": {
@@ -8174,7 +8368,7 @@
             "12": 540.0
           }
         },
-        "last_scraped": "2025-12-30T15:11:03.223215"
+        "last_scraped": "2025-12-30T18:27:40.727417"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-fulham",
@@ -9381,6 +9575,36 @@
                 "Row: -": 1135.0
               }
             }
+          },
+          {
+            "timestamp": "2025-12-30T18:27:40.727417",
+            "prices": {
+              "Longside Upper Level": {
+                "110": 450.0,
+                "132": 460.0,
+                "109": 470.0
+              },
+              "Central Longside Upper": {
+                "111": 473.0,
+                "92": 483.0,
+                "133": 544.0
+              },
+              "Longside Lower Level": {
+                "12": 540.0,
+                "13": 550.0,
+                "19": 621.0
+              },
+              "Central Longside Lower": {
+                "15,18": 585.0,
+                "16": 608.0,
+                "31,2": 653.0,
+                "31": 654.98,
+                "Row: ROWS 1-30 CENTRAL VIEW": 850.0
+              },
+              "Club Level Shortside": {
+                "Unknown": 944.15
+              }
+            }
           }
         ],
         "latest_prices": {
@@ -9403,15 +9627,14 @@
             "15,18": 585.0,
             "16": 608.0,
             "31,2": 653.0,
-            "31": 751.0,
+            "31": 654.98,
             "Row: ROWS 1-30 CENTRAL VIEW": 850.0
           },
           "Club Level Shortside": {
-            "Unknown": 1100.0,
-            "Row: -": 1135.0
+            "Unknown": 944.15
           }
         },
-        "last_scraped": "2025-12-30T15:11:03.223215"
+        "last_scraped": "2025-12-30T18:27:40.727417"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-burnley",
@@ -10514,6 +10737,33 @@
                 "16": 1215.0
               }
             }
+          },
+          {
+            "timestamp": "2025-12-30T18:27:40.727417",
+            "prices": {
+              "Shortside Upper Level": {
+                "Unknown": 800.0,
+                "101": 900.0
+              },
+              "Longside Upper Level": {
+                "110": 810.0,
+                "109": 825.0
+              },
+              "Central Longside Upper": {
+                "92": 855.0,
+                "91": 944.15
+              },
+              "Longside Lower Level": {
+                "12": 1080.0,
+                "13": 1090.0,
+                "19": 1252.0,
+                "4": 1296.0
+              },
+              "Central Longside Lower": {
+                "15,18": 1170.0,
+                "16": 1215.0
+              }
+            }
           }
         ],
         "latest_prices": {
@@ -10540,10 +10790,10 @@
             "16": 1215.0
           }
         },
-        "last_scraped": "2025-12-30T15:11:03.223215"
+        "last_scraped": "2025-12-30T18:27:40.727417"
       }
     ],
-    "last_updated": "2025-12-30T15:11:03.223215"
+    "last_updated": "2025-12-30T18:27:40.727417"
   },
   "barcelona": {
     "team_name": "FC Barcelona",
