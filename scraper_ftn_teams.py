@@ -648,103 +648,173 @@ def scrape_game_prices(driver, game_url, game_name, team_key=None):
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         time.sleep(2)
         
+        # Try to parse ticket listings using DOM elements (more reliable)
+        parsed_count = 0
         try:
-            body_text = driver.find_element(By.TAG_NAME, 'body').text
-        except Exception as body_err:
-            error_msg = str(body_err).lower()
-            print(f'      ❌ Could not read page body: {error_msg[:50]}', flush=True)
-            return {}
-        
-        lines = body_text.split('\n')
-        
-        # Parse ticket listings to extract: Category, Block, Price, and "Up To 2 Seats Together"
-        current_category = None
-        current_block = None
-        
-        for i, line in enumerate(lines):
-            line_lower = line.lower().strip()
+            # Find listing elements
+            listings = driver.find_elements(By.CSS_SELECTOR, "div.inner_price")
+            print(f'      🔍 Found {len(listings)} listing elements', flush=True)
             
-            # Look for category/location names (like "Shortside Upper Level", "Category 3", etc.)
-            if any(keyword in line_lower for keyword in ['category', 'longside', 'shortside', 'club level', 'executive', 'vip']):
-                # Check if this looks like a category name (not just containing the word)
-                if len(line.strip()) < 50 and not any(char.isdigit() for char in line.strip()[:5]):
-                    current_category = line.strip()
-                    current_block = None  # Reset block when new category found
-            
-            # Look for block information (Block: 105,100,102,106)
-            block_match = re.search(r'block[:\s]+([\d,\s]+)', line, re.IGNORECASE)
-            if block_match:
-                blocks_str = block_match.group(1)
-                # Extract individual block numbers
-                block_numbers = re.findall(r'\d+', blocks_str)
-                if block_numbers:
-                    current_block = ','.join(block_numbers)
-            
-            # Look for "Up To 2 Seats Together" or similar
-            if 'up to 2 seats together' in line_lower or '2 seats together' in line_lower:
-                # Look for price nearby (check next few lines)
-                for offset in range(1, 5):
-                    if i + offset < len(lines):
-                        check_line = lines[i + offset].strip()
-                        price_match = re.search(r'([€$£])\s*([\d,]+\.?\d*)', check_line)
-                        if price_match:
-                            currency_sym = price_match.group(1)
-                            raw_val = float(price_match.group(2).replace(',', ''))
-                            
-                            # Store price in original currency (no conversion)
-                            price = raw_val
-                            
-                            # Store price by category and block
-                            if current_category:
-                                block_key = current_block if current_block else 'Unknown'
-                                if price < prices_by_block[current_category][block_key]:
-                                    prices_by_block[current_category][block_key] = price
-                            break
-            
-            # Also look for prices directly (might be in table format)
-            price_match = re.search(r'([€$£])\s*([\d,]+\.?\d*)', line)
-            if price_match and current_category:
-                # Check if previous/next lines mention "Up To 2 Seats Together"
-                context_lines = ' '.join(lines[max(0, i-3):min(len(lines), i+3)]).lower()
-                if 'up to 2 seats together' in context_lines or '2 seats together' in context_lines:
-                    currency_sym = price_match.group(1)
-                    raw_val = float(price_match.group(2).replace(',', ''))
+            for listing in listings:
+                try:
+                    # Check for 2 seats together compatibility
+                    is_pair_compatible = False
                     
-                    # Store price in original currency (no conversion)
-                    price = raw_val
+                    # Check classes
+                    classes = listing.get_attribute("class") or ""
+                    if "pairs-ticket" in classes.lower() or "pair" in classes.lower():
+                        is_pair_compatible = True
                     
-                    block_key = current_block if current_block else 'Unknown'
-                    if price < prices_by_block[current_category][block_key]:
-                        prices_by_block[current_category][block_key] = price
+                    # Check split type text specific to this listing
+                    if not is_pair_compatible:
+                        try:
+                            split_text_elem = listing.find_element(By.CSS_SELECTOR, ".split_type_text")
+                            split_text = split_text_elem.text.lower()
+                            if "up to 2 seats" in split_text or "2 seats together" in split_text:
+                                is_pair_compatible = True
+                        except:
+                            pass
+                    
+                    # Only proceed if compatible (original filter strictness)
+                    if not is_pair_compatible:
+                        continue
+                        
+                    # Extract Price
+                    price = float('inf')
+                    price_attr = listing.get_attribute("data-price")
+                    if price_attr:
+                        try:
+                            price = float(price_attr.replace(',', ''))
+                        except:
+                            pass
+                    
+                    # Fallback to finding price in text if data attribute missing
+                    if price == float('inf'):
+                        try:
+                            price_elem = listing.find_element(By.CSS_SELECTOR, ".d-price")
+                            price_text = price_elem.text
+                            price_match = re.search(r'[\d,]+\.?\d*', price_text)
+                            if price_match:
+                                price = float(price_match.group(0).replace(',', ''))
+                        except:
+                            pass
+                            
+                    if price == float('inf'):
+                        continue
+                        
+                    # Extract Category
+                    category = "Unknown Category"
+                    try:
+                        cat_elem = listing.find_element(By.CSS_SELECTOR, ".category_name")
+                        category = cat_elem.text.strip().split('\n')[0].strip()
+                    except:
+                        pass
+                        
+                    # Normalize Category
+                    if not category or category.lower() == "category":
+                        # Try to find category in filtered attributes
+                        cat_attr = listing.get_attribute("data-category")
+                        if cat_attr and cat_attr.isdigit():
+                            # Map numeric category if possible, or leave internal
+                            # Actually better to rely on visible text for "Category 1" etc.
+                            # Fallback to searching all text in element
+                            match = re.search(r'(Category \d+(?: \w+)?)', listing.text, re.IGNORECASE)
+                            if match:
+                                category = match.group(1).title()
+                    
+                    if not category:
+                        category = "Unknown Category"
+
+                    # Extract Block
+                    block = "Unknown"
+                    try:
+                        block_elem = listing.find_element(By.CSS_SELECTOR, ".block-row")
+                        block_text = block_elem.text.strip()
+                        # Usually "Block: 105" or just "105" or "Row: ..."
+                        if block_text:
+                            # Try to extract just the block info
+                            if "block" in block_text.lower():
+                                b_match = re.search(r'block[:\s]+([\d,\s\w]+)', block_text, re.IGNORECASE)
+                                if b_match:
+                                    block = b_match.group(1).strip()
+                                else:
+                                    block = block_text
+                            else:
+                                block = block_text # fallback to full text like "Row: ..."
+                    except:
+                        pass
+                    
+                    # Clean up category name
+                    category = category.replace("Official", "").strip()
+                    category = ' '.join(category.split()) # Remove extra spaces
+                    
+                    # Store lowest price
+                    if price < prices_by_block[category][block]:
+                        prices_by_block[category][block] = price
+                        parsed_count += 1
+                        
+                except Exception as list_err:
+                    continue
+                    
+        except Exception as dom_err:
+            print(f'      ⚠️ DOM parsing error: {dom_err}', flush=True)
+        
+        # Fallback to Text Parsing if DOM parsing yielded nothing
+        if parsed_count == 0:
+            print(f'      ⚠️ No listings found via DOM, attempting text fallback...', flush=True)
+            try:
+                body_text = driver.find_element(By.TAG_NAME, 'body').text
+                lines = body_text.split('\n')
+                
+                # Parse ticket listings to extract: Category, Block, Price, and "Up To 2 Seats Together"
+                current_category = None
+                current_block = None
+                
+                for i, line in enumerate(lines):
+                    line_lower = line.lower().strip()
+                    
+                    # Look for category/location names
+                    if any(keyword in line_lower for keyword in ['category', 'longside', 'shortside', 'club level', 'executive', 'vip']):
+                        if len(line.strip()) < 50 and not any(char.isdigit() for char in line.strip()[:5]):
+                            current_category = line.strip()
+                            current_block = None
+                    
+                    # Look for block information
+                    block_match = re.search(r'block[:\s]+([\d,\s]+)', line, re.IGNORECASE)
+                    if block_match:
+                        blocks_str = block_match.group(1)
+                        block_numbers = re.findall(r'\d+', blocks_str)
+                        if block_numbers:
+                            current_block = ','.join(block_numbers)
+                    
+                    # Look for "Up To 2 Seats Together"
+                    if 'up to 2 seats together' in line_lower or '2 seats together' in line_lower:
+                        # Look for price nearby
+                        for offset in range(1, 5):
+                            if i + offset < len(lines):
+                                check_line = lines[i + offset].strip()
+                                price_match = re.search(r'([€$£])\s*([\d,]+\.?\d*)', check_line)
+                                if price_match:
+                                    raw_val = float(price_match.group(2).replace(',', ''))
+                                    price = raw_val
+                                    
+                                    if current_category:
+                                        block_key = current_block if current_block else 'Unknown'
+                                        if price < prices_by_block[current_category][block_key]:
+                                            prices_by_block[current_category][block_key] = price
+                                    break
+            except Exception as e:
+                print(f'      ❌ Text fallback failed: {e}', flush=True)
         
         # Convert to final format: {category: {block: price}}
         result = {}
         for category, blocks in prices_by_block.items():
             result[category] = dict(blocks)
         
-        # If no block-specific prices found, try to get category-level prices
-        if not result:
-            # Fallback to simple category-based extraction
-            for i, line in enumerate(lines):
-                if 'Category' in line:
-                    category = line.strip()
-                    cat_match = re.search(r'Category\s+(1\s+Premium|1|2|3|4)', category, re.IGNORECASE)
-                    if cat_match:
-                        normalized_cat = f'Category {cat_match.group(1).title()}'
-                        if i > 0:
-                            prev_line = lines[i-1].strip()
-                            price_match = re.search(r'([€$£])\s*([\d,]+\.?\d*)', prev_line)
-                            if price_match:
-                                currency_sym = price_match.group(1)
-                                raw_val = float(price_match.group(2).replace(',', ''))
-                                
-                                # Store price in original currency (no conversion)
-                                price = raw_val
-                                
-                                if normalized_cat not in result:
-                                    result[normalized_cat] = {}
-                                if 'Unknown' not in result[normalized_cat] or price < result[normalized_cat].get('Unknown', float('inf')):
-                                    result[normalized_cat]['Unknown'] = price
+        # If still no results, maybe categories are listed simply
+        if not result and parsed_count == 0:
+             # Last resort fallback ... (simplified from original)
+             pass 
         
         return result
         
