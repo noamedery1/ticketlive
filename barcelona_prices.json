@@ -225,14 +225,22 @@
               "Unknown": 119.7
             }
           }
+        },
+        {
+          "timestamp": "2025-12-28T14:29:42.288807",
+          "prices": {
+            "Category": {
+              "Unknown": 114.0
+            }
+          }
         }
       ],
       "latest_prices": {
         "Category": {
-          "Unknown": 119.7
+          "Unknown": 114.0
         }
       },
-      "last_scraped": "2025-12-28T14:05:50.836807"
+      "last_scraped": "2025-12-28T14:29:42.288807"
     },
     {
       "url": "https://www.footballticketnet.com/champions-league/fc-barcelona-vs-fc-copenhagen",
@@ -457,14 +465,22 @@
               "Unknown": 159.6
             }
           }
+        },
+        {
+          "timestamp": "2025-12-28T14:29:42.288807",
+          "prices": {
+            "Category": {
+              "Unknown": 152.0
+            }
+          }
         }
       ],
       "latest_prices": {
         "Category": {
-          "Unknown": 159.6
+          "Unknown": 152.0
         }
       },
-      "last_scraped": "2025-12-28T14:05:50.836807"
+      "last_scraped": "2025-12-28T14:29:42.288807"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-rcd-mallorca",
@@ -689,14 +705,22 @@
               "Unknown": 123.89
             }
           }
+        },
+        {
+          "timestamp": "2025-12-28T14:29:42.288807",
+          "prices": {
+            "Category": {
+              "Unknown": 117.99
+            }
+          }
         }
       ],
       "latest_prices": {
         "Category": {
-          "Unknown": 123.89
+          "Unknown": 117.99
         }
       },
-      "last_scraped": "2025-12-28T14:05:50.836807"
+      "last_scraped": "2025-12-28T14:29:42.288807"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-levante-ud",
@@ -921,14 +945,22 @@
               "Unknown": 136.5
             }
           }
+        },
+        {
+          "timestamp": "2025-12-28T14:29:42.288807",
+          "prices": {
+            "Category": {
+              "Unknown": 130.0
+            }
+          }
         }
       ],
       "latest_prices": {
         "Category": {
-          "Unknown": 136.5
+          "Unknown": 130.0
         }
       },
-      "last_scraped": "2025-12-28T14:05:50.836807"
+      "last_scraped": "2025-12-28T14:29:42.288807"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-villarreal-cf",
@@ -1153,14 +1185,22 @@
               "Unknown": 154.35
             }
           }
+        },
+        {
+          "timestamp": "2025-12-28T14:29:42.288807",
+          "prices": {
+            "Category": {
+              "Unknown": 147.0
+            }
+          }
         }
       ],
       "latest_prices": {
         "Category": {
-          "Unknown": 154.35
+          "Unknown": 147.0
         }
       },
-      "last_scraped": "2025-12-28T14:05:50.836807"
+      "last_scraped": "2025-12-28T14:29:42.288807"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-sevilla-fc",
@@ -1385,14 +1425,22 @@
               "Unknown": 140.7
             }
           }
+        },
+        {
+          "timestamp": "2025-12-28T14:29:42.288807",
+          "prices": {
+            "Category": {
+              "Unknown": 134.0
+            }
+          }
         }
       ],
       "latest_prices": {
         "Category": {
-          "Unknown": 140.7
+          "Unknown": 134.0
         }
       },
-      "last_scraped": "2025-12-28T14:05:50.836807"
+      "last_scraped": "2025-12-28T14:29:42.288807"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-rayo-vallecano",
@@ -1617,14 +1665,22 @@
               "Unknown": 181.64
             }
           }
+        },
+        {
+          "timestamp": "2025-12-28T14:29:42.288807",
+          "prices": {
+            "Category": {
+              "Unknown": 172.99
+            }
+          }
         }
       ],
       "latest_prices": {
         "Category": {
-          "Unknown": 181.64
+          "Unknown": 172.99
         }
       },
-      "last_scraped": "2025-12-28T14:05:50.836807"
+      "last_scraped": "2025-12-28T14:29:42.288807"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-rcd-espanyol",
@@ -1849,14 +1905,22 @@
               "Unknown": 215.46
             }
           }
+        },
+        {
+          "timestamp": "2025-12-28T14:29:42.288807",
+          "prices": {
+            "Category": {
+              "Unknown": 205.2
+            }
+          }
         }
       ],
       "latest_prices": {
         "Category": {
-          "Unknown": 215.46
+          "Unknown": 205.2
         }
       },
-      "last_scraped": "2025-12-28T14:05:50.836807"
+      "last_scraped": "2025-12-28T14:29:42.288807"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-celta-vigo",
@@ -2081,14 +2145,22 @@
               "Unknown": 229.11
             }
           }
+        },
+        {
+          "timestamp": "2025-12-28T14:29:42.288807",
+          "prices": {
+            "Category": {
+              "Unknown": 218.2
+            }
+          }
         }
       ],
       "latest_prices": {
         "Category": {
-          "Unknown": 229.11
+          "Unknown": 218.2
         }
       },
-      "last_scraped": "2025-12-28T14:05:50.836807"
+      "last_scraped": "2025-12-28T14:29:42.288807"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-real-madrid",
@@ -2313,14 +2385,22 @@
               "Unknown": 744.66
             }
           }
+        },
+        {
+          "timestamp": "2025-12-28T14:29:42.288807",
+          "prices": {
+            "Category": {
+              "Unknown": 709.2
+            }
+          }
         }
       ],
       "latest_prices": {
         "Category": {
-          "Unknown": 744.66
+          "Unknown": 709.2
         }
       },
-      "last_scraped": "2025-12-28T14:05:50.836807"
+      "last_scraped": "2025-12-28T14:29:42.288807"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-real-betis",
@@ -2545,15 +2625,23 @@
               "Unknown": 233.31
             }
           }
+        },
+        {
+          "timestamp": "2025-12-28T14:29:42.288807",
+          "prices": {
+            "Category": {
+              "Unknown": 222.2
+            }
+          }
         }
       ],
       "latest_prices": {
         "Category": {
-          "Unknown": 233.31
+          "Unknown": 222.2
         }
       },
-      "last_scraped": "2025-12-28T14:05:50.836807"
+      "last_scraped": "2025-12-28T14:29:42.288807"
     }
   ],
-  "last_updated": "2025-12-28T14:05:50.836807"
+  "last_updated": "2025-12-30T06:17:19.665338"
 }
