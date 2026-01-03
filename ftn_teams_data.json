@@ -20418,6 +20418,38 @@
                 "133": 500.0
               }
             }
+          },
+          {
+            "timestamp": "2026-01-03T23:12:05.688301",
+            "prices": {
+              "Category 4": {
+                "Unknown": 300.0
+              },
+              "Category 2 Lateral": {
+                "610": 300.0,
+                "Unknown": 390.0
+              },
+              "Category 2": {
+                "115": 300.0,
+                "124": 325.0,
+                "Unknown": 455.0
+              },
+              "Category 3": {
+                "Unknown": 325.0
+              },
+              "Category 1": {
+                "Unknown": 400.0
+              },
+              "Category 1 Gold": {
+                "Unknown": 406.0
+              },
+              "Category 1 Platinum": {
+                "Unknown": 463.0
+              },
+              "Category 1 Premium": {
+                "Unknown": 465.0
+              }
+            }
           }
         ],
         "latest_prices": {
@@ -20430,7 +20462,7 @@
           },
           "Category 2": {
             "115": 300.0,
-            "124": 335.0,
+            "124": 325.0,
             "Unknown": 455.0
           },
           "Category 3": {
@@ -20440,16 +20472,16 @@
             "Unknown": 400.0
           },
           "Category 1 Gold": {
-            "Unknown": 450.0
+            "Unknown": 406.0
+          },
+          "Category 1 Platinum": {
+            "Unknown": 463.0
           },
           "Category 1 Premium": {
             "Unknown": 465.0
-          },
-          "Category 1 Platinum": {
-            "133": 500.0
           }
         },
-        "last_scraped": "2026-01-03T19:56:49.307301"
+        "last_scraped": "2026-01-03T23:12:05.688301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-levante-ud",
@@ -22293,6 +22325,17 @@
                 "Unknown": 418.0
               }
             }
+          },
+          {
+            "timestamp": "2026-01-03T23:12:05.688301",
+            "prices": {
+              "Category 4": {
+                "Unknown": 354.0
+              },
+              "Category 3": {
+                "Unknown": 418.0
+              }
+            }
           }
         ],
         "latest_prices": {
@@ -22303,7 +22346,7 @@
             "Unknown": 418.0
           }
         },
-        "last_scraped": "2026-01-03T19:56:49.307301"
+        "last_scraped": "2026-01-03T23:12:05.688301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-girona",
@@ -22696,6 +22739,14 @@
                 "Unknown": 174.0
               }
             }
+          },
+          {
+            "timestamp": "2026-01-03T23:12:05.688301",
+            "prices": {
+              "Category 4": {
+                "Unknown": 174.0
+              }
+            }
           }
         ],
         "latest_prices": {
@@ -22703,7 +22754,7 @@
             "Unknown": 174.0
           }
         },
-        "last_scraped": "2026-01-03T19:56:49.307301"
+        "last_scraped": "2026-01-03T23:12:05.688301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-deportivo-alaves",
@@ -23180,6 +23231,14 @@
                 "Unknown": 173.0
               }
             }
+          },
+          {
+            "timestamp": "2026-01-03T23:12:05.688301",
+            "prices": {
+              "Category 4": {
+                "Unknown": 173.0
+              }
+            }
           }
         ],
         "latest_prices": {
@@ -23187,7 +23246,7 @@
             "Unknown": 173.0
           }
         },
-        "last_scraped": "2026-01-03T19:56:49.307301"
+        "last_scraped": "2026-01-03T23:12:05.688301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-real-oviedo",
@@ -23580,6 +23639,14 @@
                 "Unknown": 157.0
               }
             }
+          },
+          {
+            "timestamp": "2026-01-03T23:12:05.688301",
+            "prices": {
+              "Category 4": {
+                "Unknown": 157.0
+              }
+            }
           }
         ],
         "latest_prices": {
@@ -23587,7 +23654,7 @@
             "Unknown": 157.0
           }
         },
-        "last_scraped": "2026-01-03T19:56:49.307301"
+        "last_scraped": "2026-01-03T23:12:05.688301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-athletic-bilbao",
@@ -24022,6 +24089,14 @@
                 "Unknown": 167.0
               }
             }
+          },
+          {
+            "timestamp": "2026-01-03T23:12:05.688301",
+            "prices": {
+              "Category 4": {
+                "Unknown": 167.0
+              }
+            }
           }
         ],
         "latest_prices": {
@@ -24029,9 +24104,9 @@
             "Unknown": 167.0
           }
         },
-        "last_scraped": "2026-01-03T19:56:49.307301"
+        "last_scraped": "2026-01-03T23:12:05.688301"
       }
     ],
-    "last_updated": "2026-01-03T19:56:49.307301"
+    "last_updated": "2026-01-03T23:12:05.688301"
   }
 }
