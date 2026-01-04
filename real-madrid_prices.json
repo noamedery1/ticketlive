@@ -307,6 +307,34 @@
               "Unknown": 400.0
             }
           }
+        },
+        {
+          "timestamp": "2026-01-04T05:42:50.852301",
+          "prices": {
+            "Category 4": {
+              "Unknown": 300.0
+            },
+            "Category 2": {
+              "115": 300.0,
+              "Unknown": 320.0,
+              "124": 325.0
+            },
+            "Category 3": {
+              "Unknown": 325.0
+            },
+            "Category 1 Gold": {
+              "Unknown": 377.0
+            },
+            "Category 2 Lateral": {
+              "Unknown": 390.0
+            },
+            "Category 1 Platinum": {
+              "Unknown": 394.0
+            },
+            "Category 1": {
+              "Unknown": 400.0
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -334,7 +362,7 @@
           "Unknown": 400.0
         }
       },
-      "last_scraped": "2026-01-04T02:27:44.284301"
+      "last_scraped": "2026-01-04T05:42:50.852301"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-levante-ud",
@@ -2200,6 +2228,17 @@
               "Unknown": 418.0
             }
           }
+        },
+        {
+          "timestamp": "2026-01-04T05:42:50.852301",
+          "prices": {
+            "Category 4": {
+              "Unknown": 354.0
+            },
+            "Category 3": {
+              "Unknown": 418.0
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -2210,7 +2249,7 @@
           "Unknown": 418.0
         }
       },
-      "last_scraped": "2026-01-04T02:27:44.284301"
+      "last_scraped": "2026-01-04T05:42:50.852301"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-girona",
@@ -2619,6 +2658,14 @@
               "Unknown": 174.0
             }
           }
+        },
+        {
+          "timestamp": "2026-01-04T05:42:50.852301",
+          "prices": {
+            "Category 4": {
+              "Unknown": 174.0
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -2626,7 +2673,7 @@
           "Unknown": 174.0
         }
       },
-      "last_scraped": "2026-01-04T02:27:44.284301"
+      "last_scraped": "2026-01-04T05:42:50.852301"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-deportivo-alaves",
@@ -3119,6 +3166,14 @@
               "Unknown": 173.0
             }
           }
+        },
+        {
+          "timestamp": "2026-01-04T05:42:50.852301",
+          "prices": {
+            "Category 4": {
+              "Unknown": 173.0
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -3126,7 +3181,7 @@
           "Unknown": 173.0
         }
       },
-      "last_scraped": "2026-01-04T02:27:44.284301"
+      "last_scraped": "2026-01-04T05:42:50.852301"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-real-oviedo",
@@ -3535,6 +3590,14 @@
               "Unknown": 157.0
             }
           }
+        },
+        {
+          "timestamp": "2026-01-04T05:42:50.852301",
+          "prices": {
+            "Category 4": {
+              "Unknown": 157.0
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -3542,7 +3605,7 @@
           "Unknown": 157.0
         }
       },
-      "last_scraped": "2026-01-04T02:27:44.284301"
+      "last_scraped": "2026-01-04T05:42:50.852301"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-athletic-bilbao",
@@ -3993,6 +4056,14 @@
               "Unknown": 167.0
             }
           }
+        },
+        {
+          "timestamp": "2026-01-04T05:42:50.852301",
+          "prices": {
+            "Category 4": {
+              "Unknown": 167.0
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -4000,8 +4071,8 @@
           "Unknown": 167.0
         }
       },
-      "last_scraped": "2026-01-04T02:27:44.284301"
+      "last_scraped": "2026-01-04T05:42:50.852301"
     }
   ],
-  "last_updated": "2026-01-04T02:27:44.284301"
+  "last_updated": "2026-01-04T05:42:50.852301"
 }
