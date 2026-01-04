@@ -11,6 +11,8 @@ from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
+from pydantic import BaseModel
+from typing import Optional, List
 import subprocess
 from starlette.middleware.base import BaseHTTPMiddleware
 
@@ -495,6 +497,250 @@ async def serve_vite_svg():
     return {'error': 'vite.svg not found'}
 
 # Test endpoint to verify server is working - lightweight, no data loading
+# ==========================================
+# Ticket Offers Manager API
+# ==========================================
+from tickets_storage import (
+    load_sellers, create_seller, get_seller_by_name,
+    save_offer, get_offer_by_id, load_offers_from_file, rebuild_index,
+    load_index, BASE_DIR
+)
+from tickets_parser import parse_ticket_message
+from pathlib import Path
+from datetime import datetime, timedelta
+
+# Pydantic models for request/response
+class CreateSellerRequest(BaseModel):
+    name: str
+
+class ParseOfferRequest(BaseModel):
+    seller: str
+    raw: str
+
+class SaveOfferRequest(BaseModel):
+    seller: str
+    raw: str
+    parsed: dict
+
+@app.get('/api/tickets/sellers')
+def get_sellers():
+    """Return sellers list"""
+    try:
+        sellers_data = load_sellers()
+        return sellers_data.get('sellers', [])
+    except Exception as e:
+        print(f'[ERROR] /api/tickets/sellers: {e}')
+        return []
+
+@app.post('/api/tickets/sellers')
+def create_seller_endpoint(request: CreateSellerRequest):
+    """Create seller with case-insensitive dedupe"""
+    try:
+        seller = create_seller(request.name)
+        return seller
+    except Exception as e:
+        print(f'[ERROR] /api/tickets/sellers POST: {e}')
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post('/api/tickets/offers/parse')
+def parse_offer(request: ParseOfferRequest):
+    """Parse raw text into structured data without saving"""
+    try:
+        print(f'[INFO] /api/tickets/offers/parse called with seller: {request.seller}, raw length: {len(request.raw) if request.raw else 0}')
+        if not request.raw:
+            raise HTTPException(status_code=400, detail='Raw text is required')
+        parsed = parse_ticket_message(request.raw)
+        print(f'[INFO] Parse result: match={parsed.get("match")}, lines={len(parsed.get("lines", []))}, status={parsed.get("parse_status")}')
+        return parsed
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f'[ERROR] /api/tickets/offers/parse: {e}')
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post('/api/tickets/offers')
+def save_offer_endpoint(request: SaveOfferRequest):
+    """Save offer to weekly JSONL and update index"""
+    try:
+        # Get or create seller
+        seller_obj = get_seller_by_name(request.seller)
+        if not seller_obj:
+            seller_obj = create_seller(request.seller)
+        
+        # Create offer record
+        now = datetime.utcnow()
+        offer = {
+            'seller': request.seller,
+            'seller_id': seller_obj['id'],
+            'match': request.parsed.get('match'),
+            'event': request.parsed.get('event'),
+            'lines': request.parsed.get('lines', []),
+            'raw': request.raw,
+            'parse_status': request.parsed.get('parse_status', 'ok'),
+            'warnings': request.parsed.get('warnings', []),
+            'created_at': now.isoformat()
+        }
+        
+        # Save offer
+        success = save_offer(offer)
+        if not success:
+            raise HTTPException(status_code=500, detail='Failed to save offer')
+        
+        return {'success': True, 'id': offer.get('id')}
+    except Exception as e:
+        print(f'[ERROR] /api/tickets/offers POST: {e}')
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get('/api/tickets/offers/search')
+def search_offers(
+    match: Optional[int] = None,
+    seller: Optional[str] = None,
+    category: Optional[str] = None,
+    min_price: Optional[float] = None,
+    max_price: Optional[float] = None,
+    keyword: Optional[str] = None,
+    range: str = 'all'
+):
+    """Search offers using index.json and fallback scanning"""
+    try:
+        index_data = load_index()
+        candidate_ids = set()
+        
+        # Time range filter
+        now = datetime.utcnow()
+        if range == '7d':
+            cutoff = now - timedelta(days=7)
+        elif range == '30d':
+            cutoff = now - timedelta(days=30)
+        else:
+            cutoff = None
+        
+        # Use index to narrow candidates
+        if match is not None:
+            match_key = str(match)
+            if match_key in index_data.get('match', {}):
+                candidate_ids.update(index_data['match'][match_key])
+        
+        if seller:
+            seller_obj = get_seller_by_name(seller)
+            if seller_obj:
+                seller_id = seller_obj['id']
+                if seller_id in index_data.get('seller', {}):
+                    if candidate_ids:
+                        candidate_ids &= set(index_data['seller'][seller_id])
+                    else:
+                        candidate_ids.update(index_data['seller'][seller_id])
+        
+        if category:
+            cat_key = str(category)
+            if cat_key in index_data.get('category', {}):
+                if candidate_ids:
+                    candidate_ids &= set(index_data['category'][cat_key])
+                else:
+                    candidate_ids.update(index_data['category'][cat_key])
+        
+        # If no index matches, scan all files
+        if not candidate_ids:
+            offer_files = list(BASE_DIR.glob('offers_*.jsonl'))
+            for file_path in offer_files:
+                offers = load_offers_from_file(file_path)
+                for offer in offers:
+                    candidate_ids.add(offer.get('id'))
+        
+        # Load and filter offers
+        results = []
+        offers_by_id = index_data.get('offers_by_id', {})
+        
+        for offer_id in candidate_ids:
+            if offer_id not in offers_by_id:
+                continue
+            
+            file_name = offers_by_id[offer_id]['file']
+            file_path = BASE_DIR / file_name
+            offers = load_offers_from_file(file_path)
+            
+            for offer in offers:
+                if offer.get('id') != offer_id:
+                    continue
+                
+                # Apply filters
+                created_at = datetime.fromisoformat(offer.get('created_at', now.isoformat()))
+                if cutoff and created_at < cutoff:
+                    continue
+                
+                if match is not None and offer.get('match') != match:
+                    continue
+                
+                if seller and offer.get('seller', '').lower() != seller.lower():
+                    continue
+                
+                # Check category and price filters
+                lines = offer.get('lines', [])
+                matches_category = True
+                matches_price = True
+                
+                if category or min_price is not None or max_price is not None:
+                    matches_category = False
+                    for line in lines:
+                        if category and str(line.get('category')) != str(category):
+                            continue
+                        price = line.get('price', 0)
+                        if min_price is not None and price < min_price:
+                            continue
+                        if max_price is not None and price > max_price:
+                            continue
+                        matches_category = True
+                        matches_price = True
+                        break
+                
+                if not matches_category or not matches_price:
+                    continue
+                
+                # Keyword search in raw text
+                if keyword:
+                    if keyword.lower() not in offer.get('raw', '').lower():
+                        continue
+                
+                results.append(offer)
+        
+        # Sort by created_at descending
+        results.sort(key=lambda x: x.get('created_at', ''), reverse=True)
+        
+        return results
+    except Exception as e:
+        print(f'[ERROR] /api/tickets/offers/search: {e}')
+        import traceback
+        traceback.print_exc()
+        return []
+
+@app.get('/api/tickets/offers/{offer_id}')
+def get_offer(offer_id: str):
+    """Return single offer by id"""
+    try:
+        offer = get_offer_by_id(offer_id)
+        if not offer:
+            raise HTTPException(status_code=404, detail='Offer not found')
+        return offer
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f'[ERROR] /api/tickets/offers/{offer_id}: {e}')
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post('/api/tickets/index/rebuild')
+def rebuild_index_endpoint():
+    """Rebuild index by scanning all weekly offers JSONL files"""
+    try:
+        success = rebuild_index()
+        return {'success': success}
+    except Exception as e:
+        print(f'[ERROR] /api/tickets/index/rebuild: {e}')
+        raise HTTPException(status_code=500, detail=str(e))
+
 @app.get('/health')
 def health_check():
     """Lightweight health check for Railway"""

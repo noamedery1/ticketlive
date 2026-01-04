@@ -1,0 +1,676 @@
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import './App.css'
+
+const API_URL = import.meta.env.DEV ? 'http://localhost:8000' : ''
+
+function TicketOffersManager() {
+  const [activeTab, setActiveTab] = useState('add')
+  const [sellers, setSellers] = useState([])
+  const [sellerInput, setSellerInput] = useState('')
+  const [sellerSuggestions, setSellerSuggestions] = useState([])
+  const [showSuggestions, setShowSuggestions] = useState(false)
+  const [rawText, setRawText] = useState('')
+  const [parsedData, setParsedData] = useState(null)
+  const [isParsing, setIsParsing] = useState(false)
+  const [isSaving, setIsSaving] = useState(false)
+  const [toast, setToast] = useState(null)
+  
+  // Search state
+  const [searchFilters, setSearchFilters] = useState({
+    match: '',
+    seller: '',
+    category: '',
+    min_price: '',
+    max_price: '',
+    keyword: '',
+    range: 'all'
+  })
+  const [searchResults, setSearchResults] = useState([])
+  const [isSearching, setIsSearching] = useState(false)
+  const [selectedOffer, setSelectedOffer] = useState(null)
+  const [showDetailDrawer, setShowDetailDrawer] = useState(false)
+  const [sortOrder, setSortOrder] = useState(null) // null, 'asc', 'desc'
+
+  useEffect(() => {
+    fetchSellers()
+  }, [])
+
+  const fetchSellers = async () => {
+    try {
+      const res = await axios.get(`${API_URL}/api/tickets/sellers`)
+      setSellers(res.data)
+    } catch (err) {
+      console.error('Error fetching sellers:', err)
+      showToast('Error loading sellers', 'error')
+    }
+  }
+
+  const handleSellerInputChange = (value) => {
+    setSellerInput(value)
+    if (value.trim()) {
+      const filtered = sellers.filter(s => 
+        s.name.toLowerCase().includes(value.toLowerCase())
+      )
+      setSellerSuggestions(filtered)
+      setShowSuggestions(true)
+    } else {
+      setShowSuggestions(false)
+    }
+  }
+
+  const selectSeller = (seller) => {
+    setSellerInput(seller.name)
+    setShowSuggestions(false)
+  }
+
+  const createSeller = async () => {
+    if (!sellerInput.trim()) return
+    
+    try {
+      const res = await axios.post(`${API_URL}/api/tickets/sellers`, {
+        name: sellerInput.trim()
+      })
+      await fetchSellers()
+      setSellerInput(res.data.name)
+      setShowSuggestions(false)
+      showToast('Seller created', 'success')
+    } catch (err) {
+      console.error('Error creating seller:', err)
+      showToast('Error creating seller', 'error')
+    }
+  }
+
+  const handleParse = async () => {
+    if (!rawText.trim()) {
+      showToast('Please enter a message to parse', 'error')
+      return
+    }
+    
+    if (!sellerInput.trim()) {
+      showToast('Please enter or select a seller', 'error')
+      return
+    }
+
+    setIsParsing(true)
+    try {
+      const res = await axios.post(`${API_URL}/api/tickets/offers/parse`, {
+        seller: sellerInput.trim(),
+        raw: rawText
+      })
+      setParsedData(res.data)
+    } catch (err) {
+      console.error('Error parsing:', err)
+      showToast('Error parsing message', 'error')
+    } finally {
+      setIsParsing(false)
+    }
+  }
+
+  const handleSave = async () => {
+    if (!rawText.trim()) {
+      showToast('Please enter a message', 'error')
+      return
+    }
+    
+    if (!sellerInput.trim()) {
+      showToast('Please enter or select a seller', 'error')
+      return
+    }
+
+    if (!parsedData) {
+      showToast('Please parse the message first', 'error')
+      return
+    }
+
+    setIsSaving(true)
+    try {
+      await axios.post(`${API_URL}/api/tickets/offers`, {
+        seller: sellerInput.trim(),
+        raw: rawText,
+        parsed: parsedData
+      })
+      showToast('Offer saved successfully!', 'success')
+      setRawText('')
+      setParsedData(null)
+      setSellerInput('')
+    } catch (err) {
+      console.error('Error saving offer:', err)
+      showToast('Error saving offer', 'error')
+    } finally {
+      setIsSaving(false)
+    }
+  }
+
+  const sortResults = (results) => {
+    if (!sortOrder) return results
+    return [...results].sort((a, b) => {
+      const aMinPrice = Math.min(...(a.lines || []).map(l => l.price || Infinity))
+      const bMinPrice = Math.min(...(b.lines || []).map(l => l.price || Infinity))
+      return sortOrder === 'asc' ? aMinPrice - bMinPrice : bMinPrice - aMinPrice
+    })
+  }
+
+  const handleSearch = async () => {
+    setIsSearching(true)
+    try {
+      const params = {}
+      if (searchFilters.match) params.match = parseInt(searchFilters.match)
+      if (searchFilters.seller) params.seller = searchFilters.seller
+      if (searchFilters.category) params.category = searchFilters.category
+      if (searchFilters.min_price) params.min_price = parseFloat(searchFilters.min_price)
+      if (searchFilters.max_price) params.max_price = parseFloat(searchFilters.max_price)
+      if (searchFilters.keyword) params.keyword = searchFilters.keyword
+      params.range = searchFilters.range
+
+      const res = await axios.get(`${API_URL}/api/tickets/offers/search`, { params })
+      const sortedResults = sortResults(res.data)
+      setSearchResults(sortedResults)
+    } catch (err) {
+      console.error('Error searching:', err)
+      showToast('Error searching offers', 'error')
+    } finally {
+      setIsSearching(false)
+    }
+  }
+
+  const handleSort = (order) => {
+    const newOrder = sortOrder === order ? null : order
+    setSortOrder(newOrder)
+    const sortedResults = sortResults(searchResults)
+    setSearchResults(sortedResults)
+  }
+
+  const getPriceSummary = (offer) => {
+    if (!offer.lines || offer.lines.length === 0) return 'No prices'
+    const prices = offer.lines.map(l => l.price).filter(p => p != null)
+    if (prices.length === 0) return 'No prices'
+    const min = Math.min(...prices)
+    const max = Math.max(...prices)
+    const currency = offer.lines[0]?.currency || 'USD'
+    if (min === max) {
+      return `${currency} ${min.toFixed(2)}`
+    }
+    return `${currency} ${min.toFixed(2)} - ${max.toFixed(2)}`
+  }
+
+  const handleRowClick = async (offerId) => {
+    try {
+      const res = await axios.get(`${API_URL}/api/tickets/offers/${offerId}`)
+      setSelectedOffer(res.data)
+      setShowDetailDrawer(true)
+    } catch (err) {
+      console.error('Error fetching offer:', err)
+      showToast('Error loading offer details', 'error')
+    }
+  }
+
+  const showToast = (message, type = 'success') => {
+    setToast({ message, type })
+    setTimeout(() => setToast(null), 3000)
+  }
+
+  const formatDate = (isoString) => {
+    const date = new Date(isoString)
+    return date.toLocaleString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    })
+  }
+
+  return (
+    <div className="ticket-offers-manager">
+      {/* Toast Notification */}
+      {toast && (
+        <div className={`toast toast-${toast.type}`}>
+          {toast.message}
+        </div>
+      )}
+
+      {/* Tabs */}
+      <div className="tabs-container">
+        <button
+          className={`tab-button ${activeTab === 'add' ? 'active' : ''}`}
+          onClick={() => setActiveTab('add')}
+        >
+          Add Offer
+        </button>
+        <button
+          className={`tab-button ${activeTab === 'search' ? 'active' : ''}`}
+          onClick={() => setActiveTab('search')}
+        >
+          Search Offers
+        </button>
+      </div>
+
+      {/* Add Offer Tab */}
+      {activeTab === 'add' && (
+        <div className="tab-content add-offer-tab">
+          <div className="add-offer-header">
+            <h2>📝 Add New Ticket Offer</h2>
+            <p className="subtitle">Paste your WhatsApp message and let us parse it automatically</p>
+          </div>
+
+          <div className="form-card">
+            <div className="form-section">
+              <label className="form-label">
+                <span className="label-icon">👤</span>
+                Seller
+              </label>
+              <div className="seller-input-container">
+                <input
+                  type="text"
+                  value={sellerInput}
+                  onChange={(e) => handleSellerInputChange(e.target.value)}
+                  onFocus={() => sellerInput && setShowSuggestions(true)}
+                  placeholder="Enter or select seller name"
+                  className="seller-input"
+                />
+                {showSuggestions && sellerSuggestions.length > 0 && (
+                  <div className="suggestions-dropdown">
+                    {sellerSuggestions.map(seller => (
+                      <div
+                        key={seller.id}
+                        className="suggestion-item"
+                        onClick={() => selectSeller(seller)}
+                      >
+                        <span className="suggestion-icon">✓</span>
+                        {seller.name}
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {sellerInput && !sellers.find(s => s.name.toLowerCase() === sellerInput.toLowerCase()) && (
+                  <button
+                    onClick={createSeller}
+                    className="create-seller-btn"
+                    title="Create new seller"
+                  >
+                    <span>+</span> Create
+                  </button>
+                )}
+              </div>
+            </div>
+
+            <div className="form-section">
+              <label className="form-label">
+                <span className="label-icon">💬</span>
+                WhatsApp Message
+              </label>
+              <div className="textarea-wrapper">
+                <textarea
+                  value={rawText}
+                  onChange={(e) => setRawText(e.target.value)}
+                  placeholder="Paste your WhatsApp message here...&#10;&#10;Example:&#10;match 34&#10;cat1:100&#10;cat2:200&#10;cat3:150"
+                  rows={8}
+                  className="raw-text-input"
+                />
+                <div className="char-count">{rawText.length} characters</div>
+              </div>
+            </div>
+
+            <div className="form-actions">
+              <button
+                onClick={handleParse}
+                disabled={isParsing || !rawText.trim()}
+                className="btn btn-primary btn-large"
+              >
+                {isParsing ? (
+                  <>
+                    <span className="btn-spinner">⏳</span> Parsing...
+                  </>
+                ) : (
+                  <>
+                    <span className="btn-icon">🔍</span> Parse Message
+                  </>
+                )}
+              </button>
+              <button
+                onClick={handleSave}
+                disabled={isSaving || !parsedData || !rawText.trim()}
+                className="btn btn-success btn-large"
+              >
+                {isSaving ? (
+                  <>
+                    <span className="btn-spinner">💾</span> Saving...
+                  </>
+                ) : (
+                  <>
+                    <span className="btn-icon">💾</span> Save Offer
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+
+          {/* Parse Preview */}
+          {parsedData && (
+            <div className="parse-preview-card">
+              <div className="parse-preview-header">
+                <h3>✅ Parse Preview</h3>
+                <span className={`status-badge status-${parsedData.parse_status}`}>
+                  {parsedData.parse_status.toUpperCase()}
+                </span>
+              </div>
+              <div className="parse-status">
+              {parsedData.warnings && parsedData.warnings.length > 0 && (
+                <div className="warnings">
+                  <strong>Warnings:</strong>
+                  <ul>
+                    {parsedData.warnings.map((w, i) => (
+                      <li key={i}>{w}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {parsedData.match && (
+                <div className="parse-field">
+                  <strong>Match:</strong> {parsedData.match}
+                </div>
+              )}
+
+              {parsedData.event && (
+                <div className="parse-field">
+                  <strong>Event:</strong> {parsedData.event}
+                </div>
+              )}
+
+              {parsedData.lines && parsedData.lines.length > 0 && (
+                <div className="parse-lines">
+                  <strong>Category/Price Lines:</strong>
+                  <table className="parse-table">
+                    <thead>
+                      <tr>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Currency</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {parsedData.lines.map((line, i) => (
+                        <tr key={i}>
+                          <td>{line.category}</td>
+                          <td>{line.price.toFixed(2)}</td>
+                          <td>{line.currency}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Search Tab */}
+      {activeTab === 'search' && (
+        <div className="tab-content">
+          <div className="search-filters">
+            <div className="filter-row">
+              <div className="filter-group">
+                <label>Match Number</label>
+                <input
+                  type="number"
+                  value={searchFilters.match}
+                  onChange={(e) => setSearchFilters({...searchFilters, match: e.target.value})}
+                  placeholder="e.g. 32"
+                />
+              </div>
+              <div className="filter-group">
+                <label>Seller</label>
+                <input
+                  type="text"
+                  value={searchFilters.seller}
+                  onChange={(e) => setSearchFilters({...searchFilters, seller: e.target.value})}
+                  placeholder="Seller name"
+                />
+              </div>
+              <div className="filter-group">
+                <label>Category</label>
+                <input
+                  type="text"
+                  value={searchFilters.category}
+                  onChange={(e) => setSearchFilters({...searchFilters, category: e.target.value})}
+                  placeholder="e.g. 1"
+                />
+              </div>
+            </div>
+            <div className="filter-row">
+              <div className="filter-group">
+                <label>Min Price</label>
+                <input
+                  type="number"
+                  step="0.01"
+                  value={searchFilters.min_price}
+                  onChange={(e) => setSearchFilters({...searchFilters, min_price: e.target.value})}
+                  placeholder="0.00"
+                />
+              </div>
+              <div className="filter-group">
+                <label>Max Price</label>
+                <input
+                  type="number"
+                  step="0.01"
+                  value={searchFilters.max_price}
+                  onChange={(e) => setSearchFilters({...searchFilters, max_price: e.target.value})}
+                  placeholder="9999.99"
+                />
+              </div>
+              <div className="filter-group">
+                <label>Keyword</label>
+                <input
+                  type="text"
+                  value={searchFilters.keyword}
+                  onChange={(e) => setSearchFilters({...searchFilters, keyword: e.target.value})}
+                  placeholder="Search in raw text"
+                />
+              </div>
+            </div>
+            <div className="filter-row">
+              <div className="filter-group">
+                <label>Time Range</label>
+                <select
+                  value={searchFilters.range}
+                  onChange={(e) => setSearchFilters({...searchFilters, range: e.target.value})}
+                >
+                  <option value="all">All Time</option>
+                  <option value="7d">Last 7 Days</option>
+                  <option value="30d">Last 30 Days</option>
+                </select>
+              </div>
+              <div className="filter-group">
+                <button
+                  onClick={handleSearch}
+                  disabled={isSearching}
+                  className="btn btn-primary search-btn"
+                >
+                  {isSearching ? 'Searching...' : 'Search'}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Search Results */}
+          <div className="search-results">
+            <div className="results-header">
+              <h3>Results ({searchResults.length})</h3>
+              {searchResults.length > 0 && (
+                <div className="sort-controls">
+                  <label>Sort by Price:</label>
+                  <button
+                    className={`sort-btn ${sortOrder === 'asc' ? 'active' : ''}`}
+                    onClick={() => handleSort('asc')}
+                    title="Sort ascending"
+                  >
+                    ↑ Low to High
+                  </button>
+                  <button
+                    className={`sort-btn ${sortOrder === 'desc' ? 'active' : ''}`}
+                    onClick={() => handleSort('desc')}
+                    title="Sort descending"
+                  >
+                    ↓ High to Low
+                  </button>
+                  {sortOrder && (
+                    <button
+                      className="sort-btn clear-sort"
+                      onClick={() => handleSort(null)}
+                      title="Clear sort"
+                    >
+                      ✕ Clear
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
+            {searchResults.length > 0 ? (
+              <div className="results-table-container">
+                <table className="results-table">
+                  <thead>
+                    <tr>
+                      <th>Created</th>
+                      <th>Seller</th>
+                      <th>Match</th>
+                      <th>Price Summary</th>
+                      <th>Categories</th>
+                      <th>Raw Snippet</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {searchResults.map((offer) => {
+                      const rawSnippet = offer.raw ? offer.raw.substring(0, 60) + '...' : ''
+                      const priceSummary = getPriceSummary(offer)
+                      const categories = offer.lines ? offer.lines.map(l => l.category).join(', ') : '-'
+                      return (
+                        <tr
+                          key={offer.id}
+                          onClick={() => handleRowClick(offer.id)}
+                          className="result-row"
+                        >
+                          <td className="date-cell">{formatDate(offer.created_at)}</td>
+                          <td className="seller-cell">{offer.seller}</td>
+                          <td className="match-cell">{offer.match || '-'}</td>
+                          <td className="price-summary-cell">
+                            <span className="price-badge">{priceSummary}</span>
+                          </td>
+                          <td className="categories-cell">{categories}</td>
+                          <td className="raw-snippet">{rawSnippet}</td>
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              <div className="no-results">
+                {isSearching ? (
+                  <div className="loading-state">
+                    <span className="spinner">⏳</span>
+                    <span>Searching...</span>
+                  </div>
+                ) : (
+                  <div className="empty-state">
+                    <span className="empty-icon">🔍</span>
+                    <p>No results found. Try adjusting your filters.</p>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Detail Drawer */}
+      {showDetailDrawer && selectedOffer && (
+        <div className="detail-drawer-overlay" onClick={() => setShowDetailDrawer(false)}>
+          <div className="detail-drawer" onClick={(e) => e.stopPropagation()}>
+            <div className="drawer-header">
+              <h2>Offer Details</h2>
+              <button
+                className="close-btn"
+                onClick={() => setShowDetailDrawer(false)}
+              >
+                ×
+              </button>
+            </div>
+            <div className="drawer-content">
+              <div className="detail-field">
+                <strong>ID:</strong> {selectedOffer.id}
+              </div>
+              <div className="detail-field">
+                <strong>Created:</strong> {formatDate(selectedOffer.created_at)}
+              </div>
+              <div className="detail-field">
+                <strong>Seller:</strong> {selectedOffer.seller}
+              </div>
+              {selectedOffer.match && (
+                <div className="detail-field">
+                  <strong>Match:</strong> {selectedOffer.match}
+                </div>
+              )}
+              {selectedOffer.event && (
+                <div className="detail-field">
+                  <strong>Event:</strong> {selectedOffer.event}
+                </div>
+              )}
+              <div className="detail-field">
+                <strong>Parse Status:</strong> <span className={`status-${selectedOffer.parse_status}`}>
+                  {selectedOffer.parse_status.toUpperCase()}
+                </span>
+              </div>
+              
+              {selectedOffer.lines && selectedOffer.lines.length > 0 && (
+                <div className="detail-section">
+                  <strong>Category/Price Lines:</strong>
+                  <table className="detail-table">
+                    <thead>
+                      <tr>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Currency</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {selectedOffer.lines.map((line, i) => (
+                        <tr key={i}>
+                          <td>{line.category}</td>
+                          <td>{line.price.toFixed(2)}</td>
+                          <td>{line.currency}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+
+              {selectedOffer.warnings && selectedOffer.warnings.length > 0 && (
+                <div className="detail-section">
+                  <strong>Warnings:</strong>
+                  <ul>
+                    {selectedOffer.warnings.map((w, i) => (
+                      <li key={i}>{w}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              <div className="detail-section">
+                <strong>Raw Message:</strong>
+                <pre className="raw-message">{selectedOffer.raw}</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default TicketOffersManager
+
