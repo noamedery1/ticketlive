@@ -46,31 +46,54 @@ def extract_match_number(text: str) -> Optional[int]:
 
 
 def extract_category_price_pairs(text: str) -> List[Dict[str, Any]]:
-    """Extract category+price pairs from patterns"""
+    """Extract category+price pairs from patterns, including quantity"""
     lines = []
     
-    # Patterns for category:price or category - price
-    # Note: dash must be escaped or at end of character class to avoid being interpreted as range
-    patterns = [
-        r'category\s+(\d+)\s*[:\s-]+\s*(\d+(?:\.\d+)?)',
-        r'cat\s*(\d+)\s*[:\s-]+\s*(\d+(?:\.\d+)?)',
-        r'cat\.\s*(\d+)\s*[:\s-]+\s*(\d+(?:\.\d+)?)',
-        r'c\s*(\d+)\s*[:\s-]+\s*(\d+(?:\.\d+)?)',
-    ]
+    # Pattern for match quantity category price format: "3 x4 cat 3 - 1200$" or "86x4 cat 2 - 1300$"
+    # This pattern captures: match number, quantity (x4), category, price
+    # Handles both "3 x4" and "86x4" formats
+    match_quantity_pattern = r'(\d+)\s*x\s*(\d+)\s+cat\s*(\d+)\s*[:\s-]+\s*(\d+(?:\.\d+)?)\s*\$?'
+    matches = re.finditer(match_quantity_pattern, text, re.IGNORECASE)
+    for match in matches:
+        try:
+            match_num = int(match.group(1))
+            quantity = int(match.group(2))
+            category = match.group(3)
+            price = float(match.group(4))
+            lines.append({
+                'match': match_num,
+                'quantity': quantity,
+                'category': category,
+                'price': price,
+                'currency': None  # Will be set later
+            })
+        except (ValueError, IndexError):
+            continue
     
-    for pattern in patterns:
-        matches = re.finditer(pattern, text, re.IGNORECASE)
-        for match in matches:
-            try:
-                category = match.group(1)
-                price = float(match.group(2))
-                lines.append({
-                    'category': category,
-                    'price': price,
-                    'currency': None  # Will be set later
-                })
-            except (ValueError, IndexError):
-                continue
+    # If no match-quantity patterns found, try simpler patterns (backward compatibility)
+    if not lines:
+        # Patterns for category:price or category - price (without quantity)
+        patterns = [
+            r'category\s+(\d+)\s*[:\s-]+\s*(\d+(?:\.\d+)?)',
+            r'cat\s*(\d+)\s*[:\s-]+\s*(\d+(?:\.\d+)?)',
+            r'cat\.\s*(\d+)\s*[:\s-]+\s*(\d+(?:\.\d+)?)',
+            r'c\s*(\d+)\s*[:\s-]+\s*(\d+(?:\.\d+)?)',
+        ]
+        
+        for pattern in patterns:
+            matches = re.finditer(pattern, text, re.IGNORECASE)
+            for match in matches:
+                try:
+                    category = match.group(1)
+                    price = float(match.group(2))
+                    lines.append({
+                        'category': category,
+                        'price': price,
+                        'quantity': None,  # No quantity specified
+                        'currency': None  # Will be set later
+                    })
+                except (ValueError, IndexError):
+                    continue
     
     return lines
 
@@ -102,7 +125,7 @@ def parse_ticket_message(raw: str) -> Dict[str, Any]:
         {
             'match': int or None,
             'event': str or None,
-            'lines': [{'category': str, 'price': float, 'currency': str}],
+            'lines': [{'category': str, 'price': float, 'quantity': int or None, 'currency': str, 'match': int or None}],
             'parse_status': 'ok' or 'partial',
             'warnings': [str]
         }
@@ -113,22 +136,31 @@ def parse_ticket_message(raw: str) -> Dict[str, Any]:
     normalized = normalize_text(raw)
     normalized = remove_commas_from_numbers(normalized)
     
-    # Extract match number
-    match_num = extract_match_number(normalized)
-    if match_num is None:
-        warnings.append('No match number found')
-    
-    # Extract category/price pairs
+    # Extract category/price pairs (may include match numbers and quantities)
     lines = extract_category_price_pairs(normalized)
+    
+    # If lines have match numbers embedded, extract them
+    match_nums_from_lines = [line.get('match') for line in lines if line.get('match')]
+    if match_nums_from_lines:
+        # Use the most common match number, or first one
+        match_num = max(set(match_nums_from_lines), key=match_nums_from_lines.count) if match_nums_from_lines else None
+    else:
+        # Try to extract match number from text (fallback)
+        match_num = extract_match_number(normalized)
+        if match_num is None:
+            warnings.append('No match number found')
+    
     if not lines:
         warnings.append('No valid category/price pairs found')
     
     # Detect currency
     currency = detect_currency(normalized)
     
-    # Apply currency to all lines
+    # Apply currency to all lines, and ensure match is set if not already
     for line in lines:
         line['currency'] = currency
+        if 'match' not in line or line.get('match') is None:
+            line['match'] = match_num
     
     # Determine parse status
     parse_status = 'ok'
@@ -139,6 +171,7 @@ def parse_ticket_message(raw: str) -> Dict[str, Any]:
     event = None
     event_patterns = [
         r'(world\s+cup\s+\d{4})',
+        r'(wc\s+\d{4})',
         r'(champions\s+league)',
         r'(premier\s+league)',
     ]

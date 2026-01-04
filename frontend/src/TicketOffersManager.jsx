@@ -23,6 +23,8 @@ function TicketOffersManager() {
     category: '',
     min_price: '',
     max_price: '',
+    min_quantity: '',
+    max_quantity: '',
     keyword: '',
     range: 'all'
   })
@@ -160,6 +162,8 @@ function TicketOffersManager() {
       if (searchFilters.category) params.category = searchFilters.category
       if (searchFilters.min_price) params.min_price = parseFloat(searchFilters.min_price)
       if (searchFilters.max_price) params.max_price = parseFloat(searchFilters.max_price)
+      if (searchFilters.min_quantity) params.min_quantity = parseInt(searchFilters.min_quantity)
+      if (searchFilters.max_quantity) params.max_quantity = parseInt(searchFilters.max_quantity)
       if (searchFilters.keyword) params.keyword = searchFilters.keyword
       params.range = searchFilters.range
 
@@ -386,6 +390,7 @@ function TicketOffersManager() {
                     <thead>
                       <tr>
                         <th>Category</th>
+                        <th>Quantity</th>
                         <th>Price</th>
                         <th>Currency</th>
                       </tr>
@@ -394,6 +399,7 @@ function TicketOffersManager() {
                       {parsedData.lines.map((line, i) => (
                         <tr key={i}>
                           <td>{line.category}</td>
+                          <td>{line.quantity ? `${line.quantity} tickets` : '-'}</td>
                           <td>{line.price.toFixed(2)}</td>
                           <td>{line.currency}</td>
                         </tr>
@@ -463,6 +469,26 @@ function TicketOffersManager() {
                 />
               </div>
               <div className="filter-group">
+                <label>Min Quantity</label>
+                <input
+                  type="number"
+                  value={searchFilters.min_quantity}
+                  onChange={(e) => setSearchFilters({...searchFilters, min_quantity: e.target.value})}
+                  placeholder="e.g. 2"
+                />
+              </div>
+            </div>
+            <div className="filter-row">
+              <div className="filter-group">
+                <label>Max Quantity</label>
+                <input
+                  type="number"
+                  value={searchFilters.max_quantity}
+                  onChange={(e) => setSearchFilters({...searchFilters, max_quantity: e.target.value})}
+                  placeholder="e.g. 4"
+                />
+              </div>
+              <div className="filter-group">
                 <label>Keyword</label>
                 <input
                   type="text"
@@ -470,6 +496,9 @@ function TicketOffersManager() {
                   onChange={(e) => setSearchFilters({...searchFilters, keyword: e.target.value})}
                   placeholder="Search in raw text"
                 />
+              </div>
+              <div className="filter-group">
+                {/* Empty space for alignment */}
               </div>
             </div>
             <div className="filter-row">
@@ -538,6 +567,7 @@ function TicketOffersManager() {
                       <th>Seller</th>
                       <th>Match</th>
                       <th>Price Summary</th>
+                      <th>Quantity</th>
                       <th>Categories</th>
                       <th>Raw Snippet</th>
                     </tr>
@@ -546,6 +576,7 @@ function TicketOffersManager() {
                     {searchResults.map((offer) => {
                       const rawSnippet = offer.raw ? offer.raw.substring(0, 60) + '...' : ''
                       const priceSummary = getPriceSummary(offer)
+                      const quantitySummary = getQuantitySummary(offer)
                       const categories = offer.lines ? offer.lines.map(l => l.category).join(', ') : '-'
                       return (
                         <tr
@@ -559,6 +590,7 @@ function TicketOffersManager() {
                           <td className="price-summary-cell">
                             <span className="price-badge">{priceSummary}</span>
                           </td>
+                          <td className="quantity-cell">{quantitySummary}</td>
                           <td className="categories-cell">{categories}</td>
                           <td className="raw-snippet">{rawSnippet}</td>
                         </tr>
@@ -632,6 +664,7 @@ function TicketOffersManager() {
                     <thead>
                       <tr>
                         <th>Category</th>
+                        <th>Quantity</th>
                         <th>Price</th>
                         <th>Currency</th>
                       </tr>
@@ -640,6 +673,7 @@ function TicketOffersManager() {
                       {selectedOffer.lines.map((line, i) => (
                         <tr key={i}>
                           <td>{line.category}</td>
+                          <td>{line.quantity ? `${line.quantity} tickets` : '-'}</td>
                           <td>{line.price.toFixed(2)}</td>
                           <td>{line.currency}</td>
                         </tr>

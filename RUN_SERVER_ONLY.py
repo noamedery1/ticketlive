@@ -602,6 +602,8 @@ def search_offers(
     category: Optional[str] = None,
     min_price: Optional[float] = None,
     max_price: Optional[float] = None,
+    min_quantity: Optional[int] = None,
+    max_quantity: Optional[int] = None,
     keyword: Optional[str] = None,
     range: str = 'all'
 ):
@@ -678,12 +680,13 @@ def search_offers(
                 if seller and offer.get('seller', '').lower() != seller.lower():
                     continue
                 
-                # Check category and price filters
+                # Check category, price, and quantity filters
                 lines = offer.get('lines', [])
                 matches_category = True
                 matches_price = True
+                matches_quantity = True
                 
-                if category or min_price is not None or max_price is not None:
+                if category or min_price is not None or max_price is not None or min_quantity is not None or max_quantity is not None:
                     matches_category = False
                     for line in lines:
                         if category and str(line.get('category')) != str(category):
@@ -693,11 +696,17 @@ def search_offers(
                             continue
                         if max_price is not None and price > max_price:
                             continue
+                        quantity = line.get('quantity')
+                        if min_quantity is not None and (quantity is None or quantity < min_quantity):
+                            continue
+                        if max_quantity is not None and (quantity is None or quantity > max_quantity):
+                            continue
                         matches_category = True
                         matches_price = True
+                        matches_quantity = True
                         break
                 
-                if not matches_category or not matches_price:
+                if not matches_category or not matches_price or not matches_quantity:
                     continue
                 
                 # Keyword search in raw text
