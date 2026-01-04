@@ -1963,6 +1963,15 @@
               "122": 300.0
             }
           }
+        },
+        {
+          "timestamp": "2026-01-04T08:49:54.252301",
+          "prices": {
+            "Shortside Upper Level": {
+              "Unknown": 250.0,
+              "122": 300.0
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -1971,7 +1980,7 @@
           "122": 300.0
         }
       },
-      "last_scraped": "2026-01-04T05:35:19.959301"
+      "last_scraped": "2026-01-04T08:49:54.252301"
     },
     {
       "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-manchester-united",
@@ -2792,12 +2801,27 @@
               "116": 424.99
             }
           }
+        },
+        {
+          "timestamp": "2026-01-04T08:49:54.252301",
+          "prices": {
+            "Shortside Upper Level": {
+              "Unknown": 384.0,
+              "Row: BEST VIEW": 385.0,
+              "101": 414.0,
+              "126": 420.0,
+              "122": 420.0
+            },
+            "Longside Upper Level": {
+              "116": 424.99
+            }
+          }
         }
       ],
       "latest_prices": {
         "Shortside Upper Level": {
+          "Unknown": 384.0,
           "Row: BEST VIEW": 385.0,
-          "Unknown": 410.0,
           "101": 414.0,
           "126": 420.0,
           "122": 420.0
@@ -2806,7 +2830,7 @@
           "116": 424.99
         }
       },
-      "last_scraped": "2026-01-04T05:35:19.959301"
+      "last_scraped": "2026-01-04T08:49:54.252301"
     },
     {
       "url": "https://www.footballticketnet.com/champions-league/arsenal-vs-kairat-almaty",
@@ -3680,6 +3704,14 @@
               "Unknown": 154.99
             }
           }
+        },
+        {
+          "timestamp": "2026-01-04T08:49:54.252301",
+          "prices": {
+            "Shortside Upper Level": {
+              "Unknown": 154.99
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -3687,7 +3719,7 @@
           "Unknown": 154.99
         }
       },
-      "last_scraped": "2026-01-04T05:35:19.959301"
+      "last_scraped": "2026-01-04T08:49:54.252301"
     },
     {
       "url": "https://www.footballticketnet.com/carabao-cup/arsenal-vs-chelsea",
@@ -5129,6 +5161,23 @@
               "109": 205.0
             }
           }
+        },
+        {
+          "timestamp": "2026-01-04T08:49:54.252301",
+          "prices": {
+            "Shortside Upper Level": {
+              "Unknown": 188.99
+            },
+            "Central Longside Upper": {
+              "Unknown": 204.92,
+              "111": 205.0,
+              "91": 215.0
+            },
+            "Longside Upper Level": {
+              "Unknown": 204.96,
+              "109": 205.0
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -5145,7 +5194,7 @@
           "109": 205.0
         }
       },
-      "last_scraped": "2026-01-04T05:35:19.959301"
+      "last_scraped": "2026-01-04T08:49:54.252301"
     },
     {
       "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-sunderland",
@@ -6642,6 +6691,28 @@
               "Unknown": 399.91
             }
           }
+        },
+        {
+          "timestamp": "2026-01-04T08:49:54.252301",
+          "prices": {
+            "Central Longside Upper": {
+              "Unknown": 326.95,
+              "92": 327.0
+            },
+            "Shortside Upper Level": {
+              "Unknown": 349.98
+            },
+            "Longside Upper Level": {
+              "Unknown": 374.98
+            },
+            "Longside Lower Level": {
+              "Unknown": 394.91,
+              "13": 395.0
+            },
+            "Shortside Lower Level": {
+              "Unknown": 399.91
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -6663,7 +6734,7 @@
           "Unknown": 399.91
         }
       },
-      "last_scraped": "2026-01-04T05:35:19.959301"
+      "last_scraped": "2026-01-04T08:49:54.252301"
     },
     {
       "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-chelsea",
@@ -7969,14 +8040,36 @@
               "111": 530.0
             }
           }
+        },
+        {
+          "timestamp": "2026-01-04T08:49:54.252301",
+          "prices": {
+            "Away Section": {
+              "Unknown": 432.12
+            },
+            "Shortside Upper Level": {
+              "Unknown": 469.95,
+              "101": 500.0
+            },
+            "Longside Upper Level": {
+              "Unknown": 507.92,
+              "110": 508.0,
+              "132": 518.0,
+              "109": 525.0
+            },
+            "Central Longside Upper": {
+              "Unknown": 529.91,
+              "111": 530.0
+            }
+          }
         }
       ],
       "latest_prices": {
         "Away Section": {
-          "Unknown": 432.07
+          "Unknown": 432.12
         },
         "Shortside Upper Level": {
-          "Unknown": 474.98,
+          "Unknown": 469.95,
           "101": 500.0
         },
         "Longside Upper Level": {
@@ -7990,7 +8083,7 @@
           "111": 530.0
         }
       },
-      "last_scraped": "2026-01-04T05:35:19.959301"
+      "last_scraped": "2026-01-04T08:49:54.252301"
     },
     {
       "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-everton",
@@ -10006,6 +10099,33 @@
               "Unknown": 394.63
             }
           }
+        },
+        {
+          "timestamp": "2026-01-04T08:49:54.252301",
+          "prices": {
+            "Away Section": {
+              "Unknown": 260.0
+            },
+            "Longside Upper Level": {
+              "Unknown": 334.93,
+              "110": 335.0,
+              "109": 345.0,
+              "132": 350.0
+            },
+            "Central Longside Upper": {
+              "Unknown": 343.97,
+              "111": 344.0,
+              "92": 354.0,
+              "91": 365.0
+            },
+            "Shortside Lower Level": {
+              "Unknown": 389.95,
+              "10": 390.0
+            },
+            "Shortside Upper Level": {
+              "Unknown": 393.98
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -10029,10 +10149,10 @@
           "10": 390.0
         },
         "Shortside Upper Level": {
-          "Unknown": 394.63
+          "Unknown": 393.98
         }
       },
-      "last_scraped": "2026-01-04T05:35:19.959301"
+      "last_scraped": "2026-01-04T08:49:54.252301"
     },
     {
       "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-bournemouth",
@@ -11999,6 +12119,34 @@
               "Unknown": 584.9
             }
           }
+        },
+        {
+          "timestamp": "2026-01-04T08:49:54.252301",
+          "prices": {
+            "Longside Upper Level": {
+              "Unknown": 449.93,
+              "110": 450.0,
+              "109": 460.0,
+              "132": 470.0
+            },
+            "Central Longside Upper": {
+              "Unknown": 472.93,
+              "111": 473.0,
+              "92": 483.0,
+              "91": 518.0
+            },
+            "Longside Lower Level": {
+              "Unknown": 539.9,
+              "12": 540.0,
+              "13": 550.0
+            },
+            "Shortside Upper Level": {
+              "Unknown": 574.92
+            },
+            "Central Longside Lower": {
+              "Unknown": 584.9
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -12026,7 +12174,7 @@
           "Unknown": 584.9
         }
       },
-      "last_scraped": "2026-01-04T05:35:19.959301"
+      "last_scraped": "2026-01-04T08:49:54.252301"
     },
     {
       "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-newcastle-united",
@@ -13617,6 +13765,25 @@
               "Unknown": 534.91
             }
           }
+        },
+        {
+          "timestamp": "2026-01-04T08:49:54.252301",
+          "prices": {
+            "Longside Upper Level": {
+              "Unknown": 449.94,
+              "110": 450.0,
+              "109": 460.0,
+              "132": 470.0
+            },
+            "Central Longside Upper": {
+              "Unknown": 471.32,
+              "111": 473.0,
+              "92": 483.0
+            },
+            "Longside Lower Level": {
+              "Unknown": 534.91
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -13635,7 +13802,7 @@
           "Unknown": 534.91
         }
       },
-      "last_scraped": "2026-01-04T05:35:19.959301"
+      "last_scraped": "2026-01-04T08:49:54.252301"
     },
     {
       "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-fulham",
@@ -15863,6 +16030,36 @@
               "Unknown": 947.3
             }
           }
+        },
+        {
+          "timestamp": "2026-01-04T08:49:54.252301",
+          "prices": {
+            "Longside Upper Level": {
+              "110": 450.0,
+              "132": 460.0,
+              "109": 470.0
+            },
+            "Central Longside Upper": {
+              "111": 473.0,
+              "92": 483.0,
+              "133": 544.0
+            },
+            "Longside Lower Level": {
+              "12": 540.0,
+              "13": 550.0,
+              "19": 621.0
+            },
+            "Central Longside Lower": {
+              "15,18": 585.0,
+              "16": 608.0,
+              "31,2": 653.0,
+              "31": 656.56,
+              "Row: ROWS 1-30 CENTRAL VIEW": 850.0
+            },
+            "Club Level Shortside": {
+              "Unknown": 947.3
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -15892,7 +16089,7 @@
           "Unknown": 947.3
         }
       },
-      "last_scraped": "2026-01-04T05:35:19.959301"
+      "last_scraped": "2026-01-04T08:49:54.252301"
     },
     {
       "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-burnley",
@@ -17936,6 +18133,33 @@
               "16": 1215.0
             }
           }
+        },
+        {
+          "timestamp": "2026-01-04T08:49:54.252301",
+          "prices": {
+            "Longside Upper Level": {
+              "110": 810.0,
+              "109": 825.0,
+              "Unknown": 1425.0
+            },
+            "Central Longside Upper": {
+              "92": 855.0,
+              "91": 990.0
+            },
+            "Shortside Upper Level": {
+              "101": 900.0,
+              "Unknown": 1220.0
+            },
+            "Longside Lower Level": {
+              "13": 1090.0,
+              "19": 1252.0,
+              "4": 1296.0
+            },
+            "Central Longside Lower": {
+              "15,18": 1170.0,
+              "16": 1215.0
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -17962,8 +18186,8 @@
           "16": 1215.0
         }
       },
-      "last_scraped": "2026-01-04T05:35:19.959301"
+      "last_scraped": "2026-01-04T08:49:54.252301"
     }
   ],
-  "last_updated": "2026-01-04T05:35:19.959301"
+  "last_updated": "2026-01-04T08:49:54.252301"
 }
