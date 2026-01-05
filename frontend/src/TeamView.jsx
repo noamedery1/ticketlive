@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import './App.css'
 
 const API_URL = import.meta.env.DEV ? 'http://localhost:8000' : ''
@@ -595,11 +595,6 @@ function TeamView() {
                           }}
                           labelFormatter={(label) => `${label} (Daily Average)`}
                         />
-                        <Legend 
-                          wrapperStyle={{ fontSize: '11px', paddingTop: '15px' }}
-                          iconType="line"
-                          iconSize={12}
-                        />
                         {Array.from(new Set(chartData.flatMap(d => Object.keys(d).filter(k => k !== 'time')))).map((cat, i) => (
                           <Area
                             key={cat}
@@ -621,26 +616,25 @@ function TeamView() {
                 </div>
               )}
 
-              {/* Category Summary Table */}
+              {/* Category Summary Table - Compact */}
               {gamePrices && gamePrices.latest_prices && Object.keys(gamePrices.latest_prices).length > 0 && (
-                <div className="chart-section" style={{ marginTop: '20px', width: '100%', maxWidth: '900px', background: '#161b22', border: '1px solid #30363d', borderRadius: '8px', padding: '20px' }}>
-                  <h3 style={{ margin: '0 0 20px 0', fontSize: '1.1rem', color: '#c9d1d9', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <div className="chart-section" style={{ marginTop: '20px', width: '100%', maxWidth: '900px', background: '#161b22', border: '1px solid #30363d', borderRadius: '8px', padding: '12px' }}>
+                  <h3 style={{ margin: '0 0 12px 0', fontSize: '0.95rem', color: '#c9d1d9', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '6px' }}>
                     <span>📋</span>
                     <span>Category Price Summary</span>
                     {gamePrices?.currency && (
-                      <span style={{ fontSize: '0.85rem', color: '#8b949e', fontWeight: '400', marginLeft: '8px' }}>
+                      <span style={{ fontSize: '0.75rem', color: '#8b949e', fontWeight: '400', marginLeft: '6px' }}>
                         ({getCurrencySymbol(gamePrices.currency)})
                       </span>
                     )}
                   </h3>
-                  <div style={{ overflowX: 'auto' }}>
-                    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
+                  <div style={{ overflowX: 'auto', maxHeight: '400px', overflowY: 'auto' }}>
+                    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.8rem' }}>
                       <thead>
-                        <tr style={{ borderBottom: '2px solid #30363d' }}>
-                          <th style={{ padding: '12px', textAlign: 'left', color: '#8b949e', fontWeight: '600', fontSize: '0.85rem', textTransform: 'uppercase' }}>Category</th>
-                          <th style={{ padding: '12px', textAlign: 'left', color: '#8b949e', fontWeight: '600', fontSize: '0.85rem', textTransform: 'uppercase' }}>Blocks</th>
-                          <th style={{ padding: '12px', textAlign: 'right', color: '#8b949e', fontWeight: '600', fontSize: '0.85rem', textTransform: 'uppercase' }}>Price Range</th>
-                          <th style={{ padding: '12px', textAlign: 'right', color: '#8b949e', fontWeight: '600', fontSize: '0.85rem', textTransform: 'uppercase' }}>Listings</th>
+                        <tr style={{ borderBottom: '1px solid #30363d' }}>
+                          <th style={{ padding: '6px 8px', textAlign: 'left', color: '#8b949e', fontWeight: '600', fontSize: '0.7rem', textTransform: 'uppercase' }}>Category</th>
+                          <th style={{ padding: '6px 8px', textAlign: 'right', color: '#8b949e', fontWeight: '600', fontSize: '0.7rem', textTransform: 'uppercase' }}>Price Range</th>
+                          <th style={{ padding: '6px 8px', textAlign: 'right', color: '#8b949e', fontWeight: '600', fontSize: '0.7rem', textTransform: 'uppercase' }}>Listings</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -654,7 +648,6 @@ function TeamView() {
                           let catMin = Infinity
                           let catMax = -Infinity
                           let totalListings = 0
-                          const blockList = []
                           
                           blockEntries.forEach(([block, price]) => {
                             let min, max, count
@@ -672,7 +665,6 @@ function TeamView() {
                             catMin = Math.min(catMin, min)
                             catMax = Math.max(catMax, max)
                             totalListings += count
-                            blockList.push({ block, min, max, count })
                           })
                           
                           if (catMin === Infinity) return null
@@ -681,16 +673,8 @@ function TeamView() {
                           
                           return (
                             <tr key={category} style={{ borderBottom: '1px solid #21262d', transition: 'background 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.background = '#1c2128'} onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}>
-                              <td style={{ padding: '12px', color: '#c9d1d9', fontWeight: '500' }}>{category}</td>
-                              <td style={{ padding: '12px', color: '#8b949e', fontSize: '0.85rem' }}>
-                                {blockList.length} {blockList.length === 1 ? 'block' : 'blocks'}
-                                {blockList.length <= 5 && (
-                                  <div style={{ marginTop: '4px', fontSize: '0.75rem', color: '#6e7681' }}>
-                                    {blockList.map(b => b.block).join(', ')}
-                                  </div>
-                                )}
-                              </td>
-                              <td style={{ padding: '12px', textAlign: 'right', color: '#c9d1d9' }}>
+                              <td style={{ padding: '6px 8px', color: '#c9d1d9', fontWeight: '500', fontSize: '0.8rem' }}>{category}</td>
+                              <td style={{ padding: '6px 8px', textAlign: 'right', color: '#c9d1d9', fontSize: '0.8rem' }}>
                                 {catMin === catMax ? (
                                   <span style={{ fontWeight: '600', color: '#58a6ff' }}>
                                     {formatPrice(catMin, currency)}
@@ -700,15 +684,15 @@ function TeamView() {
                                     <span style={{ fontWeight: '600', color: '#56d364' }}>
                                       {formatPrice(catMin, currency)}
                                     </span>
-                                    <span style={{ margin: '0 6px', color: '#6e7681' }}>→</span>
+                                    <span style={{ margin: '0 4px', color: '#6e7681' }}>→</span>
                                     <span style={{ fontWeight: '600', color: '#ff7b72' }}>
                                       {formatPrice(catMax, currency)}
                                     </span>
                                   </span>
                                 )}
                               </td>
-                              <td style={{ padding: '12px', textAlign: 'right', color: '#8b949e', fontSize: '0.85rem' }}>
-                                {totalListings} {totalListings === 1 ? 'listing' : 'listings'}
+                              <td style={{ padding: '6px 8px', textAlign: 'right', color: '#8b949e', fontSize: '0.75rem' }}>
+                                {totalListings}
                               </td>
                             </tr>
                           )
