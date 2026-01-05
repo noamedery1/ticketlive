@@ -3747,884 +3747,40 @@
                 "Unknown": 3500.0
               }
             }
+          },
+          {
+            "timestamp": "2026-01-05T12:34:56.974046",
+            "prices": {
+              "Shortside Upper Level": 199.95,
+              "Longside Upper Level": 200.0,
+              "Shortside Lower Level": 235.0,
+              "Longside Lower Level": 235.0,
+              "Central Longside Upper": 260.0,
+              "Central Longside Lower": 285.0,
+              "Away Section": 385.0,
+              "Club Level Shortside": 450.0,
+              "Club Level Longside": 674.92,
+              "Category 3": 1750.0,
+              "Executive Private Boxes": 2499.93,
+              "VIP Packages": 3500.0
+            }
           }
         ],
         "latest_prices": {
-          "Shortside Upper Level": {
-            "Unknown": {
-              "min": 200.0,
-              "max": 9999.0,
-              "count": 30,
-              "_price": 200.0
-            },
-            "123": {
-              "min": 250.0,
-              "max": 335.0,
-              "count": 2,
-              "_price": 250.0
-            },
-            "122": {
-              "min": 300.0,
-              "max": 450.0,
-              "count": 4,
-              "_price": 300.0
-            },
-            "Row: AFC!": 324.95,
-            "99": {
-              "min": 333.0,
-              "max": 450.0,
-              "count": 3,
-              "_price": 333.0
-            },
-            "121": 335.0,
-            "128": 335.0,
-            "124": 335.0,
-            "125": 335.0,
-            "127": 335.0,
-            "119": 335.0,
-            "120": 335.0,
-            "126": 335.0,
-            "106": {
-              "min": 335.0,
-              "max": 450.0,
-              "count": 3,
-              "_price": 335.0
-            },
-            "105": {
-              "min": 335.0,
-              "max": 450.0,
-              "count": 3,
-              "_price": 335.0
-            },
-            "104": {
-              "min": 335.0,
-              "max": 450.0,
-              "count": 3,
-              "_price": 335.0
-            },
-            "103": {
-              "min": 335.0,
-              "max": 450.0,
-              "count": 3,
-              "_price": 335.0
-            },
-            "101": {
-              "min": 335.0,
-              "max": 450.0,
-              "count": 3,
-              "_price": 335.0
-            },
-            "102": {
-              "min": 335.0,
-              "max": 450.0,
-              "count": 3,
-              "_price": 335.0
-            },
-            "100": {
-              "min": 335.0,
-              "max": 450.0,
-              "count": 3,
-              "_price": 335.0
-            },
-            "98": {
-              "min": 335.0,
-              "max": 450.0,
-              "count": 3,
-              "_price": 335.0
-            },
-            "97": {
-              "min": 335.0,
-              "max": 450.0,
-              "count": 3,
-              "_price": 335.0
-            },
-            "Row: AFC! 1 Adult + 1 Young Adult": {
-              "min": 335.0,
-              "max": 360.0,
-              "count": 2,
-              "_price": 335.0
-            },
-            "124,101,102,123": 349.0,
-            "Row: AMAZING VIEW": {
-              "min": 364.95,
-              "max": 364.95,
-              "count": 2,
-              "_price": 364.95
-            },
-            "Row: Best": 400.0,
-            "Row: FANS BEST!": 540.0,
-            "Row: FRONT 30 ROWS": 620.0,
-            "Row: ROWS 1-30 BEST VIEW": 625.0
-          },
-          "Longside Upper Level": {
-            "Unknown": {
-              "min": 200.0,
-              "max": 4999.92,
-              "count": 21,
-              "_price": 200.0
-            },
-            "132": {
-              "min": 360.0,
-              "max": 500.0,
-              "count": 3,
-              "_price": 360.0
-            },
-            "117,93,110,109": 364.0,
-            "94": {
-              "min": 365.0,
-              "max": 500.0,
-              "count": 2,
-              "_price": 365.0
-            },
-            "131": {
-              "min": 365.0,
-              "max": 500.0,
-              "count": 2,
-              "_price": 365.0
-            },
-            "93": {
-              "min": 365.0,
-              "max": 500.0,
-              "count": 2,
-              "_price": 365.0
-            },
-            "109": {
-              "min": 365.0,
-              "max": 500.0,
-              "count": 2,
-              "_price": 365.0
-            },
-            "116": {
-              "min": 365.0,
-              "max": 500.0,
-              "count": 3,
-              "_price": 365.0
-            },
-            "115": {
-              "min": 365.0,
-              "max": 500.0,
-              "count": 2,
-              "_price": 365.0
-            },
-            "110": {
-              "min": 365.0,
-              "max": 500.0,
-              "count": 2,
-              "_price": 365.0
-            },
-            "Row: Best": 400.0,
-            "Row: AMAZING VIEW": {
-              "min": 465.0,
-              "max": 465.0,
-              "count": 2,
-              "_price": 465.0
-            },
-            "110,109,108,107": 499.95,
-            "93,94,95,96": 499.95,
-            "115,116,117,118": 499.95,
-            "132,131,130,129": 499.95,
-            "115,116,110,109": 550.0,
-            "132,131,93,94": 550.0,
-            "Row: UP TO 4 SEATS TOGETHER": 1000.0
-          },
-          "Shortside Lower Level": {
-            "Unknown": {
-              "min": 235.0,
-              "max": 1000.0,
-              "count": 19,
-              "_price": 235.0
-            },
-            "7,8,9": 400.0,
-            "8": {
-              "min": 400.0,
-              "max": 575.0,
-              "count": 3,
-              "_price": 400.0
-            },
-            "24": {
-              "min": 450.0,
-              "max": 575.0,
-              "count": 2,
-              "_price": 450.0
-            },
-            "9": {
-              "min": 450.0,
-              "max": 575.0,
-              "count": 2,
-              "_price": 450.0
-            },
-            "10": {
-              "min": 450.0,
-              "max": 575.0,
-              "count": 2,
-              "_price": 450.0
-            },
-            "11": {
-              "min": 450.0,
-              "max": 575.0,
-              "count": 2,
-              "_price": 450.0
-            },
-            "Row: Best": 450.0,
-            "25": {
-              "min": 450.0,
-              "max": 575.0,
-              "count": 2,
-              "_price": 450.0
-            },
-            "26": {
-              "min": 450.0,
-              "max": 575.0,
-              "count": 2,
-              "_price": 450.0
-            },
-            "27": {
-              "min": 450.0,
-              "max": 575.0,
-              "count": 3,
-              "_price": 450.0
-            },
-            "7": {
-              "min": 450.0,
-              "max": 575.0,
-              "count": 2,
-              "_price": 450.0
-            },
-            "6": {
-              "min": 450.0,
-              "max": 575.0,
-              "count": 2,
-              "_price": 450.0
-            },
-            "Row: PITCHSIDE BEST!": 494.95,
-            "6,7,10,9": {
-              "min": 550.0,
-              "max": 950.0,
-              "count": 2,
-              "_price": 550.0
-            },
-            "9,10,7,6": 550.0,
-            "24,25,26,27": 550.0,
-            "25,26,27,24": 700.0,
-            "Row: UP TO 2 SEATS TOGETHER": 1100.0,
-            "Row: FRONT 30 ROWS - GUARANTEED TOGETHER": 1500.0
-          },
-          "Longside Lower Level": {
-            "Unknown": {
-              "min": 235.0,
-              "max": 1500.0,
-              "count": 21,
-              "_price": 235.0
-            },
-            "14,29,4,5": 499.0,
-            "4": {
-              "min": 500.0,
-              "max": 650.0,
-              "count": 4,
-              "_price": 500.0
-            },
-            "Row: Best": 500.0,
-            "13": {
-              "min": 500.0,
-              "max": 800.0,
-              "count": 3,
-              "_price": 500.0
-            },
-            "29": {
-              "min": 500.0,
-              "max": 799.95,
-              "count": 4,
-              "_price": 500.0
-            },
-            "Row: PITCHSIDE BEST!": {
-              "min": 550.0,
-              "max": 799.95,
-              "count": 2,
-              "_price": 550.0
-            },
-            "3": {
-              "min": 550.0,
-              "max": 700.0,
-              "count": 3,
-              "_price": 550.0
-            },
-            "30": {
-              "min": 550.0,
-              "max": 675.0,
-              "count": 3,
-              "_price": 550.0
-            },
-            "14": {
-              "min": 550.0,
-              "max": 800.0,
-              "count": 3,
-              "_price": 550.0
-            },
-            "19": {
-              "min": 550.0,
-              "max": 800.0,
-              "count": 3,
-              "_price": 550.0
-            },
-            "4,29,30,3": {
-              "min": 649.95,
-              "max": 1125.0,
-              "count": 2,
-              "_price": 649.95
-            },
-            "13,14,29,19": 750.0,
-            "28": 800.0,
-            "14,29,13": 1000.0,
-            "Row: ROWS 1-15": 1200.0,
-            "Row: ROWS 1-25": 1250.0,
-            "13,14,19,28": 1250.0,
-            "3,4": 1300.0,
-            "12,13,14": 1300.0,
-            "Row: TOGETHER": 1600.0
-          },
-          "Central Longside Upper": {
-            "92": {
-              "min": 260.0,
-              "max": 525.0,
-              "count": 3,
-              "_price": 260.0
-            },
-            "Unknown": {
-              "min": 325.0,
-              "max": 1400.0,
-              "count": 15,
-              "_price": 325.0
-            },
-            "133": {
-              "min": 375.0,
-              "max": 525.0,
-              "count": 2,
-              "_price": 375.0
-            },
-            "134": {
-              "min": 375.0,
-              "max": 625.0,
-              "count": 4,
-              "_price": 375.0
-            },
-            "91": {
-              "min": 375.0,
-              "max": 625.0,
-              "count": 4,
-              "_price": 375.0
-            },
-            "114": {
-              "min": 375.0,
-              "max": 950.0,
-              "count": 3,
-              "_price": 375.0
-            },
-            "113": {
-              "min": 375.0,
-              "max": 550.0,
-              "count": 3,
-              "_price": 375.0
-            },
-            "112": {
-              "min": 375.0,
-              "max": 550.0,
-              "count": 3,
-              "_price": 375.0
-            },
-            "111": {
-              "min": 375.0,
-              "max": 575.0,
-              "count": 3,
-              "_price": 375.0
-            },
-            "91,112,113,134": 399.99,
-            "134,91,92": 450.0,
-            "92,91,134,113": 500.0,
-            "111,114": 515.0,
-            "111,112,113,114": {
-              "min": 515.0,
-              "max": 1500.0,
-              "count": 4,
-              "_price": 515.0
-            },
-            "92,133": 520.0,
-            "92,91,134,133": {
-              "min": 525.0,
-              "max": 1100.0,
-              "count": 4,
-              "_price": 525.0
-            },
-            "134,91,112,113": {
-              "min": 540.0,
-              "max": 1250.0,
-              "count": 2,
-              "_price": 540.0
-            },
-            "112,113": {
-              "min": 540.0,
-              "max": 545.0,
-              "count": 2,
-              "_price": 540.0
-            },
-            "Row: SEATS TOGETHER": 700.0,
-            "114,113,112,111": 1100.0,
-            "111,112,113": 1450.0,
-            "Row: ROWS 1-30": 1500.0,
-            "Row: !..GREAT SPOT & SEATS GUARANTEED TOGETHER..!": 1500.5
-          },
-          "Central Longside Lower": {
-            "Unknown": {
-              "min": 285.0,
-              "max": 3500.0,
-              "count": 19,
-              "_price": 285.0
-            },
-            "2,15,18,31": 374.99,
-            "1,16,17,32": 424.0,
-            "15": {
-              "min": 450.0,
-              "max": 3000.0,
-              "count": 8,
-              "_price": 450.0
-            },
-            "16": {
-              "min": 500.0,
-              "max": 3000.0,
-              "count": 7,
-              "_price": 500.0
-            },
-            "1,2": {
-              "min": 500.0,
-              "max": 1450.0,
-              "count": 3,
-              "_price": 500.0
-            },
-            "1,2,17,15": {
-              "min": 550.0,
-              "max": 550.0,
-              "count": 6,
-              "_price": 550.0
-            },
-            "18": {
-              "min": 575.0,
-              "max": 1300.0,
-              "count": 6,
-              "_price": 575.0
-            },
-            "17": {
-              "min": 600.0,
-              "max": 3000.0,
-              "count": 7,
-              "_price": 600.0
-            },
-            "1": {
-              "min": 600.0,
-              "max": 3000.0,
-              "count": 20,
-              "_price": 600.0
-            },
-            "1,2,32,18": 600.0,
-            "2": {
-              "min": 650.0,
-              "max": 3000.0,
-              "count": 6,
-              "_price": 650.0
-            },
-            "31": {
-              "min": 650.0,
-              "max": 3000.0,
-              "count": 7,
-              "_price": 650.0
-            },
-            "32": {
-              "min": 700.0,
-              "max": 3000.0,
-              "count": 10,
-              "_price": 700.0
-            },
-            "31,2": {
-              "min": 720.0,
-              "max": 1350.0,
-              "count": 2,
-              "_price": 720.0
-            },
-            "Row: CENTRAL SEATING": 749.99,
-            "15,16,17,18": {
-              "min": 750.0,
-              "max": 1750.0,
-              "count": 4,
-              "_price": 750.0
-            },
-            "16,17": {
-              "min": 765.0,
-              "max": 1500.0,
-              "count": 4,
-              "_price": 765.0
-            },
-            "15,18,32": 950.0,
-            "1,15,18,32": {
-              "min": 995.0,
-              "max": 1250.0,
-              "count": 3,
-              "_price": 995.0
-            },
-            "1,32": {
-              "min": 995.0,
-              "max": 1800.99,
-              "count": 4,
-              "_price": 995.0
-            },
-            "2,1,32,31": {
-              "min": 995.0,
-              "max": 2000.0,
-              "count": 2,
-              "_price": 995.0
-            },
-            "Row: ROWS 1-25 CENTRE ICE": 1200.0,
-            "Row: ROWS 1-25": 1225.0,
-            "1,2,31,32": {
-              "min": 1245.0,
-              "max": 3000.0,
-              "count": 2,
-              "_price": 1245.0
-            },
-            "32,1": 1700.0,
-            "15,18": 3000.0
-          },
-          "Away Section": {
-            "Unknown": {
-              "min": 395.0,
-              "max": 1749.98,
-              "count": 19,
-              "_price": 395.0
-            },
-            "20,21,22": {
-              "min": 674.99,
-              "max": 1200.99,
-              "count": 5,
-              "_price": 674.99
-            },
-            "20,22,21": 680.0,
-            "Row: LFC FANS": 695.0,
-            "21": {
-              "min": 745.0,
-              "max": 1000.0,
-              "count": 4,
-              "_price": 745.0
-            },
-            "22": {
-              "min": 745.0,
-              "max": 1000.0,
-              "count": 4,
-              "_price": 745.0
-            },
-            "20": {
-              "min": 749.5,
-              "max": 1000.0,
-              "count": 4,
-              "_price": 749.5
-            },
-            "Row: \u2b50 TOP SELLER \u2b50": 1750.0
-          },
-          "Club Level Shortside": {
-            "Unknown": {
-              "min": 450.0,
-              "max": 5000.0,
-              "count": 18,
-              "_price": 450.0
-            },
-            "Row: FIRST 10 ROWS VIP EXPERIENCE!": {
-              "min": 629.95,
-              "max": 769.95,
-              "count": 2,
-              "_price": 629.95
-            },
-            "77B": {
-              "min": 700.0,
-              "max": 800.0,
-              "count": 2,
-              "_price": 700.0
-            },
-            "73B": {
-              "min": 700.0,
-              "max": 800.0,
-              "count": 2,
-              "_price": 700.0
-            },
-            "74B": {
-              "min": 700.0,
-              "max": 800.0,
-              "count": 2,
-              "_price": 700.0
-            },
-            "72B": {
-              "min": 700.0,
-              "max": 800.0,
-              "count": 2,
-              "_price": 700.0
-            },
-            "50B": {
-              "min": 700.0,
-              "max": 800.0,
-              "count": 2,
-              "_price": 700.0
-            },
-            "51B": {
-              "min": 700.0,
-              "max": 800.0,
-              "count": 2,
-              "_price": 700.0
-            },
-            "53B": {
-              "min": 700.0,
-              "max": 800.0,
-              "count": 3,
-              "_price": 700.0
-            },
-            "54B": {
-              "min": 700.0,
-              "max": 800.0,
-              "count": 2,
-              "_price": 700.0
-            },
-            "55B": {
-              "min": 700.0,
-              "max": 800.0,
-              "count": 2,
-              "_price": 700.0
-            },
-            "45B": {
-              "min": 750.0,
-              "max": 950.0,
-              "count": 2,
-              "_price": 750.0
-            },
-            "56B": {
-              "min": 750.0,
-              "max": 900.0,
-              "count": 2,
-              "_price": 750.0
-            },
-            "47B": {
-              "min": 750.0,
-              "max": 900.0,
-              "count": 2,
-              "_price": 750.0
-            },
-            "46B": {
-              "min": 750.0,
-              "max": 900.0,
-              "count": 2,
-              "_price": 750.0
-            },
-            "57B": {
-              "min": 750.0,
-              "max": 899.0,
-              "count": 2,
-              "_price": 750.0
-            },
-            "69B": {
-              "min": 750.0,
-              "max": 900.0,
-              "count": 2,
-              "_price": 750.0
-            },
-            "58B": {
-              "min": 750.0,
-              "max": 900.0,
-              "count": 2,
-              "_price": 750.0
-            },
-            "78B": {
-              "min": 750.0,
-              "max": 900.0,
-              "count": 2,
-              "_price": 750.0
-            },
-            "80B": {
-              "min": 750.0,
-              "max": 950.0,
-              "count": 2,
-              "_price": 750.0
-            },
-            "52B": 800.0,
-            "Row: VIP CLUB LEVEL": 895.0,
-            "Row: !..TERRIFIC CLUB LEVEL SEATS..!": 1199.0,
-            "Row: VIP - ROWS 1-10 (CLUB LEVEL)": 1400.0,
-            "Row: SEATS TOGETHER": 1650.0,
-            "Row: CANNON CLUB SEATS TOGETHER": 1815.0
-          },
-          "Club Level Longside": {
-            "Unknown": {
-              "min": 674.92,
-              "max": 3000.0,
-              "count": 15,
-              "_price": 674.92
-            },
-            "64B": {
-              "min": 700.0,
-              "max": 950.0,
-              "count": 3,
-              "_price": 700.0
-            },
-            "43B": {
-              "min": 800.0,
-              "max": 900.0,
-              "count": 2,
-              "_price": 800.0
-            },
-            "82B": {
-              "min": 800.0,
-              "max": 900.0,
-              "count": 2,
-              "_price": 800.0
-            },
-            "81B": {
-              "min": 800.0,
-              "max": 900.0,
-              "count": 2,
-              "_price": 800.0
-            },
-            "66B": {
-              "min": 800.0,
-              "max": 1200.0,
-              "count": 3,
-              "_price": 800.0
-            },
-            "44B": {
-              "min": 800.0,
-              "max": 900.0,
-              "count": 2,
-              "_price": 800.0
-            },
-            "65B": {
-              "min": 800.0,
-              "max": 900.0,
-              "count": 2,
-              "_price": 800.0
-            },
-            "60B": {
-              "min": 800.0,
-              "max": 900.0,
-              "count": 2,
-              "_price": 800.0
-            },
-            "59B": {
-              "min": 800.0,
-              "max": 900.0,
-              "count": 2,
-              "_price": 800.0
-            },
-            "83B": {
-              "min": 850.0,
-              "max": 1000.0,
-              "count": 2,
-              "_price": 850.0
-            },
-            "42B": {
-              "min": 850.0,
-              "max": 1000.0,
-              "count": 4,
-              "_price": 850.0
-            },
-            "63B": {
-              "min": 850.0,
-              "max": 2500.0,
-              "count": 7,
-              "_price": 850.0
-            },
-            "62B": {
-              "min": 850.0,
-              "max": 2250.0,
-              "count": 8,
-              "_price": 850.0
-            },
-            "59B,60B": 895.0,
-            "Row: VIP GOLDEN EXPERIENCE!": 899.95,
-            "82B,43B": 899.99,
-            "44B,81B": 899.99,
-            "84B": {
-              "min": 900.0,
-              "max": 2500.0,
-              "count": 8,
-              "_price": 900.0
-            },
-            "41B": {
-              "min": 900.0,
-              "max": 2500.0,
-              "count": 5,
-              "_price": 900.0
-            },
-            "61B,62B,63B,65B": 994.99,
-            "42B,83B": 995.0,
-            "61B,62B,63B,64B": {
-              "min": 995.0,
-              "max": 1850.0,
-              "count": 2,
-              "_price": 995.0
-            },
-            "61B,64B": 1000.0,
-            "41B,42B,84B,83B": 1045.0,
-            "Row: VIP - ROWS 1-10 (CLUB LEVEL)": 1300.0,
-            "62B,63B": {
-              "min": 1395.0,
-              "max": 1750.0,
-              "count": 4,
-              "_price": 1395.0
-            },
-            "41B,84B": {
-              "min": 1450.0,
-              "max": 2250.0,
-              "count": 3,
-              "_price": 1450.0
-            },
-            "Row: VIP FRONT 10 ROWS": 1500.0,
-            "Row: VIP CLUB LEVEL - LOUNGE ACCESS - HALF TIME DRINK": 1500.0,
-            "63B,62B": 1500.0,
-            "84B,41B": 1500.0,
-            "Row: TERRIFIC SPOT & SEATS TOGETHER GUARANTEED..!!": 1699.99,
-            "43B,42B,83B,82B": 1700.0,
-            "Row: !!..AMAZING SEATS..!!": 1799.0,
-            "Row: CANNON CLUB SEATS TOGETHER": {
-              "min": 1850.0,
-              "max": 2000.0,
-              "count": 2,
-              "_price": 1850.0
-            },
-            "41B,42B,43B": 1899.99,
-            "84B,42B,83B,41B": 1900.0,
-            "84B,41B,62B": 2400.0,
-            "Row: SEATED TOGETHER VIP \u2022\u2022": 2500.0
-          },
-          "Category 3": {
-            "Unknown": 1750.0
-          },
-          "Executive Private Boxes": {
-            "Unknown": {
-              "min": 2499.93,
-              "max": 4750.0,
-              "count": 10,
-              "_price": 2499.93
-            },
-            "Row: LONGSIDE VIEW": 2529.0,
-            "Row: VIP BOX SEATS": 2585.0,
-            "Row: \u2b50 TOP SELLER \u2b50": 3000.0,
-            "Row: FOOD & DRINK INCLUDED": 3000.0,
-            "Row: FOOD & DRINK INCLUDED - VVIP": 3250.0,
-            "Row: LONGSIDE BOX SEATS - VVVIP": 3250.0,
-            "DlamondClub": {
-              "min": 4265.0,
-              "max": 4750.0,
-              "count": 3,
-              "_price": 4265.0
-            },
-            "Row: !!..BEST OF THE BEST..!!": 10000.09
-          },
-          "VIP Packages": {
-            "Unknown": 3500.0
-          }
+          "Shortside Upper Level": 199.95,
+          "Longside Upper Level": 200.0,
+          "Shortside Lower Level": 235.0,
+          "Longside Lower Level": 235.0,
+          "Central Longside Upper": 260.0,
+          "Central Longside Lower": 285.0,
+          "Away Section": 385.0,
+          "Club Level Shortside": 450.0,
+          "Club Level Longside": 674.92,
+          "Category 3": 1750.0,
+          "Executive Private Boxes": 2499.93,
+          "VIP Packages": 3500.0
         },
-        "last_scraped": "2026-01-05T09:32:03.926301"
+        "last_scraped": "2026-01-05T12:34:56.974046"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-manchester-united",
@@ -6658,605 +5814,40 @@
                 "Unknown": 3500.0
               }
             }
+          },
+          {
+            "timestamp": "2026-01-05T12:34:56.974046",
+            "prices": {
+              "Shortside Upper Level": 348.51,
+              "Shortside Lower Level": 375.0,
+              "Longside Upper Level": 417.0,
+              "Longside Lower Level": 417.34,
+              "Central Longside Upper": 418.21,
+              "Central Longside Lower": 474.85,
+              "Away Section": 550.65,
+              "Club Level Shortside": 684.0,
+              "Club Level Longside": 720.0,
+              "Category 3": 1750.0,
+              "Executive Private Boxes": 2940.0,
+              "VIP Packages": 3500.0
+            }
           }
         ],
         "latest_prices": {
-          "Shortside Upper Level": {
-            "Unknown": {
-              "min": 348.51,
-              "max": 9999.0,
-              "count": 22,
-              "_price": 348.51
-            },
-            "120": {
-              "min": 360.71,
-              "max": 550.0,
-              "count": 3,
-              "_price": 360.71
-            },
-            "101": {
-              "min": 361.58,
-              "max": 550.0,
-              "count": 4,
-              "_price": 361.58
-            },
-            "121": {
-              "min": 365.94,
-              "max": 550.0,
-              "count": 4,
-              "_price": 365.94
-            },
-            "Row: BEST VIEW": 375.0,
-            "122": {
-              "min": 420.0,
-              "max": 550.0,
-              "count": 3,
-              "_price": 420.0
-            },
-            "126": {
-              "min": 420.0,
-              "max": 550.0,
-              "count": 3,
-              "_price": 420.0
-            },
-            "127": {
-              "min": 425.0,
-              "max": 550.0,
-              "count": 2,
-              "_price": 425.0
-            },
-            "125": 425.0,
-            "124": {
-              "min": 425.0,
-              "max": 600.0,
-              "count": 3,
-              "_price": 425.0
-            },
-            "123": {
-              "min": 425.0,
-              "max": 550.0,
-              "count": 2,
-              "_price": 425.0
-            },
-            "106": {
-              "min": 425.0,
-              "max": 550.0,
-              "count": 2,
-              "_price": 425.0
-            },
-            "97": {
-              "min": 425.0,
-              "max": 550.0,
-              "count": 2,
-              "_price": 425.0
-            },
-            "105": {
-              "min": 425.0,
-              "max": 550.0,
-              "count": 2,
-              "_price": 425.0
-            },
-            "104": {
-              "min": 425.0,
-              "max": 550.0,
-              "count": 2,
-              "_price": 425.0
-            },
-            "103": {
-              "min": 425.0,
-              "max": 550.0,
-              "count": 2,
-              "_price": 425.0
-            },
-            "102": {
-              "min": 425.0,
-              "max": 550.0,
-              "count": 2,
-              "_price": 425.0
-            },
-            "100": {
-              "min": 425.0,
-              "max": 550.0,
-              "count": 2,
-              "_price": 425.0
-            },
-            "99": {
-              "min": 425.0,
-              "max": 550.0,
-              "count": 2,
-              "_price": 425.0
-            },
-            "98": {
-              "min": 425.0,
-              "max": 550.0,
-              "count": 3,
-              "_price": 425.0
-            },
-            "Row: Best": 470.0
-          },
-          "Shortside Lower Level": {
-            "Unknown": {
-              "min": 375.0,
-              "max": 1000.0,
-              "count": 19,
-              "_price": 375.0
-            },
-            "10": {
-              "min": 434.77,
-              "max": 600.0,
-              "count": 3,
-              "_price": 434.77
-            },
-            "11": {
-              "min": 478.33,
-              "max": 600.0,
-              "count": 3,
-              "_price": 478.33
-            },
-            "26": {
-              "min": 479.2,
-              "max": 600.0,
-              "count": 3,
-              "_price": 479.2
-            },
-            "27": {
-              "min": 500.0,
-              "max": 600.0,
-              "count": 3,
-              "_price": 500.0
-            },
-            "25": {
-              "min": 500.0,
-              "max": 600.0,
-              "count": 2,
-              "_price": 500.0
-            },
-            "24": {
-              "min": 500.0,
-              "max": 600.0,
-              "count": 2,
-              "_price": 500.0
-            },
-            "9": {
-              "min": 500.0,
-              "max": 600.0,
-              "count": 3,
-              "_price": 500.0
-            },
-            "8": {
-              "min": 500.0,
-              "max": 600.0,
-              "count": 3,
-              "_price": 500.0
-            },
-            "7": {
-              "min": 500.0,
-              "max": 600.0,
-              "count": 3,
-              "_price": 500.0
-            },
-            "6": {
-              "min": 500.0,
-              "max": 600.0,
-              "count": 2,
-              "_price": 500.0
-            },
-            "Row: Best": 549.0,
-            "7,8,9": 600.0,
-            "Row: FRONT 30 ROWS - GUARANTEED TOGETHER": 1500.0
-          },
-          "Longside Upper Level": {
-            "Unknown": {
-              "min": 417.0,
-              "max": 1250.0,
-              "count": 16,
-              "_price": 417.0
-            },
-            "116": {
-              "min": 424.99,
-              "max": 575.0,
-              "count": 5,
-              "_price": 424.99
-            },
-            "93": {
-              "min": 434.0,
-              "max": 575.0,
-              "count": 3,
-              "_price": 434.0
-            },
-            "116,115,110,109": 450.0,
-            "110": {
-              "min": 453.94,
-              "max": 575.0,
-              "count": 3,
-              "_price": 453.94
-            },
-            "Row: Best": 470.0,
-            "131": {
-              "min": 475.0,
-              "max": 575.0,
-              "count": 3,
-              "_price": 475.0
-            },
-            "94": {
-              "min": 475.0,
-              "max": 575.0,
-              "count": 3,
-              "_price": 475.0
-            },
-            "132": {
-              "min": 475.0,
-              "max": 575.0,
-              "count": 2,
-              "_price": 475.0
-            },
-            "115": {
-              "min": 475.0,
-              "max": 575.0,
-              "count": 2,
-              "_price": 475.0
-            },
-            "109": {
-              "min": 475.0,
-              "max": 575.0,
-              "count": 2,
-              "_price": 475.0
-            }
-          },
-          "Longside Lower Level": {
-            "Unknown": {
-              "min": 417.34,
-              "max": 1500.0,
-              "count": 18,
-              "_price": 417.34
-            },
-            "29": {
-              "min": 550.0,
-              "max": 800.0,
-              "count": 5,
-              "_price": 550.0
-            },
-            "28,29,30": 550.0,
-            "5": {
-              "min": 566.33,
-              "max": 650.0,
-              "count": 3,
-              "_price": 566.33
-            },
-            "13": {
-              "min": 575.0,
-              "max": 700.0,
-              "count": 3,
-              "_price": 575.0
-            },
-            "30": {
-              "min": 600.0,
-              "max": 750.0,
-              "count": 2,
-              "_price": 600.0
-            },
-            "14": {
-              "min": 600.0,
-              "max": 770.0,
-              "count": 2,
-              "_price": 600.0
-            },
-            "3": {
-              "min": 600.0,
-              "max": 750.0,
-              "count": 4,
-              "_price": 600.0
-            },
-            "12": 608.0,
-            "Row: Best": 625.0,
-            "4": {
-              "min": 700.0,
-              "max": 800.0,
-              "count": 3,
-              "_price": 700.0
-            },
-            "12,13,14": 840.0
-          },
-          "Central Longside Upper": {
-            "112": {
-              "min": 418.21,
-              "max": 850.0,
-              "count": 5,
-              "_price": 418.21
-            },
-            "134": {
-              "min": 434.77,
-              "max": 850.0,
-              "count": 5,
-              "_price": 434.77
-            },
-            "Unknown": {
-              "min": 470.0,
-              "max": 1400.0,
-              "count": 10,
-              "_price": 470.0
-            },
-            "111": {
-              "min": 477.0,
-              "max": 850.0,
-              "count": 5,
-              "_price": 477.0
-            },
-            "133": {
-              "min": 487.0,
-              "max": 600.0,
-              "count": 4,
-              "_price": 487.0
-            },
-            "91": {
-              "min": 496.63,
-              "max": 850.0,
-              "count": 4,
-              "_price": 496.63
-            },
-            "92": {
-              "min": 497.0,
-              "max": 600.0,
-              "count": 4,
-              "_price": 497.0
-            },
-            "113": {
-              "min": 500.0,
-              "max": 600.0,
-              "count": 2,
-              "_price": 500.0
-            },
-            "114": {
-              "min": 500.0,
-              "max": 745.0,
-              "count": 4,
-              "_price": 500.0
-            },
-            "92,133": 745.0,
-            "133,92,114,111": 750.0,
-            "112,113": 799.99,
-            "91,134": 799.99,
-            "134,91,112,113": {
-              "min": 800.0,
-              "max": 1250.0,
-              "count": 2,
-              "_price": 800.0
-            },
-            "92,133,134,91": 1195.0,
-            "111,112,113,114": 1500.0
-          },
-          "Central Longside Lower": {
-            "Unknown": {
-              "min": 474.85,
-              "max": 3500.0,
-              "count": 14,
-              "_price": 474.85
-            },
-            "18": {
-              "min": 575.0,
-              "max": 1090.0,
-              "count": 9,
-              "_price": 575.0
-            },
-            "2": {
-              "min": 600.0,
-              "max": 3000.0,
-              "count": 6,
-              "_price": 600.0
-            },
-            "31": {
-              "min": 675.0,
-              "max": 3000.0,
-              "count": 6,
-              "_price": 675.0
-            },
-            "1,32": {
-              "min": 698.0,
-              "max": 1450.0,
-              "count": 3,
-              "_price": 698.0
-            },
-            "17": {
-              "min": 700.0,
-              "max": 3000.0,
-              "count": 6,
-              "_price": 700.0
-            },
-            "15": {
-              "min": 700.0,
-              "max": 3000.0,
-              "count": 4,
-              "_price": 700.0
-            },
-            "16": {
-              "min": 720.0,
-              "max": 3000.0,
-              "count": 7,
-              "_price": 720.0
-            },
-            "1": {
-              "min": 732.75,
-              "max": 3000.0,
-              "count": 14,
-              "_price": 732.75
-            },
-            "32": {
-              "min": 750.0,
-              "max": 3000.0,
-              "count": 5,
-              "_price": 750.0
-            },
-            "16,17": {
-              "min": 895.0,
-              "max": 1500.0,
-              "count": 2,
-              "_price": 895.0
-            },
-            "1,32,2,18": 999.99,
-            "2,1,32,31": 1000.0,
-            "1,15,18,32": 1250.0,
-            "31,2": 1350.0,
-            "32,1": 1700.0,
-            "1,2,31,32": 3000.0,
-            "15,18": 3000.0
-          },
-          "Away Section": {
-            "Unknown": {
-              "min": 549.78,
-              "max": 1250.0,
-              "count": 15,
-              "_price": 549.78
-            },
-            "Row: MUFC FANS!": 675.0,
-            "20,21,22": {
-              "min": 683.09,
-              "max": 1075.0,
-              "count": 5,
-              "_price": 683.09
-            },
-            "21": {
-              "min": 709.23,
-              "max": 799.5,
-              "count": 5,
-              "_price": 709.23
-            },
-            "20": {
-              "min": 775.0,
-              "max": 800.0,
-              "count": 5,
-              "_price": 775.0
-            },
-            "22": {
-              "min": 775.0,
-              "max": 799.5,
-              "count": 4,
-              "_price": 775.0
-            },
-            "Row: MAN UTD FANS": 799.95,
-            "Row: ROWS 1-20 - UNITED FANS": 1000.0,
-            "Row: OFFICIAL MUFC SECTION": 1050.0,
-            "Row: FRONT 15 ROWS - UNITED FANS": 1500.0
-          },
-          "Club Level Shortside": {
-            "Unknown": {
-              "min": 684.0,
-              "max": 5000.0,
-              "count": 14,
-              "_price": 684.0
-            },
-            "Row: First 9 rows": 700.0,
-            "54B": 800.0,
-            "Row: -": {
-              "min": 1335.0,
-              "max": 1770.0,
-              "count": 2,
-              "_price": 1335.0
-            },
-            "Row: VIP - ROWS 1-10 (CLUB LEVEL)": 1400.0,
-            "Row: SEATS TOGETHER": {
-              "min": 1650.0,
-              "max": 1860.0,
-              "count": 2,
-              "_price": 1650.0
-            }
-          },
-          "Club Level Longside": {
-            "65B": 720.0,
-            "Unknown": {
-              "min": 755.41,
-              "max": 3000.0,
-              "count": 12,
-              "_price": 755.41
-            },
-            "Row: VIP - ROWS 1-10 (CLUB LEVEL)": 1500.0,
-            "Row: VIP CLUB LEVEL - LOUNGE ACCESS - HALF TIME DRINK": 1500.0,
-            "59B,60B": 1500.0,
-            "62B,63B": {
-              "min": 1599.99,
-              "max": 1625.0,
-              "count": 2,
-              "_price": 1599.99
-            },
-            "64B,63B,62B": {
-              "min": 1600.0,
-              "max": 1650.0,
-              "count": 2,
-              "_price": 1600.0
-            },
-            "61B,62B,63B,66B": 1650.0,
-            "63B,62B": {
-              "min": 1650.0,
-              "max": 1750.0,
-              "count": 2,
-              "_price": 1650.0
-            },
-            "61B,64B": 1675.0,
-            "66B": {
-              "min": 1695.0,
-              "max": 2065.0,
-              "count": 2,
-              "_price": 1695.0
-            },
-            "Row: TERRIFIC SPOT & SEATS TOGETHER GUARANTEED..!!": 1699.99,
-            "44B,81B": 1750.0,
-            "43B,82B": 1750.0,
-            "42B,83B": 1775.0,
-            "43B,42B,82B,83B": 1795.0,
-            "41B,84B": 1900.0,
-            "62B": {
-              "min": 1950.0,
-              "max": 1950.0,
-              "count": 2,
-              "_price": 1950.0
-            },
-            "63B": {
-              "min": 1950.0,
-              "max": 2000.0,
-              "count": 3,
-              "_price": 1950.0
-            },
-            "84B,41B": {
-              "min": 1975.0,
-              "max": 2500.0,
-              "count": 3,
-              "_price": 1975.0
-            },
-            "Row: CANNON CLUB SEATS TOGETHER": {
-              "min": 2000.0,
-              "max": 2250.0,
-              "count": 2,
-              "_price": 2000.0
-            },
-            "84B": {
-              "min": 2250.0,
-              "max": 2850.0,
-              "count": 5,
-              "_price": 2250.0
-            },
-            "Row: SEATED TOGETHER VIP \u2022\u2022": 2500.0,
-            "41B": 2600.0
-          },
-          "Category 3": {
-            "Unknown": 1750.0
-          },
-          "Executive Private Boxes": {
-            "Unknown": 2940.0,
-            "Row: \u2b50 TOP SELLER \u2b50": 2945.0,
-            "Row: FOOD & DRINK INCLUDED": 3000.0,
-            "Row: FOOD & DRINK INCLUDED - VVIP": 3250.0,
-            "Row: LONGSIDE BOX SEATS - VVVIP": 3250.0,
-            "DlamondClub": {
-              "min": 3960.0,
-              "max": 4750.0,
-              "count": 3,
-              "_price": 3960.0
-            }
-          },
-          "VIP Packages": {
-            "Unknown": 3500.0
-          }
+          "Shortside Upper Level": 348.51,
+          "Shortside Lower Level": 375.0,
+          "Longside Upper Level": 417.0,
+          "Longside Lower Level": 417.34,
+          "Central Longside Upper": 418.21,
+          "Central Longside Lower": 474.85,
+          "Away Section": 550.65,
+          "Club Level Shortside": 684.0,
+          "Club Level Longside": 720.0,
+          "Category 3": 1750.0,
+          "Executive Private Boxes": 2940.0,
+          "VIP Packages": 3500.0
         },
-        "last_scraped": "2026-01-05T09:32:03.926301"
+        "last_scraped": "2026-01-05T12:34:56.974046"
       },
       {
         "url": "https://www.footballticketnet.com/champions-league/arsenal-vs-kairat-almaty",
@@ -9014,555 +7605,34 @@
                 "Unknown": 1448.0
               }
             }
+          },
+          {
+            "timestamp": "2026-01-05T12:34:56.974046",
+            "prices": {
+              "Shortside Upper Level": 134.99,
+              "Longside Upper Level": 154.99,
+              "Shortside Lower Level": 163.28,
+              "Longside Lower Level": 172.99,
+              "Central Longside Upper": 180.0,
+              "Central Longside Lower": 185.0,
+              "Club Level Shortside": 275.0,
+              "Club Level Longside": 300.0,
+              "Executive Private Boxes": 1448.0
+            }
           }
         ],
         "latest_prices": {
-          "Shortside Upper Level": {
-            "Unknown": {
-              "min": 134.99,
-              "max": 517.0,
-              "count": 12,
-              "_price": 134.99
-            },
-            "106": {
-              "min": 160.0,
-              "max": 190.0,
-              "count": 2,
-              "_price": 160.0
-            },
-            "127": {
-              "min": 160.0,
-              "max": 190.0,
-              "count": 2,
-              "_price": 160.0
-            },
-            "126": {
-              "min": 160.0,
-              "max": 190.0,
-              "count": 2,
-              "_price": 160.0
-            },
-            "125": {
-              "min": 160.0,
-              "max": 190.0,
-              "count": 2,
-              "_price": 160.0
-            },
-            "124": {
-              "min": 160.0,
-              "max": 190.0,
-              "count": 2,
-              "_price": 160.0
-            },
-            "123": {
-              "min": 160.0,
-              "max": 190.0,
-              "count": 2,
-              "_price": 160.0
-            },
-            "120": 160.0,
-            "104": {
-              "min": 160.0,
-              "max": 190.0,
-              "count": 2,
-              "_price": 160.0
-            },
-            "101": {
-              "min": 160.0,
-              "max": 190.0,
-              "count": 2,
-              "_price": 160.0
-            },
-            "100": {
-              "min": 160.0,
-              "max": 190.0,
-              "count": 2,
-              "_price": 160.0
-            },
-            "99": {
-              "min": 160.0,
-              "max": 190.0,
-              "count": 2,
-              "_price": 160.0
-            },
-            "98": {
-              "min": 160.0,
-              "max": 190.0,
-              "count": 2,
-              "_price": 160.0
-            },
-            "97": {
-              "min": 160.0,
-              "max": 190.0,
-              "count": 2,
-              "_price": 160.0
-            },
-            "102": {
-              "min": 160.0,
-              "max": 200.0,
-              "count": 3,
-              "_price": 160.0
-            },
-            "105": 190.0,
-            "121": 190.0,
-            "103": 190.0
-          },
-          "Longside Upper Level": {
-            "Unknown": {
-              "min": 154.99,
-              "max": 569.0,
-              "count": 11,
-              "_price": 154.99
-            },
-            "94": {
-              "min": 175.0,
-              "max": 200.0,
-              "count": 2,
-              "_price": 175.0
-            },
-            "131": {
-              "min": 175.0,
-              "max": 200.0,
-              "count": 2,
-              "_price": 175.0
-            },
-            "132": {
-              "min": 175.0,
-              "max": 200.0,
-              "count": 2,
-              "_price": 175.0
-            },
-            "115": 175.0,
-            "109": {
-              "min": 175.0,
-              "max": 200.0,
-              "count": 2,
-              "_price": 175.0
-            },
-            "110": {
-              "min": 200.0,
-              "max": 200.0,
-              "count": 2,
-              "_price": 200.0
-            },
-            "116": 200.0
-          },
-          "Shortside Lower Level": {
-            "Unknown": {
-              "min": 163.28,
-              "max": 1043.0,
-              "count": 10,
-              "_price": 163.28
-            },
-            "26": {
-              "min": 180.0,
-              "max": 210.0,
-              "count": 2,
-              "_price": 180.0
-            },
-            "27": {
-              "min": 180.0,
-              "max": 210.0,
-              "count": 2,
-              "_price": 180.0
-            },
-            "24": 180.0,
-            "6": {
-              "min": 180.0,
-              "max": 210.0,
-              "count": 2,
-              "_price": 180.0
-            },
-            "11": {
-              "min": 180.0,
-              "max": 210.0,
-              "count": 2,
-              "_price": 180.0
-            },
-            "8": {
-              "min": 180.0,
-              "max": 210.0,
-              "count": 2,
-              "_price": 180.0
-            },
-            "7": {
-              "min": 180.0,
-              "max": 210.0,
-              "count": 2,
-              "_price": 180.0
-            },
-            "9": {
-              "min": 180.0,
-              "max": 210.0,
-              "count": 2,
-              "_price": 180.0
-            },
-            "10": {
-              "min": 180.0,
-              "max": 210.0,
-              "count": 2,
-              "_price": 180.0
-            },
-            "25": 210.0
-          },
-          "Longside Lower Level": {
-            "Row: Best": 172.99,
-            "Unknown": {
-              "min": 175.95,
-              "max": 1159.0,
-              "count": 9,
-              "_price": 175.95
-            },
-            "5": {
-              "min": 190.0,
-              "max": 220.0,
-              "count": 2,
-              "_price": 190.0
-            },
-            "19": {
-              "min": 200.0,
-              "max": 240.0,
-              "count": 2,
-              "_price": 200.0
-            },
-            "14": {
-              "min": 200.0,
-              "max": 450.0,
-              "count": 3,
-              "_price": 200.0
-            },
-            "4,29": 200.0,
-            "13": {
-              "min": 200.0,
-              "max": 240.0,
-              "count": 2,
-              "_price": 200.0
-            },
-            "29": {
-              "min": 200.0,
-              "max": 240.0,
-              "count": 2,
-              "_price": 200.0
-            },
-            "3": {
-              "min": 200.0,
-              "max": 250.0,
-              "count": 2,
-              "_price": 200.0
-            },
-            "30": {
-              "min": 200.0,
-              "max": 250.0,
-              "count": 2,
-              "_price": 200.0
-            },
-            "4": {
-              "min": 200.0,
-              "max": 240.0,
-              "count": 2,
-              "_price": 200.0
-            }
-          },
-          "Central Longside Upper": {
-            "133": {
-              "min": 180.0,
-              "max": 210.0,
-              "count": 2,
-              "_price": 180.0
-            },
-            "92": {
-              "min": 180.0,
-              "max": 210.0,
-              "count": 2,
-              "_price": 180.0
-            },
-            "111": {
-              "min": 180.0,
-              "max": 210.0,
-              "count": 2,
-              "_price": 180.0
-            },
-            "114": {
-              "min": 180.0,
-              "max": 210.0,
-              "count": 2,
-              "_price": 180.0
-            },
-            "112": {
-              "min": 185.0,
-              "max": 220.0,
-              "count": 2,
-              "_price": 185.0
-            },
-            "91": {
-              "min": 185.0,
-              "max": 220.0,
-              "count": 2,
-              "_price": 185.0
-            },
-            "134": {
-              "min": 185.0,
-              "max": 220.0,
-              "count": 2,
-              "_price": 185.0
-            },
-            "113": {
-              "min": 185.0,
-              "max": 220.0,
-              "count": 2,
-              "_price": 185.0
-            },
-            "Unknown": {
-              "min": 192.54,
-              "max": 1200.0,
-              "count": 9,
-              "_price": 192.54
-            }
-          },
-          "Central Longside Lower": {
-            "1,32": 185.0,
-            "Unknown": {
-              "min": 220.99,
-              "max": 99997.0,
-              "count": 8,
-              "_price": 220.99
-            },
-            "15": {
-              "min": 225.0,
-              "max": 275.0,
-              "count": 2,
-              "_price": 225.0
-            },
-            "18": {
-              "min": 225.0,
-              "max": 550.0,
-              "count": 4,
-              "_price": 225.0
-            },
-            "2": {
-              "min": 250.0,
-              "max": 300.0,
-              "count": 3,
-              "_price": 250.0
-            },
-            "31": {
-              "min": 250.0,
-              "max": 300.0,
-              "count": 3,
-              "_price": 250.0
-            },
-            "17": {
-              "min": 275.0,
-              "max": 325.0,
-              "count": 2,
-              "_price": 275.0
-            },
-            "16": {
-              "min": 275.0,
-              "max": 325.0,
-              "count": 2,
-              "_price": 275.0
-            },
-            "31,2": 275.0,
-            "32": {
-              "min": 300.0,
-              "max": 400.0,
-              "count": 2,
-              "_price": 300.0
-            },
-            "1": {
-              "min": 325.0,
-              "max": 700.0,
-              "count": 4,
-              "_price": 325.0
-            },
-            "16,17": 500.0
-          },
-          "Club Level Shortside": {
-            "74B": {
-              "min": 275.0,
-              "max": 300.0,
-              "count": 2,
-              "_price": 275.0
-            },
-            "77B": {
-              "min": 275.0,
-              "max": 300.0,
-              "count": 2,
-              "_price": 275.0
-            },
-            "75B": {
-              "min": 275.0,
-              "max": 300.0,
-              "count": 2,
-              "_price": 275.0
-            },
-            "76B": {
-              "min": 275.0,
-              "max": 300.0,
-              "count": 2,
-              "_price": 275.0
-            },
-            "73B": {
-              "min": 275.0,
-              "max": 300.0,
-              "count": 2,
-              "_price": 275.0
-            },
-            "72B": {
-              "min": 275.0,
-              "max": 300.0,
-              "count": 2,
-              "_price": 275.0
-            },
-            "71B": {
-              "min": 275.0,
-              "max": 300.0,
-              "count": 2,
-              "_price": 275.0
-            },
-            "55B": {
-              "min": 275.0,
-              "max": 300.0,
-              "count": 2,
-              "_price": 275.0
-            },
-            "70B": {
-              "min": 275.0,
-              "max": 300.0,
-              "count": 2,
-              "_price": 275.0
-            },
-            "48B": {
-              "min": 275.0,
-              "max": 300.0,
-              "count": 2,
-              "_price": 275.0
-            },
-            "49B": {
-              "min": 275.0,
-              "max": 300.0,
-              "count": 2,
-              "_price": 275.0
-            },
-            "50B": {
-              "min": 275.0,
-              "max": 1250.0,
-              "count": 3,
-              "_price": 275.0
-            },
-            "51B": {
-              "min": 275.0,
-              "max": 300.0,
-              "count": 2,
-              "_price": 275.0
-            },
-            "52B": {
-              "min": 275.0,
-              "max": 300.0,
-              "count": 2,
-              "_price": 275.0
-            },
-            "53B": {
-              "min": 275.0,
-              "max": 300.0,
-              "count": 2,
-              "_price": 275.0
-            },
-            "54B": {
-              "min": 275.0,
-              "max": 300.0,
-              "count": 2,
-              "_price": 275.0
-            },
-            "Unknown": {
-              "min": 285.0,
-              "max": 361.35,
-              "count": 6,
-              "_price": 285.0
-            },
-            "Row: SEATS TOGETHER": {
-              "min": 510.0,
-              "max": 574.0,
-              "count": 2,
-              "_price": 510.0
-            }
-          },
-          "Club Level Longside": {
-            "81B": {
-              "min": 300.0,
-              "max": 350.0,
-              "count": 2,
-              "_price": 300.0
-            },
-            "82B": {
-              "min": 300.0,
-              "max": 350.0,
-              "count": 2,
-              "_price": 300.0
-            },
-            "43B": {
-              "min": 300.0,
-              "max": 350.0,
-              "count": 2,
-              "_price": 300.0
-            },
-            "44B": {
-              "min": 300.0,
-              "max": 350.0,
-              "count": 2,
-              "_price": 300.0
-            },
-            "66B": {
-              "min": 300.0,
-              "max": 600.0,
-              "count": 4,
-              "_price": 300.0
-            },
-            "59B": {
-              "min": 300.0,
-              "max": 350.0,
-              "count": 2,
-              "_price": 300.0
-            },
-            "60B": {
-              "min": 300.0,
-              "max": 350.0,
-              "count": 2,
-              "_price": 300.0
-            },
-            "65B": {
-              "min": 300.0,
-              "max": 350.0,
-              "count": 2,
-              "_price": 300.0
-            },
-            "Unknown": {
-              "min": 336.6,
-              "max": 415.8,
-              "count": 3,
-              "_price": 336.6
-            },
-            "62B,63B,41B,84B": 500.0,
-            "Row: CANNON CLUB SEATS TOGETHER": {
-              "min": 625.0,
-              "max": 690.0,
-              "count": 2,
-              "_price": 625.0
-            },
-            "62B,63B": 895.0,
-            "42B,41B,84B,83B": 1500.0
-          },
-          "Executive Private Boxes": {
-            "Unknown": {
-              "min": 1448.0,
-              "max": 1448.0,
-              "count": 3,
-              "_price": 1448.0
-            }
-          }
+          "Shortside Upper Level": 134.99,
+          "Longside Upper Level": 154.99,
+          "Shortside Lower Level": 163.28,
+          "Longside Lower Level": 172.99,
+          "Central Longside Upper": 180.0,
+          "Central Longside Lower": 185.0,
+          "Club Level Shortside": 275.0,
+          "Club Level Longside": 300.0,
+          "Executive Private Boxes": 1448.0
         },
-        "last_scraped": "2026-01-05T09:32:03.926301"
+        "last_scraped": "2026-01-05T12:34:56.974046"
       },
       {
         "url": "https://www.footballticketnet.com/carabao-cup/arsenal-vs-chelsea",
@@ -11808,291 +9878,36 @@
                 "Row: VVIP EXPERIENCE": 1500.0
               }
             }
+          },
+          {
+            "timestamp": "2026-01-05T12:34:56.974046",
+            "prices": {
+              "Shortside Upper Level": 184.98,
+              "Longside Lower Level": 189.92,
+              "Longside Upper Level": 194.91,
+              "Shortside Lower Level": 203.95,
+              "Central Longside Upper": 204.92,
+              "Away Section": 261.0,
+              "Central Longside Lower": 279.94,
+              "Club Level Shortside": 290.0,
+              "Club Level Longside": 469.91,
+              "Executive Private Boxes": 1249.9
+            }
           }
         ],
         "latest_prices": {
-          "Shortside Upper Level": {
-            "Unknown": {
-              "min": 184.98,
-              "max": 349.0,
-              "count": 17,
-              "_price": 184.98
-            },
-            "Row: ARSENAL FANS SEATED TOGETHER": 265.0,
-            "Row: AMAZING VIEW": {
-              "min": 269.95,
-              "max": 475.0,
-              "count": 2,
-              "_price": 269.95
-            },
-            "Row: Upto 4 together": 298.5,
-            "Row: ROWS 1-20 - SEATS TOGETHER": 375.0
-          },
-          "Longside Lower Level": {
-            "Unknown": {
-              "min": 189.92,
-              "max": 575.0,
-              "count": 13,
-              "_price": 189.92
-            },
-            "13": 190.0,
-            "12": 260.0,
-            "14": 285.0,
-            "3": 310.0,
-            "Row: PITCHSIDE BEST!": {
-              "min": 399.95,
-              "max": 600.0,
-              "count": 2,
-              "_price": 399.95
-            },
-            "29,30,3,4": 475.0,
-            "13,14,19,28": 475.0,
-            "3,4,5": 698.0
-          },
-          "Longside Upper Level": {
-            "Unknown": {
-              "min": 194.91,
-              "max": 364.46,
-              "count": 13,
-              "_price": 194.91
-            },
-            "115": 195.0,
-            "109": 205.0,
-            "110": 240.0,
-            "Row: ARSENAL FANS TOP VIEW": 300.0,
-            "Row: AMAZING VIEW": {
-              "min": 325.0,
-              "max": 500.0,
-              "count": 2,
-              "_price": 325.0
-            },
-            "Row: Upto 4 together": 364.46,
-            "Row: ROWS 1-20 - SEATS TOGETHER": 395.0
-          },
-          "Shortside Lower Level": {
-            "Unknown": {
-              "min": 203.95,
-              "max": 900.0,
-              "count": 12,
-              "_price": 203.95
-            },
-            "11": 235.0,
-            "Row: PITCHSIDE BEST!": {
-              "min": 339.95,
-              "max": 500.0,
-              "count": 2,
-              "_price": 339.95
-            },
-            "24,25,26,27": 375.0,
-            "6,7,8,9": 375.0,
-            "Row: ROWS 1-20 - SEATS TOGETHER": 495.0,
-            "Row: GUARANTEED TOGETHER": 695.0
-          },
-          "Central Longside Upper": {
-            "Unknown": {
-              "min": 204.92,
-              "max": 849.47,
-              "count": 12,
-              "_price": 204.92
-            },
-            "111": {
-              "min": 205.0,
-              "max": 265.0,
-              "count": 2,
-              "_price": 205.0
-            },
-            "91": 215.0,
-            "92": 225.0,
-            "Row: ARSENAL FANS CENTRAL VIEW": 350.0,
-            "Row: SEATS TOGETHER": {
-              "min": 355.0,
-              "max": 355.0,
-              "count": 2,
-              "_price": 355.0
-            },
-            "92,91,134,133": 369.95,
-            "Row: CENTRAL VIEW!": 369.95,
-            "111,112,113,114": {
-              "min": 400.0,
-              "max": 600.0,
-              "count": 2,
-              "_price": 400.0
-            },
-            "91,134,112,113": 425.0,
-            "112": 550.0,
-            "113": 550.0,
-            "Row: Upto 4 together": 849.47
-          },
-          "Away Section": {
-            "Unknown": {
-              "min": 261.0,
-              "max": 300.0,
-              "count": 3,
-              "_price": 261.0
-            },
-            "Row: CHELSEA FANS!": 289.95,
-            "20,21,22": {
-              "min": 450.0,
-              "max": 469.99,
-              "count": 2,
-              "_price": 450.0
-            },
-            "Row: FRONT 15 ROWS CFC": 550.0
-          },
-          "Central Longside Lower": {
-            "Unknown": {
-              "min": 279.94,
-              "max": 875.0,
-              "count": 11,
-              "_price": 279.94
-            },
-            "2": {
-              "min": 280.0,
-              "max": 675.0,
-              "count": 3,
-              "_price": 280.0
-            },
-            "18": {
-              "min": 315.0,
-              "max": 350.0,
-              "count": 2,
-              "_price": 315.0
-            },
-            "16": {
-              "min": 335.0,
-              "max": 700.0,
-              "count": 2,
-              "_price": 335.0
-            },
-            "1": {
-              "min": 380.0,
-              "max": 750.0,
-              "count": 7,
-              "_price": 380.0
-            },
-            "Row: SEATS TOGETHER": {
-              "min": 390.0,
-              "max": 390.0,
-              "count": 2,
-              "_price": 390.0
-            },
-            "2,31": {
-              "min": 400.0,
-              "max": 455.0,
-              "count": 2,
-              "_price": 400.0
-            },
-            "16,17,15,18": {
-              "min": 450.0,
-              "max": 900.0,
-              "count": 2,
-              "_price": 450.0
-            },
-            "16,17": {
-              "min": 494.0,
-              "max": 500.0,
-              "count": 3,
-              "_price": 494.0
-            },
-            "32": {
-              "min": 495.0,
-              "max": 750.0,
-              "count": 6,
-              "_price": 495.0
-            },
-            "1,2,31,32": 649.99,
-            "2,1,32,31": 650.0,
-            "31": {
-              "min": 670.0,
-              "max": 675.0,
-              "count": 2,
-              "_price": 670.0
-            },
-            "1,32,2,31": {
-              "min": 700.0,
-              "max": 1100.0,
-              "count": 2,
-              "_price": 700.0
-            },
-            "17": 700.0,
-            "1,32": {
-              "min": 725.0,
-              "max": 750.0,
-              "count": 3,
-              "_price": 725.0
-            },
-            "Row: GUARANTEED TOGETHER": 1000.0
-          },
-          "Club Level Shortside": {
-            "Unknown": {
-              "min": 349.93,
-              "max": 450.0,
-              "count": 7,
-              "_price": 349.93
-            },
-            "Row: HOSPITALITY": 350.0,
-            "Row: ARSENAL FANS VIP": 475.0,
-            "Row: VIP GOLD ROWS 1-10!": 479.95,
-            "Row: SEATS TOGETHER": {
-              "min": 480.0,
-              "max": 530.0,
-              "count": 3,
-              "_price": 480.0
-            },
-            "Row: VIP GOLD ROWS 1-10": 525.0,
-            "Row: GUARANTEED TOGETHER": 750.0
-          },
-          "Club Level Longside": {
-            "Unknown": {
-              "min": 469.91,
-              "max": 900.0,
-              "count": 5,
-              "_price": 469.91
-            },
-            "Row: ARSENAL FANS VIP": 500.0,
-            "Row: VIP GOLD ROWS 1-10": {
-              "min": 525.0,
-              "max": 599.95,
-              "count": 2,
-              "_price": 525.0
-            },
-            "Row: CANNON CLUB SEATS TOGETHER": {
-              "min": 580.0,
-              "max": 640.0,
-              "count": 3,
-              "_price": 580.0
-            },
-            "62B,63B,64B,61B": 850.0,
-            "42B,41B,84B,83B": 875.0,
-            "42B,41B,59B,60B": 900.0,
-            "61B,62B,63B,64B": 1100.0,
-            "62B,63B": {
-              "min": 1145.0,
-              "max": 1150.0,
-              "count": 3,
-              "_price": 1145.0
-            },
-            "41B,84B": {
-              "min": 1199.0,
-              "max": 1500.0,
-              "count": 3,
-              "_price": 1199.0
-            },
-            "84B,41B": 1200.0,
-            "62B": 1400.0,
-            "63B": 1400.0
-          },
-          "Executive Private Boxes": {
-            "Unknown": {
-              "min": 1249.9,
-              "max": 2000.0,
-              "count": 7,
-              "_price": 1249.9
-            },
-            "Row: VVIP EXPERIENCE": 1500.0
-          }
+          "Shortside Upper Level": 184.98,
+          "Longside Lower Level": 189.92,
+          "Longside Upper Level": 194.91,
+          "Shortside Lower Level": 203.95,
+          "Central Longside Upper": 204.92,
+          "Away Section": 261.0,
+          "Central Longside Lower": 279.94,
+          "Club Level Shortside": 290.0,
+          "Club Level Longside": 469.91,
+          "Executive Private Boxes": 1249.9
         },
-        "last_scraped": "2026-01-05T09:32:03.926301"
+        "last_scraped": "2026-01-05T12:34:56.974046"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-sunderland",
@@ -14307,237 +12122,38 @@
                 "Unknown": 3500.0
               }
             }
+          },
+          {
+            "timestamp": "2026-01-05T12:34:56.974046",
+            "prices": {
+              "Central Longside Upper": 316.91,
+              "Shortside Upper Level": 349.98,
+              "Longside Upper Level": 374.91,
+              "Longside Lower Level": 384.94,
+              "Shortside Lower Level": 391.09,
+              "Central Longside Lower": 429.91,
+              "Club Level Shortside": 439.94,
+              "Club Level Longside": 484.91,
+              "Executive Private Boxes": 1659.2,
+              "Category 3": 1750.0,
+              "VIP Packages": 3500.0
+            }
           }
         ],
         "latest_prices": {
-          "Central Longside Upper": {
-            "Unknown": {
-              "min": 316.91,
-              "max": 4999.6,
-              "count": 8,
-              "_price": 316.91
-            },
-            "92": 317.0,
-            "92,133": 500.0,
-            "111,114": 500.0,
-            "91,134": 550.0,
-            "113,112": 550.0,
-            "134,91,112,113": 1250.0,
-            "111,112,113,114": 1500.0
-          },
-          "Shortside Upper Level": {
-            "Unknown": {
-              "min": 349.98,
-              "max": 9999.0,
-              "count": 15,
-              "_price": 349.98
-            }
-          },
-          "Longside Upper Level": {
-            "Unknown": {
-              "min": 374.91,
-              "max": 4999.2,
-              "count": 14,
-              "_price": 374.91
-            }
-          },
-          "Longside Lower Level": {
-            "Unknown": {
-              "min": 384.94,
-              "max": 1500.0,
-              "count": 9,
-              "_price": 384.94
-            },
-            "13": {
-              "min": 385.0,
-              "max": 453.0,
-              "count": 2,
-              "_price": 385.0
-            },
-            "19": 463.0,
-            "14": 475.0,
-            "14,13,19": 500.0,
-            "29,30,3,4": 500.0
-          },
-          "Shortside Lower Level": {
-            "Unknown": {
-              "min": 391.09,
-              "max": 1499.2,
-              "count": 10,
-              "_price": 391.09
-            },
-            "10,9,8,7": {
-              "min": 521.17,
-              "max": 575.0,
-              "count": 2,
-              "_price": 521.17
-            },
-            "Row: FRONT 30 ROWS - GUARANTEED TOGETHER": 1500.0
-          },
-          "Central Longside Lower": {
-            "Unknown": {
-              "min": 429.91,
-              "max": 3500.0,
-              "count": 15,
-              "_price": 429.91
-            },
-            "1,32": {
-              "min": 430.0,
-              "max": 748.0,
-              "count": 3,
-              "_price": 430.0
-            },
-            "15,18": {
-              "min": 430.0,
-              "max": 3000.0,
-              "count": 3,
-              "_price": 430.0
-            },
-            "16": {
-              "min": 434.0,
-              "max": 3000.0,
-              "count": 2,
-              "_price": 434.0
-            },
-            "16,17": {
-              "min": 463.55,
-              "max": 1500.0,
-              "count": 4,
-              "_price": 463.55
-            },
-            "18": 490.0,
-            "15,16,17,18": {
-              "min": 500.0,
-              "max": 749.99,
-              "count": 2,
-              "_price": 500.0
-            },
-            "2,31": 545.0,
-            "31,32,2": 550.0,
-            "1": {
-              "min": 590.0,
-              "max": 3000.0,
-              "count": 5,
-              "_price": 590.0
-            },
-            "32,1": {
-              "min": 725.0,
-              "max": 1700.0,
-              "count": 2,
-              "_price": 725.0
-            },
-            "Row: ROWS 1-30 CENTRAL VIEW": 850.0,
-            "1,15,18,32": 1250.0,
-            "31,2": 1350.0,
-            "17": 3000.0,
-            "1,2,31,32": 3000.0,
-            "15": 3000.0,
-            "32": 3000.0,
-            "31": 3000.0,
-            "2": 3000.0
-          },
-          "Club Level Shortside": {
-            "Unknown": {
-              "min": 439.94,
-              "max": 5000.0,
-              "count": 11,
-              "_price": 439.94
-            },
-            "Row: SEATS TOGETHER": {
-              "min": 1000.0,
-              "max": 1100.0,
-              "count": 2,
-              "_price": 1000.0
-            },
-            "Row: -": {
-              "min": 1060.0,
-              "max": 1275.0,
-              "count": 2,
-              "_price": 1060.0
-            },
-            "50B": 1250.0
-          },
-          "Club Level Longside": {
-            "Unknown": {
-              "min": 484.91,
-              "max": 4999.1,
-              "count": 11,
-              "_price": 484.91
-            },
-            "Row: SEATS TOGETHER": 645.0,
-            "84B,41B": {
-              "min": 800.0,
-              "max": 2500.0,
-              "count": 2,
-              "_price": 800.0
-            },
-            "41B,84B": {
-              "min": 850.0,
-              "max": 1500.0,
-              "count": 2,
-              "_price": 850.0
-            },
-            "61B,63B,62B,64B": 890.0,
-            "62B,63B": {
-              "min": 895.0,
-              "max": 1200.0,
-              "count": 2,
-              "_price": 895.0
-            },
-            "44B,81B": 900.0,
-            "63B,62B": {
-              "min": 900.0,
-              "max": 1750.0,
-              "count": 2,
-              "_price": 900.0
-            },
-            "42B,43B,83B,82B": 900.0,
-            "59B,60B": 925.0,
-            "61B,64B": 950.0,
-            "41B,42B,83B,84B": 1000.0,
-            "66B": {
-              "min": 1090.0,
-              "max": 1335.0,
-              "count": 2,
-              "_price": 1090.0
-            },
-            "Row: CANNON CLUB SEATS TOGETHER": {
-              "min": 1125.0,
-              "max": 1265.0,
-              "count": 2,
-              "_price": 1125.0
-            },
-            "84B": 1300.0,
-            "41B": 1400.0,
-            "Row: VIP CLUB LEVEL - LOUNGE ACCESS - HALF TIME DRINK": 1500.0,
-            "Row: TERRIFIC SPOT & SEATS TOGETHER GUARANTEED..!!": 1699.99,
-            "Row: SEATED TOGETHER VIP \u2022\u2022": 2500.0
-          },
-          "Executive Private Boxes": {
-            "Unknown": {
-              "min": 1659.2,
-              "max": 1660.0,
-              "count": 5,
-              "_price": 1659.2
-            },
-            "Row: FOOD & DRINK INCLUDED": 3000.0,
-            "DlamondClub": {
-              "min": 3185.0,
-              "max": 4500.0,
-              "count": 2,
-              "_price": 3185.0
-            },
-            "Row: LONGSIDE BOX SEATS - VVVIP": 3250.0,
-            "Row: FOOD & DRINK INCLUDED - VVIP": 3250.0
-          },
-          "Category 3": {
-            "Unknown": 1750.0
-          },
-          "VIP Packages": {
-            "Unknown": 3500.0
-          }
+          "Central Longside Upper": 316.91,
+          "Shortside Upper Level": 349.98,
+          "Longside Upper Level": 374.91,
+          "Longside Lower Level": 384.94,
+          "Shortside Lower Level": 391.09,
+          "Central Longside Lower": 429.91,
+          "Club Level Shortside": 439.94,
+          "Club Level Longside": 484.91,
+          "Executive Private Boxes": 1659.2,
+          "Category 3": 1750.0,
+          "VIP Packages": 3500.0
         },
-        "last_scraped": "2026-01-05T09:32:03.926301"
+        "last_scraped": "2026-01-05T12:34:56.974046"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-chelsea",
@@ -16741,273 +14357,40 @@
                 "Unknown": 3500.0
               }
             }
+          },
+          {
+            "timestamp": "2026-01-05T12:34:56.974046",
+            "prices": {
+              "Shortside Upper Level": 426.98,
+              "Away Section": 432.13,
+              "Longside Upper Level": 507.92,
+              "Central Longside Upper": 529.91,
+              "Shortside Lower Level": 594.93,
+              "Longside Lower Level": 604.92,
+              "Central Longside Lower": 668.92,
+              "Club Level Shortside": 684.94,
+              "Club Level Longside": 923.93,
+              "Category 3": 1750.0,
+              "Executive Private Boxes": 1794.1,
+              "VIP Packages": 3500.0
+            }
           }
         ],
         "latest_prices": {
-          "Shortside Upper Level": {
-            "Unknown": {
-              "min": 426.98,
-              "max": 9999.0,
-              "count": 19,
-              "_price": 426.98
-            },
-            "106": 427.0,
-            "101": 500.0,
-            "Row: UP TO 2 SEATS TOGETHER": 549.99,
-            "Row: SEATS IN FRONT 25 ROWS GUARANTEED": 650.0
-          },
-          "Away Section": {
-            "Unknown": {
-              "min": 432.13,
-              "max": 9999.0,
-              "count": 8,
-              "_price": 432.13
-            },
-            "Row: CHELSEA FANS - STANDING SECTION": 550.0,
-            "Row: CHELSEA FANS": {
-              "min": 565.0,
-              "max": 700.0,
-              "count": 2,
-              "_price": 565.0
-            },
-            "20,21,22": 695.0,
-            "20": {
-              "min": 750.0,
-              "max": 1000.0,
-              "count": 2,
-              "_price": 750.0
-            },
-            "22": {
-              "min": 750.0,
-              "max": 1000.0,
-              "count": 2,
-              "_price": 750.0
-            },
-            "21": {
-              "min": 750.0,
-              "max": 1000.0,
-              "count": 2,
-              "_price": 750.0
-            }
-          },
-          "Longside Upper Level": {
-            "Unknown": {
-              "min": 507.92,
-              "max": 4999.7,
-              "count": 10,
-              "_price": 507.92
-            },
-            "110": {
-              "min": 508.0,
-              "max": 629.0,
-              "count": 2,
-              "_price": 508.0
-            },
-            "132": 518.0,
-            "109": 525.0
-          },
-          "Central Longside Upper": {
-            "Unknown": {
-              "min": 529.91,
-              "max": 1499.96,
-              "count": 8,
-              "_price": 529.91
-            },
-            "111": 530.0,
-            "92": 540.0,
-            "91": 574.0,
-            "133": 625.0,
-            "92,133": 720.0,
-            "111,114": 750.0,
-            "91,134": 750.0,
-            "112,113": 750.0,
-            "134,91,112,113": 1250.0,
-            "111,112,113,114": 1500.0
-          },
-          "Shortside Lower Level": {
-            "Unknown": {
-              "min": 594.93,
-              "max": 4999.9,
-              "count": 10,
-              "_price": 594.93
-            },
-            "7,8,9": 600.0,
-            "6,7,8,9": {
-              "min": 719.34,
-              "max": 850.0,
-              "count": 2,
-              "_price": 719.34
-            },
-            "Row: FRONT 30 ROWS - GUARANTEED TOGETHER": 1500.0
-          },
-          "Longside Lower Level": {
-            "Unknown": {
-              "min": 604.92,
-              "max": 1500.0,
-              "count": 8,
-              "_price": 604.92
-            },
-            "13": {
-              "min": 605.0,
-              "max": 713.0,
-              "count": 2,
-              "_price": 605.0
-            },
-            "19": 723.0,
-            "14": {
-              "min": 749.0,
-              "max": 1020.0,
-              "count": 2,
-              "_price": 749.0
-            },
-            "Row: ROWS 1-25": 805.0,
-            "Row: FRONT 30 ROWS & GUARANTEED TOGETHER": 950.0,
-            "Row: 2 X SEATS GUARANTEED TOGETHER.": 1299.0
-          },
-          "Central Longside Lower": {
-            "Unknown": {
-              "min": 668.92,
-              "max": 3500.0,
-              "count": 12,
-              "_price": 668.92
-            },
-            "18,15": 669.0,
-            "16": {
-              "min": 695.0,
-              "max": 810.0,
-              "count": 2,
-              "_price": 695.0
-            },
-            "1,32": {
-              "min": 695.0,
-              "max": 1750.99,
-              "count": 4,
-              "_price": 695.0
-            },
-            "15,18": 780.0,
-            "Row: SEATS TOGETHER ASSURED": 900.0,
-            "17": 1150.0,
-            "15,16,17,18": 1170.0,
-            "18": 1220.0,
-            "1,15,18,32": 1250.0,
-            "2,31": 1300.0,
-            "1": {
-              "min": 1330.0,
-              "max": 2500.0,
-              "count": 4,
-              "_price": 1330.0
-            },
-            "31,2": 1350.0,
-            "16,17": 1500.0,
-            "32,1": 1700.0,
-            "32": 2250.0
-          },
-          "Club Level Shortside": {
-            "Unknown": {
-              "min": 684.94,
-              "max": 5000.0,
-              "count": 11,
-              "_price": 684.94
-            },
-            "Row: 6 together": 1100.0,
-            "Row: -": {
-              "min": 1125.0,
-              "max": 1395.0,
-              "count": 5,
-              "_price": 1125.0
-            },
-            "50B": 1250.0,
-            "Row: SEATS TOGETHER": {
-              "min": 1320.0,
-              "max": 1575.0,
-              "count": 2,
-              "_price": 1320.0
-            },
-            "Row: VIP - ROWS 1-10 (CLUB LEVEL)": 1400.0
-          },
-          "Club Level Longside": {
-            "Unknown": {
-              "min": 923.93,
-              "max": 4999.0,
-              "count": 10,
-              "_price": 923.93
-            },
-            "44B,81B": 1100.0,
-            "43B,82B": 1125.0,
-            "42B,83B": 1150.0,
-            "66B": 1485.0,
-            "Row: VIP CLUB LEVEL - LOUNGE ACCESS - HALF TIME DRINK": 1500.0,
-            "Row: CANNON CLUB SEATS TOGETHER": {
-              "min": 1550.0,
-              "max": 1710.0,
-              "count": 2,
-              "_price": 1550.0
-            },
-            "59B": 1650.0,
-            "62B,63B": {
-              "min": 1675.0,
-              "max": 1745.0,
-              "count": 2,
-              "_price": 1675.0
-            },
-            "59B,66B,62B,63B": 1699.0,
-            "Row: TERRIFIC SPOT & SEATS TOGETHER GUARANTEED..!!": 1699.99,
-            "61B,62B,63B": 1700.0,
-            "60B": 1700.0,
-            "61B,64B": 1700.0,
-            "63B,62B": 1750.0,
-            "Row: 2 x GREAT SEATS GUARANTEED TOGETHER.": 1750.99,
-            "62B": {
-              "min": 1900.0,
-              "max": 1950.0,
-              "count": 2,
-              "_price": 1900.0
-            },
-            "63B": {
-              "min": 1950.0,
-              "max": 2200.0,
-              "count": 2,
-              "_price": 1950.0
-            },
-            "61B,62B,63B,64B": 2000.0,
-            "Row: SEATED TOGETHER VIP \u2022\u2022": 2500.0,
-            "41B": 2500.0,
-            "84B,41B": 2500.0,
-            "41B,84B": 2750.0,
-            "84B": {
-              "min": 2950.0,
-              "max": 3250.0,
-              "count": 2,
-              "_price": 2950.0
-            }
-          },
-          "Category 3": {
-            "Unknown": 1750.0
-          },
-          "Executive Private Boxes": {
-            "Unknown": {
-              "min": 1794.1,
-              "max": 1800.0,
-              "count": 5,
-              "_price": 1794.1
-            },
-            "Row: VIP BOX SEATS": 1795.0,
-            "Row: FOOD & DRINK INCLUDED": 3000.0,
-            "Row: LONGSIDE BOX SEATS - VVVIP": 3250.0,
-            "Row: FOOD & DRINK INCLUDED - VVIP": 3250.0,
-            "DlamondClub": {
-              "min": 4090.0,
-              "max": 4500.0,
-              "count": 2,
-              "_price": 4090.0
-            },
-            "Row: **DIAMOND CLUB SEATS VIP**": 5999.0
-          },
-          "VIP Packages": {
-            "Unknown": 3500.0
-          }
+          "Shortside Upper Level": 426.98,
+          "Away Section": 432.13,
+          "Longside Upper Level": 507.92,
+          "Central Longside Upper": 529.91,
+          "Shortside Lower Level": 594.93,
+          "Longside Lower Level": 604.92,
+          "Central Longside Lower": 668.92,
+          "Club Level Shortside": 684.94,
+          "Club Level Longside": 923.93,
+          "Category 3": 1750.0,
+          "Executive Private Boxes": 1794.1,
+          "VIP Packages": 3500.0
         },
-        "last_scraped": "2026-01-05T09:32:03.926301"
+        "last_scraped": "2026-01-05T12:34:56.974046"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-everton",
@@ -19770,230 +17153,40 @@
                 "Unknown": 3500.0
               }
             }
+          },
+          {
+            "timestamp": "2026-01-05T12:34:56.974046",
+            "prices": {
+              "Away Section": 260.0,
+              "Shortside Upper Level": 273.9,
+              "Longside Upper Level": 334.93,
+              "Central Longside Upper": 343.95,
+              "Shortside Lower Level": 389.91,
+              "Longside Lower Level": 416.96,
+              "Central Longside Lower": 457.9,
+              "Club Level Shortside": 618.92,
+              "Club Level Longside": 624.91,
+              "Executive Private Boxes": 1749.1,
+              "Category 3": 1750.0,
+              "VIP Packages": 3500.0
+            }
           }
         ],
         "latest_prices": {
-          "Away Section": {
-            "Unknown": {
-              "min": 260.0,
-              "max": 475.0,
-              "count": 2,
-              "_price": 260.0
-            }
-          },
-          "Shortside Upper Level": {
-            "Unknown": {
-              "min": 273.9,
-              "max": 4999.4,
-              "count": 12,
-              "_price": 273.9
-            }
-          },
-          "Longside Upper Level": {
-            "Unknown": {
-              "min": 334.93,
-              "max": 1250.0,
-              "count": 9,
-              "_price": 334.93
-            },
-            "132": 335.0,
-            "109": 345.0,
-            "110": 416.0
-          },
-          "Central Longside Upper": {
-            "Unknown": {
-              "min": 343.95,
-              "max": 4999.3,
-              "count": 5,
-              "_price": 343.95
-            },
-            "111": 344.0,
-            "92": 354.0,
-            "91": 365.0,
-            "92,133": 550.0,
-            "111,114": 550.0,
-            "112,113": 575.0,
-            "91,134": 575.0,
-            "91,92,134,133": 800.0,
-            "134,91,112,113": 1250.0,
-            "111,112,113,114": 1500.0
-          },
-          "Shortside Lower Level": {
-            "Unknown": {
-              "min": 389.91,
-              "max": 4999.3,
-              "count": 8,
-              "_price": 389.91
-            },
-            "10": 390.0,
-            "10,11,6": {
-              "min": 484.43,
-              "max": 550.0,
-              "count": 2,
-              "_price": 484.43
-            },
-            "Row: FRONT 30 ROWS - GUARANTEED TOGETHER": 1500.0
-          },
-          "Longside Lower Level": {
-            "Unknown": {
-              "min": 416.96,
-              "max": 1500.0,
-              "count": 8,
-              "_price": 416.96
-            },
-            "12": 417.0,
-            "14": {
-              "min": 427.0,
-              "max": 512.0,
-              "count": 2,
-              "_price": 427.0
-            },
-            "19": 489.0,
-            "13": 500.0
-          },
-          "Central Longside Lower": {
-            "Unknown": {
-              "min": 457.9,
-              "max": 3000.0,
-              "count": 11,
-              "_price": 457.9
-            },
-            "15,18": {
-              "min": 458.0,
-              "max": 515.0,
-              "count": 2,
-              "_price": 458.0
-            },
-            "16": 471.0,
-            "1,32": {
-              "min": 480.0,
-              "max": 1095.0,
-              "count": 2,
-              "_price": 480.0
-            },
-            "31": {
-              "min": 525.0,
-              "max": 1000.0,
-              "count": 2,
-              "_price": 525.0
-            },
-            "31,2": {
-              "min": 613.0,
-              "max": 1350.0,
-              "count": 2,
-              "_price": 613.0
-            },
-            "Row: ROWS 1-30 CENTRAL VIEW": 850.0,
-            "18": 920.0,
-            "1": {
-              "min": 990.0,
-              "max": 2500.0,
-              "count": 6,
-              "_price": 990.0
-            },
-            "2": {
-              "min": 995.0,
-              "max": 1000.0,
-              "count": 2,
-              "_price": 995.0
-            },
-            "32": {
-              "min": 1075.0,
-              "max": 1500.0,
-              "count": 2,
-              "_price": 1075.0
-            },
-            "17,16": 1150.0,
-            "1,15,18,32": 1250.0,
-            "16,17": 1500.0,
-            "32,1": 1700.0
-          },
-          "Club Level Shortside": {
-            "Unknown": {
-              "min": 618.92,
-              "max": 1500.0,
-              "count": 9,
-              "_price": 618.92
-            },
-            "Row: VIP - ROWS 1-10 (CLUB LEVEL)": 740.0,
-            "Row: -": {
-              "min": 795.0,
-              "max": 1140.0,
-              "count": 3,
-              "_price": 795.0
-            },
-            "Row: SEATS TOGETHER": {
-              "min": 1050.0,
-              "max": 1150.0,
-              "count": 2,
-              "_price": 1050.0
-            },
-            "50B": 1250.0
-          },
-          "Club Level Longside": {
-            "Unknown": {
-              "min": 624.91,
-              "max": 4999.0,
-              "count": 7,
-              "_price": 624.91
-            },
-            "44B,81B": 950.0,
-            "66B": {
-              "min": 970.0,
-              "max": 1200.0,
-              "count": 2,
-              "_price": 970.0
-            },
-            "42B,43B": 990.0,
-            "83B,82B": 990.0,
-            "41B,42B,83B,84B": 995.0,
-            "59B": 1050.0,
-            "61B,64B": 1100.0,
-            "60B": 1100.0,
-            "62B,63B": {
-              "min": 1125.0,
-              "max": 1300.0,
-              "count": 2,
-              "_price": 1125.0
-            },
-            "61B,62B,63B,64B": 1145.0,
-            "Row: CANNON CLUB SEATS TOGETHER": {
-              "min": 1150.0,
-              "max": 1265.0,
-              "count": 2,
-              "_price": 1150.0
-            },
-            "Row: VIP CLUB LEVEL - LOUNGE ACCESS - HALF TIME DRINK": 1500.0,
-            "Row: TERRIFIC SPOT & SEATS TOGETHER GUARANTEED..!!": 1699.99,
-            "63B,62B": 1750.0,
-            "84B,41B": 2500.0,
-            "Row: SEATED TOGETHER VIP \u2022\u2022": 2500.0
-          },
-          "Executive Private Boxes": {
-            "Unknown": {
-              "min": 1749.1,
-              "max": 1750.0,
-              "count": 5,
-              "_price": 1749.1
-            },
-            "Row: FOOD & DRINK INCLUDED": 3000.0,
-            "Row: FOOD & DRINK INCLUDED - VVIP": 3250.0,
-            "Row: LONGSIDE BOX SEATS - VVVIP": 3250.0,
-            "DlamondClub": {
-              "min": 4000.0,
-              "max": 4500.0,
-              "count": 2,
-              "_price": 4000.0
-            }
-          },
-          "Category 3": {
-            "Unknown": 1750.0
-          },
-          "VIP Packages": {
-            "Unknown": 3500.0
-          }
+          "Away Section": 260.0,
+          "Shortside Upper Level": 273.9,
+          "Longside Upper Level": 334.93,
+          "Central Longside Upper": 343.95,
+          "Shortside Lower Level": 389.91,
+          "Longside Lower Level": 416.96,
+          "Central Longside Lower": 457.9,
+          "Club Level Shortside": 618.92,
+          "Club Level Longside": 624.91,
+          "Executive Private Boxes": 1749.1,
+          "Category 3": 1750.0,
+          "VIP Packages": 3500.0
         },
-        "last_scraped": "2026-01-05T09:32:03.926301"
+        "last_scraped": "2026-01-05T12:34:56.974046"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-bournemouth",
@@ -22590,188 +19783,40 @@
                 "Unknown": 3500.0
               }
             }
+          },
+          {
+            "timestamp": "2026-01-05T12:34:56.974046",
+            "prices": {
+              "Shortside Upper Level": 318.6,
+              "Away Section": 350.0,
+              "Longside Upper Level": 449.93,
+              "Central Longside Upper": 472.93,
+              "Longside Lower Level": 539.9,
+              "Central Longside Lower": 584.9,
+              "Club Level Shortside": 724.93,
+              "Shortside Lower Level": 749.95,
+              "Club Level Longside": 809.92,
+              "Category 3": 1750.0,
+              "Executive Private Boxes": 2999.0,
+              "VIP Packages": 3500.0
+            }
           }
         ],
         "latest_prices": {
-          "Shortside Upper Level": {
-            "Unknown": {
-              "min": 318.6,
-              "max": 4999.6,
-              "count": 9,
-              "_price": 318.6
-            },
-            "Row: N/A": 10567.32
-          },
-          "Away Section": {
-            "Unknown": {
-              "min": 350.0,
-              "max": 750.0,
-              "count": 3,
-              "_price": 350.0
-            },
-            "20": 1000.0
-          },
-          "Longside Upper Level": {
-            "Unknown": {
-              "min": 449.93,
-              "max": 4999.9,
-              "count": 8,
-              "_price": 449.93
-            },
-            "110": 450.0,
-            "109": 460.0,
-            "132": 470.0
-          },
-          "Central Longside Upper": {
-            "Unknown": {
-              "min": 472.93,
-              "max": 1499.1,
-              "count": 5,
-              "_price": 472.93
-            },
-            "111": 473.0,
-            "92": 483.0,
-            "91": 518.0,
-            "112,113": 1200.0,
-            "111,114": 1200.0,
-            "92,133": 1200.0,
-            "91,134": 1225.0,
-            "134,91,112,113": 1250.0
-          },
-          "Longside Lower Level": {
-            "Unknown": {
-              "min": 539.9,
-              "max": 1500.0,
-              "count": 7,
-              "_price": 539.9
-            },
-            "12": 540.0,
-            "13": {
-              "min": 550.0,
-              "max": 621.0,
-              "count": 2,
-              "_price": 550.0
-            },
-            "19": 631.0,
-            "14": {
-              "min": 648.0,
-              "max": 850.0,
-              "count": 2,
-              "_price": 648.0
-            }
-          },
-          "Central Longside Lower": {
-            "Unknown": {
-              "min": 584.9,
-              "max": 2000.0,
-              "count": 9,
-              "_price": 584.9
-            },
-            "15,18": {
-              "min": 585.0,
-              "max": 1200.0,
-              "count": 2,
-              "_price": 585.0
-            },
-            "16": 608.0,
-            "1": {
-              "min": 675.0,
-              "max": 1245.0,
-              "count": 3,
-              "_price": 675.0
-            },
-            "31,2": {
-              "min": 751.0,
-              "max": 1350.0,
-              "count": 2,
-              "_price": 751.0
-            },
-            "Row: ROWS 1-30 CENTRAL VIEW": 850.0,
-            "18": 920.0,
-            "32": 1225.0,
-            "1,15,18,32": 1250.0,
-            "2,31": 1300.0,
-            "16,17": {
-              "min": 1450.0,
-              "max": 1500.0,
-              "count": 2,
-              "_price": 1450.0
-            },
-            "32,1": 1700.0
-          },
-          "Club Level Shortside": {
-            "Unknown": {
-              "min": 724.93,
-              "max": 1500.0,
-              "count": 8,
-              "_price": 724.93
-            },
-            "Row: -": {
-              "min": 775.0,
-              "max": 1215.0,
-              "count": 5,
-              "_price": 775.0
-            },
-            "Row: SEATS TOGETHER": {
-              "min": 1000.0,
-              "max": 1100.0,
-              "count": 2,
-              "_price": 1000.0
-            }
-          },
-          "Shortside Lower Level": {
-            "Unknown": {
-              "min": 749.95,
-              "max": 4999.6,
-              "count": 7,
-              "_price": 749.95
-            }
-          },
-          "Club Level Longside": {
-            "Unknown": {
-              "min": 809.92,
-              "max": 4999.0,
-              "count": 8,
-              "_price": 809.92
-            },
-            "66B": {
-              "min": 815.0,
-              "max": 1335.0,
-              "count": 2,
-              "_price": 815.0
-            },
-            "Row: CANNON CLUB SEATS TOGETHER": {
-              "min": 1150.0,
-              "max": 1265.0,
-              "count": 2,
-              "_price": 1150.0
-            },
-            "44B,81B": 1500.0,
-            "43B,82B": 1550.0,
-            "42B,83B": 1650.0,
-            "61B,64B": 1650.0,
-            "Row: TERRIFIC SPOT & SEATS TOGETHER GUARANTEED..!!": 1699.99,
-            "62B,63B": 1700.0,
-            "63B,62B": 1750.0,
-            "41B,84B": 2450.0,
-            "84B,41B": 2500.0
-          },
-          "Category 3": {
-            "Unknown": 1750.0
-          },
-          "Executive Private Boxes": {
-            "Unknown": {
-              "min": 2999.0,
-              "max": 2999.8,
-              "count": 4,
-              "_price": 2999.0
-            }
-          },
-          "VIP Packages": {
-            "Unknown": 3500.0
-          }
+          "Shortside Upper Level": 318.6,
+          "Away Section": 350.0,
+          "Longside Upper Level": 449.93,
+          "Central Longside Upper": 472.93,
+          "Longside Lower Level": 539.9,
+          "Central Longside Lower": 584.9,
+          "Club Level Shortside": 724.93,
+          "Shortside Lower Level": 749.95,
+          "Club Level Longside": 809.92,
+          "Category 3": 1750.0,
+          "Executive Private Boxes": 2999.0,
+          "VIP Packages": 3500.0
         },
-        "last_scraped": "2026-01-05T09:32:03.926301"
+        "last_scraped": "2026-01-05T12:34:56.974046"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-newcastle-united",
@@ -24936,167 +21981,38 @@
                 "Unknown": 9999.0
               }
             }
+          },
+          {
+            "timestamp": "2026-01-05T12:34:56.974046",
+            "prices": {
+              "Shortside Upper Level": 388.93,
+              "Longside Upper Level": 449.94,
+              "Longside Lower Level": 462.66,
+              "Central Longside Upper": 471.27,
+              "Shortside Lower Level": 569.91,
+              "Central Longside Lower": 584.7,
+              "Club Level Shortside": 749.92,
+              "Club Level Longside": 919.94,
+              "Category 3": 1750.0,
+              "VIP Packages": 3500.0,
+              "Executive Private Boxes": 9999.0
+            }
           }
         ],
         "latest_prices": {
-          "Shortside Upper Level": {
-            "Unknown": {
-              "min": 388.93,
-              "max": 4999.7,
-              "count": 10,
-              "_price": 388.93
-            },
-            "106": 389.0
-          },
-          "Longside Upper Level": {
-            "Unknown": {
-              "min": 449.94,
-              "max": 4999.3,
-              "count": 7,
-              "_price": 449.94
-            },
-            "109": 450.0,
-            "132": 460.0,
-            "110": 540.0
-          },
-          "Longside Lower Level": {
-            "Unknown": {
-              "min": 462.7,
-              "max": 1500.0,
-              "count": 8,
-              "_price": 462.7
-            },
-            "12": 540.0,
-            "13": 550.0,
-            "14": 850.0
-          },
-          "Central Longside Upper": {
-            "Unknown": {
-              "min": 471.27,
-              "max": 4999.9,
-              "count": 6,
-              "_price": 471.27
-            },
-            "111": 473.0,
-            "92": 483.0,
-            "111,114": 1150.0,
-            "92,133": 1150.0,
-            "112,113": 1200.0,
-            "91,134": 1200.0,
-            "134,91,112,113": 1250.0
-          },
-          "Shortside Lower Level": {
-            "Unknown": {
-              "min": 569.91,
-              "max": 1000.0,
-              "count": 6,
-              "_price": 569.91
-            }
-          },
-          "Central Longside Lower": {
-            "Unknown": {
-              "min": 584.7,
-              "max": 2499.6,
-              "count": 8,
-              "_price": 584.7
-            },
-            "15,18": {
-              "min": 585.0,
-              "max": 1200.0,
-              "count": 2,
-              "_price": 585.0
-            },
-            "16": 608.0,
-            "31,2": {
-              "min": 640.05,
-              "max": 1350.0,
-              "count": 3,
-              "_price": 640.05
-            },
-            "31": 653.0,
-            "1,32": {
-              "min": 675.0,
-              "max": 1200.0,
-              "count": 2,
-              "_price": 675.0
-            },
-            "Row: ROWS 1-30 CENTRAL VIEW": 850.0,
-            "18": 920.0,
-            "1": 1000.0,
-            "2,31": 1200.0,
-            "1,15,18,32": 1250.0,
-            "16,17": {
-              "min": 1400.0,
-              "max": 1500.0,
-              "count": 2,
-              "_price": 1400.0
-            },
-            "32,1": 1700.0
-          },
-          "Club Level Shortside": {
-            "Unknown": {
-              "min": 749.92,
-              "max": 1500.0,
-              "count": 7,
-              "_price": 749.92
-            },
-            "Row: -": {
-              "min": 825.0,
-              "max": 1150.0,
-              "count": 4,
-              "_price": 825.0
-            },
-            "Row: SEATS TOGETHER": {
-              "min": 1050.0,
-              "max": 1150.0,
-              "count": 2,
-              "_price": 1050.0
-            }
-          },
-          "Club Level Longside": {
-            "Unknown": {
-              "min": 919.94,
-              "max": 1500.0,
-              "count": 7,
-              "_price": 919.94
-            },
-            "66B": {
-              "min": 1152.8,
-              "max": 1210.0,
-              "count": 2,
-              "_price": 1152.8
-            },
-            "Row: CANNON CLUB SEATS TOGETHER": {
-              "min": 1200.0,
-              "max": 1350.0,
-              "count": 2,
-              "_price": 1200.0
-            },
-            "61B,64B": 1650.0,
-            "Row: TERRIFIC SPOT & SEATS TOGETHER GUARANTEED..!!": 1699.99,
-            "62B,63B": 1700.0,
-            "63B,62B": 1750.0,
-            "43B,82B": 2150.0,
-            "42B,83B": 2250.0,
-            "41B,84B": 2450.0,
-            "84B,41B": 2500.0
-          },
-          "Category 3": {
-            "Unknown": 1750.0
-          },
-          "VIP Packages": {
-            "Unknown": 3500.0
-          },
-          "Executive Private Boxes": {
-            "Unknown": {
-              "min": 9999.0,
-              "max": 9999.0,
-              "count": 4,
-              "_price": 9999.0
-            }
-          }
+          "Shortside Upper Level": 388.93,
+          "Longside Upper Level": 449.94,
+          "Longside Lower Level": 462.66,
+          "Central Longside Upper": 471.27,
+          "Shortside Lower Level": 569.91,
+          "Central Longside Lower": 584.7,
+          "Club Level Shortside": 749.92,
+          "Club Level Longside": 919.94,
+          "Category 3": 1750.0,
+          "VIP Packages": 3500.0,
+          "Executive Private Boxes": 9999.0
         },
-        "last_scraped": "2026-01-05T09:32:03.926301"
+        "last_scraped": "2026-01-05T12:34:56.974046"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-fulham",
@@ -27755,89 +24671,34 @@
                 "Unknown": 3500.0
               }
             }
+          },
+          {
+            "timestamp": "2026-01-05T12:34:56.974046",
+            "prices": {
+              "Longside Upper Level": 450.0,
+              "Central Longside Upper": 473.0,
+              "Longside Lower Level": 540.0,
+              "Central Longside Lower": 585.0,
+              "Club Level Shortside": 945.35,
+              "Shortside Upper Level": 999.3,
+              "Club Level Longside": 1450.0,
+              "Category 3": 1750.0,
+              "VIP Packages": 3500.0
+            }
           }
         ],
         "latest_prices": {
-          "Longside Upper Level": {
-            "110": {
-              "min": 450.0,
-              "max": 540.0,
-              "count": 2,
-              "_price": 450.0
-            },
-            "132": 460.0,
-            "109": 470.0
-          },
-          "Central Longside Upper": {
-            "111": 473.0,
-            "92": 483.0,
-            "133": 544.0,
-            "134,91,112,113": 1250.0
-          },
-          "Longside Lower Level": {
-            "12": 540.0,
-            "13": 550.0,
-            "19": 621.0
-          },
-          "Central Longside Lower": {
-            "15,18": 585.0,
-            "16": 608.0,
-            "31,2": {
-              "min": 653.0,
-              "max": 1350.0,
-              "count": 2,
-              "_price": 653.0
-            },
-            "31": {
-              "min": 655.21,
-              "max": 751.0,
-              "count": 2,
-              "_price": 655.21
-            },
-            "1,32": 675.0,
-            "Row: ROWS 1-30 CENTRAL VIEW": 850.0,
-            "1,15,18,32": 1250.0,
-            "16,17": 1500.0,
-            "32,1": 1700.0
-          },
-          "Club Level Shortside": {
-            "Unknown": {
-              "min": 945.35,
-              "max": 1125.0,
-              "count": 3,
-              "_price": 945.35
-            },
-            "Row: CANNON CLUB SEATS TOGETHER": 1500.0,
-            "Row: -": {
-              "min": 1545.0,
-              "max": 1740.0,
-              "count": 2,
-              "_price": 1545.0
-            }
-          },
-          "Shortside Upper Level": {
-            "Unknown": 999.3
-          },
-          "Club Level Longside": {
-            "Unknown": {
-              "min": 1450.0,
-              "max": 1650.0,
-              "count": 2,
-              "_price": 1450.0
-            },
-            "Row: TERRIFIC SPOT & SEATS TOGETHER GUARANTEED..!!": 1699.99,
-            "Row: CANNON CLUB SEATS TOGETHER": 1700.0,
-            "63B,62B": 1750.0,
-            "84B,41B": 2500.0
-          },
-          "Category 3": {
-            "Unknown": 1750.0
-          },
-          "VIP Packages": {
-            "Unknown": 3500.0
-          }
+          "Longside Upper Level": 450.0,
+          "Central Longside Upper": 473.0,
+          "Longside Lower Level": 540.0,
+          "Central Longside Lower": 585.0,
+          "Club Level Shortside": 945.35,
+          "Shortside Upper Level": 999.3,
+          "Club Level Longside": 1450.0,
+          "Category 3": 1750.0,
+          "VIP Packages": 3500.0
         },
-        "last_scraped": "2026-01-05T09:32:03.926301"
+        "last_scraped": "2026-01-05T12:34:56.974046"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-burnley",
@@ -30285,114 +27146,37 @@
                 "Unknown": 6000.0
               }
             }
+          },
+          {
+            "timestamp": "2026-01-05T12:34:56.974046",
+            "prices": {
+              "Longside Upper Level": 810.0,
+              "Central Longside Upper": 855.0,
+              "Shortside Upper Level": 900.0,
+              "Longside Lower Level": 1090.0,
+              "Central Longside Lower": 1170.0,
+              "Club Level Longside": 1699.99,
+              "Shortside Lower Level": 1725.0,
+              "Club Level Shortside": 2650.0,
+              "Executive Private Boxes": 6000.0
+            }
           }
         ],
         "latest_prices": {
-          "Longside Upper Level": {
-            "110": {
-              "min": 810.0,
-              "max": 972.0,
-              "count": 2,
-              "_price": 810.0
-            },
-            "109": 825.0,
-            "Unknown": {
-              "min": 1425.0,
-              "max": 1500.0,
-              "count": 3,
-              "_price": 1425.0
-            }
-          },
-          "Central Longside Upper": {
-            "92": 855.0,
-            "91": 990.0,
-            "Unknown": {
-              "min": 1000.0,
-              "max": 3500.0,
-              "count": 6,
-              "_price": 1000.0
-            }
-          },
-          "Shortside Upper Level": {
-            "101": 900.0,
-            "Unknown": {
-              "min": 974.0,
-              "max": 1250.0,
-              "count": 8,
-              "_price": 974.0
-            }
-          },
-          "Longside Lower Level": {
-            "13": {
-              "min": 1090.0,
-              "max": 1242.0,
-              "count": 2,
-              "_price": 1090.0
-            },
-            "19": 1252.0,
-            "4": 1296.0,
-            "Unknown": {
-              "min": 1950.0,
-              "max": 4950.0,
-              "count": 4,
-              "_price": 1950.0
-            }
-          },
-          "Central Longside Lower": {
-            "15,18": 1170.0,
-            "16": 1215.0,
-            "1": 1575.0,
-            "31": {
-              "min": 1620.0,
-              "max": 1863.0,
-              "count": 3,
-              "_price": 1620.0
-            },
-            "Unknown": {
-              "min": 2995.0,
-              "max": 3000.0,
-              "count": 2,
-              "_price": 2995.0
-            }
-          },
-          "Club Level Longside": {
-            "Row: TERRIFIC SPOT & SEATS TOGETHER GUARANTEED..!!": 1699.99,
-            "Row: VIP CLUB LEVEL": 2450.0,
-            "66B": {
-              "min": 2500.0,
-              "max": 3825.0,
-              "count": 2,
-              "_price": 2500.0
-            },
-            "Row: CANNON CLUB SEATS TOGETHER": 3600.0
-          },
-          "Shortside Lower Level": {
-            "Unknown": {
-              "min": 1725.0,
-              "max": 1750.0,
-              "count": 3,
-              "_price": 1725.0
-            }
-          },
-          "Club Level Shortside": {
-            "Row: VIP CLUB LEVEL": 2650.0,
-            "Unknown": 2750.0,
-            "Row: -": {
-              "min": 2945.0,
-              "max": 3235.0,
-              "count": 3,
-              "_price": 2945.0
-            },
-            "Row: CANNON CLUB SEATS TOGETHER": 3500.0
-          },
-          "Executive Private Boxes": {
-            "Unknown": 6000.0
-          }
+          "Longside Upper Level": 810.0,
+          "Central Longside Upper": 855.0,
+          "Shortside Upper Level": 900.0,
+          "Longside Lower Level": 1090.0,
+          "Central Longside Lower": 1170.0,
+          "Club Level Longside": 1699.99,
+          "Shortside Lower Level": 1725.0,
+          "Club Level Shortside": 2650.0,
+          "Executive Private Boxes": 6000.0
         },
-        "last_scraped": "2026-01-05T09:32:03.926301"
+        "last_scraped": "2026-01-05T12:34:56.974046"
       }
     ],
-    "last_updated": "2026-01-05T09:32:03.926301"
+    "last_updated": "2026-01-05T12:34:56.974046"
   },
   "barcelona": {
     "team_name": "FC Barcelona",
