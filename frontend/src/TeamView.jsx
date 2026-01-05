@@ -14,6 +14,23 @@ function TeamView() {
   const [selectedDate, setSelectedDate] = useState(null)
   const [availableDates, setAvailableDates] = useState([])
   const [availableCategories, setAvailableCategories] = useState([])
+  const [selectedCategories, setSelectedCategories] = useState([])
+  const [categoryFilterOpen, setCategoryFilterOpen] = useState(false)
+  const [modalCategory, setModalCategory] = useState(null)
+
+  // Close category dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      const dropdown = document.getElementById('category-dropdown-container')
+      if (dropdown && !dropdown.contains(event.target)) {
+        setCategoryFilterOpen(false)
+      }
+    }
+    if (categoryFilterOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+      return () => document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [categoryFilterOpen])
 
   useEffect(() => {
     fetchTeams()
@@ -139,6 +156,11 @@ function TeamView() {
       setAvailableDates(sortedDates)
       setAvailableCategories(sortedCategories)
       
+      // Select all categories by default
+      if (sortedCategories.length > 0 && selectedCategories.length === 0) {
+        setSelectedCategories(sortedCategories)
+      }
+      
       if (sortedDates.length > 0 && !selectedDate) {
         setSelectedDate(sortedDates[sortedDates.length - 1]) // Default to latest date
       }
@@ -233,8 +255,10 @@ function TeamView() {
       })
     })
     
-    // Show all categories (no filtering)
-    const filteredCategoryBlocks = Array.from(categoryBlocks)
+    // Filter categoryBlocks by selectedCategories
+    const filteredCategoryBlocks = Array.from(categoryBlocks).filter(catBlock => {
+      return selectedCategories.length === 0 || selectedCategories.includes(catBlock)
+    })
     
     // Build chart data with daily averages
     const chartData = []
@@ -469,7 +493,7 @@ function TeamView() {
         <div className="price-view team-price-view">
           {gamePrices && gamePrices.game ? (
             <>
-              <div style={{ textAlign: 'center', maxWidth: '800px', width: '100%', marginBottom: '30px', paddingBottom: '20px', borderBottom: '1px solid #30363d' }}>
+              <div style={{ textAlign: 'center', maxWidth: '900px', width: '100%', margin: '0 auto 30px auto', paddingBottom: '20px', borderBottom: '1px solid #30363d' }}>
                 <h2 style={{ margin: '0 0 8px 0', color: '#c9d1d9', fontSize: '1.75rem', fontWeight: '600' }}>
                   {gamePrices.game.match_name}
                 </h2>
@@ -483,7 +507,7 @@ function TeamView() {
 
               {/* Price History Chart */}
               {chartData.length > 0 && (
-                <div className="chart-section" style={{ marginTop: '20px', width: '100%', maxWidth: '900px', background: '#161b22', border: '1px solid #30363d', borderRadius: '8px', padding: '20px' }}>
+                <div className="chart-section" style={{ marginTop: '20px', width: '100%', maxWidth: '900px', margin: '0 auto', background: '#161b22', border: '1px solid #30363d', borderRadius: '8px', padding: '20px', boxSizing: 'border-box' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
                     <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#c9d1d9', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }}>
                       <span>📊</span>
@@ -531,8 +555,162 @@ function TeamView() {
                           </select>
                         </div>
                       )}
+                      {availableCategories.length > 0 && (
+                        <div style={{ position: 'relative' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <label style={{ fontSize: '0.9rem', color: '#8b949e', fontWeight: '500' }}>Categories:</label>
+                            <div id="category-dropdown-container" style={{ position: 'relative', display: 'inline-block' }}>
+                              <button
+                                onClick={() => setCategoryFilterOpen(!categoryFilterOpen)}
+                                type="button"
+                                style={{
+                                  padding: '6px 10px',
+                                  borderRadius: '6px',
+                                  border: '1px solid #30363d',
+                                  background: '#0d1117',
+                                  color: '#c9d1d9',
+                                  fontSize: '0.85rem',
+                                  cursor: 'pointer',
+                                  transition: 'all 0.2s',
+                                  minWidth: '200px',
+                                  textAlign: 'left',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'space-between',
+                                  gap: '8px'
+                                }}
+                                onMouseEnter={(e) => e.target.style.borderColor = '#58a6ff'}
+                                onMouseLeave={(e) => e.target.style.borderColor = '#30363d'}
+                              >
+                                <span>
+                                  {selectedCategories.length === availableCategories.length 
+                                    ? 'All categories' 
+                                    : selectedCategories.length === 0
+                                    ? 'No categories'
+                                    : `${selectedCategories.length} selected`}
+                                </span>
+                                <span style={{ fontSize: '0.7rem', color: '#6e7681' }}>▼</span>
+                              </button>
+                              {categoryFilterOpen && (
+                                <div
+                                  style={{
+                                    position: 'absolute',
+                                    top: '100%',
+                                    left: 0,
+                                    marginTop: '4px',
+                                    background: '#0d1117',
+                                    border: '1px solid #30363d',
+                                    borderRadius: '6px',
+                                    padding: '6px',
+                                    maxHeight: '250px',
+                                    overflowY: 'auto',
+                                    zIndex: 1000,
+                                    minWidth: '250px',
+                                    boxShadow: '0 8px 24px rgba(0,0,0,0.5)'
+                                  }}
+                                  onClick={(e) => e.stopPropagation()}
+                                >
+                                  <div style={{ 
+                                    padding: '4px 6px', 
+                                    marginBottom: '6px', 
+                                    borderBottom: '1px solid #30363d',
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center'
+                                  }}>
+                                    <span style={{ fontSize: '0.7rem', color: '#8b949e' }}>
+                                      {selectedCategories.length} of {availableCategories.length}
+                                    </span>
+                                    <button
+                                      onClick={() => {
+                                        if (selectedCategories.length === availableCategories.length) {
+                                          setSelectedCategories([])
+                                        } else {
+                                          setSelectedCategories([...availableCategories])
+                                        }
+                                      }}
+                                      style={{
+                                        background: 'transparent',
+                                        border: '1px solid #30363d',
+                                        color: '#58a6ff',
+                                        padding: '2px 6px',
+                                        borderRadius: '4px',
+                                        fontSize: '0.65rem',
+                                        cursor: 'pointer'
+                                      }}
+                                    >
+                                      {selectedCategories.length === availableCategories.length ? 'Deselect All' : 'Select All'}
+                                    </button>
+                                  </div>
+                                  {availableCategories.map(cat => {
+                                    const isSelected = selectedCategories.includes(cat)
+                                    return (
+                                      <label
+                                        key={cat}
+                                        style={{
+                                          display: 'flex',
+                                          alignItems: 'center',
+                                          padding: '4px 6px',
+                                          cursor: 'pointer',
+                                          borderRadius: '4px',
+                                          transition: 'background 0.15s',
+                                          backgroundColor: isSelected ? '#1f6feb20' : 'transparent',
+                                          fontSize: '0.8rem'
+                                        }}
+                                        onMouseEnter={(e) => {
+                                          if (!isSelected) e.currentTarget.style.backgroundColor = '#21262d'
+                                        }}
+                                        onMouseLeave={(e) => {
+                                          if (!isSelected) e.currentTarget.style.backgroundColor = 'transparent'
+                                        }}
+                                      >
+                                        <input
+                                          type="checkbox"
+                                          checked={isSelected}
+                                          onChange={(e) => {
+                                            if (e.target.checked) {
+                                              setSelectedCategories([...selectedCategories, cat])
+                                            } else {
+                                              setSelectedCategories(selectedCategories.filter(c => c !== cat))
+                                            }
+                                          }}
+                                          style={{
+                                            marginRight: '6px',
+                                            cursor: 'pointer',
+                                            accentColor: '#58a6ff'
+                                          }}
+                                        />
+                                        <span style={{ 
+                                          color: isSelected ? '#c9d1d9' : '#8b949e',
+                                          flex: 1
+                                        }}>
+                                          {cat}
+                                        </span>
+                                      </label>
+                                    )
+                                  })}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
+                  {/* Close dropdown when clicking outside */}
+                  {categoryFilterOpen && (
+                    <div
+                      style={{
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        zIndex: 999
+                      }}
+                      onClick={() => setCategoryFilterOpen(false)}
+                    />
+                  )}
                   {selectedDate && (
                     <div style={{ marginBottom: '12px', padding: '8px 12px', background: '#1f6feb20', border: '1px solid #1f6feb40', borderRadius: '4px', fontSize: '0.85rem', color: '#58a6ff' }}>
                       📍 Showing data for: <strong>{new Date(selectedDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</strong>
@@ -582,18 +760,22 @@ function TeamView() {
                           contentStyle={{ 
                             backgroundColor: '#0d1117', 
                             border: '1px solid #30363d',
-                            borderRadius: '8px',
-                            boxShadow: '0 8px 24px rgba(0,0,0,0.5)',
-                            padding: '12px'
+                            borderRadius: '6px',
+                            boxShadow: '0 4px 12px rgba(0,0,0,0.5)',
+                            padding: '8px 10px'
                           }} 
-                          itemStyle={{ color: '#c9d1d9', fontSize: '13px', marginBottom: '4px' }}
-                          labelStyle={{ color: '#f0f6fc', fontWeight: '600', fontSize: '12px', marginBottom: '8px' }}
+                          itemStyle={{ color: '#c9d1d9', fontSize: '11px', marginBottom: '2px', padding: '2px 0' }}
+                          labelStyle={{ color: '#f0f6fc', fontWeight: '600', fontSize: '11px', marginBottom: '4px' }}
                           formatter={(value, name) => {
+                            if (!value) return null
                             const currency = gamePrices?.currency || selectedTeam?.currency || 'USD'
                             const symbol = getCurrencySymbol(currency)
-                            return [`${symbol}${value?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) || '0'}`, name]
+                            // Show only category name (remove " - Block X" part for cleaner display)
+                            const displayName = name.split(' - Block ')[0]
+                            return [`${symbol}${value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, displayName]
                           }}
-                          labelFormatter={(label) => `${label} (Daily Average)`}
+                          labelFormatter={(label) => label}
+                          separator=": "
                         />
                         {Array.from(new Set(chartData.flatMap(d => Object.keys(d).filter(k => k !== 'time')))).map((cat, i) => (
                           <Area
@@ -618,7 +800,7 @@ function TeamView() {
 
               {/* Category Summary Table - Compact */}
               {gamePrices && gamePrices.latest_prices && Object.keys(gamePrices.latest_prices).length > 0 && (
-                <div className="chart-section" style={{ marginTop: '20px', width: '100%', maxWidth: '900px', background: '#161b22', border: '1px solid #30363d', borderRadius: '8px', padding: '12px' }}>
+                <div className="chart-section" style={{ marginTop: '20px', width: '100%', maxWidth: '900px', margin: '20px auto 0 auto', background: '#161b22', border: '1px solid #30363d', borderRadius: '8px', padding: '12px', boxSizing: 'border-box' }}>
                   <h3 style={{ margin: '0 0 12px 0', fontSize: '0.95rem', color: '#c9d1d9', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '6px' }}>
                     <span>📋</span>
                     <span>Category Price Summary</span>
@@ -672,7 +854,37 @@ function TeamView() {
                           const currency = gamePrices?.currency || selectedTeam?.currency || 'USD'
                           
                           return (
-                            <tr key={category} style={{ borderBottom: '1px solid #21262d', transition: 'background 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.background = '#1c2128'} onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}>
+                            <tr 
+                              key={category} 
+                              style={{ borderBottom: '1px solid #21262d', transition: 'background 0.2s', cursor: 'pointer' }} 
+                              onMouseEnter={(e) => e.currentTarget.style.background = '#1c2128'} 
+                              onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+                              onClick={() => {
+                                // Collect all block details for this category
+                                const blockDetails = blockEntries.map(([block, price]) => {
+                                  let min, max, count
+                                  if (typeof price === 'number') {
+                                    min = max = price
+                                    count = 1
+                                  } else if (price && typeof price === 'object' && 'min' in price) {
+                                    min = price.min
+                                    max = price.max || price.min
+                                    count = price.count || 1
+                                  } else {
+                                    return null
+                                  }
+                                  return { block, min, max, count }
+                                }).filter(Boolean)
+                                
+                                setModalCategory({
+                                  category,
+                                  blocks: blockDetails,
+                                  min: catMin,
+                                  max: catMax,
+                                  totalListings: totalListings
+                                })
+                              }}
+                            >
                               <td style={{ padding: '6px 8px', color: '#c9d1d9', fontWeight: '500', fontSize: '0.8rem' }}>{category}</td>
                               <td style={{ padding: '6px 8px', textAlign: 'right', color: '#c9d1d9', fontSize: '0.8rem' }}>
                                 {catMin === catMax ? (
@@ -715,6 +927,117 @@ function TeamView() {
                       ? 'Try selecting a different date or view all dates.'
                       : 'History will appear here as more prices are collected.'}
                   </p>
+                </div>
+              )}
+
+              {/* Category Details Modal */}
+              {modalCategory && (
+                <div
+                  style={{
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    zIndex: 2000,
+                    padding: '20px'
+                  }}
+                  onClick={() => setModalCategory(null)}
+                >
+                  <div
+                    style={{
+                      background: '#161b22',
+                      border: '1px solid #30363d',
+                      borderRadius: '8px',
+                      padding: '20px',
+                      maxWidth: '600px',
+                      width: '100%',
+                      maxHeight: '80vh',
+                      overflowY: 'auto',
+                      boxShadow: '0 8px 32px rgba(0,0,0,0.5)'
+                    }}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                      <h3 style={{ margin: 0, fontSize: '1.2rem', color: '#c9d1d9', fontWeight: '600' }}>
+                        {modalCategory.category}
+                      </h3>
+                      <button
+                        onClick={() => setModalCategory(null)}
+                        style={{
+                          background: 'transparent',
+                          border: 'none',
+                          color: '#8b949e',
+                          fontSize: '1.5rem',
+                          cursor: 'pointer',
+                          padding: '0',
+                          width: '24px',
+                          height: '24px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center'
+                        }}
+                      >
+                        ×
+                      </button>
+                    </div>
+                    
+                    <div style={{ marginBottom: '16px', padding: '12px', background: '#0d1117', borderRadius: '6px', border: '1px solid #30363d' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                        <span style={{ color: '#8b949e', fontSize: '0.85rem' }}>Price Range:</span>
+                        <span style={{ color: '#c9d1d9', fontWeight: '600' }}>
+                          {(() => {
+                            const currency = gamePrices?.currency || selectedTeam?.currency || 'USD'
+                            return modalCategory.min === modalCategory.max 
+                              ? formatPrice(modalCategory.min, currency)
+                              : `${formatPrice(modalCategory.min, currency)} → ${formatPrice(modalCategory.max, currency)}`
+                          })()}
+                        </span>
+                      </div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <span style={{ color: '#8b949e', fontSize: '0.85rem' }}>Total Listings:</span>
+                        <span style={{ color: '#c9d1d9', fontWeight: '600' }}>{modalCategory.totalListings}</span>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h4 style={{ margin: '0 0 12px 0', fontSize: '0.9rem', color: '#8b949e', fontWeight: '600', textTransform: 'uppercase' }}>
+                        Blocks ({modalCategory.blocks.length})
+                      </h4>
+                      <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
+                        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem' }}>
+                          <thead>
+                            <tr style={{ borderBottom: '1px solid #30363d' }}>
+                              <th style={{ padding: '8px', textAlign: 'left', color: '#8b949e', fontWeight: '600', fontSize: '0.75rem' }}>Block</th>
+                              <th style={{ padding: '8px', textAlign: 'right', color: '#8b949e', fontWeight: '600', fontSize: '0.75rem' }}>Price Range</th>
+                              <th style={{ padding: '8px', textAlign: 'right', color: '#8b949e', fontWeight: '600', fontSize: '0.75rem' }}>Listings</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {modalCategory.blocks.map((block, idx) => {
+                              const currency = gamePrices?.currency || selectedTeam?.currency || 'USD'
+                              return (
+                                <tr key={idx} style={{ borderBottom: '1px solid #21262d' }}>
+                                  <td style={{ padding: '8px', color: '#c9d1d9' }}>{block.block}</td>
+                                  <td style={{ padding: '8px', textAlign: 'right', color: '#c9d1d9' }}>
+                                    {block.min === block.max 
+                                      ? formatPrice(block.min, currency)
+                                      : `${formatPrice(block.min, currency)} → ${formatPrice(block.max, currency)}`
+                                    }
+                                  </td>
+                                  <td style={{ padding: '8px', textAlign: 'right', color: '#8b949e' }}>{block.count}</td>
+                                </tr>
+                              )
+                            })}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               )}
             </>
