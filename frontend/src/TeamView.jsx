@@ -215,13 +215,20 @@ function TeamView() {
           }
           
           if (snapshot.prices[cat] && typeof snapshot.prices[cat] === 'object') {
-            // Block-based prices: {category: {block: price}}
+            // Block-based prices: {category: {block: price}} or {category: {block: {min, max, count}}}
             Object.keys(snapshot.prices[cat]).forEach(block => {
               const blockKey = block
               if (!dailyData[dayKey].prices[cat][blockKey]) {
                 dailyData[dayKey].prices[cat][blockKey] = []
               }
-              dailyData[dayKey].prices[cat][blockKey].push(snapshot.prices[cat][block])
+              const priceValue = snapshot.prices[cat][block]
+              // Handle both old format (number) and new format (dict with min/max/count)
+              if (typeof priceValue === 'number') {
+                dailyData[dayKey].prices[cat][blockKey].push(priceValue)
+              } else if (priceValue && typeof priceValue === 'object' && 'min' in priceValue) {
+                // New format: store min for chart, but we have access to max/count
+                dailyData[dayKey].prices[cat][blockKey].push(priceValue.min)
+              }
             })
           } else if (typeof snapshot.prices[cat] === 'number') {
             // Simple category prices: {category: price}
@@ -388,6 +395,12 @@ function TeamView() {
                       Object.values(priceData).forEach(price => {
                         if (typeof price === 'number') {
                           allPrices.push(price)
+                        } else if (price && typeof price === 'object' && 'min' in price) {
+                          // New format with min/max
+                          allPrices.push(price.min)
+                          if ('max' in price) {
+                            allPrices.push(price.max)
+                          }
                         }
                       })
                     } else if (typeof priceData === 'number') {
@@ -770,6 +783,104 @@ function TeamView() {
                         ))}
                       </AreaChart>
                     </ResponsiveContainer>
+                  </div>
+                </div>
+              )}
+
+              {/* Category Summary Table */}
+              {gamePrices && gamePrices.latest_prices && Object.keys(gamePrices.latest_prices).length > 0 && (
+                <div className="chart-section" style={{ marginTop: '20px', width: '100%', maxWidth: '900px', background: '#161b22', border: '1px solid #30363d', borderRadius: '8px', padding: '20px' }}>
+                  <h3 style={{ margin: '0 0 20px 0', fontSize: '1.1rem', color: '#c9d1d9', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <span>📋</span>
+                    <span>Category Price Summary</span>
+                    {gamePrices?.currency && (
+                      <span style={{ fontSize: '0.85rem', color: '#8b949e', fontWeight: '400', marginLeft: '8px' }}>
+                        ({getCurrencySymbol(gamePrices.currency)})
+                      </span>
+                    )}
+                  </h3>
+                  <div style={{ overflowX: 'auto' }}>
+                    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
+                      <thead>
+                        <tr style={{ borderBottom: '2px solid #30363d' }}>
+                          <th style={{ padding: '12px', textAlign: 'left', color: '#8b949e', fontWeight: '600', fontSize: '0.85rem', textTransform: 'uppercase' }}>Category</th>
+                          <th style={{ padding: '12px', textAlign: 'left', color: '#8b949e', fontWeight: '600', fontSize: '0.85rem', textTransform: 'uppercase' }}>Blocks</th>
+                          <th style={{ padding: '12px', textAlign: 'right', color: '#8b949e', fontWeight: '600', fontSize: '0.85rem', textTransform: 'uppercase' }}>Price Range</th>
+                          <th style={{ padding: '12px', textAlign: 'right', color: '#8b949e', fontWeight: '600', fontSize: '0.85rem', textTransform: 'uppercase' }}>Listings</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {Object.entries(gamePrices.latest_prices).map(([category, blocks], idx) => {
+                          if (!blocks || typeof blocks !== 'object') return null
+                          
+                          const blockEntries = Object.entries(blocks)
+                          if (blockEntries.length === 0) return null
+                          
+                          // Calculate category-wide min/max and total listings
+                          let catMin = Infinity
+                          let catMax = -Infinity
+                          let totalListings = 0
+                          const blockList = []
+                          
+                          blockEntries.forEach(([block, price]) => {
+                            let min, max, count
+                            if (typeof price === 'number') {
+                              min = max = price
+                              count = 1
+                            } else if (price && typeof price === 'object' && 'min' in price) {
+                              min = price.min
+                              max = price.max || price.min
+                              count = price.count || 1
+                            } else {
+                              return
+                            }
+                            
+                            catMin = Math.min(catMin, min)
+                            catMax = Math.max(catMax, max)
+                            totalListings += count
+                            blockList.push({ block, min, max, count })
+                          })
+                          
+                          if (catMin === Infinity) return null
+                          
+                          const currency = gamePrices?.currency || selectedTeam?.currency || 'USD'
+                          
+                          return (
+                            <tr key={category} style={{ borderBottom: '1px solid #21262d', transition: 'background 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.background = '#1c2128'} onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}>
+                              <td style={{ padding: '12px', color: '#c9d1d9', fontWeight: '500' }}>{category}</td>
+                              <td style={{ padding: '12px', color: '#8b949e', fontSize: '0.85rem' }}>
+                                {blockList.length} {blockList.length === 1 ? 'block' : 'blocks'}
+                                {blockList.length <= 5 && (
+                                  <div style={{ marginTop: '4px', fontSize: '0.75rem', color: '#6e7681' }}>
+                                    {blockList.map(b => b.block).join(', ')}
+                                  </div>
+                                )}
+                              </td>
+                              <td style={{ padding: '12px', textAlign: 'right', color: '#c9d1d9' }}>
+                                {catMin === catMax ? (
+                                  <span style={{ fontWeight: '600', color: '#58a6ff' }}>
+                                    {formatPrice(catMin, currency)}
+                                  </span>
+                                ) : (
+                                  <span>
+                                    <span style={{ fontWeight: '600', color: '#56d364' }}>
+                                      {formatPrice(catMin, currency)}
+                                    </span>
+                                    <span style={{ margin: '0 6px', color: '#6e7681' }}>→</span>
+                                    <span style={{ fontWeight: '600', color: '#ff7b72' }}>
+                                      {formatPrice(catMax, currency)}
+                                    </span>
+                                  </span>
+                                )}
+                              </td>
+                              <td style={{ padding: '12px', textAlign: 'right', color: '#8b949e', fontSize: '0.85rem' }}>
+                                {totalListings} {totalListings === 1 ? 'listing' : 'listings'}
+                              </td>
+                            </tr>
+                          )
+                        })}
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               )}

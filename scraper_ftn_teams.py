@@ -954,9 +954,8 @@ def scrape_game_prices(driver, game_url, game_name, team_key=None):
             except Exception as e:
                 print(f'      ❌ Text fallback failed: {e}', flush=True)
         
-        # Convert to final format: {category: {block: min_price}}
-        # Store min price per category/block (for backward compatibility)
-        # But also track all prices to show full range
+        # Convert to final format: {category: {block: price_info}}
+        # Store price info with min, max, and count for better UI display
         result = {}
         all_prices = []  # Track all prices for summary
         
@@ -965,7 +964,19 @@ def scrape_game_prices(driver, game_url, game_name, team_key=None):
             for block, prices_list in blocks.items():
                 if prices_list:
                     min_price = min(prices_list)
-                    result[category][block] = min_price  # Store min for compatibility
+                    max_price = max(prices_list)
+                    # Store as dict with min, max, count for better UI
+                    # Keep backward compatibility: if only one price, store as number
+                    if len(prices_list) == 1:
+                        result[category][block] = min_price  # Single price
+                    else:
+                        # Store as dict with price info (UI can use min for display, but has access to range)
+                        result[category][block] = {
+                            'min': min_price,
+                            'max': max_price,
+                            'count': len(prices_list),
+                            '_price': min_price  # For backward compatibility
+                        }
                     all_prices.extend(prices_list)  # Keep all prices for range calculation
         
         # If no results, return empty dict
@@ -1064,8 +1075,29 @@ def run_team_scraper(team_key='arsenal'):
         # Step 2: Update game list
         # - Add new games
         # - Remove games that no longer exist (but keep history)
+        # - Remove games that have passed their date (but keep history)
         existing_games = {g['url']: g for g in existing_data[team_key]['games']}
         current_urls = {g['url']: g for g in current_games}
+        
+        # Helper function to parse game date
+        def parse_game_date(date_str):
+            """Parse date string in format DD/MM/YY to datetime"""
+            try:
+                if not date_str:
+                    return None
+                # Format: "27/12/25" -> DD/MM/YY
+                parts = date_str.split('/')
+                if len(parts) == 3:
+                    day, month, year = int(parts[0]), int(parts[1]), int(parts[2])
+                    # Convert 2-digit year to 4-digit (assuming 20xx for years < 50, 19xx otherwise)
+                    if year < 50:
+                        year += 2000
+                    else:
+                        year += 1900
+                    return datetime(year, month, day)
+            except Exception:
+                pass
+            return None
         
         # Add new games
         for game in current_games:
@@ -1077,41 +1109,79 @@ def run_team_scraper(team_key='arsenal'):
                 print(f'   ➕ Added new game: {game["match_name"]}', flush=True)
         
         # Mark games for removal (but keep history)
+        # 1. Games no longer on site
         removed_games = []
         for url, game in existing_games.items():
             if url not in current_urls:
                 removed_games.append(game['match_name'])
                 print(f'   ➖ Game no longer on site (keeping history): {game["match_name"]}', flush=True)
         
-        # Step 3: Scrape prices for all current games
+        # 2. Games that have passed their date
+        today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+        past_games = []
+        for url, game in existing_games.items():
+            game_date = parse_game_date(game.get('date'))
+            if game_date and game_date < today:
+                past_games.append(game['match_name'])
+                print(f'   📅 Game date passed (keeping history): {game["match_name"]} ({game.get("date", "unknown date")})', flush=True)
+        
+        # Step 3: Filter out past games from scraping (but keep in data)
+        today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+        games_to_scrape = {}
+        for url, game in current_urls.items():
+            game_date = parse_game_date(game.get('date'))
+            if not game_date or game_date >= today:
+                games_to_scrape[url] = game
+            else:
+                print(f'   ⏭️  Skipping past game: {game["match_name"]} ({game.get("date", "unknown date")})', flush=True)
+        
+        # Step 4: Scrape prices for all current future games
         run_timestamp = datetime.now().isoformat()
         print(f'\n   📅 Run timestamp: {run_timestamp}', flush=True)
-        print(f'   📊 Scraping prices for {len(current_urls)} games...\n', flush=True)
+        print(f'   📊 Scraping prices for {len(games_to_scrape)} future games...\n', flush=True)
         
-        for i, (url, game) in enumerate(current_urls.items(), 1):
+        for i, (url, game) in enumerate(games_to_scrape.items(), 1):
             game_data = existing_games[url]
-            print(f'   [{i}/{len(current_urls)}] {game_data["match_name"]}...', flush=True)
+            print(f'   [{i}/{len(games_to_scrape)}] {game_data["match_name"]}...', flush=True)
             
             prices = scrape_game_prices(driver, url, game_data['match_name'], team_key)
             
             if prices:
                 # Count total blocks/categories
                 total_blocks = sum(len(blocks) for blocks in prices.values())
-                # Add price snapshot to history
+                # Convert new format to old format for price_history (backward compatibility)
+                # But keep new format in latest_prices for UI
+                prices_for_history = {}
+                for cat, blocks in prices.items():
+                    prices_for_history[cat] = {}
+                    for block, price_info in blocks.items():
+                        # Extract price value (min) for history
+                        if isinstance(price_info, dict) and 'min' in price_info:
+                            prices_for_history[cat][block] = price_info['min']
+                        else:
+                            prices_for_history[cat][block] = price_info
+                
+                # Add price snapshot to history (use old format for compatibility)
                 price_snapshot = {
                     'timestamp': run_timestamp,
-                    'prices': prices  # Format: {category: {block: price}}
+                    'prices': prices_for_history  # Format: {category: {block: price}}
                 }
                 game_data['price_history'].append(price_snapshot)
-                game_data['latest_prices'] = prices
+                game_data['latest_prices'] = prices  # Keep new format with min/max/count
                 game_data['last_scraped'] = run_timestamp
                 print(f'      ✅ Found {len(prices)} categories with {total_blocks} blocks', flush=True)
                 # Show sample prices
                 for cat, blocks in list(prices.items())[:3]:
-                    for block, price in list(blocks.items())[:2]:
+                    for block, price_info in list(blocks.items())[:2]:
                         currency_symbol = get_team_currency(team_key)
                         currency_display = {'GBP': '£', 'EUR': '€', 'USD': '$'}.get(currency_symbol, '$')
-                        print(f'         {cat} - Block {block}: {currency_display}{price:.2f}', flush=True)
+                        if isinstance(price_info, dict) and 'min' in price_info:
+                            if price_info.get('min') == price_info.get('max'):
+                                print(f'         {cat} - Block {block}: {currency_display}{price_info["min"]:.2f}', flush=True)
+                            else:
+                                print(f'         {cat} - Block {block}: {currency_display}{price_info["min"]:.2f} - {currency_display}{price_info["max"]:.2f} ({price_info.get("count", 1)} listings)', flush=True)
+                        else:
+                            print(f'         {cat} - Block {block}: {currency_display}{price_info:.2f}', flush=True)
             else:
                 print(f'      ⚠️ No prices found', flush=True)
             
