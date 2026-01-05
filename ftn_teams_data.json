@@ -33642,163 +33642,24 @@
                 "Unknown": 2250.0
               }
             }
+          },
+          {
+            "timestamp": "2026-01-05T14:17:30.097301",
+            "prices": {
+              "Category 4": 154.0,
+              "Category 3": 160.0,
+              "Category 2": 176.0,
+              "Category 1": 205.0
+            }
           }
         ],
         "latest_prices": {
-          "Category 4": {
-            "Unknown": {
-              "min": 119.0,
-              "max": 1998.0,
-              "count": 49,
-              "_price": 119.0
-            },
-            "Row: SINGLE SEATS": 244.0
-          },
-          "Category 3": {
-            "Unknown": {
-              "min": 148.99,
-              "max": 999.0,
-              "count": 36,
-              "_price": 148.99
-            }
-          },
-          "Category 2 Lateral": {
-            "Unknown": {
-              "min": 157.99,
-              "max": 999.0,
-              "count": 43,
-              "_price": 157.99
-            },
-            "604,602,601,603": 371.95
-          },
-          "Category 2": {
-            "Unknown": {
-              "min": 180.99,
-              "max": 1998.0,
-              "count": 42,
-              "_price": 180.99
-            },
-            "326": 225.0,
-            "115": {
-              "min": 350.0,
-              "max": 400.0,
-              "count": 2,
-              "_price": 350.0
-            },
-            "123,124": 375.0,
-            "Row: -": 420.0
-          },
-          "Category 1": {
-            "Unknown": {
-              "min": 191.0,
-              "max": 999.0,
-              "count": 42,
-              "_price": 191.0
-            },
-            "544,543,501,502": 419.0,
-            "636,638": 430.0,
-            "638": 530.0
-          },
-          "Category 1 Premium": {
-            "Unknown": {
-              "min": 205.99,
-              "max": 999.0,
-              "count": 35,
-              "_price": 205.99
-            },
-            "330": 325.0,
-            "406,405,438,437": 439.0,
-            "Row: -": 670.0
-          },
-          "Category 1 Silver": {
-            "Unknown": {
-              "min": 209.99,
-              "max": 999.0,
-              "count": 33,
-              "_price": 209.99
-            },
-            "110,126": 400.0,
-            "108,107,128,127": 439.0,
-            "108,107": 500.0,
-            "127": {
-              "min": 565.0,
-              "max": 645.0,
-              "count": 3,
-              "_price": 565.0
-            },
-            "Row: -": 580.0
-          },
-          "Category 1 Gold": {
-            "Unknown": {
-              "min": 221.99,
-              "max": 999.0,
-              "count": 37,
-              "_price": 221.99
-            },
-            "402,404,401,403": 444.0,
-            "402,401": 544.0,
-            "440,442,444,443": 544.0
-          },
-          "Best Available": {
-            "Unknown": 225.0
-          },
-          "Category 1 Platinum": {
-            "Unknown": {
-              "min": 254.99,
-              "max": 999.0,
-              "count": 40,
-              "_price": 254.99
-            },
-            "132": {
-              "min": 469.0,
-              "max": 600.0,
-              "count": 2,
-              "_price": 469.0
-            },
-            "130": {
-              "min": 469.0,
-              "max": 619.0,
-              "count": 3,
-              "_price": 469.0
-            },
-            "129": {
-              "min": 500.0,
-              "max": 600.0,
-              "count": 2,
-              "_price": 500.0
-            },
-            "105": 550.0,
-            "106": {
-              "min": 550.0,
-              "max": 600.0,
-              "count": 2,
-              "_price": 550.0
-            },
-            "101": {
-              "min": 599.99,
-              "max": 600.0,
-              "count": 2,
-              "_price": 599.99
-            },
-            "102": 599.99,
-            "104": 600.0,
-            "103": 600.0,
-            "101,102,133,134": 615.0,
-            "102,101,134,133": 619.0,
-            "130,129": 619.0,
-            "131": 650.0,
-            "134": 999.99,
-            "133": 999.99
-          },
-          "Real Madrid VIP Hospitality Package": {
-            "Row: -": 420.0,
-            "Unknown": 435.0
-          },
-          "Private VIP Box": {
-            "Unknown": 2250.0
-          }
+          "Category 4": 154.0,
+          "Category 3": 160.0,
+          "Category 2": 176.0,
+          "Category 1": 205.0
         },
-        "last_scraped": "2026-01-05T10:04:25.506301"
+        "last_scraped": "2026-01-05T14:17:30.097301"
       },
       {
         "url": "https://www.footballticketnet.com/champions-league/real-madrid-vs-as-monaco",
@@ -34462,152 +34323,24 @@
                 "Unknown": 2500.0
               }
             }
+          },
+          {
+            "timestamp": "2026-01-05T14:17:30.097301",
+            "prices": {
+              "Category 4": 192.99,
+              "Category 3": 206.0,
+              "Category 2": 211.99,
+              "Category 1": 271.98
+            }
           }
         ],
         "latest_prices": {
-          "Category 4": {
-            "Unknown": {
-              "min": 156.0,
-              "max": 400.0,
-              "count": 31,
-              "_price": 156.0
-            },
-            "617": 350.0
-          },
-          "Category 3": {
-            "Unknown": {
-              "min": 182.99,
-              "max": 695.0,
-              "count": 25,
-              "_price": 182.99
-            }
-          },
-          "Category 2 Lateral": {
-            "Unknown": {
-              "min": 188.99,
-              "max": 445.0,
-              "count": 26,
-              "_price": 188.99
-            },
-            "604,602,601,603": 400.98,
-            "Row: -": 450.0
-          },
-          "Category 2": {
-            "Unknown": {
-              "min": 204.0,
-              "max": 700.0,
-              "count": 26,
-              "_price": 204.0
-            },
-            "123": 400.0,
-            "115": {
-              "min": 400.0,
-              "max": 450.0,
-              "count": 2,
-              "_price": 400.0
-            },
-            "221": 425.0,
-            "Row: -": 505.0
-          },
-          "Category 1": {
-            "Unknown": {
-              "min": 211.0,
-              "max": 490.0,
-              "count": 26,
-              "_price": 211.0
-            },
-            "Row: -": 530.0,
-            "544,543,502,501": 556.98,
-            "638": 575.0,
-            "636,638": 575.0
-          },
-          "Best Available": {
-            "Unknown": 250.0
-          },
-          "Category 1 Premium": {
-            "Unknown": {
-              "min": 268.87,
-              "max": 600.0,
-              "count": 26,
-              "_price": 268.87
-            },
-            "406,405,438,437": 515.0,
-            "Row: -": {
-              "min": 575.0,
-              "max": 645.0,
-              "count": 2,
-              "_price": 575.0
-            }
-          },
-          "Category 1 Silver": {
-            "Unknown": {
-              "min": 280.99,
-              "max": 575.0,
-              "count": 24,
-              "_price": 280.99
-            },
-            "126": {
-              "min": 400.0,
-              "max": 400.0,
-              "count": 2,
-              "_price": 400.0
-            },
-            "107": 500.0,
-            "108": 500.0,
-            "108,107,128,127": 516.98,
-            "Row: -": 735.0,
-            "127": 780.0
-          },
-          "Category 1 Gold": {
-            "Unknown": {
-              "min": 292.99,
-              "max": 590.0,
-              "count": 27,
-              "_price": 292.99
-            },
-            "440,442,444,443": 571.99,
-            "404,402,401,403": 571.99,
-            "402,401": 671.99,
-            "305": 850.0
-          },
-          "Category 1 Platinum": {
-            "Unknown": {
-              "min": 313.99,
-              "max": 600.0,
-              "count": 27,
-              "_price": 313.99
-            },
-            "129,130": 556.98,
-            "101,102,134,133": {
-              "min": 595.0,
-              "max": 756.98,
-              "count": 3,
-              "_price": 595.0
-            },
-            "132": 606.98,
-            "130": 606.98,
-            "106": 650.0,
-            "102": 650.0,
-            "101": 650.0,
-            "104": 750.0,
-            "133": 795.0,
-            "134": 800.0,
-            "204": 900.0,
-            "200": 1500.0
-          },
-          "Real Madrid VIP Hospitality Package": {
-            "Unknown": {
-              "min": 465.0,
-              "max": 650.0,
-              "count": 2,
-              "_price": 465.0
-            }
-          },
-          "Private VIP Box": {
-            "Unknown": 2500.0
-          }
+          "Category 4": 192.99,
+          "Category 3": 206.0,
+          "Category 2": 211.99,
+          "Category 1": 271.98
         },
-        "last_scraped": "2026-01-05T10:04:25.506301"
+        "last_scraped": "2026-01-05T14:17:30.097301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-rayo-vallecano",
@@ -35178,127 +34911,24 @@
                 "Row: -": 560.0
               }
             }
+          },
+          {
+            "timestamp": "2026-01-05T14:17:30.097301",
+            "prices": {
+              "Category 4": 173.0,
+              "Category 3": 178.95,
+              "Category 2": 187.0,
+              "Category 1": 243.0
+            }
           }
         ],
         "latest_prices": {
-          "Category 4": {
-            "Unknown": {
-              "min": 141.0,
-              "max": 797.98,
-              "count": 32,
-              "_price": 141.0
-            },
-            "Row: SINGLE SEATS": 244.0
-          },
-          "Category 3": {
-            "Unknown": {
-              "min": 154.99,
-              "max": 797.98,
-              "count": 24,
-              "_price": 154.99
-            }
-          },
-          "Category 2 Lateral": {
-            "Unknown": {
-              "min": 162.99,
-              "max": 797.98,
-              "count": 31,
-              "_price": 162.99
-            },
-            "604,602,601,603": 339.0
-          },
-          "Category 2": {
-            "Unknown": {
-              "min": 178.99,
-              "max": 797.98,
-              "count": 32,
-              "_price": 178.99
-            },
-            "124": 350.0,
-            "123": 350.0,
-            "Row: -": 420.0
-          },
-          "Category 1": {
-            "Unknown": {
-              "min": 206.99,
-              "max": 750.0,
-              "count": 32,
-              "_price": 206.99
-            },
-            "636,638": 380.0,
-            "544,543,501,502": 394.0,
-            "638": 525.0
-          },
-          "Category 1 Premium": {
-            "Unknown": {
-              "min": 213.99,
-              "max": 393.0,
-              "count": 26,
-              "_price": 213.99
-            },
-            "406,405,438,437": 409.0,
-            "Row: -": 670.0
-          },
-          "Category 1 Silver": {
-            "Unknown": {
-              "min": 228.99,
-              "max": 800.0,
-              "count": 25,
-              "_price": 228.99
-            },
-            "110": 375.0,
-            "126": 375.0,
-            "108": 400.0,
-            "108,107,128,127": 419.0,
-            "Row: -": 605.0,
-            "127": {
-              "min": 625.0,
-              "max": 645.0,
-              "count": 2,
-              "_price": 625.0
-            }
-          },
-          "Category 1 Gold": {
-            "Unknown": {
-              "min": 236.99,
-              "max": 640.0,
-              "count": 30,
-              "_price": 236.99
-            },
-            "402,404,401,403": 417.28,
-            "440,442,444,443": 417.28,
-            "402,401": 517.28
-          },
-          "Category 1 Platinum": {
-            "Unknown": {
-              "min": 260.99,
-              "max": 950.0,
-              "count": 29,
-              "_price": 260.99
-            },
-            "130,129": 414.0,
-            "132": 464.0,
-            "130": {
-              "min": 464.0,
-              "max": 514.0,
-              "count": 2,
-              "_price": 464.0
-            },
-            "106": 600.0,
-            "102,101,134,133": 614.0,
-            "104": 750.0,
-            "134": 1500.0
-          },
-          "Real Madrid VIP Hospitality Package": {
-            "Row: -": {
-              "min": 560.0,
-              "max": 655.0,
-              "count": 2,
-              "_price": 560.0
-            }
-          }
+          "Category 4": 173.0,
+          "Category 3": 178.95,
+          "Category 2": 187.0,
+          "Category 1": 243.0
         },
-        "last_scraped": "2026-01-05T10:04:25.506301"
+        "last_scraped": "2026-01-05T14:17:30.097301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-real-sociedad",
@@ -35857,115 +35487,26 @@
                 "Row: -": 590.0
               }
             }
+          },
+          {
+            "timestamp": "2026-01-05T14:17:30.097301",
+            "prices": {
+              "Category 4": 214.0,
+              "Category 3": 219.99,
+              "Category 2": 235.95,
+              "Category 1": 265.0,
+              "Real Madrid VIP Hospitality Package": 590.0
+            }
           }
         ],
         "latest_prices": {
-          "Category 4": {
-            "Unknown": {
-              "min": 143.0,
-              "max": 797.96,
-              "count": 31,
-              "_price": 143.0
-            },
-            "Row: SINGLE SEATS": 244.0
-          },
-          "Category 3": {
-            "Unknown": {
-              "min": 162.0,
-              "max": 797.96,
-              "count": 23,
-              "_price": 162.0
-            }
-          },
-          "Category 2 Lateral": {
-            "Unknown": {
-              "min": 178.0,
-              "max": 797.96,
-              "count": 30,
-              "_price": 178.0
-            },
-            "604,602,601,603": 385.95
-          },
-          "Category 2": {
-            "Unknown": {
-              "min": 201.0,
-              "max": 475.0,
-              "count": 29,
-              "_price": 201.0
-            },
-            "123": 325.0,
-            "124": 325.0,
-            "Row: -": 535.0
-          },
-          "Category 1": {
-            "Unknown": {
-              "min": 211.0,
-              "max": 750.0,
-              "count": 28,
-              "_price": 211.0
-            },
-            "544,543,501,502": 419.0,
-            "638": 670.0
-          },
-          "Category 1 Premium": {
-            "Unknown": {
-              "min": 217.0,
-              "max": 490.0,
-              "count": 23,
-              "_price": 217.0
-            },
-            "406,405,438,437": 439.0,
-            "Row: -": 825.0
-          },
-          "Category 1 Silver": {
-            "Unknown": {
-              "min": 231.0,
-              "max": 800.0,
-              "count": 24,
-              "_price": 231.0
-            },
-            "110": 350.0,
-            "126": 350.0,
-            "108": 395.0,
-            "108,107,128,127": 439.0,
-            "127": 695.0
-          },
-          "Category 1 Gold": {
-            "Unknown": {
-              "min": 239.0,
-              "max": 640.0,
-              "count": 25,
-              "_price": 239.0
-            },
-            "402,404,401,403": 444.0,
-            "440,442,444,443": 444.0,
-            "402,401": 544.0
-          },
-          "Category 1 Platinum": {
-            "Unknown": {
-              "min": 263.0,
-              "max": 950.0,
-              "count": 26,
-              "_price": 263.0
-            },
-            "130,129": 419.0,
-            "132": 469.0,
-            "130": {
-              "min": 469.0,
-              "max": 519.0,
-              "count": 2,
-              "_price": 469.0
-            },
-            "106": 600.0,
-            "102,101,134,133": 619.0,
-            "104": 750.0,
-            "134": 1750.0
-          },
-          "Real Madrid VIP Hospitality Package": {
-            "Row: -": 590.0
-          }
+          "Category 4": 214.0,
+          "Category 3": 219.99,
+          "Category 2": 235.95,
+          "Category 1": 265.0,
+          "Real Madrid VIP Hospitality Package": 590.0
         },
-        "last_scraped": "2026-01-05T10:04:25.506301"
+        "last_scraped": "2026-01-05T14:17:30.097301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-getafe-cf",
@@ -36494,115 +36035,24 @@
                 "Row: -": 515.0
               }
             }
+          },
+          {
+            "timestamp": "2026-01-05T14:17:30.097301",
+            "prices": {
+              "Category 4": 185.0,
+              "Category 3": 203.99,
+              "Category 2": 214.0,
+              "Category 1": 269.0
+            }
           }
         ],
         "latest_prices": {
-          "Category 4": {
-            "Unknown": {
-              "min": 144.0,
-              "max": 797.98,
-              "count": 35,
-              "_price": 144.0
-            },
-            "Row: SINGLE SEATS": 244.0
-          },
-          "Category 3": {
-            "Unknown": {
-              "min": 165.99,
-              "max": 798.0,
-              "count": 29,
-              "_price": 165.99
-            }
-          },
-          "Category 2 Lateral": {
-            "Unknown": {
-              "min": 170.0,
-              "max": 797.98,
-              "count": 33,
-              "_price": 170.0
-            },
-            "604,602,601,603": 369.0
-          },
-          "Category 2": {
-            "Unknown": {
-              "min": 186.99,
-              "max": 475.0,
-              "count": 31,
-              "_price": 186.99
-            },
-            "Row: -": 480.0
-          },
-          "Category 1": {
-            "Unknown": {
-              "min": 214.99,
-              "max": 750.0,
-              "count": 31,
-              "_price": 214.99
-            },
-            "544,543,501,502": 419.0,
-            "636,638": 475.0,
-            "638": 530.0
-          },
-          "Category 1 Premium": {
-            "Unknown": {
-              "min": 223.95,
-              "max": 573.0,
-              "count": 26,
-              "_price": 223.95
-            },
-            "406,405,438,437": 434.0,
-            "Row: -": 725.0
-          },
-          "Category 1 Silver": {
-            "Unknown": {
-              "min": 233.99,
-              "max": 800.0,
-              "count": 24,
-              "_price": 233.99
-            },
-            "108,107,128,127": 439.0,
-            "Row: -": 575.0,
-            "127": 635.0
-          },
-          "Category 1 Gold": {
-            "Unknown": {
-              "min": 241.0,
-              "max": 640.0,
-              "count": 26,
-              "_price": 241.0
-            },
-            "402,404,401,403": 444.98,
-            "440,442,444,443": 444.98,
-            "402,401": 444.98
-          },
-          "Category 1 Platinum": {
-            "Unknown": {
-              "min": 266.99,
-              "max": 950.0,
-              "count": 27,
-              "_price": 266.99
-            },
-            "130,129": 409.0,
-            "132": 459.0,
-            "130": {
-              "min": 459.0,
-              "max": 509.0,
-              "count": 2,
-              "_price": 459.0
-            },
-            "102,101,134,133": 609.0,
-            "134": 1500.0
-          },
-          "Real Madrid VIP Hospitality Package": {
-            "Row: -": {
-              "min": 515.0,
-              "max": 610.0,
-              "count": 2,
-              "_price": 515.0
-            }
-          }
+          "Category 4": 185.0,
+          "Category 3": 203.99,
+          "Category 2": 214.0,
+          "Category 1": 269.0
         },
-        "last_scraped": "2026-01-05T10:04:25.506301"
+        "last_scraped": "2026-01-05T14:17:30.097301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-elche",
@@ -37125,119 +36575,24 @@
                 "Row: -": 490.0
               }
             }
+          },
+          {
+            "timestamp": "2026-01-05T14:17:30.097301",
+            "prices": {
+              "Category 4": 185.0,
+              "Category 3": 202.98,
+              "Category 2": 210.98,
+              "Category 1": 255.0
+            }
           }
         ],
         "latest_prices": {
-          "Category 4": {
-            "Unknown": {
-              "min": 134.0,
-              "max": 798.0,
-              "count": 30,
-              "_price": 134.0
-            },
-            "Row: SINGLE SEATS": 244.0
-          },
-          "Category 3": {
-            "Unknown": {
-              "min": 166.0,
-              "max": 797.96,
-              "count": 24,
-              "_price": 166.0
-            }
-          },
-          "Category 2 Lateral": {
-            "Unknown": {
-              "min": 174.0,
-              "max": 797.96,
-              "count": 28,
-              "_price": 174.0
-            },
-            "604,602,601,603": 360.98
-          },
-          "Category 2": {
-            "Unknown": {
-              "min": 181.0,
-              "max": 475.0,
-              "count": 28,
-              "_price": 181.0
-            },
-            "Row: -": 480.0
-          },
-          "Category 1": {
-            "Unknown": {
-              "min": 216.99,
-              "max": 750.0,
-              "count": 28,
-              "_price": 216.99
-            },
-            "544,543,501,502": 409.0,
-            "638": 420.0,
-            "636,638": 475.0
-          },
-          "Category 1 Premium": {
-            "Unknown": {
-              "min": 217.99,
-              "max": 573.0,
-              "count": 26,
-              "_price": 217.99
-            },
-            "406,405,438,437": 409.0,
-            "Row: -": 725.0
-          },
-          "Category 1 Silver": {
-            "Unknown": {
-              "min": 230.99,
-              "max": 800.0,
-              "count": 25,
-              "_price": 230.99
-            },
-            "108,107,128,127": 439.0,
-            "Row: -": 575.0,
-            "127": {
-              "min": 635.0,
-              "max": 645.0,
-              "count": 3,
-              "_price": 635.0
-            }
-          },
-          "Category 1 Gold": {
-            "Unknown": {
-              "min": 238.99,
-              "max": 640.0,
-              "count": 27,
-              "_price": 238.99
-            },
-            "402,404,401,403": 414.97,
-            "440,442,444,443": 414.97,
-            "402,401": 514.97
-          },
-          "Category 1 Platinum": {
-            "Unknown": {
-              "min": 249.99,
-              "max": 950.0,
-              "count": 26,
-              "_price": 249.99
-            },
-            "130,129": 374.97,
-            "130": {
-              "min": 424.97,
-              "max": 474.97,
-              "count": 2,
-              "_price": 424.97
-            },
-            "102,101,134,133": 574.97,
-            "134": 1500.0
-          },
-          "Real Madrid VIP Hospitality Package": {
-            "Row: -": {
-              "min": 490.0,
-              "max": 590.0,
-              "count": 2,
-              "_price": 490.0
-            }
-          }
+          "Category 4": 185.0,
+          "Category 3": 202.98,
+          "Category 2": 210.98,
+          "Category 1": 255.0
         },
-        "last_scraped": "2026-01-05T10:04:25.506301"
+        "last_scraped": "2026-01-05T14:17:30.097301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-atletico-madrid",
@@ -38004,123 +37359,26 @@
                 "Unknown": 2000.0
               }
             }
+          },
+          {
+            "timestamp": "2026-01-05T14:17:30.097301",
+            "prices": {
+              "Category 4": 354.0,
+              "Category 3": 418.0,
+              "Category 2": 453.0,
+              "Category 1": 485.0,
+              "Real Madrid VIP Hospitality Package": 2000.0
+            }
           }
         ],
         "latest_prices": {
-          "Category 4": {
-            "Unknown": {
-              "min": 336.0,
-              "max": 1998.0,
-              "count": 26,
-              "_price": 336.0
-            },
-            "Row: SINGLE SEATS": 385.0
-          },
-          "Category 3": {
-            "Unknown": {
-              "min": 406.0,
-              "max": 1998.0,
-              "count": 21,
-              "_price": 406.0
-            }
-          },
-          "Category 2 Lateral": {
-            "Unknown": {
-              "min": 425.0,
-              "max": 2000.0,
-              "count": 28,
-              "_price": 425.0
-            },
-            "604,602,601,603": 725.0
-          },
-          "Category 2": {
-            "Unknown": {
-              "min": 442.0,
-              "max": 1998.0,
-              "count": 28,
-              "_price": 442.0
-            },
-            "117": 775.0,
-            "Row: -": 875.0
-          },
-          "Category 1": {
-            "Unknown": {
-              "min": 448.0,
-              "max": 3000.0,
-              "count": 32,
-              "_price": 448.0
-            },
-            "544,543,501,502": 740.0,
-            "636,638": 1090.0
-          },
-          "Category 1 Premium": {
-            "Unknown": {
-              "min": 510.0,
-              "max": 1365.0,
-              "count": 24,
-              "_price": 510.0
-            },
-            "406,405,438,437": 771.95,
-            "Row: -": 1320.0
-          },
-          "Category 1 Silver": {
-            "Unknown": {
-              "min": 514.0,
-              "max": 950.0,
-              "count": 23,
-              "_price": 514.0
-            },
-            "108,107,128,127": 776.06,
-            "128": 850.0,
-            "107": 1000.0,
-            "127": {
-              "min": 1110.0,
-              "max": 1760.0,
-              "count": 2,
-              "_price": 1110.0
-            },
-            "Row: -": 1695.0
-          },
-          "Category 1 Gold": {
-            "Unknown": {
-              "min": 590.0,
-              "max": 1430.0,
-              "count": 28,
-              "_price": 590.0
-            },
-            "402,404,401,403": 900.0,
-            "440,442,444,443": 900.0,
-            "402,401": 1000.0
-          },
-          "Category 1 Platinum": {
-            "Unknown": {
-              "min": 619.99,
-              "max": 3998.0,
-              "count": 29,
-              "_price": 619.99
-            },
-            "130,129": {
-              "min": 849.95,
-              "max": 900.0,
-              "count": 2,
-              "_price": 849.95
-            },
-            "132": 899.95,
-            "103,104": 900.0,
-            "130": 1024.95,
-            "101,102": 1050.0,
-            "102,101,134,133": 1149.95,
-            "104": 1500.0,
-            "134": 3000.0,
-            "Row: FRONT 20 ROWS - SEATED TOGETHER": 4000.0
-          },
-          "Real Madrid VIP Hospitality Package": {
-            "Row: -": 1120.0,
-            "127": 1150.0,
-            "Unknown": 2000.0
-          }
+          "Category 4": 354.0,
+          "Category 3": 418.0,
+          "Category 2": 453.0,
+          "Category 1": 485.0,
+          "Real Madrid VIP Hospitality Package": 2000.0
         },
-        "last_scraped": "2026-01-05T10:04:25.506301"
+        "last_scraped": "2026-01-05T14:17:30.097301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-girona",
@@ -38818,114 +38076,24 @@
                 "Row: -": 615.0
               }
             }
+          },
+          {
+            "timestamp": "2026-01-05T14:17:30.097301",
+            "prices": {
+              "Category 4": 174.0,
+              "Category 3": 190.0,
+              "Category 2": 215.0,
+              "Category 1": 279.98
+            }
           }
         ],
         "latest_prices": {
-          "Category 4": {
-            "Unknown": {
-              "min": 150.0,
-              "max": 600.0,
-              "count": 28,
-              "_price": 150.0
-            },
-            "Row: SINGLE SEATS": 244.0
-          },
-          "Category 3": {
-            "Unknown": {
-              "min": 179.99,
-              "max": 792.0,
-              "count": 23,
-              "_price": 179.99
-            }
-          },
-          "Category 2 Lateral": {
-            "Unknown": {
-              "min": 193.0,
-              "max": 1000.0,
-              "count": 28,
-              "_price": 193.0
-            },
-            "604,602,601,603": 379.0
-          },
-          "Category 2": {
-            "Unknown": {
-              "min": 204.0,
-              "max": 700.0,
-              "count": 29,
-              "_price": 204.0
-            },
-            "Row: -": 535.0
-          },
-          "Category 1": {
-            "Unknown": {
-              "min": 221.0,
-              "max": 1200.0,
-              "count": 30,
-              "_price": 221.0
-            },
-            "544,543,501,502": 429.98,
-            "636,638": 575.0,
-            "638": 600.0
-          },
-          "Category 1 Premium": {
-            "Unknown": {
-              "min": 224.8,
-              "max": 798.0,
-              "count": 25,
-              "_price": 224.8
-            },
-            "406,405,438,437": 452.08,
-            "Row: -": 805.0
-          },
-          "Category 1 Silver": {
-            "Unknown": {
-              "min": 233.0,
-              "max": 800.0,
-              "count": 25,
-              "_price": 233.0
-            },
-            "108,107,128,127": 479.98,
-            "127": {
-              "min": 680.0,
-              "max": 750.0,
-              "count": 4,
-              "_price": 680.0
-            },
-            "Row: -": 705.0
-          },
-          "Category 1 Gold": {
-            "Unknown": {
-              "min": 243.0,
-              "max": 640.0,
-              "count": 27,
-              "_price": 243.0
-            },
-            "402,404,401,403": 463.93,
-            "440,442,444,443": 463.93,
-            "402,401": 563.93
-          },
-          "Category 1 Platinum": {
-            "Unknown": {
-              "min": 280.0,
-              "max": 950.0,
-              "count": 25,
-              "_price": 280.0
-            },
-            "130,129": 460.98,
-            "132": 510.98,
-            "130": {
-              "min": 510.98,
-              "max": 560.98,
-              "count": 2,
-              "_price": 510.98
-            },
-            "102,101,134,133": 660.98
-          },
-          "Real Madrid VIP Hospitality Package": {
-            "Row: -": 615.0
-          }
+          "Category 4": 174.0,
+          "Category 3": 190.0,
+          "Category 2": 215.0,
+          "Category 1": 279.98
         },
-        "last_scraped": "2026-01-05T10:04:25.506301"
+        "last_scraped": "2026-01-05T14:17:30.097301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-deportivo-alaves",
@@ -39712,120 +38880,24 @@
                 "Row: -": 485.0
               }
             }
+          },
+          {
+            "timestamp": "2026-01-05T14:17:30.097301",
+            "prices": {
+              "Category 4": 173.0,
+              "Category 3": 234.95,
+              "Category 2": 238.0,
+              "Category 1": 279.99
+            }
           }
         ],
         "latest_prices": {
-          "Category 4": {
-            "Unknown": {
-              "min": 135.0,
-              "max": 798.0,
-              "count": 31,
-              "_price": 135.0
-            },
-            "Row: SINGLE SEATS": 244.0
-          },
-          "Category 3": {
-            "Unknown": {
-              "min": 170.0,
-              "max": 798.0,
-              "count": 26,
-              "_price": 170.0
-            }
-          },
-          "Category 2 Lateral": {
-            "Unknown": {
-              "min": 174.0,
-              "max": 1000.0,
-              "count": 31,
-              "_price": 174.0
-            },
-            "604,602,601,603": 389.0
-          },
-          "Category 2": {
-            "Unknown": {
-              "min": 200.0,
-              "max": 700.0,
-              "count": 31,
-              "_price": 200.0
-            },
-            "Row: -": 510.0
-          },
-          "Category 1": {
-            "Unknown": {
-              "min": 227.0,
-              "max": 1200.0,
-              "count": 31,
-              "_price": 227.0
-            },
-            "544,543,501,502": 429.99,
-            "636,638": 475.0,
-            "638": 530.0
-          },
-          "Category 1 Silver": {
-            "Unknown": {
-              "min": 231.0,
-              "max": 800.0,
-              "count": 26,
-              "_price": 231.0
-            },
-            "108,107,128,127": 454.98,
-            "Row: -": 575.0,
-            "127": {
-              "min": 630.0,
-              "max": 645.0,
-              "count": 3,
-              "_price": 630.0
-            }
-          },
-          "Category 1 Premium": {
-            "Unknown": {
-              "min": 237.99,
-              "max": 798.0,
-              "count": 27,
-              "_price": 237.99
-            },
-            "406,405,438,437": 449.98,
-            "Row: -": 750.0
-          },
-          "Category 1 Gold": {
-            "Unknown": {
-              "min": 241.0,
-              "max": 640.0,
-              "count": 28,
-              "_price": 241.0
-            },
-            "402,404,401,403": 460.94,
-            "440,442,444,443": 460.94,
-            "402,401": 560.94
-          },
-          "Category 1 Platinum": {
-            "Unknown": {
-              "min": 281.0,
-              "max": 950.0,
-              "count": 28,
-              "_price": 281.0
-            },
-            "130,129": 421.98,
-            "132": 471.98,
-            "130": {
-              "min": 471.98,
-              "max": 521.98,
-              "count": 2,
-              "_price": 471.98
-            },
-            "102,101,134,133": 621.98,
-            "134": 1500.0
-          },
-          "Real Madrid VIP Hospitality Package": {
-            "Row: -": {
-              "min": 485.0,
-              "max": 580.0,
-              "count": 2,
-              "_price": 485.0
-            }
-          }
+          "Category 4": 173.0,
+          "Category 3": 234.95,
+          "Category 2": 238.0,
+          "Category 1": 279.99
         },
-        "last_scraped": "2026-01-05T10:04:25.506301"
+        "last_scraped": "2026-01-05T14:17:30.097301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-real-oviedo",
@@ -40538,122 +39610,24 @@
                 "Row: -": 540.0
               }
             }
+          },
+          {
+            "timestamp": "2026-01-05T14:17:30.097301",
+            "prices": {
+              "Category 4": 157.0,
+              "Category 3": 194.99,
+              "Category 2": 215.0,
+              "Category 1": 289.99
+            }
           }
         ],
         "latest_prices": {
-          "Category 4": {
-            "Unknown": {
-              "min": 138.0,
-              "max": 989.01,
-              "count": 33,
-              "_price": 138.0
-            },
-            "Row: SINGLE SEATS": 244.0,
-            "Row: -": 350.0
-          },
-          "Category 3": {
-            "Unknown": {
-              "min": 179.99,
-              "max": 798.0,
-              "count": 25,
-              "_price": 179.99
-            }
-          },
-          "Category 2 Lateral": {
-            "Unknown": {
-              "min": 185.0,
-              "max": 1000.0,
-              "count": 31,
-              "_price": 185.0
-            },
-            "604,602,601,603": 379.0,
-            "Row: -": 430.0
-          },
-          "Category 2": {
-            "Unknown": {
-              "min": 201.0,
-              "max": 798.0,
-              "count": 33,
-              "_price": 201.0
-            },
-            "Row: -": 510.0
-          },
-          "Category 1": {
-            "Unknown": {
-              "min": 230.0,
-              "max": 1200.0,
-              "count": 33,
-              "_price": 230.0
-            },
-            "544,543,501,502": 439.99,
-            "638": 520.0,
-            "636,638": 530.0
-          },
-          "Category 1 Silver": {
-            "Unknown": {
-              "min": 239.97,
-              "max": 800.0,
-              "count": 25,
-              "_price": 239.97
-            },
-            "108,107,128,127": 486.98,
-            "127": {
-              "min": 620.0,
-              "max": 755.0,
-              "count": 3,
-              "_price": 620.0
-            },
-            "Row: -": 630.0
-          },
-          "Category 1 Gold": {
-            "Unknown": {
-              "min": 248.0,
-              "max": 770.0,
-              "count": 30,
-              "_price": 248.0
-            },
-            "402,404,401,403": 483.98,
-            "440,442,444,443": 483.98,
-            "402,401": 583.98
-          },
-          "Category 1 Premium": {
-            "Unknown": {
-              "min": 256.99,
-              "max": 693.0,
-              "count": 28,
-              "_price": 256.99
-            },
-            "406,405,438,437": 479.98,
-            "Row: -": 750.0
-          },
-          "Category 1 Platinum": {
-            "Unknown": {
-              "min": 280.0,
-              "max": 950.0,
-              "count": 30,
-              "_price": 280.0
-            },
-            "130,129": 498.98,
-            "132": 548.98,
-            "130": {
-              "min": 548.98,
-              "max": 598.98,
-              "count": 2,
-              "_price": 548.98
-            },
-            "102,101,134,133": 698.98,
-            "134": 1500.0
-          },
-          "Real Madrid VIP Hospitality Package": {
-            "Row: -": {
-              "min": 540.0,
-              "max": 645.0,
-              "count": 2,
-              "_price": 540.0
-            }
-          }
+          "Category 4": 157.0,
+          "Category 3": 194.99,
+          "Category 2": 215.0,
+          "Category 1": 289.99
         },
-        "last_scraped": "2026-01-05T10:04:25.506301"
+        "last_scraped": "2026-01-05T14:17:30.097301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-athletic-bilbao",
@@ -41398,112 +40372,26 @@
                 "Row: -": 765.0
               }
             }
+          },
+          {
+            "timestamp": "2026-01-05T14:17:30.097301",
+            "prices": {
+              "Category 4": 217.0,
+              "Category 3": 316.99,
+              "Category 2": 341.0,
+              "Category 1": 350.0
+            }
           }
         ],
         "latest_prices": {
-          "Category 4": {
-            "Unknown": {
-              "min": 146.0,
-              "max": 600.0,
-              "count": 24,
-              "_price": 146.0
-            },
-            "Row: SINGLE SEATS": 255.0,
-            "Row: -": 515.0
-          },
-          "Category 3": {
-            "Unknown": {
-              "min": 170.0,
-              "max": 403.0,
-              "count": 19,
-              "_price": 170.0
-            }
-          },
-          "Category 2 Lateral": {
-            "Unknown": {
-              "min": 181.0,
-              "max": 2000.0,
-              "count": 23,
-              "_price": 181.0
-            },
-            "604,602,601,603": 467.7
-          },
-          "Category 1": {
-            "Unknown": {
-              "min": 259.0,
-              "max": 3000.0,
-              "count": 24,
-              "_price": 259.0
-            },
-            "544,543,501,502": 500.0,
-            "636,638": 745.0
-          },
-          "Category 2": {
-            "Unknown": {
-              "min": 309.0,
-              "max": 1000.0,
-              "count": 24,
-              "_price": 309.0
-            },
-            "Row: -": 810.0
-          },
-          "Category 1 Premium": {
-            "Unknown": {
-              "min": 341.0,
-              "max": 770.0,
-              "count": 20,
-              "_price": 341.0
-            },
-            "406,405,438,437": 559.0,
-            "Row: -": 1190.0
-          },
-          "Category 1 Silver": {
-            "Unknown": {
-              "min": 344.0,
-              "max": 800.0,
-              "count": 19,
-              "_price": 344.0
-            },
-            "108,107,128,127": 576.99,
-            "127": 745.0,
-            "Row: -": 1085.0
-          },
-          "Category 1 Gold": {
-            "Unknown": {
-              "min": 350.0,
-              "max": 910.0,
-              "count": 21,
-              "_price": 350.0
-            },
-            "402,404,401,403": 556.99,
-            "440,442,444,443": 556.99,
-            "402,401": 656.99
-          },
-          "Category 1 Platinum": {
-            "Unknown": {
-              "min": 390.0,
-              "max": 950.0,
-              "count": 21,
-              "_price": 390.0
-            },
-            "130,129": 556.99,
-            "132": 606.99,
-            "130": 606.99,
-            "102,101,134,133": 756.99,
-            "134": 3000.0
-          },
-          "Real Madrid VIP Hospitality Package": {
-            "Row: -": {
-              "min": 765.0,
-              "max": 1110.0,
-              "count": 2,
-              "_price": 765.0
-            }
-          }
+          "Category 4": 217.0,
+          "Category 3": 316.99,
+          "Category 2": 341.0,
+          "Category 1": 350.0
         },
-        "last_scraped": "2026-01-05T10:04:25.506301"
+        "last_scraped": "2026-01-05T14:17:30.097301"
       }
     ],
-    "last_updated": "2026-01-05T10:04:25.506301"
+    "last_updated": "2026-01-05T14:17:30.097301"
   }
 }
