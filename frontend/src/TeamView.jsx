@@ -13,23 +13,7 @@ function TeamView() {
   const [gamePrices, setGamePrices] = useState(null)
   const [selectedDate, setSelectedDate] = useState(null)
   const [availableDates, setAvailableDates] = useState([])
-  const [selectedCategories, setSelectedCategories] = useState([]) // Array of selected categories
   const [availableCategories, setAvailableCategories] = useState([])
-  const [categoryFilterOpen, setCategoryFilterOpen] = useState(false)
-
-  // Close category dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      const dropdown = document.getElementById('category-dropdown-container')
-      if (dropdown && !dropdown.contains(event.target)) {
-        setCategoryFilterOpen(false)
-      }
-    }
-    if (categoryFilterOpen) {
-      document.addEventListener('mousedown', handleClickOutside)
-      return () => document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [categoryFilterOpen])
 
   useEffect(() => {
     fetchTeams()
@@ -155,11 +139,6 @@ function TeamView() {
       setAvailableDates(sortedDates)
       setAvailableCategories(sortedCategories)
       
-      // Select all categories by default
-      if (sortedCategories.length > 0 && selectedCategories.length === 0) {
-        setSelectedCategories(sortedCategories)
-      }
-      
       if (sortedDates.length > 0 && !selectedDate) {
         setSelectedDate(sortedDates[sortedDates.length - 1]) // Default to latest date
       }
@@ -255,10 +234,8 @@ function TeamView() {
       })
     })
     
-    // Filter categoryBlocks by selectedCategories
-    const filteredCategoryBlocks = Array.from(categoryBlocks).filter(catBlock => {
-      return selectedCategories.length === 0 || selectedCategories.includes(catBlock)
-    })
+    // Show all categories (no filtering)
+    const filteredCategoryBlocks = Array.from(categoryBlocks)
     
     // Build chart data with daily averages
     const chartData = []
@@ -553,148 +530,6 @@ function TeamView() {
                               )
                             })}
                           </select>
-                        </div>
-                      )}
-                      {availableCategories.length > 0 && (
-                        <div style={{ position: 'relative' }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <label style={{ fontSize: '0.9rem', color: '#8b949e', fontWeight: '500' }}>Categories:</label>
-                            <div id="category-dropdown-container" style={{ position: 'relative', display: 'inline-block' }}>
-                              <button
-                                onClick={() => setCategoryFilterOpen(!categoryFilterOpen)}
-                                type="button"
-                                style={{
-                                  padding: '8px 12px',
-                                  borderRadius: '6px',
-                                  border: '1px solid #30363d',
-                                  background: '#0d1117',
-                                  color: '#c9d1d9',
-                                  fontSize: '0.85rem',
-                                  cursor: 'pointer',
-                                  transition: 'all 0.2s',
-                                  minWidth: '250px',
-                                  textAlign: 'left',
-                                  display: 'flex',
-                                  alignItems: 'center',
-                                  justifyContent: 'space-between',
-                                  gap: '8px'
-                                }}
-                                onMouseEnter={(e) => e.target.style.borderColor = '#58a6ff'}
-                                onMouseLeave={(e) => e.target.style.borderColor = '#30363d'}
-                              >
-                                <span>
-                                  {selectedCategories.length === availableCategories.length 
-                                    ? 'All categories' 
-                                    : selectedCategories.length === 0
-                                    ? 'No categories selected'
-                                    : `${selectedCategories.length} selected`}
-                                </span>
-                                <span style={{ fontSize: '0.7rem', color: '#6e7681' }}>
-                                  ▼
-                                </span>
-                              </button>
-                              {categoryFilterOpen && (
-                              <div
-                                style={{
-                                  display: 'block',
-                                  position: 'absolute',
-                                  top: '100%',
-                                  left: 0,
-                                  marginTop: '4px',
-                                  background: '#0d1117',
-                                  border: '1px solid #30363d',
-                                  borderRadius: '6px',
-                                  padding: '8px',
-                                  maxHeight: '300px',
-                                  overflowY: 'auto',
-                                  zIndex: 1000,
-                                  minWidth: '300px',
-                                  boxShadow: '0 8px 24px rgba(0,0,0,0.5)'
-                                }}
-                              >
-                                <div style={{ 
-                                  padding: '6px 8px', 
-                                  marginBottom: '8px', 
-                                  borderBottom: '1px solid #30363d',
-                                  display: 'flex',
-                                  justifyContent: 'space-between',
-                                  alignItems: 'center'
-                                }}>
-                                  <span style={{ fontSize: '0.75rem', color: '#8b949e' }}>
-                                    {selectedCategories.length} of {availableCategories.length} selected
-                                  </span>
-                                  <button
-                                    onClick={() => {
-                                      if (selectedCategories.length === availableCategories.length) {
-                                        setSelectedCategories([])
-                                      } else {
-                                        setSelectedCategories([...availableCategories])
-                                      }
-                                    }}
-                                    style={{
-                                      background: 'transparent',
-                                      border: '1px solid #30363d',
-                                      color: '#58a6ff',
-                                      padding: '2px 8px',
-                                      borderRadius: '4px',
-                                      fontSize: '0.7rem',
-                                      cursor: 'pointer'
-                                    }}
-                                  >
-                                    {selectedCategories.length === availableCategories.length ? 'Deselect All' : 'Select All'}
-                                  </button>
-                                </div>
-                                {availableCategories.map(cat => {
-                                  const isSelected = selectedCategories.includes(cat)
-                                  return (
-                                    <label
-                                      key={cat}
-                                      style={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        padding: '6px 8px',
-                                        cursor: 'pointer',
-                                        borderRadius: '4px',
-                                        transition: 'background 0.15s',
-                                        backgroundColor: isSelected ? '#1f6feb20' : 'transparent'
-                                      }}
-                                      onMouseEnter={(e) => {
-                                        if (!isSelected) e.currentTarget.style.backgroundColor = '#21262d'
-                                      }}
-                                      onMouseLeave={(e) => {
-                                        if (!isSelected) e.currentTarget.style.backgroundColor = 'transparent'
-                                      }}
-                                    >
-                                      <input
-                                        type="checkbox"
-                                        checked={isSelected}
-                                        onChange={(e) => {
-                                          if (e.target.checked) {
-                                            setSelectedCategories([...selectedCategories, cat])
-                                          } else {
-                                            setSelectedCategories(selectedCategories.filter(c => c !== cat))
-                                          }
-                                        }}
-                                        style={{
-                                          marginRight: '8px',
-                                          cursor: 'pointer',
-                                          accentColor: '#58a6ff'
-                                        }}
-                                      />
-                                      <span style={{ 
-                                        fontSize: '0.85rem', 
-                                        color: isSelected ? '#c9d1d9' : '#8b949e',
-                                        flex: 1
-                                      }}>
-                                        {cat}
-                                      </span>
-                                    </label>
-                                  )
-                                })}
-                              </div>
-                              )}
-                            </div>
-                          </div>
                         </div>
                       )}
                     </div>
