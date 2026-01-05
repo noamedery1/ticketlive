@@ -492,8 +492,8 @@ function TeamView() {
         {/* Price View - Right Side */}
         <div className="price-view team-price-view">
           {gamePrices && gamePrices.game ? (
-            <>
-              <div style={{ textAlign: 'center', maxWidth: '900px', width: '100%', margin: '0 auto 30px auto', paddingBottom: '20px', borderBottom: '1px solid #30363d' }}>
+            <div style={{ width: '100%', maxWidth: '900px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+              <div style={{ textAlign: 'center', width: '100%', paddingBottom: '20px', borderBottom: '1px solid #30363d' }}>
                 <h2 style={{ margin: '0 0 8px 0', color: '#c9d1d9', fontSize: '1.75rem', fontWeight: '600' }}>
                   {gamePrices.game.match_name}
                 </h2>
@@ -507,7 +507,7 @@ function TeamView() {
 
               {/* Price History Chart */}
               {chartData.length > 0 && (
-                <div className="chart-section" style={{ marginTop: '20px', width: '100%', maxWidth: '900px', margin: '0 auto', background: '#161b22', border: '1px solid #30363d', borderRadius: '8px', padding: '20px', boxSizing: 'border-box' }}>
+                <div className="chart-section" style={{ width: '100%', background: '#161b22', border: '1px solid #30363d', borderRadius: '8px', padding: '20px', boxSizing: 'border-box' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
                     <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#c9d1d9', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }}>
                       <span>📊</span>
@@ -800,7 +800,7 @@ function TeamView() {
 
               {/* Category Summary Table - Compact */}
               {gamePrices && gamePrices.latest_prices && Object.keys(gamePrices.latest_prices).length > 0 && (
-                <div className="chart-section" style={{ marginTop: '20px', width: '100%', maxWidth: '900px', margin: '20px auto 0 auto', background: '#161b22', border: '1px solid #30363d', borderRadius: '8px', padding: '12px', boxSizing: 'border-box' }}>
+                <div className="chart-section" style={{ width: '100%', background: '#161b22', border: '1px solid #30363d', borderRadius: '8px', padding: '12px', boxSizing: 'border-box' }}>
                   <h3 style={{ margin: '0 0 12px 0', fontSize: '0.95rem', color: '#c9d1d9', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '6px' }}>
                     <span>📋</span>
                     <span>Category Price Summary</span>
@@ -1040,7 +1040,7 @@ function TeamView() {
                   </div>
                 </div>
               )}
-            </>
+            </div>
           ) : selectedGame !== null ? (
             <div className="no-data" style={{ padding: '40px', textAlign: 'center' }}>
               <p>Loading prices...</p>
