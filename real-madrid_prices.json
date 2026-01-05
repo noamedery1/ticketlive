@@ -1047,6 +1047,83 @@
               "Unknown": 2250.0
             }
           }
+        },
+        {
+          "timestamp": "2026-01-05T01:52:39.852301",
+          "prices": {
+            "Category 4": {
+              "Unknown": 119.0,
+              "Row: SINGLE SEATS": 244.0
+            },
+            "Category 3": {
+              "Unknown": 148.99
+            },
+            "Category 2 Lateral": {
+              "Unknown": 157.99,
+              "604,602,601,603": 371.95
+            },
+            "Category 2": {
+              "Unknown": 180.99,
+              "326": 225.0,
+              "115": 350.0,
+              "123,124": 375.0,
+              "Row: -": 420.0
+            },
+            "Category 1": {
+              "Unknown": 191.0,
+              "544,543,501,502": 419.0,
+              "636,638": 430.0,
+              "638": 530.0
+            },
+            "Category 1 Premium": {
+              "Unknown": 205.99,
+              "330": 325.0,
+              "406,405,438,437": 439.0,
+              "Row: -": 670.0
+            },
+            "Category 1 Silver": {
+              "Unknown": 209.99,
+              "110,126": 400.0,
+              "108,107,128,127": 439.0,
+              "108,107": 500.0,
+              "127": 565.0,
+              "Row: -": 580.0
+            },
+            "Category 1 Gold": {
+              "Unknown": 221.99,
+              "402,404,401,403": 444.0,
+              "402,401": 544.0,
+              "440,442,444,443": 544.0
+            },
+            "Best Available": {
+              "Unknown": 225.0
+            },
+            "Category 1 Platinum": {
+              "Unknown": 254.99,
+              "132": 469.0,
+              "130": 469.0,
+              "129": 500.0,
+              "105": 550.0,
+              "106": 550.0,
+              "101": 599.99,
+              "102": 599.99,
+              "104": 600.0,
+              "103": 600.0,
+              "101,102,133,134": 615.0,
+              "102,101,134,133": 619.0,
+              "130,129": 619.0,
+              "131": 650.0,
+              "134": 999.99,
+              "133": 999.99
+            },
+            "Real Madrid VIP Hospitality Package": {
+              "Row: -": 420.0,
+              "Unknown": 435.0
+            },
+            "Private VIP Box": {
+              "Unknown": 2250.0
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -1123,7 +1200,7 @@
           "Unknown": 2250.0
         }
       },
-      "last_scraped": "2026-01-04T22:12:53.372301"
+      "last_scraped": "2026-01-05T01:52:39.852301"
     },
     {
       "url": "https://www.footballticketnet.com/champions-league/real-madrid-vs-as-monaco",
@@ -1559,12 +1636,87 @@
               "Unknown": 2500.0
             }
           }
+        },
+        {
+          "timestamp": "2026-01-05T01:52:39.852301",
+          "prices": {
+            "Category 4": {
+              "Unknown": 156.0,
+              "617": 350.0
+            },
+            "Category 3": {
+              "Unknown": 182.99
+            },
+            "Category 2 Lateral": {
+              "Unknown": 188.99,
+              "604,602,601,603": 400.98,
+              "Row: -": 450.0
+            },
+            "Category 2": {
+              "Unknown": 204.0,
+              "123": 400.0,
+              "115": 400.0,
+              "221": 425.0,
+              "Row: -": 505.0
+            },
+            "Category 1": {
+              "Unknown": 211.0,
+              "Row: -": 530.0,
+              "544,543,502,501": 556.98,
+              "638": 575.0,
+              "636,638": 575.0
+            },
+            "Best Available": {
+              "Unknown": 250.0
+            },
+            "Category 1 Premium": {
+              "Unknown": 268.87,
+              "406,405,438,437": 515.0,
+              "Row: -": 575.0
+            },
+            "Category 1 Silver": {
+              "Unknown": 280.99,
+              "126": 400.0,
+              "107": 500.0,
+              "108": 500.0,
+              "108,107,128,127": 516.98,
+              "Row: -": 735.0,
+              "127": 775.0
+            },
+            "Category 1 Gold": {
+              "Unknown": 292.99,
+              "440,442,444,443": 571.99,
+              "404,402,401,403": 571.99,
+              "402,401": 671.99,
+              "305": 850.0
+            },
+            "Category 1 Platinum": {
+              "Unknown": 313.99,
+              "129,130": 556.98,
+              "101,102,134,133": 595.0,
+              "132": 606.98,
+              "130": 606.98,
+              "106": 650.0,
+              "102": 650.0,
+              "101": 650.0,
+              "104": 750.0,
+              "133": 795.0,
+              "134": 800.0,
+              "204": 900.0,
+              "200": 1500.0
+            },
+            "Real Madrid VIP Hospitality Package": {
+              "Unknown": 465.0
+            },
+            "Private VIP Box": {
+              "Unknown": 2500.0
+            }
+          }
         }
       ],
       "latest_prices": {
         "Category 4": {
           "Unknown": 156.0,
-          "Row: N/A": 192.99,
           "617": 350.0
         },
         "Category 3": {
@@ -1635,7 +1787,7 @@
           "Unknown": 2500.0
         }
       },
-      "last_scraped": "2026-01-04T22:12:53.372301"
+      "last_scraped": "2026-01-05T01:52:39.852301"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-rayo-vallecano",
@@ -2023,6 +2175,67 @@
               "Row: -": 560.0
             }
           }
+        },
+        {
+          "timestamp": "2026-01-05T01:52:39.852301",
+          "prices": {
+            "Category 4": {
+              "Unknown": 141.0,
+              "Row: SINGLE SEATS": 244.0
+            },
+            "Category 3": {
+              "Unknown": 154.99
+            },
+            "Category 2 Lateral": {
+              "Unknown": 162.99,
+              "604,602,601,603": 339.0
+            },
+            "Category 2": {
+              "Unknown": 178.99,
+              "124": 350.0,
+              "123": 350.0,
+              "Row: -": 420.0
+            },
+            "Category 1": {
+              "Unknown": 206.99,
+              "636,638": 380.0,
+              "544,543,501,502": 394.0,
+              "638": 525.0
+            },
+            "Category 1 Premium": {
+              "Unknown": 213.99,
+              "406,405,438,437": 409.0,
+              "Row: -": 670.0
+            },
+            "Category 1 Silver": {
+              "Unknown": 228.99,
+              "110": 375.0,
+              "126": 375.0,
+              "108": 400.0,
+              "108,107,128,127": 419.0,
+              "Row: -": 605.0,
+              "127": 625.0
+            },
+            "Category 1 Gold": {
+              "Unknown": 236.99,
+              "402,404,401,403": 417.28,
+              "440,442,444,443": 417.28,
+              "402,401": 517.28
+            },
+            "Category 1 Platinum": {
+              "Unknown": 260.99,
+              "130,129": 414.0,
+              "132": 464.0,
+              "130": 464.0,
+              "106": 600.0,
+              "102,101,134,133": 614.0,
+              "104": 750.0,
+              "134": 1500.0
+            },
+            "Real Madrid VIP Hospitality Package": {
+              "Row: -": 560.0
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -2083,7 +2296,7 @@
           "Row: -": 560.0
         }
       },
-      "last_scraped": "2026-01-04T22:12:53.372301"
+      "last_scraped": "2026-01-05T01:52:39.852301"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-real-sociedad",
@@ -2465,6 +2678,65 @@
               "Row: -": 590.0
             }
           }
+        },
+        {
+          "timestamp": "2026-01-05T01:52:39.852301",
+          "prices": {
+            "Category 4": {
+              "Unknown": 143.0,
+              "Row: SINGLE SEATS": 244.0
+            },
+            "Category 3": {
+              "Unknown": 162.0
+            },
+            "Category 2 Lateral": {
+              "Unknown": 178.0,
+              "604,602,601,603": 385.95
+            },
+            "Category 2": {
+              "Unknown": 201.0,
+              "123": 325.0,
+              "124": 325.0,
+              "Row: -": 535.0
+            },
+            "Category 1": {
+              "Unknown": 211.0,
+              "544,543,501,502": 419.0,
+              "638": 670.0
+            },
+            "Category 1 Premium": {
+              "Unknown": 217.0,
+              "406,405,438,437": 439.0,
+              "Row: -": 825.0
+            },
+            "Category 1 Silver": {
+              "Unknown": 231.0,
+              "126": 350.0,
+              "110": 350.0,
+              "108": 395.0,
+              "108,107,128,127": 439.0,
+              "127": 695.0
+            },
+            "Category 1 Gold": {
+              "Unknown": 239.0,
+              "402,404,401,403": 444.0,
+              "440,442,444,443": 444.0,
+              "402,401": 544.0
+            },
+            "Category 1 Platinum": {
+              "Unknown": 263.0,
+              "130,129": 419.0,
+              "132": 469.0,
+              "130": 469.0,
+              "106": 600.0,
+              "102,101,134,133": 619.0,
+              "104": 750.0,
+              "134": 1750.0
+            },
+            "Real Madrid VIP Hospitality Package": {
+              "Row: -": 590.0
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -2523,7 +2795,7 @@
           "Row: -": 590.0
         }
       },
-      "last_scraped": "2026-01-04T22:12:53.372301"
+      "last_scraped": "2026-01-05T01:52:39.852301"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-getafe-cf",
@@ -2890,6 +3162,60 @@
               "Row: -": 515.0
             }
           }
+        },
+        {
+          "timestamp": "2026-01-05T01:52:39.852301",
+          "prices": {
+            "Category 4": {
+              "Unknown": 144.0,
+              "Row: SINGLE SEATS": 244.0
+            },
+            "Category 3": {
+              "Unknown": 165.99
+            },
+            "Category 2 Lateral": {
+              "Unknown": 170.0,
+              "604,602,601,603": 369.0
+            },
+            "Category 2": {
+              "Unknown": 186.99,
+              "Row: -": 480.0
+            },
+            "Category 1": {
+              "Unknown": 214.99,
+              "544,543,501,502": 419.0,
+              "636,638": 470.0,
+              "638": 530.0
+            },
+            "Category 1 Premium": {
+              "Unknown": 223.95,
+              "406,405,438,437": 434.0,
+              "Row: -": 725.0
+            },
+            "Category 1 Silver": {
+              "Unknown": 233.99,
+              "108,107,128,127": 439.0,
+              "Row: -": 570.0,
+              "127": 635.0
+            },
+            "Category 1 Gold": {
+              "Unknown": 241.0,
+              "402,404,401,403": 444.98,
+              "440,442,444,443": 444.98,
+              "402,401": 444.98
+            },
+            "Category 1 Platinum": {
+              "Unknown": 266.99,
+              "130,129": 409.0,
+              "132": 459.0,
+              "130": 459.0,
+              "102,101,134,133": 609.0,
+              "134": 1500.0
+            },
+            "Real Madrid VIP Hospitality Package": {
+              "Row: -": 515.0
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -2943,7 +3269,7 @@
           "Row: -": 515.0
         }
       },
-      "last_scraped": "2026-01-04T22:12:53.372301"
+      "last_scraped": "2026-01-05T01:52:39.852301"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-elche",
@@ -3307,6 +3633,59 @@
               "Row: -": 490.0
             }
           }
+        },
+        {
+          "timestamp": "2026-01-05T01:52:39.852301",
+          "prices": {
+            "Category 4": {
+              "Unknown": 134.0,
+              "Row: SINGLE SEATS": 244.0
+            },
+            "Category 3": {
+              "Unknown": 166.0
+            },
+            "Category 2 Lateral": {
+              "Unknown": 174.0,
+              "604,602,601,603": 360.98
+            },
+            "Category 2": {
+              "Unknown": 181.0,
+              "Row: -": 480.0
+            },
+            "Category 1": {
+              "Unknown": 216.99,
+              "544,543,501,502": 409.0,
+              "638": 420.0,
+              "636,638": 470.0
+            },
+            "Category 1 Premium": {
+              "Unknown": 217.99,
+              "406,405,438,437": 409.0,
+              "Row: -": 725.0
+            },
+            "Category 1 Silver": {
+              "Unknown": 230.99,
+              "108,107,128,127": 439.0,
+              "Row: -": 570.0,
+              "127": 630.0
+            },
+            "Category 1 Gold": {
+              "Unknown": 238.99,
+              "402,404,401,403": 414.97,
+              "440,442,444,443": 414.97,
+              "402,401": 514.97
+            },
+            "Category 1 Platinum": {
+              "Unknown": 249.99,
+              "130,129": 374.97,
+              "130": 424.97,
+              "102,101,134,133": 574.97,
+              "134": 1500.0
+            },
+            "Real Madrid VIP Hospitality Package": {
+              "Row: -": 490.0
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -3359,7 +3738,7 @@
           "Row: -": 490.0
         }
       },
-      "last_scraped": "2026-01-04T22:12:53.372301"
+      "last_scraped": "2026-01-05T01:52:39.852301"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-atletico-madrid",
@@ -3940,6 +4319,68 @@
               "Unknown": 2000.0
             }
           }
+        },
+        {
+          "timestamp": "2026-01-05T01:52:39.852301",
+          "prices": {
+            "Category 4": {
+              "Unknown": 336.0,
+              "Row: SINGLE SEATS": 385.0
+            },
+            "Category 3": {
+              "Unknown": 406.0
+            },
+            "Category 2 Lateral": {
+              "Unknown": 425.0,
+              "604,602,601,603": 725.0
+            },
+            "Category 2": {
+              "Unknown": 442.0,
+              "117": 775.0,
+              "Row: -": 875.0
+            },
+            "Category 1": {
+              "Unknown": 448.0,
+              "544,543,501,502": 740.0,
+              "636,638": 1090.0
+            },
+            "Category 1 Premium": {
+              "Unknown": 510.0,
+              "406,405,438,437": 771.95,
+              "Row: -": 1320.0
+            },
+            "Category 1 Silver": {
+              "Unknown": 514.0,
+              "108,107,128,127": 776.06,
+              "128": 850.0,
+              "107": 1000.0,
+              "127": 1110.0,
+              "Row: -": 1695.0
+            },
+            "Category 1 Gold": {
+              "Unknown": 590.0,
+              "402,404,401,403": 900.0,
+              "440,442,444,443": 900.0,
+              "402,401": 1000.0
+            },
+            "Category 1 Platinum": {
+              "Unknown": 619.99,
+              "130,129": 849.95,
+              "132": 899.95,
+              "103,104": 900.0,
+              "130": 1024.95,
+              "101,102": 1050.0,
+              "102,101,134,133": 1149.95,
+              "104": 1500.0,
+              "134": 3000.0,
+              "Row: FRONT 20 ROWS - SEATED TOGETHER": 4000.0
+            },
+            "Real Madrid VIP Hospitality Package": {
+              "Row: -": 1120.0,
+              "127": 1150.0,
+              "Unknown": 2000.0
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -4001,7 +4442,7 @@
           "Unknown": 2000.0
         }
       },
-      "last_scraped": "2026-01-04T22:12:53.372301"
+      "last_scraped": "2026-01-05T01:52:39.852301"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-girona",
@@ -4540,6 +4981,59 @@
               "Row: -": 615.0
             }
           }
+        },
+        {
+          "timestamp": "2026-01-05T01:52:39.852301",
+          "prices": {
+            "Category 4": {
+              "Unknown": 150.0,
+              "Row: SINGLE SEATS": 244.0
+            },
+            "Category 3": {
+              "Unknown": 179.99
+            },
+            "Category 2 Lateral": {
+              "Unknown": 193.0,
+              "604,602,601,603": 379.0
+            },
+            "Category 2": {
+              "Unknown": 204.0,
+              "Row: -": 535.0
+            },
+            "Category 1": {
+              "Unknown": 221.0,
+              "544,543,501,502": 429.98,
+              "636,638": 570.0,
+              "638": 600.0
+            },
+            "Category 1 Premium": {
+              "Unknown": 224.8,
+              "406,405,438,437": 452.08,
+              "Row: -": 805.0
+            },
+            "Category 1 Silver": {
+              "Unknown": 233.0,
+              "108,107,128,127": 479.98,
+              "127": 675.0,
+              "Row: -": 705.0
+            },
+            "Category 1 Gold": {
+              "Unknown": 243.0,
+              "402,404,401,403": 463.93,
+              "440,442,444,443": 463.93,
+              "402,401": 563.93
+            },
+            "Category 1 Platinum": {
+              "Unknown": 280.0,
+              "130,129": 460.98,
+              "132": 510.98,
+              "130": 510.98,
+              "102,101,134,133": 660.98
+            },
+            "Real Madrid VIP Hospitality Package": {
+              "Row: -": 615.0
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -4592,7 +5086,7 @@
           "Row: -": 615.0
         }
       },
-      "last_scraped": "2026-01-04T22:12:53.372301"
+      "last_scraped": "2026-01-05T01:52:39.852301"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-deportivo-alaves",
@@ -5217,6 +5711,60 @@
               "Row: -": 485.0
             }
           }
+        },
+        {
+          "timestamp": "2026-01-05T01:52:39.852301",
+          "prices": {
+            "Category 4": {
+              "Unknown": 135.1,
+              "Row: SINGLE SEATS": 244.0
+            },
+            "Category 3": {
+              "Unknown": 170.0
+            },
+            "Category 2 Lateral": {
+              "Unknown": 174.0,
+              "604,602,601,603": 389.0
+            },
+            "Category 2": {
+              "Unknown": 200.0,
+              "Row: -": 510.0
+            },
+            "Category 1": {
+              "Unknown": 227.0,
+              "544,543,501,502": 429.99,
+              "636,638": 475.0,
+              "638": 530.0
+            },
+            "Category 1 Silver": {
+              "Unknown": 231.0,
+              "108,107,128,127": 454.98,
+              "Row: -": 575.0,
+              "127": 630.0
+            },
+            "Category 1 Premium": {
+              "Unknown": 237.99,
+              "406,405,438,437": 449.98,
+              "Row: -": 750.0
+            },
+            "Category 1 Gold": {
+              "Unknown": 241.0,
+              "402,404,401,403": 460.94,
+              "440,442,444,443": 460.94,
+              "402,401": 560.94
+            },
+            "Category 1 Platinum": {
+              "Unknown": 281.0,
+              "130,129": 421.98,
+              "132": 471.98,
+              "130": 471.98,
+              "102,101,134,133": 621.98,
+              "134": 1500.0
+            },
+            "Real Madrid VIP Hospitality Package": {
+              "Row: -": 485.0
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -5270,7 +5818,7 @@
           "Row: -": 485.0
         }
       },
-      "last_scraped": "2026-01-04T22:12:53.372301"
+      "last_scraped": "2026-01-05T01:52:39.852301"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-real-oviedo",
@@ -5815,6 +6363,62 @@
               "Row: -": 540.0
             }
           }
+        },
+        {
+          "timestamp": "2026-01-05T01:52:39.852301",
+          "prices": {
+            "Category 4": {
+              "Unknown": 138.0,
+              "Row: SINGLE SEATS": 244.0,
+              "Row: -": 350.0
+            },
+            "Category 3": {
+              "Unknown": 179.99
+            },
+            "Category 2 Lateral": {
+              "Unknown": 185.0,
+              "604,602,601,603": 379.0,
+              "Row: -": 430.0
+            },
+            "Category 2": {
+              "Unknown": 201.0,
+              "Row: -": 510.0
+            },
+            "Category 1": {
+              "Unknown": 230.0,
+              "544,543,501,502": 439.99,
+              "638": 520.0,
+              "636,638": 530.0
+            },
+            "Category 1 Silver": {
+              "Unknown": 239.97,
+              "108,107,128,127": 486.98,
+              "127": 620.0,
+              "Row: -": 630.0
+            },
+            "Category 1 Gold": {
+              "Unknown": 248.0,
+              "402,404,401,403": 483.98,
+              "440,442,444,443": 483.98,
+              "402,401": 583.98
+            },
+            "Category 1 Premium": {
+              "Unknown": 256.99,
+              "406,405,438,437": 479.98,
+              "Row: -": 750.0
+            },
+            "Category 1 Platinum": {
+              "Unknown": 280.0,
+              "130,129": 498.98,
+              "132": 548.98,
+              "130": 548.98,
+              "102,101,134,133": 698.98,
+              "134": 1500.0
+            },
+            "Real Madrid VIP Hospitality Package": {
+              "Row: -": 540.0
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -5870,7 +6474,7 @@
           "Row: -": 540.0
         }
       },
-      "last_scraped": "2026-01-04T22:12:53.372301"
+      "last_scraped": "2026-01-05T01:52:39.852301"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-athletic-bilbao",
@@ -6453,6 +7057,60 @@
               "Row: -": 765.0
             }
           }
+        },
+        {
+          "timestamp": "2026-01-05T01:52:39.852301",
+          "prices": {
+            "Category 4": {
+              "Unknown": 146.0,
+              "Row: SINGLE SEATS": 255.0,
+              "Row: -": 515.0
+            },
+            "Category 3": {
+              "Unknown": 170.0
+            },
+            "Category 2 Lateral": {
+              "Unknown": 181.0,
+              "604,602,601,603": 467.7
+            },
+            "Category 1": {
+              "Unknown": 259.0,
+              "544,543,501,502": 500.0,
+              "636,638": 740.0
+            },
+            "Category 2": {
+              "Unknown": 309.0,
+              "Row: -": 805.0
+            },
+            "Category 1 Premium": {
+              "Unknown": 341.0,
+              "406,405,438,437": 559.0,
+              "Row: -": 1190.0
+            },
+            "Category 1 Silver": {
+              "Unknown": 344.0,
+              "108,107,128,127": 576.99,
+              "127": 745.0,
+              "Row: -": 1080.0
+            },
+            "Category 1 Gold": {
+              "Unknown": 350.0,
+              "402,404,401,403": 556.99,
+              "440,442,444,443": 556.99,
+              "402,401": 656.99
+            },
+            "Category 1 Platinum": {
+              "Unknown": 390.0,
+              "130,129": 556.99,
+              "132": 606.99,
+              "130": 606.99,
+              "102,101,134,133": 756.99,
+              "134": 3000.0
+            },
+            "Real Madrid VIP Hospitality Package": {
+              "Row: -": 765.0
+            }
+          }
         }
       ],
       "latest_prices": {
@@ -6506,8 +7164,8 @@
           "Row: -": 765.0
         }
       },
-      "last_scraped": "2026-01-04T22:12:53.372301"
+      "last_scraped": "2026-01-05T01:52:39.852301"
     }
   ],
-  "last_updated": "2026-01-04T22:12:53.372301"
+  "last_updated": "2026-01-05T01:52:39.852301"
 }
