@@ -145,7 +145,6 @@ function TeamView() {
     } else {
       setAvailableDates([])
       setAvailableCategories([])
-      setSelectedCategories([])
       setSelectedDate(null)
     }
   }, [gamePrices])
