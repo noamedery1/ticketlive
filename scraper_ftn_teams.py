@@ -594,11 +594,11 @@ def get_team_currency(team_key):
 def scrape_game_prices(driver, game_url, game_name, team_key=None):
     """
     Scrape prices for a single game.
-    Filters by "Up To 2 Seats Together" and groups lowest prices by block/category.
+    Filters by "Up To 2 Seats Together" and groups prices by main category only (no blocks).
     Stores prices in original currency (no conversion).
     """
-    # Structure: {category: {block: [prices]}} - store all prices, not just min
-    prices_by_block = defaultdict(lambda: defaultdict(list))
+    # Structure: {category: [prices]} - store all prices per category, ignore blocks
+    prices_by_category = defaultdict(list)
     
     # Get team currency
     currency = get_team_currency(team_key) if team_key else 'USD'
@@ -628,69 +628,165 @@ def scrape_game_prices(driver, game_url, game_name, team_key=None):
                 EC.presence_of_element_located((By.TAG_NAME, "body"))
             )
         
-        # Try to set quantity filter via UI (if URL param didn't work)
+        # Set quantity filter via UI dropdown - MUST be set to "2"
+        quantity_set = False
         try:
+            # Try to find quantity dropdown/selector
             quantity_selectors = [
                 "//select[contains(@name, 'quantity') or contains(@id, 'quantity')]",
+                "//*[contains(@class, 'quantity')]//select",
+                "//div[contains(@class, 'quantity')]//select",
                 "//*[@data-quantity]",
-                "//button[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '2 tickets')]",
-                "//a[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '2 tickets')]"
+                "//select[contains(@class, 'quantity')]"
             ]
             for selector in quantity_selectors:
                 try:
                     qty_elem = driver.find_element(By.XPATH, selector)
-                    if qty_elem.is_displayed():
-                        if qty_elem.tag_name == 'select':
-                            from selenium.webdriver.support.ui import Select
-                            select = Select(qty_elem)
+                    if qty_elem.is_displayed() and qty_elem.tag_name == 'select':
+                        from selenium.webdriver.support.ui import Select
+                        select = Select(qty_elem)
+                        # Try to select value "2"
+                        try:
                             select.select_by_value('2')
-                            print(f'      🔘 Set quantity to 2 via dropdown...', flush=True)
-                            time.sleep(2)
+                            print(f'      🔘 Set quantity dropdown to 2...', flush=True)
+                            quantity_set = True
+                            time.sleep(3)  # Wait for filter to apply
                             break
-                        else:
-                            qty_elem.click()
-                            print(f'      🔘 Clicked quantity: 2 tickets...', flush=True)
-                            time.sleep(2)
-                            break
+                        except:
+                            try:
+                                select.select_by_visible_text('2')
+                                print(f'      🔘 Set quantity dropdown to 2 (by text)...', flush=True)
+                                quantity_set = True
+                                time.sleep(3)
+                                break
+                            except:
+                                pass
                 except:
                     continue
-        except:
-            pass
-        
-        # Try to filter by "Seating in Pairs" (Up To 2 Seats Together)
-        try:
-            # Look for filter buttons/options - try "Seating in Pairs" first (more specific)
-            filter_selectors = [
-                "//*[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'seating in pairs')]",
-                "//*[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'up to 2 seats together')]",
-                "//*[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '2 seats together')]",
-                "//button[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'seating in pairs')]",
-                "//a[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'seating in pairs')]"
-            ]
             
-            for selector in filter_selectors:
-                try:
-                    filter_btn = driver.find_element(By.XPATH, selector)
-                    if filter_btn.is_displayed():
-                        # Check if it's already selected
-                        classes = filter_btn.get_attribute('class') or ''
-                        aria_selected = filter_btn.get_attribute('aria-selected')
-                        is_selected = ('active' in classes.lower() or 'selected' in classes.lower() or 
-                                     aria_selected == 'true' or 'checked' in classes.lower())
-                        if not is_selected:
-                            print(f'      🔘 Clicking filter: "Seating in Pairs"...', flush=True)
-                            driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", filter_btn)
+            # If dropdown not found, try clicking quantity filter button
+            if not quantity_set:
+                qty_button_selectors = [
+                    "//button[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'quantity')]",
+                    "//*[contains(@class, 'quantity')]//button",
+                    "//div[contains(@class, 'filter')]//button[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '2')]"
+                ]
+                for selector in qty_button_selectors:
+                    try:
+                        btn = driver.find_element(By.XPATH, selector)
+                        if btn.is_displayed():
+                            driver.execute_script("arguments[0].click();", btn)
                             time.sleep(1)
-                            driver.execute_script("arguments[0].click();", filter_btn)
-                            time.sleep(4)  # Wait longer for filter to apply and reload listings
+                            # Try to find and click "2" option
+                            try:
+                                option_2 = driver.find_element(By.XPATH, "//*[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '2 tickets') or text()='2']")
+                                driver.execute_script("arguments[0].click();", option_2)
+                                print(f'      🔘 Clicked quantity: 2 tickets...', flush=True)
+                                quantity_set = True
+                                time.sleep(3)
+                                break
+                            except:
+                                pass
+                    except:
+                        continue
+        except Exception as e:
+            print(f'      ⚠️ Error setting quantity filter: {e}', flush=True)
+        
+        if not quantity_set:
+            print(f'      ⚠️ Warning: Could not set quantity to 2', flush=True)
+        
+        # Set "Split Type" filter to "Seating in Pairs" via dropdown - MUST be set
+        split_type_set = False
+        try:
+            # Try to find split type dropdown/selector - look for "Split Type" label or dropdown
+            split_selectors = [
+                "//select[contains(@name, 'split') or contains(@id, 'split')]",
+                "//select[contains(@name, 'split_type') or contains(@id, 'split_type')]",
+                "//*[contains(@class, 'split')]//select",
+                "//div[contains(@class, 'split')]//select",
+                "//select[contains(@class, 'split')]",
+                "//*[contains(@data-filter, 'split')]//select",
+                "//label[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'split type')]/following-sibling::select",
+                "//label[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'split type')]/../select"
+            ]
+            for selector in split_selectors:
+                try:
+                    split_elem = driver.find_element(By.XPATH, selector)
+                    if split_elem.is_displayed() and split_elem.tag_name == 'select':
+                        from selenium.webdriver.support.ui import Select
+                        select = Select(split_elem)
+                        # Try to select "Seating in Pairs"
+                        try:
+                            select.select_by_visible_text('Seating in Pairs')
+                            print(f'      🔘 Set split type dropdown to "Seating in Pairs"...', flush=True)
+                            split_type_set = True
+                            time.sleep(3)  # Wait for filter to apply
                             break
-                        else:
-                            print(f'      ✓ Filter "Seating in Pairs" already selected', flush=True)
-                            break
+                        except:
+                            # Try alternative text
+                            try:
+                                select.select_by_visible_text('Up To 2 Seats Together')
+                                print(f'      🔘 Set split type dropdown to "Up To 2 Seats Together"...', flush=True)
+                                split_type_set = True
+                                time.sleep(3)
+                                break
+                            except:
+                                try:
+                                    select.select_by_visible_text('2 Seats Together')
+                                    print(f'      🔘 Set split type dropdown to "2 Seats Together"...', flush=True)
+                                    split_type_set = True
+                                    time.sleep(3)
+                                    break
+                                except:
+                                    pass
                 except:
                     continue
-        except:
-            pass  # Continue even if filter not found
+            
+            # If dropdown not found, try clicking split type filter button/dropdown trigger
+            if not split_type_set:
+                split_button_selectors = [
+                    "//button[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'split')]",
+                    "//*[contains(@class, 'split')]//button",
+                    "//div[contains(@class, 'filter')]//button[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'split')]",
+                    "//*[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'seating in pairs')]",
+                    "//button[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'seating in pairs')]",
+                    "//*[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'up to 2 seats together')]"
+                ]
+                for selector in split_button_selectors:
+                    try:
+                        btn = driver.find_element(By.XPATH, selector)
+                        if btn.is_displayed():
+                            # Check if already selected
+                            classes = btn.get_attribute('class') or ''
+                            if 'active' not in classes.lower() and 'selected' not in classes.lower():
+                                driver.execute_script("arguments[0].click();", btn)
+                                time.sleep(1)
+                                # Try to find and click "Seating in Pairs" option
+                                try:
+                                    option = driver.find_element(By.XPATH, "//*[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'seating in pairs')]")
+                                    driver.execute_script("arguments[0].click();", option)
+                                    print(f'      🔘 Clicked split type: "Seating in Pairs"...', flush=True)
+                                    split_type_set = True
+                                    time.sleep(3)
+                                    break
+                                except:
+                                    pass
+                            else:
+                                print(f'      ✓ Split type filter already selected', flush=True)
+                                split_type_set = True
+                                break
+                    except:
+                        continue
+        except Exception as e:
+            print(f'      ⚠️ Error setting split type filter: {e}', flush=True)
+        
+        if not split_type_set:
+            print(f'      ⚠️ Warning: Could not set split type to "Seating in Pairs"', flush=True)
+        
+        # Wait a bit more for filters to fully apply and page to reload
+        if quantity_set or split_type_set:
+            print(f'      ⏳ Waiting for filters to apply and page to reload...', flush=True)
+            time.sleep(4)
         
         # Scroll multiple times to load all tickets (lazy loading)
         print(f'      📜 Scrolling to load all ticket listings...', flush=True)
@@ -776,32 +872,80 @@ def scrape_game_prices(driver, game_url, game_name, team_key=None):
             
             for listing in listings:
                 try:
-                    # Check for 2 seats together compatibility
-                    # Since we already filtered via UI, we can be less strict here
-                    # But still verify if possible
-                    is_pair_compatible = True  # Assume compatible since we filtered
+                    # STRICT VALIDATION: Verify this listing matches "2 tickets + seating in pairs"
                     listing_text = listing.text.lower()
                     
-                    # If listing explicitly says "singles" or "single seats only", skip it
-                    if "single seats only" in listing_text or "seating in singles" in listing_text:
-                        if "pairs" not in listing_text and "2 seats" not in listing_text:
-                            continue
+                    # Check quantity - must be EXACTLY 2 tickets (not 1, not 3+)
+                    quantity_ok = False
+                    # Check for explicit "2 tickets" or "2 seats" (not "1 ticket" or "3 tickets")
+                    if re.search(r'\b2\s*(?:tickets?|seats?)\b', listing_text):
+                        quantity_ok = True
+                    # Check quantity elements - must be exactly "2"
+                    try:
+                        qty_selectors = [
+                            "[data-quantity='2']",
+                            "[data-quantity='2']",
+                            ".quantity",
+                            "[class*='quantity']"
+                        ]
+                        for qty_sel in qty_selectors:
+                            try:
+                                qty_elem = listing.find_element(By.CSS_SELECTOR, qty_sel)
+                                qty_attr = qty_elem.get_attribute("data-quantity")
+                                qty_text = qty_elem.text.strip() if qty_elem.text else ""
+                                # Must be exactly "2", not "1" or "3" or "4"
+                                if qty_attr == "2" or qty_text == "2":
+                                    quantity_ok = True
+                                    break
+                            except:
+                                continue
+                    except:
+                        pass
                     
-                    # Check classes for pair indicators
-                    classes = listing.get_attribute("class") or ""
-                    if "pairs-ticket" in classes.lower() or "pair" in classes.lower():
-                        is_pair_compatible = True
+                    # Check for seating in pairs / 2 seats together - MUST be present
+                    pair_compatible = False
+                    pair_keywords = [
+                        "seating in pairs",
+                        "2 seats together",
+                        "up to 2 seats together",
+                        "2 seats",
+                        "pairs"
+                    ]
+                    for keyword in pair_keywords:
+                        if keyword in listing_text:
+                            pair_compatible = True
+                            break
                     
-                    # Check split type text specific to this listing
+                    # Check split type text - this is the most reliable indicator
                     try:
                         split_text_elem = listing.find_element(By.CSS_SELECTOR, ".split_type_text")
                         split_text = split_text_elem.text.lower()
-                        if "seating in singles" in split_text and "pairs" not in split_text:
-                            continue  # Skip singles-only listings
-                        if "up to 2 seats" in split_text or "2 seats together" in split_text or "seating in pairs" in split_text:
-                            is_pair_compatible = True
+                        if any(keyword in split_text for keyword in pair_keywords):
+                            pair_compatible = True
+                        # Skip if explicitly singles-only
+                        if "seating in singles" in split_text and "pairs" not in split_text and "2 seats" not in split_text:
+                            continue
                     except:
-                        pass  # Continue if we can't find split type
+                        pass
+                    
+                    # Check classes for pair indicators
+                    classes = listing.get_attribute("class") or ""
+                    if any(indicator in classes.lower() for indicator in ["pairs-ticket", "pair", "2-seats"]):
+                        pair_compatible = True
+                    
+                    # STRICT: Must have BOTH quantity=2 AND seating in pairs
+                    # If we can't verify both, skip this listing
+                    if not quantity_ok or not pair_compatible:
+                        # Skip listings that don't explicitly match both criteria
+                        continue
+                    
+                    # Additional check: Skip if explicitly says "singles only" or quantity is not 2
+                    if ("single seats only" in listing_text or "seating in singles" in listing_text) and not pair_compatible:
+                        continue
+                    # Skip if quantity is clearly not 2
+                    if re.search(r'\b(?:1|3|4|5|6|7|8|9|10)\s*(?:tickets?|seats?)\b', listing_text):
+                        if not re.search(r'\b2\s*(?:tickets?|seats?)\b', listing_text):
+                            continue
                         
                     # Extract Price - try multiple methods
                     price = float('inf')
@@ -874,32 +1018,24 @@ def scrape_game_prices(driver, game_url, game_name, team_key=None):
                     
                     if not category:
                         category = "Unknown Category"
-
-                    # Extract Block
-                    block = "Unknown"
-                    try:
-                        block_elem = listing.find_element(By.CSS_SELECTOR, ".block-row")
-                        block_text = block_elem.text.strip()
-                        # Usually "Block: 105" or just "105" or "Row: ..."
-                        if block_text:
-                            # Try to extract just the block info
-                            if "block" in block_text.lower():
-                                b_match = re.search(r'block[:\s]+([\d,\s\w]+)', block_text, re.IGNORECASE)
-                                if b_match:
-                                    block = b_match.group(1).strip()
-                                else:
-                                    block = block_text
-                            else:
-                                block = block_text # fallback to full text like "Row: ..."
-                    except:
-                        pass
                     
-                    # Clean up category name
+                    # Clean up category name - normalize to main category (Category 1, Category 2, etc.)
                     category = category.replace("Official", "").strip()
                     category = ' '.join(category.split()) # Remove extra spaces
                     
-                    # Store all prices (we'll take min/max later)
-                    prices_by_block[category][block].append(price)
+                    # Normalize category to main category format (e.g., "Category 1", "Category 2")
+                    # Extract just the main category number if it's in the name
+                    cat_match = re.search(r'(Category\s*\d+)', category, re.IGNORECASE)
+                    if cat_match:
+                        category = cat_match.group(1).title()  # "Category 1", "Category 2", etc.
+                    elif re.search(r'\bcategory\b', category, re.IGNORECASE):
+                        # If it contains "category" but not in standard format, try to extract number
+                        num_match = re.search(r'(\d+)', category)
+                        if num_match:
+                            category = f"Category {num_match.group(1)}"
+                    
+                    # Store all prices by category only (ignore blocks)
+                    prices_by_category[category].append(price)
                     parsed_count += 1
                         
                 except Exception as list_err:
@@ -915,9 +1051,8 @@ def scrape_game_prices(driver, game_url, game_name, team_key=None):
                 body_text = driver.find_element(By.TAG_NAME, 'body').text
                 lines = body_text.split('\n')
                 
-                # Parse ticket listings to extract: Category, Block, Price, and "Up To 2 Seats Together"
+                # Parse ticket listings to extract: Category, Price, and "Up To 2 Seats Together"
                 current_category = None
-                current_block = None
                 
                 for i, line in enumerate(lines):
                     line_lower = line.lower().strip()
@@ -925,16 +1060,19 @@ def scrape_game_prices(driver, game_url, game_name, team_key=None):
                     # Look for category/location names
                     if any(keyword in line_lower for keyword in ['category', 'longside', 'shortside', 'club level', 'executive', 'vip']):
                         if len(line.strip()) < 50 and not any(char.isdigit() for char in line.strip()[:5]):
-                            current_category = line.strip()
-                            current_block = None
-                    
-                    # Look for block information
-                    block_match = re.search(r'block[:\s]+([\d,\s]+)', line, re.IGNORECASE)
-                    if block_match:
-                        blocks_str = block_match.group(1)
-                        block_numbers = re.findall(r'\d+', blocks_str)
-                        if block_numbers:
-                            current_block = ','.join(block_numbers)
+                            category_text = line.strip()
+                            # Normalize to main category format
+                            cat_match = re.search(r'(Category\s*\d+)', category_text, re.IGNORECASE)
+                            if cat_match:
+                                current_category = cat_match.group(1).title()
+                            elif re.search(r'\bcategory\b', category_text, re.IGNORECASE):
+                                num_match = re.search(r'(\d+)', category_text)
+                                if num_match:
+                                    current_category = f"Category {num_match.group(1)}"
+                                else:
+                                    current_category = category_text
+                            else:
+                                current_category = category_text
                     
                     # Look for "Up To 2 Seats Together"
                     if 'up to 2 seats together' in line_lower or '2 seats together' in line_lower:
@@ -948,36 +1086,22 @@ def scrape_game_prices(driver, game_url, game_name, team_key=None):
                                     price = raw_val
                                     
                                     if current_category:
-                                        block_key = current_block if current_block else 'Unknown'
-                                        prices_by_block[current_category][block_key].append(price)
+                                        prices_by_category[current_category].append(price)
                                     break
             except Exception as e:
                 print(f'      ❌ Text fallback failed: {e}', flush=True)
         
-        # Convert to final format: {category: {block: price_info}}
-        # Store price info with min, max, and count for better UI display
+        # Convert to final format: {category: lowest_price}
+        # Store only the minimum price per category (no range, no count)
         result = {}
         all_prices = []  # Track all prices for summary
         
-        for category, blocks in prices_by_block.items():
-            result[category] = {}
-            for block, prices_list in blocks.items():
-                if prices_list:
-                    min_price = min(prices_list)
-                    max_price = max(prices_list)
-                    # Store as dict with min, max, count for better UI
-                    # Keep backward compatibility: if only one price, store as number
-                    if len(prices_list) == 1:
-                        result[category][block] = min_price  # Single price
-                    else:
-                        # Store as dict with price info (UI can use min for display, but has access to range)
-                        result[category][block] = {
-                            'min': min_price,
-                            'max': max_price,
-                            'count': len(prices_list),
-                            '_price': min_price  # For backward compatibility
-                        }
-                    all_prices.extend(prices_list)  # Keep all prices for range calculation
+        for category, prices_list in prices_by_category.items():
+            if prices_list:
+                min_price = min(prices_list)
+                # Store only the lowest price (flat number, no range info)
+                result[category] = min_price
+                all_prices.extend(prices_list)  # Keep all prices for summary calculation
         
         # If no results, return empty dict
         if not result:
@@ -987,19 +1111,14 @@ def scrape_game_prices(driver, game_url, game_name, team_key=None):
         # Get currency symbol for display
         currency_symbol = '€' if currency == 'EUR' else ('£' if currency == 'GBP' else '$')
         
-        # Print summary with full price range
+        # Print summary with lowest prices only
         print(f'      ✅ Found {parsed_count} ticket listings across {len(result)} category/categories:', flush=True)
         if all_prices:
             overall_min = min(all_prices)
             overall_max = max(all_prices)
             print(f'         Overall price range: {currency_symbol}{overall_min:.2f} - {currency_symbol}{overall_max:.2f}', flush=True)
-        for cat, blocks in result.items():
-            cat_prices = [price for block_prices in prices_by_block[cat].values() for price in block_prices]
-            if cat_prices:
-                min_price = min(cat_prices)
-                max_price = max(cat_prices)
-                count = len(cat_prices)
-                print(f'         {cat}: {currency_symbol}{min_price:.2f} - {currency_symbol}{max_price:.2f} ({count} listings)', flush=True)
+        for cat, lowest_price in result.items():
+            print(f'         {cat}: {currency_symbol}{lowest_price:.2f} (lowest price)', flush=True)
         
         return result
         
@@ -1147,41 +1266,21 @@ def run_team_scraper(team_key='arsenal'):
             prices = scrape_game_prices(driver, url, game_data['match_name'], team_key)
             
             if prices:
-                # Count total blocks/categories
-                total_blocks = sum(len(blocks) for blocks in prices.values())
-                # Convert new format to old format for price_history (backward compatibility)
-                # But keep new format in latest_prices for UI
-                prices_for_history = {}
-                for cat, blocks in prices.items():
-                    prices_for_history[cat] = {}
-                    for block, price_info in blocks.items():
-                        # Extract price value (min) for history
-                        if isinstance(price_info, dict) and 'min' in price_info:
-                            prices_for_history[cat][block] = price_info['min']
-                        else:
-                            prices_for_history[cat][block] = price_info
-                
-                # Add price snapshot to history (use old format for compatibility)
+                # Prices are already in format: {category: lowest_price}
+                # Add price snapshot to history
                 price_snapshot = {
                     'timestamp': run_timestamp,
-                    'prices': prices_for_history  # Format: {category: {block: price}}
+                    'prices': prices  # Format: {category: price}
                 }
                 game_data['price_history'].append(price_snapshot)
-                game_data['latest_prices'] = prices  # Keep new format with min/max/count
+                game_data['latest_prices'] = prices  # Format: {category: lowest_price}
                 game_data['last_scraped'] = run_timestamp
-                print(f'      ✅ Found {len(prices)} categories with {total_blocks} blocks', flush=True)
+                print(f'      ✅ Found {len(prices)} categories', flush=True)
                 # Show sample prices
-                for cat, blocks in list(prices.items())[:3]:
-                    for block, price_info in list(blocks.items())[:2]:
-                        currency_symbol = get_team_currency(team_key)
-                        currency_display = {'GBP': '£', 'EUR': '€', 'USD': '$'}.get(currency_symbol, '$')
-                        if isinstance(price_info, dict) and 'min' in price_info:
-                            if price_info.get('min') == price_info.get('max'):
-                                print(f'         {cat} - Block {block}: {currency_display}{price_info["min"]:.2f}', flush=True)
-                            else:
-                                print(f'         {cat} - Block {block}: {currency_display}{price_info["min"]:.2f} - {currency_display}{price_info["max"]:.2f} ({price_info.get("count", 1)} listings)', flush=True)
-                        else:
-                            print(f'         {cat} - Block {block}: {currency_display}{price_info:.2f}', flush=True)
+                currency_symbol = get_team_currency(team_key)
+                currency_display = {'GBP': '£', 'EUR': '€', 'USD': '$'}.get(currency_symbol, '$')
+                for cat, lowest_price in list(prices.items())[:5]:
+                    print(f'         {cat}: {currency_display}{lowest_price:.2f} (lowest)', flush=True)
             else:
                 print(f'      ⚠️ No prices found', flush=True)
             

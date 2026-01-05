@@ -215,23 +215,38 @@ function TeamView() {
           }
           
           if (snapshot.prices[cat] && typeof snapshot.prices[cat] === 'object') {
-            // Block-based prices: {category: {block: price}} or {category: {block: {min, max, count}}}
-            Object.keys(snapshot.prices[cat]).forEach(block => {
-              const blockKey = block
-              if (!dailyData[dayKey].prices[cat][blockKey]) {
-                dailyData[dayKey].prices[cat][blockKey] = []
+            // Check if it's block-based format: {category: {block: price}} (old format)
+            // or category-only format with object: {category: {min, max, count}} (old new format)
+            const hasMinMax = 'min' in snapshot.prices[cat] || 'max' in snapshot.prices[cat]
+            
+            if (hasMinMax) {
+              // Old new format: {category: {min, max, count}} - category-only, no blocks
+              const priceValue = snapshot.prices[cat]
+              if (!dailyData[dayKey].prices[cat]['_simple']) {
+                dailyData[dayKey].prices[cat]['_simple'] = []
               }
-              const priceValue = snapshot.prices[cat][block]
-              // Handle both old format (number) and new format (dict with min/max/count)
-              if (typeof priceValue === 'number') {
-                dailyData[dayKey].prices[cat][blockKey].push(priceValue)
-              } else if (priceValue && typeof priceValue === 'object' && 'min' in priceValue) {
-                // New format: store min for chart, but we have access to max/count
-                dailyData[dayKey].prices[cat][blockKey].push(priceValue.min)
-              }
-            })
+              // Store min for chart
+              const price = typeof priceValue === 'number' ? priceValue : (priceValue.min || priceValue._price || 0)
+              dailyData[dayKey].prices[cat]['_simple'].push(price)
+            } else {
+              // Old block-based format: {category: {block: price}} or {category: {block: {min, max, count}}}
+              Object.keys(snapshot.prices[cat]).forEach(block => {
+                const blockKey = block
+                if (!dailyData[dayKey].prices[cat][blockKey]) {
+                  dailyData[dayKey].prices[cat][blockKey] = []
+                }
+                const priceValue = snapshot.prices[cat][block]
+                // Handle both old format (number) and new format (dict with min/max/count)
+                if (typeof priceValue === 'number') {
+                  dailyData[dayKey].prices[cat][blockKey].push(priceValue)
+                } else if (priceValue && typeof priceValue === 'object' && 'min' in priceValue) {
+                  // New format: store min for chart, but we have access to max/count
+                  dailyData[dayKey].prices[cat][blockKey].push(priceValue.min)
+                }
+              })
+            }
           } else if (typeof snapshot.prices[cat] === 'number') {
-            // Simple category prices: {category: price}
+            // New simple format: {category: lowest_price} - just the lowest price
             if (!dailyData[dayKey].prices[cat]['_simple']) {
               dailyData[dayKey].prices[cat]['_simple'] = []
             }
@@ -820,36 +835,56 @@ function TeamView() {
                         </tr>
                       </thead>
                       <tbody>
-                        {Object.entries(gamePrices.latest_prices).map(([category, blocks], idx) => {
-                          if (!blocks || typeof blocks !== 'object') return null
+                        {Object.entries(gamePrices.latest_prices).map(([category, priceData], idx) => {
+                          if (!priceData && priceData !== 0) return null
                           
-                          const blockEntries = Object.entries(blocks)
-                          if (blockEntries.length === 0) return null
+                          let catMin, catMax, totalListings, blockDetails
                           
-                          // Calculate category-wide min/max and total listings
-                          let catMin = Infinity
-                          let catMax = -Infinity
-                          let totalListings = 0
-                          
-                          blockEntries.forEach(([block, price]) => {
-                            let min, max, count
-                            if (typeof price === 'number') {
-                              min = max = price
-                              count = 1
-                            } else if (price && typeof price === 'object' && 'min' in price) {
-                              min = price.min
-                              max = price.max || price.min
-                              count = price.count || 1
-                            } else {
-                              return
-                            }
+                          // Check format: {category: lowest_price} (newest), {category: {min, max, count}} (old new), or {category: {block: price}} (oldest)
+                          if (typeof priceData === 'number') {
+                            // Newest format: {category: lowest_price} - just the lowest price
+                            catMin = catMax = priceData
+                            totalListings = 1
+                            blockDetails = [{ block: 'All', min: priceData, max: priceData, count: 1 }]
+                          } else if (priceData && typeof priceData === 'object' && ('min' in priceData || 'max' in priceData)) {
+                            // Old new format: {category: {min, max, count}}
+                            catMin = priceData.min || priceData._price || 0
+                            catMax = priceData.max || priceData.min || priceData._price || 0
+                            totalListings = priceData.count || 1
+                            blockDetails = [{ block: 'All', min: catMin, max: catMax, count: totalListings }]
+                          } else if (priceData && typeof priceData === 'object') {
+                            // Oldest block-based format: {category: {block: price}}
+                            const blockEntries = Object.entries(priceData)
+                            if (blockEntries.length === 0) return null
                             
-                            catMin = Math.min(catMin, min)
-                            catMax = Math.max(catMax, max)
-                            totalListings += count
-                          })
-                          
-                          if (catMin === Infinity) return null
+                            catMin = Infinity
+                            catMax = -Infinity
+                            totalListings = 0
+                            
+                            blockDetails = blockEntries.map(([block, price]) => {
+                              let min, max, count
+                              if (typeof price === 'number') {
+                                min = max = price
+                                count = 1
+                              } else if (price && typeof price === 'object' && 'min' in price) {
+                                min = price.min
+                                max = price.max || price.min
+                                count = price.count || 1
+                              } else {
+                                return null
+                              }
+                              
+                              catMin = Math.min(catMin, min)
+                              catMax = Math.max(catMax, max)
+                              totalListings += count
+                              
+                              return { block, min, max, count }
+                            }).filter(Boolean)
+                            
+                            if (catMin === Infinity) return null
+                          } else {
+                            return null
+                          }
                           
                           const currency = gamePrices?.currency || selectedTeam?.currency || 'USD'
                           
@@ -860,22 +895,6 @@ function TeamView() {
                               onMouseEnter={(e) => e.currentTarget.style.background = '#1c2128'} 
                               onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
                               onClick={() => {
-                                // Collect all block details for this category
-                                const blockDetails = blockEntries.map(([block, price]) => {
-                                  let min, max, count
-                                  if (typeof price === 'number') {
-                                    min = max = price
-                                    count = 1
-                                  } else if (price && typeof price === 'object' && 'min' in price) {
-                                    min = price.min
-                                    max = price.max || price.min
-                                    count = price.count || 1
-                                  } else {
-                                    return null
-                                  }
-                                  return { block, min, max, count }
-                                }).filter(Boolean)
-                                
                                 setModalCategory({
                                   category,
                                   blocks: blockDetails,
