@@ -367478,5 +367478,1253 @@
     "price": 2231.0,
     "currency": "USD",
     "timestamp": "2026-01-06T18:22:41.962301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033506?quantity=1",
+    "match_name": "1A vs 3C/E/F/H/I (Match 79)",
+    "category": "Category 1",
+    "price": 1361.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033506?quantity=1",
+    "match_name": "1A vs 3C/E/F/H/I (Match 79)",
+    "category": "Category 2",
+    "price": 982.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033506?quantity=1",
+    "match_name": "1A vs 3C/E/F/H/I (Match 79)",
+    "category": "Category 3",
+    "price": 661.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033506?quantity=1",
+    "match_name": "1A vs 3C/E/F/H/I (Match 79)",
+    "category": "Category 4",
+    "price": 719.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021172?quantity=1",
+    "match_name": "1C vs 2F (Match 76)",
+    "category": "Category 1",
+    "price": 1082.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021172?quantity=1",
+    "match_name": "1C vs 2F (Match 76)",
+    "category": "Category 2",
+    "price": 984.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021172?quantity=1",
+    "match_name": "1C vs 2F (Match 76)",
+    "category": "Category 3",
+    "price": 671.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021172?quantity=1",
+    "match_name": "1C vs 2F (Match 76)",
+    "category": "Category 4",
+    "price": 666.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033502?quantity=1",
+    "match_name": "1F vs 2C (Match 75)",
+    "category": "Category 1",
+    "price": 601.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033502?quantity=1",
+    "match_name": "1F vs 2C (Match 75)",
+    "category": "Category 2",
+    "price": 603.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033502?quantity=1",
+    "match_name": "1F vs 2C (Match 75)",
+    "category": "Category 3",
+    "price": 426.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023840?quantity=1",
+    "match_name": "1I vs 3C/D/F/G/H (Match 77)",
+    "category": "Category 1",
+    "price": 1200.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023840?quantity=1",
+    "match_name": "1I vs 3C/D/F/G/H (Match 77)",
+    "category": "Category 2",
+    "price": 1023.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023840?quantity=1",
+    "match_name": "1I vs 3C/D/F/G/H (Match 77)",
+    "category": "Category 3",
+    "price": 649.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023840?quantity=1",
+    "match_name": "1I vs 3C/D/F/G/H (Match 77)",
+    "category": "Category 4",
+    "price": 687.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021573?quantity=1",
+    "match_name": "1K vs 3D/E/I/J/L (Match 87)",
+    "category": "Category 1",
+    "price": 1536.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021573?quantity=1",
+    "match_name": "1K vs 3D/E/I/J/L (Match 87)",
+    "category": "Category 2",
+    "price": 902.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021573?quantity=1",
+    "match_name": "1K vs 3D/E/I/J/L (Match 87)",
+    "category": "Category 3",
+    "price": 612.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021573?quantity=1",
+    "match_name": "1K vs 3D/E/I/J/L (Match 87)",
+    "category": "Category 4",
+    "price": 610.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023856?quantity=1",
+    "match_name": "2K vs 2L (Match 83)",
+    "category": "Category 1",
+    "price": 1661.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023856?quantity=1",
+    "match_name": "2K vs 2L (Match 83)",
+    "category": "Category 2",
+    "price": 1191.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023856?quantity=1",
+    "match_name": "2K vs 2L (Match 83)",
+    "category": "Category 3",
+    "price": 767.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023856?quantity=1",
+    "match_name": "2K vs 2L (Match 83)",
+    "category": "Category 4",
+    "price": 937.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021572?quantity=1",
+    "match_name": "Algeria vs Austria (Match 69)",
+    "category": "Category 1",
+    "price": 524.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021572?quantity=1",
+    "match_name": "Algeria vs Austria (Match 69)",
+    "category": "Category 2",
+    "price": 354.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021572?quantity=1",
+    "match_name": "Algeria vs Austria (Match 69)",
+    "category": "Category 3",
+    "price": 222.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021572?quantity=1",
+    "match_name": "Algeria vs Austria (Match 69)",
+    "category": "Category 4",
+    "price": 474.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021561?quantity=1",
+    "match_name": "Argentina vs Algeria (Match 19)",
+    "category": "Category 1",
+    "price": 1438.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021561?quantity=1",
+    "match_name": "Argentina vs Algeria (Match 19)",
+    "category": "Category 2",
+    "price": 709.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021561?quantity=1",
+    "match_name": "Argentina vs Algeria (Match 19)",
+    "category": "Category 3",
+    "price": 642.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021561?quantity=1",
+    "match_name": "Argentina vs Algeria (Match 19)",
+    "category": "Category 4",
+    "price": 719.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021803?quantity=1",
+    "match_name": "Brazil vs Morocco (Match 7)",
+    "category": "Category 1",
+    "price": 1647.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021803?quantity=1",
+    "match_name": "Brazil vs Morocco (Match 7)",
+    "category": "Category 2",
+    "price": 1406.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021803?quantity=1",
+    "match_name": "Brazil vs Morocco (Match 7)",
+    "category": "Category 3",
+    "price": 829.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021803?quantity=1",
+    "match_name": "Brazil vs Morocco (Match 7)",
+    "category": "Category 4",
+    "price": 825.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020962?quantity=1",
+    "match_name": "Cabo Verde vs Saudi Arabia (Match 65)",
+    "category": "Category 1",
+    "price": 296.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020962?quantity=1",
+    "match_name": "Cabo Verde vs Saudi Arabia (Match 65)",
+    "category": "Category 2",
+    "price": 203.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020962?quantity=1",
+    "match_name": "Cabo Verde vs Saudi Arabia (Match 65)",
+    "category": "Category 3",
+    "price": 201.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020962?quantity=1",
+    "match_name": "Cabo Verde vs Saudi Arabia (Match 65)",
+    "category": "Category 4",
+    "price": 190.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021783?quantity=1",
+    "match_name": "Canada vs TBD (Match 3)",
+    "category": "Category 1",
+    "price": 2235.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021783?quantity=1",
+    "match_name": "Canada vs TBD (Match 3)",
+    "category": "Category 2",
+    "price": 1796.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021783?quantity=1",
+    "match_name": "Canada vs TBD (Match 3)",
+    "category": "Category 3",
+    "price": 1042.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021783?quantity=1",
+    "match_name": "Canada vs TBD (Match 3)",
+    "category": "Category 4",
+    "price": 1022.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033471?quantity=1",
+    "match_name": "Colombia vs TBD (Match 48)",
+    "category": "Category 1",
+    "price": 710.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033471?quantity=1",
+    "match_name": "Colombia vs TBD (Match 48)",
+    "category": "Category 2",
+    "price": 408.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033471?quantity=1",
+    "match_name": "Colombia vs TBD (Match 48)",
+    "category": "Category 3",
+    "price": 369.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033471?quantity=1",
+    "match_name": "Colombia vs TBD (Match 48)",
+    "category": "Category 4",
+    "price": 369.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021562?quantity=1",
+    "match_name": "Ecuador vs Cura\u00e7ao (Match 34)",
+    "category": "Category 1",
+    "price": 596.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021562?quantity=1",
+    "match_name": "Ecuador vs Cura\u00e7ao (Match 34)",
+    "category": "Category 2",
+    "price": 433.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021562?quantity=1",
+    "match_name": "Ecuador vs Cura\u00e7ao (Match 34)",
+    "category": "Category 3",
+    "price": 266.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021562?quantity=1",
+    "match_name": "Ecuador vs Cura\u00e7ao (Match 34)",
+    "category": "Category 4",
+    "price": 731.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023689?quantity=1",
+    "match_name": "Ecuador vs Germany (Match 56)",
+    "category": "Category 1",
+    "price": 1415.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023689?quantity=1",
+    "match_name": "Ecuador vs Germany (Match 56)",
+    "category": "Category 2",
+    "price": 1011.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023689?quantity=1",
+    "match_name": "Ecuador vs Germany (Match 56)",
+    "category": "Category 3",
+    "price": 683.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023689?quantity=1",
+    "match_name": "Ecuador vs Germany (Match 56)",
+    "category": "Category 4",
+    "price": 786.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153022598?quantity=1",
+    "match_name": "France vs Senegal (Match 17)",
+    "category": "Category 1",
+    "price": 1144.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153022598?quantity=1",
+    "match_name": "France vs Senegal (Match 17)",
+    "category": "Category 2",
+    "price": 838.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153022598?quantity=1",
+    "match_name": "France vs Senegal (Match 17)",
+    "category": "Category 3",
+    "price": 526.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153022598?quantity=1",
+    "match_name": "France vs Senegal (Match 17)",
+    "category": "Category 4",
+    "price": 669.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020800?quantity=1",
+    "match_name": "Germany vs Cura\u00e7ao (Match 10)",
+    "category": "Category 1",
+    "price": 796.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020800?quantity=1",
+    "match_name": "Germany vs Cura\u00e7ao (Match 10)",
+    "category": "Category 2",
+    "price": 620.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020800?quantity=1",
+    "match_name": "Germany vs Cura\u00e7ao (Match 10)",
+    "category": "Category 3",
+    "price": 505.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020800?quantity=1",
+    "match_name": "Germany vs Cura\u00e7ao (Match 10)",
+    "category": "Category 4",
+    "price": 467.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153022796?quantity=1",
+    "match_name": "Germany vs C\u00f4te d'Ivoire (Match 33)",
+    "category": "Category 1",
+    "price": 1069.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153022796?quantity=1",
+    "match_name": "Germany vs C\u00f4te d'Ivoire (Match 33)",
+    "category": "Category 2",
+    "price": 855.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153022796?quantity=1",
+    "match_name": "Germany vs C\u00f4te d'Ivoire (Match 33)",
+    "category": "Category 3",
+    "price": 470.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153022796?quantity=1",
+    "match_name": "Germany vs C\u00f4te d'Ivoire (Match 33)",
+    "category": "Category 4",
+    "price": 470.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153022614?quantity=1",
+    "match_name": "Ghana vs Panama (Match 21)",
+    "category": "Category 1",
+    "price": 520.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153022614?quantity=1",
+    "match_name": "Ghana vs Panama (Match 21)",
+    "category": "Category 2",
+    "price": 501.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153022614?quantity=1",
+    "match_name": "Ghana vs Panama (Match 21)",
+    "category": "Category 3",
+    "price": 256.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153022614?quantity=1",
+    "match_name": "Ghana vs Panama (Match 21)",
+    "category": "Category 4",
+    "price": 320.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033402?quantity=1",
+    "match_name": "Korea vs TBD (Match 2)",
+    "category": "Category 1",
+    "price": 479.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033402?quantity=1",
+    "match_name": "Korea vs TBD (Match 2)",
+    "category": "Category 2",
+    "price": 293.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033402?quantity=1",
+    "match_name": "Korea vs TBD (Match 2)",
+    "category": "Category 3",
+    "price": 272.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033402?quantity=1",
+    "match_name": "Korea vs TBD (Match 2)",
+    "category": "Category 4",
+    "price": 269.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033451?quantity=1",
+    "match_name": "Mexico vs Korea (Match 28)",
+    "category": "Category 1",
+    "price": 1759.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033451?quantity=1",
+    "match_name": "Mexico vs Korea (Match 28)",
+    "category": "Category 2",
+    "price": 1169.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033451?quantity=1",
+    "match_name": "Mexico vs Korea (Match 28)",
+    "category": "Category 3",
+    "price": 937.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033451?quantity=1",
+    "match_name": "Mexico vs Korea (Match 28)",
+    "category": "Category 4",
+    "price": 990.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033405?quantity=1",
+    "match_name": "Mexico vs South Africa (Match 1)",
+    "category": "Category 1",
+    "price": 3916.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033405?quantity=1",
+    "match_name": "Mexico vs South Africa (Match 1)",
+    "category": "Category 2",
+    "price": 2602.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033405?quantity=1",
+    "match_name": "Mexico vs South Africa (Match 1)",
+    "category": "Category 3",
+    "price": 1950.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033405?quantity=1",
+    "match_name": "Mexico vs South Africa (Match 1)",
+    "category": "Category 4",
+    "price": 3349.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020842?quantity=1",
+    "match_name": "Netherlands vs TBA (Match 35)",
+    "category": "Category 1",
+    "price": 847.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020842?quantity=1",
+    "match_name": "Netherlands vs TBA (Match 35)",
+    "category": "Category 2",
+    "price": 723.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020842?quantity=1",
+    "match_name": "Netherlands vs TBA (Match 35)",
+    "category": "Category 3",
+    "price": 385.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020842?quantity=1",
+    "match_name": "Netherlands vs TBA (Match 35)",
+    "category": "Category 4",
+    "price": 372.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023354?quantity=1",
+    "match_name": "Norway vs Senegal (Match 41)",
+    "category": "Category 1",
+    "price": 714.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023354?quantity=1",
+    "match_name": "Norway vs Senegal (Match 41)",
+    "category": "Category 2",
+    "price": 540.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023354?quantity=1",
+    "match_name": "Norway vs Senegal (Match 41)",
+    "category": "Category 3",
+    "price": 364.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023354?quantity=1",
+    "match_name": "Norway vs Senegal (Match 41)",
+    "category": "Category 4",
+    "price": 365.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023376?quantity=1",
+    "match_name": "Panama vs Croatia (Match 46)",
+    "category": "Category 1",
+    "price": 773.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023376?quantity=1",
+    "match_name": "Panama vs Croatia (Match 46)",
+    "category": "Category 2",
+    "price": 643.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023376?quantity=1",
+    "match_name": "Panama vs Croatia (Match 46)",
+    "category": "Category 3",
+    "price": 351.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023376?quantity=1",
+    "match_name": "Panama vs Croatia (Match 46)",
+    "category": "Category 4",
+    "price": 389.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023828?quantity=1",
+    "match_name": "Panama vs England (Match 67)",
+    "category": "Category 1",
+    "price": 1391.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023828?quantity=1",
+    "match_name": "Panama vs England (Match 67)",
+    "category": "Category 2",
+    "price": 849.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023828?quantity=1",
+    "match_name": "Panama vs England (Match 67)",
+    "category": "Category 3",
+    "price": 602.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023828?quantity=1",
+    "match_name": "Panama vs England (Match 67)",
+    "category": "Category 4",
+    "price": 776.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020837?quantity=1",
+    "match_name": "Portugal vs TBD (Match 23)",
+    "category": "Category 1",
+    "price": 1182.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020837?quantity=1",
+    "match_name": "Portugal vs TBD (Match 23)",
+    "category": "Category 2",
+    "price": 877.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020837?quantity=1",
+    "match_name": "Portugal vs TBD (Match 23)",
+    "category": "Category 3",
+    "price": 652.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020837?quantity=1",
+    "match_name": "Portugal vs TBD (Match 23)",
+    "category": "Category 4",
+    "price": 629.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020851?quantity=1",
+    "match_name": "Portugal vs Uzbekistan (Match 47)",
+    "category": "Category 1",
+    "price": 1200.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020851?quantity=1",
+    "match_name": "Portugal vs Uzbekistan (Match 47)",
+    "category": "Category 2",
+    "price": 775.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020851?quantity=1",
+    "match_name": "Portugal vs Uzbekistan (Match 47)",
+    "category": "Category 3",
+    "price": 606.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020851?quantity=1",
+    "match_name": "Portugal vs Uzbekistan (Match 47)",
+    "category": "Category 4",
+    "price": 532.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023734?quantity=1",
+    "match_name": "Senegal vs TBD (Match 62)",
+    "category": "Category 1",
+    "price": 646.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023734?quantity=1",
+    "match_name": "Senegal vs TBD (Match 62)",
+    "category": "Category 2",
+    "price": 438.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023734?quantity=1",
+    "match_name": "Senegal vs TBD (Match 62)",
+    "category": "Category 3",
+    "price": 275.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023734?quantity=1",
+    "match_name": "Senegal vs TBD (Match 62)",
+    "category": "Category 4",
+    "price": 295.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033494?quantity=1",
+    "match_name": "South Africa vs Korea (Match 54)",
+    "category": "Category 1",
+    "price": 310.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033494?quantity=1",
+    "match_name": "South Africa vs Korea (Match 54)",
+    "category": "Category 2",
+    "price": 215.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033494?quantity=1",
+    "match_name": "South Africa vs Korea (Match 54)",
+    "category": "Category 3",
+    "price": 126.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033421?quantity=1",
+    "match_name": "TBA vs Tunisia (Match 12)",
+    "category": "Category 1",
+    "price": 210.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033421?quantity=1",
+    "match_name": "TBA vs Tunisia (Match 12)",
+    "category": "Category 2",
+    "price": 177.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033421?quantity=1",
+    "match_name": "TBA vs Tunisia (Match 12)",
+    "category": "Category 3",
+    "price": 140.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033484?quantity=1",
+    "match_name": "TBD vs Mexico (Match 53)",
+    "category": "Category 1",
+    "price": 1492.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033484?quantity=1",
+    "match_name": "TBD vs Mexico (Match 53)",
+    "category": "Category 2",
+    "price": 1319.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033484?quantity=1",
+    "match_name": "TBD vs Mexico (Match 53)",
+    "category": "Category 3",
+    "price": 898.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033484?quantity=1",
+    "match_name": "TBD vs Mexico (Match 53)",
+    "category": "Category 4",
+    "price": 895.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033460?quantity=1",
+    "match_name": "Tunisia vs Japan (Match 36)",
+    "category": "Category 1",
+    "price": 249.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033460?quantity=1",
+    "match_name": "Tunisia vs Japan (Match 36)",
+    "category": "Category 2",
+    "price": 189.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033460?quantity=1",
+    "match_name": "Tunisia vs Japan (Match 36)",
+    "category": "Category 3",
+    "price": 112.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021563?quantity=1",
+    "match_name": "Tunisia vs Netherlands (Match 58)",
+    "category": "Category 1",
+    "price": 761.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021563?quantity=1",
+    "match_name": "Tunisia vs Netherlands (Match 58)",
+    "category": "Category 2",
+    "price": 465.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021563?quantity=1",
+    "match_name": "Tunisia vs Netherlands (Match 58)",
+    "category": "Category 3",
+    "price": 308.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021563?quantity=1",
+    "match_name": "Tunisia vs Netherlands (Match 58)",
+    "category": "Category 4",
+    "price": 520.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-156535642?quantity=1",
+    "match_name": "Uruguay vs Spain (Match 66)",
+    "category": "Category 1",
+    "price": 1237.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-156535642?quantity=1",
+    "match_name": "Uruguay vs Spain (Match 66)",
+    "category": "Category 2",
+    "price": 691.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-156535642?quantity=1",
+    "match_name": "Uruguay vs Spain (Match 66)",
+    "category": "Category 3",
+    "price": 614.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-156535642?quantity=1",
+    "match_name": "Uruguay vs Spain (Match 66)",
+    "category": "Category 4",
+    "price": 619.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033433?quantity=1",
+    "match_name": "Uzbekistan vs Colombia (Match 24)",
+    "category": "Category 1",
+    "price": 622.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033433?quantity=1",
+    "match_name": "Uzbekistan vs Colombia (Match 24)",
+    "category": "Category 2",
+    "price": 622.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033433?quantity=1",
+    "match_name": "Uzbekistan vs Colombia (Match 24)",
+    "category": "Category 3",
+    "price": 388.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033433?quantity=1",
+    "match_name": "Uzbekistan vs Colombia (Match 24)",
+    "category": "Category 4",
+    "price": 388.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020449?quantity=1",
+    "match_name": "W101 vs W102 (Match 104)",
+    "category": "Category 1",
+    "price": 15262.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020449?quantity=1",
+    "match_name": "W101 vs W102 (Match 104)",
+    "category": "Category 2",
+    "price": 11337.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020449?quantity=1",
+    "match_name": "W101 vs W102 (Match 104)",
+    "category": "Category 3",
+    "price": 8660.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153020449?quantity=1",
+    "match_name": "W101 vs W102 (Match 104)",
+    "category": "Category 4",
+    "price": 8546.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021196?quantity=1",
+    "match_name": "W73 vs W75 (Match 90)",
+    "category": "Category 1",
+    "price": 1454.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021196?quantity=1",
+    "match_name": "W73 vs W75 (Match 90)",
+    "category": "Category 2",
+    "price": 1140.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021196?quantity=1",
+    "match_name": "W73 vs W75 (Match 90)",
+    "category": "Category 3",
+    "price": 875.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021196?quantity=1",
+    "match_name": "W73 vs W75 (Match 90)",
+    "category": "Category 4",
+    "price": 872.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023886?quantity=1",
+    "match_name": "W76 vs W78 (Match 91)",
+    "category": "Category 1",
+    "price": 1980.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023886?quantity=1",
+    "match_name": "W76 vs W78 (Match 91)",
+    "category": "Category 2",
+    "price": 1519.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023886?quantity=1",
+    "match_name": "W76 vs W78 (Match 91)",
+    "category": "Category 3",
+    "price": 921.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153023886?quantity=1",
+    "match_name": "W76 vs W78 (Match 91)",
+    "category": "Category 4",
+    "price": 900.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033507?quantity=1",
+    "match_name": "W79 vs W80 (Match 92)",
+    "category": "Category 1",
+    "price": 1238.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033507?quantity=1",
+    "match_name": "W79 vs W80 (Match 92)",
+    "category": "Category 2",
+    "price": 1045.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033507?quantity=1",
+    "match_name": "W79 vs W80 (Match 92)",
+    "category": "Category 3",
+    "price": 647.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153033507?quantity=1",
+    "match_name": "W79 vs W80 (Match 92)",
+    "category": "Category 4",
+    "price": 681.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021616?quantity=1",
+    "match_name": "W95 vs W96 (Match 100)",
+    "category": "Category 1",
+    "price": 2802.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021616?quantity=1",
+    "match_name": "W95 vs W96 (Match 100)",
+    "category": "Category 2",
+    "price": 1795.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021616?quantity=1",
+    "match_name": "W95 vs W96 (Match 100)",
+    "category": "Category 3",
+    "price": 1064.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
+  },
+  {
+    "match_url": "https://www.viagogo.com/us/Sports-Tickets/Soccer/Soccer-Tournament/World-Cup-Tickets/E-153021616?quantity=1",
+    "match_name": "W95 vs W96 (Match 100)",
+    "category": "Category 4",
+    "price": 1333.0,
+    "currency": "USD",
+    "timestamp": "2026-01-06T21:10:32.273301"
   }
 ]
