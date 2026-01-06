@@ -253,6 +253,70 @@ function TicketOffersManager() {
     })
   }
 
+  /* Split offers by match for display */
+  const splitOffersByMatch = (offers) => {
+    const splitResults = []
+    offers.forEach(offer => {
+      // If offer has specific top-level match, keep as is
+      if (offer.match) {
+        splitResults.push({
+          ...offer,
+          display_match: offer.match,
+          display_lines: offer.lines
+        })
+      }
+      // If offer has no match (mixed) but lines have matches
+      else if (offer.lines && offer.lines.length > 0) {
+        // Group lines by match
+        const matchGroups = {}
+        let hasMatches = false
+
+        offer.lines.forEach(line => {
+          const m = line.match
+          if (m) {
+            hasMatches = true
+            if (!matchGroups[m]) matchGroups[m] = []
+            matchGroups[m].push(line)
+          } else {
+            // Line without match -> add to 'unknown' or attach to all?
+            // For now, ignore or add to a fallback group
+            if (!matchGroups['other']) matchGroups['other'] = []
+            matchGroups['other'].push(line)
+          }
+        })
+
+        if (hasMatches) {
+          Object.entries(matchGroups).forEach(([mKey, mLines]) => {
+            if (mKey === 'other') return // skip unknown for now or handle separately
+            splitResults.push({
+              ...offer,
+              display_match: parseInt(mKey),
+              display_lines: mLines,
+              // Create a unique key for the split row
+              unique_id: `${offer.id}_${mKey}`
+            })
+          })
+        } else {
+          // No specific matches found in lines either
+          splitResults.push({
+            ...offer,
+            display_match: '-',
+            display_lines: offer.lines
+          })
+        }
+      }
+      // Fallback
+      else {
+        splitResults.push({
+          ...offer,
+          display_match: '-',
+          display_lines: []
+        })
+      }
+    })
+    return splitResults
+  }
+
   const handleSearch = async () => {
     setIsSearching(true)
     try {
@@ -268,7 +332,8 @@ function TicketOffersManager() {
       params.range = searchFilters.range
 
       const res = await axios.get(`${API_URL}/api/tickets/offers/search`, { params })
-      const sortedResults = sortResults(res.data)
+      const splitResults = splitOffersByMatch(res.data)
+      const sortedResults = sortResults(splitResults)
       setSearchResults(sortedResults)
     } catch (err) {
       console.error('Error searching:', err)
@@ -286,19 +351,20 @@ function TicketOffersManager() {
   }
 
   const getPriceSummary = (offer) => {
-    if (!offer.lines || offer.lines.length === 0) return 'No prices'
+    const lines = offer.display_lines || offer.lines || []
+    if (!lines || lines.length === 0) return 'No prices'
 
     // Base Prices
-    const prices = offer.lines.map(l => l.price).filter(p => p != null)
+    const prices = lines.map(l => l.price).filter(p => p != null)
     const min = prices.length ? Math.min(...prices) : 0
     const max = prices.length ? Math.max(...prices) : 0
 
     // My Prices
-    const myPrices = offer.lines.map(l => l.my_price || l.price).filter(p => p != null)
+    const myPrices = lines.map(l => l.my_price || l.price).filter(p => p != null)
     const myMin = myPrices.length ? Math.min(...myPrices) : min
     const myMax = myPrices.length ? Math.max(...myPrices) : max
 
-    const currency = offer.lines[0]?.currency || 'USD'
+    const currency = lines[0]?.currency || 'USD'
 
     let baseStr = ''
     if (min === max) baseStr = `${min.toFixed(0)}`
@@ -317,8 +383,9 @@ function TicketOffersManager() {
   }
 
   const getQuantitySummary = (offer) => {
-    if (!offer.lines || offer.lines.length === 0) return '-'
-    const quantities = offer.lines.map(l => l.quantity).filter(q => q != null)
+    const lines = offer.display_lines || offer.lines || []
+    if (!lines || lines.length === 0) return '-'
+    const quantities = lines.map(l => l.quantity).filter(q => q != null)
     if (quantities.length === 0) return '-'
     const total = quantities.reduce((a, b) => a + b, 0)
     return total
@@ -787,16 +854,19 @@ function TicketOffersManager() {
                       const rawSnippet = offer.raw ? offer.raw.substring(0, 60) + '...' : ''
                       const priceSummary = getPriceSummary(offer)
                       const quantitySummary = getQuantitySummary(offer)
-                      const categories = offer.lines ? offer.lines.map(l => l.category).join(', ') : '-'
+                      // Use display_lines for categories
+                      const lines = offer.display_lines || offer.lines || []
+                      const categories = lines.map(l => l.category).join(', ') || '-'
+
                       return (
                         <tr
-                          key={offer.id}
+                          key={offer.unique_id || offer.id}
                           onClick={() => handleRowClick(offer.id)}
                           className="result-row"
                         >
                           <td className="date-cell">{formatDate(offer.created_at)}</td>
                           <td className="seller-cell">{offer.seller}</td>
-                          <td className="match-cell">{offer.match || '-'}</td>
+                          <td className="match-cell">{offer.display_match || offer.match || '-'}</td>
                           <td className="price-summary-cell">
                             <span className="price-badge">{priceSummary}</span>
                           </td>
