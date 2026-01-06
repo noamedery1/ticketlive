@@ -114,25 +114,51 @@ function TicketOffersManager() {
   const [editableLines, setEditableLines] = useState([])
   const [isEditable, setIsEditable] = useState(false)
 
-  // Update editable lines when parsed data changes
+  // Commission state
+  const [commission, setCommission] = useState(20)
+
+  // Update effect to add my_price to editable lines
   useEffect(() => {
     if (parsedData && parsedData.lines) {
-      // Add unique ID to each line for React keys
-      const linesWithIds = parsedData.lines.map((l, i) => ({
-        ...l,
-        _id: i,
-        // Ensure match is set (fallback to top-level match or empty)
-        match: l.match || parsedData.match || ''
-      }))
+      const linesWithIds = parsedData.lines.map((l, i) => {
+        const price = parseFloat(l.price) || 0
+        // Calculate initial my_price based on default commission
+        const myPrice = price * (1 + (commission / 100))
+
+        return {
+          ...l,
+          _id: i,
+          match: l.match || parsedData.match || '',
+          my_price: myPrice
+        }
+      })
       setEditableLines(linesWithIds)
       setIsEditable(true)
     }
-  }, [parsedData])
+  }, [parsedData, commission])
 
+  // Recalculate my_price when commission changes
+  const updateCommission = () => {
+    setEditableLines(prev => prev.map(line => {
+      const price = parseFloat(line.price) || 0
+      const myPrice = price * (1 + (commission / 100))
+      return { ...line, my_price: myPrice }
+    }))
+  }
+
+  // Update my_price when base price changes manually
   const handleLineChange = (id, field, value) => {
     setEditableLines(prev => prev.map(line => {
       if (line._id === id) {
-        return { ...line, [field]: value }
+        const updated = { ...line, [field]: value }
+
+        // If price changed, update my_price automatically
+        if (field === 'price') {
+          const price = parseFloat(value) || 0
+          updated.my_price = price * (1 + (commission / 100))
+        }
+
+        return updated
       }
       return line
     }))
@@ -149,6 +175,7 @@ function TicketOffersManager() {
       category: '',
       quantity: 4,
       price: 0,
+      my_price: 0,
       currency: 'USD'
     }
     setEditableLines(prev => [...prev, newLine])
@@ -173,7 +200,6 @@ function TicketOffersManager() {
     setIsSaving(true)
     try {
       // Reconstruct parsed object from editable lines
-      // Calculate top-level match: if all lines have same match, use it. Else null.
       const uniqueMatches = [...new Set(editableLines.map(l => l.match).filter(m => m))]
       const topLevelMatch = uniqueMatches.length === 1 ? parseInt(uniqueMatches[0]) : null
 
@@ -181,13 +207,15 @@ function TicketOffersManager() {
         ...rest,
         match: rest.match ? parseInt(rest.match) : null,
         quantity: rest.quantity ? parseInt(rest.quantity) : null,
-        price: parseFloat(rest.price) || 0
+        price: parseFloat(rest.price) || 0,
+        my_price: parseFloat(rest.my_price) || 0
       }))
 
       const finalParsed = {
         ...parsedData,
         match: topLevelMatch,
-        lines: finalLines
+        lines: finalLines,
+        commission_rate: commission // store used commission rate
       }
 
       await axios.post(`${API_URL}/api/tickets/offers`, {
@@ -259,15 +287,33 @@ function TicketOffersManager() {
 
   const getPriceSummary = (offer) => {
     if (!offer.lines || offer.lines.length === 0) return 'No prices'
+
+    // Base Prices
     const prices = offer.lines.map(l => l.price).filter(p => p != null)
-    if (prices.length === 0) return 'No prices'
-    const min = Math.min(...prices)
-    const max = Math.max(...prices)
+    const min = prices.length ? Math.min(...prices) : 0
+    const max = prices.length ? Math.max(...prices) : 0
+
+    // My Prices
+    const myPrices = offer.lines.map(l => l.my_price || l.price).filter(p => p != null)
+    const myMin = myPrices.length ? Math.min(...myPrices) : min
+    const myMax = myPrices.length ? Math.max(...myPrices) : max
+
     const currency = offer.lines[0]?.currency || 'USD'
-    if (min === max) {
-      return `${currency} ${min.toFixed(2)}`
-    }
-    return `${currency} ${min.toFixed(2)} - ${max.toFixed(2)}`
+
+    let baseStr = ''
+    if (min === max) baseStr = `${min.toFixed(0)}`
+    else baseStr = `${min.toFixed(0)} - ${max.toFixed(0)}`
+
+    let myStr = ''
+    if (myMin === myMax) myStr = `${myMin.toFixed(0)}`
+    else myStr = `${myMin.toFixed(0)} - ${myMax.toFixed(0)}`
+
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', fontSize: '0.85em' }}>
+        <span>Original: <b>{currency} {baseStr}</b></span>
+        <span style={{ color: '#56d364' }}>My Price: <b>{currency} {myStr}</b></span>
+      </div>
+    )
   }
 
   const getQuantitySummary = (offer) => {
@@ -435,7 +481,39 @@ function TicketOffersManager() {
             <div className="parse-preview-card">
               <div className="parse-preview-header">
                 <h3>✅ Parse Preview (Editable)</h3>
-                <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+
+                  <div className="commission-control" style={{ display: 'flex', alignItems: 'center', gap: '8px', background: '#21262d', padding: '4px 8px', borderRadius: '4px', border: '1px solid #30363d' }}>
+                    <label style={{ fontSize: '12px', color: '#8b949e' }}>Commission:</label>
+                    <input
+                      type="number"
+                      min="0"
+                      max="100"
+                      value={commission}
+                      onChange={(e) => {
+                        const val = parseFloat(e.target.value) || 0
+                        setCommission(val)
+                        // We need to update editable lines immediately
+                        setEditableLines(prev => prev.map(line => {
+                          const price = parseFloat(line.price) || 0
+                          return {
+                            ...line,
+                            my_price: price * (1 + (val / 100))
+                          }
+                        }))
+                      }}
+                      style={{
+                        width: '50px',
+                        background: '#0d1117',
+                        border: '1px solid #30363d',
+                        color: '#c9d1d9',
+                        borderRadius: '4px',
+                        padding: '2px 5px'
+                      }}
+                    />
+                    <span style={{ fontSize: '12px', color: '#8b949e' }}>%</span>
+                  </div>
+
                   <span className={`status-badge status-${parsedData.parse_status}`}>
                     {parsedData.parse_status.toUpperCase()}
                   </span>
@@ -466,7 +544,8 @@ function TicketOffersManager() {
                             <th style={{ width: '60px' }}>Match</th>
                             <th style={{ width: '60px' }}>Qty</th>
                             <th>Category</th>
-                            <th>Price</th>
+                            <th>Base Price</th>
+                            <th>My Price ({commission}%)</th>
                             <th style={{ width: '50px' }}>Curr</th>
                             <th style={{ width: '40px' }}></th>
                           </tr>
@@ -506,6 +585,16 @@ function TicketOffersManager() {
                                   className="edit-input"
                                   value={line.price}
                                   onChange={(e) => handleLineChange(line._id, 'price', e.target.value)}
+                                />
+                              </td>
+                              <td>
+                                <input
+                                  type="number"
+                                  step="0.01"
+                                  className="edit-input"
+                                  value={line.my_price ? line.my_price.toFixed(2) : ''}
+                                  style={{ borderColor: '#56d364' }}
+                                  onChange={(e) => handleLineChange(line._id, 'my_price', e.target.value)}
                                 />
                               </td>
                               <td>{line.currency}</td>
@@ -786,7 +875,8 @@ function TicketOffersManager() {
                       <tr>
                         <th>Category</th>
                         <th>Quantity</th>
-                        <th>Price</th>
+                        <th>Base Price</th>
+                        <th>My Price</th>
                         <th>Currency</th>
                       </tr>
                     </thead>
@@ -796,6 +886,7 @@ function TicketOffersManager() {
                           <td>{line.category}</td>
                           <td>{line.quantity ? `${line.quantity} tickets` : '-'}</td>
                           <td>{line.price.toFixed(2)}</td>
+                          <td style={{ color: '#56d364', fontWeight: 'bold' }}>{line.my_price ? line.my_price.toFixed(2) : '-'}</td>
                           <td>{line.currency}</td>
                         </tr>
                       ))}
