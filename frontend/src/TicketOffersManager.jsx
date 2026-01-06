@@ -33,7 +33,7 @@ function TicketOffersManager() {
   const [isSearching, setIsSearching] = useState(false)
   const [selectedOffer, setSelectedOffer] = useState(null)
   const [showDetailDrawer, setShowDetailDrawer] = useState(false)
-  const [sortOrder, setSortOrder] = useState(null) // null, 'asc', 'desc'
+
 
   useEffect(() => {
     fetchSellers()
@@ -244,14 +244,7 @@ function TicketOffersManager() {
     return acc
   }, {})
 
-  const sortResults = (results) => {
-    if (!sortOrder) return results
-    return [...results].sort((a, b) => {
-      const aMinPrice = Math.min(...(a.lines || []).map(l => l.price || Infinity))
-      const bMinPrice = Math.min(...(b.lines || []).map(l => l.price || Infinity))
-      return sortOrder === 'asc' ? aMinPrice - bMinPrice : bMinPrice - aMinPrice
-    })
-  }
+
 
   /* Split offers by match for display */
   const splitOffersByMatch = (offers) => {
@@ -316,6 +309,64 @@ function TicketOffersManager() {
     })
     return splitResults
   }
+  // Sorting state
+  const [sortConfig, setSortConfig] = useState({ key: 'created_at', direction: 'desc' })
+
+  const handleSort = (key) => {
+    let direction = 'asc'
+    if (sortConfig.key === key && sortConfig.direction === 'asc') {
+      direction = 'desc'
+    }
+    setSortConfig({ key, direction })
+
+    // Trigger sort on current results
+    const sorted = sortList(searchResults, key, direction)
+    setSearchResults(sorted)
+  }
+
+  const sortList = (list, key, direction) => {
+    return [...list].sort((a, b) => {
+      let valA, valB
+
+      switch (key) {
+        case 'price':
+          // Sort by minimum base price
+          const aLines = a.display_lines || a.lines || []
+          const bLines = b.display_lines || b.lines || []
+          valA = Math.min(...aLines.map(l => l.price || Infinity))
+          valB = Math.min(...bLines.map(l => l.price || Infinity))
+          if (valA === Infinity) valA = 999999
+          if (valB === Infinity) valB = 999999
+          break
+        case 'seller':
+          valA = (a.seller || '').toLowerCase()
+          valB = (b.seller || '').toLowerCase()
+          break
+        case 'created_at':
+          valA = new Date(a.created_at || 0).getTime()
+          valB = new Date(b.created_at || 0).getTime()
+          break
+        case 'match':
+          // Handle dashes or non-numbers
+          const mA = a.display_match || a.match
+          const mB = b.display_match || b.match
+          valA = parseInt(mA) || ((mA === '-' || !mA) ? -1 : 0)
+          valB = parseInt(mB) || ((mB === '-' || !mB) ? -1 : 0)
+          break
+        default:
+          return 0
+      }
+
+      if (valA < valB) return direction === 'asc' ? -1 : 1
+      if (valA > valB) return direction === 'asc' ? 1 : -1
+      return 0
+    })
+  }
+
+  // Wrapper for initial sort
+  const sortResults = (results) => {
+    return sortList(results, sortConfig.key, sortConfig.direction)
+  }
 
   const handleSearch = async () => {
     setIsSearching(true)
@@ -332,7 +383,20 @@ function TicketOffersManager() {
       params.range = searchFilters.range
 
       const res = await axios.get(`${API_URL}/api/tickets/offers/search`, { params })
-      const splitResults = splitOffersByMatch(res.data)
+      let splitResults = splitOffersByMatch(res.data)
+
+      // Client-side filter: If searching for specific match, only show that match's rows
+      // This is needed because the API returns the whole offer if *any* line matches
+      if (searchFilters.match) {
+        const targetMatch = parseInt(searchFilters.match)
+        splitResults = splitResults.filter(
+          r => r.display_match === targetMatch
+            || r.display_match === '-' // Optional: keep mixed rows if uncertain? Prefer exact match.
+        )
+        // Refine: strictly keep only rows where display_match matches target
+        splitResults = splitResults.filter(r => r.display_match === targetMatch)
+      }
+
       const sortedResults = sortResults(splitResults)
       setSearchResults(sortedResults)
     } catch (err) {
@@ -343,11 +407,10 @@ function TicketOffersManager() {
     }
   }
 
-  const handleSort = (order) => {
-    const newOrder = sortOrder === order ? null : order
-    setSortOrder(newOrder)
-    const sortedResults = sortResults(searchResults)
-    setSearchResults(sortedResults)
+  // Helper for sort icon
+  const getSortIcon = (columnKey) => {
+    if (sortConfig.key !== columnKey) return '↕'
+    return sortConfig.direction === 'asc' ? '↑' : '↓'
   }
 
   const getPriceSummary = (offer) => {
@@ -806,44 +869,24 @@ function TicketOffersManager() {
           <div className="search-results">
             <div className="results-header">
               <h3>Results ({searchResults.length})</h3>
-              {searchResults.length > 0 && (
-                <div className="sort-controls">
-                  <label>Sort by Price:</label>
-                  <button
-                    className={`sort-btn ${sortOrder === 'asc' ? 'active' : ''}`}
-                    onClick={() => handleSort('asc')}
-                    title="Sort ascending"
-                  >
-                    ↑ Low to High
-                  </button>
-                  <button
-                    className={`sort-btn ${sortOrder === 'desc' ? 'active' : ''}`}
-                    onClick={() => handleSort('desc')}
-                    title="Sort descending"
-                  >
-                    ↓ High to Low
-                  </button>
-                  {sortOrder && (
-                    <button
-                      className="sort-btn clear-sort"
-                      onClick={() => handleSort(null)}
-                      title="Clear sort"
-                    >
-                      ✕ Clear
-                    </button>
-                  )}
-                </div>
-              )}
             </div>
             {searchResults.length > 0 ? (
               <div className="results-table-container">
                 <table className="results-table">
                   <thead>
                     <tr>
-                      <th>Created</th>
-                      <th>Seller</th>
-                      <th>Match</th>
-                      <th>Price Summary</th>
+                      <th onClick={() => handleSort('created_at')} className="sortable-th">
+                        Created {getSortIcon('created_at')}
+                      </th>
+                      <th onClick={() => handleSort('seller')} className="sortable-th">
+                        Seller {getSortIcon('seller')}
+                      </th>
+                      <th onClick={() => handleSort('match')} className="sortable-th">
+                        Match {getSortIcon('match')}
+                      </th>
+                      <th onClick={() => handleSort('price')} className="sortable-th">
+                        Price Summary {getSortIcon('price')}
+                      </th>
                       <th>Quantity</th>
                       <th>Categories</th>
                       <th>Raw Snippet</th>
