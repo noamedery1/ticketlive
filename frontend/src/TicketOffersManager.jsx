@@ -33,6 +33,7 @@ function TicketOffersManager() {
   const [isSearching, setIsSearching] = useState(false)
   const [selectedOffer, setSelectedOffer] = useState(null)
   const [showDetailDrawer, setShowDetailDrawer] = useState(false)
+  const [selectedMatchFilter, setSelectedMatchFilter] = useState(null)
 
 
   useEffect(() => {
