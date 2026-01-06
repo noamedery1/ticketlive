@@ -11,11 +11,12 @@ function TeamView() {
   const [games, setGames] = useState([])
   const [selectedGame, setSelectedGame] = useState(null)
   const [gamePrices, setGamePrices] = useState(null)
-  const [selectedDate, setSelectedDate] = useState(null)
+  const [dateRange, setDateRange] = useState({ start: '', end: '' })
   const [availableDates, setAvailableDates] = useState([])
   const [availableCategories, setAvailableCategories] = useState([])
   const [selectedCategories, setSelectedCategories] = useState([])
   const [categoryFilterOpen, setCategoryFilterOpen] = useState(false)
+  const [dateFilterOpen, setDateFilterOpen] = useState(false)
   const [modalCategory, setModalCategory] = useState(null)
 
   // Close category dropdown when clicking outside
@@ -32,6 +33,20 @@ function TeamView() {
     }
   }, [categoryFilterOpen])
 
+  // Close date dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      const dropdown = document.getElementById('date-dropdown-container')
+      if (dropdown && !dropdown.contains(event.target)) {
+        setDateFilterOpen(false)
+      }
+    }
+    if (dateFilterOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+      return () => document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [dateFilterOpen])
+
   useEffect(() => {
     fetchTeams()
   }, [])
@@ -45,7 +60,7 @@ function TeamView() {
   useEffect(() => {
     if (selectedTeam && selectedGame !== null) {
       console.log('useEffect triggered - fetching prices for game index:', selectedGame)
-      setSelectedDate(null) // Reset date filter when game changes
+      setDateRange({ start: '', end: '' }) // Reset date filter when game changes
       fetchGamePrices(selectedTeam.key, selectedGame)
     } else {
       console.log('useEffect - conditions not met:', { selectedTeam: !!selectedTeam, selectedGame })
@@ -127,12 +142,12 @@ function TeamView() {
     if (gamePrices && gamePrices.prices && Array.isArray(gamePrices.prices)) {
       const dates = new Set()
       const categories = new Set()
-      
+
       gamePrices.prices.forEach(snapshot => {
         const date = new Date(snapshot.timestamp)
         const dateStr = date.toISOString().split('T')[0] // YYYY-MM-DD
         dates.add(dateStr)
-        
+
         // Extract categories
         if (snapshot.prices && typeof snapshot.prices === 'object') {
           Object.keys(snapshot.prices).forEach(cat => {
@@ -140,7 +155,15 @@ function TeamView() {
               // Block-based: add category and category-block combinations
               categories.add(cat)
               Object.keys(snapshot.prices[cat]).forEach(block => {
-                categories.add(`${cat} - Block ${block}`)
+                // Filter out "Unknown" blocks and reduce clutter
+                if (block && !block.toLowerCase().includes('unknown')) {
+                  // Only add specific block if it's not "Unknown"
+                  // START USER REQUEST: remove irrelevant filters (too many block variations)
+                  // We will ONLY add the main category, not every single block, to keep the list clean.
+                  // If specific block filtering is needed, we can re-enable this, but maybe only for major blocks?
+                  // For now, based on "remove all irrelevant filters", we skip adding individual blocks to the filter list.
+                  // categories.add(`${cat} - Block ${block}`) 
+                }
               })
             } else {
               // Simple category
@@ -149,52 +172,56 @@ function TeamView() {
           })
         }
       })
-      
+
       const sortedDates = Array.from(dates).sort()
       const sortedCategories = Array.from(categories).sort()
-      
+
       setAvailableDates(sortedDates)
       setAvailableCategories(sortedCategories)
-      
+
       // Select all categories by default
       if (sortedCategories.length > 0 && selectedCategories.length === 0) {
         setSelectedCategories(sortedCategories)
       }
-      
-      if (sortedDates.length > 0 && !selectedDate) {
-        setSelectedDate(sortedDates[sortedDates.length - 1]) // Default to latest date
+
+      if (sortedDates.length > 0 && (!dateRange.start || !dateRange.end)) {
+        // Default to all time (empty range) or maybe last date? 
+        // User asked for "filter by all" option.
+        // Let's default to showing everything (empty range implies all)
       }
     } else {
       setAvailableDates([])
       setAvailableCategories([])
-      setSelectedDate(null)
+      setDateRange({ start: '', end: '' })
     }
   }, [gamePrices])
 
   const prepareChartData = () => {
     if (!gamePrices || !gamePrices.prices || !Array.isArray(gamePrices.prices)) return []
-    
-    // Filter by selected date if specified
+
     let filteredSnapshots = gamePrices.prices
-    if (selectedDate) {
+    // Filter by date range if specified
+    if (dateRange.start || dateRange.end) {
       filteredSnapshots = gamePrices.prices.filter(snapshot => {
         const snapshotDate = new Date(snapshot.timestamp).toISOString().split('T')[0]
-        return snapshotDate === selectedDate
+        if (dateRange.start && snapshotDate < dateRange.start) return false
+        if (dateRange.end && snapshotDate > dateRange.end) return false
+        return true
       })
     }
-    
+
     if (filteredSnapshots.length === 0) return []
-    
+
     // Get currency from gamePrices or default to USD
     const currency = gamePrices?.currency || selectedTeam?.currency || 'USD'
-    
+
     // Group by day
     const dailyData = {}
-    
+
     filteredSnapshots.forEach(snapshot => {
       const date = new Date(snapshot.timestamp)
       const dayKey = date.toISOString().split('T')[0] // YYYY-MM-DD
-      
+
       if (!dailyData[dayKey]) {
         dailyData[dayKey] = {
           date: dayKey,
@@ -206,19 +233,19 @@ function TeamView() {
           prices: {}
         }
       }
-      
+
       // Collect all prices for each category/block
       if (snapshot.prices && typeof snapshot.prices === 'object') {
         Object.keys(snapshot.prices).forEach(cat => {
           if (!dailyData[dayKey].prices[cat]) {
             dailyData[dayKey].prices[cat] = {}
           }
-          
+
           if (snapshot.prices[cat] && typeof snapshot.prices[cat] === 'object') {
             // Check if it's block-based format: {category: {block: price}} (old format)
             // or category-only format with object: {category: {min, max, count}} (old new format)
             const hasMinMax = 'min' in snapshot.prices[cat] || 'max' in snapshot.prices[cat]
-            
+
             if (hasMinMax) {
               // Old new format: {category: {min, max, count}} - category-only, no blocks
               const priceValue = snapshot.prices[cat]
@@ -255,7 +282,7 @@ function TeamView() {
         })
       }
     })
-    
+
     // Collect all unique categories and blocks
     const categoryBlocks = new Set()
     Object.values(dailyData).forEach(day => {
@@ -269,18 +296,18 @@ function TeamView() {
         })
       })
     })
-    
+
     // Filter categoryBlocks by selectedCategories
     const filteredCategoryBlocks = Array.from(categoryBlocks).filter(catBlock => {
       return selectedCategories.length === 0 || selectedCategories.includes(catBlock)
     })
-    
+
     // Build chart data with daily averages
     const chartData = []
     Object.keys(dailyData).sort().forEach(dayKey => {
       const day = dailyData[dayKey]
       const dataPoint = { time: day.displayDate, date: dayKey }
-      
+
       filteredCategoryBlocks.forEach(catBlock => {
         const [cat, blockPart] = catBlock.split(' - Block ')
         if (blockPart) {
@@ -316,10 +343,10 @@ function TeamView() {
           }
         }
       })
-      
+
       chartData.push(dataPoint)
     })
-    
+
     return chartData
   }
 
@@ -346,8 +373,8 @@ function TeamView() {
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', width: '100%' }}>
       {/* Team Selector in header area */}
       <div style={{ padding: '10px 20px', borderBottom: '1px solid #30363d', backgroundColor: '#161b22', display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-        <select 
-          value={selectedTeam?.key || ''} 
+        <select
+          value={selectedTeam?.key || ''}
           onChange={(e) => {
             const team = teams.find(t => t.key === e.target.value)
             setSelectedTeam(team)
@@ -379,9 +406,9 @@ function TeamView() {
               Games
             </h2>
             {games.length > 0 && (
-              <span style={{ 
-                fontSize: '0.85rem', 
-                color: '#8b949e', 
+              <span style={{
+                fontSize: '0.85rem',
+                color: '#8b949e',
                 background: '#21262d',
                 padding: '4px 8px',
                 borderRadius: '12px',
@@ -401,7 +428,7 @@ function TeamView() {
                 // Calculate price range from all prices
                 let minPrice = null
                 let maxPrice = null
-                
+
                 if (game.latest_prices && Object.keys(game.latest_prices).length > 0) {
                   const allPrices = []
                   Object.values(game.latest_prices).forEach(priceData => {
@@ -422,29 +449,29 @@ function TeamView() {
                       allPrices.push(priceData)
                     }
                   })
-                  
+
                   if (allPrices.length > 0) {
                     minPrice = Math.min(...allPrices)
                     maxPrice = Math.max(...allPrices)
                   }
                 }
-                
+
                 return (
                   <div
                     key={index}
                     className={`game-item ${selectedGame === index ? 'selected' : ''}`}
                     onClick={() => setSelectedGame(index)}
-                    style={{ 
-                      padding: '14px', 
+                    style={{
+                      padding: '14px',
                       cursor: 'pointer',
                       borderRadius: '6px',
                       transition: 'all 0.2s ease'
                     }}
                   >
                     <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', marginBottom: '8px' }}>
-                      <span style={{ 
-                        fontSize: '0.8rem', 
-                        color: selectedGame === index ? '#fff' : '#6e7681', 
+                      <span style={{
+                        fontSize: '0.8rem',
+                        color: selectedGame === index ? '#fff' : '#6e7681',
                         fontWeight: '600',
                         minWidth: '20px',
                         paddingTop: '2px'
@@ -452,9 +479,9 @@ function TeamView() {
                         {index + 1}.
                       </span>
                       <div style={{ flex: 1 }}>
-                        <div className="game-name" style={{ 
-                          fontSize: '0.95rem', 
-                          fontWeight: '500', 
+                        <div className="game-name" style={{
+                          fontSize: '0.95rem',
+                          fontWeight: '500',
                           color: selectedGame === index ? '#fff' : '#c9d1d9',
                           lineHeight: '1.4',
                           marginBottom: '6px'
@@ -462,8 +489,8 @@ function TeamView() {
                           {game.match_name}
                         </div>
                         {game.date && (
-                          <div style={{ 
-                            fontSize: '0.75rem', 
+                          <div style={{
+                            fontSize: '0.75rem',
                             color: selectedGame === index ? '#c9d1d9' : '#8b949e',
                             marginBottom: '4px'
                           }}>
@@ -471,7 +498,7 @@ function TeamView() {
                           </div>
                         )}
                         {minPrice !== null && maxPrice !== null && (
-                          <div style={{ 
+                          <div style={{
                             fontSize: '0.85rem',
                             marginTop: '4px'
                           }}>
@@ -536,38 +563,138 @@ function TeamView() {
                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
                       {availableDates.length > 0 && (
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                          <label style={{ fontSize: '0.9rem', color: '#8b949e', fontWeight: '500' }}>Date:</label>
-                          <select
-                            value={selectedDate || ''}
-                            onChange={(e) => setSelectedDate(e.target.value)}
-                            style={{
-                              padding: '6px 10px',
-                              borderRadius: '6px',
-                              border: '1px solid #30363d',
-                              background: '#0d1117',
-                              color: '#c9d1d9',
-                              fontSize: '0.85rem',
-                              cursor: 'pointer',
-                              transition: 'all 0.2s'
-                            }}
-                            onMouseEnter={(e) => e.target.style.borderColor = '#58a6ff'}
-                            onMouseLeave={(e) => e.target.style.borderColor = '#30363d'}
-                          >
-                            <option value="">All dates</option>
-                            {availableDates.map(date => {
-                              const dateObj = new Date(date)
-                              const displayDate = dateObj.toLocaleDateString('en-US', {
-                                month: 'short',
-                                day: 'numeric',
-                                year: 'numeric'
-                              })
-                              return (
-                                <option key={date} value={date}>
-                                  {displayDate}
-                                </option>
-                              )
-                            })}
-                          </select>
+                          <label style={{ fontSize: '0.9rem', color: '#8b949e', fontWeight: '500' }}>Date Range:</label>
+
+                          <div id="date-dropdown-container" style={{ position: 'relative' }}>
+                            <button
+                              onClick={() => setDateFilterOpen(!dateFilterOpen)}
+                              style={{
+                                padding: '6px 12px',
+                                borderRadius: '6px',
+                                border: '1px solid #30363d',
+                                background: '#0d1117',
+                                color: '#c9d1d9',
+                                fontSize: '0.85rem',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '8px',
+                                minWidth: '180px',
+                                justifyContent: 'space-between',
+                                transition: 'border-color 0.2s'
+                              }}
+                              onMouseEnter={(e) => e.currentTarget.style.borderColor = '#58a6ff'}
+                              onMouseLeave={(e) => e.currentTarget.style.borderColor = '#30363d'}
+                            >
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                <span>📅</span>
+                                <span>
+                                  {(!dateRange.start && !dateRange.end) ? 'All Time' :
+                                    (dateRange.start && dateRange.end) ? `${new Date(dateRange.start).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })} - ${new Date(dateRange.end).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}` :
+                                      dateRange.start ? `From ${new Date(dateRange.start).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}` :
+                                        `Until ${new Date(dateRange.end).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}`
+                                  }
+                                </span>
+                              </div>
+                              <span style={{ fontSize: '0.7rem', color: '#6e7681' }}>▼</span>
+                            </button>
+
+                            {dateFilterOpen && (
+                              <div style={{
+                                position: 'absolute',
+                                top: '100%',
+                                right: 0,
+                                marginTop: '4px',
+                                background: '#161b22',
+                                border: '1px solid #30363d',
+                                borderRadius: '6px',
+                                padding: '12px',
+                                zIndex: 1000,
+                                minWidth: '280px',
+                                boxShadow: '0 8px 24px rgba(0,0,0,0.5)'
+                              }}>
+                                <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
+                                  <button
+                                    onClick={() => {
+                                      setDateRange({ start: '', end: '' })
+                                      setDateFilterOpen(false)
+                                    }}
+                                    style={{
+                                      flex: 1,
+                                      padding: '6px',
+                                      background: (!dateRange.start && !dateRange.end) ? '#1f6feb' : '#21262d',
+                                      color: (!dateRange.start && !dateRange.end) ? '#fff' : '#c9d1d9',
+                                      border: '1px solid #30363d',
+                                      borderRadius: '4px',
+                                      cursor: 'pointer',
+                                      fontSize: '0.8rem'
+                                    }}
+                                  >
+                                    All Time
+                                  </button>
+                                  <button
+                                    onClick={() => {
+                                      const end = new Date().toISOString().split('T')[0]
+                                      const start = new Date(Date.now() - 7 * 86400000).toISOString().split('T')[0]
+                                      setDateRange({ start, end })
+                                    }}
+                                    style={{
+                                      flex: 1,
+                                      padding: '6px',
+                                      background: '#21262d',
+                                      color: '#c9d1d9',
+                                      border: '1px solid #30363d',
+                                      borderRadius: '4px',
+                                      cursor: 'pointer',
+                                      fontSize: '0.8rem'
+                                    }}
+                                  >
+                                    Last 7 Days
+                                  </button>
+                                </div>
+
+                                <div style={{ fontSize: '0.85rem', color: '#8b949e', marginBottom: '8px', fontWeight: '500' }}>Custom Range:</div>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                  <div style={{ flex: 1 }}>
+                                    <div style={{ fontSize: '0.75rem', color: '#6e7681', marginBottom: '4px' }}>From</div>
+                                    <input
+                                      type="date"
+                                      value={dateRange.start}
+                                      onChange={(e) => setDateRange({ ...dateRange, start: e.target.value })}
+                                      style={{
+                                        width: '100%',
+                                        padding: '8px',
+                                        background: '#0d1117',
+                                        border: '1px solid #30363d',
+                                        borderRadius: '4px',
+                                        color: '#c9d1d9',
+                                        fontSize: '0.85rem',
+                                        colorScheme: 'dark'
+                                      }}
+                                    />
+                                  </div>
+                                  <div style={{ flex: 1 }}>
+                                    <div style={{ fontSize: '0.75rem', color: '#6e7681', marginBottom: '4px' }}>To</div>
+                                    <input
+                                      type="date"
+                                      value={dateRange.end}
+                                      onChange={(e) => setDateRange({ ...dateRange, end: e.target.value })}
+                                      style={{
+                                        width: '100%',
+                                        padding: '8px',
+                                        background: '#0d1117',
+                                        border: '1px solid #30363d',
+                                        borderRadius: '4px',
+                                        color: '#c9d1d9',
+                                        fontSize: '0.85rem',
+                                        colorScheme: 'dark'
+                                      }}
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            )}
+                          </div>
                         </div>
                       )}
                       {availableCategories.length > 0 && (
@@ -598,11 +725,11 @@ function TeamView() {
                                 onMouseLeave={(e) => e.target.style.borderColor = '#30363d'}
                               >
                                 <span>
-                                  {selectedCategories.length === availableCategories.length 
-                                    ? 'All categories' 
+                                  {selectedCategories.length === availableCategories.length
+                                    ? 'All categories'
                                     : selectedCategories.length === 0
-                                    ? 'No categories'
-                                    : `${selectedCategories.length} selected`}
+                                      ? 'No categories'
+                                      : `${selectedCategories.length} selected`}
                                 </span>
                                 <span style={{ fontSize: '0.7rem', color: '#6e7681' }}>▼</span>
                               </button>
@@ -625,9 +752,9 @@ function TeamView() {
                                   }}
                                   onClick={(e) => e.stopPropagation()}
                                 >
-                                  <div style={{ 
-                                    padding: '4px 6px', 
-                                    marginBottom: '6px', 
+                                  <div style={{
+                                    padding: '4px 6px',
+                                    marginBottom: '6px',
                                     borderBottom: '1px solid #30363d',
                                     display: 'flex',
                                     justifyContent: 'space-between',
@@ -695,7 +822,7 @@ function TeamView() {
                                             accentColor: '#58a6ff'
                                           }}
                                         />
-                                        <span style={{ 
+                                        <span style={{
                                           color: isSelected ? '#c9d1d9' : '#8b949e',
                                           flex: 1
                                         }}>
@@ -726,12 +853,12 @@ function TeamView() {
                       onClick={() => setCategoryFilterOpen(false)}
                     />
                   )}
-                  {selectedDate && (
+                  {(dateRange.start || dateRange.end) && (
                     <div style={{ marginBottom: '12px', padding: '8px 12px', background: '#1f6feb20', border: '1px solid #1f6feb40', borderRadius: '4px', fontSize: '0.85rem', color: '#58a6ff' }}>
-                      📍 Showing data for: <strong>{new Date(selectedDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</strong>
+                      📍 Showing data from: <strong>{dateRange.start || 'Beginning'}</strong> to <strong>{dateRange.end || 'Now'}</strong>
                     </div>
                   )}
-                  {!selectedDate && availableDates.length > 1 && (
+                  {(!dateRange.start && !dateRange.end) && availableDates.length > 1 && (
                     <div style={{ marginBottom: '12px', padding: '8px 12px', background: '#21262d', border: '1px solid #30363d', borderRadius: '4px', fontSize: '0.85rem', color: '#8b949e' }}>
                       💡 Showing daily averages across all dates. Use the date selector to focus on a specific day.
                     </div>
@@ -742,16 +869,16 @@ function TeamView() {
                         <defs>
                           {Array.from(new Set(chartData.flatMap(d => Object.keys(d).filter(k => k !== 'time')))).map((cat, i) => (
                             <linearGradient key={cat} id={`grad${i}`} x1="0" y1="0" x2="0" y2="1">
-                              <stop offset="0%" stopColor={colors[i % colors.length]} stopOpacity={0.4}/>
-                              <stop offset="50%" stopColor={colors[i % colors.length]} stopOpacity={0.12}/>
-                              <stop offset="100%" stopColor={colors[i % colors.length]} stopOpacity={0}/>
+                              <stop offset="0%" stopColor={colors[i % colors.length]} stopOpacity={0.4} />
+                              <stop offset="50%" stopColor={colors[i % colors.length]} stopOpacity={0.12} />
+                              <stop offset="100%" stopColor={colors[i % colors.length]} stopOpacity={0} />
                             </linearGradient>
                           ))}
                         </defs>
                         <CartesianGrid strokeDasharray="2 4" stroke="#21262d" opacity={0.4} vertical={false} />
-                        <XAxis 
-                          dataKey="time" 
-                          stroke="#6e7681" 
+                        <XAxis
+                          dataKey="time"
+                          stroke="#6e7681"
                           tick={{ fontSize: 10, fill: '#8b949e' }}
                           axisLine={{ stroke: '#30363d' }}
                           tickLine={{ stroke: '#30363d' }}
@@ -759,8 +886,8 @@ function TeamView() {
                           textAnchor="end"
                           height={80}
                         />
-                        <YAxis 
-                          stroke="#6e7681" 
+                        <YAxis
+                          stroke="#6e7681"
                           tick={{ fontSize: 9, fill: '#8b949e' }}
                           width={45}
                           axisLine={{ stroke: '#30363d' }}
@@ -771,14 +898,14 @@ function TeamView() {
                             return `${symbol}${value.toLocaleString()}`
                           }}
                         />
-                        <Tooltip 
-                          contentStyle={{ 
-                            backgroundColor: '#0d1117', 
+                        <Tooltip
+                          contentStyle={{
+                            backgroundColor: '#0d1117',
                             border: '1px solid #30363d',
                             borderRadius: '6px',
                             boxShadow: '0 4px 12px rgba(0,0,0,0.5)',
                             padding: '8px 10px'
-                          }} 
+                          }}
                           itemStyle={{ color: '#c9d1d9', fontSize: '11px', marginBottom: '2px', padding: '2px 0' }}
                           labelStyle={{ color: '#f0f6fc', fontWeight: '600', fontSize: '11px', marginBottom: '4px' }}
                           formatter={(value, name) => {
@@ -837,9 +964,9 @@ function TeamView() {
                       <tbody>
                         {Object.entries(gamePrices.latest_prices).map(([category, priceData], idx) => {
                           if (!priceData && priceData !== 0) return null
-                          
+
                           let catMin, catMax, totalListings, blockDetails
-                          
+
                           // Check format: {category: lowest_price} (newest), {category: {min, max, count}} (old new), or {category: {block: price}} (oldest)
                           if (typeof priceData === 'number') {
                             // Newest format: {category: lowest_price} - just the lowest price
@@ -856,11 +983,11 @@ function TeamView() {
                             // Oldest block-based format: {category: {block: price}}
                             const blockEntries = Object.entries(priceData)
                             if (blockEntries.length === 0) return null
-                            
+
                             catMin = Infinity
                             catMax = -Infinity
                             totalListings = 0
-                            
+
                             blockDetails = blockEntries.map(([block, price]) => {
                               let min, max, count
                               if (typeof price === 'number') {
@@ -873,26 +1000,26 @@ function TeamView() {
                               } else {
                                 return null
                               }
-                              
+
                               catMin = Math.min(catMin, min)
                               catMax = Math.max(catMax, max)
                               totalListings += count
-                              
+
                               return { block, min, max, count }
                             }).filter(Boolean)
-                            
+
                             if (catMin === Infinity) return null
                           } else {
                             return null
                           }
-                          
+
                           const currency = gamePrices?.currency || selectedTeam?.currency || 'USD'
-                          
+
                           return (
-                            <tr 
-                              key={category} 
-                              style={{ borderBottom: '1px solid #21262d', transition: 'background 0.2s', cursor: 'pointer' }} 
-                              onMouseEnter={(e) => e.currentTarget.style.background = '#1c2128'} 
+                            <tr
+                              key={category}
+                              style={{ borderBottom: '1px solid #21262d', transition: 'background 0.2s', cursor: 'pointer' }}
+                              onMouseEnter={(e) => e.currentTarget.style.background = '#1c2128'}
                               onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
                               onClick={() => {
                                 setModalCategory({
@@ -936,14 +1063,15 @@ function TeamView() {
 
               {chartData.length === 0 && gamePrices && gamePrices.game && (
                 <div style={{ padding: '40px', textAlign: 'center', color: '#6e7681', fontSize: '1rem' }}>
+
                   <p>
-                    {selectedDate 
-                      ? `No price data available for ${new Date(selectedDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}.`
+                    {(dateRange.start || dateRange.end)
+                      ? `No price data available for the selected range (${dateRange.start || '...'} - ${dateRange.end || 'Now'}).`
                       : 'No price history available yet.'}
                   </p>
                   <p style={{ fontSize: '0.85rem', marginTop: '8px' }}>
-                    {selectedDate 
-                      ? 'Try selecting a different date or view all dates.'
+                    {(dateRange.start || dateRange.end)
+                      ? 'Try clearing the date filter to view all history.'
                       : 'History will appear here as more prices are collected.'}
                   </p>
                 </div>
@@ -1004,14 +1132,14 @@ function TeamView() {
                         ×
                       </button>
                     </div>
-                    
+
                     <div style={{ marginBottom: '16px', padding: '12px', background: '#0d1117', borderRadius: '6px', border: '1px solid #30363d' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
                         <span style={{ color: '#8b949e', fontSize: '0.85rem' }}>Price Range:</span>
                         <span style={{ color: '#c9d1d9', fontWeight: '600' }}>
                           {(() => {
                             const currency = gamePrices?.currency || selectedTeam?.currency || 'USD'
-                            return modalCategory.min === modalCategory.max 
+                            return modalCategory.min === modalCategory.max
                               ? formatPrice(modalCategory.min, currency)
                               : `${formatPrice(modalCategory.min, currency)} → ${formatPrice(modalCategory.max, currency)}`
                           })()}
@@ -1043,7 +1171,7 @@ function TeamView() {
                                 <tr key={idx} style={{ borderBottom: '1px solid #21262d' }}>
                                   <td style={{ padding: '8px', color: '#c9d1d9' }}>{block.block}</td>
                                   <td style={{ padding: '8px', textAlign: 'right', color: '#c9d1d9' }}>
-                                    {block.min === block.max 
+                                    {block.min === block.max
                                       ? formatPrice(block.min, currency)
                                       : `${formatPrice(block.min, currency)} → ${formatPrice(block.max, currency)}`
                                     }

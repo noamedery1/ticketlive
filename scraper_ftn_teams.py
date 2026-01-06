@@ -933,13 +933,31 @@ def scrape_game_prices(driver, game_url, game_name, team_key=None):
                     if any(indicator in classes.lower() for indicator in ["pairs-ticket", "pair", "2-seats"]):
                         pair_compatible = True
                     
-                    # STRICT: Must have BOTH quantity=2 AND seating in pairs
-                    # If we can't verify both, skip this listing
-                    if not quantity_ok or not pair_compatible:
-                        # Skip listings that don't explicitly match both criteria
+                    # Relaxed Validation:
+                    # If we are already on a page filtered by "2 Tickets" and "Pairs", we should trust the listings more.
+                    # Especially for Category 1 which might be listed differently.
+                    
+                    # Check for Category 1 explicitly to be lenient
+                    is_cat_1 = "cat" in listing_text and "1" in listing_text
+                    
+                    # If it's Category 1, we are more lenient with pair check if quantity is not explicitly wrong
+                    if is_cat_1:
+                        # If quantity is NOT explicitly 1 or 3+, allow it
+                        if not re.search(r'\b(?:1|3|4|5|6|7|8|9|10)\s*(?:tickets?|seats?)\b', listing_text):
+                            quantity_ok = True
+                            pair_compatible = True # Trust the page filter for Cat 1
+                    
+                    # Also accept "Double" as pair
+                    if "double" in listing_text:
+                        pair_compatible = True
+
+                    # STRICT: Must have EITHER valid quantity OR pair confirmation
+                    # (Relaxed from BOTH to EITHER if the other isn't explicitly invalid)
+                    if not quantity_ok and not pair_compatible:
+                        # Skip listings that don't match criteria at all
                         continue
                     
-                    # Additional check: Skip if explicitly says "singles only" or quantity is not 2
+                    # Additional check: Skip if explicitly says "singles only" 
                     if ("single seats only" in listing_text or "seating in singles" in listing_text) and not pair_compatible:
                         continue
                     # Skip if quantity is clearly not 2

@@ -251,68 +251,86 @@ function TicketOffersManager() {
   const splitOffersByMatch = (offers) => {
     if (!Array.isArray(offers)) return []
     const splitResults = []
+
     offers.forEach(offer => {
       if (!offer) return
 
-      // If offer has specific top-level match, keep as is
-      if (offer.match) {
-        splitResults.push({
-          ...offer,
-          display_match: offer.match,
-          display_lines: offer.lines || []
-        })
-      }
-      // If offer has no match (mixed) but lines have matches
-      else if (offer.lines && offer.lines.length > 0) {
-        // ... existing logic ...
-        // Group lines by match
-        const matchGroups = {}
-        let hasMatches = false
+      const lines = offer.lines || []
 
-        offer.lines.forEach(line => {
-          // ...
-          // (Keeping the logic same, just ensuring safe access if needed, but the loop is safe if offer.lines is array)
+      // Determine if revisions/lines dictate a split
+      // We group lines by match ID to see if we have multiple matches
+      const matchGroups = {}
+      let hasSpecificMatches = false
 
-          const m = line.match
-          if (m) {
-            hasMatches = true
-            if (!matchGroups[m]) matchGroups[m] = []
-            matchGroups[m].push(line)
-          } else {
-            if (!matchGroups['other']) matchGroups['other'] = []
-            matchGroups['other'].push(line)
-          }
-        })
-
-        // ... (rest of logic same) ...
-
-        if (hasMatches) {
-          Object.entries(matchGroups).forEach(([mKey, mLines]) => {
-            if (mKey === 'other') return
-            splitResults.push({
-              ...offer,
-              display_match: parseInt(mKey),
-              display_lines: mLines,
-              unique_id: `${offer.id}_${mKey}`
-            })
-          })
+      lines.forEach(line => {
+        // line.match might be string or int
+        const m = line.match
+        if (m) {
+          hasSpecificMatches = true
+          // Normalize key
+          const key = String(m)
+          if (!matchGroups[key]) matchGroups[key] = []
+          matchGroups[key].push(line)
         } else {
+          if (!matchGroups['other']) matchGroups['other'] = []
+          matchGroups['other'].push(line)
+        }
+      })
+
+      const distinctMatchKeys = Object.keys(matchGroups).filter(k => k !== 'other')
+
+      // CASE 1: Multiple distinct matches found in lines -> SPLIT (Mixed Offer)
+      // This overrides offer.display_match if it was set to a single one incorrectly
+      if (distinctMatchKeys.length > 1) {
+        distinctMatchKeys.forEach(mKey => {
+          splitResults.push({
+            ...offer,
+            display_match: parseInt(mKey),
+            display_lines: matchGroups[mKey],
+            unique_id: `${offer.id}_${mKey}`
+          })
+        })
+        // Handle 'other' (lines with no match) if any
+        if (matchGroups['other']) {
           splitResults.push({
             ...offer,
             display_match: '-',
-            display_lines: offer.lines || []
+            display_lines: matchGroups['other'],
+            unique_id: `${offer.id}_other`
           })
         }
       }
-      // Fallback
-      else {
+      // CASE 2: Single distinct match found in lines
+      else if (distinctMatchKeys.length === 1) {
+        const mKey = distinctMatchKeys[0]
+
+        // If there are also 'other' lines, we technically have mixed content (matched + unmatched)
+        // ideally we should show them separately or together? 
+        // Usually safe to show them together under the main match if it's the only one found.
+        // But for strictness let's assume 'other' belongs to that match or create separate row.
+        // Let's merge 'other' into this match for simplicity unless explicitly different.
+
+        const allLinesForRow = [...matchGroups[mKey], ...(matchGroups['other'] || [])]
+
         splitResults.push({
           ...offer,
-          display_match: '-',
-          display_lines: []
+          display_match: parseInt(mKey),
+          display_lines: allLinesForRow,
+          unique_id: `${offer.id}_${mKey}`
+        })
+      }
+      // CASE 3: No specific matches in lines (all 'other' or empty)
+      else {
+        // Fallback to top-level offer.match if available, otherwise '-'
+        splitResults.push({
+          ...offer,
+          display_match: offer.match ? parseInt(offer.match) : '-',
+          display_lines: lines,
+          unique_id: `${offer.id}_main`
         })
       }
     })
+
     return splitResults
   }
 
@@ -983,8 +1001,10 @@ function TicketOffersManager() {
                       <tbody>
                         {selectedOffer.lines
                           .filter(line => {
-                            if (!selectedMatchFilter || selectedMatchFilter === '-') return true
+                            if (!selectedMatchFilter || selectedMatchFilter === '-' || selectedMatchFilter === 'Match -') return true
                             // If selectedMatchFilter is set, show only lines matching it
+                            // Handle loose equality for string/number mismatch
+                            if (!line.match) return false // Hide lines without match if we are filtering for a match
                             return parseInt(line.match) === parseInt(selectedMatchFilter)
                           })
                           .map((line, i) => (
