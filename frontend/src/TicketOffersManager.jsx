@@ -15,7 +15,7 @@ function TicketOffersManager() {
   const [isParsing, setIsParsing] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
   const [toast, setToast] = useState(null)
-  
+
   // Search state
   const [searchFilters, setSearchFilters] = useState({
     match: '',
@@ -51,7 +51,7 @@ function TicketOffersManager() {
   const handleSellerInputChange = (value) => {
     setSellerInput(value)
     if (value.trim()) {
-      const filtered = sellers.filter(s => 
+      const filtered = sellers.filter(s =>
         s.name.toLowerCase().includes(value.toLowerCase())
       )
       setSellerSuggestions(filtered)
@@ -68,7 +68,7 @@ function TicketOffersManager() {
 
   const createSeller = async () => {
     if (!sellerInput.trim()) return
-    
+
     try {
       const res = await axios.post(`${API_URL}/api/tickets/sellers`, {
         name: sellerInput.trim()
@@ -88,7 +88,7 @@ function TicketOffersManager() {
       showToast('Please enter a message to parse', 'error')
       return
     }
-    
+
     if (!sellerInput.trim()) {
       showToast('Please enter or select a seller', 'error')
       return
@@ -114,7 +114,7 @@ function TicketOffersManager() {
       showToast('Please enter a message', 'error')
       return
     }
-    
+
     if (!sellerInput.trim()) {
       showToast('Please enter or select a seller', 'error')
       return
@@ -196,6 +196,14 @@ function TicketOffersManager() {
       return `${currency} ${min.toFixed(2)}`
     }
     return `${currency} ${min.toFixed(2)} - ${max.toFixed(2)}`
+  }
+
+  const getQuantitySummary = (offer) => {
+    if (!offer.lines || offer.lines.length === 0) return '-'
+    const quantities = offer.lines.map(l => l.quantity).filter(q => q != null)
+    if (quantities.length === 0) return '-'
+    const total = quantities.reduce((a, b) => a + b, 0)
+    return total
   }
 
   const handleRowClick = async (offerId) => {
@@ -360,54 +368,54 @@ function TicketOffersManager() {
                 </span>
               </div>
               <div className="parse-status">
-              {parsedData.warnings && parsedData.warnings.length > 0 && (
-                <div className="warnings">
-                  <strong>Warnings:</strong>
-                  <ul>
-                    {parsedData.warnings.map((w, i) => (
-                      <li key={i}>{w}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {parsedData.match && (
-                <div className="parse-field">
-                  <strong>Match:</strong> {parsedData.match}
-                </div>
-              )}
-
-              {parsedData.event && (
-                <div className="parse-field">
-                  <strong>Event:</strong> {parsedData.event}
-                </div>
-              )}
-
-              {parsedData.lines && parsedData.lines.length > 0 && (
-                <div className="parse-lines">
-                  <strong>Category/Price Lines:</strong>
-                  <table className="parse-table">
-                    <thead>
-                      <tr>
-                        <th>Category</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                        <th>Currency</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {parsedData.lines.map((line, i) => (
-                        <tr key={i}>
-                          <td>{line.category}</td>
-                          <td>{line.quantity ? `${line.quantity} tickets` : '-'}</td>
-                          <td>{line.price.toFixed(2)}</td>
-                          <td>{line.currency}</td>
-                        </tr>
+                {parsedData.warnings && parsedData.warnings.length > 0 && (
+                  <div className="warnings">
+                    <strong>Warnings:</strong>
+                    <ul>
+                      {parsedData.warnings.map((w, i) => (
+                        <li key={i}>{w}</li>
                       ))}
-                    </tbody>
-                  </table>
-                </div>
-              )}
+                    </ul>
+                  </div>
+                )}
+
+                {parsedData.match && (
+                  <div className="parse-field">
+                    <strong>Match:</strong> {parsedData.match}
+                  </div>
+                )}
+
+                {parsedData.event && (
+                  <div className="parse-field">
+                    <strong>Event:</strong> {parsedData.event}
+                  </div>
+                )}
+
+                {parsedData.lines && parsedData.lines.length > 0 && (
+                  <div className="parse-lines">
+                    <strong>Category/Price Lines:</strong>
+                    <table className="parse-table">
+                      <thead>
+                        <tr>
+                          <th>Category</th>
+                          <th>Quantity</th>
+                          <th>Price</th>
+                          <th>Currency</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {parsedData.lines.map((line, i) => (
+                          <tr key={i}>
+                            <td>{line.category}</td>
+                            <td>{line.quantity ? `${line.quantity} tickets` : '-'}</td>
+                            <td>{line.price.toFixed(2)}</td>
+                            <td>{line.currency}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
               </div>
             </div>
           )}
@@ -424,7 +432,7 @@ function TicketOffersManager() {
                 <input
                   type="number"
                   value={searchFilters.match}
-                  onChange={(e) => setSearchFilters({...searchFilters, match: e.target.value})}
+                  onChange={(e) => setSearchFilters({ ...searchFilters, match: e.target.value })}
                   placeholder="e.g. 32"
                 />
               </div>
@@ -433,7 +441,7 @@ function TicketOffersManager() {
                 <input
                   type="text"
                   value={searchFilters.seller}
-                  onChange={(e) => setSearchFilters({...searchFilters, seller: e.target.value})}
+                  onChange={(e) => setSearchFilters({ ...searchFilters, seller: e.target.value })}
                   placeholder="Seller name"
                 />
               </div>
@@ -442,7 +450,7 @@ function TicketOffersManager() {
                 <input
                   type="text"
                   value={searchFilters.category}
-                  onChange={(e) => setSearchFilters({...searchFilters, category: e.target.value})}
+                  onChange={(e) => setSearchFilters({ ...searchFilters, category: e.target.value })}
                   placeholder="e.g. 1"
                 />
               </div>
@@ -454,7 +462,7 @@ function TicketOffersManager() {
                   type="number"
                   step="0.01"
                   value={searchFilters.min_price}
-                  onChange={(e) => setSearchFilters({...searchFilters, min_price: e.target.value})}
+                  onChange={(e) => setSearchFilters({ ...searchFilters, min_price: e.target.value })}
                   placeholder="0.00"
                 />
               </div>
@@ -464,7 +472,7 @@ function TicketOffersManager() {
                   type="number"
                   step="0.01"
                   value={searchFilters.max_price}
-                  onChange={(e) => setSearchFilters({...searchFilters, max_price: e.target.value})}
+                  onChange={(e) => setSearchFilters({ ...searchFilters, max_price: e.target.value })}
                   placeholder="9999.99"
                 />
               </div>
@@ -473,7 +481,7 @@ function TicketOffersManager() {
                 <input
                   type="number"
                   value={searchFilters.min_quantity}
-                  onChange={(e) => setSearchFilters({...searchFilters, min_quantity: e.target.value})}
+                  onChange={(e) => setSearchFilters({ ...searchFilters, min_quantity: e.target.value })}
                   placeholder="e.g. 2"
                 />
               </div>
@@ -484,7 +492,7 @@ function TicketOffersManager() {
                 <input
                   type="number"
                   value={searchFilters.max_quantity}
-                  onChange={(e) => setSearchFilters({...searchFilters, max_quantity: e.target.value})}
+                  onChange={(e) => setSearchFilters({ ...searchFilters, max_quantity: e.target.value })}
                   placeholder="e.g. 4"
                 />
               </div>
@@ -493,7 +501,7 @@ function TicketOffersManager() {
                 <input
                   type="text"
                   value={searchFilters.keyword}
-                  onChange={(e) => setSearchFilters({...searchFilters, keyword: e.target.value})}
+                  onChange={(e) => setSearchFilters({ ...searchFilters, keyword: e.target.value })}
                   placeholder="Search in raw text"
                 />
               </div>
@@ -506,7 +514,7 @@ function TicketOffersManager() {
                 <label>Time Range</label>
                 <select
                   value={searchFilters.range}
-                  onChange={(e) => setSearchFilters({...searchFilters, range: e.target.value})}
+                  onChange={(e) => setSearchFilters({ ...searchFilters, range: e.target.value })}
                 >
                   <option value="all">All Time</option>
                   <option value="7d">Last 7 Days</option>
@@ -656,7 +664,7 @@ function TicketOffersManager() {
                   {selectedOffer.parse_status.toUpperCase()}
                 </span>
               </div>
-              
+
               {selectedOffer.lines && selectedOffer.lines.length > 0 && (
                 <div className="detail-section">
                   <strong>Category/Price Lines:</strong>

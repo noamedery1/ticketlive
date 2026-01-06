@@ -15,25 +15,25 @@ if sys.platform == 'win32':
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
     sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
-def is_main_category(category_name: str) -> bool:
-    """Check if category name is a main category (Category 1, Category 2, etc.)"""
-    # Match patterns like "Category 1", "Category 2", "Category 3", etc.
-    pattern = r'^Category\s+\d+(\s+\w+)?$'
-    return bool(re.match(pattern, category_name, re.IGNORECASE))
-
 def is_new_format_price(price_data: Any) -> bool:
     """Check if price data is in the new format: {category: lowest_price}"""
     # New format: price_data is a flat number
     return isinstance(price_data, (int, float))
 
-def is_old_block_format(prices: Dict[str, Any]) -> bool:
-    """Check if prices dict contains old block-based format"""
-    # Old format: {category: {block: price}}
-    for category, price_data in prices.items():
-        if isinstance(price_data, dict):
-            # If any value is a dict, it's likely block-based format
-            return True
-    return False
+def is_block_based_format(price_data: Any) -> bool:
+    """Check if price data is in old block-based format: {block: price}"""
+    # Old format: price_data is a dict with block keys (like "Unknown", "105,100,102,106", etc.)
+    if not isinstance(price_data, dict):
+        return False
+    
+    # Check if keys look like block identifiers (not structured data like min/max/count)
+    for key in price_data.keys():
+        # Block keys are usually strings like "Unknown", "105,100,102,106", "14", etc.
+        # Structured data keys are usually "min", "max", "count", "_price", etc.
+        if key in ['min', 'max', 'count', '_price']:
+            return False
+    
+    return True
 
 def clean_price_snapshot(snapshot: Dict[str, Any]) -> Dict[str, Any] | None:
     """Clean a single price snapshot, keeping only main category prices in new format"""
@@ -44,28 +44,32 @@ def clean_price_snapshot(snapshot: Dict[str, Any]) -> Dict[str, Any] | None:
     cleaned_prices = {}
     
     for category, price_data in prices.items():
-        # Skip if not a main category (Category 1, Category 2, etc.)
-        if not is_main_category(category):
-            continue
-        
         # Check format
         if is_new_format_price(price_data):
-            # Already in new format: {category: lowest_price}
+            # Already in new format: {category: lowest_price} - keep as is
             cleaned_prices[category] = price_data
         elif isinstance(price_data, dict):
-            # Old block-based format: {category: {block: price}}
-            # Extract minimum price from all blocks
-            all_prices = []
-            for block, block_price in price_data.items():
-                if isinstance(block_price, (int, float)):
-                    all_prices.append(block_price)
-                elif isinstance(block_price, dict) and 'min' in block_price:
-                    # Old format with min/max/count
-                    all_prices.append(block_price['min'])
-            
-            if all_prices:
-                # Store only the lowest price (new format)
-                cleaned_prices[category] = min(all_prices)
+            # Check if it's block-based format or structured format
+            if is_block_based_format(price_data):
+                # Old block-based format: {category: {block: price}}
+                # Extract minimum price from all blocks
+                all_prices = []
+                for block, block_price in price_data.items():
+                    if isinstance(block_price, (int, float)):
+                        all_prices.append(block_price)
+                    elif isinstance(block_price, dict) and 'min' in block_price:
+                        # Nested format with min/max/count
+                        all_prices.append(block_price['min'])
+                
+                if all_prices:
+                    # Store only the lowest price (new format)
+                    cleaned_prices[category] = min(all_prices)
+            else:
+                # Structured format: {category: {min, max, count}} - extract min
+                if 'min' in price_data:
+                    cleaned_prices[category] = price_data['min']
+                elif '_price' in price_data:
+                    cleaned_prices[category] = price_data['_price']
     
     # Return snapshot only if it has cleaned prices
     if cleaned_prices:
@@ -94,19 +98,13 @@ def clean_game_data(game: Dict[str, Any]) -> Dict[str, Any]:
         cleaned_latest = {}
         
         for category, price_data in latest_prices.items():
-            # Skip if not a main category
-            if not is_main_category(category):
-                continue
-            
-            # Check format
+            # Check format - keep ALL categories, just convert format
             if is_new_format_price(price_data):
-                # Already in new format
+                # Already in new format - keep as is
                 cleaned_latest[category] = price_data
             elif isinstance(price_data, dict):
-                # Old format - extract minimum price
-                if 'min' in price_data:
-                    cleaned_latest[category] = price_data['min']
-                else:
+                # Check if it's block-based format or structured format
+                if is_block_based_format(price_data):
                     # Block-based format - find minimum
                     all_prices = []
                     for block, block_price in price_data.items():
@@ -116,6 +114,12 @@ def clean_game_data(game: Dict[str, Any]) -> Dict[str, Any]:
                             all_prices.append(block_price['min'])
                     if all_prices:
                         cleaned_latest[category] = min(all_prices)
+                else:
+                    # Structured format: {min, max, count} - extract min
+                    if 'min' in price_data:
+                        cleaned_latest[category] = price_data['min']
+                    elif '_price' in price_data:
+                        cleaned_latest[category] = price_data['_price']
         
         cleaned_game['latest_prices'] = cleaned_latest
     
