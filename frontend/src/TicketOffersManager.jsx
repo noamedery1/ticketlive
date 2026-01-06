@@ -450,6 +450,7 @@ function TicketOffersManager() {
   }
 
   const getQuantitySummary = (offer) => {
+    if (!offer) return '-'
     const lines = offer.display_lines || offer.lines || []
     if (!lines || lines.length === 0) return '-'
     const quantities = lines.map(l => l.quantity).filter(q => q != null)
@@ -898,6 +899,7 @@ function TicketOffersManager() {
                   </thead>
                   <tbody>
                     {searchResults.map((offer) => {
+                      if (!offer) return null
                       const rawSnippet = offer.raw ? offer.raw.substring(0, 60) + '...' : ''
                       const priceSummary = getPriceSummary(offer)
                       const quantitySummary = getQuantitySummary(offer)
