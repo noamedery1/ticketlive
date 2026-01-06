@@ -815,7 +815,7 @@ function TeamView() {
 
               {/* Category Summary Table - Compact */}
               {gamePrices && gamePrices.latest_prices && Object.keys(gamePrices.latest_prices).length > 0 && (
-                <div className="chart-section" style={{ width: '100%', background: '#161b22', border: '1px solid #30363d', borderRadius: '8px', padding: '12px', boxSizing: 'border-box' }}>
+                <div className="chart-section" style={{ width: '100%', background: '#161b22', border: '1px solid #30363d', borderRadius: '8px', padding: '20px', boxSizing: 'border-box' }}>
                   <h3 style={{ margin: '0 0 12px 0', fontSize: '0.95rem', color: '#c9d1d9', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '6px' }}>
                     <span>📋</span>
                     <span>Category Price Summary</span>
