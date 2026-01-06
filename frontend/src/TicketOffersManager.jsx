@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import './App.css'
+import './editable-preview.css'
 
 const API_URL = import.meta.env.DEV ? 'http://localhost:8000' : ''
 
@@ -109,6 +110,50 @@ function TicketOffersManager() {
     }
   }
 
+  // Editable state
+  const [editableLines, setEditableLines] = useState([])
+  const [isEditable, setIsEditable] = useState(false)
+
+  // Update editable lines when parsed data changes
+  useEffect(() => {
+    if (parsedData && parsedData.lines) {
+      // Add unique ID to each line for React keys
+      const linesWithIds = parsedData.lines.map((l, i) => ({
+        ...l,
+        _id: i,
+        // Ensure match is set (fallback to top-level match or empty)
+        match: l.match || parsedData.match || ''
+      }))
+      setEditableLines(linesWithIds)
+      setIsEditable(true)
+    }
+  }, [parsedData])
+
+  const handleLineChange = (id, field, value) => {
+    setEditableLines(prev => prev.map(line => {
+      if (line._id === id) {
+        return { ...line, [field]: value }
+      }
+      return line
+    }))
+  }
+
+  const handleDeleteLine = (id) => {
+    setEditableLines(prev => prev.filter(l => l._id !== id))
+  }
+
+  const handleAddLine = () => {
+    const newLine = {
+      _id: Date.now(),
+      match: parsedData.match || '',
+      category: '',
+      quantity: 4,
+      price: 0,
+      currency: 'USD'
+    }
+    setEditableLines(prev => [...prev, newLine])
+  }
+
   const handleSave = async () => {
     if (!rawText.trim()) {
       showToast('Please enter a message', 'error')
@@ -127,14 +172,33 @@ function TicketOffersManager() {
 
     setIsSaving(true)
     try {
+      // Reconstruct parsed object from editable lines
+      // Calculate top-level match: if all lines have same match, use it. Else null.
+      const uniqueMatches = [...new Set(editableLines.map(l => l.match).filter(m => m))]
+      const topLevelMatch = uniqueMatches.length === 1 ? parseInt(uniqueMatches[0]) : null
+
+      const finalLines = editableLines.map(({ _id, ...rest }) => ({
+        ...rest,
+        match: rest.match ? parseInt(rest.match) : null,
+        quantity: rest.quantity ? parseInt(rest.quantity) : null,
+        price: parseFloat(rest.price) || 0
+      }))
+
+      const finalParsed = {
+        ...parsedData,
+        match: topLevelMatch,
+        lines: finalLines
+      }
+
       await axios.post(`${API_URL}/api/tickets/offers`, {
         seller: sellerInput.trim(),
         raw: rawText,
-        parsed: parsedData
+        parsed: finalParsed
       })
       showToast('Offer saved successfully!', 'success')
       setRawText('')
       setParsedData(null)
+      setEditableLines([])
       setSellerInput('')
     } catch (err) {
       console.error('Error saving offer:', err)
@@ -143,6 +207,14 @@ function TicketOffersManager() {
       setIsSaving(false)
     }
   }
+
+  // Group lines by match for display
+  const groupedLines = editableLines.reduce((acc, line) => {
+    const matchKey = line.match ? `Match ${line.match}` : 'Unknown Match'
+    if (!acc[matchKey]) acc[matchKey] = []
+    acc[matchKey].push(line)
+    return acc
+  }, {})
 
   const sortResults = (results) => {
     if (!sortOrder) return results
@@ -362,10 +434,15 @@ function TicketOffersManager() {
           {parsedData && (
             <div className="parse-preview-card">
               <div className="parse-preview-header">
-                <h3>✅ Parse Preview</h3>
-                <span className={`status-badge status-${parsedData.parse_status}`}>
-                  {parsedData.parse_status.toUpperCase()}
-                </span>
+                <h3>✅ Parse Preview (Editable)</h3>
+                <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                  <span className={`status-badge status-${parsedData.parse_status}`}>
+                    {parsedData.parse_status.toUpperCase()}
+                  </span>
+                  <button className="btn-small" onClick={handleAddLine} title="Add Line">
+                    + Add Line
+                  </button>
+                </div>
               </div>
               <div className="parse-status">
                 {parsedData.warnings && parsedData.warnings.length > 0 && (
@@ -379,43 +456,79 @@ function TicketOffersManager() {
                   </div>
                 )}
 
-                {parsedData.match && (
-                  <div className="parse-field">
-                    <strong>Match:</strong> {parsedData.match}
-                  </div>
-                )}
-
-                {parsedData.event && (
-                  <div className="parse-field">
-                    <strong>Event:</strong> {parsedData.event}
-                  </div>
-                )}
-
-                {parsedData.lines && parsedData.lines.length > 0 && (
-                  <div className="parse-lines">
-                    <strong>Category/Price Lines:</strong>
-                    <table className="parse-table">
-                      <thead>
-                        <tr>
-                          <th>Category</th>
-                          <th>Quantity</th>
-                          <th>Price</th>
-                          <th>Currency</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {parsedData.lines.map((line, i) => (
-                          <tr key={i}>
-                            <td>{line.category}</td>
-                            <td>{line.quantity ? `${line.quantity} tickets` : '-'}</td>
-                            <td>{line.price.toFixed(2)}</td>
-                            <td>{line.currency}</td>
+                <div className="parse-lines-editable">
+                  {Object.entries(groupedLines).map(([groupName, lines]) => (
+                    <div key={groupName} className="match-group">
+                      <h4 className="group-title">{groupName}</h4>
+                      <table className="parse-table editable-table">
+                        <thead>
+                          <tr>
+                            <th style={{ width: '60px' }}>Match</th>
+                            <th style={{ width: '60px' }}>Qty</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th style={{ width: '50px' }}>Curr</th>
+                            <th style={{ width: '40px' }}></th>
                           </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                )}
+                        </thead>
+                        <tbody>
+                          {lines.map((line) => (
+                            <tr key={line._id}>
+                              <td>
+                                <input
+                                  type="number"
+                                  className="edit-input"
+                                  value={line.match}
+                                  onChange={(e) => handleLineChange(line._id, 'match', e.target.value)}
+                                  placeholder="#"
+                                />
+                              </td>
+                              <td>
+                                <input
+                                  type="number"
+                                  className="edit-input"
+                                  value={line.quantity || ''}
+                                  onChange={(e) => handleLineChange(line._id, 'quantity', e.target.value)}
+                                />
+                              </td>
+                              <td>
+                                <input
+                                  type="text"
+                                  className="edit-input"
+                                  value={line.category}
+                                  onChange={(e) => handleLineChange(line._id, 'category', e.target.value)}
+                                />
+                              </td>
+                              <td>
+                                <input
+                                  type="number"
+                                  step="0.01"
+                                  className="edit-input"
+                                  value={line.price}
+                                  onChange={(e) => handleLineChange(line._id, 'price', e.target.value)}
+                                />
+                              </td>
+                              <td>{line.currency}</td>
+                              <td>
+                                <button
+                                  className="delete-line-btn"
+                                  onClick={() => handleDeleteLine(line._id)}
+                                  title="Remove line"
+                                >
+                                  ×
+                                </button>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  ))}
+                  {editableLines.length === 0 && (
+                    <div className="empty-lines">No lines found. Add one?</div>
+                  )}
+                </div>
+
               </div>
             </div>
           )}

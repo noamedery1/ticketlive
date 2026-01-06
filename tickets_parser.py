@@ -50,9 +50,13 @@ def extract_category_price_pairs(text: str) -> List[Dict[str, Any]]:
     lines = []
     
     # Pattern for match quantity category price format: "3 x4 cat 3 - 1200$" or "86x4 cat 2 - 1300$"
-    # This pattern captures: match number, quantity (x4), category, price
-    # Handles both "3 x4" and "86x4" formats
-    match_quantity_pattern = r'(\d+)\s*x\s*(\d+)\s+cat\s*(\d+)\s*[:\s-]+\s*(\d+(?:\.\d+)?)\s*\$?'
+    # Also handles "match 3 x4 tickets cat 3 for price - 1200$"
+    # Groups:
+    # 1: match number
+    # 2: quantity
+    # 3: category
+    # 4: price
+    match_quantity_pattern = r'(\d+)\s*x\s*(\d+)(?:\s+(?:tickets|tix))?\s+cat\s*(\d+)(?:\s+(?:for\s+price|price))?\s*[:\s-]+\s*(\d+(?:\.\d+)?)\s*\$?'
     matches = re.finditer(match_quantity_pattern, text, re.IGNORECASE)
     for match in matches:
         try:
@@ -141,9 +145,17 @@ def parse_ticket_message(raw: str) -> Dict[str, Any]:
     
     # If lines have match numbers embedded, extract them
     match_nums_from_lines = [line.get('match') for line in lines if line.get('match')]
+    
+    match_num = None
     if match_nums_from_lines:
-        # Use the most common match number, or first one
-        match_num = max(set(match_nums_from_lines), key=match_nums_from_lines.count) if match_nums_from_lines else None
+        unique_matches = set(match_nums_from_lines)
+        if len(unique_matches) == 1:
+            # All lines have same match number
+            match_num = match_nums_from_lines[0]
+        else:
+            # Multiple matches found - keep top level match as None (Mixed)
+            match_num = None
+            warnings.append(f'Multiple matches found: {sorted(list(unique_matches))}')
     else:
         # Try to extract match number from text (fallback)
         match_num = extract_match_number(normalized)
@@ -164,7 +176,7 @@ def parse_ticket_message(raw: str) -> Dict[str, Any]:
     
     # Determine parse status
     parse_status = 'ok'
-    if not match_num or not lines:
+    if (not match_num and not match_nums_from_lines) or not lines:
         parse_status = 'partial'
     
     # Extract event name if present (optional)

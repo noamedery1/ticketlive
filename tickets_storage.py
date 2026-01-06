@@ -259,11 +259,25 @@ def update_index_with_offer(offer: Dict[str, Any]) -> bool:
     index_data['offers_by_id'][offer_id] = {'file': file_name}
     
     # Update match index
+    matches_to_index = set()
+    
+    # Top level match
     match_num = offer.get('match')
     if match_num is not None:
-        if 'match' not in index_data:
-            index_data['match'] = {}
-        match_key = str(match_num)
+        matches_to_index.add(match_num)
+        
+    # Matches in lines
+    lines = offer.get('lines', [])
+    for line in lines:
+        line_match = line.get('match')
+        if line_match is not None:
+            matches_to_index.add(line_match)
+            
+    if 'match' not in index_data:
+        index_data['match'] = {}
+        
+    for m in matches_to_index:
+        match_key = str(m)
         if match_key not in index_data['match']:
             index_data['match'][match_key] = []
         if offer_id not in index_data['match'][match_key]:
