@@ -263,41 +263,43 @@ function TicketOffersManager() {
       }
       // If offer has no match (mixed) but lines have matches
       else if (offer.lines && offer.lines.length > 0) {
+        // ... existing logic ...
         // Group lines by match
         const matchGroups = {}
         let hasMatches = false
 
         offer.lines.forEach(line => {
+          // ...
+          // (Keeping the logic same, just ensuring safe access if needed, but the loop is safe if offer.lines is array)
+
           const m = line.match
           if (m) {
             hasMatches = true
             if (!matchGroups[m]) matchGroups[m] = []
             matchGroups[m].push(line)
           } else {
-            // Line without match -> add to 'unknown' or attach to all?
-            // For now, ignore or add to a fallback group
             if (!matchGroups['other']) matchGroups['other'] = []
             matchGroups['other'].push(line)
           }
         })
 
+        // ... (rest of logic same) ...
+
         if (hasMatches) {
           Object.entries(matchGroups).forEach(([mKey, mLines]) => {
-            if (mKey === 'other') return // skip unknown for now or handle separately
+            if (mKey === 'other') return
             splitResults.push({
               ...offer,
               display_match: parseInt(mKey),
               display_lines: mLines,
-              // Create a unique key for the split row
               unique_id: `${offer.id}_${mKey}`
             })
           })
         } else {
-          // No specific matches found in lines either
           splitResults.push({
             ...offer,
             display_match: '-',
-            display_lines: offer.lines
+            display_lines: offer.lines || []
           })
         }
       }
@@ -312,6 +314,7 @@ function TicketOffersManager() {
     })
     return splitResults
   }
+
   // Sorting state
   const [sortConfig, setSortConfig] = useState({ key: 'created_at', direction: 'desc' })
 
@@ -322,13 +325,15 @@ function TicketOffersManager() {
     }
     setSortConfig({ key, direction })
 
-    // Trigger sort on current results
     const sorted = sortList(searchResults, key, direction)
     setSearchResults(sorted)
   }
 
   const sortList = (list, key, direction) => {
+    if (!list) return []
     return [...list].sort((a, b) => {
+      if (!a || !b) return 0
+
       let valA, valB
 
       switch (key) {
@@ -336,8 +341,10 @@ function TicketOffersManager() {
           // Sort by minimum base price
           const aLines = a.display_lines || a.lines || []
           const bLines = b.display_lines || b.lines || []
-          valA = Math.min(...aLines.map(l => l.price || Infinity))
-          valB = Math.min(...bLines.map(l => l.price || Infinity))
+
+          valA = aLines.length ? Math.min(...aLines.map(l => (l && l.price) || Infinity)) : Infinity
+          valB = bLines.length ? Math.min(...bLines.map(l => (l && l.price) || Infinity)) : Infinity
+
           if (valA === Infinity) valA = 999999
           if (valB === Infinity) valB = 999999
           break
@@ -350,7 +357,6 @@ function TicketOffersManager() {
           valB = new Date(b.created_at || 0).getTime()
           break
         case 'match':
-          // Handle dashes or non-numbers
           const mA = a.display_match || a.match
           const mB = b.display_match || b.match
           valA = parseInt(mA) || ((mA === '-' || !mA) ? -1 : 0)
