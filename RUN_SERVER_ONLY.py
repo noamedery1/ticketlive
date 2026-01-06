@@ -674,8 +674,20 @@ def search_offers(
                 if cutoff and created_at < cutoff:
                     continue
                 
-                if match is not None and offer.get('match') != match:
-                    continue
+                # Filter by match (check top-level OR lines)
+                if match is not None:
+                    # Check top level
+                    if offer.get('match') == match:
+                        pass
+                    # Check lines
+                    else:
+                        found_in_lines = False
+                        for line in offer.get('lines', []):
+                            if line.get('match') == match:
+                                found_in_lines = True
+                                break
+                        if not found_in_lines:
+                            continue
                 
                 if seller and offer.get('seller', '').lower() != seller.lower():
                     continue
