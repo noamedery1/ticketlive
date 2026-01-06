@@ -904,7 +904,7 @@ function TicketOffersManager() {
                       return (
                         <tr
                           key={offer.unique_id || offer.id}
-                          onClick={() => handleRowClick(offer.id)}
+                          onClick={() => handleRowClick(offer.id, offer.display_match)}
                           className="result-row"
                         >
                           <td className="date-cell">{formatDate(offer.created_at)}</td>
@@ -937,64 +937,31 @@ function TicketOffersManager() {
                 )}
               </div>
             )}
-          </div>
-        </div>
-      )}
 
-      {/* Detail Drawer */}
-      {showDetailDrawer && selectedOffer && (
-        <div className="detail-drawer-overlay" onClick={() => setShowDetailDrawer(false)}>
-          <div className="detail-drawer" onClick={(e) => e.stopPropagation()}>
-            <div className="drawer-header">
-              <h2>Offer Details</h2>
-              <button
-                className="close-btn"
-                onClick={() => setShowDetailDrawer(false)}
-              >
-                ×
-              </button>
-            </div>
-            <div className="drawer-content">
-              <div className="detail-field">
-                <strong>ID:</strong> {selectedOffer.id}
-              </div>
-              <div className="detail-field">
-                <strong>Created:</strong> {formatDate(selectedOffer.created_at)}
-              </div>
-              <div className="detail-field">
-                <strong>Seller:</strong> {selectedOffer.seller}
-              </div>
-              {selectedOffer.match && (
-                <div className="detail-field">
-                  <strong>Match:</strong> {selectedOffer.match}
-                </div>
-              )}
-              {selectedOffer.event && (
-                <div className="detail-field">
-                  <strong>Event:</strong> {selectedOffer.event}
-                </div>
-              )}
-              <div className="detail-field">
-                <strong>Parse Status:</strong> <span className={`status-${selectedOffer.parse_status}`}>
-                  {selectedOffer.parse_status.toUpperCase()}
-                </span>
-              </div>
+            {/* ... */}
 
-              {selectedOffer.lines && selectedOffer.lines.length > 0 && (
-                <div className="detail-section">
-                  <strong>Category/Price Lines:</strong>
-                  <table className="detail-table">
-                    <thead>
-                      <tr>
-                        <th>Category</th>
-                        <th>Quantity</th>
-                        <th>Base Price</th>
-                        <th>My Price</th>
-                        <th>Currency</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {selectedOffer.lines.map((line, i) => (
+            {selectedOffer.lines && selectedOffer.lines.length > 0 && (
+              <div className="detail-section">
+                <strong>Category/Price Lines {selectedMatchFilter && selectedMatchFilter !== '-' ? `(Match ${selectedMatchFilter})` : ''}:</strong>
+                <table className="detail-table">
+                  <thead>
+                    <tr>
+                      <th>Category</th>
+                      <th>Quantity</th>
+                      <th>Base Price</th>
+                      <th>My Price</th>
+                      <th>Currency</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {selectedOffer.lines
+                      .filter(line => {
+                        if (!selectedMatchFilter || selectedMatchFilter === '-') return true
+                        // If selectedMatchFilter is set, show only lines matching it
+                        // Handle potential type mismatches (string vs int)
+                        return parseInt(line.match) === parseInt(selectedMatchFilter)
+                      })
+                      .map((line, i) => (
                         <tr key={i}>
                           <td>{line.category}</td>
                           <td>{line.quantity ? `${line.quantity} tickets` : '-'}</td>
@@ -1003,27 +970,28 @@ function TicketOffersManager() {
                           <td>{line.currency}</td>
                         </tr>
                       ))}
-                    </tbody>
-                  </table>
-                </div>
-              )}
-
-              {selectedOffer.warnings && selectedOffer.warnings.length > 0 && (
-                <div className="detail-section">
-                  <strong>Warnings:</strong>
-                  <ul>
-                    {selectedOffer.warnings.map((w, i) => (
-                      <li key={i}>{w}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              <div className="detail-section">
-                <strong>Raw Message:</strong>
-                <pre className="raw-message">{selectedOffer.raw}</pre>
+                  </tbody>
+                </table>
               </div>
+            )}
+
+            {selectedOffer.warnings && selectedOffer.warnings.length > 0 && (
+              <div className="detail-section">
+                <strong>Warnings:</strong>
+                <ul>
+                  {selectedOffer.warnings.map((w, i) => (
+                    <li key={i}>{w}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <div className="detail-section">
+              <strong>Raw Message:</strong>
+              <pre className="raw-message">{selectedOffer.raw}</pre>
             </div>
+
+
           </div>
         </div>
       )}
@@ -1032,4 +1000,3 @@ function TicketOffersManager() {
 }
 
 export default TicketOffersManager
-
