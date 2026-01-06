@@ -15,7 +15,23 @@ function App() {
   const [selectedMatch, setSelectedMatch] = useState(null)
   const [history, setHistory] = useState(null)
   const [timeRange, setTimeRange] = useState('24h')
-  const [selectedDate, setSelectedDate] = useState(null)
+  // Replace simple selectedDate with range
+  const [dateRange, setDateRange] = useState({ start: null, end: null })
+  const [dateFilterOpen, setDateFilterOpen] = useState(false)
+
+  // Close date dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      const dropdown = document.getElementById('app-date-dropdown-container')
+      if (dropdown && !dropdown.contains(event.target)) {
+        setDateFilterOpen(false)
+      }
+    }
+    if (dateFilterOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+      return () => document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [dateFilterOpen])
 
 
   useEffect(() => {
@@ -67,38 +83,26 @@ function App() {
     if (!history) return []
     const now = new Date().getTime()
     let cutoff = 0
+    let rangeStart = 0
+    let rangeEnd = Infinity
 
-    if (selectedDate) {
-      // Jump to specific date - show data for that day
-      const selected = new Date(selectedDate)
-      selected.setHours(0, 0, 0, 0)
-      const dayStart = selected.getTime()
-      const dayEnd = dayStart + 24 * 3600 * 1000
-      cutoff = dayStart
-      // Filter to only show data within the selected day
-      const merged = {}
-      const sourceKey = sourcePrefix === 'Via_' ? 'viagogo' : 'ftn'
-      if (history[sourceKey] && history[sourceKey].data) {
-        Object.keys(history[sourceKey].data).forEach(cat => {
-          history[sourceKey].data[cat].forEach(pt => {
-            const date = new Date(pt.timestamp)
-            const ts = date.getTime()
-            if (ts >= dayStart && ts < dayEnd) {
-              const timeStr = date.toLocaleString('en-US', {
-                month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
-              })
-              if (!merged[ts]) merged[ts] = { time: timeStr, sortTime: ts, isNewPrice: true }
-              const key = sourcePrefix + cat
-              merged[ts][key] = pt.price
-            }
-          })
-        })
+    if (dateRange.start || dateRange.end) {
+      // Range filtering
+      if (dateRange.start) {
+        const s = new Date(dateRange.start)
+        s.setHours(0, 0, 0, 0)
+        rangeStart = s.getTime()
       }
-      return Object.values(merged).sort((a, b) => a.sortTime - b.sortTime)
+      if (dateRange.end) {
+        const e = new Date(dateRange.end)
+        e.setHours(23, 59, 59, 999)
+        rangeEnd = e.getTime()
+      }
     } else {
-      // Normal time range filtering
+      // Preset filtering
       cutoff = timeRange === '24h' ? now - 24 * 3600 * 1000 :
         timeRange === '7d' ? now - 7 * 24 * 3600 * 1000 : 0
+      rangeStart = cutoff
     }
 
     const merged = {}
@@ -108,7 +112,7 @@ function App() {
         history[sourceKey].data[cat].forEach(pt => {
           const date = new Date(pt.timestamp)
           const ts = date.getTime()
-          if (ts >= cutoff) {
+          if (ts >= rangeStart && ts <= rangeEnd) {
             const timeStr = date.toLocaleString('en-US', {
               month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
             })
@@ -167,28 +171,68 @@ function App() {
     }
   }, [resize, stopResizing])
 
+
+  const Navigation = () => (
+    <div style={{ display: 'flex', gap: '8px' }}>
+      <button
+        onClick={() => setView('original')}
+        style={{
+          padding: '6px 12px',
+          borderRadius: '6px',
+          border: view === 'original' ? '1px solid #58a6ff' : '1px solid #30363d',
+          background: view === 'original' ? '#1f6feb' : '#21262d',
+          color: 'white',
+          cursor: 'pointer',
+          fontSize: '13px',
+          fontWeight: '500'
+        }}
+      >
+        🌍 World Cup
+      </button>
+      <button
+        onClick={() => setView('teams')}
+        style={{
+          padding: '6px 12px',
+          borderRadius: '6px',
+          border: view === 'teams' ? '1px solid #58a6ff' : '1px solid #30363d',
+          background: view === 'teams' ? '#1f6feb' : '#21262d',
+          color: 'white',
+          cursor: 'pointer',
+          fontSize: '13px',
+          fontWeight: '500'
+        }}
+      >
+        🏟️ Teams
+      </button>
+      <button
+        onClick={() => setView('tickets')}
+        style={{
+          padding: '6px 12px',
+          borderRadius: '6px',
+          border: view === 'tickets' ? '1px solid #58a6ff' : '1px solid #30363d',
+          background: view === 'tickets' ? '#1f6feb' : '#21262d',
+          color: 'white',
+          cursor: 'pointer',
+          fontSize: '13px',
+          fontWeight: '500'
+        }}
+      >
+        🎫 Tickets
+      </button>
+    </div>
+  )
+
   // Render TeamView if selected
   if (view === 'teams') {
     return (
       <div className="app-container">
-        <div className="header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '15px 20px', borderBottom: '1px solid #30363d', background: '#161b22' }}>
-          <h1 style={{ margin: 0 }}>🏟️ Team Ticket Prices</h1>
-          <button
-            onClick={() => setView('original')}
-            style={{
-              padding: '8px 16px',
-              borderRadius: '6px',
-              border: '1px solid #30363d',
-              background: '#1f6feb',
-              color: 'white',
-              cursor: 'pointer',
-              fontSize: '14px'
-            }}
-          >
-            ← Back to Original View
-          </button>
+        <div className="header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 20px', borderBottom: '1px solid #30363d', background: '#161b22', flexShrink: 0 }}>
+          <h1 style={{ margin: 0, fontSize: '1.2rem' }}>Team Ticket Prices</h1>
+          <Navigation />
         </div>
-        <TeamView />
+        <div style={{ flex: 1, overflow: 'hidden', minHeight: 0 }}>
+          <TeamView />
+        </div>
       </div>
     )
   }
@@ -197,24 +241,13 @@ function App() {
   if (view === 'tickets') {
     return (
       <div className="app-container">
-        <div className="header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '15px 20px', borderBottom: '1px solid #30363d', background: '#161b22' }}>
-          <h1 style={{ margin: 0 }}>🎫 Ticket Offers Manager</h1>
-          <button
-            onClick={() => setView('original')}
-            style={{
-              padding: '8px 16px',
-              borderRadius: '6px',
-              border: '1px solid #30363d',
-              background: '#1f6feb',
-              color: 'white',
-              cursor: 'pointer',
-              fontSize: '14px'
-            }}
-          >
-            ← Back to Original View
-          </button>
+        <div className="header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 20px', borderBottom: '1px solid #30363d', background: '#161b22', flexShrink: 0 }}>
+          <h1 style={{ margin: 0, fontSize: '1.2rem' }}>Ticket Offers Manager</h1>
+          <Navigation />
         </div>
-        <TicketOffersManager />
+        <div style={{ flex: 1, overflowY: 'auto', minHeight: 0, display: 'flex', flexDirection: 'column' }}>
+          <TicketOffersManager />
+        </div>
       </div>
     )
   }
@@ -222,40 +255,8 @@ function App() {
   return (
     <div className='dashboard'>
       <div className='sidebar' style={{ width: sidebarWidth }}>
-        <div className='logo' style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span>ViagogoMonitor</span>
-          <div style={{ display: 'flex', gap: '5px' }}>
-            <button
-              onClick={() => setView('teams')}
-              style={{
-                padding: '4px 8px',
-                borderRadius: '4px',
-                border: '1px solid #30363d',
-                background: '#21262d',
-                color: '#c9d1d9',
-                cursor: 'pointer',
-                fontSize: '11px'
-              }}
-              title="Team View"
-            >
-              🏟️ Teams
-            </button>
-            <button
-              onClick={() => setView('tickets')}
-              style={{
-                padding: '4px 8px',
-                borderRadius: '4px',
-                border: '1px solid #30363d',
-                background: '#21262d',
-                color: '#c9d1d9',
-                cursor: 'pointer',
-                fontSize: '11px'
-              }}
-              title="Ticket Offers Manager"
-            >
-              🎫 Tickets
-            </button>
-          </div>
+        <div className='logo' style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'flex-start' }}>
+          <div style={{ fontWeight: 'bold', fontSize: '1.1rem', color: '#58a6ff' }}>ViagogoMonitor</div>
         </div>
         <div className='match-list'>
           {matches.map(m => (
@@ -280,61 +281,145 @@ function App() {
         {selectedMatch && (
           <>
             <div className='header'>
-              <h1>{selectedMatch.match_name}</h1>
-              <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                <h1 style={{ margin: 0 }}>{selectedMatch.match_name}</h1>
                 <span className='last-updated'>Auto-refresh: 10m</span>
-                <div className='time-filters' style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
-                  {['24h', '7d', 'all'].map(r => (
-                    <button
-                      key={r} onClick={() => { setTimeRange(r); setSelectedDate(null); }}
-                      className={timeRange === r && !selectedDate ? 'active' : ''}
-                      style={{
-                        padding: '4px 8px', margin: '0 2px', borderRadius: '4px', border: 'none',
-                        background: timeRange === r && !selectedDate ? '#1f6feb' : '#21262d',
-                        color: 'white', cursor: 'pointer'
-                      }}
-                    >
-                      {r}
-                    </button>
-                  ))}
-                </div>
-                <input
-                  type='date'
-                  value={selectedDate || ''}
-                  onChange={(e) => {
-                    if (e.target.value) {
-                      setSelectedDate(e.target.value)
-                      setTimeRange('all')
-                    } else {
-                      setSelectedDate(null)
-                    }
-                  }}
-                  style={{
-                    padding: '4px 8px',
-                    borderRadius: '4px',
-                    border: '1px solid #30363d',
-                    background: '#161b22',
-                    color: '#c9d1d9',
-                    fontSize: '0.85rem'
-                  }}
-                  title='Jump to specific day'
-                />
-                {selectedDate && (
+              </div>
+
+              <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+                {/* Date Filter Dropdown */}
+                <div id="app-date-dropdown-container" style={{ position: 'relative' }}>
                   <button
-                    onClick={() => { setSelectedDate(null); setTimeRange('all'); }}
+                    onClick={() => setDateFilterOpen(!dateFilterOpen)}
                     style={{
-                      padding: '4px 8px',
-                      borderRadius: '4px',
-                      border: 'none',
-                      background: '#d1242f',
-                      color: 'white',
+                      padding: '6px 12px',
+                      borderRadius: '6px',
+                      border: '1px solid #30363d',
+                      background: '#0d1117',
+                      color: '#c9d1d9',
+                      fontSize: '0.85rem',
                       cursor: 'pointer',
-                      fontSize: '0.85rem'
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      minWidth: '200px',
+                      justifyContent: 'space-between',
+                      transition: 'border-color 0.2s'
                     }}
+                    onMouseEnter={(e) => e.currentTarget.style.borderColor = '#58a6ff'}
+                    onMouseLeave={(e) => e.currentTarget.style.borderColor = '#30363d'}
                   >
-                    Clear Date
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span>📅</span>
+                      <span>
+                        {(!dateRange.start && !dateRange.end) ? 'All Time' :
+                          (dateRange.start && dateRange.end) ? `${new Date(dateRange.start).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })} - ${new Date(dateRange.end).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}` :
+                            dateRange.start ? `From ${new Date(dateRange.start).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}` :
+                              `Until ${new Date(dateRange.end).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}`
+                        }
+                      </span>
+                    </div>
+                    <span style={{ fontSize: '0.7rem', color: '#6e7681' }}>▼</span>
                   </button>
-                )}
+
+                  {dateFilterOpen && (
+                    <div style={{
+                      position: 'absolute',
+                      top: '100%',
+                      right: 0,
+                      marginTop: '4px',
+                      background: '#161b22',
+                      border: '1px solid #30363d',
+                      borderRadius: '6px',
+                      padding: '12px',
+                      zIndex: 1000,
+                      minWidth: '280px',
+                      boxShadow: '0 8px 24px rgba(0,0,0,0.5)'
+                    }}>
+                      <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
+                        <button
+                          onClick={() => {
+                            setDateRange({ start: null, end: null })
+                            setTimeRange('all')
+                            setDateFilterOpen(false)
+                          }}
+                          style={{
+                            flex: 1,
+                            padding: '6px',
+                            background: (!dateRange.start && !dateRange.end) ? '#1f6feb' : '#21262d',
+                            color: (!dateRange.start && !dateRange.end) ? '#fff' : '#c9d1d9',
+                            border: '1px solid #30363d',
+                            borderRadius: '4px',
+                            cursor: 'pointer',
+                            fontSize: '0.8rem'
+                          }}
+                        >
+                          All Time
+                        </button>
+                        <button
+                          onClick={() => {
+                            const end = new Date().toISOString().split('T')[0]
+                            const start = new Date(Date.now() - 7 * 86400000).toISOString().split('T')[0]
+                            setDateRange({ start, end })
+                            setTimeRange('7d')
+                            setDateFilterOpen(false)
+                          }}
+                          style={{
+                            flex: 1,
+                            padding: '6px',
+                            background: '#21262d',
+                            color: '#c9d1d9',
+                            border: '1px solid #30363d',
+                            borderRadius: '4px',
+                            cursor: 'pointer',
+                            fontSize: '0.8rem'
+                          }}
+                        >
+                          Last 7 Days
+                        </button>
+                      </div>
+
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <span style={{ width: '40px', fontSize: '0.8rem', color: '#8b949e' }}>From:</span>
+                          <input
+                            type="date"
+                            value={dateRange.start || ''}
+                            onChange={(e) => setDateRange({ ...dateRange, start: e.target.value })}
+                            style={{
+                              flex: 1,
+                              padding: '4px 8px',
+                              borderRadius: '4px',
+                              border: '1px solid #30363d',
+                              background: '#0d1117',
+                              color: '#c9d1d9',
+                              fontSize: '0.8rem'
+                            }}
+                          />
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <span style={{ width: '40px', fontSize: '0.8rem', color: '#8b949e' }}>To:</span>
+                          <input
+                            type="date"
+                            value={dateRange.end || ''}
+                            onChange={(e) => setDateRange({ ...dateRange, end: e.target.value })}
+                            style={{
+                              flex: 1,
+                              padding: '4px 8px',
+                              borderRadius: '4px',
+                              border: '1px solid #30363d',
+                              background: '#0d1117',
+                              color: '#c9d1d9',
+                              fontSize: '0.8rem'
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <Navigation />
               </div>
             </div>
 

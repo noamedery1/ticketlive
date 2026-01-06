@@ -18,6 +18,7 @@ function TicketOffersManager() {
   const [toast, setToast] = useState(null)
 
   // Search state
+  const [showSearchSellerSuggestions, setShowSearchSellerSuggestions] = useState(false) // New state for search dropdown
   const [searchFilters, setSearchFilters] = useState({
     match: '',
     seller: '',
@@ -551,18 +552,53 @@ function TicketOffersManager() {
                 <span className="label-icon">👤</span>
                 Seller
               </label>
-              <div className="seller-input-container">
+              <div className="seller-input-container" style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
                 <input
                   type="text"
                   value={sellerInput}
                   onChange={(e) => handleSellerInputChange(e.target.value)}
-                  onFocus={() => sellerInput && setShowSuggestions(true)}
+                  onFocus={() => {
+                    // specific behavior: if empty, show all. if has text, show filtered.
+                    if (sellerInput) {
+                      setShowSuggestions(true)
+                    } else {
+                      setSellerSuggestions(sellers)
+                      setShowSuggestions(true)
+                    }
+                  }}
                   placeholder="Enter or select seller name"
                   className="seller-input"
+                  style={{ flex: 1 }}
                 />
-                {showSuggestions && sellerSuggestions.length > 0 && (
-                  <div className="suggestions-dropdown">
-                    {sellerSuggestions.map(seller => (
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (showSuggestions) {
+                      setShowSuggestions(false)
+                    } else {
+                      setSellerSuggestions(sellers)
+                      setShowSuggestions(true)
+                    }
+                  }}
+                  style={{
+                    background: 'transparent',
+                    border: 'none',
+                    color: '#8b949e',
+                    cursor: 'pointer',
+                    padding: '0 8px',
+                    fontSize: '0.8rem',
+                    height: '100%',
+                    display: 'flex',
+                    alignItems: 'center'
+                  }}
+                  title="Show all sellers"
+                >
+                  ▼
+                </button>
+
+                {showSuggestions && (
+                  <div className="suggestions-dropdown" style={{ top: '100%', left: 0, right: 0, position: 'absolute', zIndex: 10 }}>
+                    {sellerSuggestions.length > 0 ? sellerSuggestions.map(seller => (
                       <div
                         key={seller.id}
                         className="suggestion-item"
@@ -571,14 +607,18 @@ function TicketOffersManager() {
                         <span className="suggestion-icon">✓</span>
                         {seller.name}
                       </div>
-                    ))}
+                    )) : (
+                      <div style={{ padding: '8px', color: '#8b949e', fontStyle: 'italic' }}>No sellers found</div>
+                    )}
                   </div>
                 )}
+                {/* Create button logic */}
                 {sellerInput && !sellers.find(s => s.name.toLowerCase() === sellerInput.toLowerCase()) && (
                   <button
                     onClick={createSeller}
                     className="create-seller-btn"
                     title="Create new seller"
+                    style={{ marginLeft: '8px' }}
                   >
                     <span>+</span> Create
                   </button>
@@ -801,12 +841,75 @@ function TicketOffersManager() {
               </div>
               <div className="filter-group">
                 <label>Seller</label>
-                <input
-                  type="text"
-                  value={searchFilters.seller}
-                  onChange={(e) => setSearchFilters({ ...searchFilters, seller: e.target.value })}
-                  placeholder="Seller name"
-                />
+                <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+                  <input
+                    type="text"
+                    value={searchFilters.seller}
+                    onChange={(e) => setSearchFilters({ ...searchFilters, seller: e.target.value })}
+                    onFocus={() => {
+                      // Optional: auto-open on focus if desired, or just leave manual
+                      setShowSearchSellerSuggestions(true)
+                    }}
+                    placeholder="Seller name"
+                    style={{ flex: 1, paddingRight: '25px' }} // Space for arrow
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowSearchSellerSuggestions(!showSearchSellerSuggestions)}
+                    style={{
+                      position: 'absolute',
+                      right: '0',
+                      top: '0',
+                      bottom: '0',
+                      background: 'transparent',
+                      border: 'none',
+                      color: '#8b949e',
+                      cursor: 'pointer',
+                      padding: '0 8px',
+                      fontSize: '0.8rem'
+                    }}
+                  >
+                    ▼
+                  </button>
+                  {showSearchSellerSuggestions && (
+                    <div style={{
+                      position: 'absolute',
+                      top: '100%',
+                      left: 0,
+                      right: 0,
+                      background: '#161b22',
+                      border: '1px solid #30363d',
+                      borderRadius: '4px',
+                      maxHeight: '200px',
+                      overflowY: 'auto',
+                      zIndex: 100,
+                      boxShadow: '0 4px 12px rgba(0,0,0,0.5)'
+                    }}>
+                      {sellers
+                        .filter(s => s.name.toLowerCase().includes((searchFilters.seller || '').toLowerCase()))
+                        .map(s => (
+                          <div
+                            key={s.id}
+                            onClick={() => {
+                              setSearchFilters({ ...searchFilters, seller: s.name })
+                              setShowSearchSellerSuggestions(false)
+                            }}
+                            style={{
+                              padding: '6px 10px',
+                              cursor: 'pointer',
+                              borderBottom: '1px solid #21262d',
+                              fontSize: '0.9rem'
+                            }}
+                            onMouseEnter={(e) => e.target.style.background = '#21262d'}
+                            onMouseLeave={(e) => e.target.style.background = 'transparent'}
+                          >
+                            {s.name}
+                          </div>
+                        ))}
+                      {sellers.length === 0 && <div style={{ padding: '8px', color: '#8b949e' }}>No sellers</div>}
+                    </div>
+                  )}
+                </div>
               </div>
               <div className="filter-group">
                 <label>Category</label>
