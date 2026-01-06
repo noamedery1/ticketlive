@@ -14,7 +14,7 @@ function App() {
   const [matches, setMatches] = useState([])
   const [selectedMatch, setSelectedMatch] = useState(null)
   const [history, setHistory] = useState(null)
-  const [timeRange, setTimeRange] = useState('all')
+  const [timeRange, setTimeRange] = useState('24h')
   const [selectedDate, setSelectedDate] = useState(null)
 
 
@@ -44,7 +44,7 @@ function App() {
       if (res.data.length > 0 && !selectedMatch) {
         setSelectedMatch(res.data[0])
       }
-    } catch (err) { 
+    } catch (err) {
       console.error('Error fetching matches:', err)
       console.error('API_URL was:', API_URL)
     }
@@ -57,7 +57,7 @@ function App() {
       const res = await axios.get(apiUrl, { params: { match_url: url } })
       console.log('History received:', res.data)
       setHistory(res.data)
-    } catch (err) { 
+    } catch (err) {
       console.error('Error fetching history:', err)
       console.error('API_URL was:', API_URL)
     }
@@ -67,7 +67,7 @@ function App() {
     if (!history) return []
     const now = new Date().getTime()
     let cutoff = 0
-    
+
     if (selectedDate) {
       // Jump to specific date - show data for that day
       const selected = new Date(selectedDate)
@@ -290,7 +290,7 @@ function App() {
                       className={timeRange === r && !selectedDate ? 'active' : ''}
                       style={{
                         padding: '4px 8px', margin: '0 2px', borderRadius: '4px', border: 'none',
-                        background: timeRange === r && !selectedDate ? '#1f6feb' : '#21262d', 
+                        background: timeRange === r && !selectedDate ? '#1f6feb' : '#21262d',
                         color: 'white', cursor: 'pointer'
                       }}
                     >
@@ -361,106 +361,106 @@ function App() {
                         <AreaChart data={viagogoChartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                           <defs>
                             <linearGradient id='gradVia1' x1='0' y1='0' x2='0' y2='1'>
-                              <stop offset='0%' stopColor='#d2a8ff' stopOpacity={0.4}/>
-                              <stop offset='50%' stopColor='#d2a8ff' stopOpacity={0.15}/>
-                              <stop offset='100%' stopColor='#d2a8ff' stopOpacity={0}/>
+                              <stop offset='0%' stopColor='#d2a8ff' stopOpacity={0.4} />
+                              <stop offset='50%' stopColor='#d2a8ff' stopOpacity={0.15} />
+                              <stop offset='100%' stopColor='#d2a8ff' stopOpacity={0} />
                             </linearGradient>
                             <linearGradient id='gradVia2' x1='0' y1='0' x2='0' y2='1'>
-                              <stop offset='0%' stopColor='#79c0ff' stopOpacity={0.4}/>
-                              <stop offset='50%' stopColor='#79c0ff' stopOpacity={0.15}/>
-                              <stop offset='100%' stopColor='#79c0ff' stopOpacity={0}/>
+                              <stop offset='0%' stopColor='#79c0ff' stopOpacity={0.4} />
+                              <stop offset='50%' stopColor='#79c0ff' stopOpacity={0.15} />
+                              <stop offset='100%' stopColor='#79c0ff' stopOpacity={0} />
                             </linearGradient>
                             <linearGradient id='gradVia3' x1='0' y1='0' x2='0' y2='1'>
-                              <stop offset='0%' stopColor='#56d364' stopOpacity={0.4}/>
-                              <stop offset='50%' stopColor='#56d364' stopOpacity={0.15}/>
-                              <stop offset='100%' stopColor='#56d364' stopOpacity={0}/>
+                              <stop offset='0%' stopColor='#56d364' stopOpacity={0.4} />
+                              <stop offset='50%' stopColor='#56d364' stopOpacity={0.15} />
+                              <stop offset='100%' stopColor='#56d364' stopOpacity={0} />
                             </linearGradient>
                             <linearGradient id='gradVia4' x1='0' y1='0' x2='0' y2='1'>
-                              <stop offset='0%' stopColor='#ffa657' stopOpacity={0.4}/>
-                              <stop offset='50%' stopColor='#ffa657' stopOpacity={0.15}/>
-                              <stop offset='100%' stopColor='#ffa657' stopOpacity={0}/>
+                              <stop offset='0%' stopColor='#ffa657' stopOpacity={0.4} />
+                              <stop offset='50%' stopColor='#ffa657' stopOpacity={0.15} />
+                              <stop offset='100%' stopColor='#ffa657' stopOpacity={0} />
                             </linearGradient>
                           </defs>
                           <CartesianGrid strokeDasharray='2 4' stroke='#21262d' opacity={0.4} vertical={false} />
-                          <XAxis 
-                            dataKey='time' 
-                            stroke='#6e7681' 
+                          <XAxis
+                            dataKey='time'
+                            stroke='#6e7681'
                             tick={{ fontSize: 9, fill: '#8b949e' }}
                             axisLine={{ stroke: '#30363d' }}
                             tickLine={{ stroke: '#30363d' }}
                           />
-                          <YAxis 
-                            stroke='#6e7681' 
+                          <YAxis
+                            stroke='#6e7681'
                             tick={{ fontSize: 9, fill: '#8b949e' }}
                             width={45}
                             axisLine={{ stroke: '#30363d' }}
                             tickLine={{ stroke: '#30363d' }}
                             tickFormatter={(value) => `$${value.toLocaleString()}`}
                           />
-                          <Tooltip 
-                            contentStyle={{ 
-                              backgroundColor: '#0d1117', 
+                          <Tooltip
+                            contentStyle={{
+                              backgroundColor: '#0d1117',
                               border: '1px solid #30363d',
                               borderRadius: '8px',
                               boxShadow: '0 8px 24px rgba(0,0,0,0.5)',
                               padding: '12px'
-                            }} 
+                            }}
                             itemStyle={{ color: '#c9d1d9', fontSize: '13px', marginBottom: '4px' }}
                             labelStyle={{ color: '#f0f6fc', fontWeight: '600', fontSize: '12px', marginBottom: '8px' }}
                             formatter={(value, name) => [`$${value?.toLocaleString() || '0'}`, name]}
                           />
-                          <Legend 
+                          <Legend
                             wrapperStyle={{ fontSize: '11px', paddingTop: '15px' }}
                             iconType='line'
                             iconSize={12}
                           />
-                          <Area 
-                            name='Cat 1' 
-                            type='basis' 
-                            dataKey='Via_Category 1' 
-                            stroke='#d2a8ff' 
+                          <Area
+                            name='Cat 1'
+                            type='basis'
+                            dataKey='Via_Category 1'
+                            stroke='#d2a8ff'
                             strokeWidth={2.5}
-                            fill='url(#gradVia1)' 
+                            fill='url(#gradVia1)'
                             fillOpacity={1}
                             dot={{ fill: '#d2a8ff', r: 3, strokeWidth: 1.5, stroke: '#fff' }}
-                            activeDot={{ r: 6, fill: '#d2a8ff', stroke: '#fff', strokeWidth: 2, filter: 'drop-shadow(0 0 4px #d2a8ff)' }} 
-                            connectNulls 
+                            activeDot={{ r: 6, fill: '#d2a8ff', stroke: '#fff', strokeWidth: 2, filter: 'drop-shadow(0 0 4px #d2a8ff)' }}
+                            connectNulls
                           />
-                          <Area 
-                            name='Cat 2' 
-                            type='basis' 
-                            dataKey='Via_Category 2' 
-                            stroke='#79c0ff' 
+                          <Area
+                            name='Cat 2'
+                            type='basis'
+                            dataKey='Via_Category 2'
+                            stroke='#79c0ff'
                             strokeWidth={2.5}
-                            fill='url(#gradVia2)' 
+                            fill='url(#gradVia2)'
                             fillOpacity={1}
                             dot={{ fill: '#79c0ff', r: 3, strokeWidth: 1.5, stroke: '#fff' }}
-                            activeDot={{ r: 6, fill: '#79c0ff', stroke: '#fff', strokeWidth: 2, filter: 'drop-shadow(0 0 4px #79c0ff)' }} 
-                            connectNulls 
+                            activeDot={{ r: 6, fill: '#79c0ff', stroke: '#fff', strokeWidth: 2, filter: 'drop-shadow(0 0 4px #79c0ff)' }}
+                            connectNulls
                           />
-                          <Area 
-                            name='Cat 3' 
-                            type='basis' 
-                            dataKey='Via_Category 3' 
-                            stroke='#56d364' 
+                          <Area
+                            name='Cat 3'
+                            type='basis'
+                            dataKey='Via_Category 3'
+                            stroke='#56d364'
                             strokeWidth={2.5}
-                            fill='url(#gradVia3)' 
+                            fill='url(#gradVia3)'
                             fillOpacity={1}
                             dot={{ fill: '#56d364', r: 3, strokeWidth: 1.5, stroke: '#fff' }}
-                            activeDot={{ r: 6, fill: '#56d364', stroke: '#fff', strokeWidth: 2, filter: 'drop-shadow(0 0 4px #56d364)' }} 
-                            connectNulls 
+                            activeDot={{ r: 6, fill: '#56d364', stroke: '#fff', strokeWidth: 2, filter: 'drop-shadow(0 0 4px #56d364)' }}
+                            connectNulls
                           />
-                          <Area 
-                            name='Cat 4' 
-                            type='basis' 
-                            dataKey='Via_Category 4' 
-                            stroke='#ffa657' 
+                          <Area
+                            name='Cat 4'
+                            type='basis'
+                            dataKey='Via_Category 4'
+                            stroke='#ffa657'
                             strokeWidth={2.5}
-                            fill='url(#gradVia4)' 
+                            fill='url(#gradVia4)'
                             fillOpacity={1}
                             dot={{ fill: '#ffa657', r: 3, strokeWidth: 1.5, stroke: '#fff' }}
-                            activeDot={{ r: 6, fill: '#ffa657', stroke: '#fff', strokeWidth: 2, filter: 'drop-shadow(0 0 4px #ffa657)' }} 
-                            connectNulls 
+                            activeDot={{ r: 6, fill: '#ffa657', stroke: '#fff', strokeWidth: 2, filter: 'drop-shadow(0 0 4px #ffa657)' }}
+                            connectNulls
                           />
                         </AreaChart>
                       </ResponsiveContainer>
@@ -491,110 +491,110 @@ function App() {
                         <AreaChart data={ftnChartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                           <defs>
                             <linearGradient id='gradFtn1' x1='0' y1='0' x2='0' y2='1'>
-                              <stop offset='0%' stopColor='#d2a8ff' stopOpacity={0.35}/>
-                              <stop offset='50%' stopColor='#d2a8ff' stopOpacity={0.12}/>
-                              <stop offset='100%' stopColor='#d2a8ff' stopOpacity={0}/>
+                              <stop offset='0%' stopColor='#d2a8ff' stopOpacity={0.35} />
+                              <stop offset='50%' stopColor='#d2a8ff' stopOpacity={0.12} />
+                              <stop offset='100%' stopColor='#d2a8ff' stopOpacity={0} />
                             </linearGradient>
                             <linearGradient id='gradFtn2' x1='0' y1='0' x2='0' y2='1'>
-                              <stop offset='0%' stopColor='#79c0ff' stopOpacity={0.35}/>
-                              <stop offset='50%' stopColor='#79c0ff' stopOpacity={0.12}/>
-                              <stop offset='100%' stopColor='#79c0ff' stopOpacity={0}/>
+                              <stop offset='0%' stopColor='#79c0ff' stopOpacity={0.35} />
+                              <stop offset='50%' stopColor='#79c0ff' stopOpacity={0.12} />
+                              <stop offset='100%' stopColor='#79c0ff' stopOpacity={0} />
                             </linearGradient>
                             <linearGradient id='gradFtn3' x1='0' y1='0' x2='0' y2='1'>
-                              <stop offset='0%' stopColor='#56d364' stopOpacity={0.35}/>
-                              <stop offset='50%' stopColor='#56d364' stopOpacity={0.12}/>
-                              <stop offset='100%' stopColor='#56d364' stopOpacity={0}/>
+                              <stop offset='0%' stopColor='#56d364' stopOpacity={0.35} />
+                              <stop offset='50%' stopColor='#56d364' stopOpacity={0.12} />
+                              <stop offset='100%' stopColor='#56d364' stopOpacity={0} />
                             </linearGradient>
                             <linearGradient id='gradFtn4' x1='0' y1='0' x2='0' y2='1'>
-                              <stop offset='0%' stopColor='#ffa657' stopOpacity={0.35}/>
-                              <stop offset='50%' stopColor='#ffa657' stopOpacity={0.12}/>
-                              <stop offset='100%' stopColor='#ffa657' stopOpacity={0}/>
+                              <stop offset='0%' stopColor='#ffa657' stopOpacity={0.35} />
+                              <stop offset='50%' stopColor='#ffa657' stopOpacity={0.12} />
+                              <stop offset='100%' stopColor='#ffa657' stopOpacity={0} />
                             </linearGradient>
                           </defs>
                           <CartesianGrid strokeDasharray='2 4' stroke='#21262d' opacity={0.4} vertical={false} />
-                          <XAxis 
-                            dataKey='time' 
-                            stroke='#6e7681' 
+                          <XAxis
+                            dataKey='time'
+                            stroke='#6e7681'
                             tick={{ fontSize: 9, fill: '#8b949e' }}
                             axisLine={{ stroke: '#30363d' }}
                             tickLine={{ stroke: '#30363d' }}
                           />
-                          <YAxis 
-                            stroke='#6e7681' 
+                          <YAxis
+                            stroke='#6e7681'
                             tick={{ fontSize: 9, fill: '#8b949e' }}
                             width={45}
                             axisLine={{ stroke: '#30363d' }}
                             tickLine={{ stroke: '#30363d' }}
                             tickFormatter={(value) => `$${value.toLocaleString()}`}
                           />
-                          <Tooltip 
-                            contentStyle={{ 
-                              backgroundColor: '#0d1117', 
+                          <Tooltip
+                            contentStyle={{
+                              backgroundColor: '#0d1117',
                               border: '1px solid #30363d',
                               borderRadius: '8px',
                               boxShadow: '0 8px 24px rgba(0,0,0,0.5)',
                               padding: '12px'
-                            }} 
+                            }}
                             itemStyle={{ color: '#c9d1d9', fontSize: '13px', marginBottom: '4px' }}
                             labelStyle={{ color: '#f0f6fc', fontWeight: '600', fontSize: '12px', marginBottom: '8px' }}
                             formatter={(value, name) => [`$${value?.toLocaleString() || '0'}`, name]}
                           />
-                          <Legend 
+                          <Legend
                             wrapperStyle={{ fontSize: '11px', paddingTop: '15px' }}
                             iconType='line'
                             iconSize={12}
                           />
-                          <Area 
-                            name='Cat 1' 
-                            type='basis' 
-                            dataKey='FTN_Category 1' 
-                            stroke='#d2a8ff' 
+                          <Area
+                            name='Cat 1'
+                            type='basis'
+                            dataKey='FTN_Category 1'
+                            stroke='#d2a8ff'
                             strokeWidth={2.5}
                             strokeDasharray='6 4'
-                            fill='url(#gradFtn1)' 
+                            fill='url(#gradFtn1)'
                             fillOpacity={1}
                             dot={{ fill: '#d2a8ff', r: 3, strokeWidth: 1.5, stroke: '#fff' }}
-                            activeDot={{ r: 6, fill: '#d2a8ff', stroke: '#fff', strokeWidth: 2, filter: 'drop-shadow(0 0 4px #d2a8ff)' }} 
-                            connectNulls 
+                            activeDot={{ r: 6, fill: '#d2a8ff', stroke: '#fff', strokeWidth: 2, filter: 'drop-shadow(0 0 4px #d2a8ff)' }}
+                            connectNulls
                           />
-                          <Area 
-                            name='Cat 2' 
-                            type='basis' 
-                            dataKey='FTN_Category 2' 
-                            stroke='#79c0ff' 
+                          <Area
+                            name='Cat 2'
+                            type='basis'
+                            dataKey='FTN_Category 2'
+                            stroke='#79c0ff'
                             strokeWidth={2.5}
                             strokeDasharray='6 4'
-                            fill='url(#gradFtn2)' 
+                            fill='url(#gradFtn2)'
                             fillOpacity={1}
                             dot={{ fill: '#79c0ff', r: 3, strokeWidth: 1.5, stroke: '#fff' }}
-                            activeDot={{ r: 6, fill: '#79c0ff', stroke: '#fff', strokeWidth: 2, filter: 'drop-shadow(0 0 4px #79c0ff)' }} 
-                            connectNulls 
+                            activeDot={{ r: 6, fill: '#79c0ff', stroke: '#fff', strokeWidth: 2, filter: 'drop-shadow(0 0 4px #79c0ff)' }}
+                            connectNulls
                           />
-                          <Area 
-                            name='Cat 3' 
-                            type='basis' 
-                            dataKey='FTN_Category 3' 
-                            stroke='#56d364' 
+                          <Area
+                            name='Cat 3'
+                            type='basis'
+                            dataKey='FTN_Category 3'
+                            stroke='#56d364'
                             strokeWidth={2.5}
                             strokeDasharray='6 4'
-                            fill='url(#gradFtn3)' 
+                            fill='url(#gradFtn3)'
                             fillOpacity={1}
                             dot={{ fill: '#56d364', r: 3, strokeWidth: 1.5, stroke: '#fff' }}
-                            activeDot={{ r: 6, fill: '#56d364', stroke: '#fff', strokeWidth: 2, filter: 'drop-shadow(0 0 4px #56d364)' }} 
-                            connectNulls 
+                            activeDot={{ r: 6, fill: '#56d364', stroke: '#fff', strokeWidth: 2, filter: 'drop-shadow(0 0 4px #56d364)' }}
+                            connectNulls
                           />
-                          <Area 
-                            name='Cat 4' 
-                            type='basis' 
-                            dataKey='FTN_Category 4' 
-                            stroke='#ffa657' 
+                          <Area
+                            name='Cat 4'
+                            type='basis'
+                            dataKey='FTN_Category 4'
+                            stroke='#ffa657'
                             strokeWidth={2.5}
                             strokeDasharray='6 4'
-                            fill='url(#gradFtn4)' 
+                            fill='url(#gradFtn4)'
                             fillOpacity={1}
                             dot={{ fill: '#ffa657', r: 3, strokeWidth: 1.5, stroke: '#fff' }}
-                            activeDot={{ r: 6, fill: '#ffa657', stroke: '#fff', strokeWidth: 2, filter: 'drop-shadow(0 0 4px #ffa657)' }} 
-                            connectNulls 
+                            activeDot={{ r: 6, fill: '#ffa657', stroke: '#fff', strokeWidth: 2, filter: 'drop-shadow(0 0 4px #ffa657)' }}
+                            connectNulls
                           />
                         </AreaChart>
                       </ResponsiveContainer>

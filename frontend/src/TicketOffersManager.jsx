@@ -248,14 +248,17 @@ function TicketOffersManager() {
 
   /* Split offers by match for display */
   const splitOffersByMatch = (offers) => {
+    if (!Array.isArray(offers)) return []
     const splitResults = []
     offers.forEach(offer => {
+      if (!offer) return
+
       // If offer has specific top-level match, keep as is
       if (offer.match) {
         splitResults.push({
           ...offer,
           display_match: offer.match,
-          display_lines: offer.lines
+          display_lines: offer.lines || []
         })
       }
       // If offer has no match (mixed) but lines have matches
@@ -414,6 +417,7 @@ function TicketOffersManager() {
   }
 
   const getPriceSummary = (offer) => {
+    if (!offer) return 'No prices'
     const lines = offer.display_lines || offer.lines || []
     if (!lines || lines.length === 0) return 'No prices'
 
