@@ -466,10 +466,11 @@ function TicketOffersManager() {
     return total
   }
 
-  const handleRowClick = async (offerId) => {
+  const handleRowClick = async (offerId, matchFilter) => {
     try {
       const res = await axios.get(`${API_URL}/api/tickets/offers/${offerId}`)
       setSelectedOffer(res.data)
+      setSelectedMatchFilter(matchFilter) // Capture the exact match we clicked on
       setShowDetailDrawer(true)
     } catch (err) {
       console.error('Error fetching offer:', err)
@@ -953,56 +954,70 @@ function TicketOffersManager() {
 
             {/* ... */}
 
-            {selectedOffer.lines && selectedOffer.lines.length > 0 && (
-              <div className="detail-section">
-                <strong>Category/Price Lines {selectedMatchFilter && selectedMatchFilter !== '-' ? `(Match ${selectedMatchFilter})` : ''}:</strong>
-                <table className="detail-table">
-                  <thead>
-                    <tr>
-                      <th>Category</th>
-                      <th>Quantity</th>
-                      <th>Base Price</th>
-                      <th>My Price</th>
-                      <th>Currency</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {selectedOffer.lines
-                      .filter(line => {
-                        if (!selectedMatchFilter || selectedMatchFilter === '-') return true
-                        // If selectedMatchFilter is set, show only lines matching it
-                        // Handle potential type mismatches (string vs int)
-                        return parseInt(line.match) === parseInt(selectedMatchFilter)
-                      })
-                      .map((line, i) => (
-                        <tr key={i}>
-                          <td>{line.category}</td>
-                          <td>{line.quantity ? `${line.quantity} tickets` : '-'}</td>
-                          <td>{line.price.toFixed(2)}</td>
-                          <td style={{ color: '#56d364', fontWeight: 'bold' }}>{line.my_price ? line.my_price.toFixed(2) : '-'}</td>
-                          <td>{line.currency}</td>
+            {/* Detail Drawer / Section */}
+            {showDetailDrawer && selectedOffer && (
+              <div className="offer-details-container" style={{ marginTop: '20px', borderTop: '1px solid #30363d', paddingTop: '20px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
+                  <h3>Offer Details</h3>
+                  <button
+                    onClick={() => setShowDetailDrawer(false)}
+                    style={{ background: 'none', border: 'none', color: '#8b949e', cursor: 'pointer', fontSize: '1.2em' }}
+                  >
+                    ×
+                  </button>
+                </div>
+
+                {selectedOffer.lines && selectedOffer.lines.length > 0 && (
+                  <div className="detail-section">
+                    <strong>Category/Price Lines {selectedMatchFilter && selectedMatchFilter !== '-' ? `(Match ${selectedMatchFilter})` : ''}:</strong>
+                    <table className="detail-table">
+                      <thead>
+                        <tr>
+                          <th>Category</th>
+                          <th>Quantity</th>
+                          <th>Base Price</th>
+                          <th>My Price</th>
+                          <th>Currency</th>
                         </tr>
+                      </thead>
+                      <tbody>
+                        {selectedOffer.lines
+                          .filter(line => {
+                            if (!selectedMatchFilter || selectedMatchFilter === '-') return true
+                            // If selectedMatchFilter is set, show only lines matching it
+                            return parseInt(line.match) === parseInt(selectedMatchFilter)
+                          })
+                          .map((line, i) => (
+                            <tr key={i}>
+                              <td>{line.category}</td>
+                              <td>{line.quantity ? `${line.quantity} tickets` : '-'}</td>
+                              <td>{line.price.toFixed(2)}</td>
+                              <td style={{ color: '#56d364', fontWeight: 'bold' }}>{line.my_price ? line.my_price.toFixed(2) : '-'}</td>
+                              <td>{line.currency}</td>
+                            </tr>
+                          ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+
+                {selectedOffer.warnings && selectedOffer.warnings.length > 0 && (
+                  <div className="detail-section">
+                    <strong>Warnings:</strong>
+                    <ul>
+                      {selectedOffer.warnings.map((w, i) => (
+                        <li key={i}>{w}</li>
                       ))}
-                  </tbody>
-                </table>
+                    </ul>
+                  </div>
+                )}
+
+                <div className="detail-section">
+                  <strong>Raw Message:</strong>
+                  <pre className="raw-message">{selectedOffer.raw}</pre>
+                </div>
               </div>
             )}
-
-            {selectedOffer.warnings && selectedOffer.warnings.length > 0 && (
-              <div className="detail-section">
-                <strong>Warnings:</strong>
-                <ul>
-                  {selectedOffer.warnings.map((w, i) => (
-                    <li key={i}>{w}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            <div className="detail-section">
-              <strong>Raw Message:</strong>
-              <pre className="raw-message">{selectedOffer.raw}</pre>
-            </div>
 
 
           </div>
