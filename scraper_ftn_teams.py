@@ -788,6 +788,43 @@ def scrape_game_prices(driver, game_url, game_name, team_key=None):
             print(f'      ⏳ Waiting for filters to apply and page to reload...', flush=True)
             time.sleep(4)
         
+        # Strategy: JSON Data Extraction (Supplementary)
+        # Extracts min_prices from page source 'event_object' to capture categories that might be hidden/lazy-loaded
+        try:
+             page_source = driver.page_source
+             match = re.search(r'var event_object\s*=\s*({.*?});', page_source, re.DOTALL)
+             if match:
+                 json_str = match.group(1)
+                 data = json.loads(json_str)
+                 cats = data.get('category_statistic', {})
+                 
+                 if cats:
+                     print(f'      ✨ Found JSON data with {len(cats)} categories', flush=True)
+                 
+                 for k, v in cats.items():
+                     raw_name = v.get('name', '')
+                     min_price = v.get('min_price')
+                     
+                     if not min_price: continue
+                     
+                     cat_key = None
+                     # Normalize category name
+                     cat_match = re.search(r'Category\s+(1\s+Premium|1|2|3|4)', raw_name, re.IGNORECASE)
+                     if cat_match:
+                         cat_key = f'Category {cat_match.group(1).title()}'
+                     elif 'category' in raw_name.lower():
+                         cat_key = raw_name
+                         
+                     if cat_key:
+                         try:
+                             val = float(str(min_price).replace(',', ''))
+                             # Avoid duplicates if we can, but since we are appending to a list that will be processed later, it's fine.
+                             # We assume direct value usage as currency should be set by page.
+                             prices_by_category[cat_key].append(val)
+                         except: pass
+        except Exception as e:
+            print(f'      ⚠️ JSON extraction error: {e}', flush=True)
+
         # Scroll multiple times to load all tickets (lazy loading)
         print(f'      📜 Scrolling to load all ticket listings...', flush=True)
         last_height = driver.execute_script("return document.body.scrollHeight")

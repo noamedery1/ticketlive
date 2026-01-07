@@ -83,6 +83,55 @@ def scrape_ftn_single(driver, url, match_name):
         driver.execute_script("window.scrollTo(0, 0);")
         time.sleep(1)
 
+        # Strategy 0: JSON Data (Most Reliable)
+        json_found = 0
+        try:
+            page_source = driver.page_source
+            match = re.search(r'var event_object\s*=\s*({.*?});', page_source, re.DOTALL)
+            if match:
+                json_str = match.group(1)
+                data = json.loads(json_str)
+                
+                currency_symbol = data.get('currency', '')
+                cats = data.get('category_statistic', {})
+                
+                if cats:
+                    print(f'      ✨ Found JSON data with {len(cats)} categories', flush=True)
+                    
+                for k, v in cats.items():
+                    raw_name = v.get('name', '')
+                    min_price = v.get('min_price')
+                    
+                    # Normalize category name
+                    cat_match = re.search(r'Category\s+(1\s+Premium|1|2|3|4)', raw_name, re.IGNORECASE)
+                    if cat_match:
+                        category = f'Category {cat_match.group(1).title()}'
+                    elif 'best available' in raw_name.lower():
+                        continue # Skip best available
+                    else:
+                        category = raw_name # Keep original if not standard pattern
+                        
+                    # Process Price
+                    try:
+                         val = float(str(min_price).replace(',', ''))
+                         
+                         # Currency Conversion based on JSON currency symbol
+                         if 'euro' in currency_symbol.lower() or '€' in currency_symbol:
+                             val *= EUR_TO_USD
+                         elif 'pound' in currency_symbol.lower() or '£' in currency_symbol:
+                             val *= 1.25
+                             
+                         if val < prices_found_for_match[category]:
+                             prices_found_for_match[category] = round(val, 2)
+                             json_found += 1
+                    except:
+                        pass
+        except Exception as e:
+            print(f'      ⚠️ JSON extraction failed: {e}', flush=True)
+
+        if json_found > 0:
+             print(f'      ✅ Extracted {json_found} prices from JSON', flush=True)
+
         # Strategy 1: DOM Elements (Most Reliable)
         listings = []
         selectors = ["div.inner_price", ".ticket-listing", "[data-price]", ".listing-row"]
