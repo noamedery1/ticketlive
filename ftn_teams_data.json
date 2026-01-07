@@ -4136,23 +4136,91 @@
               "Executive Private Boxes": 2399.94,
               "VIP Packages": 3500.0
             }
+          },
+          {
+            "timestamp": "2026-01-06T19:30:46.324301",
+            "prices": {
+              "Shortside Upper Level": 199.9,
+              "Longside Upper Level": 269.91,
+              "Central Longside Upper": 284.98,
+              "Longside Lower Level": 294.92,
+              "Shortside Lower Level": 294.99,
+              "Away Section": 424.93,
+              "Central Longside Lower": 449.92,
+              "Club Level Shortside": 524.98,
+              "Club Level Longside": 649.95,
+              "Executive Private Boxes": 1700.0,
+              "Category 3": 1750.0,
+              "VIP Packages": 3500.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T23:33:54.874301",
+            "prices": {
+              "Shortside Upper Level": 199.9,
+              "Longside Upper Level": 269.91,
+              "Longside Lower Level": 275.0,
+              "Shortside Lower Level": 299.97,
+              "Central Longside Upper": 299.98,
+              "Away Section": 424.93,
+              "Central Longside Lower": 449.92,
+              "Club Level Shortside": 524.9,
+              "Club Level Longside": 649.95,
+              "Executive Private Boxes": 1700.0,
+              "Category 3": 1750.0,
+              "VIP Packages": 3500.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T03:35:21.155301",
+            "prices": {
+              "Shortside Upper Level": 199.9,
+              "Longside Upper Level": 224.99,
+              "Longside Lower Level": 274.99,
+              "Shortside Lower Level": 289.94,
+              "Central Longside Upper": 289.97,
+              "Away Section": 424.93,
+              "Central Longside Lower": 474.98,
+              "Club Level Shortside": 499.94,
+              "Club Level Longside": 629.92,
+              "Executive Private Boxes": 1700.0,
+              "Category 3": 1750.0,
+              "VIP Packages": 3500.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T07:37:48.169301",
+            "prices": {
+              "Shortside Upper Level": 199.9,
+              "Longside Upper Level": 224.99,
+              "Longside Lower Level": 274.99,
+              "Shortside Lower Level": 289.94,
+              "Central Longside Upper": 289.97,
+              "Away Section": 424.93,
+              "Central Longside Lower": 474.98,
+              "Club Level Shortside": 499.94,
+              "Club Level Longside": 619.95,
+              "Executive Private Boxes": 1699.99,
+              "Category 3": 1750.0,
+              "VIP Packages": 3500.0
+            }
           }
         ],
         "latest_prices": {
           "Shortside Upper Level": 199.9,
-          "Longside Upper Level": 274.95,
-          "Longside Lower Level": 299.94,
-          "Shortside Lower Level": 299.96,
-          "Central Longside Upper": 304.98,
+          "Longside Upper Level": 224.99,
+          "Longside Lower Level": 274.99,
+          "Shortside Lower Level": 289.94,
+          "Central Longside Upper": 289.97,
           "Away Section": 424.93,
-          "Central Longside Lower": 449.92,
-          "Club Level Shortside": 524.98,
-          "Club Level Longside": 649.95,
+          "Central Longside Lower": 474.98,
+          "Club Level Shortside": 499.94,
+          "Club Level Longside": 619.95,
+          "Executive Private Boxes": 1699.99,
           "Category 3": 1750.0,
-          "Executive Private Boxes": 2399.94,
           "VIP Packages": 3500.0
         },
-        "last_scraped": "2026-01-06T15:32:50.884301"
+        "last_scraped": "2026-01-07T07:37:48.169301"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-manchester-united",
@@ -6491,11 +6559,79 @@
               "Executive Private Boxes": 2750.0,
               "VIP Packages": 3500.0
             }
+          },
+          {
+            "timestamp": "2026-01-06T19:30:46.324301",
+            "prices": {
+              "Shortside Upper Level": 346.04,
+              "Longside Upper Level": 405.0,
+              "Central Longside Upper": 414.0,
+              "Longside Lower Level": 495.0,
+              "Shortside Lower Level": 525.0,
+              "Central Longside Lower": 578.48,
+              "Away Section": 625.0,
+              "Club Level Shortside": 674.88,
+              "Club Level Longside": 720.0,
+              "Category 3": 1750.0,
+              "Executive Private Boxes": 2750.0,
+              "VIP Packages": 3500.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T23:33:54.874301",
+            "prices": {
+              "Shortside Upper Level": 346.04,
+              "Longside Upper Level": 405.0,
+              "Central Longside Upper": 414.0,
+              "Longside Lower Level": 495.0,
+              "Shortside Lower Level": 525.0,
+              "Central Longside Lower": 578.48,
+              "Away Section": 625.0,
+              "Club Level Shortside": 674.88,
+              "Club Level Longside": 720.0,
+              "Category 3": 1750.0,
+              "Executive Private Boxes": 2750.0,
+              "VIP Packages": 3500.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T03:35:21.155301",
+            "prices": {
+              "Shortside Upper Level": 342.57,
+              "Longside Upper Level": 374.99,
+              "Central Longside Upper": 414.0,
+              "Longside Lower Level": 495.0,
+              "Shortside Lower Level": 525.0,
+              "Central Longside Lower": 578.48,
+              "Away Section": 625.0,
+              "Club Level Shortside": 674.88,
+              "Club Level Longside": 720.0,
+              "Category 3": 1750.0,
+              "Executive Private Boxes": 2750.0,
+              "VIP Packages": 3500.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T07:37:48.169301",
+            "prices": {
+              "Shortside Upper Level": 342.57,
+              "Longside Upper Level": 374.99,
+              "Central Longside Upper": 414.0,
+              "Longside Lower Level": 495.0,
+              "Shortside Lower Level": 525.0,
+              "Central Longside Lower": 578.48,
+              "Away Section": 625.0,
+              "Club Level Shortside": 674.88,
+              "Club Level Longside": 720.0,
+              "Category 3": 1750.0,
+              "Executive Private Boxes": 2750.0,
+              "VIP Packages": 3500.0
+            }
           }
         ],
         "latest_prices": {
-          "Shortside Upper Level": 371.19,
-          "Longside Upper Level": 405.0,
+          "Shortside Upper Level": 342.57,
+          "Longside Upper Level": 374.99,
           "Central Longside Upper": 414.0,
           "Longside Lower Level": 495.0,
           "Shortside Lower Level": 525.0,
@@ -6507,7 +6643,7 @@
           "Executive Private Boxes": 2750.0,
           "VIP Packages": 3500.0
         },
-        "last_scraped": "2026-01-06T15:32:50.884301"
+        "last_scraped": "2026-01-07T07:37:48.169301"
       },
       {
         "url": "https://www.footballticketnet.com/champions-league/arsenal-vs-kairat-almaty",
@@ -8501,20 +8637,76 @@
               "Club Level Longside": 338.0,
               "Executive Private Boxes": 1448.0
             }
+          },
+          {
+            "timestamp": "2026-01-06T19:30:46.324301",
+            "prices": {
+              "Shortside Upper Level": 155.0,
+              "Shortside Lower Level": 185.0,
+              "Central Longside Upper": 197.49,
+              "Longside Upper Level": 198.0,
+              "Longside Lower Level": 200.0,
+              "Central Longside Lower": 215.0,
+              "Club Level Shortside": 285.0,
+              "Club Level Longside": 338.0,
+              "Executive Private Boxes": 1448.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T23:33:54.874301",
+            "prices": {
+              "Shortside Upper Level": 159.99,
+              "Central Longside Upper": 197.49,
+              "Longside Upper Level": 198.0,
+              "Shortside Lower Level": 199.99,
+              "Longside Lower Level": 200.0,
+              "Central Longside Lower": 215.0,
+              "Club Level Shortside": 285.0,
+              "Club Level Longside": 338.0,
+              "Executive Private Boxes": 1448.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T03:35:21.155301",
+            "prices": {
+              "Shortside Upper Level": 159.99,
+              "Central Longside Upper": 197.49,
+              "Longside Upper Level": 198.0,
+              "Shortside Lower Level": 199.99,
+              "Longside Lower Level": 200.0,
+              "Central Longside Lower": 215.0,
+              "Club Level Shortside": 285.0,
+              "Club Level Longside": 338.0,
+              "Executive Private Boxes": 1448.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T07:37:48.169301",
+            "prices": {
+              "Shortside Upper Level": 159.99,
+              "Central Longside Upper": 197.49,
+              "Longside Upper Level": 198.0,
+              "Shortside Lower Level": 199.99,
+              "Longside Lower Level": 200.0,
+              "Central Longside Lower": 215.0,
+              "Club Level Shortside": 285.0,
+              "Club Level Longside": 338.0,
+              "Executive Private Boxes": 1448.0
+            }
           }
         ],
         "latest_prices": {
-          "Shortside Upper Level": 155.0,
-          "Shortside Lower Level": 185.0,
+          "Shortside Upper Level": 159.99,
+          "Central Longside Upper": 197.49,
           "Longside Upper Level": 198.0,
+          "Shortside Lower Level": 199.99,
           "Longside Lower Level": 200.0,
-          "Central Longside Upper": 210.0,
-          "Central Longside Lower": 220.99,
+          "Central Longside Lower": 215.0,
           "Club Level Shortside": 285.0,
           "Club Level Longside": 338.0,
           "Executive Private Boxes": 1448.0
         },
-        "last_scraped": "2026-01-06T15:32:50.884301"
+        "last_scraped": "2026-01-07T07:37:48.169301"
       },
       {
         "url": "https://www.footballticketnet.com/carabao-cup/arsenal-vs-chelsea",
@@ -10990,6 +11182,66 @@
               "Club Level Shortside": 288.97,
               "Executive Private Boxes": 1244.97
             }
+          },
+          {
+            "timestamp": "2026-01-06T19:30:46.324301",
+            "prices": {
+              "Longside Upper Level": 154.99,
+              "Shortside Upper Level": 165.96,
+              "Central Longside Upper": 175.99,
+              "Shortside Lower Level": 197.97,
+              "Longside Lower Level": 224.93,
+              "Central Longside Lower": 251.94,
+              "Away Section": 261.0,
+              "Club Level Longside": 269.97,
+              "Club Level Shortside": 288.97,
+              "Executive Private Boxes": 1244.97
+            }
+          },
+          {
+            "timestamp": "2026-01-06T23:33:54.874301",
+            "prices": {
+              "Longside Upper Level": 154.99,
+              "Shortside Upper Level": 165.96,
+              "Central Longside Upper": 175.99,
+              "Shortside Lower Level": 197.97,
+              "Longside Lower Level": 224.93,
+              "Central Longside Lower": 251.94,
+              "Away Section": 261.0,
+              "Club Level Longside": 269.97,
+              "Club Level Shortside": 288.97,
+              "Executive Private Boxes": 1244.97
+            }
+          },
+          {
+            "timestamp": "2026-01-07T03:35:21.155301",
+            "prices": {
+              "Longside Upper Level": 154.99,
+              "Shortside Upper Level": 165.96,
+              "Central Longside Upper": 175.99,
+              "Shortside Lower Level": 197.97,
+              "Longside Lower Level": 224.93,
+              "Central Longside Lower": 251.94,
+              "Away Section": 261.0,
+              "Club Level Longside": 269.97,
+              "Club Level Shortside": 288.97,
+              "Executive Private Boxes": 1244.97
+            }
+          },
+          {
+            "timestamp": "2026-01-07T07:37:48.169301",
+            "prices": {
+              "Longside Upper Level": 154.99,
+              "Shortside Upper Level": 165.96,
+              "Central Longside Upper": 175.99,
+              "Shortside Lower Level": 197.97,
+              "Longside Lower Level": 224.93,
+              "Central Longside Lower": 251.94,
+              "Away Section": 261.0,
+              "Club Level Longside": 269.97,
+              "Club Level Shortside": 288.97,
+              "Executive Private Boxes": 1244.97
+            }
           }
         ],
         "latest_prices": {
@@ -11004,7 +11256,7 @@
           "Club Level Shortside": 288.97,
           "Executive Private Boxes": 1244.97
         },
-        "last_scraped": "2026-01-06T15:32:50.884301"
+        "last_scraped": "2026-01-07T07:37:48.169301"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-sunderland",
@@ -13443,6 +13695,70 @@
               "Category 3": 1750.0,
               "VIP Packages": 3500.0
             }
+          },
+          {
+            "timestamp": "2026-01-06T19:30:46.324301",
+            "prices": {
+              "Longside Lower Level": 314.94,
+              "Shortside Upper Level": 329.91,
+              "Central Longside Lower": 360.92,
+              "Longside Upper Level": 374.98,
+              "Central Longside Upper": 411.17,
+              "Club Level Shortside": 439.94,
+              "Club Level Longside": 484.91,
+              "Shortside Lower Level": 521.12,
+              "Executive Private Boxes": 1659.2,
+              "Category 3": 1750.0,
+              "VIP Packages": 3500.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T23:33:54.874301",
+            "prices": {
+              "Longside Lower Level": 314.94,
+              "Shortside Upper Level": 329.91,
+              "Central Longside Lower": 360.92,
+              "Longside Upper Level": 374.98,
+              "Central Longside Upper": 411.15,
+              "Club Level Shortside": 439.94,
+              "Club Level Longside": 484.91,
+              "Shortside Lower Level": 521.17,
+              "Executive Private Boxes": 1659.2,
+              "Category 3": 1750.0,
+              "VIP Packages": 3500.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T03:35:21.155301",
+            "prices": {
+              "Longside Lower Level": 314.94,
+              "Shortside Upper Level": 329.91,
+              "Central Longside Lower": 360.92,
+              "Longside Upper Level": 374.98,
+              "Central Longside Upper": 411.12,
+              "Club Level Shortside": 439.94,
+              "Club Level Longside": 484.91,
+              "Shortside Lower Level": 521.17,
+              "Executive Private Boxes": 1659.2,
+              "Category 3": 1750.0,
+              "VIP Packages": 3500.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T07:37:48.169301",
+            "prices": {
+              "Longside Lower Level": 314.94,
+              "Shortside Upper Level": 329.91,
+              "Central Longside Lower": 360.92,
+              "Longside Upper Level": 374.98,
+              "Central Longside Upper": 411.17,
+              "Club Level Shortside": 439.94,
+              "Club Level Longside": 484.91,
+              "Shortside Lower Level": 521.14,
+              "Executive Private Boxes": 1659.2,
+              "Category 3": 1750.0,
+              "VIP Packages": 3500.0
+            }
           }
         ],
         "latest_prices": {
@@ -13453,12 +13769,12 @@
           "Central Longside Upper": 411.17,
           "Club Level Shortside": 439.94,
           "Club Level Longside": 484.91,
-          "Shortside Lower Level": 521.15,
+          "Shortside Lower Level": 521.14,
           "Executive Private Boxes": 1659.2,
           "Category 3": 1750.0,
           "VIP Packages": 3500.0
         },
-        "last_scraped": "2026-01-06T15:32:50.884301"
+        "last_scraped": "2026-01-07T07:37:48.169301"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-chelsea",
@@ -15920,12 +16236,80 @@
               "Executive Private Boxes": 1794.1,
               "VIP Packages": 3500.0
             }
+          },
+          {
+            "timestamp": "2026-01-06T19:30:46.324301",
+            "prices": {
+              "Longside Upper Level": 404.91,
+              "Central Longside Upper": 418.96,
+              "Away Section": 432.06,
+              "Shortside Upper Level": 469.95,
+              "Longside Lower Level": 494.97,
+              "Central Longside Lower": 508.98,
+              "Shortside Lower Level": 594.93,
+              "Club Level Shortside": 684.94,
+              "Club Level Longside": 923.93,
+              "Category 3": 1750.0,
+              "Executive Private Boxes": 1794.1,
+              "VIP Packages": 3500.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T23:33:54.874301",
+            "prices": {
+              "Longside Upper Level": 404.91,
+              "Central Longside Upper": 418.96,
+              "Away Section": 432.13,
+              "Shortside Upper Level": 469.95,
+              "Longside Lower Level": 494.97,
+              "Central Longside Lower": 508.98,
+              "Shortside Lower Level": 594.93,
+              "Club Level Shortside": 684.94,
+              "Club Level Longside": 923.93,
+              "Category 3": 1750.0,
+              "Executive Private Boxes": 1794.1,
+              "VIP Packages": 3500.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T03:35:21.155301",
+            "prices": {
+              "Longside Upper Level": 404.91,
+              "Central Longside Upper": 418.96,
+              "Away Section": 432.1,
+              "Shortside Upper Level": 469.95,
+              "Longside Lower Level": 494.97,
+              "Central Longside Lower": 508.98,
+              "Shortside Lower Level": 594.93,
+              "Club Level Shortside": 684.94,
+              "Club Level Longside": 923.93,
+              "Category 3": 1750.0,
+              "Executive Private Boxes": 1794.1,
+              "VIP Packages": 3500.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T07:37:48.169301",
+            "prices": {
+              "Longside Upper Level": 404.91,
+              "Central Longside Upper": 418.96,
+              "Away Section": 432.13,
+              "Shortside Upper Level": 469.95,
+              "Longside Lower Level": 494.97,
+              "Central Longside Lower": 508.98,
+              "Shortside Lower Level": 594.93,
+              "Club Level Shortside": 684.94,
+              "Club Level Longside": 923.93,
+              "Category 3": 1750.0,
+              "Executive Private Boxes": 1794.1,
+              "VIP Packages": 3500.0
+            }
           }
         ],
         "latest_prices": {
           "Longside Upper Level": 404.91,
           "Central Longside Upper": 418.96,
-          "Away Section": 432.05,
+          "Away Section": 432.13,
           "Shortside Upper Level": 469.95,
           "Longside Lower Level": 494.97,
           "Central Longside Lower": 508.98,
@@ -15936,7 +16320,7 @@
           "Executive Private Boxes": 1794.1,
           "VIP Packages": 3500.0
         },
-        "last_scraped": "2026-01-06T15:32:50.884301"
+        "last_scraped": "2026-01-07T07:37:48.169301"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-everton",
@@ -18935,15 +19319,83 @@
               "Category 3": 1750.0,
               "VIP Packages": 3500.0
             }
+          },
+          {
+            "timestamp": "2026-01-06T19:30:46.324301",
+            "prices": {
+              "Away Section": 260.0,
+              "Longside Upper Level": 324.99,
+              "Central Longside Upper": 328.92,
+              "Shortside Upper Level": 359.92,
+              "Shortside Lower Level": 359.98,
+              "Longside Lower Level": 400.9,
+              "Central Longside Lower": 449.97,
+              "Club Level Longside": 573.28,
+              "Club Level Shortside": 618.93,
+              "Executive Private Boxes": 1749.3,
+              "Category 3": 1750.0,
+              "VIP Packages": 3500.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T23:33:54.874301",
+            "prices": {
+              "Away Section": 260.0,
+              "Longside Upper Level": 324.99,
+              "Central Longside Upper": 328.92,
+              "Shortside Upper Level": 359.86,
+              "Longside Lower Level": 400.9,
+              "Shortside Lower Level": 434.94,
+              "Central Longside Lower": 449.97,
+              "Club Level Longside": 573.18,
+              "Club Level Shortside": 618.93,
+              "Executive Private Boxes": 1749.3,
+              "Category 3": 1750.0,
+              "VIP Packages": 3500.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T03:35:21.155301",
+            "prices": {
+              "Away Section": 260.0,
+              "Longside Upper Level": 324.99,
+              "Central Longside Upper": 328.92,
+              "Shortside Upper Level": 359.82,
+              "Longside Lower Level": 400.9,
+              "Shortside Lower Level": 434.94,
+              "Central Longside Lower": 449.97,
+              "Club Level Longside": 573.24,
+              "Club Level Shortside": 618.93,
+              "Executive Private Boxes": 1749.3,
+              "Category 3": 1750.0,
+              "VIP Packages": 3500.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T07:37:48.169301",
+            "prices": {
+              "Away Section": 260.0,
+              "Longside Upper Level": 324.99,
+              "Central Longside Upper": 328.92,
+              "Shortside Upper Level": 359.92,
+              "Longside Lower Level": 400.9,
+              "Shortside Lower Level": 434.94,
+              "Central Longside Lower": 449.97,
+              "Club Level Longside": 573.28,
+              "Club Level Shortside": 618.93,
+              "Executive Private Boxes": 1749.3,
+              "Category 3": 1750.0,
+              "VIP Packages": 3500.0
+            }
           }
         ],
         "latest_prices": {
           "Away Section": 260.0,
           "Longside Upper Level": 324.99,
-          "Central Longside Upper": 328.97,
+          "Central Longside Upper": 328.92,
           "Shortside Upper Level": 359.92,
-          "Shortside Lower Level": 359.98,
           "Longside Lower Level": 400.9,
+          "Shortside Lower Level": 434.94,
           "Central Longside Lower": 449.97,
           "Club Level Longside": 573.28,
           "Club Level Shortside": 618.93,
@@ -18951,7 +19403,7 @@
           "Category 3": 1750.0,
           "VIP Packages": 3500.0
         },
-        "last_scraped": "2026-01-06T15:32:50.884301"
+        "last_scraped": "2026-01-07T07:37:48.169301"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-bournemouth",
@@ -21766,6 +22218,74 @@
               "Executive Private Boxes": 2999.8,
               "VIP Packages": 3500.0
             }
+          },
+          {
+            "timestamp": "2026-01-06T19:30:46.324301",
+            "prices": {
+              "Longside Upper Level": 337.93,
+              "Central Longside Upper": 350.91,
+              "Longside Lower Level": 431.94,
+              "Central Longside Lower": 494.94,
+              "Shortside Upper Level": 574.92,
+              "Club Level Shortside": 724.95,
+              "Shortside Lower Level": 749.97,
+              "Away Section": 749.98,
+              "Club Level Longside": 809.92,
+              "Category 3": 1750.0,
+              "Executive Private Boxes": 2999.8,
+              "VIP Packages": 3500.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T23:33:54.874301",
+            "prices": {
+              "Longside Upper Level": 337.93,
+              "Central Longside Upper": 350.91,
+              "Longside Lower Level": 431.94,
+              "Central Longside Lower": 494.94,
+              "Shortside Upper Level": 574.92,
+              "Club Level Shortside": 724.95,
+              "Shortside Lower Level": 749.97,
+              "Away Section": 749.98,
+              "Club Level Longside": 809.92,
+              "Category 3": 1750.0,
+              "Executive Private Boxes": 2999.8,
+              "VIP Packages": 3500.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T03:35:21.155301",
+            "prices": {
+              "Longside Upper Level": 337.93,
+              "Central Longside Upper": 350.91,
+              "Longside Lower Level": 431.94,
+              "Central Longside Lower": 494.94,
+              "Shortside Upper Level": 574.92,
+              "Club Level Shortside": 724.95,
+              "Shortside Lower Level": 749.97,
+              "Away Section": 749.98,
+              "Club Level Longside": 809.92,
+              "Category 3": 1750.0,
+              "Executive Private Boxes": 2999.8,
+              "VIP Packages": 3500.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T07:37:48.169301",
+            "prices": {
+              "Longside Upper Level": 337.93,
+              "Central Longside Upper": 350.91,
+              "Longside Lower Level": 431.94,
+              "Central Longside Lower": 494.94,
+              "Shortside Upper Level": 574.92,
+              "Club Level Shortside": 724.95,
+              "Shortside Lower Level": 749.97,
+              "Away Section": 749.98,
+              "Club Level Longside": 809.92,
+              "Category 3": 1750.0,
+              "Executive Private Boxes": 2999.8,
+              "VIP Packages": 3500.0
+            }
           }
         ],
         "latest_prices": {
@@ -21782,7 +22302,7 @@
           "Executive Private Boxes": 2999.8,
           "VIP Packages": 3500.0
         },
-        "last_scraped": "2026-01-06T15:32:50.884301"
+        "last_scraped": "2026-01-07T07:37:48.169301"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-newcastle-united",
@@ -24151,6 +24671,70 @@
               "VIP Packages": 3500.0,
               "Executive Private Boxes": 9999.0
             }
+          },
+          {
+            "timestamp": "2026-01-06T19:30:46.324301",
+            "prices": {
+              "Longside Upper Level": 337.94,
+              "Central Longside Upper": 350.96,
+              "Longside Lower Level": 431.94,
+              "Central Longside Lower": 494.93,
+              "Shortside Upper Level": 619.91,
+              "Club Level Shortside": 749.96,
+              "Shortside Lower Level": 799.93,
+              "Club Level Longside": 919.94,
+              "Category 3": 1750.0,
+              "VIP Packages": 3500.0,
+              "Executive Private Boxes": 9999.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T23:33:54.874301",
+            "prices": {
+              "Longside Upper Level": 337.94,
+              "Central Longside Upper": 350.96,
+              "Longside Lower Level": 431.94,
+              "Central Longside Lower": 494.93,
+              "Shortside Upper Level": 619.91,
+              "Club Level Shortside": 749.96,
+              "Shortside Lower Level": 799.93,
+              "Club Level Longside": 919.94,
+              "Category 3": 1750.0,
+              "VIP Packages": 3500.0,
+              "Executive Private Boxes": 9999.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T03:35:21.155301",
+            "prices": {
+              "Longside Upper Level": 337.94,
+              "Central Longside Upper": 350.96,
+              "Longside Lower Level": 431.94,
+              "Central Longside Lower": 494.93,
+              "Shortside Upper Level": 619.91,
+              "Club Level Shortside": 749.96,
+              "Shortside Lower Level": 799.93,
+              "Club Level Longside": 919.94,
+              "Category 3": 1750.0,
+              "VIP Packages": 3500.0,
+              "Executive Private Boxes": 9999.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T07:37:48.169301",
+            "prices": {
+              "Longside Upper Level": 337.94,
+              "Central Longside Upper": 350.96,
+              "Longside Lower Level": 431.94,
+              "Central Longside Lower": 494.93,
+              "Shortside Upper Level": 619.91,
+              "Club Level Shortside": 749.96,
+              "Shortside Lower Level": 799.93,
+              "Club Level Longside": 919.94,
+              "Category 3": 1750.0,
+              "VIP Packages": 3500.0,
+              "Executive Private Boxes": 9999.0
+            }
           }
         ],
         "latest_prices": {
@@ -24166,7 +24750,7 @@
           "VIP Packages": 3500.0,
           "Executive Private Boxes": 9999.0
         },
-        "last_scraped": "2026-01-06T15:32:50.884301"
+        "last_scraped": "2026-01-07T07:37:48.169301"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-fulham",
@@ -26982,19 +27566,71 @@
               "Category 3": 1750.0,
               "VIP Packages": 3500.0
             }
+          },
+          {
+            "timestamp": "2026-01-06T19:30:46.324301",
+            "prices": {
+              "Longside Upper Level": 495.0,
+              "Central Longside Upper": 518.0,
+              "Longside Lower Level": 585.0,
+              "Central Longside Lower": 608.83,
+              "Club Level Shortside": 941.88,
+              "Club Level Longside": 1450.0,
+              "Category 3": 1750.0,
+              "VIP Packages": 3500.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T23:33:54.874301",
+            "prices": {
+              "Longside Upper Level": 495.0,
+              "Central Longside Upper": 518.0,
+              "Longside Lower Level": 585.0,
+              "Central Longside Lower": 608.83,
+              "Club Level Shortside": 941.88,
+              "Club Level Longside": 1450.0,
+              "Category 3": 1750.0,
+              "VIP Packages": 3500.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T03:35:21.155301",
+            "prices": {
+              "Longside Upper Level": 495.0,
+              "Central Longside Upper": 518.0,
+              "Longside Lower Level": 585.0,
+              "Central Longside Lower": 608.83,
+              "Club Level Shortside": 941.01,
+              "Club Level Longside": 1450.0,
+              "Category 3": 1750.0,
+              "VIP Packages": 3500.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T07:37:48.169301",
+            "prices": {
+              "Longside Upper Level": 495.0,
+              "Central Longside Upper": 518.0,
+              "Longside Lower Level": 585.0,
+              "Central Longside Lower": 608.83,
+              "Club Level Shortside": 941.01,
+              "Club Level Longside": 1450.0,
+              "Category 3": 1750.0,
+              "VIP Packages": 3500.0
+            }
           }
         ],
         "latest_prices": {
           "Longside Upper Level": 495.0,
           "Central Longside Upper": 518.0,
-          "Longside Lower Level": 567.2,
-          "Central Longside Lower": 610.57,
-          "Club Level Shortside": 941.88,
+          "Longside Lower Level": 585.0,
+          "Central Longside Lower": 608.83,
+          "Club Level Shortside": 941.01,
           "Club Level Longside": 1450.0,
           "Category 3": 1750.0,
           "VIP Packages": 3500.0
         },
-        "last_scraped": "2026-01-06T15:32:50.884301"
+        "last_scraped": "2026-01-07T07:37:48.169301"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-burnley",
@@ -29604,6 +30240,62 @@
               "Club Level Shortside": 2650.0,
               "Executive Private Boxes": 9250.0
             }
+          },
+          {
+            "timestamp": "2026-01-06T19:30:46.324301",
+            "prices": {
+              "Longside Upper Level": 925.0,
+              "Central Longside Upper": 975.0,
+              "Shortside Upper Level": 1000.0,
+              "Longside Lower Level": 1200.0,
+              "Central Longside Lower": 1300.0,
+              "Shortside Lower Level": 1483.07,
+              "Club Level Longside": 1699.99,
+              "Club Level Shortside": 2650.0,
+              "Executive Private Boxes": 9250.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T23:33:54.874301",
+            "prices": {
+              "Longside Upper Level": 925.0,
+              "Central Longside Upper": 975.0,
+              "Shortside Upper Level": 1000.0,
+              "Longside Lower Level": 1200.0,
+              "Central Longside Lower": 1300.0,
+              "Shortside Lower Level": 1483.07,
+              "Club Level Longside": 1699.99,
+              "Club Level Shortside": 2650.0,
+              "Executive Private Boxes": 9250.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T03:35:21.155301",
+            "prices": {
+              "Longside Upper Level": 925.0,
+              "Central Longside Upper": 975.0,
+              "Shortside Upper Level": 1000.0,
+              "Longside Lower Level": 1200.0,
+              "Central Longside Lower": 1300.0,
+              "Shortside Lower Level": 1483.07,
+              "Club Level Longside": 1699.99,
+              "Club Level Shortside": 2650.0,
+              "Executive Private Boxes": 9250.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T07:37:48.169301",
+            "prices": {
+              "Longside Upper Level": 925.0,
+              "Central Longside Upper": 975.0,
+              "Shortside Upper Level": 1000.0,
+              "Longside Lower Level": 1200.0,
+              "Central Longside Lower": 1300.0,
+              "Shortside Lower Level": 1483.07,
+              "Club Level Longside": 1699.99,
+              "Club Level Shortside": 2650.0,
+              "Executive Private Boxes": 9250.0
+            }
           }
         ],
         "latest_prices": {
@@ -29617,10 +30309,10 @@
           "Club Level Shortside": 2650.0,
           "Executive Private Boxes": 9250.0
         },
-        "last_scraped": "2026-01-06T15:32:50.884301"
+        "last_scraped": "2026-01-07T07:37:48.169301"
       }
     ],
-    "last_updated": "2026-01-06T15:32:50.884301"
+    "last_updated": "2026-01-07T07:37:48.169301"
   },
   "barcelona": {
     "team_name": "FC Barcelona",
@@ -30115,22 +30807,152 @@
               "Tribuna 3rd Central": 1900.0,
               "Tribuna 3rd": 1900.0
             }
+          },
+          {
+            "timestamp": "2026-01-06T15:52:51.778301",
+            "prices": {
+              "Goal 2nd": 113.0,
+              "Goal 1st": 117.0,
+              "Corner 2nd": 125.92,
+              "Corner 1st": 127.92,
+              "Lateral 1st": 144.97,
+              "Lateral 2nd": 149.0,
+              "Tribuna 1st": 180.0,
+              "Lateral 2nd Central": 184.99,
+              "Lateral 1st Central": 219.99,
+              "Tribuna 2nd": 269.99,
+              "Tribuna 1st Central": 269.99,
+              "Corner 4th": 275.0,
+              "Tribuna 2nd Central": 284.92,
+              "Corner 3rd": 300.0,
+              "Barca VIP Hospitality Silver Package": 400.0,
+              "Lateral 3rd": 425.0,
+              "Goal 3rd": 700.0,
+              "Lateral 4th": 800.0,
+              "Goal 4th": 1000.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T19:52:18.434301",
+            "prices": {
+              "Goal 2nd": 113.0,
+              "Goal 1st": 117.0,
+              "Corner 2nd": 125.9,
+              "Corner 1st": 127.9,
+              "Lateral 1st": 144.95,
+              "Lateral 2nd": 149.0,
+              "Tribuna 1st": 180.0,
+              "Lateral 2nd Central": 184.99,
+              "Lateral 1st Central": 219.99,
+              "Tribuna 1st Central": 269.94,
+              "Tribuna 2nd": 269.99,
+              "Corner 4th": 275.0,
+              "Tribuna 2nd Central": 284.9,
+              "Corner 3rd": 300.0,
+              "Barca VIP Hospitality Silver Package": 400.0,
+              "Lateral 3rd": 425.0,
+              "Goal 3rd": 700.0,
+              "Lateral 4th": 800.0,
+              "Goal 4th": 1000.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T23:55:34.440301",
+            "prices": {
+              "Goal 2nd": 113.0,
+              "Goal 1st": 117.0,
+              "Corner 2nd": 125.9,
+              "Corner 1st": 127.9,
+              "Lateral 1st": 144.95,
+              "Lateral 2nd": 149.0,
+              "Tribuna 1st": 180.0,
+              "Lateral 2nd Central": 184.99,
+              "Lateral 1st Central": 219.99,
+              "Tribuna 1st Central": 269.94,
+              "Tribuna 2nd": 269.99,
+              "Corner 4th": 275.0,
+              "Tribuna 2nd Central": 284.9,
+              "Corner 3rd": 300.0,
+              "Barca VIP Hospitality Silver Package": 400.0,
+              "Lateral 3rd": 425.0,
+              "Goal 3rd": 700.0,
+              "Lateral 4th": 800.0,
+              "Goal 4th": 1000.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T03:53:39.739301",
+            "prices": {
+              "Goal 2nd": 113.0,
+              "Goal 1st": 117.0,
+              "Corner 2nd": 125.9,
+              "Corner 1st": 127.9,
+              "Lateral 1st": 144.95,
+              "Lateral 2nd": 149.0,
+              "Tribuna 1st": 180.0,
+              "Lateral 2nd Central": 184.99,
+              "Lateral 1st Central": 219.99,
+              "Tribuna 1st Central": 269.94,
+              "Tribuna 2nd": 269.99,
+              "Corner 4th": 275.0,
+              "Tribuna 2nd Central": 284.9,
+              "Corner 3rd": 300.0,
+              "Barca VIP Hospitality Silver Package": 400.0,
+              "Lateral 3rd": 425.0,
+              "Goal 3rd": 700.0,
+              "Lateral 4th": 800.0,
+              "Goal 4th": 1000.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T07:56:55.875301",
+            "prices": {
+              "Goal 2nd": 113.0,
+              "Goal 1st": 117.0,
+              "Corner 2nd": 125.9,
+              "Corner 1st": 127.9,
+              "Lateral 1st": 144.95,
+              "Lateral 2nd": 149.0,
+              "Tribuna 1st": 180.0,
+              "Lateral 2nd Central": 184.99,
+              "Lateral 1st Central": 219.99,
+              "Tribuna 1st Central": 269.94,
+              "Tribuna 2nd": 269.99,
+              "Corner 4th": 275.0,
+              "Tribuna 2nd Central": 284.9,
+              "Corner 3rd": 300.0,
+              "Barca VIP Hospitality Silver Package": 400.0,
+              "Lateral 3rd": 425.0,
+              "Goal 3rd": 700.0,
+              "Lateral 4th": 800.0,
+              "Goal 4th": 1000.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
           }
         ],
         "latest_prices": {
           "Goal 2nd": 113.0,
           "Goal 1st": 117.0,
-          "Corner 2nd": 125.92,
-          "Corner 1st": 127.92,
-          "Lateral 1st": 144.97,
+          "Corner 2nd": 125.9,
+          "Corner 1st": 127.9,
+          "Lateral 1st": 144.95,
           "Lateral 2nd": 149.0,
           "Tribuna 1st": 180.0,
           "Lateral 2nd Central": 184.99,
           "Lateral 1st Central": 219.99,
+          "Tribuna 1st Central": 269.94,
           "Tribuna 2nd": 269.99,
-          "Tribuna 1st Central": 269.99,
           "Corner 4th": 275.0,
-          "Tribuna 2nd Central": 284.92,
+          "Tribuna 2nd Central": 284.9,
           "Corner 3rd": 300.0,
           "Barca VIP Hospitality Silver Package": 400.0,
           "Lateral 3rd": 425.0,
@@ -30140,7 +30962,7 @@
           "Tribuna 3rd Central": 1900.0,
           "Tribuna 3rd": 1900.0
         },
-        "last_scraped": "2026-01-06T14:33:07.489301"
+        "last_scraped": "2026-01-07T07:56:55.875301"
       },
       {
         "url": "https://www.footballticketnet.com/champions-league/fc-barcelona-vs-fc-copenhagen",
@@ -30553,10 +31375,100 @@
               "Tribuna 1st Central": 415.0,
               "Barca VIP Hospitality Silver Package": 500.0
             }
+          },
+          {
+            "timestamp": "2026-01-06T15:52:51.778301",
+            "prices": {
+              "Goal 2nd": 155.0,
+              "Goal 1st": 182.0,
+              "Corner 2nd": 197.99,
+              "Corner 1st": 199.99,
+              "Lateral 1st": 200.0,
+              "Lateral 2nd": 234.99,
+              "Lateral 2nd Central": 258.0,
+              "Tribuna 1st": 294.99,
+              "Tribuna 2nd": 300.0,
+              "Lateral 1st Central": 331.0,
+              "Tribuna 2nd Central": 370.0,
+              "Tribuna 1st Central": 415.0,
+              "Barca VIP Hospitality Silver Package": 500.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T19:52:18.434301",
+            "prices": {
+              "Goal 2nd": 155.1,
+              "Goal 1st": 182.0,
+              "Corner 2nd": 197.99,
+              "Corner 1st": 199.99,
+              "Lateral 1st": 200.0,
+              "Lateral 2nd": 234.99,
+              "Lateral 2nd Central": 258.0,
+              "Tribuna 1st": 294.99,
+              "Lateral 1st Central": 331.0,
+              "Tribuna 2nd": 356.99,
+              "Tribuna 2nd Central": 370.0,
+              "Tribuna 1st Central": 415.0,
+              "Barca VIP Hospitality Silver Package": 500.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T23:55:34.440301",
+            "prices": {
+              "Goal 2nd": 155.1,
+              "Goal 1st": 182.0,
+              "Corner 2nd": 197.99,
+              "Corner 1st": 199.99,
+              "Lateral 1st": 200.0,
+              "Lateral 2nd": 234.99,
+              "Lateral 2nd Central": 258.0,
+              "Tribuna 1st": 294.99,
+              "Lateral 1st Central": 331.0,
+              "Tribuna 2nd": 356.99,
+              "Tribuna 2nd Central": 370.0,
+              "Tribuna 1st Central": 415.0,
+              "Barca VIP Hospitality Silver Package": 500.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T03:53:39.739301",
+            "prices": {
+              "Goal 2nd": 155.1,
+              "Goal 1st": 182.0,
+              "Corner 2nd": 197.99,
+              "Corner 1st": 199.99,
+              "Lateral 1st": 200.0,
+              "Lateral 2nd": 234.99,
+              "Lateral 2nd Central": 258.0,
+              "Tribuna 1st": 294.99,
+              "Lateral 1st Central": 331.0,
+              "Tribuna 2nd": 356.99,
+              "Tribuna 2nd Central": 370.0,
+              "Tribuna 1st Central": 415.0,
+              "Barca VIP Hospitality Silver Package": 500.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T07:56:55.875301",
+            "prices": {
+              "Goal 2nd": 155.1,
+              "Goal 1st": 182.0,
+              "Corner 2nd": 197.99,
+              "Corner 1st": 199.99,
+              "Lateral 1st": 200.0,
+              "Lateral 2nd": 234.99,
+              "Lateral 2nd Central": 258.0,
+              "Tribuna 1st": 294.99,
+              "Lateral 1st Central": 331.0,
+              "Tribuna 2nd": 356.99,
+              "Tribuna 2nd Central": 370.0,
+              "Tribuna 1st Central": 415.0,
+              "Barca VIP Hospitality Silver Package": 500.0
+            }
           }
         ],
         "latest_prices": {
-          "Goal 2nd": 155.0,
+          "Goal 2nd": 155.1,
           "Goal 1st": 182.0,
           "Corner 2nd": 197.99,
           "Corner 1st": 199.99,
@@ -30564,13 +31476,13 @@
           "Lateral 2nd": 234.99,
           "Lateral 2nd Central": 258.0,
           "Tribuna 1st": 294.99,
-          "Tribuna 2nd": 300.0,
           "Lateral 1st Central": 331.0,
+          "Tribuna 2nd": 356.99,
           "Tribuna 2nd Central": 370.0,
           "Tribuna 1st Central": 415.0,
           "Barca VIP Hospitality Silver Package": 500.0
         },
-        "last_scraped": "2026-01-06T14:33:07.489301"
+        "last_scraped": "2026-01-07T07:56:55.875301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-rcd-mallorca",
@@ -31060,6 +31972,136 @@
               "Tribuna 3rd Central": 1900.0,
               "Tribuna 3rd": 1900.0
             }
+          },
+          {
+            "timestamp": "2026-01-06T15:52:51.778301",
+            "prices": {
+              "Goal 2nd": 118.0,
+              "Goal 1st": 144.99,
+              "Corner 1st": 149.0,
+              "Corner 2nd": 161.0,
+              "Lateral 2nd": 174.99,
+              "Lateral 1st": 187.99,
+              "Lateral 2nd Central": 200.0,
+              "Lateral 1st Central": 210.0,
+              "Tribuna 2nd": 225.0,
+              "Tribuna 2nd Central": 235.0,
+              "Tribuna 1st": 245.0,
+              "Corner 4th": 270.0,
+              "Corner 3rd": 290.0,
+              "Tribuna 1st Central": 309.81,
+              "Barca VIP Hospitality Silver Package": 400.0,
+              "Lateral 3rd": 400.0,
+              "Goal 3rd": 700.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T19:52:18.434301",
+            "prices": {
+              "Goal 2nd": 118.0,
+              "Goal 1st": 144.99,
+              "Corner 1st": 149.0,
+              "Corner 2nd": 161.0,
+              "Lateral 2nd": 174.99,
+              "Lateral 1st": 187.99,
+              "Lateral 2nd Central": 200.0,
+              "Lateral 1st Central": 210.0,
+              "Tribuna 2nd": 225.0,
+              "Tribuna 2nd Central": 235.0,
+              "Tribuna 1st": 245.0,
+              "Corner 4th": 270.0,
+              "Corner 3rd": 290.0,
+              "Tribuna 1st Central": 309.79,
+              "Barca VIP Hospitality Silver Package": 400.0,
+              "Lateral 3rd": 400.0,
+              "Goal 3rd": 700.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T23:55:34.440301",
+            "prices": {
+              "Goal 2nd": 118.0,
+              "Goal 1st": 144.99,
+              "Corner 1st": 149.0,
+              "Corner 2nd": 161.0,
+              "Lateral 2nd": 174.99,
+              "Lateral 1st": 187.99,
+              "Lateral 2nd Central": 200.0,
+              "Lateral 1st Central": 210.0,
+              "Tribuna 2nd": 225.0,
+              "Tribuna 2nd Central": 235.0,
+              "Tribuna 1st": 245.0,
+              "Corner 4th": 270.0,
+              "Corner 3rd": 290.0,
+              "Tribuna 1st Central": 309.79,
+              "Barca VIP Hospitality Silver Package": 400.0,
+              "Lateral 3rd": 400.0,
+              "Goal 3rd": 700.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T03:53:39.739301",
+            "prices": {
+              "Goal 2nd": 118.0,
+              "Goal 1st": 144.99,
+              "Corner 1st": 149.0,
+              "Corner 2nd": 161.0,
+              "Lateral 2nd": 174.99,
+              "Lateral 1st": 187.99,
+              "Lateral 2nd Central": 200.0,
+              "Lateral 1st Central": 210.0,
+              "Tribuna 2nd": 225.0,
+              "Tribuna 2nd Central": 235.0,
+              "Tribuna 1st": 245.0,
+              "Corner 4th": 270.0,
+              "Corner 3rd": 290.0,
+              "Tribuna 1st Central": 309.79,
+              "Barca VIP Hospitality Silver Package": 400.0,
+              "Lateral 3rd": 400.0,
+              "Goal 3rd": 700.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T07:56:55.875301",
+            "prices": {
+              "Goal 2nd": 118.0,
+              "Goal 1st": 144.99,
+              "Corner 1st": 149.0,
+              "Corner 2nd": 161.0,
+              "Lateral 2nd": 174.99,
+              "Lateral 1st": 187.99,
+              "Lateral 2nd Central": 200.0,
+              "Lateral 1st Central": 210.0,
+              "Tribuna 2nd": 225.0,
+              "Tribuna 2nd Central": 235.0,
+              "Tribuna 1st": 245.0,
+              "Corner 4th": 270.0,
+              "Corner 3rd": 290.0,
+              "Tribuna 1st Central": 309.79,
+              "Barca VIP Hospitality Silver Package": 400.0,
+              "Lateral 3rd": 400.0,
+              "Goal 3rd": 700.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
           }
         ],
         "latest_prices": {
@@ -31076,7 +32118,7 @@
           "Tribuna 1st": 245.0,
           "Corner 4th": 270.0,
           "Corner 3rd": 290.0,
-          "Tribuna 1st Central": 309.81,
+          "Tribuna 1st Central": 309.79,
           "Barca VIP Hospitality Silver Package": 400.0,
           "Lateral 3rd": 400.0,
           "Goal 3rd": 700.0,
@@ -31085,7 +32127,7 @@
           "Tribuna 3rd Central": 1900.0,
           "Tribuna 3rd": 1900.0
         },
-        "last_scraped": "2026-01-06T14:33:07.489301"
+        "last_scraped": "2026-01-07T07:56:55.875301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-levante-ud",
@@ -31584,6 +32626,141 @@
               "Tribuna 3rd Central": 1900.0,
               "Tribuna 3rd": 1900.0
             }
+          },
+          {
+            "timestamp": "2026-01-06T15:52:51.778301",
+            "prices": {
+              "Goal 2nd": 135.0,
+              "Goal 1st": 154.99,
+              "Corner 2nd": 157.99,
+              "Corner 1st": 167.99,
+              "Lateral 2nd": 186.99,
+              "Lateral 1st": 187.99,
+              "Goal 3rd": 200.0,
+              "Lateral 2nd Central": 202.0,
+              "Lateral 1st Central": 240.0,
+              "Corner 4th": 255.0,
+              "Tribuna 2nd": 262.0,
+              "Tribuna 2nd Central": 270.0,
+              "Tribuna 1st": 275.0,
+              "Tribuna 1st Central": 279.99,
+              "Corner 3rd": 280.0,
+              "Barca VIP Hospitality Silver Package": 400.0,
+              "Lateral 3rd": 400.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Barca VIP Hospitality Players Zone": 885.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T19:52:18.434301",
+            "prices": {
+              "Goal 2nd": 135.0,
+              "Goal 1st": 154.99,
+              "Corner 2nd": 157.99,
+              "Corner 1st": 167.99,
+              "Lateral 2nd": 186.99,
+              "Lateral 1st": 187.99,
+              "Goal 3rd": 200.0,
+              "Lateral 2nd Central": 202.0,
+              "Lateral 1st Central": 240.0,
+              "Corner 4th": 255.0,
+              "Tribuna 2nd": 262.0,
+              "Tribuna 2nd Central": 270.0,
+              "Tribuna 1st": 275.0,
+              "Tribuna 1st Central": 279.99,
+              "Corner 3rd": 280.0,
+              "Barca VIP Hospitality Silver Package": 400.0,
+              "Lateral 3rd": 400.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Barca VIP Hospitality Players Zone": 885.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T23:55:34.440301",
+            "prices": {
+              "Goal 2nd": 135.0,
+              "Goal 1st": 154.99,
+              "Corner 2nd": 157.99,
+              "Corner 1st": 167.99,
+              "Lateral 2nd": 186.99,
+              "Lateral 1st": 187.99,
+              "Goal 3rd": 200.0,
+              "Lateral 2nd Central": 202.0,
+              "Lateral 1st Central": 240.0,
+              "Corner 4th": 255.0,
+              "Tribuna 2nd": 262.0,
+              "Tribuna 2nd Central": 270.0,
+              "Tribuna 1st": 275.0,
+              "Tribuna 1st Central": 279.99,
+              "Corner 3rd": 280.0,
+              "Barca VIP Hospitality Silver Package": 400.0,
+              "Lateral 3rd": 400.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Barca VIP Hospitality Players Zone": 885.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T03:53:39.739301",
+            "prices": {
+              "Goal 2nd": 135.0,
+              "Goal 1st": 154.99,
+              "Corner 2nd": 157.99,
+              "Corner 1st": 167.99,
+              "Lateral 2nd": 186.99,
+              "Lateral 1st": 187.99,
+              "Goal 3rd": 200.0,
+              "Lateral 2nd Central": 202.0,
+              "Lateral 1st Central": 240.0,
+              "Corner 4th": 255.0,
+              "Tribuna 2nd": 262.0,
+              "Tribuna 2nd Central": 270.0,
+              "Tribuna 1st": 275.0,
+              "Tribuna 1st Central": 279.99,
+              "Corner 3rd": 280.0,
+              "Barca VIP Hospitality Silver Package": 400.0,
+              "Lateral 3rd": 400.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Barca VIP Hospitality Players Zone": 890.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T07:56:55.875301",
+            "prices": {
+              "Goal 2nd": 135.0,
+              "Goal 1st": 154.99,
+              "Corner 2nd": 157.99,
+              "Corner 1st": 167.99,
+              "Lateral 2nd": 186.99,
+              "Lateral 1st": 187.99,
+              "Goal 3rd": 200.0,
+              "Lateral 2nd Central": 202.0,
+              "Lateral 1st Central": 240.0,
+              "Corner 4th": 255.0,
+              "Tribuna 2nd": 262.0,
+              "Tribuna 2nd Central": 270.0,
+              "Tribuna 1st": 275.0,
+              "Tribuna 1st Central": 279.99,
+              "Corner 3rd": 280.0,
+              "Barca VIP Hospitality Silver Package": 400.0,
+              "Lateral 3rd": 400.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Barca VIP Hospitality Players Zone": 890.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
           }
         ],
         "latest_prices": {
@@ -31606,11 +32783,11 @@
           "Lateral 3rd": 400.0,
           "Goal 4th": 750.0,
           "Lateral 4th": 800.0,
-          "Barca VIP Hospitality Players Zone": 885.0,
+          "Barca VIP Hospitality Players Zone": 890.0,
           "Tribuna 3rd Central": 1900.0,
           "Tribuna 3rd": 1900.0
         },
-        "last_scraped": "2026-01-06T14:33:07.489301"
+        "last_scraped": "2026-01-07T07:56:55.875301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-villarreal-cf",
@@ -32110,6 +33287,141 @@
               "Tribuna 3rd Central": 1900.0,
               "Tribuna 3rd": 1900.0
             }
+          },
+          {
+            "timestamp": "2026-01-06T15:52:51.778301",
+            "prices": {
+              "Goal 1st": 144.99,
+              "Goal 2nd": 148.0,
+              "Corner 2nd": 152.99,
+              "Corner 1st": 164.99,
+              "Lateral 2nd": 174.99,
+              "Lateral 2nd Central": 190.0,
+              "Lateral 1st": 191.99,
+              "Goal 3rd": 205.0,
+              "Lateral 1st Central": 210.0,
+              "Tribuna 2nd": 223.0,
+              "Tribuna 2nd Central": 233.0,
+              "Tribuna 1st": 243.0,
+              "Corner 4th": 275.0,
+              "Corner 3rd": 300.0,
+              "Tribuna 1st Central": 324.98,
+              "Lateral 3rd": 425.0,
+              "Barca VIP Hospitality Silver Package": 500.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Barca VIP Hospitality Players Zone": 1150.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T19:52:18.434301",
+            "prices": {
+              "Goal 1st": 144.99,
+              "Goal 2nd": 148.0,
+              "Corner 2nd": 152.99,
+              "Corner 1st": 164.99,
+              "Lateral 2nd": 174.99,
+              "Lateral 2nd Central": 190.0,
+              "Lateral 1st": 191.99,
+              "Goal 3rd": 205.0,
+              "Lateral 1st Central": 210.0,
+              "Tribuna 2nd": 223.0,
+              "Tribuna 2nd Central": 233.0,
+              "Tribuna 1st": 243.0,
+              "Corner 4th": 275.0,
+              "Corner 3rd": 300.0,
+              "Tribuna 1st Central": 324.95,
+              "Lateral 3rd": 425.0,
+              "Barca VIP Hospitality Silver Package": 500.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Barca VIP Hospitality Players Zone": 1150.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T23:55:34.440301",
+            "prices": {
+              "Goal 1st": 144.99,
+              "Goal 2nd": 148.0,
+              "Corner 2nd": 152.99,
+              "Corner 1st": 164.99,
+              "Lateral 2nd": 174.99,
+              "Lateral 2nd Central": 190.0,
+              "Lateral 1st": 191.99,
+              "Goal 3rd": 205.0,
+              "Lateral 1st Central": 210.0,
+              "Tribuna 2nd": 223.0,
+              "Tribuna 2nd Central": 233.0,
+              "Tribuna 1st": 243.0,
+              "Corner 4th": 275.0,
+              "Corner 3rd": 300.0,
+              "Tribuna 1st Central": 324.95,
+              "Lateral 3rd": 425.0,
+              "Barca VIP Hospitality Silver Package": 500.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Barca VIP Hospitality Players Zone": 1150.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T03:53:39.739301",
+            "prices": {
+              "Goal 1st": 144.99,
+              "Goal 2nd": 148.0,
+              "Corner 2nd": 152.99,
+              "Corner 1st": 164.99,
+              "Lateral 2nd": 174.99,
+              "Lateral 2nd Central": 190.0,
+              "Lateral 1st": 191.99,
+              "Goal 3rd": 205.0,
+              "Lateral 1st Central": 210.0,
+              "Tribuna 2nd": 223.0,
+              "Tribuna 2nd Central": 233.0,
+              "Tribuna 1st": 243.0,
+              "Corner 4th": 275.0,
+              "Corner 3rd": 300.0,
+              "Tribuna 1st Central": 324.95,
+              "Lateral 3rd": 425.0,
+              "Barca VIP Hospitality Silver Package": 500.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Barca VIP Hospitality Players Zone": 1155.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T07:56:55.875301",
+            "prices": {
+              "Goal 1st": 144.99,
+              "Goal 2nd": 148.0,
+              "Corner 2nd": 152.99,
+              "Corner 1st": 164.99,
+              "Lateral 2nd": 174.99,
+              "Lateral 2nd Central": 190.0,
+              "Lateral 1st": 191.99,
+              "Goal 3rd": 205.0,
+              "Lateral 1st Central": 210.0,
+              "Tribuna 2nd": 223.0,
+              "Tribuna 2nd Central": 233.0,
+              "Tribuna 1st": 243.0,
+              "Corner 4th": 275.0,
+              "Corner 3rd": 300.0,
+              "Tribuna 1st Central": 324.95,
+              "Lateral 3rd": 425.0,
+              "Barca VIP Hospitality Silver Package": 500.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Barca VIP Hospitality Players Zone": 1155.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
           }
         ],
         "latest_prices": {
@@ -32127,16 +33439,16 @@
           "Tribuna 1st": 243.0,
           "Corner 4th": 275.0,
           "Corner 3rd": 300.0,
-          "Tribuna 1st Central": 324.98,
+          "Tribuna 1st Central": 324.95,
           "Lateral 3rd": 425.0,
           "Barca VIP Hospitality Silver Package": 500.0,
           "Goal 4th": 750.0,
           "Lateral 4th": 800.0,
-          "Barca VIP Hospitality Players Zone": 1150.0,
+          "Barca VIP Hospitality Players Zone": 1155.0,
           "Tribuna 3rd Central": 1900.0,
           "Tribuna 3rd": 1900.0
         },
-        "last_scraped": "2026-01-06T14:33:07.489301"
+        "last_scraped": "2026-01-07T07:56:55.875301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-sevilla-fc",
@@ -32634,6 +33946,141 @@
               "Tribuna 3rd Central": 1900.0,
               "Tribuna 3rd": 1900.0
             }
+          },
+          {
+            "timestamp": "2026-01-06T15:52:51.778301",
+            "prices": {
+              "Goal 2nd": 140.0,
+              "Goal 1st": 167.0,
+              "Corner 2nd": 174.0,
+              "Corner 1st": 192.99,
+              "Lateral 2nd": 198.0,
+              "Lateral 2nd Central": 217.0,
+              "Lateral 1st": 224.0,
+              "Lateral 1st Central": 243.0,
+              "Tribuna 2nd": 250.0,
+              "Tribuna 2nd Central": 268.0,
+              "Corner 4th": 275.0,
+              "Tribuna 1st": 283.0,
+              "Tribuna 1st Central": 299.99,
+              "Corner 3rd": 300.0,
+              "Lateral 3rd": 425.0,
+              "Barca VIP Hospitality Silver Package": 500.0,
+              "Goal 3rd": 700.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Barca VIP Hospitality Players Zone": 1810.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T19:52:18.434301",
+            "prices": {
+              "Goal 2nd": 140.0,
+              "Goal 1st": 167.0,
+              "Corner 2nd": 174.0,
+              "Corner 1st": 192.99,
+              "Lateral 2nd": 198.0,
+              "Lateral 2nd Central": 217.0,
+              "Lateral 1st": 224.0,
+              "Lateral 1st Central": 243.0,
+              "Tribuna 2nd": 250.0,
+              "Tribuna 2nd Central": 268.0,
+              "Corner 4th": 275.0,
+              "Tribuna 1st": 283.0,
+              "Tribuna 1st Central": 299.99,
+              "Corner 3rd": 300.0,
+              "Lateral 3rd": 425.0,
+              "Barca VIP Hospitality Silver Package": 500.0,
+              "Goal 3rd": 700.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Barca VIP Hospitality Players Zone": 1810.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T23:55:34.440301",
+            "prices": {
+              "Goal 2nd": 140.0,
+              "Goal 1st": 167.0,
+              "Corner 2nd": 174.0,
+              "Corner 1st": 192.99,
+              "Lateral 2nd": 198.0,
+              "Lateral 2nd Central": 217.0,
+              "Lateral 1st": 224.0,
+              "Lateral 1st Central": 243.0,
+              "Tribuna 2nd": 250.0,
+              "Tribuna 2nd Central": 268.0,
+              "Corner 4th": 275.0,
+              "Tribuna 1st": 283.0,
+              "Tribuna 1st Central": 299.99,
+              "Corner 3rd": 300.0,
+              "Lateral 3rd": 425.0,
+              "Barca VIP Hospitality Silver Package": 500.0,
+              "Goal 3rd": 700.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Barca VIP Hospitality Players Zone": 1810.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T03:53:39.739301",
+            "prices": {
+              "Goal 2nd": 140.0,
+              "Goal 1st": 167.0,
+              "Corner 2nd": 174.0,
+              "Corner 1st": 192.99,
+              "Lateral 2nd": 198.0,
+              "Lateral 2nd Central": 217.0,
+              "Lateral 1st": 224.0,
+              "Lateral 1st Central": 243.0,
+              "Tribuna 2nd": 250.0,
+              "Tribuna 2nd Central": 268.0,
+              "Corner 4th": 275.0,
+              "Tribuna 1st": 283.0,
+              "Tribuna 1st Central": 299.99,
+              "Corner 3rd": 300.0,
+              "Lateral 3rd": 425.0,
+              "Barca VIP Hospitality Silver Package": 500.0,
+              "Goal 3rd": 700.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Barca VIP Hospitality Players Zone": 1815.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T07:56:55.875301",
+            "prices": {
+              "Goal 2nd": 140.0,
+              "Goal 1st": 167.0,
+              "Corner 2nd": 174.0,
+              "Corner 1st": 192.99,
+              "Lateral 2nd": 198.0,
+              "Lateral 2nd Central": 217.0,
+              "Lateral 1st": 224.0,
+              "Lateral 1st Central": 243.0,
+              "Tribuna 2nd": 250.0,
+              "Tribuna 2nd Central": 268.0,
+              "Corner 4th": 275.0,
+              "Tribuna 1st": 283.0,
+              "Tribuna 1st Central": 299.99,
+              "Corner 3rd": 300.0,
+              "Lateral 3rd": 425.0,
+              "Barca VIP Hospitality Silver Package": 500.0,
+              "Goal 3rd": 700.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Barca VIP Hospitality Players Zone": 1815.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
           }
         ],
         "latest_prices": {
@@ -32656,11 +34103,11 @@
           "Goal 3rd": 700.0,
           "Goal 4th": 750.0,
           "Lateral 4th": 800.0,
-          "Barca VIP Hospitality Players Zone": 1810.0,
+          "Barca VIP Hospitality Players Zone": 1815.0,
           "Tribuna 3rd Central": 1900.0,
           "Tribuna 3rd": 1900.0
         },
-        "last_scraped": "2026-01-06T14:33:07.489301"
+        "last_scraped": "2026-01-07T07:56:55.875301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-rayo-vallecano",
@@ -33159,6 +34606,141 @@
               "Tribuna 3rd Central": 1900.0,
               "Tribuna 3rd": 1900.0
             }
+          },
+          {
+            "timestamp": "2026-01-06T15:52:51.778301",
+            "prices": {
+              "Goal 2nd": 147.0,
+              "Goal 1st": 154.0,
+              "Corner 2nd": 165.0,
+              "Corner 1st": 172.0,
+              "Lateral 2nd": 180.0,
+              "Lateral 2nd Central": 205.0,
+              "Lateral 1st": 223.99,
+              "Lateral 1st Central": 250.0,
+              "Tribuna 2nd": 268.0,
+              "Corner 4th": 275.0,
+              "Tribuna 2nd Central": 285.0,
+              "Tribuna 1st": 292.99,
+              "Corner 3rd": 300.0,
+              "Tribuna 1st Central": 366.99,
+              "Lateral 3rd": 425.0,
+              "Barca VIP Hospitality Silver Package": 500.0,
+              "Goal 3rd": 700.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Barca VIP Hospitality Players Zone": 1565.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T19:52:18.434301",
+            "prices": {
+              "Goal 2nd": 147.0,
+              "Goal 1st": 154.0,
+              "Corner 2nd": 165.0,
+              "Corner 1st": 172.0,
+              "Lateral 2nd": 180.0,
+              "Lateral 2nd Central": 205.0,
+              "Lateral 1st": 223.99,
+              "Lateral 1st Central": 250.0,
+              "Tribuna 2nd": 268.0,
+              "Corner 4th": 275.0,
+              "Tribuna 2nd Central": 285.0,
+              "Tribuna 1st": 292.99,
+              "Corner 3rd": 300.0,
+              "Tribuna 1st Central": 366.99,
+              "Lateral 3rd": 425.0,
+              "Barca VIP Hospitality Silver Package": 500.0,
+              "Goal 3rd": 700.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Barca VIP Hospitality Players Zone": 1565.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T23:55:34.440301",
+            "prices": {
+              "Goal 2nd": 147.0,
+              "Goal 1st": 154.0,
+              "Corner 2nd": 165.0,
+              "Corner 1st": 172.0,
+              "Lateral 2nd": 180.0,
+              "Lateral 2nd Central": 205.0,
+              "Lateral 1st": 223.99,
+              "Lateral 1st Central": 250.0,
+              "Tribuna 2nd": 268.0,
+              "Corner 4th": 275.0,
+              "Tribuna 2nd Central": 285.0,
+              "Tribuna 1st": 292.99,
+              "Corner 3rd": 300.0,
+              "Tribuna 1st Central": 366.99,
+              "Lateral 3rd": 425.0,
+              "Barca VIP Hospitality Silver Package": 500.0,
+              "Goal 3rd": 700.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Barca VIP Hospitality Players Zone": 1565.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T03:53:39.739301",
+            "prices": {
+              "Goal 2nd": 147.0,
+              "Goal 1st": 154.0,
+              "Corner 2nd": 165.0,
+              "Corner 1st": 172.0,
+              "Lateral 2nd": 180.0,
+              "Lateral 2nd Central": 205.0,
+              "Lateral 1st": 223.99,
+              "Lateral 1st Central": 250.0,
+              "Tribuna 2nd": 268.0,
+              "Corner 4th": 275.0,
+              "Tribuna 2nd Central": 285.0,
+              "Tribuna 1st": 292.99,
+              "Corner 3rd": 300.0,
+              "Tribuna 1st Central": 366.99,
+              "Lateral 3rd": 425.0,
+              "Barca VIP Hospitality Silver Package": 500.0,
+              "Goal 3rd": 700.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Barca VIP Hospitality Players Zone": 1570.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T07:56:55.875301",
+            "prices": {
+              "Goal 2nd": 147.0,
+              "Goal 1st": 154.0,
+              "Corner 2nd": 165.0,
+              "Corner 1st": 172.0,
+              "Lateral 2nd": 180.0,
+              "Lateral 2nd Central": 205.0,
+              "Lateral 1st": 223.99,
+              "Lateral 1st Central": 250.0,
+              "Tribuna 2nd": 268.0,
+              "Corner 4th": 275.0,
+              "Tribuna 2nd Central": 285.0,
+              "Tribuna 1st": 292.99,
+              "Corner 3rd": 300.0,
+              "Tribuna 1st Central": 366.99,
+              "Lateral 3rd": 425.0,
+              "Barca VIP Hospitality Silver Package": 500.0,
+              "Goal 3rd": 700.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Barca VIP Hospitality Players Zone": 1570.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
           }
         ],
         "latest_prices": {
@@ -33181,11 +34763,11 @@
           "Goal 3rd": 700.0,
           "Goal 4th": 750.0,
           "Lateral 4th": 800.0,
-          "Barca VIP Hospitality Players Zone": 1565.0,
+          "Barca VIP Hospitality Players Zone": 1570.0,
           "Tribuna 3rd Central": 1900.0,
           "Tribuna 3rd": 1900.0
         },
-        "last_scraped": "2026-01-06T14:33:07.489301"
+        "last_scraped": "2026-01-07T07:56:55.875301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-rcd-espanyol",
@@ -33684,6 +35266,141 @@
               "Tribuna 3rd": 1900.0,
               "Barca VIP Hospitality Players Zone": 2055.0
             }
+          },
+          {
+            "timestamp": "2026-01-06T15:52:51.778301",
+            "prices": {
+              "Goal 2nd": 183.0,
+              "Goal 1st": 194.0,
+              "Corner 2nd": 207.0,
+              "Corner 1st": 217.0,
+              "Lateral 2nd": 235.0,
+              "Lateral 2nd Central": 255.0,
+              "Corner 4th": 255.0,
+              "Corner 3rd": 275.0,
+              "Lateral 1st": 283.0,
+              "Goal 3rd": 300.0,
+              "Lateral 1st Central": 325.0,
+              "Tribuna 2nd": 340.0,
+              "Tribuna 2nd Central": 360.0,
+              "Tribuna 1st": 378.0,
+              "Tribuna 1st Central": 399.99,
+              "Lateral 3rd": 405.0,
+              "Barca VIP Hospitality Silver Package": 600.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0,
+              "Barca VIP Hospitality Players Zone": 2055.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T19:52:18.434301",
+            "prices": {
+              "Goal 2nd": 183.0,
+              "Goal 1st": 194.0,
+              "Corner 2nd": 207.0,
+              "Corner 1st": 217.0,
+              "Lateral 2nd": 235.0,
+              "Lateral 2nd Central": 255.0,
+              "Corner 4th": 255.0,
+              "Corner 3rd": 275.0,
+              "Lateral 1st": 283.0,
+              "Goal 3rd": 300.0,
+              "Lateral 1st Central": 325.0,
+              "Tribuna 2nd": 340.0,
+              "Tribuna 2nd Central": 360.0,
+              "Tribuna 1st": 378.0,
+              "Tribuna 1st Central": 399.99,
+              "Lateral 3rd": 405.0,
+              "Barca VIP Hospitality Silver Package": 600.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0,
+              "Barca VIP Hospitality Players Zone": 2055.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T23:55:34.440301",
+            "prices": {
+              "Goal 2nd": 183.0,
+              "Goal 1st": 194.0,
+              "Corner 2nd": 207.0,
+              "Corner 1st": 217.0,
+              "Lateral 2nd": 235.0,
+              "Lateral 2nd Central": 255.0,
+              "Corner 4th": 255.0,
+              "Corner 3rd": 275.0,
+              "Lateral 1st": 283.0,
+              "Goal 3rd": 300.0,
+              "Lateral 1st Central": 325.0,
+              "Tribuna 2nd": 340.0,
+              "Tribuna 2nd Central": 360.0,
+              "Tribuna 1st": 378.0,
+              "Tribuna 1st Central": 399.99,
+              "Lateral 3rd": 405.0,
+              "Barca VIP Hospitality Silver Package": 600.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0,
+              "Barca VIP Hospitality Players Zone": 2055.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T03:53:39.739301",
+            "prices": {
+              "Goal 2nd": 183.0,
+              "Goal 1st": 194.0,
+              "Corner 2nd": 207.0,
+              "Corner 1st": 217.0,
+              "Lateral 2nd": 235.0,
+              "Lateral 2nd Central": 255.0,
+              "Corner 4th": 255.0,
+              "Corner 3rd": 275.0,
+              "Lateral 1st": 283.0,
+              "Goal 3rd": 300.0,
+              "Lateral 1st Central": 325.0,
+              "Tribuna 2nd": 340.0,
+              "Tribuna 2nd Central": 360.0,
+              "Tribuna 1st": 378.0,
+              "Tribuna 1st Central": 399.99,
+              "Lateral 3rd": 405.0,
+              "Barca VIP Hospitality Silver Package": 600.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0,
+              "Barca VIP Hospitality Players Zone": 2055.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T07:56:55.875301",
+            "prices": {
+              "Goal 2nd": 183.0,
+              "Goal 1st": 194.0,
+              "Corner 2nd": 207.0,
+              "Corner 1st": 217.0,
+              "Lateral 2nd": 235.0,
+              "Lateral 2nd Central": 255.0,
+              "Corner 4th": 255.0,
+              "Corner 3rd": 275.0,
+              "Lateral 1st": 283.0,
+              "Goal 3rd": 300.0,
+              "Lateral 1st Central": 325.0,
+              "Tribuna 2nd": 340.0,
+              "Tribuna 2nd Central": 360.0,
+              "Tribuna 1st": 378.0,
+              "Tribuna 1st Central": 399.99,
+              "Lateral 3rd": 405.0,
+              "Barca VIP Hospitality Silver Package": 600.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0,
+              "Barca VIP Hospitality Players Zone": 2055.0
+            }
           }
         ],
         "latest_prices": {
@@ -33710,7 +35427,7 @@
           "Tribuna 3rd": 1900.0,
           "Barca VIP Hospitality Players Zone": 2055.0
         },
-        "last_scraped": "2026-01-06T14:33:07.489301"
+        "last_scraped": "2026-01-07T07:56:55.875301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-celta-vigo",
@@ -34208,33 +35925,168 @@
               "Tribuna 3rd Central": 1900.0,
               "Tribuna 3rd": 1900.0
             }
+          },
+          {
+            "timestamp": "2026-01-06T15:52:51.778301",
+            "prices": {
+              "Goal 2nd": 155.0,
+              "Goal 1st": 183.0,
+              "Corner 2nd": 189.0,
+              "Corner 1st": 197.99,
+              "Lateral 2nd": 213.99,
+              "Corner 4th": 265.0,
+              "Lateral 2nd Central": 267.0,
+              "Corner 3rd": 280.0,
+              "Lateral 1st": 309.95,
+              "Lateral 1st Central": 329.99,
+              "Tribuna 1st": 349.99,
+              "Tribuna 2nd": 353.99,
+              "Tribuna 2nd Central": 364.99,
+              "Tribuna 1st Central": 394.99,
+              "Lateral 3rd": 400.0,
+              "Barca VIP Hospitality Silver Package": 500.0,
+              "Goal 3rd": 700.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Barca VIP Hospitality Players Zone": 1780.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T19:52:18.434301",
+            "prices": {
+              "Goal 2nd": 155.0,
+              "Goal 1st": 183.0,
+              "Corner 2nd": 189.0,
+              "Corner 1st": 197.99,
+              "Lateral 2nd": 209.99,
+              "Lateral 2nd Central": 250.0,
+              "Corner 4th": 265.0,
+              "Lateral 1st": 270.0,
+              "Corner 3rd": 280.0,
+              "Lateral 1st Central": 290.0,
+              "Tribuna 2nd": 312.99,
+              "Tribuna 2nd Central": 334.99,
+              "Tribuna 1st": 344.99,
+              "Tribuna 1st Central": 389.99,
+              "Lateral 3rd": 400.0,
+              "Barca VIP Hospitality Silver Package": 500.0,
+              "Goal 3rd": 700.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Barca VIP Hospitality Players Zone": 1780.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T23:55:34.440301",
+            "prices": {
+              "Goal 2nd": 155.0,
+              "Goal 1st": 183.0,
+              "Corner 2nd": 189.0,
+              "Corner 1st": 197.99,
+              "Lateral 2nd": 209.99,
+              "Lateral 2nd Central": 250.0,
+              "Corner 4th": 265.0,
+              "Lateral 1st": 270.0,
+              "Corner 3rd": 280.0,
+              "Lateral 1st Central": 290.0,
+              "Tribuna 2nd": 312.99,
+              "Tribuna 2nd Central": 334.99,
+              "Tribuna 1st": 344.99,
+              "Tribuna 1st Central": 389.99,
+              "Lateral 3rd": 400.0,
+              "Barca VIP Hospitality Silver Package": 500.0,
+              "Goal 3rd": 700.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Barca VIP Hospitality Players Zone": 1780.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T03:53:39.739301",
+            "prices": {
+              "Goal 2nd": 155.0,
+              "Goal 1st": 183.0,
+              "Corner 2nd": 189.0,
+              "Corner 1st": 197.99,
+              "Lateral 2nd": 209.99,
+              "Lateral 2nd Central": 250.0,
+              "Corner 4th": 265.0,
+              "Lateral 1st": 270.0,
+              "Corner 3rd": 280.0,
+              "Lateral 1st Central": 290.0,
+              "Tribuna 2nd": 312.99,
+              "Tribuna 2nd Central": 334.99,
+              "Tribuna 1st": 344.99,
+              "Tribuna 1st Central": 389.99,
+              "Lateral 3rd": 400.0,
+              "Barca VIP Hospitality Silver Package": 500.0,
+              "Goal 3rd": 700.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Barca VIP Hospitality Players Zone": 1785.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T07:56:55.875301",
+            "prices": {
+              "Goal 2nd": 155.0,
+              "Goal 1st": 183.0,
+              "Corner 2nd": 189.0,
+              "Corner 1st": 197.99,
+              "Lateral 2nd": 209.99,
+              "Lateral 2nd Central": 250.0,
+              "Corner 4th": 265.0,
+              "Lateral 1st": 270.0,
+              "Corner 3rd": 280.0,
+              "Lateral 1st Central": 290.0,
+              "Tribuna 2nd": 312.99,
+              "Tribuna 2nd Central": 334.99,
+              "Tribuna 1st": 344.99,
+              "Tribuna 1st Central": 389.99,
+              "Lateral 3rd": 400.0,
+              "Barca VIP Hospitality Silver Package": 500.0,
+              "Goal 3rd": 700.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Barca VIP Hospitality Players Zone": 1785.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0
+            }
           }
         ],
         "latest_prices": {
           "Goal 2nd": 155.0,
           "Goal 1st": 183.0,
           "Corner 2nd": 189.0,
-          "Corner 1st": 189.0,
-          "Lateral 2nd": 246.96,
+          "Corner 1st": 197.99,
+          "Lateral 2nd": 209.99,
+          "Lateral 2nd Central": 250.0,
           "Corner 4th": 265.0,
-          "Lateral 2nd Central": 267.0,
+          "Lateral 1st": 270.0,
           "Corner 3rd": 280.0,
-          "Lateral 1st": 309.95,
-          "Lateral 1st Central": 329.99,
-          "Tribuna 1st": 349.99,
-          "Tribuna 2nd": 353.99,
-          "Tribuna 2nd Central": 364.99,
-          "Tribuna 1st Central": 394.99,
+          "Lateral 1st Central": 290.0,
+          "Tribuna 2nd": 312.99,
+          "Tribuna 2nd Central": 334.99,
+          "Tribuna 1st": 344.99,
+          "Tribuna 1st Central": 389.99,
           "Lateral 3rd": 400.0,
           "Barca VIP Hospitality Silver Package": 500.0,
           "Goal 3rd": 700.0,
           "Goal 4th": 750.0,
           "Lateral 4th": 800.0,
-          "Barca VIP Hospitality Players Zone": 1780.0,
+          "Barca VIP Hospitality Players Zone": 1785.0,
           "Tribuna 3rd Central": 1900.0,
           "Tribuna 3rd": 1900.0
         },
-        "last_scraped": "2026-01-06T14:33:07.489301"
+        "last_scraped": "2026-01-07T07:56:55.875301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-real-madrid",
@@ -34737,6 +36589,141 @@
               "Corner 4th": 2000.0,
               "Barca VIP Hospitality Silver Package": 2500.0
             }
+          },
+          {
+            "timestamp": "2026-01-06T15:52:51.778301",
+            "prices": {
+              "Goal 2nd": 719.1,
+              "Goal 3rd": 850.0,
+              "Goal 1st": 862.0,
+              "Corner 2nd": 979.0,
+              "Best Available": 988.0,
+              "Corner 1st": 988.99,
+              "Corner 3rd": 1150.0,
+              "Lateral 4th": 1220.0,
+              "Lateral 2nd": 1257.0,
+              "Lateral 2nd Central": 1300.0,
+              "Lateral 1st": 1475.0,
+              "Lateral 1st Central": 1590.0,
+              "Lateral 3rd": 1600.0,
+              "Tribuna 2nd": 1663.99,
+              "Tribuna 2nd Central": 1675.0,
+              "Tribuna 1st Central": 1750.0,
+              "Goal 4th": 1750.0,
+              "Tribuna 1st": 1763.99,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0,
+              "Corner 4th": 2000.0,
+              "Barca VIP Hospitality Silver Package": 2500.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T19:52:18.434301",
+            "prices": {
+              "Goal 2nd": 719.1,
+              "Goal 3rd": 850.0,
+              "Goal 1st": 862.0,
+              "Corner 2nd": 979.0,
+              "Best Available": 988.0,
+              "Corner 1st": 988.99,
+              "Corner 3rd": 1150.0,
+              "Lateral 4th": 1220.0,
+              "Lateral 2nd": 1257.0,
+              "Lateral 2nd Central": 1300.0,
+              "Lateral 1st": 1475.0,
+              "Lateral 1st Central": 1590.0,
+              "Lateral 3rd": 1600.0,
+              "Tribuna 2nd": 1663.99,
+              "Tribuna 2nd Central": 1675.0,
+              "Goal 4th": 1750.0,
+              "Tribuna 1st Central": 1750.0,
+              "Tribuna 1st": 1763.99,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0,
+              "Corner 4th": 2000.0,
+              "Barca VIP Hospitality Silver Package": 2500.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T23:55:34.440301",
+            "prices": {
+              "Goal 2nd": 719.1,
+              "Goal 3rd": 850.0,
+              "Goal 1st": 862.0,
+              "Corner 2nd": 979.0,
+              "Best Available": 988.0,
+              "Corner 1st": 988.99,
+              "Corner 3rd": 1150.0,
+              "Lateral 4th": 1220.0,
+              "Lateral 2nd": 1257.0,
+              "Lateral 2nd Central": 1300.0,
+              "Lateral 1st": 1475.0,
+              "Lateral 1st Central": 1590.0,
+              "Lateral 3rd": 1600.0,
+              "Tribuna 2nd": 1663.99,
+              "Tribuna 2nd Central": 1675.0,
+              "Goal 4th": 1750.0,
+              "Tribuna 1st Central": 1750.0,
+              "Tribuna 1st": 1763.99,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0,
+              "Corner 4th": 2000.0,
+              "Barca VIP Hospitality Silver Package": 2500.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T03:53:39.739301",
+            "prices": {
+              "Goal 2nd": 719.1,
+              "Goal 3rd": 850.0,
+              "Goal 1st": 862.0,
+              "Corner 2nd": 979.0,
+              "Best Available": 988.0,
+              "Corner 1st": 988.99,
+              "Corner 3rd": 1150.0,
+              "Lateral 4th": 1220.0,
+              "Lateral 2nd": 1257.0,
+              "Lateral 2nd Central": 1300.0,
+              "Lateral 1st": 1475.0,
+              "Lateral 1st Central": 1590.0,
+              "Lateral 3rd": 1600.0,
+              "Tribuna 2nd": 1663.99,
+              "Tribuna 2nd Central": 1675.0,
+              "Goal 4th": 1750.0,
+              "Tribuna 1st Central": 1750.0,
+              "Tribuna 1st": 1763.99,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0,
+              "Corner 4th": 2000.0,
+              "Barca VIP Hospitality Silver Package": 2500.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T07:56:55.875301",
+            "prices": {
+              "Goal 2nd": 719.1,
+              "Goal 3rd": 850.0,
+              "Goal 1st": 862.0,
+              "Corner 2nd": 979.0,
+              "Best Available": 988.0,
+              "Corner 1st": 988.99,
+              "Corner 3rd": 1150.0,
+              "Lateral 4th": 1220.0,
+              "Lateral 2nd": 1257.0,
+              "Lateral 2nd Central": 1300.0,
+              "Lateral 1st": 1475.0,
+              "Lateral 1st Central": 1590.0,
+              "Lateral 3rd": 1600.0,
+              "Tribuna 2nd": 1663.99,
+              "Tribuna 2nd Central": 1675.0,
+              "Goal 4th": 1750.0,
+              "Tribuna 1st Central": 1750.0,
+              "Tribuna 1st": 1763.99,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0,
+              "Corner 4th": 2000.0,
+              "Barca VIP Hospitality Silver Package": 2500.0
+            }
           }
         ],
         "latest_prices": {
@@ -34755,15 +36742,15 @@
           "Lateral 3rd": 1600.0,
           "Tribuna 2nd": 1663.99,
           "Tribuna 2nd Central": 1675.0,
-          "Tribuna 1st Central": 1750.0,
           "Goal 4th": 1750.0,
+          "Tribuna 1st Central": 1750.0,
           "Tribuna 1st": 1763.99,
           "Tribuna 3rd Central": 1900.0,
           "Tribuna 3rd": 1900.0,
           "Corner 4th": 2000.0,
           "Barca VIP Hospitality Silver Package": 2500.0
         },
-        "last_scraped": "2026-01-06T14:33:07.489301"
+        "last_scraped": "2026-01-07T07:56:55.875301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-real-betis",
@@ -35258,6 +37245,141 @@
               "Tribuna 3rd": 1900.0,
               "Barca VIP Hospitality Players Zone": 4145.0
             }
+          },
+          {
+            "timestamp": "2026-01-06T15:52:51.778301",
+            "prices": {
+              "Goal 2nd": 236.99,
+              "Corner 2nd": 242.99,
+              "Goal 1st": 255.99,
+              "Corner 4th": 275.0,
+              "Corner 1st": 287.99,
+              "Corner 3rd": 300.0,
+              "Lateral 2nd": 337.99,
+              "Lateral 2nd Central": 349.0,
+              "Lateral 1st": 357.99,
+              "Lateral 1st Central": 377.99,
+              "Tribuna 2nd": 393.99,
+              "Tribuna 2nd Central": 403.99,
+              "Tribuna 1st": 418.99,
+              "Lateral 3rd": 425.0,
+              "Tribuna 1st Central": 477.99,
+              "Barca VIP Hospitality Silver Package": 600.0,
+              "Goal 3rd": 700.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0,
+              "Barca VIP Hospitality Players Zone": 4145.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T19:52:18.434301",
+            "prices": {
+              "Goal 2nd": 236.99,
+              "Corner 2nd": 242.99,
+              "Goal 1st": 255.99,
+              "Corner 4th": 275.0,
+              "Corner 1st": 287.99,
+              "Corner 3rd": 300.0,
+              "Lateral 2nd": 337.99,
+              "Lateral 2nd Central": 349.0,
+              "Lateral 1st": 357.99,
+              "Lateral 1st Central": 377.99,
+              "Tribuna 2nd": 393.99,
+              "Tribuna 2nd Central": 403.99,
+              "Tribuna 1st": 418.99,
+              "Lateral 3rd": 425.0,
+              "Tribuna 1st Central": 477.99,
+              "Barca VIP Hospitality Silver Package": 600.0,
+              "Goal 3rd": 700.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0,
+              "Barca VIP Hospitality Players Zone": 4145.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T23:55:34.440301",
+            "prices": {
+              "Goal 2nd": 236.99,
+              "Corner 2nd": 242.99,
+              "Goal 1st": 255.99,
+              "Corner 4th": 275.0,
+              "Corner 1st": 287.99,
+              "Corner 3rd": 300.0,
+              "Lateral 2nd": 337.99,
+              "Lateral 2nd Central": 349.0,
+              "Lateral 1st": 357.99,
+              "Lateral 1st Central": 377.99,
+              "Tribuna 2nd": 393.99,
+              "Tribuna 2nd Central": 403.99,
+              "Tribuna 1st": 418.99,
+              "Lateral 3rd": 425.0,
+              "Tribuna 1st Central": 477.99,
+              "Barca VIP Hospitality Silver Package": 600.0,
+              "Goal 3rd": 700.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0,
+              "Barca VIP Hospitality Players Zone": 4145.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T03:53:39.739301",
+            "prices": {
+              "Goal 2nd": 236.99,
+              "Corner 2nd": 242.99,
+              "Goal 1st": 255.99,
+              "Corner 4th": 275.0,
+              "Corner 1st": 287.99,
+              "Corner 3rd": 300.0,
+              "Lateral 2nd": 337.99,
+              "Lateral 2nd Central": 349.0,
+              "Lateral 1st": 357.99,
+              "Lateral 1st Central": 377.99,
+              "Tribuna 2nd": 393.99,
+              "Tribuna 2nd Central": 403.99,
+              "Tribuna 1st": 418.99,
+              "Lateral 3rd": 425.0,
+              "Tribuna 1st Central": 477.99,
+              "Barca VIP Hospitality Silver Package": 600.0,
+              "Goal 3rd": 700.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0,
+              "Barca VIP Hospitality Players Zone": 4155.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T07:56:55.875301",
+            "prices": {
+              "Goal 2nd": 236.99,
+              "Corner 2nd": 242.99,
+              "Goal 1st": 255.99,
+              "Corner 4th": 275.0,
+              "Corner 1st": 287.99,
+              "Corner 3rd": 300.0,
+              "Lateral 2nd": 337.99,
+              "Lateral 2nd Central": 349.0,
+              "Lateral 1st": 357.99,
+              "Lateral 1st Central": 377.99,
+              "Tribuna 2nd": 393.99,
+              "Tribuna 2nd Central": 403.99,
+              "Tribuna 1st": 418.99,
+              "Lateral 3rd": 425.0,
+              "Tribuna 1st Central": 477.99,
+              "Barca VIP Hospitality Silver Package": 600.0,
+              "Goal 3rd": 700.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Tribuna 3rd": 1900.0,
+              "Barca VIP Hospitality Players Zone": 4155.0
+            }
           }
         ],
         "latest_prices": {
@@ -35282,12 +37404,12 @@
           "Lateral 4th": 800.0,
           "Tribuna 3rd Central": 1900.0,
           "Tribuna 3rd": 1900.0,
-          "Barca VIP Hospitality Players Zone": 4145.0
+          "Barca VIP Hospitality Players Zone": 4155.0
         },
-        "last_scraped": "2026-01-06T14:33:07.489301"
+        "last_scraped": "2026-01-07T07:56:55.875301"
       }
     ],
-    "last_updated": "2026-01-06T14:33:07.489301"
+    "last_updated": "2026-01-07T07:56:55.875301"
   },
   "real-madrid": {
     "team_name": "Real Madrid",
@@ -36632,15 +38754,60 @@
               "Category 2": 171.0,
               "Category 1": 199.98
             }
+          },
+          {
+            "timestamp": "2026-01-06T16:10:16.280301",
+            "prices": {
+              "Category 4": 121.0,
+              "Category 3": 145.0,
+              "Category 2": 148.0,
+              "Category 1": 190.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T20:10:59.351608",
+            "prices": {
+              "Category 4": 121.0,
+              "Category 3": 141.0,
+              "Category 2": 146.0,
+              "Category 1": 188.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T00:15:19.150301",
+            "prices": {
+              "Category 4": 121.2,
+              "Category 3": 141.0,
+              "Category 2": 145.0,
+              "Category 1": 187.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T04:13:26.237301",
+            "prices": {
+              "Category 4": 121.2,
+              "Category 3": 141.0,
+              "Category 2": 145.0,
+              "Category 1": 187.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T08:14:28.020301",
+            "prices": {
+              "Category 4": 121.2,
+              "Category 3": 141.0,
+              "Category 2": 145.0,
+              "Category 1": 187.0
+            }
           }
         ],
         "latest_prices": {
-          "Category 4": 154.0,
-          "Category 3": 160.0,
-          "Category 2": 171.0,
-          "Category 1": 199.98
+          "Category 4": 121.2,
+          "Category 3": 141.0,
+          "Category 2": 145.0,
+          "Category 1": 187.0
         },
-        "last_scraped": "2026-01-06T14:52:06.732301"
+        "last_scraped": "2026-01-07T08:14:28.020301"
       },
       {
         "url": "https://www.footballticketnet.com/champions-league/real-madrid-vs-as-monaco",
@@ -37367,15 +39534,60 @@
               "Category 2": 206.99,
               "Category 1": 271.98
             }
+          },
+          {
+            "timestamp": "2026-01-06T16:10:16.280301",
+            "prices": {
+              "Category 4": 156.0,
+              "Category 3": 175.99,
+              "Category 2": 187.0,
+              "Category 1": 211.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T20:10:59.351608",
+            "prices": {
+              "Category 4": 156.0,
+              "Category 3": 175.99,
+              "Category 2": 186.99,
+              "Category 1": 211.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T00:15:19.150301",
+            "prices": {
+              "Category 4": 155.0,
+              "Category 3": 174.99,
+              "Category 2": 186.0,
+              "Category 1": 210.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T04:13:26.237301",
+            "prices": {
+              "Category 4": 155.0,
+              "Category 3": 174.99,
+              "Category 2": 186.0,
+              "Category 1": 210.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T08:14:28.020301",
+            "prices": {
+              "Category 4": 155.0,
+              "Category 3": 174.99,
+              "Category 2": 186.0,
+              "Category 1": 210.0
+            }
           }
         ],
         "latest_prices": {
-          "Category 4": 192.99,
-          "Category 3": 206.0,
-          "Category 2": 206.99,
-          "Category 1": 271.98
+          "Category 4": 155.0,
+          "Category 3": 174.99,
+          "Category 2": 186.0,
+          "Category 1": 210.0
         },
-        "last_scraped": "2026-01-06T14:52:06.732301"
+        "last_scraped": "2026-01-07T08:14:28.020301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-rayo-vallecano",
@@ -38009,15 +40221,60 @@
               "Category 2": 187.0,
               "Category 1": 243.0
             }
+          },
+          {
+            "timestamp": "2026-01-06T16:10:16.280301",
+            "prices": {
+              "Category 4": 141.0,
+              "Category 3": 154.0,
+              "Category 2": 161.0,
+              "Category 1": 206.99
+            }
+          },
+          {
+            "timestamp": "2026-01-06T20:10:59.351608",
+            "prices": {
+              "Category 4": 141.0,
+              "Category 3": 153.99,
+              "Category 2": 160.99,
+              "Category 1": 206.99
+            }
+          },
+          {
+            "timestamp": "2026-01-07T00:15:19.150301",
+            "prices": {
+              "Category 4": 141.0,
+              "Category 3": 153.99,
+              "Category 2": 160.99,
+              "Category 1": 206.99
+            }
+          },
+          {
+            "timestamp": "2026-01-07T04:13:26.237301",
+            "prices": {
+              "Category 4": 141.0,
+              "Category 3": 153.99,
+              "Category 2": 160.99,
+              "Category 1": 206.99
+            }
+          },
+          {
+            "timestamp": "2026-01-07T08:14:28.020301",
+            "prices": {
+              "Category 4": 141.0,
+              "Category 3": 153.99,
+              "Category 2": 160.99,
+              "Category 1": 206.99
+            }
           }
         ],
         "latest_prices": {
-          "Category 4": 173.0,
-          "Category 3": 178.95,
-          "Category 2": 187.0,
-          "Category 1": 243.0
+          "Category 4": 141.0,
+          "Category 3": 153.99,
+          "Category 2": 160.99,
+          "Category 1": 206.99
         },
-        "last_scraped": "2026-01-06T14:52:06.732301"
+        "last_scraped": "2026-01-07T08:14:28.020301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-real-sociedad",
@@ -38646,16 +40903,66 @@
               "Category 1": 265.0,
               "Real Madrid VIP Hospitality Package": 590.0
             }
+          },
+          {
+            "timestamp": "2026-01-06T16:10:16.280301",
+            "prices": {
+              "Category 4": 143.0,
+              "Category 3": 162.0,
+              "Category 2": 178.0,
+              "Category 1": 211.0,
+              "Real Madrid VIP Hospitality Package": 590.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T20:10:59.351608",
+            "prices": {
+              "Category 4": 143.0,
+              "Category 3": 162.0,
+              "Category 2": 178.0,
+              "Category 1": 211.0,
+              "Real Madrid VIP Hospitality Package": 590.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T00:15:19.150301",
+            "prices": {
+              "Category 4": 143.0,
+              "Category 3": 162.0,
+              "Category 2": 178.0,
+              "Category 1": 211.0,
+              "Real Madrid VIP Hospitality Package": 590.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T04:13:26.237301",
+            "prices": {
+              "Category 4": 143.0,
+              "Category 3": 162.0,
+              "Category 2": 178.0,
+              "Category 1": 211.0,
+              "Real Madrid VIP Hospitality Package": 590.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T08:14:28.020301",
+            "prices": {
+              "Category 4": 143.0,
+              "Category 3": 162.0,
+              "Category 2": 178.0,
+              "Category 1": 211.0,
+              "Real Madrid VIP Hospitality Package": 590.0
+            }
           }
         ],
         "latest_prices": {
-          "Category 4": 214.0,
-          "Category 3": 219.99,
-          "Category 2": 235.95,
-          "Category 1": 265.0,
+          "Category 4": 143.0,
+          "Category 3": 162.0,
+          "Category 2": 178.0,
+          "Category 1": 211.0,
           "Real Madrid VIP Hospitality Package": 590.0
         },
-        "last_scraped": "2026-01-06T14:52:06.732301"
+        "last_scraped": "2026-01-07T08:14:28.020301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-getafe-cf",
@@ -39247,15 +41554,60 @@
               "Category 2": 214.0,
               "Category 1": 269.0
             }
+          },
+          {
+            "timestamp": "2026-01-06T16:10:16.280301",
+            "prices": {
+              "Category 4": 144.0,
+              "Category 3": 165.99,
+              "Category 2": 170.0,
+              "Category 1": 214.99
+            }
+          },
+          {
+            "timestamp": "2026-01-06T20:10:59.351608",
+            "prices": {
+              "Category 4": 144.0,
+              "Category 3": 165.99,
+              "Category 2": 169.99,
+              "Category 1": 214.99
+            }
+          },
+          {
+            "timestamp": "2026-01-07T00:15:19.150301",
+            "prices": {
+              "Category 4": 144.0,
+              "Category 3": 165.99,
+              "Category 2": 169.99,
+              "Category 1": 214.99
+            }
+          },
+          {
+            "timestamp": "2026-01-07T04:13:26.237301",
+            "prices": {
+              "Category 4": 144.0,
+              "Category 3": 165.99,
+              "Category 2": 169.99,
+              "Category 1": 214.99
+            }
+          },
+          {
+            "timestamp": "2026-01-07T08:14:28.020301",
+            "prices": {
+              "Category 4": 144.0,
+              "Category 3": 165.99,
+              "Category 2": 169.99,
+              "Category 1": 214.99
+            }
           }
         ],
         "latest_prices": {
-          "Category 4": 185.0,
-          "Category 3": 203.99,
-          "Category 2": 214.0,
-          "Category 1": 269.0
+          "Category 4": 144.0,
+          "Category 3": 165.99,
+          "Category 2": 169.99,
+          "Category 1": 214.99
         },
-        "last_scraped": "2026-01-06T14:52:06.732301"
+        "last_scraped": "2026-01-07T08:14:28.020301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-elche",
@@ -39841,15 +42193,60 @@
               "Category 2": 210.98,
               "Category 1": 255.0
             }
+          },
+          {
+            "timestamp": "2026-01-06T16:10:16.280301",
+            "prices": {
+              "Category 4": 134.0,
+              "Category 3": 166.0,
+              "Category 2": 174.0,
+              "Category 1": 216.99
+            }
+          },
+          {
+            "timestamp": "2026-01-06T20:10:59.351608",
+            "prices": {
+              "Category 4": 134.0,
+              "Category 3": 166.0,
+              "Category 2": 174.0,
+              "Category 1": 216.99
+            }
+          },
+          {
+            "timestamp": "2026-01-07T00:15:19.150301",
+            "prices": {
+              "Category 4": 134.0,
+              "Category 3": 166.0,
+              "Category 2": 174.0,
+              "Category 1": 216.99
+            }
+          },
+          {
+            "timestamp": "2026-01-07T04:13:26.237301",
+            "prices": {
+              "Category 4": 134.0,
+              "Category 3": 166.0,
+              "Category 2": 174.0,
+              "Category 1": 216.99
+            }
+          },
+          {
+            "timestamp": "2026-01-07T08:14:28.020301",
+            "prices": {
+              "Category 4": 134.0,
+              "Category 3": 166.0,
+              "Category 2": 174.0,
+              "Category 1": 216.99
+            }
           }
         ],
         "latest_prices": {
-          "Category 4": 185.0,
-          "Category 3": 202.98,
-          "Category 2": 210.98,
-          "Category 1": 255.0
+          "Category 4": 134.0,
+          "Category 3": 166.0,
+          "Category 2": 174.0,
+          "Category 1": 216.99
         },
-        "last_scraped": "2026-01-06T14:52:06.732301"
+        "last_scraped": "2026-01-07T08:14:28.020301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-atletico-madrid",
@@ -40686,16 +43083,66 @@
               "Category 1": 485.0,
               "Real Madrid VIP Hospitality Package": 2000.0
             }
+          },
+          {
+            "timestamp": "2026-01-06T16:10:16.280301",
+            "prices": {
+              "Category 4": 336.0,
+              "Category 3": 406.0,
+              "Category 2": 425.0,
+              "Category 1": 448.0,
+              "Real Madrid VIP Hospitality Package": 2000.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T20:10:59.351608",
+            "prices": {
+              "Category 4": 336.0,
+              "Category 3": 406.0,
+              "Category 2": 425.0,
+              "Category 1": 448.0,
+              "Real Madrid VIP Hospitality Package": 2000.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T00:15:19.150301",
+            "prices": {
+              "Category 4": 336.0,
+              "Category 3": 406.0,
+              "Category 2": 425.0,
+              "Category 1": 448.0,
+              "Real Madrid VIP Hospitality Package": 2000.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T04:13:26.237301",
+            "prices": {
+              "Category 4": 336.0,
+              "Category 3": 406.0,
+              "Category 2": 425.0,
+              "Category 1": 448.0,
+              "Real Madrid VIP Hospitality Package": 2000.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T08:14:28.020301",
+            "prices": {
+              "Category 4": 336.0,
+              "Category 3": 406.0,
+              "Category 2": 425.0,
+              "Category 1": 448.0,
+              "Real Madrid VIP Hospitality Package": 2000.0
+            }
           }
         ],
         "latest_prices": {
-          "Category 4": 354.0,
-          "Category 3": 418.0,
-          "Category 2": 453.0,
-          "Category 1": 485.0,
+          "Category 4": 336.0,
+          "Category 3": 406.0,
+          "Category 2": 425.0,
+          "Category 1": 448.0,
           "Real Madrid VIP Hospitality Package": 2000.0
         },
-        "last_scraped": "2026-01-06T14:52:06.732301"
+        "last_scraped": "2026-01-07T08:14:28.020301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-girona",
@@ -41456,15 +43903,60 @@
               "Category 2": 215.0,
               "Category 1": 279.98
             }
+          },
+          {
+            "timestamp": "2026-01-06T16:10:16.280301",
+            "prices": {
+              "Category 4": 150.0,
+              "Category 3": 179.99,
+              "Category 2": 193.0,
+              "Category 1": 221.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T20:10:59.351608",
+            "prices": {
+              "Category 4": 150.0,
+              "Category 3": 179.99,
+              "Category 2": 193.0,
+              "Category 1": 221.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T00:15:19.150301",
+            "prices": {
+              "Category 4": 150.0,
+              "Category 3": 179.99,
+              "Category 2": 193.0,
+              "Category 1": 221.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T04:13:26.237301",
+            "prices": {
+              "Category 4": 150.0,
+              "Category 3": 179.99,
+              "Category 2": 193.0,
+              "Category 1": 221.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T08:14:28.020301",
+            "prices": {
+              "Category 4": 150.0,
+              "Category 3": 179.99,
+              "Category 2": 193.0,
+              "Category 1": 221.0
+            }
           }
         ],
         "latest_prices": {
-          "Category 4": 174.0,
-          "Category 3": 190.0,
-          "Category 2": 215.0,
-          "Category 1": 279.98
+          "Category 4": 150.0,
+          "Category 3": 179.99,
+          "Category 2": 193.0,
+          "Category 1": 221.0
         },
-        "last_scraped": "2026-01-06T14:52:06.732301"
+        "last_scraped": "2026-01-07T08:14:28.020301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-deportivo-alaves",
@@ -42314,15 +44806,60 @@
               "Category 2": 238.0,
               "Category 1": 279.99
             }
+          },
+          {
+            "timestamp": "2026-01-06T16:10:16.280301",
+            "prices": {
+              "Category 4": 135.0,
+              "Category 3": 170.0,
+              "Category 2": 174.0,
+              "Category 1": 227.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T20:10:59.351608",
+            "prices": {
+              "Category 4": 135.0,
+              "Category 3": 170.0,
+              "Category 2": 174.0,
+              "Category 1": 227.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T00:15:19.150301",
+            "prices": {
+              "Category 4": 135.0,
+              "Category 3": 170.0,
+              "Category 2": 174.0,
+              "Category 1": 227.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T04:13:26.237301",
+            "prices": {
+              "Category 4": 135.0,
+              "Category 3": 170.0,
+              "Category 2": 174.0,
+              "Category 1": 227.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T08:14:28.020301",
+            "prices": {
+              "Category 4": 135.0,
+              "Category 3": 170.0,
+              "Category 2": 174.0,
+              "Category 1": 227.0
+            }
           }
         ],
         "latest_prices": {
-          "Category 4": 173.0,
-          "Category 3": 234.95,
-          "Category 2": 238.0,
-          "Category 1": 279.99
+          "Category 4": 135.0,
+          "Category 3": 170.0,
+          "Category 2": 174.0,
+          "Category 1": 227.0
         },
-        "last_scraped": "2026-01-06T14:52:06.732301"
+        "last_scraped": "2026-01-07T08:14:28.020301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-real-oviedo",
@@ -43098,15 +45635,60 @@
               "Category 2": 215.0,
               "Category 1": 289.99
             }
+          },
+          {
+            "timestamp": "2026-01-06T16:10:16.280301",
+            "prices": {
+              "Category 4": 138.0,
+              "Category 3": 179.99,
+              "Category 2": 185.0,
+              "Category 1": 230.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T20:10:59.351608",
+            "prices": {
+              "Category 4": 138.0,
+              "Category 3": 179.99,
+              "Category 2": 185.0,
+              "Category 1": 230.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T00:15:19.150301",
+            "prices": {
+              "Category 4": 138.0,
+              "Category 3": 179.99,
+              "Category 2": 185.0,
+              "Category 1": 230.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T04:13:26.237301",
+            "prices": {
+              "Category 4": 138.0,
+              "Category 3": 179.99,
+              "Category 2": 185.0,
+              "Category 1": 230.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T08:14:28.020301",
+            "prices": {
+              "Category 4": 138.0,
+              "Category 3": 179.99,
+              "Category 2": 185.0,
+              "Category 1": 230.0
+            }
           }
         ],
         "latest_prices": {
-          "Category 4": 157.0,
-          "Category 3": 194.99,
-          "Category 2": 215.0,
-          "Category 1": 289.99
+          "Category 4": 138.0,
+          "Category 3": 179.99,
+          "Category 2": 185.0,
+          "Category 1": 230.0
         },
-        "last_scraped": "2026-01-06T14:52:06.732301"
+        "last_scraped": "2026-01-07T08:14:28.020301"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-athletic-bilbao",
@@ -43914,17 +46496,62 @@
               "Category 2": 341.0,
               "Category 1": 389.99
             }
+          },
+          {
+            "timestamp": "2026-01-06T16:10:16.280301",
+            "prices": {
+              "Category 4": 191.0,
+              "Category 3": 218.0,
+              "Category 2": 231.0,
+              "Category 1": 309.0
+            }
+          },
+          {
+            "timestamp": "2026-01-06T20:10:59.351608",
+            "prices": {
+              "Category 4": 191.0,
+              "Category 3": 218.0,
+              "Category 2": 231.0,
+              "Category 1": 309.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T00:15:19.150301",
+            "prices": {
+              "Category 4": 191.0,
+              "Category 3": 218.0,
+              "Category 2": 231.0,
+              "Category 1": 309.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T04:13:26.237301",
+            "prices": {
+              "Category 4": 191.0,
+              "Category 3": 218.0,
+              "Category 2": 231.0,
+              "Category 1": 309.0
+            }
+          },
+          {
+            "timestamp": "2026-01-07T08:14:28.020301",
+            "prices": {
+              "Category 4": 191.0,
+              "Category 3": 218.0,
+              "Category 2": 231.0,
+              "Category 1": 309.0
+            }
           }
         ],
         "latest_prices": {
-          "Category 4": 217.0,
-          "Category 3": 316.99,
-          "Category 2": 341.0,
-          "Category 1": 389.99
+          "Category 4": 191.0,
+          "Category 3": 218.0,
+          "Category 2": 231.0,
+          "Category 1": 309.0
         },
-        "last_scraped": "2026-01-06T14:52:06.732301"
+        "last_scraped": "2026-01-07T08:14:28.020301"
       }
     ],
-    "last_updated": "2026-01-06T14:52:06.732301"
+    "last_updated": "2026-01-07T08:14:28.020301"
   }
 }
