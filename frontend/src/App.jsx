@@ -36,17 +36,17 @@ function App() {
 
   useEffect(() => {
     fetchMatches()
-    const interval = setInterval(fetchMatches, 120000)
-    return () => clearInterval(interval)
+    // const interval = setInterval(fetchMatches, 120000)
+    // return () => clearInterval(interval)
   }, [])
 
   useEffect(() => {
     if (selectedMatch) {
       fetchHistory(selectedMatch.match_url)
-      const historyInterval = setInterval(() => {
-        fetchHistory(selectedMatch.match_url)
-      }, 120000)
-      return () => clearInterval(historyInterval)
+      // const historyInterval = setInterval(() => {
+      //   fetchHistory(selectedMatch.match_url)
+      // }, 120000)
+      // return () => clearInterval(historyInterval)
     }
   }, [selectedMatch])
 
@@ -283,7 +283,7 @@ function App() {
             <div className='header'>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
                 <h1 style={{ margin: 0 }}>{selectedMatch.match_name}</h1>
-                <span className='last-updated'>Auto-refresh: 10m</span>
+                <span className='last-updated'>Auto-refresh: Disabled</span>
               </div>
 
               <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
