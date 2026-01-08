@@ -252,6 +252,77 @@ def parse_with_gemini(text: str, api_key: str) -> Optional[Dict[str, Any]]:
         print(f"Gemini parsing failed: {e}")
         return None
 
+def interpret_search_query(query: str, api_key: str) -> Optional[Dict[str, Any]]:
+    """
+    Use Gemini to convert natural language search query into structured filter params.
+    """
+    try:
+        genai.configure(api_key=api_key)
+        
+        # Same candidates as parse_with_gemini
+        candidate_models = [
+            'models/gemini-flash-latest', 
+            'models/gemini-1.5-flash',
+            'gemini-1.5-flash',
+            'gemini-2.0-flash-exp',
+            'models/gemini-2.0-flash-exp',
+            'models/gemini-2.0-flash-001',
+            'models/gemini-pro-latest',
+            'models/gemini-exp-1206',
+            'gemini-1.5-pro'
+        ]
+        
+        prompt = f"""
+        You are a search query interpreter for a World Cup ticket system.
+        Convert the following natural language query into a JSON object representing search filters.
+        
+        Fields available:
+        - match: int (match number)
+        - category: str (e.g. "1", "2")
+        - min_price: float
+        - max_price: float
+        - min_quantity: int
+        - seller: str (seller name)
+        - sort_by: str (options: 'price_asc' (for cheapest/lowest), 'price_desc', 'date_desc' (newest), 'date_asc')
+        - limit: int (default 50)
+        
+        Query: "{query}"
+        
+        Rules:
+        1. Return ONLY valid JSON.
+        2. If "lowest price" or "cheapest" is asked, set sort_by='price_asc'.
+        3. If specific match (e.g. "match 4", "m4") is found, extract it.
+        4. If no clear filter found for a field, omit it.
+        """
+        
+        response = None
+        last_error = None
+        
+        for m_name in candidate_models:
+            try:
+                active_model = genai.GenerativeModel(m_name)
+                response = active_model.generate_content(prompt)
+                break
+            except Exception as e:
+                print(f"   [Gemini Search] Failed {m_name}: {e}", flush=True)
+                last_error = e
+                continue
+                
+        if not response:
+             raise last_error or Exception("No search models worked")
+        
+        text = response.text.strip()
+        
+        # Clean markdown
+        if text.startswith('```json'): text = text[7:]
+        if text.startswith('```'): text = text[3:]
+        if text.endswith('```'): text = text[:-3]
+        
+        return json.loads(text.strip())
+    except Exception as e:
+        print(f"Gemini search interpretation failed: {e}")
+        return None
+
 def parse_ticket_message(raw: str, api_key: str = None) -> Dict[str, Any]:
     """
     Parse raw WhatsApp-style message into structured data.

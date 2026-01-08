@@ -32,10 +32,14 @@ TEAMS_DATA_FILE = 'ftn_teams_data.json'
 # Railway sets PORT dynamically - use whatever Railway provides
 # Railway will set PORT environment variable automatically
 # Railway will set PORT environment variable automatically
+from dotenv import load_dotenv
+load_dotenv()
+
 PORT = int(os.environ.get('PORT', '8000'))  # Railway always sets PORT, but keep default for local dev
 
 # Gemini API Key (User Provided)
-os.environ['GEMINI_API_KEY'] = 'AIzaSyCkHdlgylSHKQsj_L7ckQE5uQhXazXYkT4'
+# Gemini API Key (User Provided)
+# os.environ['GEMINI_API_KEY'] = '...' # Key removed for security. Please set GEMINI_API_KEY env var.
 
 # ==========================================
 # FastAPI App
@@ -509,13 +513,16 @@ from tickets_storage import (
     save_offer, get_offer_by_id, load_offers_from_file, rebuild_index,
     load_index, BASE_DIR
 )
-from tickets_parser import parse_ticket_message
+from tickets_parser import parse_ticket_message, interpret_search_query
 from pathlib import Path
 from datetime import datetime, timedelta
 
 # Pydantic models for request/response
 class CreateSellerRequest(BaseModel):
     name: str
+
+class AskRequest(BaseModel):
+    query: str
 
 class ParseOfferRequest(BaseModel):
     seller: str
@@ -535,6 +542,60 @@ def get_sellers():
         return sellers_data.get('sellers', [])
     except Exception as e:
         print(f'[ERROR] /api/tickets/sellers: {e}')
+        return []
+
+@app.post('/api/tickets/ask')
+def ask_tickets(request: AskRequest):
+    """Ask AI for tickets (NL Search)"""
+    try:
+        api_key = os.environ.get("GEMINI_API_KEY")
+        if not api_key:
+             raise HTTPException(status_code=500, detail="AI not configured")
+             
+        filters = interpret_search_query(request.query, api_key)
+        if not filters:
+             return []
+             
+        print(f"[INFO] AI Filters: {filters}")
+        
+        # Map filters to search logic
+        offers = _search_offers_logic(
+            match=filters.get('match'),
+            seller=filters.get('seller'),
+            category=filters.get('category'),
+            min_price=filters.get('min_price'),
+            max_price=filters.get('max_price'),
+            min_quantity=filters.get('min_quantity'),
+            max_quantity=None,
+            keyword=filters.get('keyword'),
+            range='all'
+        )
+        
+        # Apply Sorting
+        sort_by = filters.get('sort_by')
+        if sort_by == 'price_asc':
+            def get_min_price(o):
+                 prices = [float(l.get('price', 999999)) for l in o.get('lines', []) if l.get('price')]
+                 return min(prices) if prices else 999999
+            offers.sort(key=get_min_price)
+            
+        elif sort_by == 'price_desc':
+            def get_max_price(o):
+                 prices = [float(l.get('price', 0)) for l in o.get('lines', []) if l.get('price')]
+                 return max(prices) if prices else 0
+            offers.sort(key=get_max_price, reverse=True)
+            
+        elif sort_by == 'date_desc':
+            offers.sort(key=lambda x: x.get('created_at', ''), reverse=True)
+            
+        # Limit
+        limit = filters.get('limit', 50)
+        return offers[:limit]
+        
+    except Exception as e:
+        print(f'[ERROR] /api/tickets/ask: {e}')
+        import traceback
+        traceback.print_exc()
         return []
 
 @app.post('/api/tickets/sellers')
@@ -621,8 +682,17 @@ def search_offers(
 
 def _search_offers_logic(match, seller, category, min_price, max_price, min_quantity, max_quantity, keyword, range):
     try:
+        # Debugging
+        print(f"[SEARCH] Filters: match={match}, seller={seller}, cat={category}, price={min_price}-{max_price}", flush=True)
+        
         index_data = load_index()
-        candidate_ids = set()
+        # Ensure we have valid sets
+        if 'match' not in index_data: index_data['match'] = {}
+        if 'seller' not in index_data: index_data['seller'] = {}
+        if 'category' not in index_data: index_data['category'] = {}
+        if 'offers_by_id' not in index_data: index_data['offers_by_id'] = {}
+
+        candidate_ids = None
         
         # Time range filter
         now = datetime.utcnow()
@@ -633,124 +703,158 @@ def _search_offers_logic(match, seller, category, min_price, max_price, min_quan
         else:
             cutoff = None
         
-        # Use index to narrow candidates
-        if match is not None:
-            match_key = str(match)
-            if match_key in index_data.get('match', {}):
-                candidate_ids.update(index_data['match'][match_key])
+        # --- INDEX FILTERING ---
+        used_index = False
         
+        # Match Filter
+        if match is not None:
+            used_index = True
+            match_key = str(match)
+            # If match key exists, get IDs. If not, we get empty set, which is correct (no results).
+            # But we must initialize candidate_ids.
+            ids = set(index_data['match'].get(match_key, []))
+            if candidate_ids is None:
+                candidate_ids = ids
+            else:
+                candidate_ids &= ids
+
+        # Seller Filter
         if seller:
+            used_index = True
             seller_obj = get_seller_by_name(seller)
             if seller_obj:
                 seller_id = seller_obj['id']
-                if seller_id in index_data.get('seller', {}):
-                    if candidate_ids:
-                        candidate_ids &= set(index_data['seller'][seller_id])
-                    else:
-                        candidate_ids.update(index_data['seller'][seller_id])
-        
-        if category:
-            cat_key = str(category)
-            if cat_key in index_data.get('category', {}):
-                if candidate_ids:
-                    candidate_ids &= set(index_data['category'][cat_key])
+                ids = set(index_data['seller'].get(seller_id, []))
+                if candidate_ids is None:
+                    candidate_ids = ids
                 else:
-                    candidate_ids.update(index_data['category'][cat_key])
+                    candidate_ids &= ids
+            else:
+                # Seller not found -> no results
+                candidate_ids = set()
         
-        # If no index matches, scan all files
+        # Category Filter (Skipping index for fuzzy matching capabilities)
+        
+        # --- FALLBACK ---
+        # If candidate_ids IS NONE, it means no index filters were applied -> Search All.
+        # If candidate_ids IS EMPTY SET (not None), it means index filters returned 0 results.
+        
+        if candidate_ids is None:
+            # Fallback to all indexed offers
+            candidate_ids = set(index_data['offers_by_id'].keys())
+            
+            # If index is empty/broken, try file scan?
+            if not candidate_ids:
+                 offer_files = list(BASE_DIR.glob('offers_*.jsonl'))
+                 for file_path in offer_files:
+                     offers = load_offers_from_file(file_path)
+                     for offer in offers:
+                         candidate_ids.add(offer.get('id'))
+
         if not candidate_ids:
-            offer_files = list(BASE_DIR.glob('offers_*.jsonl'))
-            for file_path in offer_files:
-                offers = load_offers_from_file(file_path)
-                for offer in offers:
-                    candidate_ids.add(offer.get('id'))
-        
-        # Load and filter offers
+             print("[SEARCH] No candidates found.", flush=True)
+             return []
+
+        # --- LOAD & FILTER ---
         results = []
         offers_by_id = index_data.get('offers_by_id', {})
         
-        for offer_id in candidate_ids:
-            if offer_id not in offers_by_id:
-                continue
+        # Group by file to minimize IO
+        file_groups = {}
+        for oid in candidate_ids:
+            if oid in offers_by_id:
+                fname = offers_by_id[oid]['file']
+                if fname not in file_groups: file_groups[fname] = []
+                file_groups[fname].append(oid)
+        
+        print(f"[SEARCH] Scanning {len(file_groups)} files...", flush=True)
+
+        for fname, oids in file_groups.items():
+            file_path = BASE_DIR / fname
+            if not file_path.exists(): continue
             
-            file_name = offers_by_id[offer_id]['file']
-            file_path = BASE_DIR / file_name
-            offers = load_offers_from_file(file_path)
+            file_offers = load_offers_from_file(file_path)
+            target_ids = set(oids)
             
-            for offer in offers:
-                if offer.get('id') != offer_id:
+            for offer in file_offers:
+                if offer.get('id') not in target_ids:
                     continue
                 
-                # Apply filters
+                # Time Check
                 if 'created_at' in offer:
                     created_at = datetime.fromisoformat(offer['created_at'])
                 else:
                     created_at = now
-                    
                 if cutoff and created_at < cutoff:
                     continue
                 
-                # Filter by match (check top-level OR lines)
-                if match is not None:
-                    # Check top level
-                    if offer.get('match') == match:
-                        pass
-                    # Check lines
-                    else:
-                        found_in_lines = False
-                        for line in offer.get('lines', []):
-                            if line.get('match') == match:
-                                found_in_lines = True
-                                break
-                        if not found_in_lines:
-                            continue
-                
-                if seller and offer.get('seller', '').lower() != seller.lower():
+                # Top Level Filters (Seller, Keyword)
+                if seller and str(offer.get('seller', '')).lower() != str(seller).lower():
                     continue
-                
-                # Check category, price, and quantity filters
+                if keyword and keyword.lower() not in offer.get('raw', '').lower():
+                    continue
+
+                # Filter Lines to show specific matches users asked for
                 lines = offer.get('lines', [])
-                matches_category = True
-                matches_price = True
-                matches_quantity = True
+                valid_lines = []
                 
-                if category or min_price is not None or max_price is not None or min_quantity is not None or max_quantity is not None:
-                    matches_category = False
-                    for line in lines:
-                        if category and str(line.get('category')) != str(category):
-                            continue
-                        price = line.get('price', 0)
-                        if min_price is not None and price < min_price:
-                            continue
-                        if max_price is not None and price > max_price:
-                            continue
-                        quantity = line.get('quantity')
-                        if min_quantity is not None and (quantity is None or quantity < min_quantity):
-                            continue
-                        if max_quantity is not None and (quantity is None or quantity > max_quantity):
-                            continue
-                        matches_category = True
-                        matches_price = True
-                        matches_quantity = True
-                        break
+                # Check Global Match
+                global_match_satisfies = False
+                if match is not None:
+                     if str(offer.get('match')) == str(match):
+                         global_match_satisfies = True
                 
-                if not matches_category or not matches_price or not matches_quantity:
+                # Determine filters
+                has_filters = (match is not None or category or min_price is not None or 
+                               max_price is not None or min_quantity is not None or max_quantity is not None)
+                
+                if not has_filters:
+                    results.append(offer)
                     continue
+
+                for line in lines:
+                    # Match Check
+                    if match is not None:
+                        l_match = line.get('match')
+                        o_match = offer.get('match')
+                        # Use line match if present, else fallback to offer match
+                        effective_match = l_match if l_match is not None else o_match
+                        
+                        if effective_match is None or str(effective_match) != str(match):
+                            continue
+                    # Category
+                    if category:
+                        l_cat = str(line.get('category', '')).lower()
+                        t_cat = str(category).lower()
+                        if t_cat not in l_cat and l_cat not in t_cat:
+                            continue
+                    
+                    # Price
+                    price = float(line.get('price', 0))
+                    if min_price is not None and price < min_price: continue
+                    if max_price is not None and price > max_price: continue
+                    
+                    # Qty
+                    qty = line.get('quantity')
+                    if min_quantity is not None and (qty is None or qty < min_quantity): continue
+                    if max_quantity is not None and (qty is None or qty > max_quantity): continue
+                    
+                    valid_lines.append(line)
                 
-                # Keyword search in raw text
-                if keyword:
-                    if keyword.lower() not in offer.get('raw', '').lower():
-                        continue
-                
-                results.append(offer)
-        
-        # Sort by created_at descending
-        results.sort(key=lambda x: x.get('created_at', ''), reverse=True)
-        
+                if valid_lines:
+                    # Return copy with only valid lines
+                    offer_copy = offer.copy()
+                    offer_copy['lines'] = valid_lines
+                    results.append(offer_copy)
+
+        print(f"[SEARCH] Found {len(results)} results.", flush=True)
         return results
+
     except Exception as e:
-        print(f'[ERROR] search_offers_logic: {e}')
-        import traceback
+        print(f'[ERROR] Search Logic: {e}')
+        # import traceback
+        # traceback.print_exc()
+        return []
         traceback.print_exc()
         return []
 

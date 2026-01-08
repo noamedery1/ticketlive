@@ -40,6 +40,27 @@ function TicketOffersManager() {
   const [selectedMatchFilter, setSelectedMatchFilter] = useState(null)
 
 
+  // Ask AI state
+  const [askQuery, setAskQuery] = useState('')
+
+  const handleAskAi = async () => {
+    if (!askQuery.trim()) return
+    setIsSearching(true)
+    setSearchResults([])
+    try {
+      const res = await axios.post(`${API_URL}/api/tickets/ask`, {
+        query: askQuery
+      })
+      setSearchResults(res.data)
+      // Also might interpret filters for UI? Simpler to just show results.
+    } catch (err) {
+      console.error('Error asking AI:', err)
+      showToast('Error asking AI', 'error')
+    } finally {
+      setIsSearching(false)
+    }
+  }
+
   useEffect(() => {
     fetchSellers()
   }, [])
@@ -915,6 +936,31 @@ function TicketOffersManager() {
       {activeTab === 'search' && (
         <div className="tab-content">
           <div className="search-filters">
+            {/* Ask AI Section */}
+            <div style={{ marginBottom: '20px', padding: '15px', background: '#161b22', borderRadius: '8px', border: '1px solid #30363d' }}>
+              <label style={{ display: 'block', marginBottom: '8px', color: '#c9d1d9', fontWeight: 500, fontSize: '0.9rem' }}>
+                ✨ Ask AI to find tickets
+              </label>
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <input
+                  type="text"
+                  value={askQuery}
+                  onChange={(e) => setAskQuery(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleAskAi()}
+                  placeholder="e.g. Lowest price for match 4, or Cat 1 tickets under $500"
+                  style={{ flex: 1, padding: '8px 12px', background: '#0d1117', border: '1px solid #30363d', borderRadius: '6px', color: 'white' }}
+                />
+                <button
+                  onClick={handleAskAi}
+                  className="btn btn-primary"
+                  disabled={isSearching}
+                  style={{ height: 'auto', whiteSpace: 'nowrap' }}
+                >
+                  {isSearching ? 'Thinking...' : 'Ask AI'}
+                </button>
+              </div>
+            </div>
+
             <div className="filter-row">
               <div className="filter-group">
                 <label>Match Number</label>
