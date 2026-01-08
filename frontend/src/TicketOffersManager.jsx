@@ -1305,10 +1305,7 @@ function TicketOffersManager() {
                   </div>
                 )}
 
-                <div className="detail-section">
-                  <strong>Raw Message:</strong>
-                  <pre className="raw-message">{selectedOffer.raw}</pre>
-                </div>
+
               </div>
             )}
 
