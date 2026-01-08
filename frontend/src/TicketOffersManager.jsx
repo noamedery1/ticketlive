@@ -17,6 +17,9 @@ function TicketOffersManager() {
   const [isSaving, setIsSaving] = useState(false)
   const [toast, setToast] = useState(null)
 
+  // Options
+  const [useAI, setUseAI] = useState(true)
+
   // Search state
   const [showSearchSellerSuggestions, setShowSearchSellerSuggestions] = useState(false) // New state for search dropdown
   const [searchFilters, setSearchFilters] = useState({
@@ -101,7 +104,8 @@ function TicketOffersManager() {
     try {
       const res = await axios.post(`${API_URL}/api/tickets/offers/parse`, {
         seller: sellerInput.trim(),
-        raw: rawText
+        raw: rawText,
+        use_ai: useAI
       })
       setParsedData(res.data)
     } catch (err) {
@@ -119,48 +123,30 @@ function TicketOffersManager() {
   // Commission state
   const [commission, setCommission] = useState(20)
 
-  // Update effect to add my_price to editable lines
+  // Update effect to add default my_price to lines (but keep it blank/0 if not set)
   useEffect(() => {
     if (parsedData && parsedData.lines) {
       const linesWithIds = parsedData.lines.map((l, i) => {
-        const price = parseFloat(l.price) || 0
-        // Calculate initial my_price based on default commission
-        const myPrice = price * (1 + (commission / 100))
-
         return {
           ...l,
           _id: i,
           match: l.match || parsedData.match || '',
-          my_price: myPrice
+          // Initialize my_price as empty or 0, user must edit it manually
+          my_price: l.my_price || ''
         }
       })
       setEditableLines(linesWithIds)
       setIsEditable(true)
     }
-  }, [parsedData, commission])
+  }, [parsedData])
 
-  // Recalculate my_price when commission changes
-  const updateCommission = () => {
-    setEditableLines(prev => prev.map(line => {
-      const price = parseFloat(line.price) || 0
-      const myPrice = price * (1 + (commission / 100))
-      return { ...line, my_price: myPrice }
-    }))
-  }
+  // Removed auto-commission calculation effects
 
   // Update my_price when base price changes manually
   const handleLineChange = (id, field, value) => {
     setEditableLines(prev => prev.map(line => {
       if (line._id === id) {
-        const updated = { ...line, [field]: value }
-
-        // If price changed, update my_price automatically
-        if (field === 'price') {
-          const price = parseFloat(value) || 0
-          updated.my_price = price * (1 + (commission / 100))
-        }
-
-        return updated
+        return { ...line, [field]: value }
       }
       return line
     }))
@@ -216,8 +202,7 @@ function TicketOffersManager() {
       const finalParsed = {
         ...parsedData,
         match: topLevelMatch,
-        lines: finalLines,
-        commission_rate: commission // store used commission rate
+        lines: finalLines
       }
 
       await axios.post(`${API_URL}/api/tickets/offers`, {
@@ -395,6 +380,98 @@ function TicketOffersManager() {
   // Wrapper for initial sort
   const sortResults = (results) => {
     return sortList(results, sortConfig.key, sortConfig.direction)
+  }
+
+  /* Export Handler */
+  const handleExport = async () => {
+    try {
+      showToast('Preparing export...', 'info')
+      const params = {}
+      if (searchFilters.match) params.match = parseInt(searchFilters.match)
+      if (searchFilters.seller) params.seller = searchFilters.seller
+      if (searchFilters.category) params.category = searchFilters.category
+      params.range = searchFilters.range
+
+      // Trigger download
+      const queryString = new URLSearchParams(params).toString()
+      window.location.href = `${API_URL}/api/tickets/export?${queryString}`
+
+      // Note: window.location.href is simple but doesn't handle errors gracefully if backend fails JSON response.
+      // But for export it's standard.
+    } catch (err) {
+      console.error('Error exporting:', err)
+      showToast('Error exporting data', 'error')
+    }
+  }
+
+  /* Edit Handlers in Drawer */
+  const updateOfferLinePrice = (lineIndex, newVal) => {
+    if (!selectedOffer) return
+    const val = parseFloat(newVal)
+
+    // We update the specific line in the full lines array
+    const updatedLines = [...selectedOffer.lines]
+    if (updatedLines[lineIndex]) {
+      // We use '_id' logic or just key update
+      // If no _id exists on loaded lines, we assume index is stable for this session
+      // Backend expects lines to have some identifier if possible, but our PUT endpoint 
+      // maps by index if we send all lines, or we need to align.
+      // Let's send index as _id for the backend update map if backend uses it.
+      // Current backend implementation: `updates_map = {str(l.get('_id')): ...}`
+      // BUT loaded offers usually don't have _id unless we add it on load.
+      // Let's ensure we add _id on load or use index assuming stable.
+
+      updatedLines[lineIndex] = {
+        ...updatedLines[lineIndex],
+        my_price: isNaN(val) ? '' : val,
+        // Ensure _id exists for backend mapping
+        _id: updatedLines[lineIndex]._id !== undefined ? updatedLines[lineIndex]._id : lineIndex
+      }
+
+      setSelectedOffer({
+        ...selectedOffer,
+        lines: updatedLines
+      })
+    }
+  }
+
+  const saveOfferChanges = async () => {
+    if (!selectedOffer) return
+    try {
+      // Prepare payload: list of lines with _id and my_price
+      // We must ensure _id matches what backend expects (index)
+      const linesPayload = selectedOffer.lines.map((l, i) => ({
+        _id: l._id !== undefined ? l._id : i,
+        my_price: l.my_price
+      }))
+
+      await axios.put(`${API_URL}/api/tickets/offers/${selectedOffer.id}`, {
+        lines: linesPayload
+      })
+
+      showToast('Offer prices updated!', 'success')
+      // Optionally refresh search results to reflect changes in table
+      handleSearch()
+    } catch (err) {
+      console.error('Error saving changes:', err)
+      showToast('Error saving changes', 'error')
+    }
+  }
+
+  const handleDeleteOffer = async () => {
+    if (!selectedOffer) return
+    if (!confirm('Are you sure you want to delete this offer? This cannot be undone.')) return
+
+    try {
+      await axios.delete(`${API_URL}/api/tickets/offers/${selectedOffer.id}`)
+      showToast('Offer deleted', 'success')
+      setShowDetailDrawer(false)
+      setSelectedOffer(null)
+      handleSearch()
+    } catch (err) {
+      console.error('Error deleting offer:', err)
+      showToast('Error deleting offer', 'error')
+    }
   }
 
   const handleSearch = async () => {
@@ -641,6 +718,18 @@ function TicketOffersManager() {
                 />
                 <div className="char-count">{rawText.length} characters</div>
               </div>
+
+              <div style={{ marginTop: '10px' }}>
+                <label className="checkbox-container" style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', fontSize: '0.9rem' }}>
+                  <input
+                    type="checkbox"
+                    checked={useAI}
+                    onChange={(e) => setUseAI(e.target.checked)}
+                    style={{ marginRight: '8px' }}
+                  />
+                  ✨ Use AI Parsing (Recommended)
+                </label>
+              </div>
             </div>
 
             <div className="form-actions">
@@ -684,37 +773,6 @@ function TicketOffersManager() {
                 <h3>✅ Parse Preview (Editable)</h3>
                 <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
 
-                  <div className="commission-control" style={{ display: 'flex', alignItems: 'center', gap: '8px', background: '#21262d', padding: '4px 8px', borderRadius: '4px', border: '1px solid #30363d' }}>
-                    <label style={{ fontSize: '12px', color: '#8b949e' }}>Commission:</label>
-                    <input
-                      type="number"
-                      min="0"
-                      max="100"
-                      value={commission}
-                      onChange={(e) => {
-                        const val = parseFloat(e.target.value) || 0
-                        setCommission(val)
-                        // We need to update editable lines immediately
-                        setEditableLines(prev => prev.map(line => {
-                          const price = parseFloat(line.price) || 0
-                          return {
-                            ...line,
-                            my_price: price * (1 + (val / 100))
-                          }
-                        }))
-                      }}
-                      style={{
-                        width: '50px',
-                        background: '#0d1117',
-                        border: '1px solid #30363d',
-                        color: '#c9d1d9',
-                        borderRadius: '4px',
-                        padding: '2px 5px'
-                      }}
-                    />
-                    <span style={{ fontSize: '12px', color: '#8b949e' }}>%</span>
-                  </div>
-
                   <span className={`status-badge status-${parsedData.parse_status}`}>
                     {parsedData.parse_status.toUpperCase()}
                   </span>
@@ -746,7 +804,7 @@ function TicketOffersManager() {
                             <th style={{ width: '60px' }}>Qty</th>
                             <th>Category</th>
                             <th>Base Price</th>
-                            <th>My Price ({commission}%)</th>
+                            <th>My Price</th>
                             <th style={{ width: '50px' }}>Curr</th>
                             <th style={{ width: '40px' }}></th>
                           </tr>
@@ -987,14 +1045,25 @@ function TicketOffersManager() {
                   <option value="30d">Last 30 Days</option>
                 </select>
               </div>
-              <div className="filter-group">
+              <div className="filter-group" style={{ display: 'flex', gap: '10px', alignItems: 'flex-end' }}>
                 <button
                   onClick={handleSearch}
                   disabled={isSearching}
                   className="btn btn-primary search-btn"
+                  style={{ flex: 2, height: '38px', justifyContent: 'center' }}
                 >
                   {isSearching ? 'Searching...' : 'Search'}
                 </button>
+                {searchResults.length > 0 && (
+                  <button
+                    onClick={handleExport}
+                    className="btn btn-secondary"
+                    title="Export filtered results to Excel"
+                    style={{ flex: 1, height: '38px', justifyContent: 'center', whiteSpace: 'nowrap' }}
+                  >
+                    📥 Export ({searchResults.length})
+                  </button>
+                )}
               </div>
             </div>
           </div>
@@ -1079,13 +1148,28 @@ function TicketOffersManager() {
             {showDetailDrawer && selectedOffer && (
               <div className="offer-details-container" style={{ marginTop: '20px', borderTop: '1px solid #30363d', paddingTop: '20px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
-                  <h3>Offer Details</h3>
-                  <button
-                    onClick={() => setShowDetailDrawer(false)}
-                    style={{ background: 'none', border: 'none', color: '#8b949e', cursor: 'pointer', fontSize: '1.2em' }}
-                  >
-                    ×
-                  </button>
+                  <h3>Offer Details (Editable)</h3>
+                  <div style={{ display: 'flex', gap: '10px' }}>
+                    <button
+                      onClick={saveOfferChanges}
+                      className="btn btn-success btn-small"
+                    >
+                      💾 Save Changes
+                    </button>
+                    <button
+                      onClick={handleDeleteOffer}
+                      className="btn btn-danger btn-small"
+                      style={{ background: '#d73a49', border: '1px solid #cb2431', color: 'white' }}
+                    >
+                      🗑️ Delete
+                    </button>
+                    <button
+                      onClick={() => setShowDetailDrawer(false)}
+                      style={{ background: 'none', border: 'none', color: '#8b949e', cursor: 'pointer', fontSize: '1.2em' }}
+                    >
+                      ×
+                    </button>
+                  </div>
                 </div>
 
                 {selectedOffer.lines && selectedOffer.lines.length > 0 && (
@@ -1097,28 +1181,40 @@ function TicketOffersManager() {
                           <th>Category</th>
                           <th>Quantity</th>
                           <th>Base Price</th>
-                          <th>My Price</th>
+                          <th style={{ width: '150px' }}>My Price</th>
                           <th>Currency</th>
                         </tr>
                       </thead>
                       <tbody>
                         {selectedOffer.lines
-                          .filter(line => {
-                            if (!selectedMatchFilter || selectedMatchFilter === '-' || selectedMatchFilter === 'Match -') return true
-                            // If selectedMatchFilter is set, show only lines matching it
-                            // Handle loose equality for string/number mismatch
-                            if (!line.match) return false // Hide lines without match if we are filtering for a match
-                            return parseInt(line.match) === parseInt(selectedMatchFilter)
-                          })
-                          .map((line, i) => (
-                            <tr key={i}>
-                              <td>{line.category}</td>
-                              <td>{line.quantity ? `${line.quantity} tickets` : '-'}</td>
-                              <td>{line.price.toFixed(2)}</td>
-                              <td style={{ color: '#56d364', fontWeight: 'bold' }}>{line.my_price ? line.my_price.toFixed(2) : '-'}</td>
-                              <td>{line.currency}</td>
-                            </tr>
-                          ))}
+                          .map((line, i) => {
+                            // Only show relevant lines if filter active
+                            if (selectedMatchFilter && selectedMatchFilter !== '-' && selectedMatchFilter !== 'Match -') {
+                              if (!line.match || parseInt(line.match) !== parseInt(selectedMatchFilter)) return null
+                            }
+
+                            // We need to match the line in the full array index to update state correctly
+                            // Since map might skip, we pass actual index 'i' to handler
+                            return (
+                              <tr key={i}>
+                                <td>{line.category}</td>
+                                <td>{line.quantity ? `${line.quantity} tickets` : '-'}</td>
+                                <td>{line.price.toFixed(2)}</td>
+                                <td>
+                                  <input
+                                    type="number"
+                                    step="0.01"
+                                    value={line.my_price || ''}
+                                    onChange={(e) => updateOfferLinePrice(i, e.target.value)}
+                                    className="edit-input"
+                                    style={{ borderColor: '#56d364', width: '100%' }}
+                                    placeholder="Set Price"
+                                  />
+                                </td>
+                                <td>{line.currency}</td>
+                              </tr>
+                            )
+                          })}
                       </tbody>
                     </table>
                   </div>

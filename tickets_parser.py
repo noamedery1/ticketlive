@@ -134,17 +134,118 @@ def detect_currency(text: str) -> str:
     return 'USD'
 
 
-def parse_ticket_message(raw: str) -> Dict[str, Any]:
+
+import os
+import json
+import google.generativeai as genai
+
+def parse_with_gemini(text: str, api_key: str) -> Optional[Dict[str, Any]]:
     """
-    Parse raw WhatsApp-style message into structured data
-    Supports:
-    1. Single lines with match info: "Match 50 x2 Cat 1..."
-    2. Header-based format:
-       "Match 02"
-       "Cat 1..."
-       "Match 04"
-       "Cat 2..."
+    Parse ticket message using Gemini API
     """
+    try:
+        genai.configure(api_key=api_key)
+        
+        # Try a list of models, starting with experimental/flash ones that seem available
+        # Including 'models/' prefix as returned by list_models()
+        candidate_models = [
+            'models/gemini-flash-latest', # Working reliably
+            'models/gemini-1.5-flash',
+            'gemini-1.5-flash',
+            'gemini-2.0-flash-exp', # Rate limited often
+            'models/gemini-2.0-flash-exp',
+            'models/gemini-2.0-flash-001',
+            'models/gemini-pro-latest',
+            'models/gemini-exp-1206',
+            'gemini-1.5-pro'
+        ]
+
+        prompt = f"""
+        You are a smart ticket parser. Extract ticket information from the following text into a structured JSON format.
+        
+        Text:
+        "{text}"
+        
+        Output JSON format:
+        {{
+            "match": int or null (extracted match number if available globally),
+            "event": str or null (e.g. "World Cup 2026"),
+            "lines": [
+                {{
+                    "match": int or null (specific match number for this line),
+                    "quantity": int or null,
+                    "category": str (e.g. "Category 1"),
+                    "price": float (numeric price only),
+                    "currency": str or null (e.g. "USD", "EUR", "GBP")
+                }}
+            ],
+            "warnings": [str] (any issues encountered)
+        }}
+        
+        Rules:
+        1. If quantity is in format "3x4" it means 3 matches of 4 tickets, or 3 listings of 4 tickets. Usually "4x Cat 1" means 4 tickets of Cat 1.
+        2. Detect currency if possible, default to null.
+        3. Return ONLY valid JSON, no markdown formatting.
+        """
+        
+        # We need to try generating content with fallback models
+        response = None
+        last_error = None
+        
+        for m_name in candidate_models:
+            try:
+                print(f"   [Gemini] Attempting generation with {m_name}...", flush=True)
+                active_model = genai.GenerativeModel(m_name)
+                response = active_model.generate_content(prompt)
+                print(f"   [Gemini] Success with {m_name}!", flush=True)
+                break
+            except Exception as e:
+                print(f"   [Gemini] Failed {m_name}: {e}", flush=True)
+                last_error = e
+                continue
+        
+        if not response:
+            raise last_error or Exception("No models worked")
+
+        # Clean response (remove markdown code blocks if present)
+        clean_text = response.text.strip()
+        if clean_text.startswith('```json'):
+            clean_text = clean_text[7:]
+        if clean_text.startswith('```'):
+            clean_text = clean_text[3:]
+        if clean_text.endswith('```'):
+            clean_text = clean_text[:-3]
+            
+        data = json.loads(clean_text.strip())
+        data['parse_status'] = 'ok'
+        if not data.get('lines'):
+            data['parse_status'] = 'failed'
+        
+        return data
+    except Exception as e:
+        print(f"Gemini parsing failed: {e}")
+        return None
+
+def parse_ticket_message(raw: str, api_key: str = None) -> Dict[str, Any]:
+    """
+    Parse raw WhatsApp-style message into structured data.
+    Tries Gemini API first if key provided or in env, falls back to regex.
+    """
+    # 1. Try Gemini
+    # Check env var if no key passed (and strictly None, not just empty)
+    if api_key is None:
+        api_key = os.environ.get("GEMINI_API_KEY")
+    
+    if api_key:
+        print("Attempting to parse with Gemini API...")
+        gemini_result = parse_with_gemini(raw, api_key)
+        if gemini_result and gemini_result.get('parse_status') == 'ok':
+            print("Gemini parsing successful!")
+            return gemini_result
+        print("Gemini parsing failed or returned no lines, falling back to regex.")
+
+    # 2. Regex Fallback (Original Logic)
+    print("Parsing with Regex Logic...")
     warnings = []
     lines_found = []
     

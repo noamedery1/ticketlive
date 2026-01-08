@@ -31,7 +31,11 @@ GAMES_FILE = 'all_games_to_scrape.json'
 TEAMS_DATA_FILE = 'ftn_teams_data.json'
 # Railway sets PORT dynamically - use whatever Railway provides
 # Railway will set PORT environment variable automatically
+# Railway will set PORT environment variable automatically
 PORT = int(os.environ.get('PORT', '8000'))  # Railway always sets PORT, but keep default for local dev
+
+# Gemini API Key (User Provided)
+os.environ['GEMINI_API_KEY'] = 'AIzaSyCkHdlgylSHKQsj_L7ckQE5uQhXazXYkT4'
 
 # ==========================================
 # FastAPI App
@@ -516,6 +520,7 @@ class CreateSellerRequest(BaseModel):
 class ParseOfferRequest(BaseModel):
     seller: str
     raw: str
+    use_ai: bool = True
 
 class SaveOfferRequest(BaseModel):
     seller: str
@@ -549,7 +554,11 @@ def parse_offer(request: ParseOfferRequest):
         print(f'[INFO] /api/tickets/offers/parse called with seller: {request.seller}, raw length: {len(request.raw) if request.raw else 0}')
         if not request.raw:
             raise HTTPException(status_code=400, detail='Raw text is required')
-        parsed = parse_ticket_message(request.raw)
+            
+        # If use_ai is True, pass None to use Env Var. If False, pass "" to disable AI.
+        key_arg = None if request.use_ai else ""
+        parsed = parse_ticket_message(request.raw, api_key=key_arg)
+        
         print(f'[INFO] Parse result: match={parsed.get("match")}, lines={len(parsed.get("lines", []))}, status={parsed.get("parse_status")}')
         return parsed
     except HTTPException:
@@ -608,6 +617,9 @@ def search_offers(
     range: str = 'all'
 ):
     """Search offers using index.json and fallback scanning"""
+    return _search_offers_logic(match, seller, category, min_price, max_price, min_quantity, max_quantity, keyword, range)
+
+def _search_offers_logic(match, seller, category, min_price, max_price, min_quantity, max_quantity, keyword, range):
     try:
         index_data = load_index()
         candidate_ids = set()
@@ -670,7 +682,11 @@ def search_offers(
                     continue
                 
                 # Apply filters
-                created_at = datetime.fromisoformat(offer.get('created_at', now.isoformat()))
+                if 'created_at' in offer:
+                    created_at = datetime.fromisoformat(offer['created_at'])
+                else:
+                    created_at = now
+                    
                 if cutoff and created_at < cutoff:
                     continue
                 
@@ -733,10 +749,282 @@ def search_offers(
         
         return results
     except Exception as e:
-        print(f'[ERROR] /api/tickets/offers/search: {e}')
+        print(f'[ERROR] search_offers_logic: {e}')
         import traceback
         traceback.print_exc()
         return []
+
+@app.get('/api/tickets/export')
+def export_tickets(
+    match: Optional[int] = None,
+    seller: Optional[str] = None,
+    category: Optional[str] = None,
+    range: str = 'all'
+):
+    """Export tickets to Excel"""
+    try:
+        import pandas as pd
+        import io
+        from fastapi.responses import StreamingResponse
+        
+        # Refactor search logic to reuse it or just duplicate simple logic
+        # We'll use the search logic function extracted above
+        offers = _search_offers_logic(match, seller, category, None, None, None, None, None, range)
+        
+        # Flatten data
+        rows = []
+        for offer in offers:
+            seller_name = offer.get('seller', 'Unknown')
+            offer_date = offer.get('created_at', '')
+            top_match = offer.get('match')
+            event = offer.get('event')
+            
+            for line in offer.get('lines', []):
+                # Determine match for this line
+                line_match = line.get('match')
+                final_match = line_match if line_match else top_match
+                
+                # Strict Filtering for Export
+                if match is not None:
+                    try:
+                        # Allow robust comparison (int/str)
+                        if final_match is None or int(final_match) != int(match):
+                            continue
+                    except (ValueError, TypeError):
+                        # If match is not a valid number (e.g. "None" or text), skip if we needed a specific match
+                         continue
+                
+                if category:
+                   if str(line.get('category')) != str(category):
+                       continue
+
+                rows.append({
+                    'Match': final_match,
+                    'Event': event,
+                    'Date': offer_date,
+                    'Seller': seller_name,
+                    'Category': line.get('category'),
+                    'Quantity': line.get('quantity'),
+                    'Cost Price': line.get('price'),
+                    'My Price': line.get('my_price'),
+                    'Currency': line.get('currency'),
+                    'Raw': offer.get('raw')[:50] + '...' # Truncate raw
+                })
+        
+        if not rows:
+             return {'error': 'No data found to export'}
+
+        df = pd.DataFrame(rows)
+        
+        # Grouping/Breaking Logic
+        # "Group by Match, Break by Seller"
+        # Since Excel is a flat format (unless multiple sheets), we will sort.
+        # Primary Sort: Match
+        # Secondary Sort: Seller
+        
+        # Ensure Match is numeric for sorting if possible
+        df['Match'] = pd.to_numeric(df['Match'], errors='coerce').fillna(999999)
+        
+        df = df.sort_values(by=['Match', 'Seller'])
+        
+        # Create Excel file in memory
+        output = io.BytesIO()
+        with pd.ExcelWriter(output, engine='openpyxl') as writer:
+            df.to_excel(writer, index=False, sheet_name='Tickets')
+            
+            # Application of styles using openpyxl
+            workbook = writer.book
+            worksheet = writer.sheets['Tickets']
+            from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+            
+            # Header Style
+            header_font = Font(bold=True, color='FFFFFF')
+            header_fill = PatternFill(start_color='2b5797', end_color='2b5797', fill_type='solid') # Nice Blue
+            
+            for cell in worksheet[1]:
+                cell.font = header_font
+                cell.fill = header_fill
+                cell.alignment = Alignment(horizontal='center', vertical='center')
+            
+            # Column Widths
+            worksheet.column_dimensions['A'].width = 10 # Match
+            worksheet.column_dimensions['B'].width = 20 # Event
+            worksheet.column_dimensions['C'].width = 20 # Date
+            worksheet.column_dimensions['D'].width = 20 # Seller
+            worksheet.column_dimensions['E'].width = 15 # Category
+            worksheet.column_dimensions['F'].width = 10 # Qty
+            worksheet.column_dimensions['G'].width = 12 # Cost
+            worksheet.column_dimensions['H'].width = 12 # My Price
+            worksheet.column_dimensions['I'].width = 8 # Curr
+            worksheet.column_dimensions['J'].width = 50 # Raw
+            
+            # Data Styles (Alternating colors or logic)
+            # Grouping visually by match: alternate background color when match changes?
+            
+            thin_border = Border(left=Side(style='thin'), 
+                                 right=Side(style='thin'), 
+                                 top=Side(style='thin'), 
+                                 bottom=Side(style='thin'))
+            
+            current_match = None
+            fill_color = 'FFFFFF'
+            alt_fill_color = 'F2F2F2' # Light Gray
+            current_fill = PatternFill(start_color=fill_color, end_color=fill_color, fill_type='solid')
+            
+            for row in worksheet.iter_rows(min_row=2, max_row=worksheet.max_row):
+                # Check match column (A is 0)
+                match_val = row[0].value
+                if match_val != current_match:
+                    current_match = match_val
+                    # Toggle color
+                    fill_color = alt_fill_color if fill_color == 'FFFFFF' else 'FFFFFF'
+                    current_fill = PatternFill(start_color=fill_color, end_color=fill_color, fill_type='solid')
+                
+                for cell in row:
+                    cell.fill = current_fill
+                    cell.border = thin_border
+                    # Align numbers
+                    if cell.col_idx in [1, 6, 7, 8]: # Match, Qty, Prices
+                         cell.alignment = Alignment(horizontal='center')
+
+        
+        output.seek(0)
+        
+        filename = f"tickets_export_{datetime.now().strftime('%Y%m%d_%H%M')}.xlsx"
+        
+        headers = {
+            'Content-Disposition': f'attachment; filename="{filename}"'
+        }
+        
+        return StreamingResponse(
+            output, 
+            media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            headers=headers
+        )
+
+    except Exception as e:
+        print(f'[ERROR] /api/tickets/export: {e}')
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.delete('/api/tickets/offers/{offer_id}')
+def delete_offer(offer_id: str):
+    """Delete an offer"""
+    try:
+        from tickets_storage import BASE_DIR, load_offers_from_file, load_index, save_index
+        
+        index_data = load_index()
+        offers_by_id = index_data.get('offers_by_id', {})
+        
+        if offer_id not in offers_by_id:
+             return {'success': False, 'msg': 'Offer not found'} # Idempotent-ish
+             
+        file_name = offers_by_id[offer_id]['file']
+        file_path = BASE_DIR / file_name
+        
+        # Read and filter
+        all_offers = load_offers_from_file(file_path)
+        new_offers = [o for o in all_offers if o.get('id') != offer_id]
+        
+        # Write back
+        temp_file = file_path.with_suffix('.jsonl.tmp')
+        with open(temp_file, 'w', encoding='utf-8') as f:
+            for offer in new_offers:
+                f.write(json.dumps(offer, ensure_ascii=False) + '\n')
+        temp_file.replace(file_path)
+        
+        # Update Index (Remove)
+        del index_data['offers_by_id'][offer_id]
+        
+        # Cleanup other indexes? Ideally yes, but complex reverse lookup. 
+        # Rebuilding index is safer or acceptable latency. 
+        # For now, just removing from primary ID lookup effectively hides it.
+        # Ideally trigger a bg index rebuild or do lazy cleanup.
+        save_index(index_data)
+        
+        return {'success': True}
+    except Exception as e:
+        print(f'[ERROR] delete_offer: {e}')
+        raise HTTPException(status_code=500, detail=str(e))
+
+class UpdateOfferPriceRequest(BaseModel):
+    lines: List[dict]
+
+@app.put('/api/tickets/offers/{offer_id}')
+def update_offer_prices(offer_id: str, request: UpdateOfferPriceRequest):
+    """
+    Update my_price for lines in an existing offer.
+    We need to load the offer, update specific lines, and save it back (overwriting).
+    Since we store in weekly files, this is tricky: we must read the weekly file, update, and rewrite.
+    """
+    try:
+        from tickets_storage import BASE_DIR, load_offers_from_file, get_weekly_file_path, update_index_with_offer
+        
+        # 1. Locate the file containing the offer
+        index_data = load_index()
+        offers_by_id = index_data.get('offers_by_id', {})
+        if offer_id not in offers_by_id:
+             raise HTTPException(status_code=404, detail='Offer not found in index')
+        
+        file_name = offers_by_id[offer_id]['file']
+        file_path = BASE_DIR / file_name
+        
+        # 2. Read all offers from that file
+        all_offers = load_offers_from_file(file_path)
+        
+        target_offer_index = -1
+        target_offer = None
+        
+        for i, offer in enumerate(all_offers):
+            if offer.get('id') == offer_id:
+                target_offer = offer
+                target_offer_index = i
+                break
+        
+        if target_offer_index == -1:
+            raise HTTPException(status_code=404, detail='Offer not found in file')
+        
+        # 3. Update the lines
+        # request.lines should contain objects with {_id (index or id), my_price}
+        # In current storage, lines don't have stable IDs, only indices.
+        # Frontend provides _id which is just index in the array usually.
+        
+        # Map incoming updates
+        updates_map = {str(l.get('_id')): l.get('my_price') for l in request.lines}
+        
+        current_lines = target_offer.get('lines', [])
+        updated_lines = []
+        
+        for idx, line in enumerate(current_lines):
+            # Frontend uses index as _id usually initiated in frontend state
+            # We assume the array order is stable.
+            # However, careful: frontend generates _id = i. If we rely on index, we must match.
+            # Let's assume frontend sends matching indices.
+            
+            s_idx = str(idx)
+            if s_idx in updates_map:
+                line['my_price'] = updates_map[s_idx]
+            updated_lines.append(line)
+            
+        target_offer['lines'] = updated_lines
+        all_offers[target_offer_index] = target_offer
+        
+        # 4. Rewrite the file
+        # We use a temp file to be safe
+        temp_file = file_path.with_suffix('.jsonl.tmp')
+        with open(temp_file, 'w', encoding='utf-8') as f:
+            for offer in all_offers:
+                f.write(json.dumps(offer, ensure_ascii=False) + '\n')
+        
+        temp_file.replace(file_path)
+        
+        return {'success': True, 'msg': 'Offer updated'}
+
+    except Exception as e:
+        print(f'[ERROR] update_offer_prices: {e}')
+        raise HTTPException(status_code=500, detail=str(e))
+
 
 @app.get('/api/tickets/offers/{offer_id}')
 def get_offer(offer_id: str):
