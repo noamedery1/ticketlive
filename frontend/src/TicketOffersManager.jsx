@@ -89,23 +89,26 @@ function TicketOffersManager() {
     }
   }
 
-  const handleParse = async () => {
-    if (!rawText.trim()) {
+  const executeParse = async (text, seller, useAiEndpoint) => {
+    if (!text || !text.trim()) {
       showToast('Please enter a message to parse', 'error')
       return
     }
-
-    if (!sellerInput.trim()) {
+    if (!seller || !seller.trim()) {
       showToast('Please enter or select a seller', 'error')
       return
     }
 
+    // Ensure UI is synced if called externally
+    setRawText(text)
+    setSellerInput(seller)
+
     setIsParsing(true)
     try {
       const res = await axios.post(`${API_URL}/api/tickets/offers/parse`, {
-        seller: sellerInput.trim(),
-        raw: rawText,
-        use_ai: useAI
+        seller: seller.trim(),
+        raw: text,
+        use_ai: useAiEndpoint
       })
       setParsedData(res.data)
     } catch (err) {
@@ -115,6 +118,31 @@ function TicketOffersManager() {
       setIsParsing(false)
     }
   }
+
+  const handleParse = () => {
+    executeParse(rawText, sellerInput, useAI)
+  }
+
+  // URL Param Initialization
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const rawParam = params.get('raw')
+    const sellerParam = params.get('seller')
+    const autoParseParam = params.get('autoparse')
+
+    if (rawParam) {
+      setRawText(rawParam)
+      if (sellerParam) setSellerInput(sellerParam)
+
+      if (autoParseParam === 'true') {
+        const aiParam = params.get('use_ai') !== 'false' // default true
+        // Add timeout to let React mount/render updates if needed, though state updates are batched
+        setTimeout(() => {
+          executeParse(rawParam, sellerParam || '', aiParam)
+        }, 500)
+      }
+    }
+  }, []) // Mount only
 
   // Editable state
   const [editableLines, setEditableLines] = useState([])

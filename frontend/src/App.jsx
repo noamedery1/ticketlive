@@ -14,6 +14,15 @@ function App() {
   const [matches, setMatches] = useState([])
   const [selectedMatch, setSelectedMatch] = useState(null)
   const [history, setHistory] = useState(null)
+
+  // Auto-switch to tickets view if URL params dictate
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    if (params.get('raw') || params.get('autoparse')) {
+      setView('tickets')
+    }
+  }, [])
+
   const [timeRange, setTimeRange] = useState('24h')
   // Replace simple selectedDate with range
   const [dateRange, setDateRange] = useState({ start: null, end: null })

@@ -68,6 +68,32 @@ def extract_category_price_pairs(text: str) -> List[Dict[str, Any]]:
         except (ValueError, IndexError):
             continue
 
+    # Pattern 1b: "Cat 3 X50 $1000" or "Cat 3 X 50 $1000"
+    # Groups: 1=Category, 2=Quantity, 3=Price
+    cat_x_qty_pattern = r'cat\s*(\d+)\s*x\s*(\d+)\s*[:\s-]?\s*[\$€£]?\s*(\d+(?:\.\d+)?)'
+    matches = re.finditer(cat_x_qty_pattern, text, re.IGNORECASE)
+    for match in matches:
+        try:
+            category = match.group(1)
+            quantity = int(match.group(2))
+            # Handle potential thousand separators if needed, but for now standard float
+            price_str = match.group(3)
+            # Simple heuristic: if price is 15.000, it's likely 15000 if Category 1
+            if '.' in price_str and len(price_str.split('.')[1]) == 3 and float(price_str) < 100:
+                 price_str = price_str.replace('.', '')
+            
+            price = float(price_str)
+            
+            lines.append({
+                'match': None,
+                'quantity': quantity,
+                'category': category,
+                'price': price,
+                'currency': None
+            })
+        except (ValueError, IndexError):
+            continue
+
     # Pattern 2: New format 'CAT 3 (40) - $325' or 'CAT 1 (4) - 500' (Quantity in parens)
     # Groups: 1=Category, 2=Quantity, 3=Price
     paren_qty_pattern = r'cat\s*(\d+)\s*\((\d+)\)\s*[:\s-]+\s*[\$€£]?\s*(\d+(?:\.\d+)?)'

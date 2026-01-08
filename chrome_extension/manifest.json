@@ -1,0 +1,24 @@
+{
+    "manifest_version": 3,
+    "name": "Ticket Parser Helper",
+    "version": "1.0",
+    "description": "Send selected text to Ticket Manager for parsing",
+    "permissions": [
+        "contextMenus",
+        "activeTab",
+        "scripting",
+        "storage"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "action": {
+        "default_popup": "popup.html",
+        "default_title": "Ticket Parser"
+    },
+    "icons": {
+        "16": "icon.png",
+        "48": "icon.png",
+        "128": "icon.png"
+    }
+}
