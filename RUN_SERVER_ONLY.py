@@ -845,6 +845,15 @@ def _search_offers_logic(match, seller, category, min_price, max_price, min_quan
                     # Return copy with only valid lines
                     offer_copy = offer.copy()
                     offer_copy['lines'] = valid_lines
+                    
+                    # Optimization: If all lines are for the same match, promote it to top-level for UI clarity
+                    if offer_copy.get('match') is None:
+                         unique_matches = set(str(l.get('match')) for l in valid_lines if l.get('match'))
+                         if len(unique_matches) == 1:
+                             try:
+                                offer_copy['match'] = int(list(unique_matches)[0])
+                             except: pass
+
                     results.append(offer_copy)
 
         print(f"[SEARCH] Found {len(results)} results.", flush=True)
