@@ -943,6 +943,33 @@
             "Tribuna 3rd Central": 1900.0,
             "Tribuna 3rd": 1900.0
           }
+        },
+        {
+          "timestamp": "2026-01-13T13:27:16.867708",
+          "prices": {
+            "Goal 2nd": 108.0,
+            "Goal 1st": 115.0,
+            "Corner 2nd": 122.0,
+            "Corner 1st": 126.99,
+            "Lateral 1st": 150.0,
+            "Tribuna 1st": 153.0,
+            "Lateral 2nd": 164.0,
+            "Lateral 1st Central": 210.0,
+            "Tribuna 1st Central": 250.0,
+            "Corner 4th": 275.0,
+            "Lateral 2nd Central": 285.0,
+            "Corner 3rd": 300.0,
+            "Tribuna 2nd": 315.0,
+            "Tribuna 2nd Central": 324.99,
+            "Barca VIP Hospitality Silver Package": 400.0,
+            "Lateral 3rd": 425.0,
+            "Goal 3rd": 700.0,
+            "Lateral 4th": 800.0,
+            "Barca VIP Hospitality Players Zone": 825.0,
+            "Goal 4th": 1000.0,
+            "Tribuna 3rd Central": 1900.0,
+            "Tribuna 3rd": 1900.0
+          }
         }
       ],
       "latest_prices": {
@@ -951,7 +978,7 @@
         "Corner 2nd": 122.0,
         "Corner 1st": 126.99,
         "Lateral 1st": 150.0,
-        "Tribuna 1st": 159.0,
+        "Tribuna 1st": 153.0,
         "Lateral 2nd": 164.0,
         "Lateral 1st Central": 210.0,
         "Tribuna 1st Central": 250.0,
@@ -969,7 +996,7 @@
         "Tribuna 3rd Central": 1900.0,
         "Tribuna 3rd": 1900.0
       },
-      "last_scraped": "2026-01-13T09:31:06.302355"
+      "last_scraped": "2026-01-13T13:27:16.867708"
     },
     {
       "url": "https://www.footballticketnet.com/champions-league/fc-barcelona-vs-fc-copenhagen",
@@ -1688,6 +1715,24 @@
             "Tribuna 1st Central": 413.0,
             "Barca VIP Hospitality Silver Package": 500.0
           }
+        },
+        {
+          "timestamp": "2026-01-13T13:27:16.867708",
+          "prices": {
+            "Goal 2nd": 155.0,
+            "Goal 1st": 182.0,
+            "Corner 2nd": 196.0,
+            "Corner 1st": 199.0,
+            "Lateral 2nd": 232.0,
+            "Lateral 1st": 250.0,
+            "Lateral 2nd Central": 258.0,
+            "Lateral 1st Central": 331.0,
+            "Tribuna 2nd": 370.0,
+            "Tribuna 2nd Central": 393.0,
+            "Tribuna 1st": 405.0,
+            "Tribuna 1st Central": 413.0,
+            "Barca VIP Hospitality Silver Package": 500.0
+          }
         }
       ],
       "latest_prices": {
@@ -1705,7 +1750,7 @@
         "Tribuna 1st Central": 413.0,
         "Barca VIP Hospitality Silver Package": 500.0
       },
-      "last_scraped": "2026-01-13T09:31:06.302355"
+      "last_scraped": "2026-01-13T13:27:16.867708"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-rcd-mallorca",
@@ -2637,6 +2682,32 @@
             "Tribuna 3rd Central": 1900.0,
             "Tribuna 3rd": 1900.0
           }
+        },
+        {
+          "timestamp": "2026-01-13T13:27:16.867708",
+          "prices": {
+            "Goal 2nd": 118.0,
+            "Corner 1st": 149.0,
+            "Goal 1st": 155.0,
+            "Corner 2nd": 161.0,
+            "Lateral 2nd": 178.0,
+            "Lateral 1st": 180.0,
+            "Lateral 2nd Central": 200.0,
+            "Lateral 1st Central": 210.0,
+            "Tribuna 2nd": 225.0,
+            "Tribuna 2nd Central": 235.0,
+            "Tribuna 1st": 245.0,
+            "Corner 4th": 270.0,
+            "Corner 3rd": 290.0,
+            "Tribuna 1st Central": 299.99,
+            "Barca VIP Hospitality Silver Package": 400.0,
+            "Lateral 3rd": 400.0,
+            "Goal 3rd": 700.0,
+            "Goal 4th": 750.0,
+            "Lateral 4th": 800.0,
+            "Tribuna 3rd Central": 1900.0,
+            "Tribuna 3rd": 1900.0
+          }
         }
       ],
       "latest_prices": {
@@ -2644,7 +2715,7 @@
         "Corner 1st": 149.0,
         "Goal 1st": 155.0,
         "Corner 2nd": 161.0,
-        "Lateral 2nd": 174.99,
+        "Lateral 2nd": 178.0,
         "Lateral 1st": 180.0,
         "Lateral 2nd Central": 200.0,
         "Lateral 1st Central": 210.0,
@@ -2653,7 +2724,7 @@
         "Tribuna 1st": 245.0,
         "Corner 4th": 270.0,
         "Corner 3rd": 290.0,
-        "Tribuna 1st Central": 309.72,
+        "Tribuna 1st Central": 299.99,
         "Barca VIP Hospitality Silver Package": 400.0,
         "Lateral 3rd": 400.0,
         "Goal 3rd": 700.0,
@@ -2662,7 +2733,7 @@
         "Tribuna 3rd Central": 1900.0,
         "Tribuna 3rd": 1900.0
       },
-      "last_scraped": "2026-01-13T09:31:06.302355"
+      "last_scraped": "2026-01-13T13:27:16.867708"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-levante-ud",
@@ -3620,24 +3691,51 @@
             "Tribuna 3rd Central": 1900.0,
             "Tribuna 3rd": 1900.0
           }
+        },
+        {
+          "timestamp": "2026-01-13T13:27:16.867708",
+          "prices": {
+            "Goal 2nd": 135.0,
+            "Goal 1st": 161.99,
+            "Corner 1st": 165.0,
+            "Corner 2nd": 167.99,
+            "Lateral 1st": 189.99,
+            "Lateral 2nd": 190.99,
+            "Lateral 2nd Central": 202.0,
+            "Goal 3rd": 240.0,
+            "Lateral 1st Central": 240.0,
+            "Corner 4th": 255.0,
+            "Tribuna 2nd": 262.0,
+            "Tribuna 2nd Central": 270.0,
+            "Tribuna 1st": 280.0,
+            "Tribuna 1st Central": 280.0,
+            "Corner 3rd": 280.0,
+            "Barca VIP Hospitality Silver Package": 400.0,
+            "Lateral 3rd": 400.0,
+            "Goal 4th": 750.0,
+            "Lateral 4th": 800.0,
+            "Barca VIP Hospitality Players Zone": 890.0,
+            "Tribuna 3rd Central": 1900.0,
+            "Tribuna 3rd": 1900.0
+          }
         }
       ],
       "latest_prices": {
         "Goal 2nd": 135.0,
-        "Goal 1st": 154.99,
-        "Corner 2nd": 157.99,
-        "Corner 1st": 167.99,
-        "Lateral 2nd": 186.99,
-        "Lateral 1st": 187.99,
+        "Goal 1st": 161.99,
+        "Corner 1st": 165.0,
+        "Corner 2nd": 167.99,
+        "Lateral 1st": 189.99,
+        "Lateral 2nd": 190.99,
         "Lateral 2nd Central": 202.0,
         "Goal 3rd": 240.0,
         "Lateral 1st Central": 240.0,
         "Corner 4th": 255.0,
         "Tribuna 2nd": 262.0,
         "Tribuna 2nd Central": 270.0,
-        "Tribuna 1st Central": 279.99,
-        "Corner 3rd": 280.0,
         "Tribuna 1st": 280.0,
+        "Tribuna 1st Central": 280.0,
+        "Corner 3rd": 280.0,
         "Barca VIP Hospitality Silver Package": 400.0,
         "Lateral 3rd": 400.0,
         "Goal 4th": 750.0,
@@ -3646,7 +3744,7 @@
         "Tribuna 3rd Central": 1900.0,
         "Tribuna 3rd": 1900.0
       },
-      "last_scraped": "2026-01-13T09:31:06.302355"
+      "last_scraped": "2026-01-13T13:27:16.867708"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-villarreal-cf",
@@ -4605,24 +4703,51 @@
             "Tribuna 3rd Central": 1900.0,
             "Tribuna 3rd": 1900.0
           }
+        },
+        {
+          "timestamp": "2026-01-13T13:27:16.867708",
+          "prices": {
+            "Goal 2nd": 148.0,
+            "Goal 1st": 150.0,
+            "Corner 2nd": 157.0,
+            "Corner 1st": 160.0,
+            "Lateral 2nd": 181.0,
+            "Lateral 2nd Central": 190.0,
+            "Lateral 1st": 198.0,
+            "Lateral 1st Central": 209.0,
+            "Tribuna 2nd": 223.0,
+            "Tribuna 2nd Central": 233.0,
+            "Tribuna 1st": 243.0,
+            "Goal 3rd": 245.0,
+            "Corner 4th": 275.0,
+            "Tribuna 1st Central": 299.99,
+            "Corner 3rd": 300.0,
+            "Lateral 3rd": 425.0,
+            "Barca VIP Hospitality Silver Package": 500.0,
+            "Goal 4th": 750.0,
+            "Lateral 4th": 800.0,
+            "Barca VIP Hospitality Players Zone": 1155.0,
+            "Tribuna 3rd Central": 1900.0,
+            "Tribuna 3rd": 1900.0
+          }
         }
       ],
       "latest_prices": {
-        "Goal 1st": 144.99,
         "Goal 2nd": 148.0,
-        "Corner 2nd": 152.99,
-        "Corner 1st": 164.99,
-        "Lateral 2nd": 174.99,
+        "Goal 1st": 150.0,
+        "Corner 2nd": 157.0,
+        "Corner 1st": 160.0,
+        "Lateral 2nd": 181.0,
         "Lateral 2nd Central": 190.0,
-        "Lateral 1st": 191.99,
-        "Lateral 1st Central": 210.0,
+        "Lateral 1st": 198.0,
+        "Lateral 1st Central": 209.0,
         "Tribuna 2nd": 223.0,
         "Tribuna 2nd Central": 233.0,
         "Tribuna 1st": 243.0,
         "Goal 3rd": 245.0,
         "Corner 4th": 275.0,
+        "Tribuna 1st Central": 299.99,
         "Corner 3rd": 300.0,
-        "Tribuna 1st Central": 324.89,
         "Lateral 3rd": 425.0,
         "Barca VIP Hospitality Silver Package": 500.0,
         "Goal 4th": 750.0,
@@ -4631,7 +4756,7 @@
         "Tribuna 3rd Central": 1900.0,
         "Tribuna 3rd": 1900.0
       },
-      "last_scraped": "2026-01-13T09:31:06.302355"
+      "last_scraped": "2026-01-13T13:27:16.867708"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-sevilla-fc",
@@ -5588,6 +5713,33 @@
             "Tribuna 3rd Central": 1900.0,
             "Tribuna 3rd": 1900.0
           }
+        },
+        {
+          "timestamp": "2026-01-13T13:27:16.867708",
+          "prices": {
+            "Goal 2nd": 140.1,
+            "Goal 1st": 167.0,
+            "Corner 2nd": 174.0,
+            "Corner 1st": 192.99,
+            "Lateral 2nd": 198.0,
+            "Lateral 2nd Central": 217.0,
+            "Lateral 1st": 224.0,
+            "Lateral 1st Central": 243.0,
+            "Tribuna 2nd": 250.0,
+            "Tribuna 2nd Central": 268.0,
+            "Corner 4th": 275.0,
+            "Tribuna 1st": 283.0,
+            "Tribuna 1st Central": 299.99,
+            "Corner 3rd": 300.0,
+            "Lateral 3rd": 425.0,
+            "Barca VIP Hospitality Silver Package": 500.0,
+            "Goal 3rd": 700.0,
+            "Goal 4th": 750.0,
+            "Lateral 4th": 800.0,
+            "Barca VIP Hospitality Players Zone": 1810.0,
+            "Tribuna 3rd Central": 1900.0,
+            "Tribuna 3rd": 1900.0
+          }
         }
       ],
       "latest_prices": {
@@ -5614,7 +5766,7 @@
         "Tribuna 3rd Central": 1900.0,
         "Tribuna 3rd": 1900.0
       },
-      "last_scraped": "2026-01-13T09:31:06.302355"
+      "last_scraped": "2026-01-13T13:27:16.867708"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-rayo-vallecano",
@@ -6572,6 +6724,33 @@
             "Tribuna 3rd Central": 1900.0,
             "Tribuna 3rd": 1900.0
           }
+        },
+        {
+          "timestamp": "2026-01-13T13:27:16.867708",
+          "prices": {
+            "Goal 2nd": 147.0,
+            "Goal 1st": 154.0,
+            "Corner 2nd": 165.0,
+            "Corner 1st": 172.0,
+            "Lateral 2nd": 180.0,
+            "Lateral 2nd Central": 205.0,
+            "Lateral 1st": 223.99,
+            "Lateral 1st Central": 250.0,
+            "Tribuna 2nd": 268.0,
+            "Corner 4th": 275.0,
+            "Tribuna 2nd Central": 285.0,
+            "Tribuna 1st": 292.99,
+            "Corner 3rd": 300.0,
+            "Tribuna 1st Central": 366.99,
+            "Lateral 3rd": 425.0,
+            "Barca VIP Hospitality Silver Package": 500.0,
+            "Goal 3rd": 700.0,
+            "Goal 4th": 750.0,
+            "Lateral 4th": 800.0,
+            "Barca VIP Hospitality Players Zone": 1570.0,
+            "Tribuna 3rd Central": 1900.0,
+            "Tribuna 3rd": 1900.0
+          }
         }
       ],
       "latest_prices": {
@@ -6598,7 +6777,7 @@
         "Tribuna 3rd Central": 1900.0,
         "Tribuna 3rd": 1900.0
       },
-      "last_scraped": "2026-01-13T09:31:06.302355"
+      "last_scraped": "2026-01-13T13:27:16.867708"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-rcd-espanyol",
@@ -7556,6 +7735,33 @@
             "Tribuna 3rd": 1900.0,
             "Barca VIP Hospitality Players Zone": 2060.0
           }
+        },
+        {
+          "timestamp": "2026-01-13T13:27:16.867708",
+          "prices": {
+            "Goal 2nd": 183.0,
+            "Goal 1st": 194.0,
+            "Corner 2nd": 207.0,
+            "Corner 1st": 217.0,
+            "Lateral 2nd": 235.0,
+            "Lateral 2nd Central": 255.0,
+            "Corner 4th": 255.0,
+            "Corner 3rd": 275.0,
+            "Lateral 1st": 283.0,
+            "Goal 3rd": 305.0,
+            "Lateral 1st Central": 325.0,
+            "Tribuna 2nd": 340.0,
+            "Tribuna 2nd Central": 360.0,
+            "Tribuna 1st": 378.0,
+            "Tribuna 1st Central": 399.99,
+            "Lateral 3rd": 405.0,
+            "Barca VIP Hospitality Silver Package": 600.0,
+            "Goal 4th": 750.0,
+            "Lateral 4th": 800.0,
+            "Tribuna 3rd Central": 1900.0,
+            "Tribuna 3rd": 1900.0,
+            "Barca VIP Hospitality Players Zone": 2060.0
+          }
         }
       ],
       "latest_prices": {
@@ -7582,7 +7788,7 @@
         "Tribuna 3rd": 1900.0,
         "Barca VIP Hospitality Players Zone": 2060.0
       },
-      "last_scraped": "2026-01-13T09:31:06.302355"
+      "last_scraped": "2026-01-13T13:27:16.867708"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-celta-vigo",
@@ -8539,6 +8745,33 @@
             "Tribuna 3rd Central": 1900.0,
             "Tribuna 3rd": 1900.0
           }
+        },
+        {
+          "timestamp": "2026-01-13T13:27:16.867708",
+          "prices": {
+            "Goal 2nd": 155.0,
+            "Goal 1st": 183.0,
+            "Corner 2nd": 189.0,
+            "Corner 1st": 197.99,
+            "Lateral 2nd": 209.99,
+            "Lateral 2nd Central": 250.0,
+            "Corner 4th": 265.0,
+            "Lateral 1st": 270.0,
+            "Corner 3rd": 280.0,
+            "Lateral 1st Central": 290.0,
+            "Tribuna 2nd": 312.99,
+            "Tribuna 2nd Central": 334.99,
+            "Tribuna 1st": 344.99,
+            "Tribuna 1st Central": 389.99,
+            "Lateral 3rd": 400.0,
+            "Barca VIP Hospitality Silver Package": 500.0,
+            "Goal 3rd": 700.0,
+            "Goal 4th": 750.0,
+            "Lateral 4th": 800.0,
+            "Barca VIP Hospitality Players Zone": 1785.0,
+            "Tribuna 3rd Central": 1900.0,
+            "Tribuna 3rd": 1900.0
+          }
         }
       ],
       "latest_prices": {
@@ -8565,7 +8798,7 @@
         "Tribuna 3rd Central": 1900.0,
         "Tribuna 3rd": 1900.0
       },
-      "last_scraped": "2026-01-13T09:31:06.302355"
+      "last_scraped": "2026-01-13T13:27:16.867708"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-real-madrid",
@@ -9527,6 +9760,33 @@
             "Corner 4th": 2000.0,
             "Barca VIP Hospitality Silver Package": 2500.0
           }
+        },
+        {
+          "timestamp": "2026-01-13T13:27:16.867708",
+          "prices": {
+            "Goal 2nd": 739.0,
+            "Goal 1st": 849.0,
+            "Goal 3rd": 849.0,
+            "Corner 2nd": 903.0,
+            "Corner 1st": 918.0,
+            "Best Available": 988.0,
+            "Corner 3rd": 1150.0,
+            "Lateral 4th": 1220.0,
+            "Lateral 2nd": 1240.0,
+            "Lateral 2nd Central": 1410.0,
+            "Lateral 1st": 1465.0,
+            "Lateral 3rd": 1600.0,
+            "Lateral 1st Central": 1640.0,
+            "Tribuna 2nd": 1654.99,
+            "Tribuna 2nd Central": 1665.0,
+            "Tribuna 1st": 1749.99,
+            "Tribuna 1st Central": 1750.0,
+            "Goal 4th": 1750.0,
+            "Tribuna 3rd": 1900.0,
+            "Tribuna 3rd Central": 1900.0,
+            "Corner 4th": 2000.0,
+            "Barca VIP Hospitality Silver Package": 2500.0
+          }
         }
       ],
       "latest_prices": {
@@ -9553,7 +9813,7 @@
         "Corner 4th": 2000.0,
         "Barca VIP Hospitality Silver Package": 2500.0
       },
-      "last_scraped": "2026-01-13T09:31:06.302355"
+      "last_scraped": "2026-01-13T13:27:16.867708"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-real-betis",
@@ -10507,6 +10767,33 @@
             "Tribuna 3rd": 1900.0,
             "Barca VIP Hospitality Players Zone": 4165.0
           }
+        },
+        {
+          "timestamp": "2026-01-13T13:27:16.867708",
+          "prices": {
+            "Goal 2nd": 236.99,
+            "Corner 2nd": 242.99,
+            "Goal 1st": 255.99,
+            "Corner 4th": 275.0,
+            "Corner 1st": 287.99,
+            "Corner 3rd": 300.0,
+            "Lateral 2nd": 337.99,
+            "Lateral 2nd Central": 349.0,
+            "Lateral 1st": 357.99,
+            "Lateral 1st Central": 377.99,
+            "Tribuna 2nd": 393.99,
+            "Tribuna 2nd Central": 403.99,
+            "Tribuna 1st": 418.99,
+            "Lateral 3rd": 425.0,
+            "Tribuna 1st Central": 477.99,
+            "Barca VIP Hospitality Silver Package": 600.0,
+            "Goal 3rd": 700.0,
+            "Goal 4th": 750.0,
+            "Lateral 4th": 800.0,
+            "Tribuna 3rd Central": 1900.0,
+            "Tribuna 3rd": 1900.0,
+            "Barca VIP Hospitality Players Zone": 4165.0
+          }
         }
       ],
       "latest_prices": {
@@ -10533,8 +10820,8 @@
         "Tribuna 3rd": 1900.0,
         "Barca VIP Hospitality Players Zone": 4165.0
       },
-      "last_scraped": "2026-01-13T09:31:06.302355"
+      "last_scraped": "2026-01-13T13:27:16.867708"
     }
   ],
-  "last_updated": "2026-01-13T09:31:06.302355"
+  "last_updated": "2026-01-13T13:27:16.867708"
 }
