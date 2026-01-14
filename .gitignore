@@ -10,15 +10,12 @@ data/tickets/
 *.jsonl
 
 # Large data files
-prices.json
-prices_ftn.json
-ftn_teams_data.json
+# prices.json - explicitly tracked
+# prices_ftn.json - explicitly tracked
+# ftn_teams_data.json - explicitly tracked
 prices.json_old
 prices_ftn.json_old
 prices_ftn_test.json
-arsenal_prices.json
-barcelona_prices.json
-real-madrid_prices.json
 
 # Logs
 *.log
