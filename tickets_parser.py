@@ -113,6 +113,46 @@ def extract_category_price_pairs(text: str) -> List[Dict[str, Any]]:
         except (ValueError, IndexError):
             continue
     
+    # Pattern 3: "category 3 - 4 tickets €1.275ea"
+    # Groups: 1=Category, 2=Quantity, 3=Price
+    # We look for "tickets" or "ticket" to distinguish from simple "cat 3 - 400"
+    cat_qty_tix_pattern = r'category\s*(\d+)\s*-\s*(\d+)\s*(?:tickets|ticket|tix)\s*.*?(?:€|£|\$|price)?\s*?(\d+(?:[\.,]\d+)?)'
+    matches = re.finditer(cat_qty_tix_pattern, text, re.IGNORECASE)
+    for match in matches:
+        try:
+            category = match.group(1)
+            quantity = int(match.group(2))
+            price_str = match.group(3)
+            
+            # clean price string
+            price_str = price_str.replace(',', '')
+            # Handle dot as thousands separator (e.g. 1.275 -> 1275)
+            # If 3 decimal places and value < 100 (unlikely to be 1.275 dollars/euros for a ticket, usually > 10)
+            # But 1.275 is 1,275.
+            if '.' in price_str:
+                parts = price_str.split('.')
+                # If the last part is exactly 3 digits, treat as thousands separator
+                if len(parts) > 1 and len(parts[-1]) == 3:
+                     # Check if it looks like a small float (e.g. 1.250 could be 1.25 or 1250)
+                     # Context: specific matching for this user who uses European format
+                     price_str = price_str.replace('.', '')
+            
+            price = float(price_str)
+
+            lines.append({
+                'match': None, # rely on context
+                'quantity': quantity,
+                'category': category,
+                'price': price,
+                'currency': None
+            })
+        except (ValueError, IndexError):
+            continue
+
+    # If lines found with this specific pattern, we might want to skip the fallback
+    # But we append to lines, so we just need to ensure we don't double count if we add a check?
+    # actually the fallback runs only `if not lines`. So if we found something here, fallback won't run.
+    
     # If no match-quantity patterns found, try simpler patterns (backward compatibility)
     if not lines:
         # Patterns for category:price or category - price (without quantity)
@@ -210,8 +250,9 @@ def parse_with_gemini(text: str, api_key: str) -> Optional[Dict[str, Any]]:
         
         Rules:
         1. If quantity is in format "3x4" it means 3 matches of 4 tickets, or 3 listings of 4 tickets. Usually "4x Cat 1" means 4 tickets of Cat 1.
-        2. Detect currency if possible, default to null.
-        3. Return ONLY valid JSON, no markdown formatting.
+        2. Handle format "Match X ... Category Y - Z tickets P" where Z is quantity and P is price (e.g. "Match 3 ... category 3 - 4 tickets €1.275").
+        3. Detect currency if possible, default to null.
+        4. Return ONLY valid JSON, no markdown formatting.
         """
         
         # We need to try generating content with fallback models
@@ -365,17 +406,10 @@ def parse_ticket_message(raw: str, api_key: str = None) -> Dict[str, Any]:
         
         # Check if line seems to be ONLY a match header (short, contains match/game)
         # e.g. "Match 002" or "Game 004" or "Match #05"
-        is_header = False
         if header_match is not None:
-            # If line is short and strictly match declaration
-            # or if it starts with match/game
-            if len(line_clean) < 20 and ('match' in line_clean or 'game' in line_clean or line_clean.startswith('m')):
-                 # It's likely a header
-                 current_match = header_match
-                 is_header = True
-            elif re.search(r'^(match|game)\s*#?\d+\s*$', line_clean):
-                 current_match = header_match
-                 is_header = True
+            # If match number found, update context
+            current_match = header_match
+            is_header = True
 
         # If it was a header, we don't try to parse tickets from it (usually)
         # Unless it's a one-liner like "Match 10 Cat 1..." - but that is handled by line extraction logic below
