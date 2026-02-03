@@ -251,7 +251,7 @@ def parse_with_gemini(text: str, api_key: str) -> Optional[Dict[str, Any]]:
         Rules:
         1. If quantity is in format "3x4" it means 3 matches of 4 tickets, or 3 listings of 4 tickets. Usually "4x Cat 1" means 4 tickets of Cat 1.
         2. Handle format "Match X ... Category Y - Z tickets P" where Z is quantity and P is price (e.g. "Match 3 ... category 3 - 4 tickets €1.275").
-        3. Detect currency if possible, default to null.
+        3. ALWAYS convert prices to USD if they are in another currency. Assume 1 EUR = 1.05 USD. Return price in USD.
         4. Return ONLY valid JSON, no markdown formatting.
         """
         
@@ -439,14 +439,67 @@ def parse_ticket_message(raw: str, api_key: str = None) -> Dict[str, Any]:
     # Global currency detection (fallback)
     global_currency = detect_currency(normalize_text(raw))
     
-    # Post-processing: Apply global currency if missing, set top-level match if consistent
-    final_match_num = None
-    all_matches = set()
+    # Post-processing: Currency Conversion to USD
+    all_matches = set() # Fix: Initialize before loop
     
+    # helper for checking rates (simple cache in function attribute)
+    if not hasattr(parse_ticket_message, "rates_cache"):
+         parse_ticket_message.rates_cache = {'data': {}, 'ts': 0}
+    
+    # Fetch live rates if cache is old (1 hour)
+    import time
+    if time.time() - parse_ticket_message.rates_cache['ts'] > 3600:
+        try:
+            import requests # Import here to avoid top-level dependency issues if not installed, though it is requirements.txt
+            # Fetch USD base rates. Ex: {"rates": {"EUR": 0.92, ...}} meaning 1 USD = 0.92 EUR
+            resp = requests.get('https://api.exchangerate-api.com/v4/latest/USD', timeout=3)
+            if resp.status_code == 200:
+                parse_ticket_message.rates_cache['data'] = resp.json().get('rates', {})
+                parse_ticket_message.rates_cache['ts'] = time.time()
+                print("Updated live currency rates")
+        except Exception as e:
+            print(f"Failed to fetch live currency rates: {e}")
+            
+    live_rates = parse_ticket_message.rates_cache['data']
+
     for line in lines_found:
         if not line.get('currency'):
-            line['currency'] = global_currency
+            line['currency'] = global_currency or 'USD' # Default to USD if undetectable
         
+        curr = line.get('currency', 'USD').upper()
+        
+        if curr != 'USD':
+            multiplier = None
+            
+            # 1. Try Live Rates (Base USD)
+            # API returns matches for 1 USD. e.g. EUR=0.92. So 1 EUR = 1/0.92 USD.
+            if live_rates and curr in live_rates:
+                try:
+                    rate = float(live_rates[curr])
+                    if rate > 0:
+                        multiplier = 1.0 / rate
+                except:
+                    pass
+            
+            # 2. Fallback to Static Rates
+            if multiplier is None:
+                # Static multipliers (Amount * X = USD)
+                static_rates = {
+                    'EUR': 1.05,
+                    'GBP': 1.25,
+                    'ILS': 0.28,
+                    'AUD': 0.65,
+                    'CAD': 0.74,
+                    'CHF': 1.10
+                }
+                multiplier = static_rates.get(curr)
+                
+            if multiplier:
+                line['original_price'] = line['price']
+                line['original_currency'] = curr
+                line['price'] = round(line['price'] * multiplier, 2)
+                line['currency'] = 'USD'
+            
         if line.get('match'):
             all_matches.add(line['match'])
     
