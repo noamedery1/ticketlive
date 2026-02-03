@@ -3855,16 +3855,266 @@
             "Category 1": 164.0,
             "Category 1 Premium": 200.0
           }
+        },
+        {
+          "timestamp": "2026-01-28T15:16:40.538648",
+          "prices": {
+            "Category 4": 95.0,
+            "Category 3": 106.0,
+            "Category 2": 116.99,
+            "Category 1": 164.0,
+            "Category 1 Premium": 200.0
+          }
+        },
+        {
+          "timestamp": "2026-01-28T19:09:42.723648",
+          "prices": {
+            "Category 4": 92.0,
+            "Category 3": 106.0,
+            "Category 2": 116.99,
+            "Category 1": 163.99,
+            "Category 1 Premium": 200.0
+          }
+        },
+        {
+          "timestamp": "2026-01-28T23:01:46.714648",
+          "prices": {
+            "Category 4": 92.0,
+            "Category 3": 106.0,
+            "Category 2": 116.99,
+            "Category 1": 163.99,
+            "Category 1 Premium": 200.0
+          }
+        },
+        {
+          "timestamp": "2026-01-29T02:51:44.210648",
+          "prices": {
+            "Category 4": 92.0,
+            "Category 3": 106.0,
+            "Category 2": 117.0,
+            "Category 1": 163.99,
+            "Category 1 Premium": 200.0
+          }
+        },
+        {
+          "timestamp": "2026-01-29T06:45:50.186648",
+          "prices": {
+            "Category 4": 92.0,
+            "Category 3": 106.0,
+            "Category 2": 117.0,
+            "Category 1": 163.99,
+            "Category 1 Premium": 200.0
+          }
+        },
+        {
+          "timestamp": "2026-01-29T10:42:51.679648",
+          "prices": {
+            "Category 4": 86.0,
+            "Category 3": 106.0,
+            "Category 2": 117.0,
+            "Category 1": 163.99,
+            "Category 1 Premium": 200.0
+          }
+        },
+        {
+          "timestamp": "2026-01-29T14:32:40.011648",
+          "prices": {
+            "Category 4": 83.0,
+            "Category 3": 104.0,
+            "Category 2": 117.0,
+            "Category 1": 159.0,
+            "Category 1 Premium": 200.0
+          }
+        },
+        {
+          "timestamp": "2026-01-29T18:22:13.809648",
+          "prices": {
+            "Category 4": 80.0,
+            "Category 3": 104.0,
+            "Category 2": 110.0,
+            "Category 1": 159.0,
+            "Category 1 Premium": 200.0
+          }
+        },
+        {
+          "timestamp": "2026-01-29T22:15:24.626648",
+          "prices": {
+            "Category 4": 80.0,
+            "Category 3": 104.0,
+            "Category 2": 110.0,
+            "Category 1": 159.0,
+            "Category 1 Premium": 200.0
+          }
+        },
+        {
+          "timestamp": "2026-01-30T02:09:07.488648",
+          "prices": {
+            "Category 4": 80.0,
+            "Category 3": 104.0,
+            "Category 2": 110.0,
+            "Category 1": 159.0,
+            "Category 1 Premium": 200.0
+          }
+        },
+        {
+          "timestamp": "2026-01-30T06:02:01.851648",
+          "prices": {
+            "Category 4": 80.0,
+            "Category 3": 104.0,
+            "Category 2": 110.0,
+            "Category 1": 159.0,
+            "Category 1 Premium": 200.0
+          }
+        },
+        {
+          "timestamp": "2026-01-30T09:51:00.995648",
+          "prices": {
+            "Category 4": 80.0,
+            "Category 3": 104.0,
+            "Category 2": 110.0,
+            "Category 1": 159.0,
+            "Category 1 Premium": 200.0
+          }
+        },
+        {
+          "timestamp": "2026-01-30T13:37:30.385648",
+          "prices": {
+            "Category 4": 75.0,
+            "Category 3": 104.0,
+            "Category 2": 116.99,
+            "Category 1": 159.0,
+            "Category 1 Premium": 200.0
+          }
+        },
+        {
+          "timestamp": "2026-01-30T17:33:08.154648",
+          "prices": {
+            "Category 4": 75.0,
+            "Category 2": 95.81,
+            "Category 3": 104.0,
+            "Category 1": 159.0,
+            "Category 1 Premium": 200.0
+          }
+        },
+        {
+          "timestamp": "2026-01-30T21:27:08.980648",
+          "prices": {
+            "Category 4": 75.0,
+            "Category 2": 95.81,
+            "Category 1": 99.0,
+            "Category 3": 104.0,
+            "Category 1 Premium": 200.0
+          }
+        },
+        {
+          "timestamp": "2026-01-31T01:21:39.477648",
+          "prices": {
+            "Category 4": 75.0,
+            "Category 2": 99.0,
+            "Category 1": 99.0,
+            "Category 3": 104.0,
+            "Category 1 Premium": 200.0
+          }
+        },
+        {
+          "timestamp": "2026-01-31T05:19:58.222648",
+          "prices": {
+            "Category 4": 75.0,
+            "Category 2": 99.0,
+            "Category 1": 99.0,
+            "Category 3": 104.0,
+            "Category 1 Premium": 200.0
+          }
+        },
+        {
+          "timestamp": "2026-01-31T09:14:47.114648",
+          "prices": {
+            "Category 4": 75.0,
+            "Category 2": 99.0,
+            "Category 1": 99.0,
+            "Category 3": 104.0,
+            "Category 1 Premium": 200.0
+          }
+        },
+        {
+          "timestamp": "2026-01-31T13:20:28.975648",
+          "prices": {
+            "Category 4": 75.0,
+            "Category 2": 99.0,
+            "Category 1": 99.0,
+            "Category 3": 104.0,
+            "Category 1 Premium": 200.0
+          }
+        },
+        {
+          "timestamp": "2026-01-31T17:19:08.065648",
+          "prices": {
+            "Category 4": 75.1,
+            "Category 3": 104.0,
+            "Category 2": 117.0,
+            "Category 1": 159.0,
+            "Category 1 Premium": 190.0
+          }
+        },
+        {
+          "timestamp": "2026-01-31T21:12:55.465648",
+          "prices": {
+            "Category 4": 90.0,
+            "Category 3": 140.0,
+            "Category 2": 160.0,
+            "Category 1 Premium": 164.55,
+            "Category 1": 164.55
+          }
+        },
+        {
+          "timestamp": "2026-02-01T01:08:10.263648",
+          "prices": {
+            "Category 4": 120.0,
+            "Category 3": 140.0,
+            "Category 2": 160.0,
+            "Category 1": 185.0,
+            "Category 1 Premium": 268.0
+          }
+        },
+        {
+          "timestamp": "2026-02-01T05:03:13.125648",
+          "prices": {
+            "Category 3": 140.0,
+            "Category 4": 146.0,
+            "Category 2": 160.0,
+            "Category 1": 185.0,
+            "Category 1 Premium": 268.0
+          }
+        },
+        {
+          "timestamp": "2026-02-01T09:01:41.013648",
+          "prices": {
+            "Category 3": 140.0,
+            "Category 4": 146.0,
+            "Category 2": 160.0,
+            "Category 1": 185.0,
+            "Category 1 Premium": 268.0
+          }
+        },
+        {
+          "timestamp": "2026-02-01T13:01:47.687648",
+          "prices": {
+            "Category 2": 125.0,
+            "Category 1": 125.0,
+            "Category 3": 170.0,
+            "Category 4": 223.0,
+            "Category 1 Premium": 268.99
+          }
         }
       ],
       "latest_prices": {
-        "Category 4": 93.0,
-        "Category 3": 106.0,
-        "Category 2": 116.99,
-        "Category 1": 164.0,
-        "Category 1 Premium": 200.0
+        "Category 2": 125.0,
+        "Category 1": 125.0,
+        "Category 3": 170.0,
+        "Category 4": 223.0,
+        "Category 1 Premium": 268.99
       },
-      "last_scraped": "2026-01-28T11:21:32.536648"
+      "last_scraped": "2026-02-01T13:01:47.687648"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-real-sociedad",
@@ -5125,16 +5375,386 @@
             "Category 1": 200.0,
             "Category 1 Premium": 214.0
           }
+        },
+        {
+          "timestamp": "2026-01-28T15:16:40.538648",
+          "prices": {
+            "Category 4": 129.0,
+            "Category 3": 152.0,
+            "Category 2": 168.0,
+            "Category 1": 200.0,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-01-28T19:09:42.723648",
+          "prices": {
+            "Category 4": 128.99,
+            "Category 3": 152.0,
+            "Category 2": 168.0,
+            "Category 1": 200.0,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-01-28T23:01:46.714648",
+          "prices": {
+            "Category 4": 128.99,
+            "Category 3": 152.0,
+            "Category 2": 168.0,
+            "Category 1": 200.0,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-01-29T02:51:44.210648",
+          "prices": {
+            "Category 4": 128.99,
+            "Category 3": 151.99,
+            "Category 2": 167.99,
+            "Category 1": 199.99,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-01-29T06:45:50.186648",
+          "prices": {
+            "Category 4": 128.99,
+            "Category 3": 151.99,
+            "Category 2": 167.99,
+            "Category 1": 199.99,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-01-29T10:42:51.679648",
+          "prices": {
+            "Category 4": 128.99,
+            "Category 3": 151.99,
+            "Category 2": 167.99,
+            "Category 1": 199.99,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-01-29T14:32:40.011648",
+          "prices": {
+            "Category 4": 124.0,
+            "Category 3": 147.0,
+            "Category 2": 163.0,
+            "Category 1": 195.0,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-01-29T18:22:13.809648",
+          "prices": {
+            "Category 4": 124.0,
+            "Category 3": 147.0,
+            "Category 2": 163.0,
+            "Category 1": 195.0,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-01-29T22:15:24.626648",
+          "prices": {
+            "Category 4": 123.99,
+            "Category 3": 146.99,
+            "Category 2": 162.99,
+            "Category 1": 194.99,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-01-30T02:09:07.488648",
+          "prices": {
+            "Category 4": 123.99,
+            "Category 3": 146.99,
+            "Category 2": 162.99,
+            "Category 1": 194.99,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-01-30T06:02:01.851648",
+          "prices": {
+            "Category 4": 123.99,
+            "Category 3": 146.99,
+            "Category 2": 162.99,
+            "Category 1": 194.99,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-01-30T09:51:00.995648",
+          "prices": {
+            "Category 4": 123.99,
+            "Category 3": 146.99,
+            "Category 2": 162.99,
+            "Category 1": 194.99,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-01-30T13:37:30.385648",
+          "prices": {
+            "Category 4": 123.99,
+            "Category 3": 146.99,
+            "Category 2": 162.99,
+            "Category 1": 194.99,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-01-30T17:33:08.154648",
+          "prices": {
+            "Category 4": 123.99,
+            "Category 3": 146.99,
+            "Category 2": 162.99,
+            "Category 1": 194.99,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-01-30T21:27:08.980648",
+          "prices": {
+            "Category 4": 123.99,
+            "Category 3": 146.99,
+            "Category 2": 162.99,
+            "Category 1": 194.99,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-01-31T01:21:39.477648",
+          "prices": {
+            "Category 4": 123.99,
+            "Category 3": 146.99,
+            "Category 2": 162.99,
+            "Category 1": 194.99,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-01-31T05:19:58.222648",
+          "prices": {
+            "Category 4": 123.99,
+            "Category 3": 146.99,
+            "Category 2": 162.99,
+            "Category 1": 194.99,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-01-31T09:14:47.114648",
+          "prices": {
+            "Category 4": 123.99,
+            "Category 3": 146.99,
+            "Category 2": 162.99,
+            "Category 1": 194.99,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-01-31T13:20:28.975648",
+          "prices": {
+            "Category 4": 123.99,
+            "Category 3": 146.99,
+            "Category 2": 162.99,
+            "Category 1": 194.99,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-01-31T17:19:08.065648",
+          "prices": {
+            "Category 4": 123.99,
+            "Category 3": 146.99,
+            "Category 2": 162.99,
+            "Category 1": 194.99,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-01-31T21:12:55.465648",
+          "prices": {
+            "Category 4": 123.99,
+            "Category 3": 146.99,
+            "Category 2": 162.99,
+            "Category 1": 194.99,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-02-01T01:08:10.263648",
+          "prices": {
+            "Category 4": 123.99,
+            "Category 3": 146.99,
+            "Category 2": 162.99,
+            "Category 1": 194.99,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-02-01T05:03:13.125648",
+          "prices": {
+            "Category 4": 123.99,
+            "Category 3": 146.99,
+            "Category 2": 162.99,
+            "Category 1": 194.99,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-02-01T09:01:41.013648",
+          "prices": {
+            "Category 4": 123.99,
+            "Category 3": 146.99,
+            "Category 2": 162.99,
+            "Category 1": 194.99,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-02-01T13:01:47.687648",
+          "prices": {
+            "Category 4": 123.99,
+            "Category 3": 146.99,
+            "Category 2": 162.99,
+            "Category 1": 194.99,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-02-01T16:55:14.990648",
+          "prices": {
+            "Category 4": 123.99,
+            "Category 3": 146.99,
+            "Category 2": 162.99,
+            "Category 1": 194.99,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-02-01T20:48:09.557648",
+          "prices": {
+            "Category 4": 123.99,
+            "Category 3": 146.99,
+            "Category 2": 162.99,
+            "Category 1": 194.99,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-02-02T00:40:47.121648",
+          "prices": {
+            "Category 4": 123.99,
+            "Category 3": 146.99,
+            "Category 2": 162.98,
+            "Category 1": 194.98,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-02-02T04:31:59.267648",
+          "prices": {
+            "Category 4": 123.99,
+            "Category 3": 146.99,
+            "Category 2": 162.98,
+            "Category 1": 194.98,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-02-02T08:26:43.842648",
+          "prices": {
+            "Category 4": 123.99,
+            "Category 3": 146.99,
+            "Category 2": 162.98,
+            "Category 1": 194.98,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-02-02T12:17:06.315648",
+          "prices": {
+            "Category 4": 123.99,
+            "Category 3": 146.99,
+            "Category 2": 162.98,
+            "Category 1": 194.98,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-02-02T16:10:52.425648",
+          "prices": {
+            "Category 4": 123.99,
+            "Category 3": 146.99,
+            "Category 2": 162.97,
+            "Category 1": 194.97,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-02-02T20:12:46.322648",
+          "prices": {
+            "Category 4": 107.09,
+            "Category 3": 131.99,
+            "Category 2": 156.99,
+            "Category 1": 189.0,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-02-03T00:32:27.792648",
+          "prices": {
+            "Category 4": 107.09,
+            "Category 3": 131.99,
+            "Category 2": 156.99,
+            "Category 1": 189.0,
+            "Category 1 Premium": 211.0
+          }
+        },
+        {
+          "timestamp": "2026-02-03T04:45:23.972648",
+          "prices": {
+            "Category 4": 107.09,
+            "Category 3": 131.99,
+            "Category 2": 156.95,
+            "Category 1": 188.99,
+            "Category 1 Premium": 210.99
+          }
+        },
+        {
+          "timestamp": "2026-02-03T08:41:01.924648",
+          "prices": {
+            "Category 4": 107.09,
+            "Category 3": 132.0,
+            "Category 2": 156.95,
+            "Category 1": 188.99,
+            "Category 1 Premium": 210.99
+          }
+        },
+        {
+          "timestamp": "2026-02-03T12:33:38.987648",
+          "prices": {
+            "Category 4": 102.0,
+            "Category 3": 127.0,
+            "Category 2": 152.0,
+            "Category 1": 184.0,
+            "Category 1 Premium": 206.0
+          }
         }
       ],
       "latest_prices": {
-        "Category 4": 129.0,
-        "Category 3": 152.0,
-        "Category 2": 168.0,
-        "Category 1": 200.0,
-        "Category 1 Premium": 214.0
+        "Category 4": 102.0,
+        "Category 3": 127.0,
+        "Category 2": 152.0,
+        "Category 1": 184.0,
+        "Category 1 Premium": 206.0
       },
-      "last_scraped": "2026-01-28T11:21:32.536648"
+      "last_scraped": "2026-02-03T12:33:38.987648"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-getafe-cf",
@@ -6311,16 +6931,386 @@
             "Category 1": 202.0,
             "Category 1 Premium": 209.0
           }
+        },
+        {
+          "timestamp": "2026-01-28T15:16:40.538648",
+          "prices": {
+            "Category 4": 131.0,
+            "Category 3": 150.0,
+            "Category 2": 157.0,
+            "Category 1": 202.0,
+            "Category 1 Premium": 209.0
+          }
+        },
+        {
+          "timestamp": "2026-01-28T19:09:42.723648",
+          "prices": {
+            "Category 4": 130.99,
+            "Category 3": 149.98,
+            "Category 2": 156.98,
+            "Category 1": 201.99,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-01-28T23:01:46.714648",
+          "prices": {
+            "Category 4": 130.99,
+            "Category 3": 149.98,
+            "Category 2": 156.98,
+            "Category 1": 201.99,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-01-29T02:51:44.210648",
+          "prices": {
+            "Category 4": 130.99,
+            "Category 3": 149.98,
+            "Category 2": 156.98,
+            "Category 1": 201.98,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-01-29T06:45:50.186648",
+          "prices": {
+            "Category 4": 130.99,
+            "Category 3": 149.98,
+            "Category 2": 156.98,
+            "Category 1": 201.98,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-01-29T10:42:51.679648",
+          "prices": {
+            "Category 4": 130.99,
+            "Category 3": 149.98,
+            "Category 2": 156.98,
+            "Category 1": 201.98,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-01-29T14:32:40.011648",
+          "prices": {
+            "Category 4": 130.99,
+            "Category 3": 149.98,
+            "Category 2": 156.98,
+            "Category 1": 201.98,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-01-29T18:22:13.809648",
+          "prices": {
+            "Category 4": 130.99,
+            "Category 3": 149.98,
+            "Category 2": 156.98,
+            "Category 1": 197.0,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-01-29T22:15:24.626648",
+          "prices": {
+            "Category 4": 126.0,
+            "Category 3": 145.0,
+            "Category 2": 152.0,
+            "Category 1": 197.0,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-01-30T02:09:07.488648",
+          "prices": {
+            "Category 4": 126.0,
+            "Category 3": 145.0,
+            "Category 2": 152.0,
+            "Category 1": 197.0,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-01-30T06:02:01.851648",
+          "prices": {
+            "Category 4": 126.0,
+            "Category 3": 145.0,
+            "Category 2": 152.0,
+            "Category 1": 197.0,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-01-30T09:51:00.995648",
+          "prices": {
+            "Category 4": 126.0,
+            "Category 3": 145.0,
+            "Category 2": 152.0,
+            "Category 1": 197.0,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-01-30T13:37:30.385648",
+          "prices": {
+            "Category 4": 125.99,
+            "Category 3": 144.99,
+            "Category 2": 152.0,
+            "Category 1": 197.0,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-01-30T17:33:08.154648",
+          "prices": {
+            "Category 4": 125.99,
+            "Category 3": 144.99,
+            "Category 2": 152.0,
+            "Category 1": 197.0,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-01-30T21:27:08.980648",
+          "prices": {
+            "Category 4": 125.99,
+            "Category 3": 144.95,
+            "Category 2": 151.99,
+            "Category 1": 196.99,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-01-31T01:21:39.477648",
+          "prices": {
+            "Category 4": 125.99,
+            "Category 3": 144.94,
+            "Category 2": 151.99,
+            "Category 1": 196.98,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-01-31T05:19:58.222648",
+          "prices": {
+            "Category 4": 125.99,
+            "Category 3": 144.94,
+            "Category 2": 151.99,
+            "Category 1": 196.98,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-01-31T09:14:47.114648",
+          "prices": {
+            "Category 4": 125.99,
+            "Category 3": 144.94,
+            "Category 2": 151.99,
+            "Category 1": 196.98,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-01-31T13:20:28.975648",
+          "prices": {
+            "Category 4": 125.99,
+            "Category 3": 144.94,
+            "Category 2": 151.98,
+            "Category 1": 196.98,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-01-31T17:19:08.065648",
+          "prices": {
+            "Category 4": 125.99,
+            "Category 3": 144.94,
+            "Category 2": 151.98,
+            "Category 1": 196.98,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-01-31T21:12:55.465648",
+          "prices": {
+            "Category 4": 125.99,
+            "Category 3": 144.94,
+            "Category 2": 151.98,
+            "Category 1": 196.98,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-02-01T01:08:10.263648",
+          "prices": {
+            "Category 4": 125.99,
+            "Category 3": 144.94,
+            "Category 2": 151.98,
+            "Category 1": 196.98,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-02-01T05:03:13.125648",
+          "prices": {
+            "Category 4": 125.99,
+            "Category 3": 144.94,
+            "Category 2": 151.98,
+            "Category 1": 196.98,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-02-01T09:01:41.013648",
+          "prices": {
+            "Category 4": 125.99,
+            "Category 3": 144.94,
+            "Category 2": 151.98,
+            "Category 1": 196.98,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-02-01T13:01:47.687648",
+          "prices": {
+            "Category 4": 125.99,
+            "Category 3": 144.94,
+            "Category 2": 151.98,
+            "Category 1": 196.98,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-02-01T16:55:14.990648",
+          "prices": {
+            "Category 4": 125.99,
+            "Category 3": 144.94,
+            "Category 2": 151.98,
+            "Category 1": 196.98,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-02-01T20:48:09.557648",
+          "prices": {
+            "Category 4": 125.99,
+            "Category 3": 144.94,
+            "Category 2": 151.98,
+            "Category 1": 196.98,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-02-02T00:40:47.121648",
+          "prices": {
+            "Category 4": 125.99,
+            "Category 3": 144.94,
+            "Category 2": 151.98,
+            "Category 1": 196.98,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-02-02T04:31:59.267648",
+          "prices": {
+            "Category 4": 125.99,
+            "Category 3": 144.94,
+            "Category 2": 151.98,
+            "Category 1": 196.98,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-02-02T08:26:43.842648",
+          "prices": {
+            "Category 4": 125.99,
+            "Category 3": 144.94,
+            "Category 2": 151.98,
+            "Category 1": 196.98,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-02-02T12:17:06.315648",
+          "prices": {
+            "Category 4": 125.99,
+            "Category 3": 144.94,
+            "Category 2": 151.98,
+            "Category 1": 196.98,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-02-02T16:10:52.425648",
+          "prices": {
+            "Category 4": 125.99,
+            "Category 3": 144.94,
+            "Category 2": 151.98,
+            "Category 1": 196.98,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-02-02T20:12:46.322648",
+          "prices": {
+            "Category 4": 125.99,
+            "Category 3": 144.93,
+            "Category 2": 151.97,
+            "Category 1": 196.97,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-02-03T00:32:27.792648",
+          "prices": {
+            "Category 4": 125.99,
+            "Category 3": 144.93,
+            "Category 2": 151.97,
+            "Category 1": 196.97,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-02-03T04:45:23.972648",
+          "prices": {
+            "Category 4": 125.99,
+            "Category 3": 144.93,
+            "Category 2": 151.97,
+            "Category 1": 196.97,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-02-03T08:41:01.924648",
+          "prices": {
+            "Category 4": 125.99,
+            "Category 3": 144.93,
+            "Category 2": 151.97,
+            "Category 1": 196.97,
+            "Category 1 Premium": 208.99
+          }
+        },
+        {
+          "timestamp": "2026-02-03T12:33:38.987648",
+          "prices": {
+            "Category 4": 125.99,
+            "Category 3": 144.92,
+            "Category 2": 151.96,
+            "Category 1": 196.96,
+            "Category 1 Premium": 208.99
+          }
         }
       ],
       "latest_prices": {
-        "Category 4": 131.0,
-        "Category 3": 150.0,
-        "Category 2": 157.0,
-        "Category 1": 202.0,
-        "Category 1 Premium": 209.0
+        "Category 4": 125.99,
+        "Category 3": 144.92,
+        "Category 2": 151.96,
+        "Category 1": 196.96,
+        "Category 1 Premium": 208.99
       },
-      "last_scraped": "2026-01-28T11:21:32.536648"
+      "last_scraped": "2026-02-03T12:33:38.987648"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-elche",
@@ -7491,16 +8481,386 @@
             "Category 1": 205.99,
             "Category 1 Premium": 209.99
           }
+        },
+        {
+          "timestamp": "2026-01-28T15:16:40.538648",
+          "prices": {
+            "Category 4": 117.0,
+            "Category 3": 146.0,
+            "Category 2": 156.0,
+            "Category 1": 201.0,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-01-28T19:09:42.723648",
+          "prices": {
+            "Category 4": 116.99,
+            "Category 3": 145.99,
+            "Category 2": 155.99,
+            "Category 1": 201.0,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-01-28T23:01:46.714648",
+          "prices": {
+            "Category 4": 116.99,
+            "Category 3": 145.99,
+            "Category 2": 155.99,
+            "Category 1": 201.0,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-01-29T02:51:44.210648",
+          "prices": {
+            "Category 4": 116.99,
+            "Category 3": 145.99,
+            "Category 2": 155.99,
+            "Category 1": 201.0,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-01-29T06:45:50.186648",
+          "prices": {
+            "Category 4": 116.99,
+            "Category 3": 145.99,
+            "Category 2": 155.99,
+            "Category 1": 201.0,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-01-29T10:42:51.679648",
+          "prices": {
+            "Category 4": 116.99,
+            "Category 3": 145.99,
+            "Category 2": 155.99,
+            "Category 1": 201.0,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-01-29T14:32:40.011648",
+          "prices": {
+            "Category 4": 116.99,
+            "Category 3": 145.99,
+            "Category 2": 155.99,
+            "Category 1": 201.0,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-01-29T18:22:13.809648",
+          "prices": {
+            "Category 4": 116.99,
+            "Category 3": 145.99,
+            "Category 2": 155.99,
+            "Category 1": 201.0,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-01-29T22:15:24.626648",
+          "prices": {
+            "Category 4": 116.99,
+            "Category 3": 145.99,
+            "Category 2": 155.98,
+            "Category 1": 200.99,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-01-30T02:09:07.488648",
+          "prices": {
+            "Category 4": 116.99,
+            "Category 3": 145.99,
+            "Category 2": 155.98,
+            "Category 1": 200.99,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-01-30T06:02:01.851648",
+          "prices": {
+            "Category 4": 116.99,
+            "Category 3": 145.99,
+            "Category 2": 155.98,
+            "Category 1": 200.99,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-01-30T09:51:00.995648",
+          "prices": {
+            "Category 4": 116.99,
+            "Category 3": 145.99,
+            "Category 2": 155.98,
+            "Category 1": 200.99,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-01-30T13:37:30.385648",
+          "prices": {
+            "Category 4": 116.99,
+            "Category 3": 145.99,
+            "Category 2": 155.98,
+            "Category 1": 200.99,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-01-30T17:33:08.154648",
+          "prices": {
+            "Category 4": 116.99,
+            "Category 3": 145.99,
+            "Category 2": 155.98,
+            "Category 1": 200.99,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-01-30T21:27:08.980648",
+          "prices": {
+            "Category 4": 116.99,
+            "Category 3": 145.99,
+            "Category 2": 155.98,
+            "Category 1": 200.99,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-01-31T01:21:39.477648",
+          "prices": {
+            "Category 4": 116.98,
+            "Category 3": 145.99,
+            "Category 2": 155.98,
+            "Category 1": 200.99,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-01-31T05:19:58.222648",
+          "prices": {
+            "Category 4": 116.98,
+            "Category 3": 145.99,
+            "Category 2": 155.98,
+            "Category 1": 200.99,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-01-31T09:14:47.114648",
+          "prices": {
+            "Category 4": 116.98,
+            "Category 3": 145.99,
+            "Category 2": 155.98,
+            "Category 1": 200.99,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-01-31T13:20:28.975648",
+          "prices": {
+            "Category 4": 116.98,
+            "Category 3": 145.99,
+            "Category 2": 155.98,
+            "Category 1": 200.99,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-01-31T17:19:08.065648",
+          "prices": {
+            "Category 4": 116.98,
+            "Category 3": 145.99,
+            "Category 2": 155.98,
+            "Category 1": 200.99,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-01-31T21:12:55.465648",
+          "prices": {
+            "Category 4": 116.98,
+            "Category 3": 145.99,
+            "Category 2": 155.98,
+            "Category 1": 200.99,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-02-01T01:08:10.263648",
+          "prices": {
+            "Category 4": 116.98,
+            "Category 3": 145.99,
+            "Category 2": 155.98,
+            "Category 1": 200.99,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-02-01T05:03:13.125648",
+          "prices": {
+            "Category 4": 116.98,
+            "Category 3": 145.99,
+            "Category 2": 155.98,
+            "Category 1": 200.99,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-02-01T09:01:41.013648",
+          "prices": {
+            "Category 4": 116.98,
+            "Category 3": 145.99,
+            "Category 2": 155.98,
+            "Category 1": 200.99,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-02-01T13:01:47.687648",
+          "prices": {
+            "Category 4": 116.98,
+            "Category 3": 145.98,
+            "Category 2": 155.98,
+            "Category 1": 200.99,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-02-01T16:55:14.990648",
+          "prices": {
+            "Category 4": 116.98,
+            "Category 3": 145.98,
+            "Category 2": 155.98,
+            "Category 1": 200.99,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-02-01T20:48:09.557648",
+          "prices": {
+            "Category 4": 116.98,
+            "Category 3": 145.98,
+            "Category 2": 155.98,
+            "Category 1": 200.99,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-02-02T00:40:47.121648",
+          "prices": {
+            "Category 4": 116.98,
+            "Category 3": 145.98,
+            "Category 2": 155.98,
+            "Category 1": 200.99,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-02-02T04:31:59.267648",
+          "prices": {
+            "Category 4": 116.98,
+            "Category 3": 145.98,
+            "Category 2": 155.98,
+            "Category 1": 200.99,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-02-02T08:26:43.842648",
+          "prices": {
+            "Category 4": 116.98,
+            "Category 3": 145.98,
+            "Category 2": 155.98,
+            "Category 1": 200.99,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-02-02T12:17:06.315648",
+          "prices": {
+            "Category 4": 116.98,
+            "Category 3": 145.98,
+            "Category 2": 155.98,
+            "Category 1": 200.99,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-02-02T16:10:52.425648",
+          "prices": {
+            "Category 4": 116.98,
+            "Category 3": 145.98,
+            "Category 2": 155.98,
+            "Category 1": 200.99,
+            "Category 1 Premium": 206.0
+          }
+        },
+        {
+          "timestamp": "2026-02-02T20:12:46.322648",
+          "prices": {
+            "Category 4": 116.97,
+            "Category 3": 145.97,
+            "Category 2": 155.97,
+            "Category 1": 200.98,
+            "Category 1 Premium": 205.99
+          }
+        },
+        {
+          "timestamp": "2026-02-03T00:32:27.792648",
+          "prices": {
+            "Category 4": 116.97,
+            "Category 3": 145.97,
+            "Category 2": 155.97,
+            "Category 1": 200.98,
+            "Category 1 Premium": 205.99
+          }
+        },
+        {
+          "timestamp": "2026-02-03T04:45:23.972648",
+          "prices": {
+            "Category 4": 116.97,
+            "Category 3": 145.97,
+            "Category 2": 155.97,
+            "Category 1": 200.98,
+            "Category 1 Premium": 205.99
+          }
+        },
+        {
+          "timestamp": "2026-02-03T08:41:01.924648",
+          "prices": {
+            "Category 4": 116.97,
+            "Category 3": 145.97,
+            "Category 2": 155.97,
+            "Category 1": 200.98,
+            "Category 1 Premium": 205.99
+          }
+        },
+        {
+          "timestamp": "2026-02-03T12:33:38.987648",
+          "prices": {
+            "Category 4": 116.97,
+            "Category 3": 145.97,
+            "Category 2": 155.96,
+            "Category 1": 200.97,
+            "Category 1 Premium": 205.99
+          }
         }
       ],
       "latest_prices": {
-        "Category 4": 120.99,
-        "Category 3": 150.99,
-        "Category 2": 160.99,
-        "Category 1": 205.99,
-        "Category 1 Premium": 209.99
+        "Category 4": 116.97,
+        "Category 3": 145.97,
+        "Category 2": 155.96,
+        "Category 1": 200.97,
+        "Category 1 Premium": 205.99
       },
-      "last_scraped": "2026-01-28T11:21:32.536648"
+      "last_scraped": "2026-02-03T12:33:38.987648"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-atletico-madrid",
@@ -8928,16 +10288,386 @@
             "Category 1": 431.0,
             "Category 1 Premium": 493.0
           }
+        },
+        {
+          "timestamp": "2026-01-28T15:16:40.538648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-01-28T19:09:42.723648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-01-28T23:01:46.714648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-01-29T02:51:44.210648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-01-29T06:45:50.186648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-01-29T10:42:51.679648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-01-29T14:32:40.011648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-01-29T18:22:13.809648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-01-29T22:15:24.626648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-01-30T02:09:07.488648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-01-30T06:02:01.851648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-01-30T09:51:00.995648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-01-30T13:37:30.385648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-01-30T17:33:08.154648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-01-30T21:27:08.980648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-01-31T01:21:39.477648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-01-31T05:19:58.222648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-01-31T09:14:47.114648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-01-31T13:20:28.975648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-01-31T17:19:08.065648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-01-31T21:12:55.465648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-02-01T01:08:10.263648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-02-01T05:03:13.125648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-02-01T09:01:41.013648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-02-01T13:01:47.687648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-02-01T16:55:14.990648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-02-01T20:48:09.557648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-02-02T00:40:47.121648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-02-02T04:31:59.267648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-02-02T08:26:43.842648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-02-02T12:17:06.315648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-02-02T16:10:52.425648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-02-02T20:12:46.322648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-02-03T00:32:27.792648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-02-03T04:45:23.972648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-02-03T08:41:01.924648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
+        },
+        {
+          "timestamp": "2026-02-03T12:33:38.987648",
+          "prices": {
+            "Category 4": 307.0,
+            "Category 3": 377.0,
+            "Category 2": 397.0,
+            "Category 1": 420.0,
+            "Category 1 Premium": 493.0
+          }
         }
       ],
       "latest_prices": {
-        "Category 4": 318.0,
+        "Category 4": 307.0,
         "Category 3": 377.0,
-        "Category 2": 408.0,
-        "Category 1": 431.0,
+        "Category 2": 397.0,
+        "Category 1": 420.0,
         "Category 1 Premium": 493.0
       },
-      "last_scraped": "2026-01-28T11:21:32.536648"
+      "last_scraped": "2026-02-03T12:33:38.987648"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-girona",
@@ -10283,16 +12013,386 @@
             "Category 1 Premium": 219.98,
             "Category 1": 219.98
           }
+        },
+        {
+          "timestamp": "2026-01-28T15:16:40.538648",
+          "prices": {
+            "Category 4": 146.99,
+            "Category 3": 173.89,
+            "Category 2": 189.98,
+            "Category 1 Premium": 219.98,
+            "Category 1": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-01-28T19:09:42.723648",
+          "prices": {
+            "Category 4": 142.0,
+            "Category 3": 169.0,
+            "Category 2": 187.0,
+            "Category 1": 215.0,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-01-28T23:01:46.714648",
+          "prices": {
+            "Category 4": 142.0,
+            "Category 3": 169.0,
+            "Category 2": 187.0,
+            "Category 1": 215.0,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-01-29T02:51:44.210648",
+          "prices": {
+            "Category 4": 142.0,
+            "Category 3": 169.0,
+            "Category 2": 187.0,
+            "Category 1": 215.0,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-01-29T06:45:50.186648",
+          "prices": {
+            "Category 4": 142.0,
+            "Category 3": 169.0,
+            "Category 2": 187.0,
+            "Category 1": 215.0,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-01-29T10:42:51.679648",
+          "prices": {
+            "Category 4": 142.0,
+            "Category 3": 169.0,
+            "Category 2": 187.0,
+            "Category 1": 215.0,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-01-29T14:32:40.011648",
+          "prices": {
+            "Category 4": 141.99,
+            "Category 3": 168.99,
+            "Category 2": 186.99,
+            "Category 1": 214.99,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-01-29T18:22:13.809648",
+          "prices": {
+            "Category 4": 141.99,
+            "Category 3": 168.99,
+            "Category 2": 186.99,
+            "Category 1": 214.99,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-01-29T22:15:24.626648",
+          "prices": {
+            "Category 4": 141.99,
+            "Category 3": 168.99,
+            "Category 2": 186.99,
+            "Category 1": 214.99,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-01-30T02:09:07.488648",
+          "prices": {
+            "Category 4": 141.99,
+            "Category 3": 168.99,
+            "Category 2": 186.99,
+            "Category 1": 214.99,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-01-30T06:02:01.851648",
+          "prices": {
+            "Category 4": 141.99,
+            "Category 3": 168.99,
+            "Category 2": 186.99,
+            "Category 1": 214.99,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-01-30T09:51:00.995648",
+          "prices": {
+            "Category 4": 141.99,
+            "Category 3": 168.99,
+            "Category 2": 186.99,
+            "Category 1": 214.99,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-01-30T13:37:30.385648",
+          "prices": {
+            "Category 4": 141.99,
+            "Category 3": 168.99,
+            "Category 2": 186.99,
+            "Category 1": 214.99,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-01-30T17:33:08.154648",
+          "prices": {
+            "Category 4": 141.99,
+            "Category 3": 168.99,
+            "Category 2": 186.99,
+            "Category 1": 214.99,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-01-30T21:27:08.980648",
+          "prices": {
+            "Category 4": 141.99,
+            "Category 3": 168.99,
+            "Category 2": 186.99,
+            "Category 1": 214.99,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-01-31T01:21:39.477648",
+          "prices": {
+            "Category 4": 141.99,
+            "Category 3": 168.99,
+            "Category 2": 186.99,
+            "Category 1": 214.99,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-01-31T05:19:58.222648",
+          "prices": {
+            "Category 4": 141.99,
+            "Category 3": 168.99,
+            "Category 2": 186.99,
+            "Category 1": 214.99,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-01-31T09:14:47.114648",
+          "prices": {
+            "Category 4": 141.99,
+            "Category 3": 168.99,
+            "Category 2": 186.99,
+            "Category 1": 214.99,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-01-31T13:20:28.975648",
+          "prices": {
+            "Category 4": 141.99,
+            "Category 3": 168.99,
+            "Category 2": 186.99,
+            "Category 1": 214.99,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-01-31T17:19:08.065648",
+          "prices": {
+            "Category 4": 141.99,
+            "Category 3": 168.99,
+            "Category 2": 186.99,
+            "Category 1": 214.99,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-01-31T21:12:55.465648",
+          "prices": {
+            "Category 4": 141.99,
+            "Category 3": 168.99,
+            "Category 2": 186.99,
+            "Category 1": 214.99,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-02-01T01:08:10.263648",
+          "prices": {
+            "Category 4": 141.99,
+            "Category 3": 168.99,
+            "Category 2": 186.99,
+            "Category 1": 214.99,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-02-01T05:03:13.125648",
+          "prices": {
+            "Category 4": 141.99,
+            "Category 3": 168.99,
+            "Category 2": 186.99,
+            "Category 1": 214.99,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-02-01T09:01:41.013648",
+          "prices": {
+            "Category 4": 141.99,
+            "Category 3": 168.99,
+            "Category 2": 186.99,
+            "Category 1": 214.99,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-02-01T13:01:47.687648",
+          "prices": {
+            "Category 4": 141.99,
+            "Category 3": 168.99,
+            "Category 2": 186.99,
+            "Category 1": 214.99,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-02-01T16:55:14.990648",
+          "prices": {
+            "Category 4": 141.99,
+            "Category 3": 168.99,
+            "Category 2": 186.99,
+            "Category 1": 214.99,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-02-01T20:48:09.557648",
+          "prices": {
+            "Category 4": 141.99,
+            "Category 3": 168.99,
+            "Category 2": 186.99,
+            "Category 1": 214.99,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-02-02T00:40:47.121648",
+          "prices": {
+            "Category 4": 141.99,
+            "Category 3": 168.99,
+            "Category 2": 186.99,
+            "Category 1": 214.99,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-02-02T04:31:59.267648",
+          "prices": {
+            "Category 4": 141.99,
+            "Category 3": 168.99,
+            "Category 2": 186.99,
+            "Category 1": 214.99,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-02-02T08:26:43.842648",
+          "prices": {
+            "Category 4": 141.99,
+            "Category 3": 168.99,
+            "Category 2": 186.99,
+            "Category 1": 214.99,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-02-02T12:17:06.315648",
+          "prices": {
+            "Category 4": 141.99,
+            "Category 3": 168.99,
+            "Category 2": 186.99,
+            "Category 1": 214.99,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-02-02T16:10:52.425648",
+          "prices": {
+            "Category 4": 141.99,
+            "Category 3": 168.99,
+            "Category 2": 186.99,
+            "Category 1": 214.99,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-02-02T20:12:46.322648",
+          "prices": {
+            "Category 4": 141.99,
+            "Category 3": 168.99,
+            "Category 2": 186.99,
+            "Category 1": 214.99,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-02-03T00:32:27.792648",
+          "prices": {
+            "Category 4": 141.99,
+            "Category 3": 168.99,
+            "Category 2": 186.99,
+            "Category 1": 214.99,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-02-03T04:45:23.972648",
+          "prices": {
+            "Category 4": 141.99,
+            "Category 3": 168.99,
+            "Category 2": 186.99,
+            "Category 1": 214.99,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-02-03T08:41:01.924648",
+          "prices": {
+            "Category 4": 141.99,
+            "Category 3": 168.99,
+            "Category 2": 186.99,
+            "Category 1": 214.99,
+            "Category 1 Premium": 219.98
+          }
+        },
+        {
+          "timestamp": "2026-02-03T12:33:38.987648",
+          "prices": {
+            "Category 4": 141.99,
+            "Category 3": 168.99,
+            "Category 2": 186.99,
+            "Category 1": 214.99,
+            "Category 1 Premium": 219.98
+          }
         }
       ],
       "latest_prices": {
-        "Category 4": 146.99,
-        "Category 3": 173.89,
-        "Category 2": 189.98,
-        "Category 1 Premium": 219.98,
-        "Category 1": 219.98
+        "Category 4": 141.99,
+        "Category 3": 168.99,
+        "Category 2": 186.99,
+        "Category 1": 214.99,
+        "Category 1 Premium": 219.98
       },
-      "last_scraped": "2026-01-28T11:21:32.536648"
+      "last_scraped": "2026-02-03T12:33:38.987648"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-deportivo-alaves",
@@ -11727,16 +13827,386 @@
             "Category 1": 222.81,
             "Category 1 Premium": 222.89
           }
+        },
+        {
+          "timestamp": "2026-01-28T15:16:40.538648",
+          "prices": {
+            "Category 4": 129.86,
+            "Category 3": 165.81,
+            "Category 2": 168.89,
+            "Category 1": 222.81,
+            "Category 1 Premium": 222.89
+          }
+        },
+        {
+          "timestamp": "2026-01-28T19:09:42.723648",
+          "prices": {
+            "Category 4": 125.0,
+            "Category 3": 159.0,
+            "Category 2": 164.0,
+            "Category 1": 222.81,
+            "Category 1 Premium": 222.89
+          }
+        },
+        {
+          "timestamp": "2026-01-28T23:01:46.714648",
+          "prices": {
+            "Category 4": 125.0,
+            "Category 3": 159.0,
+            "Category 2": 164.0,
+            "Category 1": 222.81,
+            "Category 1 Premium": 222.89
+          }
+        },
+        {
+          "timestamp": "2026-01-29T02:51:44.210648",
+          "prices": {
+            "Category 4": 125.0,
+            "Category 3": 159.0,
+            "Category 2": 164.0,
+            "Category 1": 222.81,
+            "Category 1 Premium": 222.89
+          }
+        },
+        {
+          "timestamp": "2026-01-29T06:45:50.186648",
+          "prices": {
+            "Category 4": 125.0,
+            "Category 3": 159.0,
+            "Category 2": 164.0,
+            "Category 1": 222.81,
+            "Category 1 Premium": 222.89
+          }
+        },
+        {
+          "timestamp": "2026-01-29T10:42:51.679648",
+          "prices": {
+            "Category 4": 125.0,
+            "Category 3": 159.0,
+            "Category 2": 164.0,
+            "Category 1": 222.81,
+            "Category 1 Premium": 222.89
+          }
+        },
+        {
+          "timestamp": "2026-01-29T14:32:40.011648",
+          "prices": {
+            "Category 4": 124.99,
+            "Category 3": 159.0,
+            "Category 2": 164.0,
+            "Category 1": 222.81,
+            "Category 1 Premium": 222.89
+          }
+        },
+        {
+          "timestamp": "2026-01-29T18:22:13.809648",
+          "prices": {
+            "Category 4": 124.99,
+            "Category 3": 159.0,
+            "Category 2": 164.0,
+            "Category 1": 222.81,
+            "Category 1 Premium": 222.89
+          }
+        },
+        {
+          "timestamp": "2026-01-29T22:15:24.626648",
+          "prices": {
+            "Category 4": 124.99,
+            "Category 3": 158.99,
+            "Category 2": 163.99,
+            "Category 1": 222.8,
+            "Category 1 Premium": 222.87
+          }
+        },
+        {
+          "timestamp": "2026-01-30T02:09:07.488648",
+          "prices": {
+            "Category 4": 124.99,
+            "Category 3": 158.99,
+            "Category 2": 163.99,
+            "Category 1": 222.8,
+            "Category 1 Premium": 222.87
+          }
+        },
+        {
+          "timestamp": "2026-01-30T06:02:01.851648",
+          "prices": {
+            "Category 4": 124.99,
+            "Category 3": 158.99,
+            "Category 2": 163.99,
+            "Category 1": 222.8,
+            "Category 1 Premium": 222.87
+          }
+        },
+        {
+          "timestamp": "2026-01-30T09:51:00.995648",
+          "prices": {
+            "Category 4": 124.99,
+            "Category 3": 158.99,
+            "Category 2": 163.99,
+            "Category 1": 222.8,
+            "Category 1 Premium": 222.87
+          }
+        },
+        {
+          "timestamp": "2026-01-30T13:37:30.385648",
+          "prices": {
+            "Category 4": 124.99,
+            "Category 3": 158.99,
+            "Category 2": 163.99,
+            "Category 1": 222.8,
+            "Category 1 Premium": 222.87
+          }
+        },
+        {
+          "timestamp": "2026-01-30T17:33:08.154648",
+          "prices": {
+            "Category 4": 124.99,
+            "Category 3": 158.99,
+            "Category 2": 163.99,
+            "Category 1": 222.8,
+            "Category 1 Premium": 222.87
+          }
+        },
+        {
+          "timestamp": "2026-01-30T21:27:08.980648",
+          "prices": {
+            "Category 4": 124.99,
+            "Category 3": 158.99,
+            "Category 2": 163.99,
+            "Category 1": 222.8,
+            "Category 1 Premium": 222.87
+          }
+        },
+        {
+          "timestamp": "2026-01-31T01:21:39.477648",
+          "prices": {
+            "Category 4": 124.99,
+            "Category 3": 158.99,
+            "Category 2": 163.99,
+            "Category 1": 222.8,
+            "Category 1 Premium": 222.87
+          }
+        },
+        {
+          "timestamp": "2026-01-31T05:19:58.222648",
+          "prices": {
+            "Category 4": 124.99,
+            "Category 3": 158.99,
+            "Category 2": 163.99,
+            "Category 1": 222.8,
+            "Category 1 Premium": 222.87
+          }
+        },
+        {
+          "timestamp": "2026-01-31T09:14:47.114648",
+          "prices": {
+            "Category 4": 124.99,
+            "Category 3": 158.99,
+            "Category 2": 163.99,
+            "Category 1": 222.8,
+            "Category 1 Premium": 222.87
+          }
+        },
+        {
+          "timestamp": "2026-01-31T13:20:28.975648",
+          "prices": {
+            "Category 4": 124.99,
+            "Category 3": 158.99,
+            "Category 2": 163.99,
+            "Category 1": 222.8,
+            "Category 1 Premium": 222.87
+          }
+        },
+        {
+          "timestamp": "2026-01-31T17:19:08.065648",
+          "prices": {
+            "Category 4": 124.99,
+            "Category 3": 158.99,
+            "Category 2": 163.99,
+            "Category 1": 222.8,
+            "Category 1 Premium": 222.87
+          }
+        },
+        {
+          "timestamp": "2026-01-31T21:12:55.465648",
+          "prices": {
+            "Category 4": 124.99,
+            "Category 3": 158.99,
+            "Category 2": 163.99,
+            "Category 1": 222.8,
+            "Category 1 Premium": 222.87
+          }
+        },
+        {
+          "timestamp": "2026-02-01T01:08:10.263648",
+          "prices": {
+            "Category 4": 124.99,
+            "Category 3": 158.99,
+            "Category 2": 163.99,
+            "Category 1": 222.8,
+            "Category 1 Premium": 222.87
+          }
+        },
+        {
+          "timestamp": "2026-02-01T05:03:13.125648",
+          "prices": {
+            "Category 4": 124.99,
+            "Category 3": 158.99,
+            "Category 2": 163.99,
+            "Category 1": 222.8,
+            "Category 1 Premium": 222.87
+          }
+        },
+        {
+          "timestamp": "2026-02-01T09:01:41.013648",
+          "prices": {
+            "Category 4": 124.99,
+            "Category 3": 158.99,
+            "Category 2": 163.99,
+            "Category 1": 222.8,
+            "Category 1 Premium": 222.87
+          }
+        },
+        {
+          "timestamp": "2026-02-01T13:01:47.687648",
+          "prices": {
+            "Category 4": 124.99,
+            "Category 3": 158.99,
+            "Category 2": 163.99,
+            "Category 1": 222.8,
+            "Category 1 Premium": 222.87
+          }
+        },
+        {
+          "timestamp": "2026-02-01T16:55:14.990648",
+          "prices": {
+            "Category 4": 124.99,
+            "Category 3": 158.99,
+            "Category 2": 163.99,
+            "Category 1": 222.8,
+            "Category 1 Premium": 222.87
+          }
+        },
+        {
+          "timestamp": "2026-02-01T20:48:09.557648",
+          "prices": {
+            "Category 4": 124.99,
+            "Category 3": 158.99,
+            "Category 2": 163.99,
+            "Category 1": 222.8,
+            "Category 1 Premium": 222.87
+          }
+        },
+        {
+          "timestamp": "2026-02-02T00:40:47.121648",
+          "prices": {
+            "Category 4": 124.99,
+            "Category 3": 158.99,
+            "Category 2": 163.99,
+            "Category 1": 222.8,
+            "Category 1 Premium": 222.87
+          }
+        },
+        {
+          "timestamp": "2026-02-02T04:31:59.267648",
+          "prices": {
+            "Category 4": 124.99,
+            "Category 3": 158.99,
+            "Category 2": 163.99,
+            "Category 1": 222.8,
+            "Category 1 Premium": 222.87
+          }
+        },
+        {
+          "timestamp": "2026-02-02T08:26:43.842648",
+          "prices": {
+            "Category 4": 124.99,
+            "Category 3": 158.99,
+            "Category 2": 163.99,
+            "Category 1": 222.8,
+            "Category 1 Premium": 222.87
+          }
+        },
+        {
+          "timestamp": "2026-02-02T12:17:06.315648",
+          "prices": {
+            "Category 4": 124.99,
+            "Category 3": 158.99,
+            "Category 2": 163.99,
+            "Category 1": 222.8,
+            "Category 1 Premium": 222.87
+          }
+        },
+        {
+          "timestamp": "2026-02-02T16:10:52.425648",
+          "prices": {
+            "Category 4": 124.99,
+            "Category 3": 158.99,
+            "Category 2": 163.99,
+            "Category 1": 222.8,
+            "Category 1 Premium": 222.87
+          }
+        },
+        {
+          "timestamp": "2026-02-02T20:12:46.322648",
+          "prices": {
+            "Category 4": 124.99,
+            "Category 3": 158.99,
+            "Category 2": 163.99,
+            "Category 1": 222.8,
+            "Category 1 Premium": 222.87
+          }
+        },
+        {
+          "timestamp": "2026-02-03T00:32:27.792648",
+          "prices": {
+            "Category 4": 124.99,
+            "Category 3": 158.99,
+            "Category 2": 163.99,
+            "Category 1": 222.8,
+            "Category 1 Premium": 222.87
+          }
+        },
+        {
+          "timestamp": "2026-02-03T04:45:23.972648",
+          "prices": {
+            "Category 4": 124.99,
+            "Category 3": 158.99,
+            "Category 2": 163.99,
+            "Category 1": 222.8,
+            "Category 1 Premium": 222.87
+          }
+        },
+        {
+          "timestamp": "2026-02-03T08:41:01.924648",
+          "prices": {
+            "Category 4": 124.99,
+            "Category 3": 158.99,
+            "Category 2": 163.99,
+            "Category 1": 222.8,
+            "Category 1 Premium": 222.87
+          }
+        },
+        {
+          "timestamp": "2026-02-03T12:33:38.987648",
+          "prices": {
+            "Category 4": 124.99,
+            "Category 3": 158.99,
+            "Category 2": 163.99,
+            "Category 1": 222.8,
+            "Category 1 Premium": 222.87
+          }
         }
       ],
       "latest_prices": {
-        "Category 4": 129.86,
-        "Category 3": 165.81,
-        "Category 2": 168.89,
-        "Category 1": 222.81,
-        "Category 1 Premium": 222.89
+        "Category 4": 124.99,
+        "Category 3": 158.99,
+        "Category 2": 163.99,
+        "Category 1": 222.8,
+        "Category 1 Premium": 222.87
       },
-      "last_scraped": "2026-01-28T11:21:32.536648"
+      "last_scraped": "2026-02-03T12:33:38.987648"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-real-oviedo",
@@ -13097,16 +15567,386 @@
             "Category 1": 229.0,
             "Category 1 Premium": 249.87
           }
+        },
+        {
+          "timestamp": "2026-01-28T15:16:40.538648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.84,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.87
+          }
+        },
+        {
+          "timestamp": "2026-01-28T19:09:42.723648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.84,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.87
+          }
+        },
+        {
+          "timestamp": "2026-01-28T23:01:46.714648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.84,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.87
+          }
+        },
+        {
+          "timestamp": "2026-01-29T02:51:44.210648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.83,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.86
+          }
+        },
+        {
+          "timestamp": "2026-01-29T06:45:50.186648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.82,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.85
+          }
+        },
+        {
+          "timestamp": "2026-01-29T10:42:51.679648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.82,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.85
+          }
+        },
+        {
+          "timestamp": "2026-01-29T14:32:40.011648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.82,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.85
+          }
+        },
+        {
+          "timestamp": "2026-01-29T18:22:13.809648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.82,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.85
+          }
+        },
+        {
+          "timestamp": "2026-01-29T22:15:24.626648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.8,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.83
+          }
+        },
+        {
+          "timestamp": "2026-01-30T02:09:07.488648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.8,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.83
+          }
+        },
+        {
+          "timestamp": "2026-01-30T06:02:01.851648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.8,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.83
+          }
+        },
+        {
+          "timestamp": "2026-01-30T09:51:00.995648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.8,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.83
+          }
+        },
+        {
+          "timestamp": "2026-01-30T13:37:30.385648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.79,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.82
+          }
+        },
+        {
+          "timestamp": "2026-01-30T17:33:08.154648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.79,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.82
+          }
+        },
+        {
+          "timestamp": "2026-01-30T21:27:08.980648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.79,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.82
+          }
+        },
+        {
+          "timestamp": "2026-01-31T01:21:39.477648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.79,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.82
+          }
+        },
+        {
+          "timestamp": "2026-01-31T05:19:58.222648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.79,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.82
+          }
+        },
+        {
+          "timestamp": "2026-01-31T09:14:47.114648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.79,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.82
+          }
+        },
+        {
+          "timestamp": "2026-01-31T13:20:28.975648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.79,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.82
+          }
+        },
+        {
+          "timestamp": "2026-01-31T17:19:08.065648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.79,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.82
+          }
+        },
+        {
+          "timestamp": "2026-01-31T21:12:55.465648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.79,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.82
+          }
+        },
+        {
+          "timestamp": "2026-02-01T01:08:10.263648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.79,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.82
+          }
+        },
+        {
+          "timestamp": "2026-02-01T05:03:13.125648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.79,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.82
+          }
+        },
+        {
+          "timestamp": "2026-02-01T09:01:41.013648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.79,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.82
+          }
+        },
+        {
+          "timestamp": "2026-02-01T13:01:47.687648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.79,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.82
+          }
+        },
+        {
+          "timestamp": "2026-02-01T16:55:14.990648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.79,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.82
+          }
+        },
+        {
+          "timestamp": "2026-02-01T20:48:09.557648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.79,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.82
+          }
+        },
+        {
+          "timestamp": "2026-02-02T00:40:47.121648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.79,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.82
+          }
+        },
+        {
+          "timestamp": "2026-02-02T04:31:59.267648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.79,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.82
+          }
+        },
+        {
+          "timestamp": "2026-02-02T08:26:43.842648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.79,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.82
+          }
+        },
+        {
+          "timestamp": "2026-02-02T12:17:06.315648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.79,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.82
+          }
+        },
+        {
+          "timestamp": "2026-02-02T16:10:52.425648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.79,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.82
+          }
+        },
+        {
+          "timestamp": "2026-02-02T20:12:46.322648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.79,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.82
+          }
+        },
+        {
+          "timestamp": "2026-02-03T00:32:27.792648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.79,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.82
+          }
+        },
+        {
+          "timestamp": "2026-02-03T04:45:23.972648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.79,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.82
+          }
+        },
+        {
+          "timestamp": "2026-02-03T08:41:01.924648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.79,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.82
+          }
+        },
+        {
+          "timestamp": "2026-02-03T12:33:38.987648",
+          "prices": {
+            "Category 4": 137.0,
+            "Category 3": 173.79,
+            "Category 2": 184.0,
+            "Category 1": 229.0,
+            "Category 1 Premium": 249.82
+          }
         }
       ],
       "latest_prices": {
         "Category 4": 137.0,
-        "Category 3": 173.84,
+        "Category 3": 173.79,
         "Category 2": 184.0,
         "Category 1": 229.0,
-        "Category 1 Premium": 249.87
+        "Category 1 Premium": 249.82
       },
-      "last_scraped": "2026-01-28T11:21:32.536648"
+      "last_scraped": "2026-02-03T12:33:38.987648"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-athletic-bilbao",
@@ -14499,17 +17339,705 @@
             "Category 1": 303.99,
             "Category 1 Premium": 353.99
           }
+        },
+        {
+          "timestamp": "2026-01-28T15:16:40.538648",
+          "prices": {
+            "Category 4": 185.99,
+            "Category 3": 212.99,
+            "Category 2": 225.99,
+            "Category 1": 303.99,
+            "Category 1 Premium": 353.99
+          }
+        },
+        {
+          "timestamp": "2026-01-28T19:09:42.723648",
+          "prices": {
+            "Category 4": 185.99,
+            "Category 3": 212.99,
+            "Category 2": 225.99,
+            "Category 1": 303.99,
+            "Category 1 Premium": 353.99
+          }
+        },
+        {
+          "timestamp": "2026-01-28T23:01:46.714648",
+          "prices": {
+            "Category 4": 185.99,
+            "Category 3": 212.99,
+            "Category 2": 225.99,
+            "Category 1": 303.99,
+            "Category 1 Premium": 353.99
+          }
+        },
+        {
+          "timestamp": "2026-01-29T02:51:44.210648",
+          "prices": {
+            "Category 4": 185.99,
+            "Category 3": 212.99,
+            "Category 2": 225.99,
+            "Category 1": 303.99,
+            "Category 1 Premium": 353.99
+          }
+        },
+        {
+          "timestamp": "2026-01-29T06:45:50.186648",
+          "prices": {
+            "Category 4": 185.99,
+            "Category 3": 212.99,
+            "Category 2": 225.99,
+            "Category 1": 303.99,
+            "Category 1 Premium": 353.99
+          }
+        },
+        {
+          "timestamp": "2026-01-29T10:42:51.679648",
+          "prices": {
+            "Category 4": 185.99,
+            "Category 3": 212.99,
+            "Category 2": 225.99,
+            "Category 1": 303.99,
+            "Category 1 Premium": 353.99
+          }
+        },
+        {
+          "timestamp": "2026-01-29T14:32:40.011648",
+          "prices": {
+            "Category 4": 185.99,
+            "Category 3": 212.99,
+            "Category 2": 225.99,
+            "Category 1": 303.99,
+            "Category 1 Premium": 353.99
+          }
+        },
+        {
+          "timestamp": "2026-01-29T18:22:13.809648",
+          "prices": {
+            "Category 4": 185.99,
+            "Category 3": 212.99,
+            "Category 2": 225.99,
+            "Category 1": 303.99,
+            "Category 1 Premium": 353.99
+          }
+        },
+        {
+          "timestamp": "2026-01-29T22:15:24.626648",
+          "prices": {
+            "Category 4": 185.98,
+            "Category 3": 212.98,
+            "Category 2": 225.98,
+            "Category 1": 303.98,
+            "Category 1 Premium": 353.98
+          }
+        },
+        {
+          "timestamp": "2026-01-30T02:09:07.488648",
+          "prices": {
+            "Category 4": 180.98,
+            "Category 3": 207.98,
+            "Category 2": 220.98,
+            "Category 1": 298.98,
+            "Category 1 Premium": 348.98
+          }
+        },
+        {
+          "timestamp": "2026-01-30T06:02:01.851648",
+          "prices": {
+            "Category 4": 180.98,
+            "Category 3": 207.98,
+            "Category 2": 220.98,
+            "Category 1": 298.98,
+            "Category 1 Premium": 348.98
+          }
+        },
+        {
+          "timestamp": "2026-01-30T09:51:00.995648",
+          "prices": {
+            "Category 4": 180.98,
+            "Category 3": 207.98,
+            "Category 2": 220.98,
+            "Category 1": 298.98,
+            "Category 1 Premium": 348.98
+          }
+        },
+        {
+          "timestamp": "2026-01-30T13:37:30.385648",
+          "prices": {
+            "Category 4": 175.97,
+            "Category 3": 207.97,
+            "Category 2": 220.98,
+            "Category 1": 293.97,
+            "Category 1 Premium": 343.97
+          }
+        },
+        {
+          "timestamp": "2026-01-30T17:33:08.154648",
+          "prices": {
+            "Category 4": 180.97,
+            "Category 3": 207.97,
+            "Category 2": 225.98,
+            "Category 1": 298.97,
+            "Category 1 Premium": 348.97
+          }
+        },
+        {
+          "timestamp": "2026-01-30T21:27:08.980648",
+          "prices": {
+            "Category 4": 180.97,
+            "Category 3": 207.97,
+            "Category 2": 225.98,
+            "Category 1": 298.97,
+            "Category 1 Premium": 348.97
+          }
+        },
+        {
+          "timestamp": "2026-01-31T01:21:39.477648",
+          "prices": {
+            "Category 4": 180.97,
+            "Category 3": 207.97,
+            "Category 2": 225.98,
+            "Category 1": 298.97,
+            "Category 1 Premium": 348.97
+          }
+        },
+        {
+          "timestamp": "2026-01-31T05:19:58.222648",
+          "prices": {
+            "Category 4": 180.97,
+            "Category 3": 207.97,
+            "Category 2": 225.98,
+            "Category 1": 298.97,
+            "Category 1 Premium": 348.97
+          }
+        },
+        {
+          "timestamp": "2026-01-31T09:14:47.114648",
+          "prices": {
+            "Category 4": 180.97,
+            "Category 3": 207.97,
+            "Category 2": 225.98,
+            "Category 1": 298.97,
+            "Category 1 Premium": 348.97
+          }
+        },
+        {
+          "timestamp": "2026-01-31T13:20:28.975648",
+          "prices": {
+            "Category 4": 180.97,
+            "Category 3": 207.97,
+            "Category 2": 225.98,
+            "Category 1": 298.97,
+            "Category 1 Premium": 348.97
+          }
+        },
+        {
+          "timestamp": "2026-01-31T17:19:08.065648",
+          "prices": {
+            "Category 4": 180.97,
+            "Category 3": 207.97,
+            "Category 2": 225.98,
+            "Category 1": 298.97,
+            "Category 1 Premium": 348.97
+          }
+        },
+        {
+          "timestamp": "2026-01-31T21:12:55.465648",
+          "prices": {
+            "Category 4": 180.97,
+            "Category 3": 207.97,
+            "Category 2": 225.98,
+            "Category 1": 298.97,
+            "Category 1 Premium": 348.97
+          }
+        },
+        {
+          "timestamp": "2026-02-01T01:08:10.263648",
+          "prices": {
+            "Category 4": 180.97,
+            "Category 3": 207.97,
+            "Category 2": 225.98,
+            "Category 1": 298.97,
+            "Category 1 Premium": 348.97
+          }
+        },
+        {
+          "timestamp": "2026-02-01T05:03:13.125648",
+          "prices": {
+            "Category 4": 180.97,
+            "Category 3": 207.97,
+            "Category 2": 225.98,
+            "Category 1": 298.97,
+            "Category 1 Premium": 348.97
+          }
+        },
+        {
+          "timestamp": "2026-02-01T09:01:41.013648",
+          "prices": {
+            "Category 4": 180.97,
+            "Category 3": 207.97,
+            "Category 2": 225.98,
+            "Category 1": 298.97,
+            "Category 1 Premium": 348.97
+          }
+        },
+        {
+          "timestamp": "2026-02-01T13:01:47.687648",
+          "prices": {
+            "Category 4": 180.97,
+            "Category 3": 207.97,
+            "Category 2": 225.98,
+            "Category 1": 298.97,
+            "Category 1 Premium": 348.97
+          }
+        },
+        {
+          "timestamp": "2026-02-01T16:55:14.990648",
+          "prices": {
+            "Category 4": 180.97,
+            "Category 3": 207.97,
+            "Category 2": 225.98,
+            "Category 1": 298.97,
+            "Category 1 Premium": 348.97
+          }
+        },
+        {
+          "timestamp": "2026-02-01T20:48:09.557648",
+          "prices": {
+            "Category 4": 180.97,
+            "Category 3": 202.97,
+            "Category 2": 220.98,
+            "Category 1": 293.97,
+            "Category 1 Premium": 348.97
+          }
+        },
+        {
+          "timestamp": "2026-02-02T00:40:47.121648",
+          "prices": {
+            "Category 4": 180.97,
+            "Category 3": 207.97,
+            "Category 2": 225.98,
+            "Category 1": 298.97,
+            "Category 1 Premium": 348.97
+          }
+        },
+        {
+          "timestamp": "2026-02-02T04:31:59.267648",
+          "prices": {
+            "Category 4": 180.97,
+            "Category 3": 207.97,
+            "Category 2": 225.98,
+            "Category 1": 298.97,
+            "Category 1 Premium": 348.97
+          }
+        },
+        {
+          "timestamp": "2026-02-02T08:26:43.842648",
+          "prices": {
+            "Category 4": 180.97,
+            "Category 3": 207.97,
+            "Category 2": 225.98,
+            "Category 1": 298.97,
+            "Category 1 Premium": 348.97
+          }
+        },
+        {
+          "timestamp": "2026-02-02T12:17:06.315648",
+          "prices": {
+            "Category 4": 175.97,
+            "Category 3": 202.97,
+            "Category 2": 220.98,
+            "Category 1": 293.97,
+            "Category 1 Premium": 343.97
+          }
+        },
+        {
+          "timestamp": "2026-02-02T16:10:52.425648",
+          "prices": {
+            "Category 4": 180.97,
+            "Category 3": 207.97,
+            "Category 2": 225.98,
+            "Category 1": 298.97,
+            "Category 1 Premium": 348.97
+          }
+        },
+        {
+          "timestamp": "2026-02-02T20:12:46.322648",
+          "prices": {
+            "Category 4": 180.97,
+            "Category 3": 207.97,
+            "Category 2": 225.98,
+            "Category 1": 293.97,
+            "Category 1 Premium": 348.97
+          }
+        },
+        {
+          "timestamp": "2026-02-03T00:32:27.792648",
+          "prices": {
+            "Category 4": 180.97,
+            "Category 3": 207.97,
+            "Category 2": 225.98,
+            "Category 1": 298.97,
+            "Category 1 Premium": 348.97
+          }
+        },
+        {
+          "timestamp": "2026-02-03T04:45:23.972648",
+          "prices": {
+            "Category 4": 180.97,
+            "Category 3": 207.97,
+            "Category 2": 225.98,
+            "Category 1": 298.97,
+            "Category 1 Premium": 348.97
+          }
+        },
+        {
+          "timestamp": "2026-02-03T08:41:01.924648",
+          "prices": {
+            "Category 4": 180.97,
+            "Category 3": 207.97,
+            "Category 2": 225.98,
+            "Category 1": 298.97,
+            "Category 1 Premium": 348.97
+          }
+        },
+        {
+          "timestamp": "2026-02-03T12:33:38.987648",
+          "prices": {
+            "Category 4": 180.97,
+            "Category 3": 207.97,
+            "Category 2": 225.98,
+            "Category 1": 298.97,
+            "Category 1 Premium": 348.97
+          }
         }
       ],
       "latest_prices": {
-        "Category 4": 185.99,
-        "Category 3": 212.99,
-        "Category 2": 225.99,
-        "Category 1": 303.99,
-        "Category 1 Premium": 353.99
+        "Category 4": 180.97,
+        "Category 3": 207.97,
+        "Category 2": 225.98,
+        "Category 1": 298.97,
+        "Category 1 Premium": 348.97
       },
-      "last_scraped": "2026-01-28T11:21:32.536648"
+      "last_scraped": "2026-02-03T12:33:38.987648"
+    },
+    {
+      "url": "https://www.footballticketnet.com/champions-league/real-madrid-vs-sl-benfica",
+      "match_name": "Real Madrid vs SL Benfica",
+      "team": "Real Madrid",
+      "opponent": "SL Benfica",
+      "date": "24/02/2026",
+      "is_home": true,
+      "price_history": [
+        {
+          "timestamp": "2026-01-30T13:37:30.385648",
+          "prices": {
+            "Category 4": 200.0,
+            "Category 3": 220.0,
+            "Category 2": 240.0,
+            "Category 1": 315.0,
+            "Category 1 Premium": 345.0
+          }
+        },
+        {
+          "timestamp": "2026-01-30T17:33:08.154648",
+          "prices": {
+            "Category 4": 173.0,
+            "Category 3": 186.0,
+            "Category 2": 216.0,
+            "Category 1": 236.0,
+            "Category 1 Premium": 276.0,
+            "Away Section": 400.0,
+            "Real Madrid VIP Hospitality Package": 1950.0
+          }
+        },
+        {
+          "timestamp": "2026-01-30T21:27:08.980648",
+          "prices": {
+            "Category 4": 173.0,
+            "Category 3": 186.0,
+            "Category 2": 205.0,
+            "Category 1": 236.0,
+            "Category 1 Premium": 276.0,
+            "Away Section": 400.0,
+            "Real Madrid VIP Hospitality Package": 1950.0
+          }
+        },
+        {
+          "timestamp": "2026-01-31T01:21:39.477648",
+          "prices": {
+            "Category 4": 172.99,
+            "Category 3": 185.99,
+            "Category 2": 204.99,
+            "Category 1": 236.0,
+            "Category 1 Premium": 276.0,
+            "Away Section": 400.0,
+            "Real Madrid VIP Hospitality Package": 1950.0
+          }
+        },
+        {
+          "timestamp": "2026-01-31T05:19:58.222648",
+          "prices": {
+            "Category 4": 172.99,
+            "Category 3": 185.99,
+            "Category 2": 204.99,
+            "Category 1": 236.0,
+            "Category 1 Premium": 276.0,
+            "Away Section": 400.0,
+            "Real Madrid VIP Hospitality Package": 1950.0
+          }
+        },
+        {
+          "timestamp": "2026-01-31T09:14:47.114648",
+          "prices": {
+            "Category 4": 172.99,
+            "Category 3": 185.99,
+            "Category 2": 204.99,
+            "Category 1": 236.0,
+            "Category 1 Premium": 276.0,
+            "Away Section": 400.0,
+            "Real Madrid VIP Hospitality Package": 1950.0
+          }
+        },
+        {
+          "timestamp": "2026-01-31T13:20:28.975648",
+          "prices": {
+            "Category 4": 171.99,
+            "Category 3": 185.99,
+            "Category 2": 204.99,
+            "Category 1": 236.0,
+            "Category 1 Premium": 276.0,
+            "Away Section": 400.0,
+            "Real Madrid VIP Hospitality Package": 1950.0
+          }
+        },
+        {
+          "timestamp": "2026-01-31T17:19:08.065648",
+          "prices": {
+            "Category 4": 171.99,
+            "Category 3": 185.99,
+            "Category 2": 204.99,
+            "Category 1": 236.0,
+            "Category 1 Premium": 276.0,
+            "Away Section": 400.0,
+            "Real Madrid VIP Hospitality Package": 1950.0
+          }
+        },
+        {
+          "timestamp": "2026-01-31T21:12:55.465648",
+          "prices": {
+            "Category 4": 121.0,
+            "Category 3": 144.0,
+            "Category 1": 178.0,
+            "Category 2": 204.99,
+            "Category 1 Premium": 276.0,
+            "Away Section": 400.0,
+            "Real Madrid VIP Hospitality Package": 1950.0
+          }
+        },
+        {
+          "timestamp": "2026-02-01T01:08:10.263648",
+          "prices": {
+            "Category 4": 121.0,
+            "Category 3": 144.0,
+            "Category 1": 178.0,
+            "Category 2": 204.99,
+            "Category 1 Premium": 276.0,
+            "Away Section": 400.0,
+            "Real Madrid VIP Hospitality Package": 1950.0
+          }
+        },
+        {
+          "timestamp": "2026-02-01T05:03:13.125648",
+          "prices": {
+            "Category 4": 121.0,
+            "Category 3": 144.0,
+            "Category 1": 178.0,
+            "Category 2": 204.99,
+            "Category 1 Premium": 276.0,
+            "Away Section": 400.0,
+            "Real Madrid VIP Hospitality Package": 1950.0
+          }
+        },
+        {
+          "timestamp": "2026-02-01T09:01:41.013648",
+          "prices": {
+            "Category 4": 121.0,
+            "Category 3": 144.0,
+            "Category 1": 178.0,
+            "Category 2": 204.99,
+            "Category 1 Premium": 276.0,
+            "Away Section": 400.0,
+            "Real Madrid VIP Hospitality Package": 1950.0
+          }
+        },
+        {
+          "timestamp": "2026-02-01T13:01:47.687648",
+          "prices": {
+            "Category 4": 121.0,
+            "Category 3": 144.0,
+            "Category 1": 178.0,
+            "Category 2": 204.99,
+            "Category 1 Premium": 276.0,
+            "Away Section": 400.0,
+            "Real Madrid VIP Hospitality Package": 1950.0
+          }
+        },
+        {
+          "timestamp": "2026-02-01T16:55:14.990648",
+          "prices": {
+            "Category 4": 121.0,
+            "Category 3": 144.0,
+            "Category 2": 204.99,
+            "Category 1": 236.1,
+            "Category 1 Premium": 276.0,
+            "Away Section": 400.0,
+            "Real Madrid VIP Hospitality Package": 1950.0
+          }
+        },
+        {
+          "timestamp": "2026-02-01T20:48:09.557648",
+          "prices": {
+            "Category 4": 122.0,
+            "Category 3": 144.0,
+            "Category 2": 204.99,
+            "Category 1": 236.1,
+            "Category 1 Premium": 276.0,
+            "Away Section": 400.0,
+            "Real Madrid VIP Hospitality Package": 1950.0
+          }
+        },
+        {
+          "timestamp": "2026-02-02T00:40:47.121648",
+          "prices": {
+            "Category 4": 122.0,
+            "Category 3": 144.0,
+            "Category 2": 204.99,
+            "Category 1": 236.1,
+            "Category 1 Premium": 276.0,
+            "Away Section": 400.0,
+            "Real Madrid VIP Hospitality Package": 1950.0
+          }
+        },
+        {
+          "timestamp": "2026-02-02T04:31:59.267648",
+          "prices": {
+            "Category 4": 122.0,
+            "Category 3": 144.0,
+            "Category 2": 204.99,
+            "Category 1": 236.1,
+            "Category 1 Premium": 276.0,
+            "Away Section": 400.0,
+            "Real Madrid VIP Hospitality Package": 1950.0
+          }
+        },
+        {
+          "timestamp": "2026-02-02T08:26:43.842648",
+          "prices": {
+            "Category 4": 122.0,
+            "Category 3": 144.0,
+            "Category 2": 204.99,
+            "Category 1": 236.1,
+            "Category 1 Premium": 276.0,
+            "Away Section": 400.0,
+            "Real Madrid VIP Hospitality Package": 1950.0
+          }
+        },
+        {
+          "timestamp": "2026-02-02T12:17:06.315648",
+          "prices": {
+            "Category 4": 156.0,
+            "Category 3": 175.0,
+            "Category 2": 204.99,
+            "Category 1": 236.0,
+            "Category 1 Premium": 276.0,
+            "Away Section": 400.0,
+            "Real Madrid VIP Hospitality Package": 1950.0
+          }
+        },
+        {
+          "timestamp": "2026-02-02T16:10:52.425648",
+          "prices": {
+            "Category 4": 156.0,
+            "Category 3": 175.0,
+            "Category 2": 185.0,
+            "Category 1": 236.0,
+            "Category 1 Premium": 276.0,
+            "Away Section": 400.0,
+            "Real Madrid VIP Hospitality Package": 1950.0
+          }
+        },
+        {
+          "timestamp": "2026-02-02T20:12:46.322648",
+          "prices": {
+            "Category 4": 156.0,
+            "Category 3": 175.0,
+            "Category 2": 185.0,
+            "Category 1": 236.0,
+            "Category 1 Premium": 276.0,
+            "Away Section": 400.0,
+            "Real Madrid VIP Hospitality Package": 1950.0
+          }
+        },
+        {
+          "timestamp": "2026-02-03T00:32:27.792648",
+          "prices": {
+            "Category 4": 155.99,
+            "Category 3": 174.99,
+            "Category 2": 184.99,
+            "Category 1": 235.99,
+            "Category 1 Premium": 275.99,
+            "Away Section": 400.0,
+            "Real Madrid VIP Hospitality Package": 1950.0
+          }
+        },
+        {
+          "timestamp": "2026-02-03T04:45:23.972648",
+          "prices": {
+            "Category 4": 155.99,
+            "Category 3": 174.99,
+            "Category 2": 184.99,
+            "Category 1": 235.99,
+            "Category 1 Premium": 275.99,
+            "Away Section": 400.0,
+            "Real Madrid VIP Hospitality Package": 1950.0
+          }
+        },
+        {
+          "timestamp": "2026-02-03T08:41:01.924648",
+          "prices": {
+            "Category 4": 155.99,
+            "Category 3": 174.99,
+            "Category 2": 184.99,
+            "Category 1": 235.99,
+            "Category 1 Premium": 275.99,
+            "Away Section": 400.0,
+            "Real Madrid VIP Hospitality Package": 1950.0
+          }
+        },
+        {
+          "timestamp": "2026-02-03T12:33:38.987648",
+          "prices": {
+            "Category 4": 155.99,
+            "Category 3": 174.99,
+            "Category 2": 184.99,
+            "Category 1": 235.99,
+            "Category 1 Premium": 275.99,
+            "Away Section": 400.0,
+            "Real Madrid VIP Hospitality Package": 1950.0
+          }
+        }
+      ],
+      "latest_prices": {
+        "Category 4": 155.99,
+        "Category 3": 174.99,
+        "Category 2": 184.99,
+        "Category 1": 235.99,
+        "Category 1 Premium": 275.99,
+        "Away Section": 400.0,
+        "Real Madrid VIP Hospitality Package": 1950.0
+      },
+      "last_scraped": "2026-02-03T12:33:38.987648"
     }
   ],
-  "last_updated": "2026-01-28T11:21:32.536648"
+  "last_updated": "2026-02-03T12:33:38.987648"
 }
