@@ -89106,6 +89106,16 @@
               "Category 1": 178.99,
               "Category 1 Premium": 185.68
             }
+          },
+          {
+            "timestamp": "2026-02-06T06:23:03.886635",
+            "prices": {
+              "Category 4": 96.99,
+              "Category 3": 121.97,
+              "Category 2": 127.99,
+              "Category 1": 178.99,
+              "Category 1 Premium": 185.68
+            }
           }
         ],
         "latest_prices": {
@@ -89115,7 +89125,7 @@
           "Category 1": 178.99,
           "Category 1 Premium": 185.68
         },
-        "last_scraped": "2026-02-06T02:34:02.656848"
+        "last_scraped": "2026-02-06T06:23:03.886635"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-getafe-cf",
@@ -90822,6 +90832,16 @@
               "Category 1 Premium": 175.04,
               "Category 1": 191.93
             }
+          },
+          {
+            "timestamp": "2026-02-06T06:23:03.886635",
+            "prices": {
+              "Category 4": 95.0,
+              "Category 3": 131.99,
+              "Category 2": 146.93,
+              "Category 1 Premium": 175.04,
+              "Category 1": 191.93
+            }
           }
         ],
         "latest_prices": {
@@ -90831,7 +90851,7 @@
           "Category 1 Premium": 175.04,
           "Category 1": 191.93
         },
-        "last_scraped": "2026-02-06T02:34:02.656848"
+        "last_scraped": "2026-02-06T06:23:03.886635"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-elche",
@@ -92532,6 +92552,16 @@
               "Category 1": 195.92,
               "Category 1 Premium": 200.98
             }
+          },
+          {
+            "timestamp": "2026-02-06T06:23:03.886635",
+            "prices": {
+              "Category 4": 116.96,
+              "Category 3": 140.95,
+              "Category 2": 150.98,
+              "Category 1": 195.92,
+              "Category 1 Premium": 200.98
+            }
           }
         ],
         "latest_prices": {
@@ -92541,7 +92571,7 @@
           "Category 1": 195.92,
           "Category 1 Premium": 200.98
         },
-        "last_scraped": "2026-02-06T02:34:02.656848"
+        "last_scraped": "2026-02-06T06:23:03.886635"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-atletico-madrid",
@@ -94499,6 +94529,16 @@
               "Category 1": 410.0,
               "Category 1 Premium": 483.0
             }
+          },
+          {
+            "timestamp": "2026-02-06T06:23:03.886635",
+            "prices": {
+              "Category 4": 300.0,
+              "Category 3": 377.0,
+              "Category 2": 387.0,
+              "Category 1": 410.0,
+              "Category 1 Premium": 483.0
+            }
           }
         ],
         "latest_prices": {
@@ -94508,7 +94548,7 @@
           "Category 1": 410.0,
           "Category 1 Premium": 483.0
         },
-        "last_scraped": "2026-02-06T02:34:02.656848"
+        "last_scraped": "2026-02-06T06:23:03.886635"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-girona",
@@ -96384,6 +96424,16 @@
               "Category 1": 214.99,
               "Category 1 Premium": 219.98
             }
+          },
+          {
+            "timestamp": "2026-02-06T06:23:03.886635",
+            "prices": {
+              "Category 4": 141.99,
+              "Category 3": 168.99,
+              "Category 2": 186.99,
+              "Category 1": 214.99,
+              "Category 1 Premium": 219.98
+            }
           }
         ],
         "latest_prices": {
@@ -96393,7 +96443,7 @@
           "Category 1": 214.99,
           "Category 1 Premium": 219.98
         },
-        "last_scraped": "2026-02-06T02:34:02.656848"
+        "last_scraped": "2026-02-06T06:23:03.886635"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-deportivo-alaves",
@@ -98358,6 +98408,16 @@
               "Category 1": 221.81,
               "Category 1 Premium": 222.84
             }
+          },
+          {
+            "timestamp": "2026-02-06T06:23:03.886635",
+            "prices": {
+              "Category 4": 111.96,
+              "Category 3": 158.94,
+              "Category 2": 163.99,
+              "Category 1": 221.81,
+              "Category 1 Premium": 222.84
+            }
           }
         ],
         "latest_prices": {
@@ -98367,7 +98427,7 @@
           "Category 1": 221.81,
           "Category 1 Premium": 222.84
         },
-        "last_scraped": "2026-02-06T02:34:02.656848"
+        "last_scraped": "2026-02-06T06:23:03.886635"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-real-oviedo",
@@ -100258,6 +100318,16 @@
               "Category 1": 212.76,
               "Category 1 Premium": 217.59
             }
+          },
+          {
+            "timestamp": "2026-02-06T06:23:03.886635",
+            "prices": {
+              "Category 4": 110.11,
+              "Category 3": 134.42,
+              "Category 2": 184.0,
+              "Category 1": 212.76,
+              "Category 1 Premium": 217.59
+            }
           }
         ],
         "latest_prices": {
@@ -100267,7 +100337,7 @@
           "Category 1": 212.76,
           "Category 1 Premium": 217.59
         },
-        "last_scraped": "2026-02-06T02:34:02.656848"
+        "last_scraped": "2026-02-06T06:23:03.886635"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-athletic-bilbao",
@@ -102190,6 +102260,16 @@
               "Category 1": 298.97,
               "Category 1 Premium": 348.97
             }
+          },
+          {
+            "timestamp": "2026-02-06T06:23:03.886635",
+            "prices": {
+              "Category 4": 180.97,
+              "Category 3": 207.97,
+              "Category 2": 225.98,
+              "Category 1": 298.97,
+              "Category 1 Premium": 348.97
+            }
           }
         ],
         "latest_prices": {
@@ -102199,7 +102279,7 @@
           "Category 1": 298.97,
           "Category 1 Premium": 348.97
         },
-        "last_scraped": "2026-02-06T02:34:02.656848"
+        "last_scraped": "2026-02-06T06:23:03.886635"
       },
       {
         "url": "https://www.footballticketnet.com/champions-league/real-madrid-vs-sl-benfica",
@@ -102698,6 +102778,18 @@
               "Away Section": 400.0,
               "Real Madrid VIP Hospitality Package": 1950.0
             }
+          },
+          {
+            "timestamp": "2026-02-06T06:23:03.886635",
+            "prices": {
+              "Category 4": 119.0,
+              "Category 3": 139.99,
+              "Category 2": 165.0,
+              "Category 1": 206.0,
+              "Category 1 Premium": 244.0,
+              "Away Section": 400.0,
+              "Real Madrid VIP Hospitality Package": 1950.0
+            }
           }
         ],
         "latest_prices": {
@@ -102709,9 +102801,9 @@
           "Away Section": 400.0,
           "Real Madrid VIP Hospitality Package": 1950.0
         },
-        "last_scraped": "2026-02-06T02:34:02.656848"
+        "last_scraped": "2026-02-06T06:23:03.886635"
       }
     ],
-    "last_updated": "2026-02-06T02:34:02.656848"
+    "last_updated": "2026-02-06T06:23:03.886635"
   }
 }
