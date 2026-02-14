@@ -39759,14 +39759,30 @@
               "VIP Packages": 3500.0,
               "Executive Private Boxes": 4000.0
             }
+          },
+          {
+            "timestamp": "2026-02-14T20:21:36.982714",
+            "prices": {
+              "Category 3": 1750.0,
+              "Central Longside Upper": 441.0,
+              "Longside Upper Level": 450.0,
+              "Shortside Upper Level": 491.67,
+              "Central Longside Lower": 615.47,
+              "Longside Lower Level": 675.0,
+              "Shortside Lower Level": 775.0,
+              "Club Level Shortside": 915.0,
+              "Club Level Longside": 985.0,
+              "VIP Packages": 3500.0,
+              "Executive Private Boxes": 4000.0
+            }
           }
         ],
         "latest_prices": {
           "Category 3": 1750.0,
           "Central Longside Upper": 441.0,
+          "Longside Upper Level": 450.0,
           "Shortside Upper Level": 491.67,
           "Central Longside Lower": 615.47,
-          "Longside Upper Level": 640.0,
           "Longside Lower Level": 675.0,
           "Shortside Lower Level": 775.0,
           "Club Level Shortside": 915.0,
@@ -39774,7 +39790,7 @@
           "VIP Packages": 3500.0,
           "Executive Private Boxes": 4000.0
         },
-        "last_scraped": "2026-02-12T21:05:39.425714"
+        "last_scraped": "2026-02-14T20:21:36.982714"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-fulham",
@@ -44452,6 +44468,18 @@
               "Club Level Shortside": 1475.0,
               "Club Level Longside": 1600.0
             }
+          },
+          {
+            "timestamp": "2026-02-14T20:21:36.982714",
+            "prices": {
+              "Longside Upper Level": 585.0,
+              "Central Longside Upper": 630.0,
+              "Shortside Upper Level": 650.0,
+              "Longside Lower Level": 765.0,
+              "Central Longside Lower": 833.0,
+              "Club Level Shortside": 1475.0,
+              "Club Level Longside": 1600.0
+            }
           }
         ],
         "latest_prices": {
@@ -44463,7 +44491,7 @@
           "Club Level Shortside": 1475.0,
           "Club Level Longside": 1600.0
         },
-        "last_scraped": "2026-02-12T21:05:39.425714"
+        "last_scraped": "2026-02-14T20:21:36.982714"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-burnley",
@@ -52113,7 +52141,7 @@
         "last_scraped": "2026-02-12T21:05:39.425714"
       }
     ],
-    "last_updated": "2026-02-14T01:16:59.846714"
+    "last_updated": "2026-02-14T20:21:36.982714"
   },
   "barcelona": {
     "team_name": "FC Barcelona",
