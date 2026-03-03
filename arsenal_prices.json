@@ -30836,23 +30836,40 @@
             "Executive Private Boxes": 1499.92,
             "VIP Packages": 3500.0
           }
+        },
+        {
+          "timestamp": "2026-03-03T17:25:07.820984",
+          "prices": {
+            "Category 3": 1750.0,
+            "Shortside Upper Level": 185.0,
+            "Longside Upper Level": 195.0,
+            "Shortside Lower Level": 209.96,
+            "Central Longside Upper": 209.99,
+            "Away Section": 230.0,
+            "Longside Lower Level": 244.91,
+            "Club Level Shortside": 319.92,
+            "Central Longside Lower": 321.93,
+            "Club Level Longside": 374.96,
+            "Executive Private Boxes": 1499.92,
+            "VIP Packages": 3500.0
+          }
         }
       ],
       "latest_prices": {
         "Category 3": 1750.0,
-        "Shortside Upper Level": 190.0,
-        "Longside Upper Level": 200.0,
+        "Shortside Upper Level": 185.0,
+        "Longside Upper Level": 195.0,
+        "Shortside Lower Level": 209.96,
         "Central Longside Upper": 209.99,
-        "Shortside Lower Level": 219.91,
         "Away Section": 230.0,
-        "Longside Lower Level": 249.96,
-        "Central Longside Lower": 324.92,
-        "Club Level Shortside": 324.96,
-        "Club Level Longside": 379.94,
+        "Longside Lower Level": 244.91,
+        "Club Level Shortside": 319.92,
+        "Central Longside Lower": 321.93,
+        "Club Level Longside": 374.96,
         "Executive Private Boxes": 1499.92,
         "VIP Packages": 3500.0
       },
-      "last_scraped": "2026-03-03T13:43:43.314984"
+      "last_scraped": "2026-03-03T17:25:07.820984"
     },
     {
       "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-bournemouth",
@@ -37118,23 +37135,40 @@
             "Executive Private Boxes": 1994.9,
             "VIP Packages": 3500.0
           }
+        },
+        {
+          "timestamp": "2026-03-03T17:25:07.820984",
+          "prices": {
+            "Category 3": 1750.0,
+            "Shortside Upper Level": 219.9,
+            "Longside Upper Level": 284.93,
+            "Central Longside Upper": 294.96,
+            "Shortside Lower Level": 294.97,
+            "Club Level Shortside": 339.95,
+            "Longside Lower Level": 368.97,
+            "Central Longside Lower": 369.94,
+            "Club Level Longside": 439.97,
+            "Away Section": 749.98,
+            "Executive Private Boxes": 1994.9,
+            "VIP Packages": 3500.0
+          }
         }
       ],
       "latest_prices": {
         "Category 3": 1750.0,
-        "Shortside Upper Level": 224.91,
-        "Longside Upper Level": 287.97,
-        "Shortside Lower Level": 299.91,
-        "Central Longside Upper": 299.96,
-        "Club Level Shortside": 349.93,
+        "Shortside Upper Level": 219.9,
+        "Longside Upper Level": 284.93,
+        "Central Longside Upper": 294.96,
+        "Shortside Lower Level": 294.97,
+        "Club Level Shortside": 339.95,
         "Longside Lower Level": 368.97,
-        "Central Longside Lower": 374.92,
-        "Club Level Longside": 449.96,
+        "Central Longside Lower": 369.94,
+        "Club Level Longside": 439.97,
         "Away Section": 749.98,
         "Executive Private Boxes": 1994.9,
         "VIP Packages": 3500.0
       },
-      "last_scraped": "2026-03-03T13:43:43.314984"
+      "last_scraped": "2026-03-03T17:25:07.820984"
     },
     {
       "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-newcastle-united",
@@ -42719,22 +42753,38 @@
             "Executive Private Boxes": 1599.95,
             "VIP Packages": 3500.0
           }
+        },
+        {
+          "timestamp": "2026-03-03T17:25:07.820984",
+          "prices": {
+            "Category 3": 1750.0,
+            "Shortside Upper Level": 275.0,
+            "Longside Upper Level": 294.91,
+            "Shortside Lower Level": 294.95,
+            "Central Longside Upper": 299.82,
+            "Longside Lower Level": 394.93,
+            "Club Level Shortside": 419.95,
+            "Central Longside Lower": 439.94,
+            "Club Level Longside": 539.9,
+            "Executive Private Boxes": 1599.95,
+            "VIP Packages": 3500.0
+          }
         }
       ],
       "latest_prices": {
         "Category 3": 1750.0,
-        "Shortside Upper Level": 280.0,
-        "Longside Upper Level": 298.94,
+        "Shortside Upper Level": 275.0,
+        "Longside Upper Level": 294.91,
+        "Shortside Lower Level": 294.95,
         "Central Longside Upper": 299.82,
-        "Shortside Lower Level": 299.97,
-        "Longside Lower Level": 399.97,
-        "Club Level Shortside": 424.94,
-        "Central Longside Lower": 449.21,
-        "Club Level Longside": 549.93,
+        "Longside Lower Level": 394.93,
+        "Club Level Shortside": 419.95,
+        "Central Longside Lower": 439.94,
+        "Club Level Longside": 539.9,
         "Executive Private Boxes": 1599.95,
         "VIP Packages": 3500.0
       },
-      "last_scraped": "2026-03-03T13:43:43.314984"
+      "last_scraped": "2026-03-03T17:25:07.820984"
     },
     {
       "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-fulham",
@@ -48027,19 +48077,32 @@
             "Club Level Shortside": 850.0,
             "Club Level Longside": 850.0
           }
+        },
+        {
+          "timestamp": "2026-03-03T17:25:07.820984",
+          "prices": {
+            "Shortside Upper Level": 450.0,
+            "Longside Upper Level": 490.0,
+            "Shortside Lower Level": 500.0,
+            "Central Longside Upper": 518.0,
+            "Longside Lower Level": 630.0,
+            "Central Longside Lower": 707.0,
+            "Club Level Shortside": 825.0,
+            "Club Level Longside": 840.0
+          }
         }
       ],
       "latest_prices": {
-        "Shortside Upper Level": 475.0,
-        "Longside Upper Level": 495.0,
+        "Shortside Upper Level": 450.0,
+        "Longside Upper Level": 490.0,
         "Shortside Lower Level": 500.0,
         "Central Longside Upper": 518.0,
         "Longside Lower Level": 630.0,
         "Central Longside Lower": 707.0,
-        "Club Level Shortside": 850.0,
-        "Club Level Longside": 850.0
+        "Club Level Shortside": 825.0,
+        "Club Level Longside": 840.0
       },
-      "last_scraped": "2026-03-03T13:43:43.314984"
+      "last_scraped": "2026-03-03T17:25:07.820984"
     },
     {
       "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-burnley",
@@ -53543,6 +53606,21 @@
             "Club Level Shortside": 2349.94,
             "Executive Private Boxes": 6989.91
           }
+        },
+        {
+          "timestamp": "2026-03-03T17:25:07.820984",
+          "prices": {
+            "Away Section": 850.0,
+            "Longside Upper Level": 899.9,
+            "Shortside Upper Level": 924.93,
+            "Central Longside Upper": 949.93,
+            "Shortside Lower Level": 999.96,
+            "Longside Lower Level": 1199.97,
+            "Central Longside Lower": 1299.94,
+            "Club Level Longside": 1749.92,
+            "Club Level Shortside": 2349.94,
+            "Executive Private Boxes": 6989.91
+          }
         }
       ],
       "latest_prices": {
@@ -53557,7 +53635,7 @@
         "Club Level Shortside": 2349.94,
         "Executive Private Boxes": 6989.91
       },
-      "last_scraped": "2026-03-03T13:43:43.314984"
+      "last_scraped": "2026-03-03T17:25:07.820984"
     },
     {
       "url": "https://www.footballticketnet.com/fa-cup/arsenal-vs-wigan-athletic",
@@ -57100,21 +57178,35 @@
             "Club Level Longside": 349.94,
             "Executive Private Boxes": 1499.94
           }
+        },
+        {
+          "timestamp": "2026-03-03T17:25:07.820984",
+          "prices": {
+            "Longside Upper Level": 168.97,
+            "Shortside Upper Level": 170.0,
+            "Shortside Lower Level": 189.96,
+            "Longside Lower Level": 200.0,
+            "Central Longside Upper": 218.97,
+            "Club Level Shortside": 289.97,
+            "Central Longside Lower": 299.92,
+            "Club Level Longside": 340.0,
+            "Executive Private Boxes": 1499.94
+          }
         }
       ],
       "latest_prices": {
-        "Longside Upper Level": 169.92,
-        "Shortside Upper Level": 174.0,
-        "Shortside Lower Level": 194.93,
+        "Longside Upper Level": 168.97,
+        "Shortside Upper Level": 170.0,
+        "Shortside Lower Level": 189.96,
         "Longside Lower Level": 200.0,
-        "Central Longside Upper": 219.98,
-        "Club Level Shortside": 294.95,
+        "Central Longside Upper": 218.97,
+        "Club Level Shortside": 289.97,
         "Central Longside Lower": 299.92,
-        "Club Level Longside": 349.94,
+        "Club Level Longside": 340.0,
         "Executive Private Boxes": 1499.94
       },
-      "last_scraped": "2026-03-03T13:43:43.314984"
+      "last_scraped": "2026-03-03T17:25:07.820984"
     }
   ],
-  "last_updated": "2026-03-03T13:43:43.314984"
+  "last_updated": "2026-03-03T17:25:07.820984"
 }
