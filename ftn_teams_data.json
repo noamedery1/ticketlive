@@ -130621,18 +130621,30 @@
               "Real Madrid VIP Hospitality Package": 690.68,
               "Private VIP Box": 2014.53
             }
+          },
+          {
+            "timestamp": "2026-03-06T23:03:51.126984",
+            "prices": {
+              "Category 4": 96.1,
+              "Category 3": 109.0,
+              "Category 2": 123.98,
+              "Category 1": 177.99,
+              "Category 1 Premium": 193.0,
+              "Real Madrid VIP Hospitality Package": 690.68,
+              "Private VIP Box": 2014.53
+            }
           }
         ],
         "latest_prices": {
           "Category 4": 96.1,
-          "Category 3": 111.99,
-          "Category 2": 124.0,
-          "Category 1": 178.99,
+          "Category 3": 109.0,
+          "Category 2": 123.98,
+          "Category 1": 177.99,
           "Category 1 Premium": 193.0,
           "Real Madrid VIP Hospitality Package": 690.68,
           "Private VIP Box": 2014.53
         },
-        "last_scraped": "2026-03-06T13:40:09.256984"
+        "last_scraped": "2026-03-06T23:03:51.126984"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-atletico-madrid",
@@ -147427,6 +147439,6 @@
         "last_scraped": "2026-03-06T13:40:09.256984"
       }
     ],
-    "last_updated": "2026-03-06T13:40:09.256984"
+    "last_updated": "2026-03-06T23:03:51.126984"
   }
 }
