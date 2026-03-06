@@ -49162,6 +49162,19 @@
               "Club Level Longside": 850.0,
               "Club Level Shortside": 850.0
             }
+          },
+          {
+            "timestamp": "2026-03-06T12:44:15.212984",
+            "prices": {
+              "Longside Upper Level": 495.0,
+              "Central Longside Upper": 518.0,
+              "Shortside Upper Level": 525.0,
+              "Longside Lower Level": 630.0,
+              "Shortside Lower Level": 700.0,
+              "Central Longside Lower": 707.0,
+              "Club Level Longside": 850.0,
+              "Club Level Shortside": 850.0
+            }
           }
         ],
         "latest_prices": {
@@ -49174,7 +49187,7 @@
           "Club Level Longside": 850.0,
           "Club Level Shortside": 850.0
         },
-        "last_scraped": "2026-03-06T08:20:21.197984"
+        "last_scraped": "2026-03-06T12:44:15.212984"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-burnley",
@@ -54939,6 +54952,20 @@
               "Club Level Shortside": 2349.94,
               "Executive Private Boxes": 6989.91
             }
+          },
+          {
+            "timestamp": "2026-03-06T12:44:15.212984",
+            "prices": {
+              "Shortside Upper Level": 825.0,
+              "Longside Upper Level": 849.98,
+              "Central Longside Upper": 875.0,
+              "Shortside Lower Level": 999.96,
+              "Longside Lower Level": 1099.94,
+              "Central Longside Lower": 1200.0,
+              "Club Level Longside": 1749.92,
+              "Club Level Shortside": 2349.94,
+              "Executive Private Boxes": 6989.91
+            }
           }
         ],
         "latest_prices": {
@@ -54952,7 +54979,7 @@
           "Club Level Shortside": 2349.94,
           "Executive Private Boxes": 6989.91
         },
-        "last_scraped": "2026-03-06T08:20:21.197984"
+        "last_scraped": "2026-03-06T12:44:15.212984"
       },
       {
         "url": "https://www.footballticketnet.com/fa-cup/arsenal-vs-wigan-athletic",
@@ -58770,7 +58797,7 @@
         "last_scraped": "2026-03-06T08:20:21.197984"
       }
     ],
-    "last_updated": "2026-03-06T08:20:21.197984"
+    "last_updated": "2026-03-06T12:44:15.212984"
   },
   "barcelona": {
     "team_name": "FC Barcelona",
