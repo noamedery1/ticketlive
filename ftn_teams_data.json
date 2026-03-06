@@ -49175,6 +49175,19 @@
               "Club Level Longside": 850.0,
               "Club Level Shortside": 850.0
             }
+          },
+          {
+            "timestamp": "2026-03-06T17:23:58.642984",
+            "prices": {
+              "Longside Upper Level": 495.0,
+              "Central Longside Upper": 518.0,
+              "Shortside Upper Level": 525.0,
+              "Longside Lower Level": 630.0,
+              "Shortside Lower Level": 700.0,
+              "Central Longside Lower": 707.0,
+              "Club Level Shortside": 850.0,
+              "Club Level Longside": 850.0
+            }
           }
         ],
         "latest_prices": {
@@ -49184,10 +49197,10 @@
           "Longside Lower Level": 630.0,
           "Shortside Lower Level": 700.0,
           "Central Longside Lower": 707.0,
-          "Club Level Longside": 850.0,
-          "Club Level Shortside": 850.0
+          "Club Level Shortside": 850.0,
+          "Club Level Longside": 850.0
         },
-        "last_scraped": "2026-03-06T12:44:15.212984"
+        "last_scraped": "2026-03-06T17:23:58.642984"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-burnley",
@@ -58797,7 +58810,7 @@
         "last_scraped": "2026-03-06T08:20:21.197984"
       }
     ],
-    "last_updated": "2026-03-06T12:44:15.212984"
+    "last_updated": "2026-03-06T17:23:58.642984"
   },
   "barcelona": {
     "team_name": "FC Barcelona",
