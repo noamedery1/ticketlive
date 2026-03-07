@@ -37747,23 +37747,40 @@
             "Executive Private Boxes": 1800.0,
             "VIP Packages": 3500.0
           }
+        },
+        {
+          "timestamp": "2026-03-07T18:04:58.908984",
+          "prices": {
+            "Category 3": 1750.0,
+            "Shortside Upper Level": 220.0,
+            "Shortside Lower Level": 274.92,
+            "Longside Upper Level": 274.94,
+            "Longside Lower Level": 289.0,
+            "Central Longside Upper": 289.96,
+            "Club Level Shortside": 339.95,
+            "Central Longside Lower": 364.91,
+            "Club Level Longside": 424.95,
+            "Away Section": 749.98,
+            "Executive Private Boxes": 1799.96,
+            "VIP Packages": 3500.0
+          }
         }
       ],
       "latest_prices": {
         "Category 3": 1750.0,
         "Shortside Upper Level": 220.0,
-        "Longside Upper Level": 284.93,
-        "Central Longside Upper": 294.96,
-        "Shortside Lower Level": 294.97,
+        "Shortside Lower Level": 274.92,
+        "Longside Upper Level": 274.94,
+        "Longside Lower Level": 289.0,
+        "Central Longside Upper": 289.96,
         "Club Level Shortside": 339.95,
-        "Longside Lower Level": 349.96,
-        "Central Longside Lower": 369.94,
-        "Club Level Longside": 439.97,
+        "Central Longside Lower": 364.91,
+        "Club Level Longside": 424.95,
         "Away Section": 749.98,
-        "Executive Private Boxes": 1800.0,
+        "Executive Private Boxes": 1799.96,
         "VIP Packages": 3500.0
       },
-      "last_scraped": "2026-03-06T08:20:21.197984"
+      "last_scraped": "2026-03-07T18:04:58.908984"
     },
     {
       "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-newcastle-united",
@@ -58884,5 +58901,5 @@
       "last_scraped": "2026-03-07T03:38:31.026984"
     }
   ],
-  "last_updated": "2026-03-07T03:38:31.026984"
+  "last_updated": "2026-03-07T18:04:58.908984"
 }
