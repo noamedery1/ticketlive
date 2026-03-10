@@ -134090,6 +134090,18 @@
               "Real Madrid VIP Hospitality Package": 460.0,
               "Private VIP Box": 2014.53
             }
+          },
+          {
+            "timestamp": "2026-03-10T06:00:47.268791",
+            "prices": {
+              "Category 4": 90.0,
+              "Category 3": 107.0,
+              "Category 2": 122.0,
+              "Category 1": 172.97,
+              "Category 1 Premium": 192.99,
+              "Real Madrid VIP Hospitality Package": 460.0,
+              "Private VIP Box": 2014.53
+            }
           }
         ],
         "latest_prices": {
@@ -134101,7 +134113,7 @@
           "Real Madrid VIP Hospitality Package": 460.0,
           "Private VIP Box": 2014.53
         },
-        "last_scraped": "2026-03-10T02:16:30.557953"
+        "last_scraped": "2026-03-10T06:00:47.268791"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-atletico-madrid",
@@ -137249,6 +137261,16 @@
               "Category 1": 446.97,
               "Category 1 Premium": 469.09
             }
+          },
+          {
+            "timestamp": "2026-03-10T06:00:47.268791",
+            "prices": {
+              "Category 4": 263.1,
+              "Category 3": 377.0,
+              "Category 2": 399.97,
+              "Category 1": 446.97,
+              "Category 1 Premium": 469.09
+            }
           }
         ],
         "latest_prices": {
@@ -137258,7 +137280,7 @@
           "Category 1": 446.97,
           "Category 1 Premium": 469.09
         },
-        "last_scraped": "2026-03-10T02:16:30.557953"
+        "last_scraped": "2026-03-10T06:00:47.268791"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-girona",
@@ -140332,6 +140354,18 @@
               "Real Madrid VIP Hospitality Package": 805.8,
               "Private VIP Box": 2302.3
             }
+          },
+          {
+            "timestamp": "2026-03-10T06:00:47.268791",
+            "prices": {
+              "Category 4": 122.99,
+              "Category 3": 150.95,
+              "Category 2": 155.95,
+              "Category 1": 203.95,
+              "Category 1 Premium": 220.94,
+              "Real Madrid VIP Hospitality Package": 805.8,
+              "Private VIP Box": 2302.3
+            }
           }
         ],
         "latest_prices": {
@@ -140343,7 +140377,7 @@
           "Real Madrid VIP Hospitality Package": 805.8,
           "Private VIP Box": 2302.3
         },
-        "last_scraped": "2026-03-10T02:16:30.557953"
+        "last_scraped": "2026-03-10T06:00:47.268791"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-deportivo-alaves",
@@ -143508,16 +143542,26 @@
               "Category 1": 212.94,
               "Category 1 Premium": 218.9
             }
+          },
+          {
+            "timestamp": "2026-03-10T06:00:47.268791",
+            "prices": {
+              "Category 4": 101.92,
+              "Category 3": 141.88,
+              "Category 2": 158.9,
+              "Category 1": 212.92,
+              "Category 1 Premium": 218.9
+            }
           }
         ],
         "latest_prices": {
-          "Category 4": 101.93,
-          "Category 3": 141.9,
-          "Category 2": 158.92,
-          "Category 1": 212.94,
+          "Category 4": 101.92,
+          "Category 3": 141.88,
+          "Category 2": 158.9,
+          "Category 1": 212.92,
           "Category 1 Premium": 218.9
         },
-        "last_scraped": "2026-03-10T02:16:30.557953"
+        "last_scraped": "2026-03-10T06:00:47.268791"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-real-oviedo",
@@ -146598,6 +146642,16 @@
               "Category 1": 202.99,
               "Category 1 Premium": 224.98
             }
+          },
+          {
+            "timestamp": "2026-03-10T06:00:47.268791",
+            "prices": {
+              "Category 4": 115.99,
+              "Category 3": 138.99,
+              "Category 2": 149.99,
+              "Category 1": 202.99,
+              "Category 1 Premium": 224.98
+            }
           }
         ],
         "latest_prices": {
@@ -146607,7 +146661,7 @@
           "Category 1": 202.99,
           "Category 1 Premium": 224.98
         },
-        "last_scraped": "2026-03-10T02:16:30.557953"
+        "last_scraped": "2026-03-10T06:00:47.268791"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-athletic-bilbao",
@@ -149720,6 +149774,16 @@
               "Category 1": 253.0,
               "Category 1 Premium": 289.99
             }
+          },
+          {
+            "timestamp": "2026-03-10T06:00:47.268791",
+            "prices": {
+              "Category 4": 189.97,
+              "Category 3": 220.96,
+              "Category 2": 226.98,
+              "Category 1": 253.0,
+              "Category 1 Premium": 289.99
+            }
           }
         ],
         "latest_prices": {
@@ -149729,7 +149793,7 @@
           "Category 1": 253.0,
           "Category 1 Premium": 289.99
         },
-        "last_scraped": "2026-03-10T02:16:30.557953"
+        "last_scraped": "2026-03-10T06:00:47.268791"
       },
       {
         "url": "https://www.footballticketnet.com/champions-league/real-madrid-vs-sl-benfica",
@@ -151533,6 +151597,17 @@
               "Category 1 Premium": 275.0,
               "Away Section": 293.0
             }
+          },
+          {
+            "timestamp": "2026-03-10T06:00:47.268791",
+            "prices": {
+              "Category 4": 120.1,
+              "Category 3": 145.0,
+              "Category 2": 151.99,
+              "Category 1": 193.0,
+              "Category 1 Premium": 275.0,
+              "Away Section": 293.0
+            }
           }
         ],
         "latest_prices": {
@@ -151543,9 +151618,9 @@
           "Category 1 Premium": 275.0,
           "Away Section": 293.0
         },
-        "last_scraped": "2026-03-10T02:16:30.557953"
+        "last_scraped": "2026-03-10T06:00:47.268791"
       }
     ],
-    "last_updated": "2026-03-10T02:16:30.557953"
+    "last_updated": "2026-03-10T06:00:47.268791"
   }
 }
