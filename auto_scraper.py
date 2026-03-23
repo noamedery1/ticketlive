@@ -30,7 +30,7 @@ PYTHON_CMD = get_python_cmd()
 # ⚙️ CONFIGURATION
 # ==========================================
 SCRAPE_INTERVAL_HOURS = 2.0  # Run every 2 hours
-PRICES_FTN_FILE = 'prices_ftn.json'
+PRICES_FTN_FILE = 'prices_ftn.json.gz'
 PRICES_VIAGOGO_FILE = 'prices.json'
 
 # ==========================================
@@ -168,17 +168,12 @@ def git_commit(message):
             print(f'   [OK] Committed: {message}', flush=True)
             return True
         else:
-            # Check if there are no changes to commit
-<<<<<<< .merge_file_a04156
-            if 'nothing to commit' in result.stdout.lower() or 'nothing to commit' in result.stderr.lower():
-                print(f'   [INFO] No changes to commit', flush=True)
-                return True
-=======
-            output = (result.stdout + result.stderr).lower()
-            if 'nothing to commit' in output or 'no changes' in output:
+            # Check if there are no changes to commit (not an error)
+            output = (result.stdout or '') + (result.stderr or '')
+            output_l = output.lower()
+            if 'nothing to commit' in output_l or 'no changes' in output_l:
                 print(f'   [INFO] No changes to commit (files already up to date)', flush=True)
-                return True  # Return True because this is not an error
->>>>>>> .merge_file_a11708
+                return True
             print(f'   [ERROR] Commit failed: {result.stderr}', flush=True)
             return False
     except Exception as e:

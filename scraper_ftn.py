@@ -5,6 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 import re
 import json
+import gzip
 import os
 import sys
 from collections import defaultdict
@@ -247,7 +248,8 @@ def scrape_ftn_single(driver, url, match_name):
 
 def run_ftn_scraper_cycle():
     GAMES_FILE = 'all_games_ftn_to_scrape.json'
-    OUTPUT_FILE = 'prices_ftn.json'
+    OUTPUT_FILE_LEGACY = 'prices_ftn.json'
+    OUTPUT_FILE = 'prices_ftn.json.gz'
     
     print(f'\n[{datetime.now().strftime("%H:%M")}] 🚀 FTN SCRAPER STARTING...', flush=True)
     
@@ -265,10 +267,16 @@ def run_ftn_scraper_cycle():
     print(f'   📅 Run timestamp: {run_timestamp}', flush=True)
     
     existing_data = []
-    if os.path.exists(OUTPUT_FILE):
-        try:
-            with open(OUTPUT_FILE, 'r') as f: existing_data = json.load(f)
-        except: pass
+    # Prefer gz if present; otherwise, bootstrap from legacy json once.
+    try:
+        if os.path.exists(OUTPUT_FILE):
+            with gzip.open(OUTPUT_FILE, 'rt', encoding='utf-8') as f:
+                existing_data = json.load(f)
+        elif os.path.exists(OUTPUT_FILE_LEGACY):
+            with open(OUTPUT_FILE_LEGACY, 'r', encoding='utf-8') as f:
+                existing_data = json.load(f)
+    except Exception as e:
+        print(f'[WARN] Could not load existing FTN data: {e}', flush=True)
     
     all_new_records = []
     
@@ -288,11 +296,24 @@ def run_ftn_scraper_cycle():
             time.sleep(2)
             
     finally:
+        # Write gz to keep repo pushes small.
+        # - If we scraped new records -> append and write.
+        # - If gz doesn't exist yet -> bootstrap from legacy data even if no new records.
+        should_write_gz = False
         if all_new_records:
             existing_data.extend(all_new_records)
-            with open(OUTPUT_FILE, 'w') as f:
-                json.dump(existing_data, f, indent=2)
-            print(f'\n[OK] Saved {len(all_new_records)} records.', flush=True)
+            should_write_gz = True
+        elif not os.path.exists(OUTPUT_FILE) and existing_data:
+            should_write_gz = True
+        
+        if should_write_gz:
+            with gzip.open(OUTPUT_FILE, 'wt', encoding='utf-8', compresslevel=9) as f:
+                json.dump(existing_data, f)
+            
+            if all_new_records:
+                print(f'\n[OK] Saved {len(all_new_records)} records to {OUTPUT_FILE}.', flush=True)
+            else:
+                print(f'\n[OK] Bootstrapped {OUTPUT_FILE} from legacy JSON.', flush=True)
         
         if driver: driver.quit()
 

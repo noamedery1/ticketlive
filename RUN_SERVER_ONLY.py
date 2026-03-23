@@ -1,10 +1,11 @@
 """
 Railway Server - No Scrapers
-Only serves the API and frontend, reads from prices.json and prices_ftn.json
+Only serves the API and frontend, reads from prices.json and prices_ftn.json.gz
 """
 import uvicorn
 import json
 import os
+import gzip
 import re
 import sys
 from fastapi import FastAPI, Request, HTTPException
@@ -26,7 +27,8 @@ if sys.platform == 'win32':
 # ⚙️ CONFIGURATION
 # ==========================================
 DATA_FILE_VIAGOGO = 'prices.json'
-DATA_FILE_FTN = 'prices_ftn.json'
+DATA_FILE_FTN = 'prices_ftn.json.gz'
+DATA_FILE_FTN_LEGACY = 'prices_ftn.json'
 GAMES_FILE = 'all_games_to_scrape.json'
 TEAMS_DATA_FILE = 'ftn_teams_data.json'
 # Railway sets PORT dynamically - use whatever Railway provides
@@ -85,8 +87,12 @@ def load_data(file_path):
         print(f'[WARN] File not found: {file_path}')
         return []
     try:
-        with open(file_path, 'r', encoding='utf-8') as f: 
-            data = json.load(f)
+        if file_path.endswith('.gz'):
+            with gzip.open(file_path, 'rt', encoding='utf-8') as f:
+                data = json.load(f)
+        else:
+            with open(file_path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
             print(f'[INFO] Loaded {len(data)} records from {file_path}')
             return data
     except Exception as e:
@@ -173,7 +179,9 @@ def get_history(match_url: str):
         v_match_data.sort(key=lambda x: x.get('timestamp', ''))
 
         # 2. IDENTIFY MATCH FOR FTN
-        ftn_data = load_data(DATA_FILE_FTN)
+        # Prefer gz if present; fall back to legacy json for first-time migration.
+        ftn_data_file = DATA_FILE_FTN if os.path.exists(DATA_FILE_FTN) else DATA_FILE_FTN_LEGACY
+        ftn_data = load_data(ftn_data_file)
         f_match_data = []
         
         match_number = None
