@@ -91,6 +91,8 @@ def load_data(file_path):
         if file_path.endswith('.gz'):
             with gzip.open(file_path, 'rt', encoding='utf-8') as f:
                 data = json.load(f)
+            print(f'[INFO] Loaded {len(data)} records from {file_path}')
+            return data
         else:
             with open(file_path, 'r', encoding='utf-8') as f:
                 data = json.load(f)
