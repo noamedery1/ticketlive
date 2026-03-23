@@ -142723,18 +142723,30 @@
               "Real Madrid VIP Hospitality Package": 805.8,
               "Private VIP Box": 2302.3
             }
+          },
+          {
+            "timestamp": "2026-03-23T16:06:49.306533",
+            "prices": {
+              "Category 4": 104.99,
+              "Category 3": 124.99,
+              "Category 2": 138.99,
+              "Category 1": 189.99,
+              "Category 1 Premium": 213.0,
+              "Real Madrid VIP Hospitality Package": 805.8,
+              "Private VIP Box": 2302.3
+            }
           }
         ],
         "latest_prices": {
-          "Category 4": 105.0,
-          "Category 3": 125.0,
-          "Category 2": 139.0,
-          "Category 1": 190.0,
+          "Category 4": 104.99,
+          "Category 3": 124.99,
+          "Category 2": 138.99,
+          "Category 1": 189.99,
           "Category 1 Premium": 213.0,
           "Real Madrid VIP Hospitality Package": 805.8,
           "Private VIP Box": 2302.3
         },
-        "last_scraped": "2026-03-23T12:37:30.844341"
+        "last_scraped": "2026-03-23T16:06:49.306533"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-deportivo-alaves",
@@ -145979,16 +145991,26 @@
               "Category 1": 183.99,
               "Category 1 Premium": 208.99
             }
+          },
+          {
+            "timestamp": "2026-03-23T16:06:49.306533",
+            "prices": {
+              "Category 4": 94.99,
+              "Category 3": 106.99,
+              "Category 2": 125.99,
+              "Category 1": 179.99,
+              "Category 1 Premium": 204.99
+            }
           }
         ],
         "latest_prices": {
-          "Category 4": 95.99,
-          "Category 3": 109.99,
-          "Category 2": 129.97,
-          "Category 1": 183.99,
-          "Category 1 Premium": 208.99
+          "Category 4": 94.99,
+          "Category 3": 106.99,
+          "Category 2": 125.99,
+          "Category 1": 179.99,
+          "Category 1 Premium": 204.99
         },
-        "last_scraped": "2026-03-23T12:37:30.844341"
+        "last_scraped": "2026-03-23T16:06:49.306533"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-real-oviedo",
@@ -149149,6 +149171,16 @@
               "Category 1": 187.99,
               "Category 1 Premium": 215.0
             }
+          },
+          {
+            "timestamp": "2026-03-23T16:06:49.306533",
+            "prices": {
+              "Category 4": 104.99,
+              "Category 3": 128.99,
+              "Category 2": 135.0,
+              "Category 1": 187.99,
+              "Category 1 Premium": 215.0
+            }
           }
         ],
         "latest_prices": {
@@ -149158,7 +149190,7 @@
           "Category 1": 187.99,
           "Category 1 Premium": 215.0
         },
-        "last_scraped": "2026-03-23T12:37:30.844341"
+        "last_scraped": "2026-03-23T16:06:49.306533"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-athletic-bilbao",
@@ -152351,6 +152383,16 @@
               "Category 1": 254.99,
               "Category 1 Premium": 268.99
             }
+          },
+          {
+            "timestamp": "2026-03-23T16:06:49.306533",
+            "prices": {
+              "Category 4": 178.97,
+              "Category 3": 214.99,
+              "Category 2": 219.98,
+              "Category 1": 254.99,
+              "Category 1 Premium": 268.99
+            }
           }
         ],
         "latest_prices": {
@@ -152360,7 +152402,7 @@
           "Category 1": 254.99,
           "Category 1 Premium": 268.99
         },
-        "last_scraped": "2026-03-23T12:37:30.844341"
+        "last_scraped": "2026-03-23T16:06:49.306533"
       },
       {
         "url": "https://www.footballticketnet.com/champions-league/real-madrid-vs-sl-benfica",
@@ -154270,18 +154312,28 @@
               "Category 1": 407.0,
               "Category 1 Premium": 434.0
             }
+          },
+          {
+            "timestamp": "2026-03-23T16:06:49.306533",
+            "prices": {
+              "Category 4": 277.0,
+              "Category 3": 330.0,
+              "Category 2": 339.0,
+              "Category 1": 407.0,
+              "Category 1 Premium": 434.0
+            }
           }
         ],
         "latest_prices": {
           "Category 4": 277.0,
-          "Category 3": 333.0,
-          "Category 2": 341.0,
+          "Category 3": 330.0,
+          "Category 2": 339.0,
           "Category 1": 407.0,
           "Category 1 Premium": 434.0
         },
-        "last_scraped": "2026-03-23T12:37:30.844341"
+        "last_scraped": "2026-03-23T16:06:49.306533"
       }
     ],
-    "last_updated": "2026-03-23T12:37:30.844341"
+    "last_updated": "2026-03-23T16:06:49.306533"
   }
 }
