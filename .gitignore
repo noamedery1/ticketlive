@@ -10,9 +10,13 @@ data/tickets/
 *.jsonl
 
 # Large data files
-# prices.json - explicitly tracked
+# Keep full price history in gzipped JSON to avoid GitHub file size limits.
+# prices.json.gz - explicitly tracked
 # prices_ftn.json.gz - explicitly tracked
 # ftn_teams_data.json - explicitly tracked
+# Legacy uncompressed files (kept for backward compatibility only)
+prices.json
+prices_ftn.json
 prices.json_old
 prices_ftn.json_old
 prices_ftn_test.json

@@ -31,7 +31,7 @@ PYTHON_CMD = get_python_cmd()
 # ==========================================
 SCRAPE_INTERVAL_HOURS = 2.0  # Run every 2 hours
 PRICES_FTN_FILE = 'prices_ftn.json.gz'
-PRICES_VIAGOGO_FILE = 'prices.json'
+PRICES_VIAGOGO_FILE = 'prices.json.gz'
 
 # ==========================================
 # Scraper Functions

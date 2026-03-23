@@ -33,7 +33,7 @@ PYTHON_CMD = get_python_cmd()
 # ⚙️ CONFIGURATION
 # ==========================================
 SCRAPE_INTERVAL_HOURS = 2.0  # Run every 2 hours
-PRICES_VIAGOGO_FILE = 'prices.json'  # Viagogo World Cup prices file
+PRICES_VIAGOGO_FILE = 'prices.json.gz'  # Viagogo World Cup prices file
 PRICES_FTN_FILE = 'prices_ftn.json.gz'  # FTN World Cup prices file
 
 # ==========================================

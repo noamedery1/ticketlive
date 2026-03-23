@@ -23,7 +23,8 @@ if sys.platform == 'win32':
 # ⚙️ CONFIGURATION
 # ==========================================
 SCRAPE_INTERVAL_HOURS = 2.0
-DATA_FILE_VIAGOGO = 'prices.json'
+DATA_FILE_VIAGOGO_LEGACY = 'prices.json'
+DATA_FILE_VIAGOGO = 'prices.json.gz'
 DATA_FILE_FTN = 'prices_ftn.json.gz'
 DATA_FILE_FTN_LEGACY = 'prices_ftn.json'
 GAMES_FILE = 'all_games_to_scrape.json'
@@ -77,7 +78,8 @@ def get_matches():
 def get_history(match_url: str):
     try:
         # 1. LOAD VIAGOGO DATA
-        viagogo_data = load_data(DATA_FILE_VIAGOGO)
+        viagogo_data_file = DATA_FILE_VIAGOGO if os.path.exists(DATA_FILE_VIAGOGO) else DATA_FILE_VIAGOGO_LEGACY
+        viagogo_data = load_data(viagogo_data_file)
         v_match_data = []
         
         # Extract ID from requested URL

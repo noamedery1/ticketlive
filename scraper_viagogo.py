@@ -3,6 +3,7 @@ import os
 import re
 import time
 import sys
+import gzip
 import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -18,7 +19,8 @@ if sys.platform == 'win32':
 # ==========================================
 # ⚙️ CONFIGURATION
 # ==========================================
-OUTPUT_FILE = 'prices.json'
+OUTPUT_FILE_LEGACY = 'prices.json'
+OUTPUT_FILE = 'prices.json.gz'
 GAMES_FILE = 'all_games_to_scrape.json'
 
 # ==========================================
@@ -28,6 +30,9 @@ def load_json(path, default):
     if not os.path.exists(path):
         return default
     try:
+        if path.endswith('.gz'):
+            with gzip.open(path, "rt", encoding="utf-8") as f:
+                return json.load(f)
         with open(path, "r", encoding="utf-8") as f:
             return json.load(f)
     except:
@@ -36,8 +41,12 @@ def load_json(path, default):
 def append_json(path, rows):
     data = load_json(path, [])
     data.extend(rows)
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2)
+    if path.endswith('.gz'):
+        with gzip.open(path, "wt", encoding="utf-8", compresslevel=9) as f:
+            json.dump(data, f)
+    else:
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2)
 
 # ==========================================
 # PRICE EXTRACTION - Simple HTML/DOM approach
