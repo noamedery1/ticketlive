@@ -121,6 +121,87 @@ def load_data(file_path):
         return []
 
 # ---------------------------------------------------------
+# Indexing / caching for fast /history lookups
+# ---------------------------------------------------------
+_GAMES_MATCHNUM_MAP = {'file': None, 'mtime': None, 'map': {}}
+_VIAGOGO_INDEX = {'file': None, 'mtime': None, 'by_id': {}, 'by_clean': {}}
+_FTN_INDEX = {'file': None, 'mtime': None, 'by_matchnum': {}}
+_INDEX_LOCK = threading.Lock()
+
+def _clean_viagogo_url(url: str) -> str:
+    # Match server's old logic: drop query params and anything after '&'
+    return (url or '').split('?')[0].split('&')[0]
+
+def _ensure_games_matchnum_map():
+    if not os.path.exists(GAMES_FILE):
+        return {}
+    try:
+        mtime = os.path.getmtime(GAMES_FILE)
+    except Exception:
+        mtime = None
+
+    with _INDEX_LOCK:
+        if _GAMES_MATCHNUM_MAP['file'] == GAMES_FILE and _GAMES_MATCHNUM_MAP['mtime'] == mtime:
+            return _GAMES_MATCHNUM_MAP['map']
+
+        games_by_url = {}
+        with open(GAMES_FILE, 'r', encoding='utf-8') as f:
+            games = json.load(f)
+        for g in games:
+            u = (g.get('url') or '').split('?')[0]
+            mn = re.search(r'Match (\d+)', g.get('match_name', ''), re.IGNORECASE)
+            if u and mn:
+                games_by_url[u] = mn.group(1)
+
+        _GAMES_MATCHNUM_MAP.update({'file': GAMES_FILE, 'mtime': mtime, 'map': games_by_url})
+        return games_by_url
+
+def _ensure_viagogo_index(viagogo_file: str):
+    try:
+        mtime = os.path.getmtime(viagogo_file)
+    except Exception:
+        mtime = None
+
+    with _INDEX_LOCK:
+        if _VIAGOGO_INDEX['file'] == viagogo_file and _VIAGOGO_INDEX['mtime'] == mtime:
+            return _VIAGOGO_INDEX['by_id'], _VIAGOGO_INDEX['by_clean']
+
+        data = load_data(viagogo_file)
+        by_id = {}
+        by_clean = {}
+        for row in data:
+            stored_clean = _clean_viagogo_url(row.get('match_url', ''))
+            if not stored_clean:
+                continue
+            m = re.search(r'/(E-\d+)', stored_clean)
+            if m:
+                by_id.setdefault(m.group(1), []).append(row)
+            by_clean.setdefault(stored_clean, []).append(row)
+
+        _VIAGOGO_INDEX.update({'file': viagogo_file, 'mtime': mtime, 'by_id': by_id, 'by_clean': by_clean})
+        return by_id, by_clean
+
+def _ensure_ftn_index(ftn_file: str):
+    try:
+        mtime = os.path.getmtime(ftn_file)
+    except Exception:
+        mtime = None
+
+    with _INDEX_LOCK:
+        if _FTN_INDEX['file'] == ftn_file and _FTN_INDEX['mtime'] == mtime:
+            return _FTN_INDEX['by_matchnum']
+
+        data = load_data(ftn_file)
+        by_matchnum = {}
+        for row in data:
+            mn = re.search(r'Match (\d+)', row.get('match_name', ''), re.IGNORECASE)
+            if mn:
+                by_matchnum.setdefault(mn.group(1), []).append(row)
+
+        _FTN_INDEX.update({'file': ftn_file, 'mtime': mtime, 'by_matchnum': by_matchnum})
+        return by_matchnum
+
+# ---------------------------------------------------------
 # API Endpoints
 # ---------------------------------------------------------
 @app.get('/matches')
@@ -154,7 +235,6 @@ def get_history(match_url: str):
         
         # 1. LOAD VIAGOGO DATA
         viagogo_data_file = DATA_FILE_VIAGOGO if os.path.exists(DATA_FILE_VIAGOGO) else DATA_FILE_VIAGOGO_LEGACY
-        viagogo_data = load_data(viagogo_data_file)
         v_match_data = []
         
         # Extract ID from requested URL
@@ -166,36 +246,17 @@ def get_history(match_url: str):
         
         print(f"[API] Looking for Viagogo ID: {req_id}")
 
-        for row in viagogo_data:
-            # Extract ID from stored URL (remove query params for comparison)
-            stored_url = row.get('match_url', '').split('?')[0].split('&')[0]
-            stored_id = None
-            m_stored = re.search(r'/(E-\d+)', stored_url)
-            if m_stored: 
-                stored_id = m_stored.group(1)
-            
-            # Clean request URL too
-            clean_req_url = match_url.split('?')[0].split('&')[0]
-            
-            # Match by ID if possible (most reliable)
-            if req_id and stored_id:
-                if req_id == stored_id:
-                    v_match_data.append(row)
-                    continue
-            
-            # Match by URL (exact or partial)
-            if clean_req_url in stored_url or stored_url in clean_req_url:
-                v_match_data.append(row)
-                continue
-            
-            # Match by match number in match_name
-            match_name = row.get('match_name', '')
-            match_num = re.search(r'Match (\d+)', match_name)
-            if match_num:
-                url_match_num = re.search(r'Match (\d+)', match_url, re.IGNORECASE)
-                if url_match_num and match_num.group(1) == url_match_num.group(1):
-                    v_match_data.append(row)
-                    continue
+        clean_req_url = _clean_viagogo_url(match_url)
+        by_id, by_clean = _ensure_viagogo_index(viagogo_data_file)
+
+        # Fast path: match by ID.
+        if req_id:
+            v_match_data = by_id.get(req_id, [])
+        # Fallback: substring match on cleaned urls (keeps old behavior).
+        if not v_match_data:
+            for stored_url, rows in by_clean.items():
+                if clean_req_url in stored_url or stored_url in clean_req_url:
+                    v_match_data.extend(rows)
                  
         print(f"[API] Found {len(v_match_data)} Viagogo records.")
         v_match_data.sort(key=lambda x: x.get('timestamp', ''))
@@ -203,34 +264,29 @@ def get_history(match_url: str):
         # 2. IDENTIFY MATCH FOR FTN
         # Prefer gz if present; fall back to legacy json for first-time migration.
         ftn_data_file = DATA_FILE_FTN if os.path.exists(DATA_FILE_FTN) else DATA_FILE_FTN_LEGACY
-        ftn_data = load_data(ftn_data_file)
         f_match_data = []
         
         match_number = None
         m = re.search(r'Match (\d+)', match_url, re.IGNORECASE)
-        
-        # New fallback: Look in GAMES_FILE if URL does not have match number
-        if not m and os.path.exists(GAMES_FILE):
-             try:
-                 with open(GAMES_FILE, 'r', encoding='utf-8') as f: 
-                     games = json.load(f)
-                 # Find game with this URL (ignoring query params)
-                 clean_input_url = match_url.split('?')[0]
-                 
-                 for g in games:
-                     if g['url'].split('?')[0] == clean_input_url:
-                         m = re.search(r'Match (\d+)', g['match_name'], re.IGNORECASE)
-                         break
-             except Exception as e:
-                 print(f'[ERROR] Error loading games file: {e}')
 
-        if not m and v_match_data:
-             m = re.search(r'Match (\d+)', v_match_data[0].get('match_name', ''), re.IGNORECASE)
-        
         if m:
             match_number = m.group(1)
-            # Find FTN records for this Match #
-            f_match_data = [d for d in ftn_data if f'Match {match_number}' in d.get('match_name', '')]
+        else:
+            # Look in GAMES_FILE (url -> match number) since match_url is a viagogo url.
+            games_url_map = _ensure_games_matchnum_map()
+            clean_input_url = match_url.split('?')[0]
+            mn = games_url_map.get(clean_input_url)
+            if mn:
+                match_number = mn
+            # Final fallback: extract from the first viagogo record's match_name.
+            elif v_match_data:
+                m2 = re.search(r'Match (\d+)', v_match_data[0].get('match_name', ''), re.IGNORECASE)
+                if m2:
+                    match_number = m2.group(1)
+
+        if match_number:
+            by_matchnum = _ensure_ftn_index(ftn_data_file)
+            f_match_data = by_matchnum.get(match_number, [])
             f_match_data.sort(key=lambda x: x.get('timestamp', ''))
             print(f"[API] Found {len(f_match_data)} FTN records for Match {match_number}")
         
