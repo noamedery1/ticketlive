@@ -47,12 +47,34 @@ app.add_middleware(
 def load_data(file_path):
     if not os.path.exists(file_path): return []
     try:
+        # Cache file contents to avoid re-loading large JSON on every request.
+        try:
+            mtime = os.path.getmtime(file_path)
+        except Exception:
+            mtime = None
+
+        # Use function attribute as lightweight module cache.
+        if not hasattr(load_data, '_cache'):
+            load_data._cache = {}
+            load_data._lock = threading.Lock()
+
+        with load_data._lock:
+            cached = load_data._cache.get(file_path)
+            if cached and cached.get('mtime') == mtime:
+                return cached.get('data', [])
+
         if file_path.endswith('.gz'):
             with gzip.open(file_path, 'rt', encoding='utf-8') as f:
-                return json.load(f)
-        with open(file_path, 'r') as f:
-            return json.load(f)
-    except: return []
+                data = json.load(f)
+        else:
+            with open(file_path, 'r') as f:
+                data = json.load(f)
+
+        with load_data._lock:
+            load_data._cache[file_path] = {'mtime': mtime, 'data': data}
+        return data
+    except: 
+        return []
 
 # ---------------------------------------------------------
 # API Endpoints

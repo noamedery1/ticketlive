@@ -16,6 +16,7 @@ from pydantic import BaseModel
 from typing import Optional, List
 import subprocess
 from starlette.middleware.base import BaseHTTPMiddleware
+import threading
 
 # Fix encoding for Windows
 if sys.platform == 'win32':
@@ -83,20 +84,37 @@ app.add_middleware(
 # ---------------------------------------------------------
 # JSON Data Utility
 # ---------------------------------------------------------
+_DATA_CACHE: dict[str, dict[str, object]] = {}
+_DATA_CACHE_LOCK = threading.Lock()
+
 def load_data(file_path):
     if not os.path.exists(file_path): 
         print(f'[WARN] File not found: {file_path}')
         return []
     try:
+        # Cache file contents to avoid re-loading large JSON on every request.
+        # Keyed by file mtime so updated datasets eventually refresh.
+        try:
+            mtime = os.path.getmtime(file_path)
+        except Exception:
+            mtime = None
+
+        with _DATA_CACHE_LOCK:
+            cached = _DATA_CACHE.get(file_path)
+            if cached and cached.get('mtime') == mtime:
+                return cached.get('data', [])
+
         if file_path.endswith('.gz'):
             with gzip.open(file_path, 'rt', encoding='utf-8') as f:
                 data = json.load(f)
-            print(f'[INFO] Loaded {len(data)} records from {file_path}')
+            with _DATA_CACHE_LOCK:
+                _DATA_CACHE[file_path] = {'mtime': mtime, 'data': data}
             return data
         else:
             with open(file_path, 'r', encoding='utf-8') as f:
                 data = json.load(f)
-            print(f'[INFO] Loaded {len(data)} records from {file_path}')
+            with _DATA_CACHE_LOCK:
+                _DATA_CACHE[file_path] = {'mtime': mtime, 'data': data}
             return data
     except Exception as e:
         print(f'[ERROR] Failed to load {file_path}: {e}')
