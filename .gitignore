@@ -11,7 +11,7 @@ data/tickets/
 
 # Large data files
 # prices.json - explicitly tracked
-# prices_ftn.json - explicitly tracked
+# prices_ftn.json.gz - explicitly tracked
 # ftn_teams_data.json - explicitly tracked
 prices.json_old
 prices_ftn.json_old

@@ -3,6 +3,7 @@ import time
 import uvicorn
 import json
 import os
+import gzip
 import re
 import sys
 from datetime import datetime
@@ -23,7 +24,8 @@ if sys.platform == 'win32':
 # ==========================================
 SCRAPE_INTERVAL_HOURS = 2.0
 DATA_FILE_VIAGOGO = 'prices.json'
-DATA_FILE_FTN = 'prices_ftn.json'
+DATA_FILE_FTN = 'prices_ftn.json.gz'
+DATA_FILE_FTN_LEGACY = 'prices_ftn.json'
 GAMES_FILE = 'all_games_to_scrape.json'
 PORT = 8000
 # ==========================================
@@ -44,7 +46,11 @@ app.add_middleware(
 def load_data(file_path):
     if not os.path.exists(file_path): return []
     try:
-        with open(file_path, 'r') as f: return json.load(f)
+        if file_path.endswith('.gz'):
+            with gzip.open(file_path, 'rt', encoding='utf-8') as f:
+                return json.load(f)
+        with open(file_path, 'r') as f:
+            return json.load(f)
     except: return []
 
 # ---------------------------------------------------------
@@ -100,7 +106,9 @@ def get_history(match_url: str):
         v_match_data.sort(key=lambda x: x['timestamp'])
 
         # 2. IDENTIFY MATCH FOR FTN
-        ftn_data = load_data(DATA_FILE_FTN)
+        # Prefer gz if present; fall back to legacy json for first-time migration.
+        ftn_data_file = DATA_FILE_FTN if os.path.exists(DATA_FILE_FTN) else DATA_FILE_FTN_LEGACY
+        ftn_data = load_data(ftn_data_file)
         f_match_data = []
         
         match_number = None

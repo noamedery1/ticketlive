@@ -97,7 +97,7 @@ py auto_scraper.py
 
 This will:
 - Run both scrapers in parallel
-- Save prices to `prices.json` and `prices_ftn.json`
+- Save prices to `prices.json` and `prices_ftn.json.gz`
 - Automatically commit and push to Git
 - Wait 2 hours and repeat
 
