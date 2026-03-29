@@ -163565,6 +163565,17 @@
               "Category 1 Premium": 382.0,
               "Away Section": 375.0
             }
+          },
+          {
+            "timestamp": "2026-03-29T21:57:13.533880",
+            "prices": {
+              "Category 4": 248.1,
+              "Category 3": 296.99,
+              "Category 2": 307.99,
+              "Category 1": 354.99,
+              "Category 1 Premium": 382.0,
+              "Away Section": 375.0
+            }
           }
         ],
         "latest_prices": {
@@ -163575,9 +163586,9 @@
           "Category 1 Premium": 382.0,
           "Away Section": 375.0
         },
-        "last_scraped": "2026-03-29T10:34:38.157650"
+        "last_scraped": "2026-03-29T21:57:13.533880"
       }
     ],
-    "last_updated": "2026-03-29T10:34:38.157650"
+    "last_updated": "2026-03-29T21:57:13.533880"
   }
 }
