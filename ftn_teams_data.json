@@ -38953,21 +38953,36 @@
               "Club Level Longside": 314.54,
               "Executive Private Boxes": 599.6
             }
+          },
+          {
+            "timestamp": "2026-03-30T05:08:37.856880",
+            "prices": {
+              "Shortside Upper Level": 179.0,
+              "Away Section": 196.0,
+              "Longside Upper Level": 197.98,
+              "Central Longside Upper": 215.98,
+              "Shortside Lower Level": 224.98,
+              "Longside Lower Level": 239.96,
+              "Central Longside Lower": 297.9,
+              "Club Level Shortside": 304.98,
+              "Club Level Longside": 314.54,
+              "Executive Private Boxes": 599.6
+            }
           }
         ],
         "latest_prices": {
           "Shortside Upper Level": 179.0,
+          "Away Section": 196.0,
           "Longside Upper Level": 197.98,
           "Central Longside Upper": 215.98,
           "Shortside Lower Level": 224.98,
           "Longside Lower Level": 239.96,
-          "Away Section": 284.97,
           "Central Longside Lower": 297.9,
-          "Club Level Shortside": 299.96,
+          "Club Level Shortside": 304.98,
           "Club Level Longside": 314.54,
           "Executive Private Boxes": 599.6
         },
-        "last_scraped": "2026-03-29T13:55:54.238910"
+        "last_scraped": "2026-03-30T05:08:37.856880"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-newcastle-united",
@@ -63321,23 +63336,37 @@
               "Club Level Longside": 305.55,
               "Executive Private Boxes": 519.31
             }
+          },
+          {
+            "timestamp": "2026-03-30T05:08:37.856880",
+            "prices": {
+              "Shortside Upper Level": 179.78,
+              "Longside Upper Level": 188.0,
+              "Central Longside Upper": 205.97,
+              "Shortside Lower Level": 224.99,
+              "Longside Lower Level": 227.92,
+              "Central Longside Lower": 272.92,
+              "Club Level Shortside": 299.92,
+              "Club Level Longside": 305.55,
+              "Executive Private Boxes": 498.73
+            }
           }
         ],
         "latest_prices": {
           "Shortside Upper Level": 179.78,
           "Longside Upper Level": 188.0,
-          "Central Longside Upper": 197.0,
+          "Central Longside Upper": 205.97,
           "Shortside Lower Level": 224.99,
           "Longside Lower Level": 227.92,
           "Central Longside Lower": 272.92,
           "Club Level Shortside": 299.92,
           "Club Level Longside": 305.55,
-          "Executive Private Boxes": 519.31
+          "Executive Private Boxes": 498.73
         },
-        "last_scraped": "2026-03-29T13:55:54.238910"
+        "last_scraped": "2026-03-30T05:08:37.856880"
       }
     ],
-    "last_updated": "2026-03-30T02:02:20.181880"
+    "last_updated": "2026-03-30T05:08:37.856880"
   },
   "barcelona": {
     "team_name": "FC Barcelona",
