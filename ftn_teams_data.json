@@ -39313,6 +39313,20 @@
               "Club Level Longside": 314.54,
               "Executive Private Boxes": 599.6
             }
+          },
+          {
+            "timestamp": "2026-04-03T06:43:12.951345",
+            "prices": {
+              "Shortside Upper Level": 168.0,
+              "Longside Upper Level": 191.93,
+              "Away Section": 196.0,
+              "Shortside Lower Level": 199.0,
+              "Central Longside Upper": 228.93,
+              "Longside Lower Level": 238.96,
+              "Central Longside Lower": 289.99,
+              "Club Level Shortside": 298.95,
+              "Club Level Longside": 314.54
+            }
           }
         ],
         "latest_prices": {
@@ -39324,10 +39338,9 @@
           "Longside Lower Level": 238.96,
           "Central Longside Lower": 289.99,
           "Club Level Shortside": 298.95,
-          "Club Level Longside": 314.54,
-          "Executive Private Boxes": 599.6
+          "Club Level Longside": 314.54
         },
-        "last_scraped": "2026-04-03T03:09:18.877315"
+        "last_scraped": "2026-04-03T06:43:12.951345"
       },
       {
         "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-newcastle-united",
@@ -64993,7 +65006,7 @@
         "last_scraped": "2026-04-03T03:09:18.877315"
       }
     ],
-    "last_updated": "2026-04-03T03:09:18.877315"
+    "last_updated": "2026-04-03T06:43:12.951345"
   },
   "barcelona": {
     "team_name": "FC Barcelona",
