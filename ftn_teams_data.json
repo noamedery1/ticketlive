@@ -158478,18 +158478,30 @@
               "Real Madrid VIP Hospitality Package": 600.0,
               "Private VIP Box": 2302.3
             }
+          },
+          {
+            "timestamp": "2026-04-09T22:32:36.695368",
+            "prices": {
+              "Category 4": 88.0,
+              "Category 3": 119.99,
+              "Category 2": 128.0,
+              "Category 1": 175.0,
+              "Category 1 Premium": 210.0,
+              "Real Madrid VIP Hospitality Package": 500.0,
+              "Private VIP Box": 2302.3
+            }
           }
         ],
         "latest_prices": {
-          "Category 4": 106.95,
-          "Category 3": 122.99,
-          "Category 2": 135.0,
-          "Category 1": 185.99,
-          "Category 1 Premium": 215.0,
-          "Real Madrid VIP Hospitality Package": 600.0,
+          "Category 4": 88.0,
+          "Category 3": 119.99,
+          "Category 2": 128.0,
+          "Category 1": 175.0,
+          "Category 1 Premium": 210.0,
+          "Real Madrid VIP Hospitality Package": 500.0,
           "Private VIP Box": 2302.3
         },
-        "last_scraped": "2026-04-05T14:46:44.207414"
+        "last_scraped": "2026-04-09T22:32:36.695368"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-deportivo-alaves",
@@ -162484,16 +162496,26 @@
               "Category 1": 171.98,
               "Category 1 Premium": 200.93
             }
+          },
+          {
+            "timestamp": "2026-04-09T22:32:36.695368",
+            "prices": {
+              "Category 4": 91.99,
+              "Category 3": 100.0,
+              "Category 2": 118.0,
+              "Category 1": 168.99,
+              "Category 1 Premium": 198.0
+            }
           }
         ],
         "latest_prices": {
-          "Category 4": 94.98,
-          "Category 3": 104.0,
-          "Category 2": 121.91,
-          "Category 1": 171.98,
-          "Category 1 Premium": 200.93
+          "Category 4": 91.99,
+          "Category 3": 100.0,
+          "Category 2": 118.0,
+          "Category 1": 168.99,
+          "Category 1 Premium": 198.0
         },
-        "last_scraped": "2026-04-05T14:46:44.207414"
+        "last_scraped": "2026-04-09T22:32:36.695368"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-real-oviedo",
@@ -173128,6 +173150,6 @@
         "last_scraped": "2026-04-05T14:46:44.207414"
       }
     ],
-    "last_updated": "2026-04-05T14:46:44.207414"
+    "last_updated": "2026-04-09T22:32:36.695368"
   }
 }
