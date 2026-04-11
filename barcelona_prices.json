@@ -40068,32 +40068,32 @@
             "Tribuna 3rd": 1900.0,
             "Tribuna 3rd Central": 1900.0
           }
+        },
+        {
+          "timestamp": "2026-04-11T05:57:51.040368",
+          "prices": {
+            "Goal 2nd": 361.0,
+            "Goal 1st": 377.0,
+            "Corner 2nd": 417.0,
+            "Corner 1st": 430.0,
+            "Lateral 2nd": 453.0,
+            "Lateral 2nd Central": 485.0,
+            "Lateral 1st": 498.0,
+            "Tribuna 1st Central": 533.0
+          }
         }
       ],
       "latest_prices": {
-        "Goal 2nd": 221.0,
-        "Goal 1st": 237.0,
-        "Corner 3rd": 275.0,
-        "Corner 2nd": 277.0,
-        "Corner 1st": 290.0,
-        "Lateral 2nd": 313.0,
-        "Lateral 2nd Central": 345.0,
-        "Tribuna 2nd": 350.0,
-        "Lateral 1st": 358.0,
-        "Lateral 1st Central": 400.0,
-        "Lateral 3rd": 405.0,
-        "Tribuna 2nd Central": 450.0,
-        "Tribuna 1st Central": 450.0,
-        "Tribuna 1st": 468.0,
-        "Barca VIP Hospitality Silver Package": 495.0,
-        "Corner 4th": 600.0,
-        "Goal 3rd": 700.0,
-        "Goal 4th": 750.0,
-        "Lateral 4th": 800.0,
-        "Tribuna 3rd": 1900.0,
-        "Tribuna 3rd Central": 1900.0
+        "Goal 2nd": 361.0,
+        "Goal 1st": 377.0,
+        "Corner 2nd": 417.0,
+        "Corner 1st": 430.0,
+        "Lateral 2nd": 453.0,
+        "Lateral 2nd Central": 485.0,
+        "Lateral 1st": 498.0,
+        "Tribuna 1st Central": 533.0
       },
-      "last_scraped": "2026-04-10T10:03:35.455368"
+      "last_scraped": "2026-04-11T05:57:51.040368"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-celta-vigo",
@@ -73089,5 +73089,5 @@
       "last_scraped": "2026-04-05T14:38:04.688743"
     }
   ],
-  "last_updated": "2026-04-10T10:03:35.455368"
+  "last_updated": "2026-04-11T05:57:51.040368"
 }
