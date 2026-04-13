@@ -115722,13 +115722,39 @@
               "Tribuna 3rd": 1900.0,
               "Tribuna 3rd Central": 1900.0
             }
+          },
+          {
+            "timestamp": "2026-04-13T20:08:39.084147",
+            "prices": {
+              "Goal 2nd": 172.0,
+              "Goal 1st": 178.0,
+              "Corner 2nd": 185.0,
+              "Corner 1st": 195.0,
+              "Lateral 2nd": 224.0,
+              "Lateral 2nd Central": 236.0,
+              "Lateral 1st": 250.0,
+              "Lateral 1st Central": 287.0,
+              "Tribuna 2nd": 297.0,
+              "Tribuna 2nd Central": 315.0,
+              "Corner 4th": 325.0,
+              "Tribuna 1st Central": 330.0,
+              "Tribuna 1st": 335.0,
+              "Barca VIP Hospitality Silver Package": 395.0,
+              "Corner 3rd": 700.0,
+              "Goal 3rd": 700.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Lateral 3rd": 900.0,
+              "Tribuna 3rd": 1900.0,
+              "Tribuna 3rd Central": 1900.0
+            }
           }
         ],
         "latest_prices": {
           "Goal 2nd": 172.0,
           "Goal 1st": 178.0,
           "Corner 2nd": 185.0,
-          "Corner 1st": 196.0,
+          "Corner 1st": 195.0,
           "Lateral 2nd": 224.0,
           "Lateral 2nd Central": 236.0,
           "Lateral 1st": 250.0,
@@ -115747,7 +115773,7 @@
           "Tribuna 3rd": 1900.0,
           "Tribuna 3rd Central": 1900.0
         },
-        "last_scraped": "2026-04-13T16:48:55.672147"
+        "last_scraped": "2026-04-13T20:08:39.084147"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-real-madrid",
@@ -124941,6 +124967,32 @@
               "Tribuna 3rd Central": 1900.0,
               "Corner 4th": 2000.0
             }
+          },
+          {
+            "timestamp": "2026-04-13T20:08:39.084147",
+            "prices": {
+              "Goal 2nd": 947.0,
+              "Goal 1st": 990.0,
+              "Best Available": 999.0,
+              "Corner 1st": 1095.0,
+              "Corner 2nd": 1096.0,
+              "Corner 3rd": 1150.0,
+              "Lateral 2nd": 1198.0,
+              "Lateral 4th": 1259.0,
+              "Lateral 1st": 1275.0,
+              "Lateral 2nd Central": 1316.99,
+              "Tribuna 1st": 1350.0,
+              "Tribuna 2nd": 1450.0,
+              "Lateral 1st Central": 1537.99,
+              "Lateral 3rd": 1600.0,
+              "Goal 4th": 1690.0,
+              "Tribuna 2nd Central": 1699.99,
+              "Barca VIP Hospitality Silver Package": 1750.0,
+              "Tribuna 1st Central": 1809.99,
+              "Tribuna 3rd": 1900.0,
+              "Tribuna 3rd Central": 1900.0,
+              "Corner 4th": 2000.0
+            }
           }
         ],
         "latest_prices": {
@@ -124966,7 +125018,7 @@
           "Tribuna 3rd Central": 1900.0,
           "Corner 4th": 2000.0
         },
-        "last_scraped": "2026-04-13T16:48:55.672147"
+        "last_scraped": "2026-04-13T20:08:39.084147"
       },
       {
         "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-real-betis",
@@ -134097,6 +134149,32 @@
               "Tribuna 3rd": 1900.0,
               "Tribuna 3rd Central": 1900.0
             }
+          },
+          {
+            "timestamp": "2026-04-13T20:08:39.084147",
+            "prices": {
+              "Goal 2nd": 256.0,
+              "Corner 1st": 289.0,
+              "Corner 2nd": 290.0,
+              "Goal 1st": 310.0,
+              "Lateral 1st": 380.0,
+              "Lateral 2nd": 380.0,
+              "Tribuna 1st": 414.99,
+              "Tribuna 2nd": 420.0,
+              "Corner 4th": 465.0,
+              "Lateral 2nd Central": 484.0,
+              "Lateral 1st Central": 500.0,
+              "Tribuna 1st Central": 519.0,
+              "Tribuna 2nd Central": 520.0,
+              "Barca VIP Hospitality Silver Package": 600.0,
+              "Goal 3rd": 700.0,
+              "Corner 3rd": 700.0,
+              "Goal 4th": 750.0,
+              "Lateral 4th": 800.0,
+              "Lateral 3rd": 900.0,
+              "Tribuna 3rd": 1900.0,
+              "Tribuna 3rd Central": 1900.0
+            }
           }
         ],
         "latest_prices": {
@@ -134122,7 +134200,7 @@
           "Tribuna 3rd": 1900.0,
           "Tribuna 3rd Central": 1900.0
         },
-        "last_scraped": "2026-04-13T16:48:55.672147"
+        "last_scraped": "2026-04-13T20:08:39.084147"
       },
       {
         "url": "https://www.footballticketnet.com/champions-league/fc-barcelona-vs-tba",
@@ -139795,7 +139873,7 @@
         "last_scraped": "2026-04-05T14:38:04.688743"
       }
     ],
-    "last_updated": "2026-04-13T16:48:55.672147"
+    "last_updated": "2026-04-13T20:08:39.084147"
   },
   "real-madrid": {
     "team_name": "Real Madrid",
