@@ -20,6 +20,13 @@
       "team_url": "https://www.footballticketnet.com/real-madrid-football-tickets/filter/home_away/home-matches",
       "currency": "EUR",
       "country": "Spain"
+    },
+    {
+      "team_key": "champions-league",
+      "team_name": "Champions League",
+      "team_url": "https://www.footballticketnet.com/champions-league-football-tickets",
+      "currency": "EUR",
+      "country": "Europe"
     }
   ]
 }
