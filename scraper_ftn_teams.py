@@ -315,6 +315,9 @@ def extract_games_from_current_page(driver, team_name, team_url_slug, seen_urls)
                 if '/filter/' not in href.lower():
                     if f'/{team_url_slug}/' in href.lower():
                         is_game_url = True
+                    # Tournament pages (like Champions League) may include final URLs without "vs"
+                    elif team_url_slug.startswith('champions-league') and '/champions-league/' in href.lower():
+                        is_game_url = True
                     elif team_url_slug.split('-')[0] in href.lower() and ('vs' in href.lower() or '-vs-' in href.lower()):
                         is_game_url = True
                 
@@ -403,7 +406,14 @@ def extract_games_from_current_page(driver, team_name, team_url_slug, seen_urls)
                         continue
                     
                     # Check if it's a game URL
-                    if f'/{team_url_slug}/' in href.lower() and '/filter/' not in href:
+                    is_game_url = False
+                    if '/filter/' not in href.lower():
+                        if f'/{team_url_slug}/' in href.lower():
+                            is_game_url = True
+                        elif team_url_slug.startswith('champions-league') and '/champions-league/' in href.lower():
+                            is_game_url = True
+                    
+                    if is_game_url:
                         if href in seen_urls:
                             continue
                         seen_urls.add(href)
@@ -579,6 +589,7 @@ def get_team_currency(team_key):
         'arsenal': 'GBP',
         'barcelona': 'EUR',
         'real-madrid': 'EUR',
+        'champions-league': 'EUR',
         'manchester': 'GBP',
         'liverpool': 'GBP',
         'chelsea': 'GBP',
