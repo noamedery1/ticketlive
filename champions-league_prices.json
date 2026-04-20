@@ -360,6 +360,19 @@
             "PSG VIP Europe": 4000.0,
             "PSG VIP Saint Germain": 5000.0
           }
+        },
+        {
+          "timestamp": "2026-04-20T03:45:56.328348",
+          "prices": {
+            "Category 4": 475.0,
+            "Category 3": 495.0,
+            "Category 2": 499.0,
+            "Category 1": 550.0,
+            "Category 1 Premium": 699.0,
+            "PSG VIP Saint Germain": 2200.0,
+            "PSG VIP Hospitality Package": 2500.0,
+            "PSG VIP Europe": 4000.0
+          }
         }
       ],
       "latest_prices": {
@@ -368,11 +381,11 @@
         "Category 2": 499.0,
         "Category 1": 550.0,
         "Category 1 Premium": 699.0,
+        "PSG VIP Saint Germain": 2200.0,
         "PSG VIP Hospitality Package": 2500.0,
-        "PSG VIP Europe": 4000.0,
-        "PSG VIP Saint Germain": 5000.0
+        "PSG VIP Europe": 4000.0
       },
-      "last_scraped": "2026-04-19T23:48:04.806348"
+      "last_scraped": "2026-04-20T03:45:56.328348"
     },
     {
       "url": "https://www.footballticketnet.com/champions-league/atletico-madrid-vs-arsenal",
@@ -651,6 +664,16 @@
             "Category 2": 300.0,
             "Away Section": 1100.0
           }
+        },
+        {
+          "timestamp": "2026-04-20T03:45:56.328348",
+          "prices": {
+            "Category 4": 269.0,
+            "Category 3": 275.0,
+            "Category 1": 286.0,
+            "Category 2": 300.0,
+            "Away Section": 1100.0
+          }
         }
       ],
       "latest_prices": {
@@ -660,7 +683,7 @@
         "Category 2": 300.0,
         "Away Section": 1100.0
       },
-      "last_scraped": "2026-04-19T23:48:04.806348"
+      "last_scraped": "2026-04-20T03:45:56.328348"
     },
     {
       "url": "https://www.footballticketnet.com/champions-league/arsenal-vs-atletico-madrid",
@@ -1047,6 +1070,20 @@
             "Club Level Longside": 975.0,
             "Executive Private Boxes": 1999.0
           }
+        },
+        {
+          "timestamp": "2026-04-20T03:45:56.328348",
+          "prices": {
+            "Shortside Upper Level": 494.95,
+            "Longside Upper Level": 522.0,
+            "Central Longside Upper": 545.0,
+            "Longside Lower Level": 630.0,
+            "Central Longside Lower": 650.0,
+            "Shortside Lower Level": 675.0,
+            "Club Level Shortside": 749.97,
+            "Club Level Longside": 975.0,
+            "Executive Private Boxes": 1999.0
+          }
         }
       ],
       "latest_prices": {
@@ -1060,7 +1097,7 @@
         "Club Level Longside": 975.0,
         "Executive Private Boxes": 1999.0
       },
-      "last_scraped": "2026-04-19T23:48:04.806348"
+      "last_scraped": "2026-04-20T03:45:56.328348"
     },
     {
       "url": "https://www.footballticketnet.com/champions-league/bayern-munich-vs-paris-saint-germain",
@@ -1393,6 +1430,18 @@
             "Standing": 1110.0,
             "VIP Business Seats": 4000.0
           }
+        },
+        {
+          "timestamp": "2026-04-20T03:45:56.328348",
+          "prices": {
+            "Category 4": 1175.0,
+            "Category 2": 1215.0,
+            "Category 3": 1220.0,
+            "Category 1": 1500.0,
+            "Away Section": 890.0,
+            "Standing": 1110.0,
+            "VIP Business Seats": 4000.0
+          }
         }
       ],
       "latest_prices": {
@@ -1404,7 +1453,7 @@
         "Standing": 1110.0,
         "VIP Business Seats": 4000.0
       },
-      "last_scraped": "2026-04-19T23:48:04.806348"
+      "last_scraped": "2026-04-20T03:45:56.328348"
     },
     {
       "url": "https://www.footballticketnet.com/champions-league/champions-league-final-2026",
@@ -1738,6 +1787,19 @@
             "Prestige VIP": 16000.0,
             "Sky Club": 39000.0
           }
+        },
+        {
+          "timestamp": "2026-04-20T03:45:56.328348",
+          "prices": {
+            "Category 3": 3197.0,
+            "Category 2": 4396.0,
+            "Category 1": 4622.0,
+            "Fans First": 5500.0,
+            "Prime Seats": 7408.0,
+            "Prestige VIP - Outside": 13800.0,
+            "Prestige VIP": 16000.0,
+            "Sky Club": 39000.0
+          }
         }
       ],
       "latest_prices": {
@@ -1750,8 +1812,8 @@
         "Prestige VIP": 16000.0,
         "Sky Club": 39000.0
       },
-      "last_scraped": "2026-04-19T23:48:04.806348"
+      "last_scraped": "2026-04-20T03:45:56.328348"
     }
   ],
-  "last_updated": "2026-04-19T23:48:04.806348"
+  "last_updated": "2026-04-20T03:45:56.328348"
 }
