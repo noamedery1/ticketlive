@@ -1376,13 +1376,22 @@
             "Shortside Upper Level": 439.49,
             "Longside Upper Level": 450.0
           }
+        },
+        {
+          "timestamp": "2026-04-29T23:41:41.639348",
+          "prices": {
+            "Shortside Upper Level": 439.49,
+            "Longside Upper Level": 450.0,
+            "Central Longside Upper": 464.0
+          }
         }
       ],
       "latest_prices": {
         "Shortside Upper Level": 439.49,
-        "Longside Upper Level": 450.0
+        "Longside Upper Level": 450.0,
+        "Central Longside Upper": 464.0
       },
-      "last_scraped": "2026-04-29T20:15:48.782348"
+      "last_scraped": "2026-04-29T23:41:41.639348"
     },
     {
       "url": "https://www.footballticketnet.com/champions-league/bayern-munich-vs-paris-saint-germain",
@@ -1835,18 +1844,30 @@
             "Standing": 1020.0,
             "VIP Business Seats": 3950.0
           }
+        },
+        {
+          "timestamp": "2026-04-29T23:41:41.639348",
+          "prices": {
+            "Category 4": 882.15744,
+            "Category 2": 992.4271200000001,
+            "Category 3": 1001.61626,
+            "Category 1": 1092.588746,
+            "Away Section": 999.0,
+            "Standing": 1020.0,
+            "VIP Business Seats": 3950.0
+          }
         }
       ],
       "latest_prices": {
-        "Category 4": 960.0,
-        "Category 2": 1080.0,
-        "Category 3": 1090.0,
-        "Category 1": 1189.0,
+        "Category 4": 882.15744,
+        "Category 2": 992.4271200000001,
+        "Category 3": 1001.61626,
+        "Category 1": 1092.588746,
         "Away Section": 999.0,
         "Standing": 1020.0,
         "VIP Business Seats": 3950.0
       },
-      "last_scraped": "2026-04-29T20:15:48.782348"
+      "last_scraped": "2026-04-29T23:41:41.639348"
     },
     {
       "url": "https://www.footballticketnet.com/champions-league/champions-league-final-2026",
@@ -2312,12 +2333,26 @@
             "Private VIP Sky Box": 29050.0,
             "Sky Club": 38500.0
           }
+        },
+        {
+          "timestamp": "2026-04-29T23:41:41.639348",
+          "prices": {
+            "Category 3": 2919.389778,
+            "Category 2": 3535.062158,
+            "Category 1": 4219.653088,
+            "Fans First": 5500.0,
+            "Prime Seats": 6992.0,
+            "Prestige VIP - Outside": 13400.0,
+            "Prestige VIP": 16000.0,
+            "Private VIP Sky Box": 29050.0,
+            "Sky Club": 38500.0
+          }
         }
       ],
       "latest_prices": {
-        "Category 3": 3177.0,
-        "Category 2": 3800.0,
-        "Category 1": 4592.0,
+        "Category 3": 2919.389778,
+        "Category 2": 3535.062158,
+        "Category 1": 4219.653088,
         "Fans First": 5500.0,
         "Prime Seats": 6992.0,
         "Prestige VIP - Outside": 13400.0,
@@ -2325,8 +2360,8 @@
         "Private VIP Sky Box": 29050.0,
         "Sky Club": 38500.0
       },
-      "last_scraped": "2026-04-29T20:15:48.782348"
+      "last_scraped": "2026-04-29T23:41:41.639348"
     }
   ],
-  "last_updated": "2026-04-29T20:15:48.782348"
+  "last_updated": "2026-04-29T23:41:41.639348"
 }
