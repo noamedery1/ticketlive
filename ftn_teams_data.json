@@ -63811,12 +63811,26 @@
               "Club Level Longside": 1052.28,
               "Executive Private Boxes": 3188.0
             }
+          },
+          {
+            "timestamp": "2026-05-03T01:06:45.933348",
+            "prices": {
+              "Shortside Upper Level": 424.0,
+              "Longside Upper Level": 499.0,
+              "Shortside Lower Level": 515.0,
+              "Central Longside Upper": 745.0,
+              "Longside Lower Level": 800.0,
+              "Club Level Shortside": 875.0,
+              "Central Longside Lower": 1000.0,
+              "Club Level Longside": 1052.28,
+              "Executive Private Boxes": 3188.0
+            }
           }
         ],
         "latest_prices": {
           "Shortside Upper Level": 424.0,
           "Longside Upper Level": 499.0,
-          "Shortside Lower Level": 550.0,
+          "Shortside Lower Level": 515.0,
           "Central Longside Upper": 745.0,
           "Longside Lower Level": 800.0,
           "Club Level Shortside": 875.0,
@@ -63824,7 +63838,7 @@
           "Club Level Longside": 1052.28,
           "Executive Private Boxes": 3188.0
         },
-        "last_scraped": "2026-05-02T21:47:09.471134"
+        "last_scraped": "2026-05-03T01:06:45.933348"
       },
       {
         "url": "https://www.footballticketnet.com/fa-cup/arsenal-vs-wigan-athletic",
@@ -70131,6 +70145,20 @@
               "Club Level Longside": 1049.95,
               "Executive Private Boxes": 2000.0
             }
+          },
+          {
+            "timestamp": "2026-05-03T01:06:45.933348",
+            "prices": {
+              "Shortside Upper Level": 499.99,
+              "Central Longside Upper": 530.0,
+              "Shortside Lower Level": 550.0,
+              "Longside Upper Level": 572.0,
+              "Longside Lower Level": 649.0,
+              "Central Longside Lower": 674.0,
+              "Club Level Shortside": 700.0,
+              "Club Level Longside": 1049.95,
+              "Executive Private Boxes": 2000.0
+            }
           }
         ],
         "latest_prices": {
@@ -70144,10 +70172,10 @@
           "Club Level Longside": 1049.95,
           "Executive Private Boxes": 2000.0
         },
-        "last_scraped": "2026-05-02T21:47:09.471134"
+        "last_scraped": "2026-05-03T01:06:45.933348"
       }
     ],
-    "last_updated": "2026-05-02T21:47:09.471134"
+    "last_updated": "2026-05-03T01:06:45.933348"
   },
   "barcelona": {
     "team_name": "FC Barcelona",
