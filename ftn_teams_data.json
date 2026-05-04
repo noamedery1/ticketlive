@@ -187813,20 +187813,34 @@
               "Club Level Longside": 1050.0,
               "Executive Private Boxes": 2000.0
             }
+          },
+          {
+            "timestamp": "2026-05-04T16:24:30.099348",
+            "prices": {
+              "Shortside Upper Level": 540.75,
+              "Central Longside Upper": 545.0,
+              "Longside Upper Level": 550.0,
+              "Longside Lower Level": 595.0,
+              "Shortside Lower Level": 600.0,
+              "Club Level Shortside": 725.0,
+              "Central Longside Lower": 825.0,
+              "Club Level Longside": 1050.0,
+              "Executive Private Boxes": 2000.0
+            }
           }
         ],
         "latest_prices": {
           "Shortside Upper Level": 540.75,
-          "Central Longside Upper": 550.0,
-          "Longside Upper Level": 575.0,
-          "Longside Lower Level": 600.0,
-          "Shortside Lower Level": 643.75,
+          "Central Longside Upper": 545.0,
+          "Longside Upper Level": 550.0,
+          "Longside Lower Level": 595.0,
+          "Shortside Lower Level": 600.0,
           "Club Level Shortside": 725.0,
-          "Central Longside Lower": 798.0,
+          "Central Longside Lower": 825.0,
           "Club Level Longside": 1050.0,
           "Executive Private Boxes": 2000.0
         },
-        "last_scraped": "2026-05-04T13:05:44.258348"
+        "last_scraped": "2026-05-04T16:24:30.099348"
       },
       {
         "url": "https://www.footballticketnet.com/champions-league/bayern-munich-vs-paris-saint-germain",
@@ -188639,18 +188653,30 @@
               "Standing": 1244.0,
               "VIP Business Seats": 3950.0
             }
+          },
+          {
+            "timestamp": "2026-05-04T16:24:30.099348",
+            "prices": {
+              "Category 4": 742.5431440000001,
+              "Category 3": 810.2133320000002,
+              "Category 2": 908.9752280000001,
+              "Category 1": 959.2706380000001,
+              "Away Section": 849.0,
+              "Standing": 1092.0,
+              "VIP Business Seats": 3950.0
+            }
           }
         ],
         "latest_prices": {
-          "Category 4": 800.15425,
-          "Category 2": 927.2644680000001,
-          "Category 3": 973.9020300000001,
-          "Category 1": 1083.6374700000001,
+          "Category 4": 742.5431440000001,
+          "Category 3": 810.2133320000002,
+          "Category 2": 908.9752280000001,
+          "Category 1": 959.2706380000001,
           "Away Section": 849.0,
-          "Standing": 1244.0,
+          "Standing": 1092.0,
           "VIP Business Seats": 3950.0
         },
-        "last_scraped": "2026-05-04T13:05:44.258348"
+        "last_scraped": "2026-05-04T16:24:30.099348"
       },
       {
         "url": "https://www.footballticketnet.com/champions-league/champions-league-final-2026",
@@ -189536,6 +189562,20 @@
               "Private VIP Sky Box": 29050.0,
               "Sky Club": 36999.99
             }
+          },
+          {
+            "timestamp": "2026-05-04T16:24:30.099348",
+            "prices": {
+              "Category 3": 3456.6663600000006,
+              "Category 2": 3563.6584140000004,
+              "Category 1": 4158.058714000001,
+              "Fans First": 5500.0,
+              "Prime Seats": 6992.0,
+              "Prestige VIP - Outside": 13400.0,
+              "Prestige VIP": 16000.0,
+              "Private VIP Sky Box": 29050.0,
+              "Sky Club": 36999.99
+            }
           }
         ],
         "latest_prices": {
@@ -189549,9 +189589,9 @@
           "Private VIP Sky Box": 29050.0,
           "Sky Club": 36999.99
         },
-        "last_scraped": "2026-05-04T13:05:44.258348"
+        "last_scraped": "2026-05-04T16:24:30.099348"
       }
     ],
-    "last_updated": "2026-05-04T13:05:44.258348"
+    "last_updated": "2026-05-04T16:24:30.099348"
   }
 }
