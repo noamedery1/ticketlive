@@ -63908,6 +63908,20 @@
             "Club Level Longside": 1052.28,
             "Executive Private Boxes": 3188.0
           }
+        },
+        {
+          "timestamp": "2026-05-04T12:51:49.827348",
+          "prices": {
+            "Shortside Upper Level": 450.0,
+            "Longside Upper Level": 599.0,
+            "Shortside Lower Level": 625.0,
+            "Central Longside Upper": 745.0,
+            "Longside Lower Level": 800.0,
+            "Club Level Shortside": 875.0,
+            "Central Longside Lower": 1000.0,
+            "Club Level Longside": 1052.28,
+            "Executive Private Boxes": 3188.0
+          }
         }
       ],
       "latest_prices": {
@@ -63921,7 +63935,7 @@
         "Club Level Longside": 1052.28,
         "Executive Private Boxes": 3188.0
       },
-      "last_scraped": "2026-05-04T09:33:05.119348"
+      "last_scraped": "2026-05-04T12:51:49.827348"
     },
     {
       "url": "https://www.footballticketnet.com/fa-cup/arsenal-vs-wigan-athletic",
@@ -70326,21 +70340,35 @@
             "Club Level Longside": 1049.98,
             "Executive Private Boxes": 2000.0
           }
+        },
+        {
+          "timestamp": "2026-05-04T12:51:49.827348",
+          "prices": {
+            "Shortside Upper Level": 540.75,
+            "Central Longside Upper": 550.0,
+            "Longside Upper Level": 575.0,
+            "Longside Lower Level": 600.0,
+            "Shortside Lower Level": 643.75,
+            "Club Level Shortside": 725.0,
+            "Central Longside Lower": 797.0,
+            "Club Level Longside": 1050.0,
+            "Executive Private Boxes": 2000.0
+          }
         }
       ],
       "latest_prices": {
-        "Shortside Upper Level": 475.0,
-        "Longside Upper Level": 525.0,
-        "Shortside Lower Level": 535.0,
+        "Shortside Upper Level": 540.75,
         "Central Longside Upper": 550.0,
-        "Longside Lower Level": 645.0,
+        "Longside Upper Level": 575.0,
+        "Longside Lower Level": 600.0,
+        "Shortside Lower Level": 643.75,
         "Club Level Shortside": 725.0,
         "Central Longside Lower": 797.0,
-        "Club Level Longside": 1049.98,
+        "Club Level Longside": 1050.0,
         "Executive Private Boxes": 2000.0
       },
-      "last_scraped": "2026-05-04T09:33:05.119348"
+      "last_scraped": "2026-05-04T12:51:49.827348"
     }
   ],
-  "last_updated": "2026-05-04T09:33:05.119348"
+  "last_updated": "2026-05-04T12:51:49.827348"
 }
