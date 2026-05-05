@@ -64007,6 +64007,20 @@
               "Club Level Longside": 1675.0,
               "Executive Private Boxes": 6975.0
             }
+          },
+          {
+            "timestamp": "2026-05-05T21:16:37.109348",
+            "prices": {
+              "Shortside Lower Level": 745.0,
+              "Shortside Upper Level": 750.0,
+              "Longside Upper Level": 990.0,
+              "Longside Lower Level": 1225.0,
+              "Central Longside Upper": 1245.0,
+              "Club Level Shortside": 1400.0,
+              "Central Longside Lower": 1495.0,
+              "Club Level Longside": 1675.0,
+              "Executive Private Boxes": 6975.0
+            }
           }
         ],
         "latest_prices": {
@@ -64020,7 +64034,7 @@
           "Club Level Longside": 1675.0,
           "Executive Private Boxes": 6975.0
         },
-        "last_scraped": "2026-05-05T18:00:02.029348"
+        "last_scraped": "2026-05-05T21:16:37.109348"
       },
       {
         "url": "https://www.footballticketnet.com/fa-cup/arsenal-vs-wigan-athletic",
@@ -70519,22 +70533,23 @@
               "Club Level Shortside": 1200.0,
               "Club Level Longside": 1400.0
             }
+          },
+          {
+            "timestamp": "2026-05-05T21:16:37.109348",
+            "prices": {
+              "Central Longside Upper": 470.0,
+              "Longside Lower Level": 699.0
+            }
           }
         ],
         "latest_prices": {
-          "Longside Upper Level": 525.0,
-          "Central Longside Upper": 540.75,
-          "Shortside Upper Level": 575.0,
-          "Shortside Lower Level": 575.0,
-          "Central Longside Lower": 950.0,
-          "Longside Lower Level": 1200.0,
-          "Club Level Shortside": 1200.0,
-          "Club Level Longside": 1400.0
+          "Central Longside Upper": 470.0,
+          "Longside Lower Level": 699.0
         },
-        "last_scraped": "2026-05-05T18:00:02.029348"
+        "last_scraped": "2026-05-05T21:16:37.109348"
       }
     ],
-    "last_updated": "2026-05-05T18:00:02.029348"
+    "last_updated": "2026-05-05T21:16:37.109348"
   },
   "barcelona": {
     "team_name": "FC Barcelona",
