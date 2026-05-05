@@ -63993,20 +63993,34 @@
               "Club Level Longside": 1695.0,
               "Executive Private Boxes": 6975.0
             }
+          },
+          {
+            "timestamp": "2026-05-05T18:00:02.029348",
+            "prices": {
+              "Shortside Lower Level": 745.0,
+              "Shortside Upper Level": 750.0,
+              "Longside Upper Level": 990.0,
+              "Longside Lower Level": 1225.0,
+              "Central Longside Upper": 1245.0,
+              "Club Level Shortside": 1400.0,
+              "Central Longside Lower": 1495.0,
+              "Club Level Longside": 1675.0,
+              "Executive Private Boxes": 6975.0
+            }
           }
         ],
         "latest_prices": {
+          "Shortside Lower Level": 745.0,
           "Shortside Upper Level": 750.0,
-          "Shortside Lower Level": 950.0,
-          "Longside Upper Level": 995.0,
-          "Longside Lower Level": 1050.0,
+          "Longside Upper Level": 990.0,
+          "Longside Lower Level": 1225.0,
           "Central Longside Upper": 1245.0,
-          "Club Level Shortside": 1420.0,
-          "Central Longside Lower": 1545.0,
-          "Club Level Longside": 1695.0,
+          "Club Level Shortside": 1400.0,
+          "Central Longside Lower": 1495.0,
+          "Club Level Longside": 1675.0,
           "Executive Private Boxes": 6975.0
         },
-        "last_scraped": "2026-05-05T14:41:33.185348"
+        "last_scraped": "2026-05-05T18:00:02.029348"
       },
       {
         "url": "https://www.footballticketnet.com/fa-cup/arsenal-vs-wigan-athletic",
@@ -70492,22 +70506,35 @@
               "Club Level Longside": 925.0,
               "Central Longside Lower": 1200.0
             }
+          },
+          {
+            "timestamp": "2026-05-05T18:00:02.029348",
+            "prices": {
+              "Longside Upper Level": 525.0,
+              "Central Longside Upper": 540.75,
+              "Shortside Upper Level": 575.0,
+              "Shortside Lower Level": 575.0,
+              "Central Longside Lower": 950.0,
+              "Longside Lower Level": 1200.0,
+              "Club Level Shortside": 1200.0,
+              "Club Level Longside": 1400.0
+            }
           }
         ],
         "latest_prices": {
-          "Central Longside Upper": 525.0,
+          "Longside Upper Level": 525.0,
+          "Central Longside Upper": 540.75,
           "Shortside Upper Level": 575.0,
-          "Longside Upper Level": 618.0,
-          "Shortside Lower Level": 650.0,
-          "Longside Lower Level": 725.0,
-          "Club Level Shortside": 800.0,
-          "Club Level Longside": 925.0,
-          "Central Longside Lower": 1200.0
+          "Shortside Lower Level": 575.0,
+          "Central Longside Lower": 950.0,
+          "Longside Lower Level": 1200.0,
+          "Club Level Shortside": 1200.0,
+          "Club Level Longside": 1400.0
         },
-        "last_scraped": "2026-05-05T14:41:33.185348"
+        "last_scraped": "2026-05-05T18:00:02.029348"
       }
     ],
-    "last_updated": "2026-05-05T14:41:33.185348"
+    "last_updated": "2026-05-05T18:00:02.029348"
   },
   "barcelona": {
     "team_name": "FC Barcelona",
