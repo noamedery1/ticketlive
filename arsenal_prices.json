@@ -64020,6 +64020,20 @@
             "Club Level Longside": 1675.0,
             "Executive Private Boxes": 6975.0
           }
+        },
+        {
+          "timestamp": "2026-05-06T00:32:50.913348",
+          "prices": {
+            "Shortside Lower Level": 745.0,
+            "Shortside Upper Level": 750.0,
+            "Longside Upper Level": 990.0,
+            "Longside Lower Level": 1225.0,
+            "Central Longside Upper": 1244.0,
+            "Club Level Shortside": 1400.0,
+            "Central Longside Lower": 1495.0,
+            "Club Level Longside": 1675.0,
+            "Executive Private Boxes": 6975.0
+          }
         }
       ],
       "latest_prices": {
@@ -64027,13 +64041,13 @@
         "Shortside Upper Level": 750.0,
         "Longside Upper Level": 990.0,
         "Longside Lower Level": 1225.0,
-        "Central Longside Upper": 1245.0,
+        "Central Longside Upper": 1244.0,
         "Club Level Shortside": 1400.0,
         "Central Longside Lower": 1495.0,
         "Club Level Longside": 1675.0,
         "Executive Private Boxes": 6975.0
       },
-      "last_scraped": "2026-05-05T21:16:37.109348"
+      "last_scraped": "2026-05-06T00:32:50.913348"
     },
     {
       "url": "https://www.footballticketnet.com/fa-cup/arsenal-vs-wigan-athletic",
@@ -70548,5 +70562,5 @@
       "last_scraped": "2026-05-05T21:16:37.109348"
     }
   ],
-  "last_updated": "2026-05-05T21:16:37.109348"
+  "last_updated": "2026-05-06T00:32:50.913348"
 }
