@@ -28855,6 +28855,18 @@
             "Real Madrid VIP Hospitality Package": 690.68,
             "Private VIP Box": 1726.73
           }
+        },
+        {
+          "timestamp": "2026-05-05T18:07:14.789348",
+          "prices": {
+            "Category 4": 79.99,
+            "Category 3": 99.99,
+            "Category 2": 110.0,
+            "Category 1": 149.0,
+            "Category 1 Premium": 174.0,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
         }
       ],
       "latest_prices": {
@@ -28866,7 +28878,7 @@
         "Real Madrid VIP Hospitality Package": 690.68,
         "Private VIP Box": 1726.73
       },
-      "last_scraped": "2026-05-05T14:49:23.802348"
+      "last_scraped": "2026-05-05T18:07:14.789348"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-athletic-bilbao",
@@ -33835,6 +33847,18 @@
             "Real Madrid VIP Hospitality Package": 863.36,
             "Private VIP Box": 2302.3
           }
+        },
+        {
+          "timestamp": "2026-05-05T18:07:14.789348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 140.0,
+            "Category 1": 209.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
         }
       ],
       "latest_prices": {
@@ -33846,7 +33870,7 @@
         "Real Madrid VIP Hospitality Package": 863.36,
         "Private VIP Box": 2302.3
       },
-      "last_scraped": "2026-05-05T14:49:23.802348"
+      "last_scraped": "2026-05-05T18:07:14.789348"
     },
     {
       "url": "https://www.footballticketnet.com/champions-league/real-madrid-vs-sl-benfica",
@@ -36638,5 +36662,5 @@
       "price_history": []
     }
   ],
-  "last_updated": "2026-05-05T14:49:23.802348"
+  "last_updated": "2026-05-05T18:07:14.789348"
 }
