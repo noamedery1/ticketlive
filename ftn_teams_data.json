@@ -189943,17 +189943,26 @@
               "Away Section": 800.0,
               "Standing": 945.0
             }
+          },
+          {
+            "timestamp": "2026-05-06T19:58:37.979348",
+            "prices": {
+              "Category 4": 700.0,
+              "Category 2": 775.0,
+              "Category 3": 799.0,
+              "Category 1": 1100.0,
+              "Away Section": 2000.0
+            }
           }
         ],
         "latest_prices": {
-          "Category 2": 900.0,
-          "Category 3": 990.0,
-          "Category 1": 995.0,
-          "Category 4": 1750.0,
-          "Away Section": 800.0,
-          "Standing": 945.0
+          "Category 4": 700.0,
+          "Category 2": 775.0,
+          "Category 3": 799.0,
+          "Category 1": 1100.0,
+          "Away Section": 2000.0
         },
-        "last_scraped": "2026-05-06T16:43:48.733348"
+        "last_scraped": "2026-05-06T19:58:37.979348"
       },
       {
         "url": "https://www.footballticketnet.com/champions-league/champions-league-final-2026",
@@ -191012,6 +191021,21 @@
               "Private VIP Sky Box": 28368.11,
               "Sky Club": 34739.7
             }
+          },
+          {
+            "timestamp": "2026-05-06T19:58:37.979348",
+            "prices": {
+              "Category 3": 5500.0,
+              "Category 2": 6000.0,
+              "Category 1": 7300.0,
+              "Fans First": 9500.0,
+              "Prime Seats": 11000.0,
+              "Prestige VIP - Outside": 15000.0,
+              "Prestige VIP": 18500.0,
+              "Prestige VIP - Served Dinner": 25000.0,
+              "Private VIP Sky Box": 28368.11,
+              "Sky Club": 34739.7
+            }
           }
         ],
         "latest_prices": {
@@ -191026,9 +191050,9 @@
           "Private VIP Sky Box": 28368.11,
           "Sky Club": 34739.7
         },
-        "last_scraped": "2026-05-06T16:43:48.733348"
+        "last_scraped": "2026-05-06T19:58:37.979348"
       }
     ],
-    "last_updated": "2026-05-06T16:43:48.733348"
+    "last_updated": "2026-05-06T19:58:37.979348"
   }
 }
