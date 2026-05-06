@@ -189742,18 +189742,28 @@
               "Standing": 870.0,
               "VIP Business Seats": 4000.0
             }
+          },
+          {
+            "timestamp": "2026-05-06T13:25:29.070348",
+            "prices": {
+              "Category 4": 900.0,
+              "Category 2": 925.0,
+              "Category 3": 975.0,
+              "Category 1": 1130.0,
+              "Away Section": 617.0,
+              "VIP Business Seats": 4000.0
+            }
           }
         ],
         "latest_prices": {
-          "Category 4": 675.1,
-          "Category 2": 810.0,
-          "Category 3": 930.0,
-          "Category 1": 1028.0,
-          "Away Section": 620.0,
-          "Standing": 870.0,
+          "Category 4": 900.0,
+          "Category 2": 925.0,
+          "Category 3": 975.0,
+          "Category 1": 1130.0,
+          "Away Section": 617.0,
           "VIP Business Seats": 4000.0
         },
-        "last_scraped": "2026-05-06T07:04:08.042348"
+        "last_scraped": "2026-05-06T13:25:29.070348"
       },
       {
         "url": "https://www.footballticketnet.com/champions-league/champions-league-final-2026",
@@ -190782,23 +190792,38 @@
               "Private VIP Sky Box": 28368.11,
               "Sky Club": 34739.7
             }
+          },
+          {
+            "timestamp": "2026-05-06T13:25:29.070348",
+            "prices": {
+              "Category 3": 5495.0,
+              "Category 2": 5650.0,
+              "Category 1": 7295.0,
+              "Fans First": 9500.0,
+              "Prime Seats": 11000.0,
+              "Prestige VIP - Outside": 15000.0,
+              "Prestige VIP": 15500.0,
+              "Prestige VIP - Served Dinner": 25000.0,
+              "Private VIP Sky Box": 28368.11,
+              "Sky Club": 34739.7
+            }
           }
         ],
         "latest_prices": {
+          "Category 3": 5495.0,
           "Category 2": 5650.0,
-          "Category 3": 5650.0,
-          "Category 1": 7300.0,
+          "Category 1": 7295.0,
           "Fans First": 9500.0,
           "Prime Seats": 11000.0,
           "Prestige VIP - Outside": 15000.0,
-          "Prestige VIP": 15600.0,
+          "Prestige VIP": 15500.0,
           "Prestige VIP - Served Dinner": 25000.0,
           "Private VIP Sky Box": 28368.11,
           "Sky Club": 34739.7
         },
-        "last_scraped": "2026-05-06T07:04:08.042348"
+        "last_scraped": "2026-05-06T13:25:29.070348"
       }
     ],
-    "last_updated": "2026-05-06T07:04:08.042348"
+    "last_updated": "2026-05-06T13:25:29.070348"
   }
 }
