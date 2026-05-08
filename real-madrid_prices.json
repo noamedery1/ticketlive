@@ -29023,6 +29023,18 @@
             "Real Madrid VIP Hospitality Package": 690.68,
             "Private VIP Box": 1726.73
           }
+        },
+        {
+          "timestamp": "2026-05-08T05:36:48.118348",
+          "prices": {
+            "Category 4": 79.0,
+            "Category 2": 111.0,
+            "Category 3": 112.96,
+            "Category 1": 153.94,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
         }
       ],
       "latest_prices": {
@@ -29034,7 +29046,7 @@
         "Real Madrid VIP Hospitality Package": 690.68,
         "Private VIP Box": 1726.73
       },
-      "last_scraped": "2026-05-07T19:44:17.392348"
+      "last_scraped": "2026-05-08T05:36:48.118348"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-athletic-bilbao",
@@ -36974,5 +36986,5 @@
       "price_history": []
     }
   ],
-  "last_updated": "2026-05-07T19:44:17.392348"
+  "last_updated": "2026-05-08T05:36:48.118348"
 }
