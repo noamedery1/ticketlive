@@ -29035,18 +29035,30 @@
             "Real Madrid VIP Hospitality Package": 690.68,
             "Private VIP Box": 1726.73
           }
+        },
+        {
+          "timestamp": "2026-05-09T07:13:39.561348",
+          "prices": {
+            "Category 4": 79.0,
+            "Category 2": 111.0,
+            "Category 3": 119.99,
+            "Category 1": 153.94,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
         }
       ],
       "latest_prices": {
         "Category 4": 79.0,
         "Category 2": 111.0,
-        "Category 3": 112.96,
+        "Category 3": 119.99,
         "Category 1": 153.94,
         "Category 1 Premium": 176.95,
         "Real Madrid VIP Hospitality Package": 690.68,
         "Private VIP Box": 1726.73
       },
-      "last_scraped": "2026-05-08T05:36:48.118348"
+      "last_scraped": "2026-05-09T07:13:39.561348"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-athletic-bilbao",
@@ -36983,8 +36995,19 @@
       "opponent": "Inter Milan Legends",
       "date": "13/06/26",
       "is_home": true,
-      "price_history": []
+      "price_history": [
+        {
+          "timestamp": "2026-05-09T07:13:39.561348",
+          "prices": {
+            "Category 1": 80.0
+          }
+        }
+      ],
+      "latest_prices": {
+        "Category 1": 80.0
+      },
+      "last_scraped": "2026-05-09T07:13:39.561348"
     }
   ],
-  "last_updated": "2026-05-08T23:06:43.675348"
+  "last_updated": "2026-05-09T07:13:39.561348"
 }
