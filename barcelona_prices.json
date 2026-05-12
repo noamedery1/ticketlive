@@ -74497,32 +74497,60 @@
             "Tribuna 3rd": 1900.0,
             "Tribuna 3rd Central": 1900.0
           }
+        },
+        {
+          "timestamp": "2026-05-12T14:59:14.526348",
+          "prices": {
+            "Goal 2nd": 198.0,
+            "Goal 1st": 200.0,
+            "Corner 2nd": 200.0,
+            "Corner 1st": 236.0,
+            "Lateral 1st": 240.0,
+            "Lateral 2nd": 260.0,
+            "Lateral 2nd Central": 266.0,
+            "Lateral 1st Central": 290.0,
+            "Tribuna 2nd": 295.0,
+            "Tribuna 1st": 300.0,
+            "Tribuna 2nd Central": 310.0,
+            "Barca VIP Hospitality Silver Package": 450.0,
+            "Tribuna 1st Central": 450.0,
+            "Corner 4th": 600.0,
+            "Goal 3rd": 700.0,
+            "Corner 3rd": 700.0,
+            "Goal 4th": 750.0,
+            "Lateral 4th": 800.0,
+            "Lateral 3rd": 900.0,
+            "Barca VIP Hospitality Players Zone": 1150.0,
+            "Tribuna 3rd": 1900.0,
+            "Tribuna 3rd Central": 1900.0
+          }
         }
       ],
       "latest_prices": {
-        "Lateral 1st Central": 290.0,
-        "Goal 2nd": 197.99,
+        "Goal 2nd": 198.0,
         "Goal 1st": 200.0,
-        "Corner 1st": 200.0,
-        "Corner 2nd": 234.0,
+        "Corner 2nd": 200.0,
+        "Corner 1st": 236.0,
         "Lateral 1st": 240.0,
         "Lateral 2nd": 260.0,
         "Lateral 2nd Central": 266.0,
+        "Lateral 1st Central": 290.0,
         "Tribuna 2nd": 295.0,
         "Tribuna 1st": 300.0,
         "Tribuna 2nd Central": 310.0,
         "Barca VIP Hospitality Silver Package": 450.0,
-        "Tribuna 1st Central": 462.0,
+        "Tribuna 1st Central": 450.0,
         "Corner 4th": 600.0,
-        "Corner 3rd": 700.0,
         "Goal 3rd": 700.0,
+        "Corner 3rd": 700.0,
         "Goal 4th": 750.0,
         "Lateral 4th": 800.0,
         "Lateral 3rd": 900.0,
+        "Barca VIP Hospitality Players Zone": 1150.0,
         "Tribuna 3rd": 1900.0,
         "Tribuna 3rd Central": 1900.0
       },
-      "last_scraped": "2026-05-12T11:47:43.431348"
+      "last_scraped": "2026-05-12T14:59:14.526348"
     },
     {
       "url": "https://www.footballticketnet.com/champions-league/fc-barcelona-vs-tba",
@@ -80195,5 +80223,5 @@
       "last_scraped": "2026-04-05T14:38:04.688743"
     }
   ],
-  "last_updated": "2026-05-12T11:47:43.431348"
+  "last_updated": "2026-05-12T14:59:14.526348"
 }
