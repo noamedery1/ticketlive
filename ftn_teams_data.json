@@ -193168,13 +193168,28 @@
               "Prestige VIP - Outside": 27000.0,
               "Private VIP Sky Box": 28368.11
             }
+          },
+          {
+            "timestamp": "2026-05-14T02:18:55.453348",
+            "prices": {
+              "Category 3": 2595.0,
+              "Category 2": 3595.0,
+              "Category 1": 4595.0,
+              "Fans First": 3500.0,
+              "Prime Seats": 8999.0,
+              "Prestige VIP": 18400.0,
+              "Sky Club": 20782.0,
+              "Prestige VIP - Served Dinner": 24500.0,
+              "Prestige VIP - Outside": 27000.0,
+              "Private VIP Sky Box": 28368.11
+            }
           }
         ],
         "latest_prices": {
           "Category 3": 2595.0,
           "Category 2": 3595.0,
           "Category 1": 4595.0,
-          "Fans First": 3998.0,
+          "Fans First": 3500.0,
           "Prime Seats": 8999.0,
           "Prestige VIP": 18400.0,
           "Sky Club": 20782.0,
@@ -193182,9 +193197,9 @@
           "Prestige VIP - Outside": 27000.0,
           "Private VIP Sky Box": 28368.11
         },
-        "last_scraped": "2026-05-13T23:07:36.525348"
+        "last_scraped": "2026-05-14T02:18:55.453348"
       }
     ],
-    "last_updated": "2026-05-13T23:07:36.525348"
+    "last_updated": "2026-05-14T02:18:55.453348"
   }
 }
