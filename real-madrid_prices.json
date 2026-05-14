@@ -37559,13 +37559,19 @@
           "prices": {
             "Category 1": 80.0
           }
+        },
+        {
+          "timestamp": "2026-05-15T01:30:35.046348",
+          "prices": {
+            "Category 1": 80.0
+          }
         }
       ],
       "latest_prices": {
         "Category 1": 80.0
       },
-      "last_scraped": "2026-05-14T21:32:38.200348"
+      "last_scraped": "2026-05-15T01:30:35.046348"
     }
   ],
-  "last_updated": "2026-05-14T21:32:38.200348"
+  "last_updated": "2026-05-15T01:30:35.046348"
 }
