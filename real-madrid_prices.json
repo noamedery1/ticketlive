@@ -29227,6 +29227,18 @@
             "Real Madrid VIP Hospitality Package": 593.99,
             "Private VIP Box": 1485.0
           }
+        },
+        {
+          "timestamp": "2026-05-14T11:56:20.509348",
+          "prices": {
+            "Category 4": 81.0,
+            "Category 2": 111.0,
+            "Category 3": 118.91,
+            "Category 1": 153.95,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 593.99,
+            "Private VIP Box": 1485.0
+          }
         }
       ],
       "latest_prices": {
@@ -29238,7 +29250,7 @@
         "Real Madrid VIP Hospitality Package": 593.99,
         "Private VIP Box": 1485.0
       },
-      "last_scraped": "2026-05-14T08:41:57.726348"
+      "last_scraped": "2026-05-14T11:56:20.509348"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-athletic-bilbao",
@@ -34555,6 +34567,18 @@
             "Real Madrid VIP Hospitality Package": 742.5,
             "Private VIP Box": 2302.3
           }
+        },
+        {
+          "timestamp": "2026-05-14T11:56:20.509348",
+          "prices": {
+            "Category 4": 115.99,
+            "Category 3": 123.99,
+            "Category 2": 143.0,
+            "Category 1": 204.99,
+            "Category 1 Premium": 237.0,
+            "Real Madrid VIP Hospitality Package": 742.5,
+            "Private VIP Box": 2302.3
+          }
         }
       ],
       "latest_prices": {
@@ -34566,7 +34590,7 @@
         "Real Madrid VIP Hospitality Package": 742.5,
         "Private VIP Box": 2302.3
       },
-      "last_scraped": "2026-05-14T08:41:57.726348"
+      "last_scraped": "2026-05-14T11:56:20.509348"
     },
     {
       "url": "https://www.footballticketnet.com/champions-league/real-madrid-vs-sl-benfica",
@@ -37451,13 +37475,19 @@
           "prices": {
             "Category 1": 80.0
           }
+        },
+        {
+          "timestamp": "2026-05-14T11:56:20.509348",
+          "prices": {
+            "Category 1": 80.0
+          }
         }
       ],
       "latest_prices": {
         "Category 1": 80.0
       },
-      "last_scraped": "2026-05-14T08:41:57.726348"
+      "last_scraped": "2026-05-14T11:56:20.509348"
     }
   ],
-  "last_updated": "2026-05-14T08:41:57.726348"
+  "last_updated": "2026-05-14T11:56:20.509348"
 }
