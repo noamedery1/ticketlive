@@ -146212,29 +146212,18 @@
               "Tribuna 3rd Central": 1900.0,
               "Tribuna 2nd Central": 2000.0
             }
+          },
+          {
+            "timestamp": "2026-05-17T18:15:31.813600",
+            "prices": {
+              "Barca VIP Hospitality Silver Package": 350.0
+            }
           }
         ],
         "latest_prices": {
-          "Corner 1st": 249.0,
-          "Barca VIP Hospitality Silver Package": 375.0,
-          "Goal 1st": 500.0,
-          "Corner 4th": 600.0,
-          "Corner 2nd": 700.0,
-          "Corner 3rd": 700.0,
-          "Goal 2nd": 700.0,
-          "Goal 3rd": 700.0,
-          "Lateral 4th": 800.0,
-          "Lateral 1st": 900.0,
-          "Lateral 2nd": 900.0,
-          "Lateral 3rd": 900.0,
-          "Tribuna 1st": 1000.0,
-          "Tribuna 2nd": 1000.0,
-          "Tribuna 1st Central": 1200.0,
-          "Tribuna 3rd": 1900.0,
-          "Tribuna 3rd Central": 1900.0,
-          "Tribuna 2nd Central": 2000.0
+          "Barca VIP Hospitality Silver Package": 350.0
         },
-        "last_scraped": "2026-05-17T15:05:20.193600"
+        "last_scraped": "2026-05-17T18:15:31.813600"
       },
       {
         "url": "https://www.footballticketnet.com/champions-league/fc-barcelona-vs-tba",
@@ -151907,7 +151896,7 @@
         "last_scraped": "2026-04-05T14:38:04.688743"
       }
     ],
-    "last_updated": "2026-05-17T15:05:20.193600"
+    "last_updated": "2026-05-17T18:15:31.813600"
   },
   "real-madrid": {
     "team_name": "Real Madrid",
