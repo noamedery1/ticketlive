@@ -3,21 +3,21 @@
     {
       "team_key": "arsenal",
       "team_name": "Arsenal",
-      "team_url": "https://www.footballticketnet.com/arsenal-football-tickets/filter/home_away/home-matches",
+      "team_url": "https://www.footballticketnet.com/arsenal-football-tickets",
       "currency": "GBP",
       "country": "England"
     },
     {
       "team_key": "barcelona",
       "team_name": "FC Barcelona",
-      "team_url": "https://www.footballticketnet.com/fc-barcelona-football-tickets/filter/home_away/home-matches",
+      "team_url": "https://www.footballticketnet.com/fc-barcelona-football-tickets",
       "currency": "EUR",
       "country": "Spain"
     },
     {
       "team_key": "real-madrid",
       "team_name": "Real Madrid",
-      "team_url": "https://www.footballticketnet.com/real-madrid-football-tickets/filter/home_away/home-matches",
+      "team_url": "https://www.footballticketnet.com/real-madrid-football-tickets",
       "currency": "EUR",
       "country": "Spain"
     },
@@ -26,8 +26,8 @@
       "team_name": "Champions League",
       "team_url": "https://www.footballticketnet.com/champions-league-football-tickets",
       "currency": "EUR",
-      "country": "Europe"
+      "country": "Europe",
+      "all_games": true
     }
   ]
 }
-

@@ -263,7 +263,7 @@ def get_teams_overview():
                 'opponent': game.get('opponent'),
                 'date': d.date().isoformat() if d else None,
                 'url': game.get('url'),
-                'currency': currencies.get(key, 'USD'),
+                'currency': game.get('currency') or currencies.get(key, 'USD'),
                 'summary': _summarize_series(_game_series(game)),
             })
     rows.sort(key=lambda r: (r['date'] is None, r['date'] or ''))
@@ -306,7 +306,7 @@ def get_game_prices(team_key: str, game_index: int):
         'prices': game.get('price_history', []),
         'latest_prices': game.get('latest_prices', {}),
         'summary': _summarize_series(_game_series(game)),
-        'currency': get_team_currency(team_key),
+        'currency': game.get('currency') or get_team_currency(team_key),
     }
 
 @app.get('/health')

@@ -14,8 +14,8 @@ scraper only uses:
 | `RUN_ALL_TEAMS_ONCE.bat` | Entry point for Task Scheduler (one cycle, logs to `scraper.log`) |
 | `RUN_ALL_TEAMS.bat` | Same, as a loop in a console window (every 3 h) |
 | `auto_scraper_teams.py` | git pull → scrape each team → one commit → push |
-| `scraper_ftn_teams.py` | Scrapes one team with Chrome |
-| `teams_list.json` | Which teams to scrape — see `ADD_TEAM_GUIDE.md` |
+| `scraper_ftn_teams.py` | Scrapes one team with Chrome: team page → upcoming home games → each game's category prices |
+| `teams_list.json` | Which teams to scrape. `team_url` = the team page on FTN, `currency` = GBP/EUR/USD, `"all_games": true` for a tournament page (all games, not only home games) |
 | `ftn_teams_data.json` | The price history (state) |
 | `download_chromedriver.py`, `DOWNLOAD_CHROMEDRIVER.bat` | Fetch a chromedriver matching Chrome |
 | `requirements_win7.txt` | Python packages |
