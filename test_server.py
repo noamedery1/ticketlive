@@ -15,7 +15,8 @@ assert srv.parse_game_date('27/12/25').year == 2025
 
 # teams endpoints
 teams = c.get('/teams').json()
-assert teams and {'key', 'name', 'currency'} <= teams[0].keys()
+assert isinstance(teams, list)  # empty until the scraper's first run
+assert all({'key', 'name', 'currency'} <= t.keys() for t in teams)
 overview = c.get('/teams/overview').json()
 assert isinstance(overview, list)
 for row in overview[:20]:

@@ -10,6 +10,7 @@ scraper only uses:
 
 | File | Role |
 |---|---|
+| `SETUP_SCRAPER.bat` | One-time setup + first run |
 | `RUN_ALL_TEAMS_ONCE.bat` | Entry point for Task Scheduler (one cycle, logs to `scraper.log`) |
 | `RUN_ALL_TEAMS.bat` | Same, as a loop in a console window (every 3 h) |
 | `auto_scraper_teams.py` | git pull → scrape each team → one commit → push |
@@ -21,31 +22,23 @@ scraper only uses:
 
 ## Install (Windows 7)
 
-1. **Python 3.8.10** (last version that installs on Windows 7), "Add to PATH" ticked.
-2. **Chrome 109** (last version for Windows 7). Turn off auto-update.
-3. **Git for Windows**, then clone and give it push access:
-   ```bat
-   git clone https://github.com/noamedery1/ticketlive.git C:\ticketlive
-   ```
-   Use a GitHub fine-grained token with *Contents: read and write* on this repo only,
-   stored by Git Credential Manager on the first push.
-4. Virtual env + packages:
-   ```bat
-   py -3.8 -m venv C:\PythonEnvs\ticketlive
-   C:\PythonEnvs\ticketlive\Scripts\pip install -r C:\ticketlive\requirements_win7.txt
-   ```
-5. Chromedriver 109 into `C:\PythonEnvs\ticketlive\Scripts\chromedriver.exe`:
-   run `DOWNLOAD_CHROMEDRIVER.bat`.
-6. Test once by hand: double-click `RUN_ALL_TEAMS_ONCE.bat`, then read `scraper.log`.
+1. Install, in this order:
+   - **Python 3.8.10** (last version for Windows 7) — tick "Add Python to PATH" and "py launcher".
+   - **Chrome 109** (last version for Windows 7) if it is not there already.
+   - **Git for Windows 2.46.x** (last line that supports Windows 7).
+2. Extract `ticketlive-scraper.zip` to `C:\ticketlive`.
+3. Double-click `C:\ticketlive\SETUP_SCRAPER.bat`. It links the folder to GitHub,
+   creates `C:\PythonEnvs\ticketlive`, installs packages, downloads ChromeDriver,
+   schedules a run every 3 hours and starts the first run.
+4. On the first push Git asks for GitHub credentials: your username, and as password a
+   fine-grained token (github.com → Settings → Developer settings → Fine-grained tokens,
+   repository `ticketlive`, permission *Contents: Read and write*).
 
 ## Schedule it
 
-Task Scheduler → Create Task:
-- Trigger: daily, repeat every 3 hours.
-- Action: `C:\ticketlive\RUN_ALL_TEAMS_ONCE.bat`, start in `C:\ticketlive`.
-- "Run whether user is logged on or not" is **not** recommended: Chrome needs a desktop
-  session. Use auto-logon and "Run only when user is logged on".
-- Settings: "Stop the task if it runs longer than 4 hours".
+`SETUP_SCRAPER.bat` creates the task "TicketLive Scraper" (every 3 hours, runs
+`RUN_ALL_TEAMS_ONCE.bat`). Chrome needs a desktop session, so the PC must stay logged
+in: turn on auto-logon and turn off sleep.
 
 ## When something breaks
 
