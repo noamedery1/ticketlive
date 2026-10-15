@@ -220,6 +220,60 @@ def scrape_event(driver, url, currency):
     }
 
 
+DETAIL_MAX_AGE_HOURS = 12   # categories are refreshed at least this often
+BACKOFF_MINUTES = (4, 8)     # the bot check cleared after ~4 min in practice
+DETAIL_PRIORITY = ['new game', 'price changed', 'refresh', None]
+SHARED_FIELDS = ('match_name', 'opponent', 'date', 'start', 'competition', 'currency', 'latest_prices', 'last_detail')
+
+
+def hours_since(ts):
+    try:
+        return (datetime.now() - datetime.fromisoformat(ts)).total_seconds() / 3600
+    except (TypeError, ValueError):
+        return float('inf')
+
+
+def detail_reason(game, ev):
+    """Why this game's own page should be loaded this run, or None to use the team page price."""
+    if not game or not game.get('last_detail'):
+        return 'new game'
+    history = game.get('price_history') or []
+    last = min(history[-1]['prices'].values()) if history and history[-1].get('prices') else None
+    if ev['from_price'] is not None and last is not None and abs(ev['from_price'] - last) > 0.005:
+        return 'price changed'
+    if hours_since(game['last_detail']) >= DETAIL_MAX_AGE_HOURS:
+        return 'refresh'
+    return None
+
+
+def recent_detail_elsewhere(data, team_key, url, max_age_hours=2):
+    """Same game already scraped in full for another team this cycle (e.g. a CL home game)."""
+    for key, team in data.items():
+        if key == team_key or not isinstance(team, dict):
+            continue
+        for g in team.get('games', []):
+            if g.get('url') == url and g.get('latest_prices') and hours_since(g.get('last_detail')) < max_age_hours:
+                return g
+    return None
+
+
+def scrape_with_backoff(driver, url, currency):
+    """Game page; on the bot check wait it out (BACKOFF_MINUTES) and retry. Returns info, None or BLOCKED."""
+    time.sleep(random.uniform(*PAUSE))
+    for wait in (0,) + BACKOFF_MINUTES:
+        if wait:
+            log(f'      ⏳ Bot check page - waiting {wait} min, then retrying')
+            time.sleep(wait * 60)
+        try:
+            info = scrape_event(driver, url, currency)
+        except Exception as e:
+            log(f'      ⚠️ {e}')
+            return None
+        if info != BLOCKED:
+            return info
+    return BLOCKED
+
+
 def run_team_scraper(team_key):
     team = load_team(team_key)
     if not team:
@@ -253,40 +307,46 @@ def run_team_scraper(team_key):
         now = datetime.now().isoformat()
         scraped = 0
 
-        blocked = False
+        # Load game pages only where they add something, most valuable first.
+        for ev in events:
+            ev['why'] = detail_reason(games.get(ev['url']), ev)
+        events.sort(key=lambda ev: DETAIL_PRIORITY.index(ev['why']))
+        gave_up = False
         for i, ev in enumerate(events, 1):
             url = ev['url']
-            log(f'   [{i}/{len(events)}] {url.split("/")[-3]}')
+            log(f'   [{i}/{len(events)}] {url.split("/")[-3]}' + (f' ({ev["why"]})' if ev['why'] else ''))
+            game = games.setdefault(url, {'url': url, 'price_history': []})
             info = None
-            if not blocked:
-                time.sleep(random.uniform(*PAUSE))
-                try:
-                    info = scrape_event(driver, url, team.get('currency'))
-                except Exception as e:
-                    log(f'      ⚠️ {e}')
-                if info == BLOCKED:
-                    # Stop loading game pages for this run; more requests only prolong the block.
-                    log('      🛑 Bot check page - using team page prices for the rest of this run')
-                    blocked, info = True, None
+            if ev['why']:
+                shared = recent_detail_elsewhere(data, team_key, url)
+                if shared:
+                    info = {k: shared.get(k) for k in SHARED_FIELDS}
+                    log('      ♻ same game scraped minutes ago for another team')
+                elif not gave_up:
+                    info = scrape_with_backoff(driver, url, team.get('currency'))
+                    if info == BLOCKED:
+                        log('      🛑 Still blocked - cheapest prices only for the rest of this run')
+                        gave_up, info = True, None
             if info:
-                game = games.setdefault(url, {'url': url, 'price_history': []})
                 prices = info.pop('latest_prices')
                 game.update(info)
                 game['latest_prices'] = prices
+                game['last_detail'] = info.get('last_detail') or now
                 snapshot = {c: v['min'] for c, v in prices.items()}
                 if snapshot:
-                    log(f'      ✅ {len(prices)} categories, from {min(snapshot.values()):,.2f} {info["currency"]}')
+                    log(f'      ✅ {len(prices)} categories, from {min(snapshot.values()):,.2f} {game.get("currency")}')
                 else:
                     log('      ⚠️ No tickets listed')
             elif ev['from_price']:
-                # Fallback: only the cheapest price, from the team page.
-                game = games.setdefault(url, {'url': url, 'price_history': []})
+                # Only the cheapest price, from the team page.
                 for k in ('match_name', 'date'):
                     game.setdefault(k, ev[k])
                 game.setdefault('currency', team.get('currency'))
                 snapshot = {FALLBACK_CATEGORY: ev['from_price']}
                 log(f'      ↪ cheapest only: {ev["from_price"]:,.2f}')
             else:
+                if not game.get('match_name'):
+                    del games[url]
                 continue
             game['team'] = team.get('team_name', team_key)
             game['last_scraped'] = now
@@ -304,7 +364,7 @@ def run_team_scraper(team_key):
         with open(tmp, 'w', encoding='utf-8') as f:
             json.dump(data, f, indent=1)
         os.replace(tmp, OUTPUT_FILE)  # atomic: a crash never leaves a half-written file
-        log(f'✅ Saved {scraped}/{len(events)} games' + (' (cheapest only after the bot check)' if blocked else ''))
+        log(f'✅ Saved {scraped}/{len(events)} games' + (' (cheapest only after the bot check)' if gave_up else ''))
         return True
     except Exception as e:
         log(f'❌ Error: {e}')

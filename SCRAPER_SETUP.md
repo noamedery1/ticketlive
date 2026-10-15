@@ -40,6 +40,21 @@ scraper only uses:
 `RUN_ALL_TEAMS_ONCE.bat`). Chrome needs a desktop session, so the PC must stay logged
 in: turn on auto-logon and turn off sleep.
 
+## How a run avoids the bot check
+
+FootballTicketNet sometimes shows a Cloudflare "verify you are human" page after many game
+pages in a row. It clears by itself after a few minutes. The scraper never clicks it; instead:
+
+1. **Fewer page loads.** The team page lists every game with its cheapest price. A game's own
+   page (all categories) is loaded only if the game is new, its cheapest price changed, or its
+   categories are older than 12 hours (`DETAIL_MAX_AGE_HOURS`). Most runs load only a few pages.
+2. **No duplicates.** A game already scraped for another team in the last 2 hours is reused.
+3. **Most valuable first.** New and changed games are loaded before routine refreshes.
+4. **Waits out a block.** On the check page it waits 4 minutes, retries, then 8 minutes
+   (`BACKOFF_MINUTES`), then stops loading game pages for that run.
+5. **Never loses a run.** Games it could not open still get their cheapest price from the
+   team page (shown as the "Cheapest (team page)" line on the chart).
+
 ## When something breaks
 
 - `scraper.log` shows each run. Exit code 1 = at least one team failed.
