@@ -16,15 +16,21 @@ if not defined PYBASE python --version >nul 2>&1 && set PYBASE=python
 if not defined PYBASE (echo [ERROR] Python not found. Install Python 3.8.10, then rerun. & pause & exit /b 1)
 
 echo [2/6] Linking this folder to GitHub...
-REM Only on first setup: a later rerun must not throw away unpushed price commits.
-if exist ".git" goto linked
-git init -q
-git remote add origin %REPO%
-git fetch --depth 1 origin main || (echo [ERROR] git fetch failed - check internet access. & pause & exit /b 1)
+set DEPTH=
+if not exist ".git" (
+    git init -q
+    git remote add origin %REPO%
+    set DEPTH=--depth 1
+)
+git fetch %DEPTH% origin main || (echo [ERROR] git fetch failed - check internet access. & pause & exit /b 1)
+REM An existing clone may hold price commits that never reached GitHub: never discard those.
+git rev-parse -q --verify HEAD >nul 2>&1 && for /f %%n in ('git rev-list --count FETCH_HEAD..HEAD') do if not "%%n"=="0" (
+    echo [ERROR] This folder has %%n commit^(s^) that are not on GitHub. Push or back them up, then rerun.
+    pause & exit /b 1
+)
 git symbolic-ref HEAD refs/heads/main
 git reset -q --hard FETCH_HEAD
 git branch -q --set-upstream-to=origin/main main
-:linked
 git config user.name >nul 2>&1 || git config user.name "ticketlive-scraper"
 git config user.email >nul 2>&1 || git config user.email "scraper@ticketlive.local"
 
