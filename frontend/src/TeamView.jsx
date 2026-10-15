@@ -1,1210 +1,252 @@
-import React, { useState, useEffect } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import axios from 'axios'
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
-import './App.css'
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
+import { useLang } from './i18n'
+import { Change, DateStub, formatMoney, maxPrice, minPrice, parseDate } from './ui'
 
-const API_URL = import.meta.env.DEV ? 'http://localhost:8000' : ''
+const SERIES_COLORS = ['#5aa9e6', '#f2b544', '#3dbe8b', '#c792ea', '#f07167', '#7fd1c7', '#e8a87c', '#9aa8ff', '#d4e157', '#f48fb1', '#a1887f', '#90a4ae']
+const dayKey = (ts) => ts.slice(0, 10)
 
-function TeamView() {
+// Listing count for one category in latest_prices, any stored shape.
+function countListings(value) {
+  if (typeof value === 'number') return 1
+  if (value && typeof value === 'object') {
+    if ('min' in value) return value.count || 1
+    return Object.values(value).reduce((n, v) => n + countListings(v), 0)
+  }
+  return 0
+}
+
+export default function TeamView({ target }) {
+  const { t, locale } = useLang()
   const [teams, setTeams] = useState([])
-  const [selectedTeam, setSelectedTeam] = useState(null)
+  const [teamKey, setTeamKey] = useState(target?.teamKey || null)
   const [games, setGames] = useState([])
-  const [selectedGame, setSelectedGame] = useState(null)
-  const [gamePrices, setGamePrices] = useState(null)
-  const [dateRange, setDateRange] = useState({ start: '', end: '' })
-  const [availableDates, setAvailableDates] = useState([])
-  const [availableCategories, setAvailableCategories] = useState([])
-  const [selectedCategories, setSelectedCategories] = useState([])
-  const [categoryFilterOpen, setCategoryFilterOpen] = useState(false)
-  const [dateFilterOpen, setDateFilterOpen] = useState(false)
-  const [modalCategory, setModalCategory] = useState(null)
-
-  // Close category dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      const dropdown = document.getElementById('category-dropdown-container')
-      if (dropdown && !dropdown.contains(event.target)) {
-        setCategoryFilterOpen(false)
-      }
-    }
-    if (categoryFilterOpen) {
-      document.addEventListener('mousedown', handleClickOutside)
-      return () => document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [categoryFilterOpen])
-
-  // Close date dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      const dropdown = document.getElementById('date-dropdown-container')
-      if (dropdown && !dropdown.contains(event.target)) {
-        setDateFilterOpen(false)
-      }
-    }
-    if (dateFilterOpen) {
-      document.addEventListener('mousedown', handleClickOutside)
-      return () => document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [dateFilterOpen])
+  const [gameIndex, setGameIndex] = useState(null)
+  const [detail, setDetail] = useState(null)
+  const [range, setRange] = useState({ preset: 'all', start: '', end: '' })
+  const [hidden, setHidden] = useState([]) // categories toggled off
+  const [modal, setModal] = useState(null)
+  const [error, setError] = useState(false)
 
   useEffect(() => {
-    fetchTeams()
+    axios.get('/teams').then((res) => {
+      setTeams(res.data)
+      setTeamKey((k) => k || res.data[0]?.key || null)
+    }).catch(() => setError(true))
   }, [])
 
   useEffect(() => {
-    if (selectedTeam) {
-      fetchTeamGames(selectedTeam.key)
-    }
-  }, [selectedTeam])
-
-  useEffect(() => {
-    if (selectedTeam && selectedGame !== null) {
-      console.log('useEffect triggered - fetching prices for game index:', selectedGame)
-      setDateRange({ start: '', end: '' }) // Reset date filter when game changes
-      fetchGamePrices(selectedTeam.key, selectedGame)
-    } else {
-      console.log('useEffect - conditions not met:', { selectedTeam: !!selectedTeam, selectedGame })
-    }
-  }, [selectedTeam, selectedGame])
-
-  const fetchTeams = async () => {
-    try {
-      console.log('Fetching teams from:', `${API_URL}/teams`)
-      const res = await axios.get(`${API_URL}/teams`)
-      console.log('Teams received:', res.data)
-      setTeams(res.data)
-      if (res.data.length > 0) {
-        setSelectedTeam(res.data[0])
-      } else {
-        console.warn('No teams found')
-      }
-    } catch (err) {
-      console.error('Error fetching teams:', err)
-      console.error('API_URL:', API_URL)
-    }
-  }
-
-  const fetchTeamGames = async (teamKey) => {
-    try {
-      console.log('Fetching games for team:', teamKey)
-      const res = await axios.get(`${API_URL}/teams/${teamKey}`)
-      console.log('Games received:', res.data)
+    if (!teamKey) return
+    setGames([])
+    setGameIndex(null)
+    axios.get(`/teams/${encodeURIComponent(teamKey)}`).then((res) => {
       setGames(res.data)
-      if (res.data.length > 0) {
-        console.log('Setting selectedGame to 0')
-        setSelectedGame(0)
-      } else {
-        console.warn('No games found for team:', teamKey)
-        setSelectedGame(null)
-      }
-    } catch (err) {
-      console.error('Error fetching games:', err)
-      setSelectedGame(null)
-    }
-  }
+      const wanted = target?.teamKey === teamKey ? res.data.findIndex((g) => g.url === target.url) : -1
+      setGameIndex(res.data.length ? Math.max(wanted, 0) : null)
+    }).catch(() => setError(true))
+  }, [teamKey, target])
 
-  const fetchGamePrices = async (teamKey, gameIndex) => {
-    try {
-      console.log('Fetching game prices for:', teamKey, 'game index:', gameIndex)
-      const url = `${API_URL}/teams/${teamKey}/game/${gameIndex}`
-      console.log('API URL:', url)
-      const res = await axios.get(url)
-      console.log('Game prices response:', res.data)
-      console.log('Has game:', !!res.data.game)
-      console.log('Has latest_prices:', !!res.data.latest_prices)
-      console.log('Latest prices keys:', res.data.latest_prices ? Object.keys(res.data.latest_prices) : 'none')
-      setGamePrices(res.data)
-    } catch (err) {
-      console.error('Error fetching game prices:', err)
-      console.error('Error details:', err.response?.data || err.message)
-      setGamePrices(null)
-    }
-  }
-
-  const getCurrencySymbol = (currency) => {
-    const symbols = {
-      'USD': '$',
-      'GBP': '£',
-      'EUR': '€'
-    }
-    return symbols[currency] || '$'
-  }
-
-  const formatPrice = (price, currency = 'USD') => {
-    // Prices are now stored in original currency, no conversion needed
-    if (!price) return 'N/A'
-    const symbol = getCurrencySymbol(currency)
-    return `${symbol}${price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
-  }
-
-  // Extract available dates and categories from price history
   useEffect(() => {
-    if (gamePrices && gamePrices.prices && Array.isArray(gamePrices.prices)) {
-      const dates = new Set()
-      const categories = new Set()
+    if (!teamKey || gameIndex === null) return
+    setDetail(null)
+    setHidden([])
+    setRange({ preset: 'all', start: '', end: '' })
+    axios.get(`/teams/${encodeURIComponent(teamKey)}/game/${gameIndex}`)
+      .then((res) => setDetail(res.data))
+      .catch(() => setError(true))
+  }, [teamKey, gameIndex])
 
-      gamePrices.prices.forEach(snapshot => {
-        const date = new Date(snapshot.timestamp)
-        const dateStr = date.toISOString().split('T')[0] // YYYY-MM-DD
-        dates.add(dateStr)
+  const currency = detail?.currency || teams.find((x) => x.key === teamKey)?.currency || 'USD'
 
-        // Extract categories
-        if (snapshot.prices && typeof snapshot.prices === 'object') {
-          Object.keys(snapshot.prices).forEach(cat => {
-            if (snapshot.prices[cat] && typeof snapshot.prices[cat] === 'object') {
-              // Block-based: add category and category-block combinations
-              categories.add(cat)
-              Object.keys(snapshot.prices[cat]).forEach(block => {
-                // Filter out "Unknown" blocks and reduce clutter
-                if (block && !block.toLowerCase().includes('unknown')) {
-                  // Only add specific block if it's not "Unknown"
-                  // START USER REQUEST: remove irrelevant filters (too many block variations)
-                  // We will ONLY add the main category, not every single block, to keep the list clean.
-                  // If specific block filtering is needed, we can re-enable this, but maybe only for major blocks?
-                  // For now, based on "remove all irrelevant filters", we skip adding individual blocks to the filter list.
-                  // categories.add(`${cat} - Block ${block}`) 
-                }
-              })
-            } else {
-              // Simple category
-              categories.add(cat)
-            }
-          })
-        }
-      })
-
-      const sortedDates = Array.from(dates).sort()
-      const sortedCategories = Array.from(categories).sort()
-
-      setAvailableDates(sortedDates)
-      setAvailableCategories(sortedCategories)
-
-      // Select all categories by default
-      if (sortedCategories.length > 0 && selectedCategories.length === 0) {
-        setSelectedCategories(sortedCategories)
-      }
-
-      if (sortedDates.length > 0 && (!dateRange.start || !dateRange.end)) {
-        // Default to all time (empty range) or maybe last date? 
-        // User asked for "filter by all" option.
-        // Let's default to showing everything (empty range implies all)
-      }
-    } else {
-      setAvailableDates([])
-      setAvailableCategories([])
-      setDateRange({ start: '', end: '' })
+  // Daily lowest price per category.
+  const { chartData, categories } = useMemo(() => {
+    const byDay = {}
+    const cats = new Set()
+    let start = range.start, end = range.end
+    if (range.preset !== 'all' && range.preset !== 'custom') {
+      start = new Date(Date.now() - Number(range.preset) * 86400000).toISOString().slice(0, 10)
+      end = ''
     }
-  }, [gamePrices])
-
-  const prepareChartData = () => {
-    if (!gamePrices || !gamePrices.prices || !Array.isArray(gamePrices.prices)) return []
-
-    let filteredSnapshots = gamePrices.prices
-    // Filter by date range if specified
-    if (dateRange.start || dateRange.end) {
-      filteredSnapshots = gamePrices.prices.filter(snapshot => {
-        const snapshotDate = new Date(snapshot.timestamp).toISOString().split('T')[0]
-        if (dateRange.start && snapshotDate < dateRange.start) return false
-        if (dateRange.end && snapshotDate > dateRange.end) return false
-        return true
-      })
+    for (const snap of detail?.prices || []) {
+      const day = dayKey(snap.timestamp || '')
+      if (!day || (start && day < start) || (end && day > end)) continue
+      for (const [cat, value] of Object.entries(snap.prices || {})) {
+        const p = minPrice(value)
+        if (p === null) continue
+        cats.add(cat)
+        byDay[day] ??= { day }
+        byDay[day][cat] = Math.min(byDay[day][cat] ?? Infinity, p)
+      }
     }
+    return { chartData: Object.values(byDay).sort((a, b) => a.day.localeCompare(b.day)), categories: [...cats].sort() }
+  }, [detail, range])
 
-    if (filteredSnapshots.length === 0) return []
+  const categoryRows = useMemo(() => Object.entries(detail?.latest_prices || {})
+    .map(([category, value]) => ({
+      category,
+      min: minPrice(value),
+      max: maxPrice(value),
+      count: countListings(value),
+      blocks: value && typeof value === 'object' && !('min' in value)
+        ? Object.entries(value).map(([block, v]) => ({ block, min: minPrice(v), max: maxPrice(v), count: countListings(v) }))
+          .filter((b) => b.min !== null).sort((a, b) => a.min - b.min)
+        : [],
+    }))
+    .filter((r) => r.min !== null)
+    .sort((a, b) => a.min - b.min), [detail])
 
-    // Get currency from gamePrices or default to USD
-    const currency = gamePrices?.currency || selectedTeam?.currency || 'USD'
+  const money = (v, digits = 0) => formatMoney(v, currency, locale, digits)
+  const fmtDay = (d) => new Date(d).toLocaleDateString(locale, { day: 'numeric', month: 'short' })
+  const range2 = (r) => (r.min === r.max ? money(r.min) : `${money(r.min)} – ${money(r.max)}`)
 
-    // Group by day
-    const dailyData = {}
-
-    filteredSnapshots.forEach(snapshot => {
-      const date = new Date(snapshot.timestamp)
-      const dayKey = date.toISOString().split('T')[0] // YYYY-MM-DD
-
-      if (!dailyData[dayKey]) {
-        dailyData[dayKey] = {
-          date: dayKey,
-          displayDate: date.toLocaleDateString('en-US', {
-            month: 'short',
-            day: 'numeric',
-            year: 'numeric'
-          }),
-          prices: {}
-        }
-      }
-
-      // Collect all prices for each category/block
-      if (snapshot.prices && typeof snapshot.prices === 'object') {
-        Object.keys(snapshot.prices).forEach(cat => {
-          if (!dailyData[dayKey].prices[cat]) {
-            dailyData[dayKey].prices[cat] = {}
-          }
-
-          if (snapshot.prices[cat] && typeof snapshot.prices[cat] === 'object') {
-            // Check if it's block-based format: {category: {block: price}} (old format)
-            // or category-only format with object: {category: {min, max, count}} (old new format)
-            const hasMinMax = 'min' in snapshot.prices[cat] || 'max' in snapshot.prices[cat]
-
-            if (hasMinMax) {
-              // Old new format: {category: {min, max, count}} - category-only, no blocks
-              const priceValue = snapshot.prices[cat]
-              if (!dailyData[dayKey].prices[cat]['_simple']) {
-                dailyData[dayKey].prices[cat]['_simple'] = []
-              }
-              // Store min for chart
-              const price = typeof priceValue === 'number' ? priceValue : (priceValue.min || priceValue._price || 0)
-              dailyData[dayKey].prices[cat]['_simple'].push(price)
-            } else {
-              // Old block-based format: {category: {block: price}} or {category: {block: {min, max, count}}}
-              Object.keys(snapshot.prices[cat]).forEach(block => {
-                const blockKey = block
-                if (!dailyData[dayKey].prices[cat][blockKey]) {
-                  dailyData[dayKey].prices[cat][blockKey] = []
-                }
-                const priceValue = snapshot.prices[cat][block]
-                // Handle both old format (number) and new format (dict with min/max/count)
-                if (typeof priceValue === 'number') {
-                  dailyData[dayKey].prices[cat][blockKey].push(priceValue)
-                } else if (priceValue && typeof priceValue === 'object' && 'min' in priceValue) {
-                  // New format: store min for chart, but we have access to max/count
-                  dailyData[dayKey].prices[cat][blockKey].push(priceValue.min)
-                }
-              })
-            }
-          } else if (typeof snapshot.prices[cat] === 'number') {
-            // New simple format: {category: lowest_price} - just the lowest price
-            if (!dailyData[dayKey].prices[cat]['_simple']) {
-              dailyData[dayKey].prices[cat]['_simple'] = []
-            }
-            dailyData[dayKey].prices[cat]['_simple'].push(snapshot.prices[cat])
-          }
-        })
-      }
-    })
-
-    // Collect all unique categories and blocks
-    const categoryBlocks = new Set()
-    Object.values(dailyData).forEach(day => {
-      Object.keys(day.prices).forEach(cat => {
-        Object.keys(day.prices[cat]).forEach(block => {
-          if (block === '_simple') {
-            categoryBlocks.add(cat)
-          } else {
-            categoryBlocks.add(`${cat} - Block ${block}`)
-          }
-        })
-      })
-    })
-
-    // Filter categoryBlocks by selectedCategories
-    const filteredCategoryBlocks = Array.from(categoryBlocks).filter(catBlock => {
-      return selectedCategories.length === 0 || selectedCategories.includes(catBlock)
-    })
-
-    // Build chart data with daily averages
-    const chartData = []
-    Object.keys(dailyData).sort().forEach(dayKey => {
-      const day = dailyData[dayKey]
-      const dataPoint = { time: day.displayDate, date: dayKey }
-
-      filteredCategoryBlocks.forEach(catBlock => {
-        const [cat, blockPart] = catBlock.split(' - Block ')
-        if (blockPart) {
-          // Block-based price - calculate average
-          const block = blockPart
-          if (day.prices[cat] && day.prices[cat][block] && day.prices[cat][block].length > 0) {
-            const prices = day.prices[cat][block].filter(p => typeof p === 'number')
-            if (prices.length > 0) {
-              const avg = prices.reduce((a, b) => a + b, 0) / prices.length
-              // Prices already in correct currency, no conversion needed
-              const convertedAvg = avg
-              dataPoint[catBlock] = Math.round(convertedAvg * 100) / 100
-            } else {
-              dataPoint[catBlock] = null
-            }
-          } else {
-            dataPoint[catBlock] = null
-          }
-        } else {
-          // Simple category price - calculate average
-          if (day.prices[cat] && day.prices[cat]['_simple'] && day.prices[cat]['_simple'].length > 0) {
-            const prices = day.prices[cat]['_simple'].filter(p => typeof p === 'number')
-            if (prices.length > 0) {
-              const avg = prices.reduce((a, b) => a + b, 0) / prices.length
-              // Prices already in correct currency, no conversion needed
-              const convertedAvg = avg
-              dataPoint[cat] = Math.round(convertedAvg * 100) / 100
-            } else {
-              dataPoint[cat] = null
-            }
-          } else {
-            dataPoint[cat] = null
-          }
-        }
-      })
-
-      chartData.push(dataPoint)
-    })
-
-    return chartData
-  }
-
-  const chartData = prepareChartData()
-  const colors = ['#d2a8ff', '#79c0ff', '#56d364', '#ffa657', '#ff7b72', '#a5a5ff']
-
-  if (teams.length === 0) {
-    return (
-      <div className="app-container">
-        <div className="header">
-          <h1>🏟️ Team Ticket Prices</h1>
-        </div>
-        <div className="no-data" style={{ padding: '40px', textAlign: 'center' }}>
-          <p>Loading teams...</p>
-          <p style={{ fontSize: '12px', color: '#6e7681', marginTop: '10px' }}>
-            If this persists, check the browser console for errors.
-          </p>
-        </div>
-      </div>
-    )
-  }
+  if (error) return <div className="empty">{t('loadError')}</div>
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', width: '100%' }}>
-      {/* Team Selector in header area */}
-      <div style={{ padding: '10px 20px', borderBottom: '1px solid #30363d', backgroundColor: '#161b22', display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-        <select
-          value={selectedTeam?.key || ''}
-          onChange={(e) => {
-            const team = teams.find(t => t.key === e.target.value)
-            setSelectedTeam(team)
-          }}
-          className="team-selector"
-          style={{
-            padding: '8px 12px',
-            borderRadius: '6px',
-            border: '1px solid #30363d',
-            background: '#0d1117',
-            color: '#c9d1d9',
-            fontSize: '0.9rem',
-            cursor: 'pointer'
-          }}
-        >
-          {teams.map(team => (
-            <option key={team.key} value={team.key}>
-              {team.name} ({team.game_count} games)
-            </option>
-          ))}
+    <div className="team-layout">
+      <aside className="game-list">
+        <label className="field-label" htmlFor="team-select">{t('team')}</label>
+        <select id="team-select" className="field" value={teamKey || ''} onChange={(e) => setTeamKey(e.target.value)}>
+          {teams.map((tm) => <option key={tm.key} value={tm.key}>{tm.name} ({tm.game_count})</option>)}
         </select>
-      </div>
+        <h2 className="list-title">{t('games')}</h2>
+        {games.length === 0 && <p className="muted small">{t('noGames')}</p>}
+        <ul>
+          {games.map((g, i) => (
+            <li key={g.url}>
+              <button className={i === gameIndex ? 'game on' : 'game'} onClick={() => setGameIndex(i)} aria-current={i === gameIndex}>
+                <DateStub date={parseDate(g.date)} locale={locale} tbc={t('dateTbc')} />
+                <span className="game-text">
+                  <span className="game-name">{g.opponent || g.match_name}</span>
+                  <span className="game-price">{g.cheapest ? money(g.cheapest) : t('noPrice')}</span>
+                </span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      </aside>
 
-      <div className="main-content team-view-content">
-        {/* Games List */}
-        <div className="games-sidebar">
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '15px', paddingBottom: '12px', borderBottom: '1px solid #30363d' }}>
-            <h2 style={{ margin: 0, fontSize: '1.2rem', color: '#c9d1d9', fontWeight: '600' }}>
-              Games
-            </h2>
-            {games.length > 0 && (
-              <span style={{
-                fontSize: '0.85rem',
-                color: '#8b949e',
-                background: '#21262d',
-                padding: '4px 8px',
-                borderRadius: '12px',
-                fontWeight: '500'
-              }}>
-                {games.length}
-              </span>
-            )}
-          </div>
-          {games.length === 0 ? (
-            <div className="no-data" style={{ padding: '20px', textAlign: 'center' }}>
-              <p style={{ color: '#8b949e', fontSize: '0.9rem' }}>No games found for this team.</p>
-            </div>
-          ) : (
-            <div className="games-list">
-              {games.map((game, index) => {
-                // Calculate price range from all prices
-                let minPrice = null
-                let maxPrice = null
+      <section className="game-detail">
+        {!detail?.game ? (
+          <div className="empty">{gameIndex === null ? t('selectGame') : t('loading')}</div>
+        ) : (
+          <>
+            <header className="detail-head">
+              <div>
+                <h1>{detail.game.match_name}</h1>
+                <p className="muted">
+                  {parseDate(detail.game.date)?.toLocaleDateString(locale, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) || t('dateTbc')}
+                  {detail.game.url && <> · <a href={detail.game.url} target="_blank" rel="noopener noreferrer">{t('viewOnSite')}</a></>}
+                </p>
+              </div>
+            </header>
 
-                if (game.latest_prices && Object.keys(game.latest_prices).length > 0) {
-                  const allPrices = []
-                  Object.values(game.latest_prices).forEach(priceData => {
-                    if (priceData && typeof priceData === 'object' && !Array.isArray(priceData)) {
-                      // Block-based prices - collect all block prices
-                      Object.values(priceData).forEach(price => {
-                        if (typeof price === 'number') {
-                          allPrices.push(price)
-                        } else if (price && typeof price === 'object' && 'min' in price) {
-                          // New format with min/max
-                          allPrices.push(price.min)
-                          if ('max' in price) {
-                            allPrices.push(price.max)
-                          }
-                        }
-                      })
-                    } else if (typeof priceData === 'number') {
-                      allPrices.push(priceData)
-                    }
-                  })
+            <dl className="kpis">
+              <div><dt>{t('cheapestNow')}</dt><dd className="kpi-main">{money(detail.summary?.current)}</dd></div>
+              <div><dt>{t('change7d')}</dt><dd><Change pct={detail.summary?.pct} /></dd></div>
+              <div><dt>{t('categories')}</dt><dd>{categoryRows.length}</dd></div>
+              <div><dt>{t('lastChecked')}</dt><dd>{detail.game.last_scraped ? new Date(detail.game.last_scraped).toLocaleString(locale, { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '—'}</dd></div>
+            </dl>
 
-                  if (allPrices.length > 0) {
-                    minPrice = Math.min(...allPrices)
-                    maxPrice = Math.max(...allPrices)
-                  }
-                }
-
-                return (
-                  <div
-                    key={index}
-                    className={`game-item ${selectedGame === index ? 'selected' : ''}`}
-                    onClick={() => setSelectedGame(index)}
-                    style={{
-                      padding: '14px',
-                      cursor: 'pointer',
-                      borderRadius: '6px',
-                      transition: 'all 0.2s ease'
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', marginBottom: '8px' }}>
-                      <span style={{
-                        fontSize: '0.8rem',
-                        color: selectedGame === index ? '#fff' : '#6e7681',
-                        fontWeight: '600',
-                        minWidth: '20px',
-                        paddingTop: '2px'
-                      }}>
-                        {index + 1}.
-                      </span>
-                      <div style={{ flex: 1 }}>
-                        <div className="game-name" style={{
-                          fontSize: '0.95rem',
-                          fontWeight: '500',
-                          color: selectedGame === index ? '#fff' : '#c9d1d9',
-                          lineHeight: '1.4',
-                          marginBottom: '6px'
-                        }}>
-                          {game.match_name}
-                        </div>
-                        {game.date && (
-                          <div style={{
-                            fontSize: '0.75rem',
-                            color: selectedGame === index ? '#c9d1d9' : '#8b949e',
-                            marginBottom: '4px'
-                          }}>
-                            📅 {game.date}
-                          </div>
-                        )}
-                        {minPrice !== null && maxPrice !== null && (
-                          <div style={{
-                            fontSize: '0.85rem',
-                            marginTop: '4px'
-                          }}>
-                            {(() => {
-                              const currency = selectedTeam?.currency || 'USD'
-                              return minPrice === maxPrice ? (
-                                <span style={{ color: selectedGame === index ? '#fff' : '#58a6ff', fontWeight: '600' }}>
-                                  {formatPrice(minPrice, currency)}
-                                </span>
-                              ) : (
-                                <span>
-                                  <span style={{ color: selectedGame === index ? '#fff' : '#56d364', fontWeight: '600' }}>
-                                    {formatPrice(minPrice, currency)}
-                                  </span>
-                                  <span style={{ margin: '0 6px', color: selectedGame === index ? '#c9d1d9' : '#6e7681' }}>→</span>
-                                  <span style={{ color: selectedGame === index ? '#fff' : '#ff7b72', fontWeight: '600' }}>
-                                    {formatPrice(maxPrice, currency)}
-                                  </span>
-                                </span>
-                              )
-                            })()}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-          )}
-        </div>
-
-        {/* Price View - Right Side */}
-        <div className="price-view team-price-view">
-          {gamePrices && gamePrices.game ? (
-            <div style={{ width: '100%', maxWidth: '900px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              <div style={{ textAlign: 'center', width: '100%', paddingBottom: '20px', borderBottom: '1px solid #30363d' }}>
-                <h2 style={{ margin: '0 0 8px 0', color: '#c9d1d9', fontSize: '1.75rem', fontWeight: '600' }}>
-                  {gamePrices.game.match_name}
-                </h2>
-                {gamePrices.game.date && (
-                  <div style={{ fontSize: '1rem', color: '#8b949e', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
-                    <span>📅</span>
-                    <span>{gamePrices.game.date}</span>
-                  </div>
-                )}
+            <div className="panel">
+              <div className="panel-head">
+                <h2>{t('priceHistory')}</h2>
+                <div className="segmented" role="group">
+                  {[['all', t('allTime')], ['7', t('last7')], ['30', t('last30')]].map(([k, label]) => (
+                    <button key={k} className={range.preset === k ? 'on' : ''} onClick={() => setRange({ preset: k, start: '', end: '' })}>{label}</button>
+                  ))}
+                </div>
+                <div className="date-range">
+                  <label>{t('from')} <input type="date" className="field" value={range.start} onChange={(e) => setRange({ ...range, preset: 'custom', start: e.target.value })} /></label>
+                  <label>{t('to')} <input type="date" className="field" value={range.end} onChange={(e) => setRange({ ...range, preset: 'custom', end: e.target.value })} /></label>
+                </div>
               </div>
 
-              {/* Price History Chart */}
-              {chartData.length > 0 && (
-                <div className="chart-section" style={{ width: '100%', background: '#161b22', border: '1px solid #30363d', borderRadius: '8px', padding: '20px', boxSizing: 'border-box' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
-                    <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#c9d1d9', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <span>📊</span>
-                      <span>Daily Price History</span>
-                      {gamePrices?.currency && (
-                        <span style={{ fontSize: '0.85rem', color: '#8b949e', fontWeight: '400', marginLeft: '8px' }}>
-                          ({getCurrencySymbol(gamePrices.currency)})
-                        </span>
-                      )}
-                    </h3>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
-                      {availableDates.length > 0 && (
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                          <label style={{ fontSize: '0.9rem', color: '#8b949e', fontWeight: '500' }}>Date Range:</label>
-
-                          <div id="date-dropdown-container" style={{ position: 'relative' }}>
-                            <button
-                              onClick={() => setDateFilterOpen(!dateFilterOpen)}
-                              style={{
-                                padding: '6px 12px',
-                                borderRadius: '6px',
-                                border: '1px solid #30363d',
-                                background: '#0d1117',
-                                color: '#c9d1d9',
-                                fontSize: '0.85rem',
-                                cursor: 'pointer',
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '8px',
-                                minWidth: '180px',
-                                justifyContent: 'space-between',
-                                transition: 'border-color 0.2s'
-                              }}
-                              onMouseEnter={(e) => e.currentTarget.style.borderColor = '#58a6ff'}
-                              onMouseLeave={(e) => e.currentTarget.style.borderColor = '#30363d'}
-                            >
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                <span>📅</span>
-                                <span>
-                                  {(!dateRange.start && !dateRange.end) ? 'All Time' :
-                                    (dateRange.start && dateRange.end) ? `${new Date(dateRange.start).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })} - ${new Date(dateRange.end).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}` :
-                                      dateRange.start ? `From ${new Date(dateRange.start).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}` :
-                                        `Until ${new Date(dateRange.end).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}`
-                                  }
-                                </span>
-                              </div>
-                              <span style={{ fontSize: '0.7rem', color: '#6e7681' }}>▼</span>
-                            </button>
-
-                            {dateFilterOpen && (
-                              <div style={{
-                                position: 'absolute',
-                                top: '100%',
-                                right: 0,
-                                marginTop: '4px',
-                                background: '#161b22',
-                                border: '1px solid #30363d',
-                                borderRadius: '6px',
-                                padding: '12px',
-                                zIndex: 1000,
-                                minWidth: '280px',
-                                boxShadow: '0 8px 24px rgba(0,0,0,0.5)'
-                              }}>
-                                <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
-                                  <button
-                                    onClick={() => {
-                                      setDateRange({ start: '', end: '' })
-                                      setDateFilterOpen(false)
-                                    }}
-                                    style={{
-                                      flex: 1,
-                                      padding: '6px',
-                                      background: (!dateRange.start && !dateRange.end) ? '#1f6feb' : '#21262d',
-                                      color: (!dateRange.start && !dateRange.end) ? '#fff' : '#c9d1d9',
-                                      border: '1px solid #30363d',
-                                      borderRadius: '4px',
-                                      cursor: 'pointer',
-                                      fontSize: '0.8rem'
-                                    }}
-                                  >
-                                    All Time
-                                  </button>
-                                  <button
-                                    onClick={() => {
-                                      const end = new Date().toISOString().split('T')[0]
-                                      const start = new Date(Date.now() - 7 * 86400000).toISOString().split('T')[0]
-                                      setDateRange({ start, end })
-                                    }}
-                                    style={{
-                                      flex: 1,
-                                      padding: '6px',
-                                      background: '#21262d',
-                                      color: '#c9d1d9',
-                                      border: '1px solid #30363d',
-                                      borderRadius: '4px',
-                                      cursor: 'pointer',
-                                      fontSize: '0.8rem'
-                                    }}
-                                  >
-                                    Last 7 Days
-                                  </button>
-                                </div>
-
-                                <div style={{ fontSize: '0.85rem', color: '#8b949e', marginBottom: '8px', fontWeight: '500' }}>Custom Range:</div>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                  <div style={{ flex: 1 }}>
-                                    <div style={{ fontSize: '0.75rem', color: '#6e7681', marginBottom: '4px' }}>From</div>
-                                    <input
-                                      type="date"
-                                      value={dateRange.start}
-                                      onChange={(e) => setDateRange({ ...dateRange, start: e.target.value })}
-                                      style={{
-                                        width: '100%',
-                                        padding: '8px',
-                                        background: '#0d1117',
-                                        border: '1px solid #30363d',
-                                        borderRadius: '4px',
-                                        color: '#c9d1d9',
-                                        fontSize: '0.85rem',
-                                        colorScheme: 'dark'
-                                      }}
-                                    />
-                                  </div>
-                                  <div style={{ flex: 1 }}>
-                                    <div style={{ fontSize: '0.75rem', color: '#6e7681', marginBottom: '4px' }}>To</div>
-                                    <input
-                                      type="date"
-                                      value={dateRange.end}
-                                      onChange={(e) => setDateRange({ ...dateRange, end: e.target.value })}
-                                      style={{
-                                        width: '100%',
-                                        padding: '8px',
-                                        background: '#0d1117',
-                                        border: '1px solid #30363d',
-                                        borderRadius: '4px',
-                                        color: '#c9d1d9',
-                                        fontSize: '0.85rem',
-                                        colorScheme: 'dark'
-                                      }}
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      )}
-                      {availableCategories.length > 0 && (
-                        <div style={{ position: 'relative' }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <label style={{ fontSize: '0.9rem', color: '#8b949e', fontWeight: '500' }}>Categories:</label>
-                            <div id="category-dropdown-container" style={{ position: 'relative', display: 'inline-block' }}>
-                              <button
-                                onClick={() => setCategoryFilterOpen(!categoryFilterOpen)}
-                                type="button"
-                                style={{
-                                  padding: '6px 10px',
-                                  borderRadius: '6px',
-                                  border: '1px solid #30363d',
-                                  background: '#0d1117',
-                                  color: '#c9d1d9',
-                                  fontSize: '0.85rem',
-                                  cursor: 'pointer',
-                                  transition: 'all 0.2s',
-                                  minWidth: '200px',
-                                  textAlign: 'left',
-                                  display: 'flex',
-                                  alignItems: 'center',
-                                  justifyContent: 'space-between',
-                                  gap: '8px'
-                                }}
-                                onMouseEnter={(e) => e.target.style.borderColor = '#58a6ff'}
-                                onMouseLeave={(e) => e.target.style.borderColor = '#30363d'}
-                              >
-                                <span>
-                                  {selectedCategories.length === availableCategories.length
-                                    ? 'All categories'
-                                    : selectedCategories.length === 0
-                                      ? 'No categories'
-                                      : `${selectedCategories.length} selected`}
-                                </span>
-                                <span style={{ fontSize: '0.7rem', color: '#6e7681' }}>▼</span>
-                              </button>
-                              {categoryFilterOpen && (
-                                <div
-                                  style={{
-                                    position: 'absolute',
-                                    top: '100%',
-                                    left: 0,
-                                    marginTop: '4px',
-                                    background: '#0d1117',
-                                    border: '1px solid #30363d',
-                                    borderRadius: '6px',
-                                    padding: '6px',
-                                    maxHeight: '250px',
-                                    overflowY: 'auto',
-                                    zIndex: 1000,
-                                    minWidth: '250px',
-                                    boxShadow: '0 8px 24px rgba(0,0,0,0.5)'
-                                  }}
-                                  onClick={(e) => e.stopPropagation()}
-                                >
-                                  <div style={{
-                                    padding: '4px 6px',
-                                    marginBottom: '6px',
-                                    borderBottom: '1px solid #30363d',
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center'
-                                  }}>
-                                    <span style={{ fontSize: '0.7rem', color: '#8b949e' }}>
-                                      {selectedCategories.length} of {availableCategories.length}
-                                    </span>
-                                    <button
-                                      onClick={() => {
-                                        if (selectedCategories.length === availableCategories.length) {
-                                          setSelectedCategories([])
-                                        } else {
-                                          setSelectedCategories([...availableCategories])
-                                        }
-                                      }}
-                                      style={{
-                                        background: 'transparent',
-                                        border: '1px solid #30363d',
-                                        color: '#58a6ff',
-                                        padding: '2px 6px',
-                                        borderRadius: '4px',
-                                        fontSize: '0.65rem',
-                                        cursor: 'pointer'
-                                      }}
-                                    >
-                                      {selectedCategories.length === availableCategories.length ? 'Deselect All' : 'Select All'}
-                                    </button>
-                                  </div>
-                                  {availableCategories.map(cat => {
-                                    const isSelected = selectedCategories.includes(cat)
-                                    return (
-                                      <label
-                                        key={cat}
-                                        style={{
-                                          display: 'flex',
-                                          alignItems: 'center',
-                                          padding: '4px 6px',
-                                          cursor: 'pointer',
-                                          borderRadius: '4px',
-                                          transition: 'background 0.15s',
-                                          backgroundColor: isSelected ? '#1f6feb20' : 'transparent',
-                                          fontSize: '0.8rem'
-                                        }}
-                                        onMouseEnter={(e) => {
-                                          if (!isSelected) e.currentTarget.style.backgroundColor = '#21262d'
-                                        }}
-                                        onMouseLeave={(e) => {
-                                          if (!isSelected) e.currentTarget.style.backgroundColor = 'transparent'
-                                        }}
-                                      >
-                                        <input
-                                          type="checkbox"
-                                          checked={isSelected}
-                                          onChange={(e) => {
-                                            if (e.target.checked) {
-                                              setSelectedCategories([...selectedCategories, cat])
-                                            } else {
-                                              setSelectedCategories(selectedCategories.filter(c => c !== cat))
-                                            }
-                                          }}
-                                          style={{
-                                            marginRight: '6px',
-                                            cursor: 'pointer',
-                                            accentColor: '#58a6ff'
-                                          }}
-                                        />
-                                        <span style={{
-                                          color: isSelected ? '#c9d1d9' : '#8b949e',
-                                          flex: 1
-                                        }}>
-                                          {cat}
-                                        </span>
-                                      </label>
-                                    )
-                                  })}
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                  {/* Close dropdown when clicking outside */}
-                  {categoryFilterOpen && (
-                    <div
-                      style={{
-                        position: 'fixed',
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        zIndex: 999
-                      }}
-                      onClick={() => setCategoryFilterOpen(false)}
-                    />
-                  )}
-                  {(dateRange.start || dateRange.end) && (
-                    <div style={{ marginBottom: '12px', padding: '8px 12px', background: '#1f6feb20', border: '1px solid #1f6feb40', borderRadius: '4px', fontSize: '0.85rem', color: '#58a6ff' }}>
-                      📍 Showing data from: <strong>{dateRange.start || 'Beginning'}</strong> to <strong>{dateRange.end || 'Now'}</strong>
-                    </div>
-                  )}
-                  {(!dateRange.start && !dateRange.end) && availableDates.length > 1 && (
-                    <div style={{ marginBottom: '12px', padding: '8px 12px', background: '#21262d', border: '1px solid #30363d', borderRadius: '4px', fontSize: '0.85rem', color: '#8b949e' }}>
-                      💡 Showing daily averages across all dates. Use the date selector to focus on a specific day.
-                    </div>
-                  )}
-                  <div className="chart-container" style={{ width: '100%', height: '450px', minHeight: '450px' }}>
-                    <ResponsiveContainer width="100%" height="100%">
-                      <AreaChart data={chartData} margin={{ top: 10, right: 20, left: 10, bottom: 10 }}>
-                        <defs>
-                          {Array.from(new Set(chartData.flatMap(d => Object.keys(d).filter(k => k !== 'time')))).map((cat, i) => (
-                            <linearGradient key={cat} id={`grad${i}`} x1="0" y1="0" x2="0" y2="1">
-                              <stop offset="0%" stopColor={colors[i % colors.length]} stopOpacity={0.4} />
-                              <stop offset="50%" stopColor={colors[i % colors.length]} stopOpacity={0.12} />
-                              <stop offset="100%" stopColor={colors[i % colors.length]} stopOpacity={0} />
-                            </linearGradient>
-                          ))}
-                        </defs>
-                        <CartesianGrid strokeDasharray="2 4" stroke="#21262d" opacity={0.4} vertical={false} />
-                        <XAxis
-                          dataKey="time"
-                          stroke="#6e7681"
-                          tick={{ fontSize: 10, fill: '#8b949e' }}
-                          axisLine={{ stroke: '#30363d' }}
-                          tickLine={{ stroke: '#30363d' }}
-                          angle={-45}
-                          textAnchor="end"
-                          height={80}
-                        />
-                        <YAxis
-                          stroke="#6e7681"
-                          tick={{ fontSize: 9, fill: '#8b949e' }}
-                          width={45}
-                          axisLine={{ stroke: '#30363d' }}
-                          tickLine={{ stroke: '#30363d' }}
-                          tickFormatter={(value) => {
-                            const currency = gamePrices?.currency || selectedTeam?.currency || 'USD'
-                            const symbol = getCurrencySymbol(currency)
-                            return `${symbol}${value.toLocaleString()}`
-                          }}
-                        />
-                        <Tooltip
-                          contentStyle={{
-                            backgroundColor: '#0d1117',
-                            border: '1px solid #30363d',
-                            borderRadius: '6px',
-                            boxShadow: '0 4px 12px rgba(0,0,0,0.5)',
-                            padding: '8px 10px'
-                          }}
-                          itemStyle={{ color: '#c9d1d9', fontSize: '11px', marginBottom: '2px', padding: '2px 0' }}
-                          labelStyle={{ color: '#f0f6fc', fontWeight: '600', fontSize: '11px', marginBottom: '4px' }}
-                          formatter={(value, name) => {
-                            if (!value) return null
-                            const currency = gamePrices?.currency || selectedTeam?.currency || 'USD'
-                            const symbol = getCurrencySymbol(currency)
-                            // Show only category name (remove " - Block X" part for cleaner display)
-                            const displayName = name.split(' - Block ')[0]
-                            return [`${symbol}${value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, displayName]
-                          }}
-                          labelFormatter={(label) => label}
-                          separator=": "
-                        />
-                        {Array.from(new Set(chartData.flatMap(d => Object.keys(d).filter(k => k !== 'time')))).map((cat, i) => (
-                          <Area
-                            key={cat}
-                            name={cat}
-                            type="basis"
-                            dataKey={cat}
-                            stroke={colors[i % colors.length]}
-                            strokeWidth={2}
-                            fill={`url(#grad${i})`}
-                            fillOpacity={0.3}
-                            dot={{ fill: colors[i % colors.length], r: 4, strokeWidth: 2, stroke: '#fff', display: 'block' }}
-                            activeDot={{ r: 7, fill: colors[i % colors.length], stroke: '#fff', strokeWidth: 2.5, filter: `drop-shadow(0 0 4px ${colors[i % colors.length]})` }}
-                            connectNulls
-                          />
-                        ))}
-                      </AreaChart>
-                    </ResponsiveContainer>
-                  </div>
+              {categories.length > 0 && (
+                <div className="legend" role="group" aria-label={t('categories')}>
+                  {categories.map((c, i) => (
+                    <button key={c} className={hidden.includes(c) ? 'legend-item off' : 'legend-item'} aria-pressed={!hidden.includes(c)}
+                      onClick={() => setHidden(hidden.includes(c) ? hidden.filter((x) => x !== c) : [...hidden, c])}>
+                      <span className="swatch" style={{ background: SERIES_COLORS[i % SERIES_COLORS.length] }} />{c}
+                    </button>
+                  ))}
+                  <button className="link-btn" onClick={() => setHidden(hidden.length ? [] : categories)}>
+                    {hidden.length ? t('selectAll') : t('clear')}
+                  </button>
                 </div>
               )}
 
-              {/* Category Summary Table - Compact */}
-              {gamePrices && gamePrices.latest_prices && Object.keys(gamePrices.latest_prices).length > 0 && (
-                <div className="chart-section" style={{ width: '100%', background: '#161b22', border: '1px solid #30363d', borderRadius: '8px', padding: '20px', boxSizing: 'border-box' }}>
-                  <h3 style={{ margin: '0 0 12px 0', fontSize: '0.95rem', color: '#c9d1d9', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <span>📋</span>
-                    <span>Category Price Summary</span>
-                    {gamePrices?.currency && (
-                      <span style={{ fontSize: '0.75rem', color: '#8b949e', fontWeight: '400', marginLeft: '6px' }}>
-                        ({getCurrencySymbol(gamePrices.currency)})
-                      </span>
-                    )}
-                  </h3>
-                  <div style={{ overflowX: 'auto', maxHeight: '400px', overflowY: 'auto' }}>
-                    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.8rem' }}>
-                      <thead>
-                        <tr style={{ borderBottom: '1px solid #30363d' }}>
-                          <th style={{ padding: '6px 8px', textAlign: 'left', color: '#8b949e', fontWeight: '600', fontSize: '0.7rem', textTransform: 'uppercase' }}>Category</th>
-                          <th style={{ padding: '6px 8px', textAlign: 'right', color: '#8b949e', fontWeight: '600', fontSize: '0.7rem', textTransform: 'uppercase' }}>Price Range</th>
-                          <th style={{ padding: '6px 8px', textAlign: 'right', color: '#8b949e', fontWeight: '600', fontSize: '0.7rem', textTransform: 'uppercase' }}>Listings</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {Object.entries(gamePrices.latest_prices).map(([category, priceData], idx) => {
-                          if (!priceData && priceData !== 0) return null
-
-                          let catMin, catMax, totalListings, blockDetails
-
-                          // Check format: {category: lowest_price} (newest), {category: {min, max, count}} (old new), or {category: {block: price}} (oldest)
-                          if (typeof priceData === 'number') {
-                            // Newest format: {category: lowest_price} - just the lowest price
-                            catMin = catMax = priceData
-                            totalListings = 1
-                            blockDetails = [{ block: 'All', min: priceData, max: priceData, count: 1 }]
-                          } else if (priceData && typeof priceData === 'object' && ('min' in priceData || 'max' in priceData)) {
-                            // Old new format: {category: {min, max, count}}
-                            catMin = priceData.min || priceData._price || 0
-                            catMax = priceData.max || priceData.min || priceData._price || 0
-                            totalListings = priceData.count || 1
-                            blockDetails = [{ block: 'All', min: catMin, max: catMax, count: totalListings }]
-                          } else if (priceData && typeof priceData === 'object') {
-                            // Oldest block-based format: {category: {block: price}}
-                            const blockEntries = Object.entries(priceData)
-                            if (blockEntries.length === 0) return null
-
-                            catMin = Infinity
-                            catMax = -Infinity
-                            totalListings = 0
-
-                            blockDetails = blockEntries.map(([block, price]) => {
-                              let min, max, count
-                              if (typeof price === 'number') {
-                                min = max = price
-                                count = 1
-                              } else if (price && typeof price === 'object' && 'min' in price) {
-                                min = price.min
-                                max = price.max || price.min
-                                count = price.count || 1
-                              } else {
-                                return null
-                              }
-
-                              catMin = Math.min(catMin, min)
-                              catMax = Math.max(catMax, max)
-                              totalListings += count
-
-                              return { block, min, max, count }
-                            }).filter(Boolean)
-
-                            if (catMin === Infinity) return null
-                          } else {
-                            return null
-                          }
-
-                          const currency = gamePrices?.currency || selectedTeam?.currency || 'USD'
-
-                          return (
-                            <tr
-                              key={category}
-                              style={{ borderBottom: '1px solid #21262d', transition: 'background 0.2s', cursor: 'pointer' }}
-                              onMouseEnter={(e) => e.currentTarget.style.background = '#1c2128'}
-                              onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
-                              onClick={() => {
-                                setModalCategory({
-                                  category,
-                                  blocks: blockDetails,
-                                  min: catMin,
-                                  max: catMax,
-                                  totalListings: totalListings
-                                })
-                              }}
-                            >
-                              <td style={{ padding: '6px 8px', color: '#c9d1d9', fontWeight: '500', fontSize: '0.8rem' }}>{category}</td>
-                              <td style={{ padding: '6px 8px', textAlign: 'right', color: '#c9d1d9', fontSize: '0.8rem' }}>
-                                {catMin === catMax ? (
-                                  <span style={{ fontWeight: '600', color: '#58a6ff' }}>
-                                    {formatPrice(catMin, currency)}
-                                  </span>
-                                ) : (
-                                  <span>
-                                    <span style={{ fontWeight: '600', color: '#56d364' }}>
-                                      {formatPrice(catMin, currency)}
-                                    </span>
-                                    <span style={{ margin: '0 4px', color: '#6e7681' }}>→</span>
-                                    <span style={{ fontWeight: '600', color: '#ff7b72' }}>
-                                      {formatPrice(catMax, currency)}
-                                    </span>
-                                  </span>
-                                )}
-                              </td>
-                              <td style={{ padding: '6px 8px', textAlign: 'right', color: '#8b949e', fontSize: '0.75rem' }}>
-                                {totalListings}
-                              </td>
-                            </tr>
-                          )
-                        })}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              )}
-
-              {chartData.length === 0 && gamePrices && gamePrices.game && (
-                <div style={{ padding: '40px', textAlign: 'center', color: '#6e7681', fontSize: '1rem' }}>
-
-                  <p>
-                    {(dateRange.start || dateRange.end)
-                      ? `No price data available for the selected range (${dateRange.start || '...'} - ${dateRange.end || 'Now'}).`
-                      : 'No price history available yet.'}
-                  </p>
-                  <p style={{ fontSize: '0.85rem', marginTop: '8px' }}>
-                    {(dateRange.start || dateRange.end)
-                      ? 'Try clearing the date filter to view all history.'
-                      : 'History will appear here as more prices are collected.'}
-                  </p>
-                </div>
-              )}
-
-              {/* Category Details Modal */}
-              {modalCategory && (
-                <div
-                  style={{
-                    position: 'fixed',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    zIndex: 2000,
-                    padding: '20px'
-                  }}
-                  onClick={() => setModalCategory(null)}
-                >
-                  <div
-                    style={{
-                      background: '#161b22',
-                      border: '1px solid #30363d',
-                      borderRadius: '8px',
-                      padding: '20px',
-                      maxWidth: '600px',
-                      width: '100%',
-                      maxHeight: '80vh',
-                      overflowY: 'auto',
-                      boxShadow: '0 8px 32px rgba(0,0,0,0.5)'
-                    }}
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-                      <h3 style={{ margin: 0, fontSize: '1.2rem', color: '#c9d1d9', fontWeight: '600' }}>
-                        {modalCategory.category}
-                      </h3>
-                      <button
-                        onClick={() => setModalCategory(null)}
-                        style={{
-                          background: 'transparent',
-                          border: 'none',
-                          color: '#8b949e',
-                          fontSize: '1.5rem',
-                          cursor: 'pointer',
-                          padding: '0',
-                          width: '24px',
-                          height: '24px',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center'
-                        }}
-                      >
-                        ×
-                      </button>
-                    </div>
-
-                    <div style={{ marginBottom: '16px', padding: '12px', background: '#0d1117', borderRadius: '6px', border: '1px solid #30363d' }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                        <span style={{ color: '#8b949e', fontSize: '0.85rem' }}>Price Range:</span>
-                        <span style={{ color: '#c9d1d9', fontWeight: '600' }}>
-                          {(() => {
-                            const currency = gamePrices?.currency || selectedTeam?.currency || 'USD'
-                            return modalCategory.min === modalCategory.max
-                              ? formatPrice(modalCategory.min, currency)
-                              : `${formatPrice(modalCategory.min, currency)} → ${formatPrice(modalCategory.max, currency)}`
-                          })()}
-                        </span>
-                      </div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <span style={{ color: '#8b949e', fontSize: '0.85rem' }}>Total Listings:</span>
-                        <span style={{ color: '#c9d1d9', fontWeight: '600' }}>{modalCategory.totalListings}</span>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 style={{ margin: '0 0 12px 0', fontSize: '0.9rem', color: '#8b949e', fontWeight: '600', textTransform: 'uppercase' }}>
-                        Blocks ({modalCategory.blocks.length})
-                      </h4>
-                      <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
-                        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem' }}>
-                          <thead>
-                            <tr style={{ borderBottom: '1px solid #30363d' }}>
-                              <th style={{ padding: '8px', textAlign: 'left', color: '#8b949e', fontWeight: '600', fontSize: '0.75rem' }}>Block</th>
-                              <th style={{ padding: '8px', textAlign: 'right', color: '#8b949e', fontWeight: '600', fontSize: '0.75rem' }}>Price Range</th>
-                              <th style={{ padding: '8px', textAlign: 'right', color: '#8b949e', fontWeight: '600', fontSize: '0.75rem' }}>Listings</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {modalCategory.blocks.map((block, idx) => {
-                              const currency = gamePrices?.currency || selectedTeam?.currency || 'USD'
-                              return (
-                                <tr key={idx} style={{ borderBottom: '1px solid #21262d' }}>
-                                  <td style={{ padding: '8px', color: '#c9d1d9' }}>{block.block}</td>
-                                  <td style={{ padding: '8px', textAlign: 'right', color: '#c9d1d9' }}>
-                                    {block.min === block.max
-                                      ? formatPrice(block.min, currency)
-                                      : `${formatPrice(block.min, currency)} → ${formatPrice(block.max, currency)}`
-                                    }
-                                  </td>
-                                  <td style={{ padding: '8px', textAlign: 'right', color: '#8b949e' }}>{block.count}</td>
-                                </tr>
-                              )
-                            })}
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
+              {chartData.length === 0 ? (
+                <div className="empty small">{t('noHistory')}</div>
+              ) : (
+                <div className="chart" dir="ltr">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart data={chartData} margin={{ top: 8, right: 16, left: 8, bottom: 0 }}>
+                      <CartesianGrid stroke="var(--line)" strokeDasharray="3 5" vertical={false} />
+                      <XAxis dataKey="day" tickFormatter={fmtDay} stroke="var(--faint)" tick={{ fontSize: 12, fill: 'var(--muted)' }} minTickGap={24} />
+                      <YAxis tickFormatter={(v) => money(v)} stroke="var(--faint)" tick={{ fontSize: 12, fill: 'var(--muted)' }} width={72} />
+                      <Tooltip
+                        labelFormatter={fmtDay}
+                        formatter={(v, name) => [money(v), name]}
+                        contentStyle={{ background: 'var(--surface-2)', border: '1px solid var(--line)', borderRadius: 8 }}
+                        labelStyle={{ color: 'var(--text-strong)', fontWeight: 600 }}
+                        itemStyle={{ padding: 0 }}
+                      />
+                      {categories.map((c, i) => !hidden.includes(c) && (
+                        <Line key={c} dataKey={c} name={c} type="monotone" stroke={SERIES_COLORS[i % SERIES_COLORS.length]}
+                          strokeWidth={2} dot={chartData.length < 20} connectNulls isAnimationActive={false} />
+                      ))}
+                    </LineChart>
+                  </ResponsiveContainer>
                 </div>
               )}
             </div>
-          ) : selectedGame !== null ? (
-            <div className="no-data" style={{ padding: '40px', textAlign: 'center' }}>
-              <p>Loading prices...</p>
-              <p style={{ fontSize: '12px', color: '#6e7681', marginTop: '10px' }}>
-                {gamePrices ? 'No price data available' : 'Fetching price data...'}
-              </p>
+
+            {categoryRows.length > 0 && (
+              <div className="panel">
+                <h2>{t('categoryTable')}</h2>
+                <table className="data-table">
+                  <thead>
+                    <tr><th>{t('category')}</th><th className="num">{t('priceRange')}</th><th className="num">{t('listings')}</th></tr>
+                  </thead>
+                  <tbody>
+                    {categoryRows.map((r) => (
+                      <tr key={r.category} className={r.blocks.length ? 'clickable' : ''}
+                        onClick={() => r.blocks.length && setModal(r)}
+                        onKeyDown={(e) => e.key === 'Enter' && r.blocks.length && setModal(r)}
+                        tabIndex={r.blocks.length ? 0 : undefined}>
+                        <td>{r.category}</td>
+                        <td className="num">{range2(r)}</td>
+                        <td className="num">{r.count}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </>
+        )}
+      </section>
+
+      {modal && (
+        <div className="modal-backdrop" onClick={() => setModal(null)}>
+          <div className="modal" role="dialog" aria-modal="true" aria-label={modal.category} onClick={(e) => e.stopPropagation()}>
+            <div className="modal-head">
+              <h2>{modal.category}</h2>
+              <button className="icon-btn" onClick={() => setModal(null)} aria-label={t('close')} autoFocus>×</button>
             </div>
-          ) : (
-            <div className="no-data" style={{ padding: '40px', textAlign: 'center' }}>
-              <p>Select a game from the list to view prices</p>
-            </div>
-          )}
+            <p className="muted">{range2(modal)} · {modal.count} {t('listings')}</p>
+            <table className="data-table">
+              <thead><tr><th>{t('block')}</th><th className="num">{t('priceRange')}</th><th className="num">{t('listings')}</th></tr></thead>
+              <tbody>
+                {modal.blocks.map((b) => (
+                  <tr key={b.block}><td>{b.block}</td><td className="num">{range2(b)}</td><td className="num">{b.count}</td></tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }
-
-export default TeamView
-

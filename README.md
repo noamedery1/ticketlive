@@ -7,41 +7,39 @@ dashboard charts it.
 ## How it works
 
 ```
-auto_scraper*.py  ──>  prices.json.gz / prices_ftn.json.gz  ──>  FastAPI  ──>  React dashboard
-   (Selenium)              (price history)                    (RUN_SERVER_ONLY.py)
+scraper_ftn_teams.py  ──>  ftn_teams_data.json  ──>  FastAPI  ──>  React dashboard
+  (Selenium, FTN)            (price history)      (RUN_SERVER_ONLY.py)
 ```
 
-- **Scrapers** drive headless Chrome via Selenium. `scrape_game_prices()` is
-  shared, so a team added to `teams_list.json` is picked up automatically —
-  currently Arsenal (GBP), FC Barcelona (EUR) and Real Madrid (EUR).
-  `auto_scraper_worldcup.py` handles World Cup fixtures.
-- **Price history** lives in gzipped JSON (`prices.json.gz`,
-  `prices_ftn.json.gz`) to stay under GitHub's file size limits. The
-  uncompressed `prices.json` is gitignored.
+- **Scrapers** drive Chrome via Selenium against FootballTicketNet. Every team
+  in `teams_list.json` is picked up automatically — currently Arsenal (GBP),
+  FC Barcelona (EUR), Real Madrid (EUR) and the Champions League.
+  `auto_scraper_teams.py` runs them on a schedule and pushes the data to git.
 - **Server:** FastAPI + uvicorn (`RUN_SERVER_ONLY.py`), deployed to Railway.
-  It serves the API and the built frontend, and runs no scrapers.
-- **Frontend:** React + axios + Recharts (`frontend/`).
+  Serves the API and the built frontend; runs no scrapers.
+- **Frontend:** React + Recharts (`frontend/`), English and Hebrew.
+  - *Overview* — every upcoming game, cheapest ticket, 7-day change.
+  - *Teams* — per-game price history by category.
+  - *Offers* — paste sellers' WhatsApp offers, parse, search, export to Excel.
 
 ## Running
 
-Everything (scrapers + server):
-
-```bash
-python RUN_EVERYTHING.py
-```
-
-Server only — reads existing price history, scrapes nothing:
+Server (reads existing data, scrapes nothing):
 
 ```bash
 pip install -r requirements_server.txt
 python RUN_SERVER_ONLY.py
 ```
 
-Frontend:
+Frontend dev server (proxies the API to localhost:8000):
 
 ```bash
 cd frontend && npm install && npm run dev
 ```
+
+Scrapers: `RUN_ALL_TEAMS.bat` / `RUN_ALL_TEAMS_ONCE.bat`.
+
+Smoke test: `python test_server.py`
 
 ## Configuration
 
@@ -49,8 +47,9 @@ cd frontend && npm install && npm run dev
 cp .env.example .env
 ```
 
-Then set `GEMINI_API_KEY` — get one at
-[Google AI Studio](https://aistudio.google.com/apikey).
+- `ADMIN_PASSWORD` — password for the Offers tab and `/api/tickets/*`
+  (browser asks for it; any username). Unset = offers API disabled.
+  Set it in Railway too.
 
 `.env` is gitignored and must stay that way. An earlier commit tracked it
 and exposed a live key; that key has been revoked. If you leak another one,

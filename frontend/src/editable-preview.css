@@ -1,20 +1,20 @@
 /* Editable Parse Preview Styles */
 .match-group {
     margin-bottom: 20px;
-    border: 1px solid #30363d;
+    border: 1px solid var(--line);
     border-radius: 6px;
-    background: #0d1117;
+    background: var(--bg);
     overflow: hidden;
 }
 
 .group-title {
     margin: 0;
     padding: 8px 12px;
-    background: #21262d;
+    background: var(--surface-2);
     font-size: 13px;
     font-weight: 600;
-    color: #c9d1d9;
-    border-bottom: 1px solid #30363d;
+    color: var(--text);
+    border-bottom: 1px solid var(--line);
 }
 
 .editable-table {
@@ -28,24 +28,24 @@
 .edit-input {
     width: 100%;
     padding: 6px;
-    background: #161b22;
-    border: 1px solid #30363d;
+    background: var(--surface);
+    border: 1px solid var(--line);
     border-radius: 4px;
-    color: #c9d1d9;
+    color: var(--text);
     font-size: 13px;
     box-sizing: border-box;
 }
 
 .edit-input:focus {
-    border-color: #58a6ff;
+    border-color: var(--accent);
     outline: none;
-    background: #0d1117;
+    background: var(--bg);
 }
 
 .delete-line-btn {
     background: transparent;
     border: none;
-    color: #f85149;
+    color: var(--bad);
     cursor: pointer;
     font-size: 18px;
     padding: 2px 6px;
@@ -64,23 +64,23 @@
     padding: 4px 8px;
     font-size: 12px;
     border-radius: 4px;
-    background: #21262d;
-    border: 1px solid #30363d;
-    color: #c9d1d9;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    color: var(--text);
     cursor: pointer;
 }
 
 .btn-small:hover {
-    background: #30363d;
-    border-color: #8b949e;
+    background: var(--line);
+    border-color: var(--muted);
 }
 
 .empty-lines {
     padding: 20px;
     text-align: center;
-    color: #8b949e;
+    color: var(--muted);
     font-style: italic;
-    background: #161b22;
-    border: 1px solid #30363d;
+    background: var(--surface);
+    border: 1px solid var(--line);
     border-radius: 6px;
 }

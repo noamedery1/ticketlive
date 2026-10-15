@@ -1,21 +1,20 @@
 """
 Railway Server - No Scrapers
-Only serves the API and frontend, reads from prices.json and prices_ftn.json.gz
+Serves the API and the built frontend. Reads team prices from ftn_teams_data.json.
 """
 import uvicorn
 import json
 import os
-import gzip
 import re
 import sys
+import base64
+import secrets
 from fastapi import FastAPI, Request, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, JSONResponse
 from pydantic import BaseModel
 from typing import Optional, List
 import subprocess
-from starlette.middleware.base import BaseHTTPMiddleware
 import threading
 
 # Fix encoding for Windows
@@ -27,59 +26,51 @@ if sys.platform == 'win32':
 # ==========================================
 # ⚙️ CONFIGURATION
 # ==========================================
-DATA_FILE_VIAGOGO = 'prices.json.gz'
-DATA_FILE_VIAGOGO_LEGACY = 'prices.json'
-DATA_FILE_FTN = 'prices_ftn.json.gz'
-DATA_FILE_FTN_LEGACY = 'prices_ftn.json'
-GAMES_FILE = 'all_games_to_scrape.json'
 TEAMS_DATA_FILE = 'ftn_teams_data.json'
-# Railway sets PORT dynamically - use whatever Railway provides
-# Railway will set PORT environment variable automatically
-# Railway will set PORT environment variable automatically
 from dotenv import load_dotenv
 load_dotenv()
 
-PORT = int(os.environ.get('PORT', '8000'))  # Railway always sets PORT, but keep default for local dev
-
-# Gemini API Key (User Provided)
-# Gemini API Key (User Provided)
-# os.environ['GEMINI_API_KEY'] = '...' # Key removed for security. Please set GEMINI_API_KEY env var.
+PORT = int(os.environ.get('PORT', '8000'))  # Railway sets PORT
+# Password for the offers manager (/api/tickets/*). Unset = offers API disabled.
+ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', '')
 
 # ==========================================
 # FastAPI App
 # ==========================================
-from contextlib import asynccontextmanager
+app = FastAPI(title="TicketLive API")
 
-# Lifespan event handler (replaces deprecated on_event)
-@asynccontextmanager
-async def lifespan(app_instance: FastAPI):
-    # Startup - Railway handles port/IP configuration
-    print('[STARTUP] FastAPI application started', flush=True)
+SECURITY_HEADERS = {
+    'X-Content-Type-Options': 'nosniff',
+    'X-Frame-Options': 'DENY',
+    'Referrer-Policy': 'same-origin',
+}
+
+
+def _authorized(request: Request) -> bool:
+    """HTTP Basic auth; any username, password must equal ADMIN_PASSWORD."""
+    header = request.headers.get('authorization', '')
+    if not header.startswith('Basic '):
+        return False
     try:
-        yield
-    finally:
-        # Shutdown (if needed)
-        print('[SHUTDOWN] FastAPI application shutting down', flush=True)
+        _user, _, password = base64.b64decode(header[6:]).decode('utf-8').partition(':')
+    except Exception:
+        return False
+    return secrets.compare_digest(password.encode(), ADMIN_PASSWORD.encode())
 
-app = FastAPI(title="Viagogo Monitor API", lifespan=lifespan)
 
-# Request logging middleware
-class LoggingMiddleware(BaseHTTPMiddleware):
-    async def dispatch(self, request: Request, call_next):
-        print(f'[REQUEST] {request.method} {request.url.path}')
-        response = await call_next(request)
-        print(f'[RESPONSE] {request.method} {request.url.path} -> {response.status_code}')
-        return response
-
-app.add_middleware(LoggingMiddleware)
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=['*'],
-    allow_credentials=True,
-    allow_methods=['*'],
-    allow_headers=['*'],
-)
+@app.middleware('http')
+async def guard(request: Request, call_next):
+    # Offers data (sellers, cost prices) is private.
+    if request.url.path.startswith('/api/tickets'):
+        if not ADMIN_PASSWORD:
+            return JSONResponse({'detail': 'Offers manager disabled: set ADMIN_PASSWORD'}, status_code=503)
+        if not _authorized(request):
+            return JSONResponse({'detail': 'Authentication required'}, status_code=401,
+                                headers={'WWW-Authenticate': 'Basic realm="TicketLive"'})
+    response = await call_next(request)
+    for k, v in SECURITY_HEADERS.items():
+        response.headers.setdefault(k, v)
+    return response
 
 # ---------------------------------------------------------
 # JSON Data Utility
@@ -87,236 +78,80 @@ app.add_middleware(
 _DATA_CACHE: dict[str, dict[str, object]] = {}
 _DATA_CACHE_LOCK = threading.Lock()
 
-def load_data(file_path):
-    if not os.path.exists(file_path): 
+def load_data(file_path, default=None):
+    """Load JSON, cached by file mtime so updated datasets refresh."""
+    if not os.path.exists(file_path):
         print(f'[WARN] File not found: {file_path}')
-        return []
+        return default
     try:
-        # Cache file contents to avoid re-loading large JSON on every request.
-        # Keyed by file mtime so updated datasets eventually refresh.
-        try:
-            mtime = os.path.getmtime(file_path)
-        except Exception:
-            mtime = None
-
+        mtime = os.path.getmtime(file_path)
         with _DATA_CACHE_LOCK:
             cached = _DATA_CACHE.get(file_path)
-            if cached and cached.get('mtime') == mtime:
-                return cached.get('data', [])
-
-        if file_path.endswith('.gz'):
-            with gzip.open(file_path, 'rt', encoding='utf-8') as f:
-                data = json.load(f)
-            with _DATA_CACHE_LOCK:
-                _DATA_CACHE[file_path] = {'mtime': mtime, 'data': data}
-            return data
-        else:
-            with open(file_path, 'r', encoding='utf-8') as f:
-                data = json.load(f)
-            with _DATA_CACHE_LOCK:
-                _DATA_CACHE[file_path] = {'mtime': mtime, 'data': data}
-            return data
+            if cached and cached['mtime'] == mtime:
+                return cached['data']
+        with open(file_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        with _DATA_CACHE_LOCK:
+            _DATA_CACHE[file_path] = {'mtime': mtime, 'data': data}
+        return data
     except Exception as e:
         print(f'[ERROR] Failed to load {file_path}: {e}')
-        return []
+        return default
 
 # ---------------------------------------------------------
-# Indexing / caching for fast /history lookups
+# Price helpers
 # ---------------------------------------------------------
-_GAMES_MATCHNUM_MAP = {'file': None, 'mtime': None, 'map': {}}
-_VIAGOGO_INDEX = {'file': None, 'mtime': None, 'by_id': {}, 'by_clean': {}}
-_FTN_INDEX = {'file': None, 'mtime': None, 'by_matchnum': {}}
-_INDEX_LOCK = threading.Lock()
+def _min_price(value):
+    """Lowest price in any stored shape: number, {min,max,count}, or {block: price}."""
+    if isinstance(value, (int, float)):
+        return value if value > 0 else None
+    if isinstance(value, dict):
+        if 'min' in value:
+            return _min_price(value['min'])
+        found = [p for p in (_min_price(v) for v in value.values()) if p is not None]
+        return min(found) if found else None
+    return None
 
-def _clean_viagogo_url(url: str) -> str:
-    # Match server's old logic: drop query params and anything after '&'
-    return (url or '').split('?')[0].split('&')[0]
 
-def _ensure_games_matchnum_map():
-    if not os.path.exists(GAMES_FILE):
-        return {}
+def _summarize_series(series, window_hours=24 * 7):
+    """Current price, change vs `window_hours` before the latest reading, and a sparkline.
+
+    The window is measured from the most recent reading (not wall-clock),
+    so the change stays meaningful when scraping pauses.
+    """
+    from datetime import datetime, timedelta
+    if not series:
+        return None
+    current_ts, current = series[-1]
+    prev = None
     try:
-        mtime = os.path.getmtime(GAMES_FILE)
-    except Exception:
-        mtime = None
+        cutoff = datetime.fromisoformat(current_ts) - timedelta(hours=window_hours)
+        for ts, p in reversed(series):
+            if datetime.fromisoformat(ts) <= cutoff:
+                prev = p
+                break
+    except ValueError:
+        pass
+    if prev is None:
+        prev = series[0][1]
 
-    with _INDEX_LOCK:
-        if _GAMES_MATCHNUM_MAP['file'] == GAMES_FILE and _GAMES_MATCHNUM_MAP['mtime'] == mtime:
-            return _GAMES_MATCHNUM_MAP['map']
+    change = current - prev
+    pct = (change / prev * 100.0) if prev else 0.0
 
-        games_by_url = {}
-        with open(GAMES_FILE, 'r', encoding='utf-8') as f:
-            games = json.load(f)
-        for g in games:
-            u = (g.get('url') or '').split('?')[0]
-            mn = re.search(r'Match (\d+)', g.get('match_name', ''), re.IGNORECASE)
-            if u and mn:
-                games_by_url[u] = mn.group(1)
+    prices = [p for _, p in series]
+    if len(prices) > 30:
+        step = len(prices) / 30.0
+        prices = [prices[min(int(i * step), len(prices) - 1)] for i in range(30)]
 
-        _GAMES_MATCHNUM_MAP.update({'file': GAMES_FILE, 'mtime': mtime, 'map': games_by_url})
-        return games_by_url
-
-def _ensure_viagogo_index(viagogo_file: str):
-    try:
-        mtime = os.path.getmtime(viagogo_file)
-    except Exception:
-        mtime = None
-
-    with _INDEX_LOCK:
-        if _VIAGOGO_INDEX['file'] == viagogo_file and _VIAGOGO_INDEX['mtime'] == mtime:
-            return _VIAGOGO_INDEX['by_id'], _VIAGOGO_INDEX['by_clean']
-
-        data = load_data(viagogo_file)
-        by_id = {}
-        by_clean = {}
-        for row in data:
-            stored_clean = _clean_viagogo_url(row.get('match_url', ''))
-            if not stored_clean:
-                continue
-            m = re.search(r'/(E-\d+)', stored_clean)
-            if m:
-                by_id.setdefault(m.group(1), []).append(row)
-            by_clean.setdefault(stored_clean, []).append(row)
-
-        _VIAGOGO_INDEX.update({'file': viagogo_file, 'mtime': mtime, 'by_id': by_id, 'by_clean': by_clean})
-        return by_id, by_clean
-
-def _ensure_ftn_index(ftn_file: str):
-    try:
-        mtime = os.path.getmtime(ftn_file)
-    except Exception:
-        mtime = None
-
-    with _INDEX_LOCK:
-        if _FTN_INDEX['file'] == ftn_file and _FTN_INDEX['mtime'] == mtime:
-            return _FTN_INDEX['by_matchnum']
-
-        data = load_data(ftn_file)
-        by_matchnum = {}
-        for row in data:
-            mn = re.search(r'Match (\d+)', row.get('match_name', ''), re.IGNORECASE)
-            if mn:
-                by_matchnum.setdefault(mn.group(1), []).append(row)
-
-        _FTN_INDEX.update({'file': ftn_file, 'mtime': mtime, 'by_matchnum': by_matchnum})
-        return by_matchnum
-
-# ---------------------------------------------------------
-# API Endpoints
-# ---------------------------------------------------------
-@app.get('/matches')
-def get_matches():
-    try:
-        print('[API] /matches endpoint called')
-        if not os.path.exists(GAMES_FILE): 
-            print(f'[WARN] {GAMES_FILE} not found')
-            return []
-        with open(GAMES_FILE, 'r', encoding='utf-8') as f: 
-            games = json.load(f)
-        
-        def get_match_number(match_name):
-            m = re.search(r'Match (\d+)', match_name)
-            return int(m.group(1)) if m else 9999
-
-        matches_list = [{'match_name': g['match_name'], 'match_url': g['url']} for g in games]
-        matches_list.sort(key=lambda x: get_match_number(x['match_name']))
-        print(f'[API] Returning {len(matches_list)} matches')
-        return matches_list
-    except Exception as e:
-        print(f'[ERROR] API Error: {e}')
-        import traceback
-        traceback.print_exc()
-        return []
-
-@app.get('/history')
-def get_history(match_url: str):
-    try:
-        print(f"[API] History Request for URL: {match_url[:50]}...")
-        
-        # 1. LOAD VIAGOGO DATA
-        viagogo_data_file = DATA_FILE_VIAGOGO if os.path.exists(DATA_FILE_VIAGOGO) else DATA_FILE_VIAGOGO_LEGACY
-        v_match_data = []
-        
-        # Extract ID from requested URL
-        # e.g. .../World-Cup-Tickets/E-153033506?Currency=... -> E-153033506
-        req_id = None
-        match = re.search(r'/(E-\d+)', match_url)
-        if match: 
-            req_id = match.group(1)
-        
-        print(f"[API] Looking for Viagogo ID: {req_id}")
-
-        clean_req_url = _clean_viagogo_url(match_url)
-        by_id, by_clean = _ensure_viagogo_index(viagogo_data_file)
-
-        # Fast path: match by ID.
-        if req_id:
-            v_match_data = by_id.get(req_id, [])
-        # Fallback: substring match on cleaned urls (keeps old behavior).
-        if not v_match_data:
-            for stored_url, rows in by_clean.items():
-                if clean_req_url in stored_url or stored_url in clean_req_url:
-                    v_match_data.extend(rows)
-                 
-        print(f"[API] Found {len(v_match_data)} Viagogo records.")
-        v_match_data.sort(key=lambda x: x.get('timestamp', ''))
-
-        # 2. IDENTIFY MATCH FOR FTN
-        # Prefer gz if present; fall back to legacy json for first-time migration.
-        ftn_data_file = DATA_FILE_FTN if os.path.exists(DATA_FILE_FTN) else DATA_FILE_FTN_LEGACY
-        f_match_data = []
-        
-        match_number = None
-        m = re.search(r'Match (\d+)', match_url, re.IGNORECASE)
-
-        if m:
-            match_number = m.group(1)
-        else:
-            # Look in GAMES_FILE (url -> match number) since match_url is a viagogo url.
-            games_url_map = _ensure_games_matchnum_map()
-            clean_input_url = match_url.split('?')[0]
-            mn = games_url_map.get(clean_input_url)
-            if mn:
-                match_number = mn
-            # Final fallback: extract from the first viagogo record's match_name.
-            elif v_match_data:
-                m2 = re.search(r'Match (\d+)', v_match_data[0].get('match_name', ''), re.IGNORECASE)
-                if m2:
-                    match_number = m2.group(1)
-
-        if match_number:
-            by_matchnum = _ensure_ftn_index(ftn_data_file)
-            f_match_data = by_matchnum.get(match_number, [])
-            f_match_data.sort(key=lambda x: x.get('timestamp', ''))
-            print(f"[API] Found {len(f_match_data)} FTN records for Match {match_number}")
-        
-        def process_source_data(data_list):
-            if not data_list: 
-                return {}, []
-            categories = sorted(list(set(d.get('category', '') for d in data_list if d.get('category'))))
-            result_data = {}
-            for cat in categories:
-                cat_rows = [d for d in data_list if d.get('category') == cat]
-                result_data[cat] = [{'timestamp': d.get('timestamp', ''), 'price': d.get('price', 0)} for d in cat_rows]
-            return result_data, categories
-
-        v_processed, v_cats = process_source_data(v_match_data)
-        f_processed, f_cats = process_source_data(f_match_data)
-
-        result = {
-            'viagogo': {'categories': v_cats, 'data': v_processed},
-            'ftn': {'categories': f_cats, 'data': f_processed},
-            'currency': 'USD'
-        }
-        
-        print(f"[API] Returning: Viagogo categories: {v_cats}, FTN categories: {f_cats}")
-        return result
-
-    except Exception as e:
-        print(f'[ERROR] History Error: {e}')
-        import traceback
-        traceback.print_exc()
-        return {'viagogo': {'categories': [], 'data': {}}, 'ftn': {'categories': [], 'data': {}}}
+    return {
+        'current': current,
+        'prev': prev,
+        'change': round(change, 2),
+        'pct': round(pct, 2),
+        'spark': prices,
+        'updated': current_ts,
+        'points': len(series),
+    }
 
 # ---------------------------------------------------------
 # Auto-Build Frontend
@@ -325,272 +160,178 @@ client_dist = 'frontend/dist'
 
 def build_frontend():
     print('[INFO] Building frontend...')
+    if not os.path.exists('frontend'):
+        print('[ERROR] Frontend folder missing!')
+        return False
+    npm_cmd = 'npm.cmd' if os.name == 'nt' else 'npm'
     try:
-        if not os.path.exists('frontend'):
-            print('[ERROR] Frontend folder missing!')
-            return False
-            
-        npm_cmd = 'npm.cmd' if os.name == 'nt' else 'npm'
-        
-        # Install dependencies
-        print('[INFO] Installing npm dependencies...')
-        result = subprocess.run(
-            [npm_cmd, 'install'], 
-            cwd='frontend', 
-            shell=True,
-            capture_output=True,
-            text=True
-        )
-        if result.returncode != 0:
-            print(f'[WARN] npm install had issues: {result.stderr[:200]}')
-        
-        # Build
-        print('[INFO] Building frontend...')
-        result = subprocess.run(
-            [npm_cmd, 'run', 'build'], 
-            cwd='frontend', 
-            shell=True,
-            capture_output=True,
-            text=True
-        )
-        if result.returncode == 0:
-            print('[OK] Frontend build complete!')
-            return True
-        else:
-            print(f'[ERROR] Build failed: {result.stderr[:500]}')
-            return False
+        for args in (['install'], ['run', 'build']):
+            result = subprocess.run([npm_cmd, *args], cwd='frontend', capture_output=True, text=True)
+            if result.returncode != 0:
+                print(f'[ERROR] npm {" ".join(args)} failed: {result.stderr[:500]}')
+                return False
+        print('[OK] Frontend build complete!')
+        return True
     except Exception as e:
         print(f'[ERROR] Build Failed: {e}')
-        import traceback
-        traceback.print_exc()
         return False
 
-# Build frontend if needed
 if not os.path.exists(f'{client_dist}/index.html'):
     print('[WARN] Frontend build not found. Building now...')
     if not build_frontend():
         print('[ERROR] Frontend build failed! Dashboard may not work.')
-else:
-    print('[OK] Frontend build found.')
-    # Verify it's a valid build
-    if not os.path.exists(f'{client_dist}/index.html'):
-        print('[ERROR] Frontend dist/index.html missing!')
-    else:
-        print(f'[OK] Frontend index.html found at {client_dist}/index.html')
 
-# Mount static files - MUST be done before catch-all route
-if os.path.exists(client_dist):
-    # Mount assets directory (JS, CSS files)
-    assets_path = f'{client_dist}/assets'
-    if os.path.exists(assets_path):
-        try:
-            app.mount('/assets', StaticFiles(directory=assets_path, html=False), name='assets')
-            # List files in assets for debugging
-            asset_files = os.listdir(assets_path)
-            print(f'[OK] Static assets mounted at /assets ({len(asset_files)} files)')
-            for f in asset_files[:5]:  # Show first 5 files
-                print(f'      - {f}')
-        except Exception as e:
-            print(f'[WARN] Failed to mount assets: {e}')
-            import traceback
-            traceback.print_exc()
-    else:
-        print(f'[WARN] Assets directory not found: {assets_path}')
-        print(f'[INFO] Contents of {client_dist}: {os.listdir(client_dist) if os.path.exists(client_dist) else "N/A"}')
-    
-    print('[OK] Static file routes configured')
+assets_path = f'{client_dist}/assets'
+if os.path.exists(assets_path):
+    app.mount('/assets', StaticFiles(directory=assets_path, html=False), name='assets')
+    print('[OK] Static assets mounted at /assets')
 else:
-    print(f'[ERROR] Frontend dist directory not found: {client_dist}')
+    print(f'[WARN] Assets directory not found: {assets_path}')
+
+# ---------------------------------------------------------
+# Teams API
+# ---------------------------------------------------------
+def _team_currencies():
+    data = load_data('teams_list.json', {}) or {}
+    return {t.get('team_key'): t.get('currency', 'USD') for t in data.get('teams', [])}
+
 
 def get_team_currency(team_key):
-    """Get currency for a team from teams_list.json"""
+    return _team_currencies().get(team_key, 'USD')
+
+
+def _teams_data():
+    data = load_data(TEAMS_DATA_FILE, {})
+    return data if isinstance(data, dict) else {}
+
+
+def parse_game_date(date_str):
+    """Parse 'DD/MM/YY' into a datetime, or None."""
+    from datetime import datetime
     try:
-        teams_list_file = 'teams_list.json'
-        if os.path.exists(teams_list_file):
-            with open(teams_list_file, 'r', encoding='utf-8') as f:
-                data = json.load(f)
-                for team in data.get('teams', []):
-                    if team.get('team_key') == team_key:
-                        return team.get('currency', 'USD')
-    except Exception as e:
-        print(f'[WARN] Could not load currency for {team_key}: {e}')
-    
-    # Default currency mapping based on team name/country
-    default_currencies = {
-        'arsenal': 'GBP',
-        'barcelona': 'EUR',
-        'real-madrid': 'EUR',
-        'manchester': 'GBP',
-        'liverpool': 'GBP',
-        'chelsea': 'GBP',
-        'tottenham': 'GBP',
-    }
-    
-    # Check if team_key matches any default
-    for key, currency in default_currencies.items():
-        if key in team_key.lower():
-            return currency
-    
-    return 'USD'  # Default
+        return datetime.strptime(date_str, '%d/%m/%y')
+    except (TypeError, ValueError):
+        return None
+
+
+def _today():
+    from datetime import datetime
+    return datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+
+
+def _upcoming_games(team_data):
+    """Games from today on. Undated games count while they were scraped in the last 30 days.
+
+    /teams/{key} and /teams/{key}/game/{index} both use this, so indexes line up.
+    """
+    from datetime import datetime, timedelta
+    today = _today()
+    out = []
+    for game in team_data.get('games', []) or []:
+        d = parse_game_date(game.get('date'))
+        if d is None:
+            try:
+                d = datetime.fromisoformat(game.get('last_scraped') or '') + timedelta(days=30)
+            except ValueError:
+                continue
+        if d >= today:
+            out.append(game)
+    return out
+
+
+def _game_series(game):
+    """Cheapest price per snapshot, oldest first."""
+    series = []
+    for snap in game.get('price_history', []) or []:
+        p = _min_price(snap.get('prices'))
+        if snap.get('timestamp') and p is not None:
+            series.append((snap['timestamp'], p))
+    series.sort()
+    return series
+
 
 @app.get('/teams')
 def get_teams():
-    """Get list of available teams"""
-    try:
-        if not os.path.exists(TEAMS_DATA_FILE):
-            print(f'[INFO] /teams: {TEAMS_DATA_FILE} not found, returning empty list')
-            return []
-        
-        # Try to load JSON, handle merge conflicts
-        try:
-            with open(TEAMS_DATA_FILE, 'r', encoding='utf-8') as f:
-                content = f.read()
-                # Check for merge conflicts
-                if '<<<<<<<' in content or '=======' in content or '>>>>>>>' in content:
-                    print(f'[WARN] /teams: {TEAMS_DATA_FILE} contains merge conflicts, returning empty list')
-                    return []
-                data = json.loads(content)
-        except json.JSONDecodeError as json_err:
-            print(f'[ERROR] /teams: JSON decode error: {json_err}')
-            return []
-        except Exception as file_err:
-            print(f'[ERROR] /teams: File read error: {file_err}')
-            return []
-        
-        if not isinstance(data, dict):
-            print(f'[ERROR] /teams: Expected dict, got {type(data)}')
-            return []
-        
-        teams = []
-        for team_key, team_data in data.items():
-            if not isinstance(team_data, dict):
-                continue
-            try:
-                currency = get_team_currency(team_key)
-                teams.append({
-                    'key': str(team_key),
-                    'name': str(team_data.get('team_name', team_key.title())),
-                    'url': str(team_data.get('team_url', '')),
-                    'last_updated': team_data.get('last_updated'),
-                    'game_count': len(team_data.get('games', [])) if isinstance(team_data.get('games'), list) else 0,
-                    'currency': str(currency)
-                })
-            except Exception as team_err:
-                print(f'[WARN] /teams: Error processing team {team_key}: {team_err}')
-                continue
-        
-        print(f'[INFO] /teams: Returning {len(teams)} teams')
-        return teams
-    except Exception as e:
-        print(f'[ERROR] /teams error: {e}')
-        import traceback
-        traceback.print_exc()
-        return []
+    currencies = _team_currencies()
+    teams = []
+    for key, team in _teams_data().items():
+        if not isinstance(team, dict):
+            continue
+        teams.append({
+            'key': key,
+            'name': team.get('team_name', key.title()),
+            'url': team.get('team_url', ''),
+            'last_updated': team.get('last_updated'),
+            'game_count': len(_upcoming_games(team)),
+            'currency': currencies.get(key, 'USD'),
+        })
+    return teams
 
-def parse_game_date(date_str):
-    """Parse date string in format DD/MM/YY to datetime"""
-    try:
-        if not date_str:
-            return None
-        # Format: "27/12/25" -> DD/MM/YY
-        parts = date_str.split('/')
-        if len(parts) == 3:
-            day, month, year = int(parts[0]), int(parts[1]), int(parts[2])
-            # Convert 2-digit year to 4-digit (assuming 20xx for years < 50, 19xx otherwise)
-            if year < 50:
-                year += 2000
-            else:
-                year += 1900
-            from datetime import datetime
-            return datetime(year, month, day)
-    except Exception as e:
-        print(f'[WARN] Could not parse date {date_str}: {e}')
-    return None
+
+@app.get('/teams/overview')
+def get_teams_overview():
+    """Every upcoming game across all teams: cheapest price, 7-day change, sparkline."""
+    currencies = _team_currencies()
+    rows = []
+    for key, team in _teams_data().items():
+        if not isinstance(team, dict):
+            continue
+        for index, game in enumerate(_upcoming_games(team)):
+            d = parse_game_date(game.get('date'))
+            rows.append({
+                'team_key': key,
+                'team_name': team.get('team_name', key.title()),
+                'index': index,
+                'match_name': game.get('match_name'),
+                'opponent': game.get('opponent'),
+                'date': d.date().isoformat() if d else None,
+                'url': game.get('url'),
+                'currency': currencies.get(key, 'USD'),
+                'summary': _summarize_series(_game_series(game)),
+            })
+    rows.sort(key=lambda r: (r['date'] is None, r['date'] or ''))
+    return rows
+
 
 @app.get('/teams/{team_key}')
 def get_team_games(team_key: str):
-    """Get all games for a specific team (filter out past games)"""
-    try:
-        if not os.path.exists(TEAMS_DATA_FILE):
-            return []
-        with open(TEAMS_DATA_FILE, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-        if team_key not in data:
-            return []
-        team_data = data[team_key]
-        games = []
-        from datetime import datetime
-        today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
-        
-        for game in team_data.get('games', []):
-            game_date = parse_game_date(game.get('date'))
-            # Filter out past games (games before today)
-            if game_date and game_date < today:
-                continue  # Skip past games
-            
-            games.append({
-                'url': game.get('url'),
-                'match_name': game.get('match_name'),
-                'opponent': game.get('opponent'),
-                'date': game.get('date'),
-                'latest_prices': game.get('latest_prices', {}),
-                'last_scraped': game.get('last_scraped'),
-                'price_history_count': len(game.get('price_history', []))
-            })
-        return games
-    except Exception as e:
-        print(f'[ERROR] /teams/{team_key} error: {e}')
+    team = _teams_data().get(team_key)
+    if not isinstance(team, dict):
         return []
+    return [{
+        'url': g.get('url'),
+        'match_name': g.get('match_name'),
+        'opponent': g.get('opponent'),
+        'date': g.get('date'),
+        'cheapest': _min_price(g.get('latest_prices', {})),
+        'last_scraped': g.get('last_scraped'),
+    } for g in _upcoming_games(team)]
+
 
 @app.get('/teams/{team_key}/game/{game_index}')
 def get_game_prices(team_key: str, game_index: int):
-    """Get price history for a specific game"""
-    try:
-        if not os.path.exists(TEAMS_DATA_FILE):
-            return {'prices': [], 'game': None, 'currency': 'USD'}
-        with open(TEAMS_DATA_FILE, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-        if team_key not in data:
-            return {'prices': [], 'game': None, 'currency': 'USD'}
-        
-        # Filter out past games when getting the list
-        from datetime import datetime
-        today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
-        all_games = data[team_key].get('games', [])
-        future_games = []
-        for game in all_games:
-            game_date = parse_game_date(game.get('date'))
-            if game_date and game_date >= today:
-                future_games.append(game)
-        
-        if game_index < 0 or game_index >= len(future_games):
-            return {'prices': [], 'game': None, 'currency': 'USD'}
-        
-        game = future_games[game_index]
-        currency = get_team_currency(team_key)
-        return {
-            'game': {
-                'match_name': game.get('match_name'),
-                'url': game.get('url'),
-                'opponent': game.get('opponent'),
-                'date': game.get('date')
-            },
-            'prices': game.get('price_history', []),
-            'latest_prices': game.get('latest_prices', {}),
-            'currency': currency
-        }
-    except Exception as e:
-        print(f'[ERROR] /teams/{team_key}/game/{game_index} error: {e}')
-        return {'prices': [], 'game': None, 'currency': 'USD'}
+    empty = {'prices': [], 'game': None, 'currency': 'USD'}
+    team = _teams_data().get(team_key)
+    if not isinstance(team, dict):
+        return empty
+    games = _upcoming_games(team)
+    if not 0 <= game_index < len(games):
+        return empty
+    game = games[game_index]
+    return {
+        'game': {
+            'match_name': game.get('match_name'),
+            'url': game.get('url'),
+            'opponent': game.get('opponent'),
+            'date': game.get('date'),
+            'last_scraped': game.get('last_scraped'),
+        },
+        'prices': game.get('price_history', []),
+        'latest_prices': game.get('latest_prices', {}),
+        'summary': _summarize_series(_game_series(game)),
+        'currency': get_team_currency(team_key),
+    }
 
-@app.get('/vite.svg')
-async def serve_vite_svg():
-    vite_svg_path = f'{client_dist}/vite.svg'
-    if os.path.exists(vite_svg_path):
-        return FileResponse(vite_svg_path, media_type='image/svg+xml')
-    return {'error': 'vite.svg not found'}
-
-# Test endpoint to verify server is working - lightweight, no data loading
 # ==========================================
 # Ticket Offers Manager API
 # ==========================================
@@ -599,7 +340,7 @@ from tickets_storage import (
     save_offer, get_offer_by_id, load_offers_from_file, rebuild_index,
     load_index, BASE_DIR
 )
-from tickets_parser import parse_ticket_message, interpret_search_query
+from tickets_parser import parse_ticket_message
 from pathlib import Path
 from datetime import datetime, timedelta
 
@@ -607,13 +348,9 @@ from datetime import datetime, timedelta
 class CreateSellerRequest(BaseModel):
     name: str
 
-class AskRequest(BaseModel):
-    query: str
-
 class ParseOfferRequest(BaseModel):
     seller: str
     raw: str
-    use_ai: bool = True
 
 class SaveOfferRequest(BaseModel):
     seller: str
@@ -630,60 +367,6 @@ def get_sellers():
         print(f'[ERROR] /api/tickets/sellers: {e}')
         return []
 
-@app.post('/api/tickets/ask')
-def ask_tickets(request: AskRequest):
-    """Ask AI for tickets (NL Search)"""
-    try:
-        api_key = os.environ.get("GEMINI_API_KEY")
-        if not api_key:
-             raise HTTPException(status_code=500, detail="AI not configured")
-             
-        filters = interpret_search_query(request.query, api_key)
-        if not filters:
-             return []
-             
-        print(f"[INFO] AI Filters: {filters}")
-        
-        # Map filters to search logic
-        offers = _search_offers_logic(
-            match=filters.get('match'),
-            seller=filters.get('seller'),
-            category=filters.get('category'),
-            min_price=filters.get('min_price'),
-            max_price=filters.get('max_price'),
-            min_quantity=filters.get('min_quantity'),
-            max_quantity=None,
-            keyword=filters.get('keyword'),
-            range='all'
-        )
-        
-        # Apply Sorting
-        sort_by = filters.get('sort_by')
-        if sort_by == 'price_asc':
-            def get_min_price(o):
-                 prices = [float(l.get('price', 999999)) for l in o.get('lines', []) if l.get('price')]
-                 return min(prices) if prices else 999999
-            offers.sort(key=get_min_price)
-            
-        elif sort_by == 'price_desc':
-            def get_max_price(o):
-                 prices = [float(l.get('price', 0)) for l in o.get('lines', []) if l.get('price')]
-                 return max(prices) if prices else 0
-            offers.sort(key=get_max_price, reverse=True)
-            
-        elif sort_by == 'date_desc':
-            offers.sort(key=lambda x: x.get('created_at', ''), reverse=True)
-            
-        # Limit
-        limit = filters.get('limit', 50)
-        return offers[:limit]
-        
-    except Exception as e:
-        print(f'[ERROR] /api/tickets/ask: {e}')
-        import traceback
-        traceback.print_exc()
-        return []
-
 @app.post('/api/tickets/sellers')
 def create_seller_endpoint(request: CreateSellerRequest):
     """Create seller with case-insensitive dedupe"""
@@ -692,7 +375,7 @@ def create_seller_endpoint(request: CreateSellerRequest):
         return seller
     except Exception as e:
         print(f'[ERROR] /api/tickets/sellers POST: {e}')
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail='Internal server error')
 
 @app.post('/api/tickets/offers/parse')
 def parse_offer(request: ParseOfferRequest):
@@ -702,9 +385,7 @@ def parse_offer(request: ParseOfferRequest):
         if not request.raw:
             raise HTTPException(status_code=400, detail='Raw text is required')
             
-        # If use_ai is True, pass None to use Env Var. If False, pass "" to disable AI.
-        key_arg = None if request.use_ai else ""
-        parsed = parse_ticket_message(request.raw, api_key=key_arg)
+        parsed = parse_ticket_message(request.raw)
         
         print(f'[INFO] Parse result: match={parsed.get("match")}, lines={len(parsed.get("lines", []))}, status={parsed.get("parse_status")}')
         return parsed
@@ -714,7 +395,7 @@ def parse_offer(request: ParseOfferRequest):
         print(f'[ERROR] /api/tickets/offers/parse: {e}')
         import traceback
         traceback.print_exc()
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail='Internal server error')
 
 @app.post('/api/tickets/offers')
 def save_offer_endpoint(request: SaveOfferRequest):
@@ -749,7 +430,7 @@ def save_offer_endpoint(request: SaveOfferRequest):
         print(f'[ERROR] /api/tickets/offers POST: {e}')
         import traceback
         traceback.print_exc()
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail='Internal server error')
 
 @app.get('/api/tickets/offers/search')
 def search_offers(
@@ -947,11 +628,14 @@ def _search_offers_logic(match, seller, category, min_price, max_price, min_quan
 
     except Exception as e:
         print(f'[ERROR] Search Logic: {e}')
-        # import traceback
-        # traceback.print_exc()
         return []
-        traceback.print_exc()
-        return []
+
+def _excel_safe(value):
+    """Stop pasted seller text like '=HYPERLINK(...)' from becoming an Excel formula."""
+    if isinstance(value, str) and value[:1] in ('=', '+', '-', '@', '\t', '\r'):
+        return "'" + value
+    return value
+
 
 @app.get('/api/tickets/export')
 def export_tickets(
@@ -997,7 +681,7 @@ def export_tickets(
                    if str(line.get('category')) != str(category):
                        continue
 
-                rows.append({
+                rows.append({k: _excel_safe(v) for k, v in {
                     'Match': final_match,
                     'Event': event,
                     'Date': offer_date,
@@ -1007,8 +691,8 @@ def export_tickets(
                     'Cost Price': line.get('price'),
                     'My Price': line.get('my_price'),
                     'Currency': line.get('currency'),
-                    'Raw': offer.get('raw')[:50] + '...' # Truncate raw
-                })
+                    'Raw': (offer.get('raw') or '')[:50] + '...'  # Truncate raw
+                }.items()})
         
         if not rows:
              return {'error': 'No data found to export'}
@@ -1105,7 +789,7 @@ def export_tickets(
         print(f'[ERROR] /api/tickets/export: {e}')
         import traceback
         traceback.print_exc()
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail='Internal server error')
 
 @app.delete('/api/tickets/offers/{offer_id}')
 def delete_offer(offer_id: str):
@@ -1145,7 +829,7 @@ def delete_offer(offer_id: str):
         return {'success': True}
     except Exception as e:
         print(f'[ERROR] delete_offer: {e}')
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail='Internal server error')
 
 class UpdateOfferPriceRequest(BaseModel):
     lines: List[dict]
@@ -1220,9 +904,11 @@ def update_offer_prices(offer_id: str, request: UpdateOfferPriceRequest):
         
         return {'success': True, 'msg': 'Offer updated'}
 
+    except HTTPException:
+        raise
     except Exception as e:
         print(f'[ERROR] update_offer_prices: {e}')
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail='Internal server error')
 
 
 @app.get('/api/tickets/offers/{offer_id}')
@@ -1237,7 +923,7 @@ def get_offer(offer_id: str):
         raise
     except Exception as e:
         print(f'[ERROR] /api/tickets/offers/{offer_id}: {e}')
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail='Internal server error')
 
 @app.post('/api/tickets/index/rebuild')
 def rebuild_index_endpoint():
@@ -1247,7 +933,7 @@ def rebuild_index_endpoint():
         return {'success': success}
     except Exception as e:
         print(f'[ERROR] /api/tickets/index/rebuild: {e}')
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail='Internal server error')
 
 @app.get('/health')
 def health_check():
@@ -1255,80 +941,21 @@ def health_check():
     return {'status': 'ok', 'message': 'Server is running'}
 
 # Catch-all route for React SPA - MUST be last (after API routes)
-# FastAPI matches routes in order, so specific routes above will be matched first
 @app.get('/{full_path:path}')
-async def serve_react_app(full_path: str, request: Request):
-    """Serve React app for all non-API routes (SPA routing)"""
-    # Explicitly exclude API routes and static assets
-    # These should never reach here if routes are defined correctly above
-    excluded_paths = ['matches', 'history', 'teams', 'health', 'assets', 'vite.svg']
-    if any(full_path.startswith(excluded) for excluded in excluded_paths):
-        # This shouldn't happen if routes are defined correctly, but just in case
-        raise HTTPException(status_code=404, detail="API route not found")
-    
-    # Serve index.html for all other routes (React Router handles routing)
+async def serve_react_app(full_path: str):
+    if full_path.startswith(('api/', 'teams', 'health', 'assets')):
+        raise HTTPException(status_code=404, detail='Not found')
+    # Serve real files from dist (favicon etc.), index.html for everything else.
+    candidate = os.path.realpath(os.path.join(client_dist, full_path))
+    if full_path and candidate.startswith(os.path.realpath(client_dist) + os.sep) and os.path.isfile(candidate):
+        return FileResponse(candidate)
     index_path = f'{client_dist}/index.html'
     if os.path.exists(index_path):
-        return FileResponse(
-            index_path,
-            media_type='text/html',
-            headers={'Cache-Control': 'no-cache'}
-        )
+        return FileResponse(index_path, media_type='text/html', headers={'Cache-Control': 'no-cache'})
     return {'message': 'Build Not Found.'}
 
 if __name__ == '__main__':
-    try:
-        import time
-        startup_time = time.time()
-        
-        print('\n' + '='*60, flush=True)
-        print(f'  [START] VIAGOGO MONITOR - SERVER ONLY (NO SCRAPERS)', flush=True)
-        print(f'  [PORT] {PORT}', flush=True)
-        print(f'  [DATA] Loading from {DATA_FILE_VIAGOGO} and {DATA_FILE_FTN}', flush=True)
-        print('='*60 + '\n', flush=True)
-        
-        # Quick check - don't load full data at startup, just verify files exist
-        print('[INFO] Verifying data files exist...', flush=True)
-        if os.path.exists(DATA_FILE_VIAGOGO):
-            file_size = os.path.getsize(DATA_FILE_VIAGOGO)
-            print(f'[OK] {DATA_FILE_VIAGOGO} exists ({file_size} bytes)', flush=True)
-        else:
-            print(f'[WARN] {DATA_FILE_VIAGOGO} not found', flush=True)
-        
-        if os.path.exists(DATA_FILE_FTN):
-            file_size = os.path.getsize(DATA_FILE_FTN)
-            print(f'[OK] {DATA_FILE_FTN} exists ({file_size} bytes)', flush=True)
-        else:
-            print(f'[WARN] {DATA_FILE_FTN} not found', flush=True)
-        
-        # Verify frontend build exists
-        print('[INFO] Verifying frontend build...', flush=True)
-        if not os.path.exists(client_dist):
-            print(f'[ERROR] Frontend dist directory not found: {client_dist}', flush=True)
-        elif not os.path.exists(f'{client_dist}/index.html'):
-            print(f'[ERROR] Frontend index.html not found at {client_dist}/index.html', flush=True)
-        else:
-            print(f'[OK] Frontend build verified: {client_dist}/index.html', flush=True)
-        
-        elapsed = time.time() - startup_time
-        print(f'[INFO] Startup checks completed in {elapsed:.2f}s', flush=True)
-        
-        print(f'[INFO] Starting server on 0.0.0.0:{PORT}...', flush=True)
-        print(f'[INFO] Railway PORT env: {os.environ.get("PORT", "NOT SET")}', flush=True)
-        print('[INFO] Server starting now...', flush=True)
-        
-        # Start uvicorn server - this blocks until server stops
-        uvicorn.run(
-            app, 
-            host='0.0.0.0', 
-            port=PORT, 
-            log_level='info'
-        )
-    except KeyboardInterrupt:
-        print('\n[INFO] Server stopped by user', flush=True)
-    except Exception as e:
-        print(f'[FATAL] Server startup failed: {e}', flush=True)
-        import traceback
-        traceback.print_exc()
-        sys.exit(1)
-
+    print(f'[START] TicketLive server on 0.0.0.0:{PORT}', flush=True)
+    if not ADMIN_PASSWORD:
+        print('[WARN] ADMIN_PASSWORD not set - offers manager API is disabled', flush=True)
+    uvicorn.run(app, host='0.0.0.0', port=PORT, log_level='info')

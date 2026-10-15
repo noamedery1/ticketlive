@@ -3,7 +3,7 @@ import axios from 'axios'
 import './App.css'
 import './editable-preview.css'
 
-const API_URL = import.meta.env.DEV ? 'http://localhost:8000' : ''
+const API_URL = ''  // same origin; vite proxies the API in dev
 
 function TicketOffersManager() {
   const [activeTab, setActiveTab] = useState('add')
@@ -18,7 +18,6 @@ function TicketOffersManager() {
   const [toast, setToast] = useState(null)
 
   // Options
-  const [useAI, setUseAI] = useState(true)
 
   // Search state
   const [showSearchSellerSuggestions, setShowSearchSellerSuggestions] = useState(false) // New state for search dropdown
@@ -39,27 +38,6 @@ function TicketOffersManager() {
   const [showDetailDrawer, setShowDetailDrawer] = useState(false)
   const [selectedMatchFilter, setSelectedMatchFilter] = useState(null)
 
-
-  // Ask AI state
-  const [askQuery, setAskQuery] = useState('')
-
-  const handleAskAi = async () => {
-    if (!askQuery.trim()) return
-    setIsSearching(true)
-    setSearchResults([])
-    try {
-      const res = await axios.post(`${API_URL}/api/tickets/ask`, {
-        query: askQuery
-      })
-      setSearchResults(res.data)
-      // Also might interpret filters for UI? Simpler to just show results.
-    } catch (err) {
-      console.error('Error asking AI:', err)
-      showToast('Error asking AI', 'error')
-    } finally {
-      setIsSearching(false)
-    }
-  }
 
   useEffect(() => {
     fetchSellers()
@@ -110,7 +88,7 @@ function TicketOffersManager() {
     }
   }
 
-  const executeParse = async (text, seller, useAiEndpoint) => {
+  const executeParse = async (text, seller) => {
     if (!text || !text.trim()) {
       showToast('Please enter a message to parse', 'error')
       return
@@ -128,8 +106,7 @@ function TicketOffersManager() {
     try {
       const res = await axios.post(`${API_URL}/api/tickets/offers/parse`, {
         seller: seller.trim(),
-        raw: text,
-        use_ai: useAiEndpoint
+        raw: text
       })
       setParsedData(res.data)
     } catch (err) {
@@ -141,7 +118,7 @@ function TicketOffersManager() {
   }
 
   const handleParse = () => {
-    executeParse(rawText, sellerInput, useAI)
+    executeParse(rawText, sellerInput)
   }
 
   // URL Param Initialization
@@ -156,10 +133,9 @@ function TicketOffersManager() {
       if (sellerParam) setSellerInput(sellerParam)
 
       if (autoParseParam === 'true') {
-        const aiParam = params.get('use_ai') !== 'false' // default true
         // Add timeout to let React mount/render updates if needed, though state updates are batched
         setTimeout(() => {
-          executeParse(rawParam, sellerParam || '', aiParam)
+          executeParse(rawParam, sellerParam || '')
         }, 500)
       }
     }
@@ -596,7 +572,7 @@ function TicketOffersManager() {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', fontSize: '0.85em' }}>
         <span>Original: <b>{currency} {baseStr}</b></span>
-        <span style={{ color: '#56d364' }}>My Price: <b>{currency} {myStr}</b></span>
+        <span style={{ color: 'var(--good)' }}>My Price: <b>{currency} {myStr}</b></span>
       </div>
     )
   }
@@ -709,7 +685,7 @@ function TicketOffersManager() {
                   style={{
                     background: 'transparent',
                     border: 'none',
-                    color: '#8b949e',
+                    color: 'var(--muted)',
                     cursor: 'pointer',
                     padding: '0 8px',
                     fontSize: '0.8rem',
@@ -734,7 +710,7 @@ function TicketOffersManager() {
                         {seller.name}
                       </div>
                     )) : (
-                      <div style={{ padding: '8px', color: '#8b949e', fontStyle: 'italic' }}>No sellers found</div>
+                      <div style={{ padding: '8px', color: 'var(--muted)', fontStyle: 'italic' }}>No sellers found</div>
                     )}
                   </div>
                 )}
@@ -768,17 +744,6 @@ function TicketOffersManager() {
                 <div className="char-count">{rawText.length} characters</div>
               </div>
 
-              <div style={{ marginTop: '10px' }}>
-                <label className="checkbox-container" style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', fontSize: '0.9rem' }}>
-                  <input
-                    type="checkbox"
-                    checked={useAI}
-                    onChange={(e) => setUseAI(e.target.checked)}
-                    style={{ marginRight: '8px' }}
-                  />
-                  ✨ Use AI Parsing (Recommended)
-                </label>
-              </div>
             </div>
 
             <div className="form-actions">
@@ -901,7 +866,7 @@ function TicketOffersManager() {
                                   step="0.01"
                                   className="edit-input"
                                   value={line.my_price ? line.my_price.toFixed(2) : ''}
-                                  style={{ borderColor: '#56d364' }}
+                                  style={{ borderColor: 'var(--good)' }}
                                   onChange={(e) => handleLineChange(line._id, 'my_price', e.target.value)}
                                 />
                               </td>
@@ -936,31 +901,6 @@ function TicketOffersManager() {
       {activeTab === 'search' && (
         <div className="tab-content">
           <div className="search-filters">
-            {/* Ask AI Section */}
-            <div style={{ marginBottom: '20px', padding: '15px', background: '#161b22', borderRadius: '8px', border: '1px solid #30363d' }}>
-              <label style={{ display: 'block', marginBottom: '8px', color: '#c9d1d9', fontWeight: 500, fontSize: '0.9rem' }}>
-                ✨ Ask AI to find tickets
-              </label>
-              <div style={{ display: 'flex', gap: '10px' }}>
-                <input
-                  type="text"
-                  value={askQuery}
-                  onChange={(e) => setAskQuery(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && handleAskAi()}
-                  placeholder="e.g. Lowest price for match 4, or Cat 1 tickets under $500"
-                  style={{ flex: 1, padding: '8px 12px', background: '#0d1117', border: '1px solid #30363d', borderRadius: '6px', color: 'white' }}
-                />
-                <button
-                  onClick={handleAskAi}
-                  className="btn btn-primary"
-                  disabled={isSearching}
-                  style={{ height: 'auto', whiteSpace: 'nowrap' }}
-                >
-                  {isSearching ? 'Thinking...' : 'Ask AI'}
-                </button>
-              </div>
-            </div>
-
             <div className="filter-row">
               <div className="filter-group">
                 <label>Match Number</label>
@@ -995,7 +935,7 @@ function TicketOffersManager() {
                       bottom: '0',
                       background: 'transparent',
                       border: 'none',
-                      color: '#8b949e',
+                      color: 'var(--muted)',
                       cursor: 'pointer',
                       padding: '0 8px',
                       fontSize: '0.8rem'
@@ -1009,8 +949,8 @@ function TicketOffersManager() {
                       top: '100%',
                       left: 0,
                       right: 0,
-                      background: '#161b22',
-                      border: '1px solid #30363d',
+                      background: 'var(--surface)',
+                      border: '1px solid var(--line)',
                       borderRadius: '4px',
                       maxHeight: '200px',
                       overflowY: 'auto',
@@ -1029,16 +969,16 @@ function TicketOffersManager() {
                             style={{
                               padding: '6px 10px',
                               cursor: 'pointer',
-                              borderBottom: '1px solid #21262d',
+                              borderBottom: '1px solid var(--surface-2)',
                               fontSize: '0.9rem'
                             }}
-                            onMouseEnter={(e) => e.target.style.background = '#21262d'}
+                            onMouseEnter={(e) => e.target.style.background = 'var(--surface-2)'}
                             onMouseLeave={(e) => e.target.style.background = 'transparent'}
                           >
                             {s.name}
                           </div>
                         ))}
-                      {sellers.length === 0 && <div style={{ padding: '8px', color: '#8b949e' }}>No sellers</div>}
+                      {sellers.length === 0 && <div style={{ padding: '8px', color: 'var(--muted)' }}>No sellers</div>}
                     </div>
                   )}
                 </div>
@@ -1220,7 +1160,7 @@ function TicketOffersManager() {
 
             {/* Detail Drawer / Section */}
             {showDetailDrawer && selectedOffer && (
-              <div className="offer-details-container" style={{ marginTop: '20px', borderTop: '1px solid #30363d', paddingTop: '20px' }}>
+              <div className="offer-details-container" style={{ marginTop: '20px', borderTop: '1px solid var(--line)', paddingTop: '20px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
                   <h3>Offer Details (Editable)</h3>
                   <div style={{ display: 'flex', gap: '10px' }}>
@@ -1233,13 +1173,13 @@ function TicketOffersManager() {
                     <button
                       onClick={handleDeleteOffer}
                       className="btn btn-danger btn-small"
-                      style={{ background: '#d73a49', border: '1px solid #cb2431', color: 'white' }}
+                      style={{ background: 'var(--bad)', border: '1px solid var(--bad)', color: 'white' }}
                     >
                       🗑️ Delete
                     </button>
                     <button
                       onClick={() => setShowDetailDrawer(false)}
-                      style={{ background: 'none', border: 'none', color: '#8b949e', cursor: 'pointer', fontSize: '1.2em' }}
+                      style={{ background: 'none', border: 'none', color: 'var(--muted)', cursor: 'pointer', fontSize: '1.2em' }}
                     >
                       ×
                     </button>
@@ -1281,7 +1221,7 @@ function TicketOffersManager() {
                                     value={line.my_price || ''}
                                     onChange={(e) => updateOfferLinePrice(i, e.target.value)}
                                     className="edit-input"
-                                    style={{ borderColor: '#56d364', width: '100%' }}
+                                    style={{ borderColor: 'var(--good)', width: '100%' }}
                                     placeholder="Set Price"
                                   />
                                 </td>
