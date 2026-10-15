@@ -23599,16 +23599,336 @@
             "Category 1": 152.0,
             "Category 1 Premium": 188.0
           }
+        },
+        {
+          "timestamp": "2026-04-16T19:10:59.612348",
+          "prices": {
+            "Category 4": 72.0,
+            "Category 3": 98.0,
+            "Category 2": 112.0,
+            "Category 1": 151.99,
+            "Category 1 Premium": 188.0
+          }
+        },
+        {
+          "timestamp": "2026-04-16T22:36:56.529348",
+          "prices": {
+            "Category 4": 71.0,
+            "Category 3": 98.0,
+            "Category 2": 112.0,
+            "Category 1": 151.99,
+            "Category 1 Premium": 188.0
+          }
+        },
+        {
+          "timestamp": "2026-04-17T02:05:20.341348",
+          "prices": {
+            "Category 4": 71.0,
+            "Category 3": 98.0,
+            "Category 2": 112.0,
+            "Category 1": 151.99,
+            "Category 1 Premium": 188.0
+          }
+        },
+        {
+          "timestamp": "2026-04-17T05:34:16.460348",
+          "prices": {
+            "Category 4": 71.0,
+            "Category 3": 98.0,
+            "Category 2": 112.0,
+            "Category 1": 151.99,
+            "Category 1 Premium": 188.0
+          }
+        },
+        {
+          "timestamp": "2026-04-17T09:00:28.985348",
+          "prices": {
+            "Category 4": 63.0,
+            "Category 3": 98.0,
+            "Category 2": 112.0,
+            "Category 1": 151.99,
+            "Category 1 Premium": 188.0
+          }
+        },
+        {
+          "timestamp": "2026-04-17T12:25:00.940348",
+          "prices": {
+            "Category 4": 63.0,
+            "Category 3": 98.0,
+            "Category 2": 112.0,
+            "Category 1": 151.99,
+            "Category 1 Premium": 188.0
+          }
+        },
+        {
+          "timestamp": "2026-04-17T15:52:25.253348",
+          "prices": {
+            "Category 4": 60.0,
+            "Category 3": 98.0,
+            "Category 2": 112.0,
+            "Category 1": 151.99,
+            "Category 1 Premium": 188.0
+          }
+        },
+        {
+          "timestamp": "2026-04-17T19:20:54.273348",
+          "prices": {
+            "Category 4": 68.0,
+            "Category 3": 98.0,
+            "Category 2": 112.0,
+            "Category 1": 152.0,
+            "Category 1 Premium": 188.0
+          }
+        },
+        {
+          "timestamp": "2026-04-17T22:52:00.857348",
+          "prices": {
+            "Category 4": 68.0,
+            "Category 3": 98.0,
+            "Category 2": 112.0,
+            "Category 1": 152.0,
+            "Category 1 Premium": 188.0
+          }
+        },
+        {
+          "timestamp": "2026-04-18T02:22:06.450348",
+          "prices": {
+            "Category 4": 68.0,
+            "Category 3": 98.0,
+            "Category 2": 112.0,
+            "Category 1": 152.0,
+            "Category 1 Premium": 188.0
+          }
+        },
+        {
+          "timestamp": "2026-04-18T05:48:28.634348",
+          "prices": {
+            "Category 4": 68.0,
+            "Category 3": 98.0,
+            "Category 2": 112.0,
+            "Category 1": 152.0,
+            "Category 1 Premium": 188.0
+          }
+        },
+        {
+          "timestamp": "2026-04-18T09:17:04.676348",
+          "prices": {
+            "Category 4": 68.0,
+            "Category 3": 98.0,
+            "Category 2": 112.0,
+            "Category 1": 152.0,
+            "Category 1 Premium": 188.0
+          }
+        },
+        {
+          "timestamp": "2026-04-18T12:46:10.634348",
+          "prices": {
+            "Category 4": 68.0,
+            "Category 3": 98.0,
+            "Category 2": 112.0,
+            "Category 1": 152.0,
+            "Category 1 Premium": 188.0
+          }
+        },
+        {
+          "timestamp": "2026-04-18T16:16:08.947348",
+          "prices": {
+            "Category 4": 68.0,
+            "Category 3": 98.0,
+            "Category 2": 112.0,
+            "Category 1": 152.0,
+            "Category 1 Premium": 188.0
+          }
+        },
+        {
+          "timestamp": "2026-04-18T19:46:57.086348",
+          "prices": {
+            "Category 4": 68.0,
+            "Category 3": 98.0,
+            "Category 2": 112.0,
+            "Category 1": 152.0,
+            "Category 1 Premium": 188.0
+          }
+        },
+        {
+          "timestamp": "2026-04-18T23:15:17.303348",
+          "prices": {
+            "Category 4": 68.0,
+            "Category 3": 98.0,
+            "Category 2": 112.0,
+            "Category 1": 152.0,
+            "Category 1 Premium": 188.0
+          }
+        },
+        {
+          "timestamp": "2026-04-19T02:42:58.063348",
+          "prices": {
+            "Category 4": 68.0,
+            "Category 3": 98.0,
+            "Category 2": 112.0,
+            "Category 1": 152.0,
+            "Category 1 Premium": 188.0
+          }
+        },
+        {
+          "timestamp": "2026-04-19T06:15:22.578348",
+          "prices": {
+            "Category 4": 68.0,
+            "Category 3": 98.0,
+            "Category 2": 112.0,
+            "Category 1": 152.0,
+            "Category 1 Premium": 188.0
+          }
+        },
+        {
+          "timestamp": "2026-04-19T09:50:26.257348",
+          "prices": {
+            "Category 4": 68.0,
+            "Category 3": 98.0,
+            "Category 2": 112.0,
+            "Category 1": 152.0,
+            "Category 1 Premium": 188.0
+          }
+        },
+        {
+          "timestamp": "2026-04-19T13:19:08.654348",
+          "prices": {
+            "Category 4": 68.0,
+            "Category 3": 98.0,
+            "Category 2": 112.0,
+            "Category 1": 152.0,
+            "Category 1 Premium": 188.0
+          }
+        },
+        {
+          "timestamp": "2026-04-19T16:46:45.255348",
+          "prices": {
+            "Category 4": 68.0,
+            "Category 3": 98.0,
+            "Category 2": 112.0,
+            "Category 1": 152.0,
+            "Category 1 Premium": 188.0
+          }
+        },
+        {
+          "timestamp": "2026-04-19T20:15:23.122348",
+          "prices": {
+            "Category 4": 68.0,
+            "Category 3": 98.0,
+            "Category 2": 112.0,
+            "Category 1": 152.0,
+            "Category 1 Premium": 188.0
+          }
+        },
+        {
+          "timestamp": "2026-04-19T23:42:23.864348",
+          "prices": {
+            "Category 4": 68.0,
+            "Category 3": 98.0,
+            "Category 2": 112.0,
+            "Category 1": 152.0,
+            "Category 1 Premium": 188.0
+          }
+        },
+        {
+          "timestamp": "2026-04-20T03:37:26.836348",
+          "prices": {
+            "Category 4": 68.0,
+            "Category 3": 98.0,
+            "Category 2": 112.0,
+            "Category 1": 152.0,
+            "Category 1 Premium": 188.0
+          }
+        },
+        {
+          "timestamp": "2026-04-20T07:07:16.789348",
+          "prices": {
+            "Category 4": 68.0,
+            "Category 3": 98.0,
+            "Category 2": 112.0,
+            "Category 1": 152.0,
+            "Category 1 Premium": 188.0
+          }
+        },
+        {
+          "timestamp": "2026-04-20T10:34:38.775348",
+          "prices": {
+            "Category 4": 70.0,
+            "Category 3": 98.0,
+            "Category 2": 112.0,
+            "Category 1": 152.0,
+            "Category 1 Premium": 188.0
+          }
+        },
+        {
+          "timestamp": "2026-04-20T14:04:09.158348",
+          "prices": {
+            "Category 4": 70.0,
+            "Category 3": 98.0,
+            "Category 2": 112.0,
+            "Category 1": 152.0,
+            "Category 1 Premium": 188.0
+          }
+        },
+        {
+          "timestamp": "2026-04-20T17:25:26.001348",
+          "prices": {
+            "Category 4": 88.5,
+            "Category 3": 102.0,
+            "Category 2": 118.99,
+            "Category 1": 159.0,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-20T20:45:13.761348",
+          "prices": {
+            "Category 4": 88.5,
+            "Category 3": 102.0,
+            "Category 2": 118.99,
+            "Category 1": 159.0,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-21T00:14:12.844348",
+          "prices": {
+            "Category 4": 88.5,
+            "Category 3": 102.0,
+            "Category 2": 118.99,
+            "Category 1": 159.0,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-21T03:43:50.688348",
+          "prices": {
+            "Category 4": 88.5,
+            "Category 3": 102.0,
+            "Category 2": 118.99,
+            "Category 1": 159.0,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-21T07:15:23.704348",
+          "prices": {
+            "Category 4": 88.5,
+            "Category 3": 102.0,
+            "Category 2": 118.99,
+            "Category 1": 159.0,
+            "Category 1 Premium": 198.0
+          }
         }
       ],
       "latest_prices": {
-        "Category 4": 75.0,
-        "Category 3": 99.0,
-        "Category 2": 112.0,
-        "Category 1": 152.0,
-        "Category 1 Premium": 188.0
+        "Category 4": 88.5,
+        "Category 3": 102.0,
+        "Category 2": 118.99,
+        "Category 1": 159.0,
+        "Category 1 Premium": 198.0
       },
-      "last_scraped": "2026-04-16T15:46:21.508348"
+      "last_scraped": "2026-04-21T07:15:23.704348"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-real-oviedo",
@@ -27759,16 +28079,1202 @@
             "Category 1": 164.99,
             "Category 1 Premium": 198.0
           }
+        },
+        {
+          "timestamp": "2026-04-16T19:10:59.612348",
+          "prices": {
+            "Category 4": 93.99,
+            "Category 3": 111.0,
+            "Category 2": 122.0,
+            "Category 1": 164.99,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-16T22:36:56.529348",
+          "prices": {
+            "Category 4": 93.99,
+            "Category 3": 111.0,
+            "Category 2": 122.0,
+            "Category 1": 164.99,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-17T02:05:20.341348",
+          "prices": {
+            "Category 4": 93.99,
+            "Category 3": 111.0,
+            "Category 2": 122.0,
+            "Category 1": 164.99,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-17T05:34:16.460348",
+          "prices": {
+            "Category 4": 93.99,
+            "Category 3": 111.0,
+            "Category 2": 122.0,
+            "Category 1": 164.99,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-17T09:00:28.985348",
+          "prices": {
+            "Category 4": 93.99,
+            "Category 3": 111.0,
+            "Category 2": 122.0,
+            "Category 1": 164.99,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-17T12:25:00.940348",
+          "prices": {
+            "Category 4": 93.99,
+            "Category 3": 111.0,
+            "Category 2": 122.0,
+            "Category 1": 164.99,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-17T15:52:25.253348",
+          "prices": {
+            "Category 4": 91.0,
+            "Category 3": 113.0,
+            "Category 2": 124.0,
+            "Category 1": 162.0,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-17T19:20:54.273348",
+          "prices": {
+            "Category 4": 91.0,
+            "Category 3": 113.0,
+            "Category 2": 124.0,
+            "Category 1": 162.0,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-17T22:52:00.857348",
+          "prices": {
+            "Category 4": 91.0,
+            "Category 3": 113.0,
+            "Category 2": 124.0,
+            "Category 1": 162.0,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-18T02:22:06.450348",
+          "prices": {
+            "Category 4": 91.0,
+            "Category 3": 113.0,
+            "Category 2": 124.0,
+            "Category 1": 162.0,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-18T05:48:28.634348",
+          "prices": {
+            "Category 4": 91.0,
+            "Category 3": 113.0,
+            "Category 2": 124.0,
+            "Category 1": 162.0,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-18T09:17:04.676348",
+          "prices": {
+            "Category 4": 91.0,
+            "Category 3": 113.0,
+            "Category 2": 124.0,
+            "Category 1": 162.0,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-18T12:46:10.634348",
+          "prices": {
+            "Category 4": 91.0,
+            "Category 3": 113.0,
+            "Category 2": 124.0,
+            "Category 1": 162.0,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-18T16:16:08.947348",
+          "prices": {
+            "Category 4": 91.0,
+            "Category 3": 113.0,
+            "Category 2": 124.0,
+            "Category 1": 162.0,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-18T19:46:57.086348",
+          "prices": {
+            "Category 4": 91.0,
+            "Category 3": 113.0,
+            "Category 2": 124.0,
+            "Category 1": 162.0,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-18T23:15:17.303348",
+          "prices": {
+            "Category 4": 91.0,
+            "Category 3": 113.0,
+            "Category 2": 124.0,
+            "Category 1": 162.0,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-19T02:42:58.063348",
+          "prices": {
+            "Category 4": 91.0,
+            "Category 3": 113.0,
+            "Category 2": 124.0,
+            "Category 1": 162.0,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-19T06:15:22.578348",
+          "prices": {
+            "Category 4": 91.0,
+            "Category 3": 113.0,
+            "Category 2": 124.0,
+            "Category 1": 162.0,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-19T09:50:26.257348",
+          "prices": {
+            "Category 4": 91.0,
+            "Category 3": 113.0,
+            "Category 2": 124.0,
+            "Category 1": 162.0,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-19T13:19:08.654348",
+          "prices": {
+            "Category 4": 91.0,
+            "Category 3": 113.0,
+            "Category 2": 124.0,
+            "Category 1": 162.0,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-19T16:46:45.255348",
+          "prices": {
+            "Category 4": 91.0,
+            "Category 3": 113.0,
+            "Category 2": 124.0,
+            "Category 1": 162.0,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-19T20:15:23.122348",
+          "prices": {
+            "Category 4": 91.0,
+            "Category 3": 113.0,
+            "Category 2": 124.0,
+            "Category 1": 162.0,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-19T23:42:23.864348",
+          "prices": {
+            "Category 4": 91.0,
+            "Category 3": 113.0,
+            "Category 2": 124.0,
+            "Category 1": 162.0,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-20T03:37:26.836348",
+          "prices": {
+            "Category 4": 91.0,
+            "Category 3": 113.0,
+            "Category 2": 124.0,
+            "Category 1": 162.0,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-20T07:07:16.789348",
+          "prices": {
+            "Category 4": 91.0,
+            "Category 3": 113.0,
+            "Category 2": 124.0,
+            "Category 1": 162.0,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-20T10:34:38.775348",
+          "prices": {
+            "Category 4": 91.0,
+            "Category 3": 113.0,
+            "Category 2": 124.0,
+            "Category 1": 162.0,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-20T14:04:09.158348",
+          "prices": {
+            "Category 4": 90.0,
+            "Category 3": 113.0,
+            "Category 2": 124.0,
+            "Category 1": 157.0,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-20T17:25:26.001348",
+          "prices": {
+            "Category 4": 90.0,
+            "Category 3": 113.0,
+            "Category 2": 124.0,
+            "Category 1": 157.0,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-20T20:45:13.761348",
+          "prices": {
+            "Category 4": 90.0,
+            "Category 3": 113.0,
+            "Category 2": 124.0,
+            "Category 1": 157.0,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-21T00:14:12.844348",
+          "prices": {
+            "Category 4": 90.0,
+            "Category 3": 113.0,
+            "Category 2": 124.0,
+            "Category 1": 157.0,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-21T03:43:50.688348",
+          "prices": {
+            "Category 4": 90.0,
+            "Category 3": 113.0,
+            "Category 2": 124.0,
+            "Category 1": 157.0,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-21T07:15:23.704348",
+          "prices": {
+            "Category 4": 90.0,
+            "Category 3": 113.0,
+            "Category 2": 124.0,
+            "Category 1": 157.0,
+            "Category 1 Premium": 198.0
+          }
+        },
+        {
+          "timestamp": "2026-04-29T13:38:50.141348",
+          "prices": {
+            "Category 4": 78.99,
+            "Category 3": 100.99,
+            "Category 2": 114.95,
+            "Category 1": 153.94,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-04-29T20:10:34.152348",
+          "prices": {
+            "Category 4": 78.99,
+            "Category 3": 100.99,
+            "Category 2": 114.95,
+            "Category 1": 153.94,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-04-29T23:35:50.103348",
+          "prices": {
+            "Category 4": 78.99,
+            "Category 3": 100.99,
+            "Category 2": 114.95,
+            "Category 1": 153.94,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-04-30T03:00:45.441348",
+          "prices": {
+            "Category 4": 78.99,
+            "Category 3": 100.99,
+            "Category 2": 114.95,
+            "Category 1": 153.94,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-04-30T06:25:15.121348",
+          "prices": {
+            "Category 4": 78.99,
+            "Category 3": 100.99,
+            "Category 2": 114.95,
+            "Category 1": 153.94,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-04-30T09:49:46.669348",
+          "prices": {
+            "Category 4": 78.99,
+            "Category 3": 100.99,
+            "Category 2": 114.95,
+            "Category 1": 153.94,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-04-30T13:14:46.661348",
+          "prices": {
+            "Category 4": 80.0,
+            "Category 3": 100.99,
+            "Category 2": 114.95,
+            "Category 1": 153.94,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-04-30T16:33:40.345348",
+          "prices": {
+            "Category 4": 80.0,
+            "Category 3": 100.99,
+            "Category 2": 114.95,
+            "Category 1": 153.94,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-04-30T19:54:06.097348",
+          "prices": {
+            "Category 4": 80.0,
+            "Category 3": 100.99,
+            "Category 2": 114.95,
+            "Category 1": 153.94,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-04-30T23:19:21.717348",
+          "prices": {
+            "Category 4": 80.0,
+            "Category 3": 100.99,
+            "Category 2": 114.95,
+            "Category 1": 153.94,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-01T02:44:10.860348",
+          "prices": {
+            "Category 4": 80.0,
+            "Category 3": 100.99,
+            "Category 2": 114.95,
+            "Category 1": 153.94,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-01T06:07:36.648348",
+          "prices": {
+            "Category 4": 80.0,
+            "Category 3": 100.99,
+            "Category 2": 114.95,
+            "Category 1": 153.94,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-01T09:30:58.340348",
+          "prices": {
+            "Category 4": 81.99,
+            "Category 3": 100.99,
+            "Category 2": 114.95,
+            "Category 1": 153.94,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-01T16:03:15.269348",
+          "prices": {
+            "Category 4": 81.99,
+            "Category 3": 100.99,
+            "Category 2": 114.95,
+            "Category 1": 153.94,
+            "Category 1 Premium": 174.0,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-01T19:25:32.691348",
+          "prices": {
+            "Category 4": 81.99,
+            "Category 3": 100.99,
+            "Category 2": 114.95,
+            "Category 1": 153.94,
+            "Category 1 Premium": 174.0,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-01T22:47:20.945348",
+          "prices": {
+            "Category 4": 81.99,
+            "Category 3": 100.99,
+            "Category 2": 114.95,
+            "Category 1": 153.94,
+            "Category 1 Premium": 174.0,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-02T02:09:58.365348",
+          "prices": {
+            "Category 4": 81.99,
+            "Category 3": 100.99,
+            "Category 2": 114.95,
+            "Category 1": 153.94,
+            "Category 1 Premium": 174.0,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-02T08:30:41.473348",
+          "prices": {
+            "Category 4": 81.99,
+            "Category 3": 100.99,
+            "Category 2": 114.95,
+            "Category 1": 153.94,
+            "Category 1 Premium": 174.0,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-02T11:52:11.210348",
+          "prices": {
+            "Category 4": 81.99,
+            "Category 3": 100.99,
+            "Category 2": 114.95,
+            "Category 1": 153.94,
+            "Category 1 Premium": 174.0,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-02T15:14:12.280348",
+          "prices": {
+            "Category 4": 81.99,
+            "Category 3": 100.99,
+            "Category 2": 114.95,
+            "Category 1": 153.94,
+            "Category 1 Premium": 174.0,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-02T18:36:37.981348",
+          "prices": {
+            "Category 4": 81.99,
+            "Category 3": 100.99,
+            "Category 2": 114.95,
+            "Category 1": 153.94,
+            "Category 1 Premium": 174.0,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-02T21:56:47.575348",
+          "prices": {
+            "Category 4": 81.99,
+            "Category 3": 100.99,
+            "Category 2": 114.95,
+            "Category 1": 153.94,
+            "Category 1 Premium": 174.0,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-03T01:13:31.826348",
+          "prices": {
+            "Category 4": 81.99,
+            "Category 3": 100.99,
+            "Category 2": 114.95,
+            "Category 1": 153.94,
+            "Category 1 Premium": 174.0,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-03T07:36:29.936348",
+          "prices": {
+            "Category 4": 81.99,
+            "Category 3": 100.99,
+            "Category 2": 114.95,
+            "Category 1": 153.94,
+            "Category 1 Premium": 174.0,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-03T10:56:13.397348",
+          "prices": {
+            "Category 4": 81.99,
+            "Category 3": 100.99,
+            "Category 2": 114.95,
+            "Category 1": 153.94,
+            "Category 1 Premium": 174.0,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-03T14:16:54.973348",
+          "prices": {
+            "Category 4": 81.99,
+            "Category 3": 100.99,
+            "Category 2": 114.95,
+            "Category 1": 153.94,
+            "Category 1 Premium": 174.0,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-03T17:35:49.609348",
+          "prices": {
+            "Category 4": 81.99,
+            "Category 3": 100.99,
+            "Category 2": 114.95,
+            "Category 1": 153.94,
+            "Category 1 Premium": 174.0,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-03T20:55:08.612348",
+          "prices": {
+            "Category 4": 81.99,
+            "Category 3": 100.99,
+            "Category 2": 114.95,
+            "Category 1": 153.94,
+            "Category 1 Premium": 174.0,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-04T00:08:01.524348",
+          "prices": {
+            "Category 4": 81.97,
+            "Category 3": 100.99,
+            "Category 2": 114.95,
+            "Category 1": 153.94,
+            "Category 1 Premium": 174.0,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-04T06:27:25.474348",
+          "prices": {
+            "Category 4": 81.97,
+            "Category 3": 100.99,
+            "Category 2": 114.95,
+            "Category 1": 153.94,
+            "Category 1 Premium": 174.0,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-04T09:42:08.241348",
+          "prices": {
+            "Category 4": 81.97,
+            "Category 3": 100.99,
+            "Category 2": 114.95,
+            "Category 1": 153.94,
+            "Category 1 Premium": 174.0,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-04T13:00:50.326348",
+          "prices": {
+            "Category 4": 80.0,
+            "Category 3": 100.0,
+            "Category 2": 110.0,
+            "Category 1": 149.0,
+            "Category 1 Premium": 174.0,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-04T16:18:56.865348",
+          "prices": {
+            "Category 4": 79.99,
+            "Category 3": 99.99,
+            "Category 2": 110.0,
+            "Category 1": 149.0,
+            "Category 1 Premium": 174.0,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-04T19:37:06.768348",
+          "prices": {
+            "Category 4": 79.99,
+            "Category 3": 99.99,
+            "Category 2": 110.0,
+            "Category 1": 149.0,
+            "Category 1 Premium": 174.0,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-04T22:54:33.817348",
+          "prices": {
+            "Category 4": 79.99,
+            "Category 3": 99.99,
+            "Category 2": 110.0,
+            "Category 1": 149.0,
+            "Category 1 Premium": 174.0,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-05T02:07:25.959348",
+          "prices": {
+            "Category 4": 79.99,
+            "Category 3": 99.99,
+            "Category 2": 110.0,
+            "Category 1": 149.0,
+            "Category 1 Premium": 174.0,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-05T11:30:43.430348",
+          "prices": {
+            "Category 4": 79.99,
+            "Category 3": 99.99,
+            "Category 2": 110.0,
+            "Category 1": 149.0,
+            "Category 1 Premium": 174.0,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-05T14:49:23.802348",
+          "prices": {
+            "Category 4": 79.99,
+            "Category 3": 99.99,
+            "Category 2": 110.0,
+            "Category 1": 149.0,
+            "Category 1 Premium": 174.0,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-05T18:07:14.789348",
+          "prices": {
+            "Category 4": 79.99,
+            "Category 3": 99.99,
+            "Category 2": 110.0,
+            "Category 1": 149.0,
+            "Category 1 Premium": 174.0,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-05T21:23:41.625348",
+          "prices": {
+            "Category 4": 79.99,
+            "Category 3": 99.99,
+            "Category 2": 110.0,
+            "Category 1": 149.0,
+            "Category 1 Premium": 174.0,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-06T00:38:36.152348",
+          "prices": {
+            "Category 4": 79.0,
+            "Category 3": 99.99,
+            "Category 2": 110.0,
+            "Category 1": 149.0,
+            "Category 1 Premium": 174.0,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-06T06:59:12.750348",
+          "prices": {
+            "Category 4": 79.0,
+            "Category 3": 99.99,
+            "Category 2": 110.0,
+            "Category 1": 149.0,
+            "Category 1 Premium": 174.0,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-06T13:18:44.876348",
+          "prices": {
+            "Category 4": 79.0,
+            "Category 3": 99.99,
+            "Category 2": 110.0,
+            "Category 1": 149.0,
+            "Category 1 Premium": 174.0,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-06T16:36:21.525345",
+          "prices": {
+            "Category 4": 79.0,
+            "Category 3": 100.0,
+            "Category 2": 110.0,
+            "Category 1": 149.0,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-06T19:52:54.525348",
+          "prices": {
+            "Category 4": 79.0,
+            "Category 3": 100.0,
+            "Category 2": 110.0,
+            "Category 1": 149.0,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-06T23:07:28.470348",
+          "prices": {
+            "Category 4": 79.0,
+            "Category 3": 100.0,
+            "Category 2": 110.0,
+            "Category 1": 149.0,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-07T02:20:31.731348",
+          "prices": {
+            "Category 4": 79.0,
+            "Category 3": 100.0,
+            "Category 2": 110.0,
+            "Category 1": 149.1,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-07T05:33:40.934348",
+          "prices": {
+            "Category 4": 79.0,
+            "Category 3": 100.0,
+            "Category 2": 110.0,
+            "Category 1": 149.1,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-07T08:43:48.680348",
+          "prices": {
+            "Category 4": 79.0,
+            "Category 3": 100.0,
+            "Category 2": 110.0,
+            "Category 1": 149.1,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-07T11:56:27.423348",
+          "prices": {
+            "Category 4": 78.0,
+            "Category 3": 100.0,
+            "Category 2": 110.0,
+            "Category 1": 149.0,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-07T15:10:38.934348",
+          "prices": {
+            "Category 4": 79.0,
+            "Category 3": 110.0,
+            "Category 2": 111.0,
+            "Category 1": 150.0,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-07T19:44:17.392348",
+          "prices": {
+            "Category 4": 79.0,
+            "Category 2": 111.0,
+            "Category 3": 112.96,
+            "Category 1": 153.94,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-08T05:36:48.118348",
+          "prices": {
+            "Category 4": 79.0,
+            "Category 2": 111.0,
+            "Category 3": 112.96,
+            "Category 1": 153.94,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-09T07:13:39.561348",
+          "prices": {
+            "Category 4": 79.0,
+            "Category 2": 111.0,
+            "Category 3": 119.99,
+            "Category 1": 153.94,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 690.68,
+            "Private VIP Box": 1726.73
+          }
+        },
+        {
+          "timestamp": "2026-05-12T11:49:47.775348",
+          "prices": {
+            "Category 4": 79.0,
+            "Category 2": 111.0,
+            "Category 3": 118.94,
+            "Category 1": 150.0,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 593.99,
+            "Private VIP Box": 1485.0
+          }
+        },
+        {
+          "timestamp": "2026-05-12T15:01:27.337348",
+          "prices": {
+            "Category 4": 79.0,
+            "Category 2": 111.0,
+            "Category 3": 118.93,
+            "Category 1": 120.0,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 593.99,
+            "Private VIP Box": 1485.0
+          }
+        },
+        {
+          "timestamp": "2026-05-12T18:13:23.615566",
+          "prices": {
+            "Category 4": 79.0,
+            "Category 2": 111.0,
+            "Category 3": 118.92,
+            "Category 1": 120.0,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 593.99,
+            "Private VIP Box": 1485.0
+          }
+        },
+        {
+          "timestamp": "2026-05-12T21:25:47.599348",
+          "prices": {
+            "Category 4": 79.0,
+            "Category 2": 111.0,
+            "Category 3": 118.92,
+            "Category 1": 120.0,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 593.99,
+            "Private VIP Box": 1485.0
+          }
+        },
+        {
+          "timestamp": "2026-05-13T00:38:08.501348",
+          "prices": {
+            "Category 4": 70.0,
+            "Category 3": 80.0,
+            "Category 2": 111.0,
+            "Category 1": 120.0,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 593.99,
+            "Private VIP Box": 1485.0
+          }
+        },
+        {
+          "timestamp": "2026-05-13T03:50:28.470348",
+          "prices": {
+            "Category 4": 70.0,
+            "Category 3": 80.0,
+            "Category 2": 111.0,
+            "Category 1": 120.0,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 593.99,
+            "Private VIP Box": 1485.0
+          }
+        },
+        {
+          "timestamp": "2026-05-13T07:02:35.394348",
+          "prices": {
+            "Category 4": 70.0,
+            "Category 3": 80.0,
+            "Category 2": 111.0,
+            "Category 1": 120.0,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 593.99,
+            "Private VIP Box": 1485.0
+          }
+        },
+        {
+          "timestamp": "2026-05-13T10:15:22.111348",
+          "prices": {
+            "Category 4": 70.0,
+            "Category 3": 80.0,
+            "Category 2": 111.0,
+            "Category 1": 120.0,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 593.99,
+            "Private VIP Box": 1485.0
+          }
+        },
+        {
+          "timestamp": "2026-05-13T13:27:58.574348",
+          "prices": {
+            "Category 4": 70.0,
+            "Category 1": 85.0,
+            "Category 2": 111.0,
+            "Category 3": 118.92,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 593.99,
+            "Private VIP Box": 1485.0
+          }
+        },
+        {
+          "timestamp": "2026-05-13T16:39:01.490348",
+          "prices": {
+            "Category 4": 70.0,
+            "Category 2": 111.0,
+            "Category 3": 118.92,
+            "Category 1": 153.94,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 593.99,
+            "Private VIP Box": 1485.0
+          }
+        },
+        {
+          "timestamp": "2026-05-13T19:50:48.343348",
+          "prices": {
+            "Category 4": 67.0,
+            "Category 2": 111.0,
+            "Category 3": 118.9,
+            "Category 1": 153.94,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 593.99,
+            "Private VIP Box": 1485.0
+          }
+        },
+        {
+          "timestamp": "2026-05-13T23:02:16.166348",
+          "prices": {
+            "Category 4": 81.0,
+            "Category 2": 111.0,
+            "Category 3": 118.91,
+            "Category 1": 153.95,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 593.99,
+            "Private VIP Box": 1485.0
+          }
+        },
+        {
+          "timestamp": "2026-05-14T02:13:37.004348",
+          "prices": {
+            "Category 4": 81.0,
+            "Category 2": 111.0,
+            "Category 3": 118.91,
+            "Category 1": 153.95,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 593.99,
+            "Private VIP Box": 1485.0
+          }
+        },
+        {
+          "timestamp": "2026-05-14T05:26:18.094348",
+          "prices": {
+            "Category 4": 81.0,
+            "Category 2": 111.0,
+            "Category 3": 118.91,
+            "Category 1": 153.95,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 593.99,
+            "Private VIP Box": 1485.0
+          }
+        },
+        {
+          "timestamp": "2026-05-14T08:41:57.726348",
+          "prices": {
+            "Category 4": 81.0,
+            "Category 2": 111.0,
+            "Category 3": 118.91,
+            "Category 1": 153.95,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 593.99,
+            "Private VIP Box": 1485.0
+          }
+        },
+        {
+          "timestamp": "2026-05-14T11:56:20.509348",
+          "prices": {
+            "Category 4": 81.0,
+            "Category 2": 111.0,
+            "Category 3": 118.91,
+            "Category 1": 153.95,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 593.99,
+            "Private VIP Box": 1485.0
+          }
+        },
+        {
+          "timestamp": "2026-05-14T15:09:00.769348",
+          "prices": {
+            "Category 4": 98.0,
+            "Category 2": 114.95,
+            "Category 3": 120.0,
+            "Category 1": 153.95,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 593.99,
+            "Private VIP Box": 1485.0
+          }
+        },
+        {
+          "timestamp": "2026-05-14T18:20:32.738348",
+          "prices": {
+            "Category 2": 114.95,
+            "Category 4": 128.99,
+            "Category 3": 145.0,
+            "Category 1": 153.95,
+            "Category 1 Premium": 176.95,
+            "Real Madrid VIP Hospitality Package": 593.99,
+            "Private VIP Box": 1485.0
+          }
+        },
+        {
+          "timestamp": "2026-05-14T21:32:38.200348",
+          "prices": {
+            "Category 1": 5000.0
+          }
         }
       ],
       "latest_prices": {
-        "Category 4": 93.99,
-        "Category 3": 111.0,
-        "Category 2": 122.0,
-        "Category 1": 164.99,
-        "Category 1 Premium": 198.0
+        "Category 1": 5000.0
       },
-      "last_scraped": "2026-04-16T15:46:21.508348"
+      "last_scraped": "2026-05-14T21:32:38.200348"
     },
     {
       "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-athletic-bilbao",
@@ -31961,16 +33467,1286 @@
             "Category 1": 239.0,
             "Category 1 Premium": 253.0
           }
+        },
+        {
+          "timestamp": "2026-04-16T19:10:59.612348",
+          "prices": {
+            "Category 4": 120.0,
+            "Category 3": 129.0,
+            "Category 2": 142.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-16T22:36:56.529348",
+          "prices": {
+            "Category 4": 120.0,
+            "Category 3": 129.0,
+            "Category 2": 142.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-17T02:05:20.341348",
+          "prices": {
+            "Category 4": 120.0,
+            "Category 3": 129.0,
+            "Category 2": 142.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-17T05:34:16.460348",
+          "prices": {
+            "Category 4": 120.0,
+            "Category 3": 129.0,
+            "Category 2": 142.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-17T09:00:28.985348",
+          "prices": {
+            "Category 4": 120.0,
+            "Category 3": 129.0,
+            "Category 2": 142.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-17T12:25:00.940348",
+          "prices": {
+            "Category 4": 120.0,
+            "Category 3": 129.0,
+            "Category 2": 142.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-17T15:52:25.253348",
+          "prices": {
+            "Category 4": 113.0,
+            "Category 3": 130.0,
+            "Category 2": 140.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-17T19:20:54.273348",
+          "prices": {
+            "Category 4": 113.0,
+            "Category 3": 130.0,
+            "Category 2": 140.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-17T22:52:00.857348",
+          "prices": {
+            "Category 4": 113.0,
+            "Category 3": 130.0,
+            "Category 2": 140.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-18T02:22:06.450348",
+          "prices": {
+            "Category 4": 113.0,
+            "Category 3": 130.0,
+            "Category 2": 140.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-18T05:48:28.634348",
+          "prices": {
+            "Category 4": 113.0,
+            "Category 3": 130.0,
+            "Category 2": 140.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-18T09:17:04.676348",
+          "prices": {
+            "Category 4": 113.0,
+            "Category 3": 130.0,
+            "Category 2": 140.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-18T12:46:10.634348",
+          "prices": {
+            "Category 4": 113.0,
+            "Category 3": 130.0,
+            "Category 2": 140.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-18T16:16:08.947348",
+          "prices": {
+            "Category 4": 113.0,
+            "Category 3": 130.0,
+            "Category 2": 140.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-18T19:46:57.086348",
+          "prices": {
+            "Category 4": 113.0,
+            "Category 3": 130.0,
+            "Category 2": 140.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-18T23:15:17.303348",
+          "prices": {
+            "Category 4": 113.0,
+            "Category 3": 130.0,
+            "Category 2": 140.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-19T02:42:58.063348",
+          "prices": {
+            "Category 4": 113.0,
+            "Category 3": 130.0,
+            "Category 2": 140.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-19T06:15:22.578348",
+          "prices": {
+            "Category 4": 113.0,
+            "Category 3": 130.0,
+            "Category 2": 140.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-19T09:50:26.257348",
+          "prices": {
+            "Category 4": 113.0,
+            "Category 3": 130.0,
+            "Category 2": 140.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-19T13:19:08.654348",
+          "prices": {
+            "Category 4": 113.0,
+            "Category 3": 130.0,
+            "Category 2": 140.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-19T16:46:45.255348",
+          "prices": {
+            "Category 4": 113.0,
+            "Category 3": 130.0,
+            "Category 2": 140.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-19T20:15:23.122348",
+          "prices": {
+            "Category 4": 113.0,
+            "Category 3": 130.0,
+            "Category 2": 140.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-19T23:42:23.864348",
+          "prices": {
+            "Category 4": 113.0,
+            "Category 3": 130.0,
+            "Category 2": 140.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-20T03:37:26.836348",
+          "prices": {
+            "Category 4": 113.0,
+            "Category 3": 130.0,
+            "Category 2": 140.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-20T07:07:16.789348",
+          "prices": {
+            "Category 4": 113.0,
+            "Category 3": 130.0,
+            "Category 2": 140.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-20T10:34:38.775348",
+          "prices": {
+            "Category 4": 113.0,
+            "Category 3": 130.0,
+            "Category 2": 140.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-20T14:04:09.158348",
+          "prices": {
+            "Category 4": 113.0,
+            "Category 3": 130.0,
+            "Category 2": 140.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-20T17:25:26.001348",
+          "prices": {
+            "Category 4": 113.0,
+            "Category 3": 130.0,
+            "Category 2": 140.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-20T20:45:13.761348",
+          "prices": {
+            "Category 4": 113.0,
+            "Category 3": 120.0,
+            "Category 2": 137.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-21T00:14:12.844348",
+          "prices": {
+            "Category 4": 113.0,
+            "Category 3": 120.0,
+            "Category 2": 137.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-21T03:43:50.688348",
+          "prices": {
+            "Category 4": 113.0,
+            "Category 3": 120.0,
+            "Category 2": 137.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-21T07:15:23.704348",
+          "prices": {
+            "Category 4": 113.0,
+            "Category 3": 120.0,
+            "Category 2": 137.0,
+            "Category 1": 239.0,
+            "Category 1 Premium": 253.0
+          }
+        },
+        {
+          "timestamp": "2026-04-29T13:38:50.141348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.99,
+            "Category 2": 152.95,
+            "Category 1": 213.99,
+            "Category 1 Premium": 244.95,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-04-29T20:10:34.152348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 149.0,
+            "Category 1": 213.99,
+            "Category 1 Premium": 244.95,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-04-29T23:35:50.103348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 149.0,
+            "Category 1": 213.99,
+            "Category 1 Premium": 244.95,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-04-30T03:00:45.441348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 149.0,
+            "Category 1": 213.99,
+            "Category 1 Premium": 244.95,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-04-30T06:25:15.121348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 149.0,
+            "Category 1": 213.99,
+            "Category 1 Premium": 244.95,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-04-30T09:49:46.669348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 149.0,
+            "Category 1": 213.99,
+            "Category 1 Premium": 244.95,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-04-30T13:14:46.661348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 145.0,
+            "Category 1": 210.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-04-30T16:33:40.345348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 145.0,
+            "Category 1": 210.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-04-30T19:54:06.097348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 145.0,
+            "Category 1": 210.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-04-30T23:19:21.717348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 145.0,
+            "Category 1": 210.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-01T02:44:10.860348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 145.0,
+            "Category 1": 210.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-01T06:07:36.648348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 145.0,
+            "Category 1": 210.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-01T09:30:58.340348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 145.0,
+            "Category 1": 210.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-01T16:03:15.269348",
+          "prices": {
+            "Category 4": 115.1,
+            "Category 3": 119.0,
+            "Category 2": 145.0,
+            "Category 1": 210.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-01T19:25:32.691348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 145.0,
+            "Category 1": 210.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-01T22:47:20.945348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 145.0,
+            "Category 1": 210.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-02T02:09:58.365348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 145.0,
+            "Category 1": 210.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-02T08:30:41.473348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 145.0,
+            "Category 1": 210.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-02T11:52:11.210348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 145.0,
+            "Category 1": 210.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-02T15:14:12.280348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 145.0,
+            "Category 1": 210.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-02T18:36:37.981348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 145.0,
+            "Category 1": 210.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-02T21:56:47.575348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 145.0,
+            "Category 1": 210.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-03T01:13:31.826348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 145.0,
+            "Category 1": 210.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-03T07:36:29.936348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 145.0,
+            "Category 1": 210.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-03T10:56:13.397348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 145.0,
+            "Category 1": 210.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-03T14:16:54.973348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 145.0,
+            "Category 1": 210.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-03T17:35:49.609348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 145.0,
+            "Category 1": 210.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-03T20:55:08.612348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 145.0,
+            "Category 1": 210.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-04T00:08:01.524348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 145.0,
+            "Category 1": 209.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-04T06:27:25.474348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 145.0,
+            "Category 1": 209.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-04T09:42:08.241348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 145.0,
+            "Category 1": 209.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-04T13:00:50.326348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 145.0,
+            "Category 1": 209.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-04T16:18:56.865348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 140.0,
+            "Category 1": 209.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-04T19:37:06.768348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 140.0,
+            "Category 1": 209.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-04T22:54:33.817348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 140.0,
+            "Category 1": 209.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-05T02:07:25.959348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 140.0,
+            "Category 1": 209.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-05T11:30:43.430348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 140.0,
+            "Category 1": 209.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-05T14:49:23.802348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 140.0,
+            "Category 1": 209.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-05T18:07:14.789348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 140.0,
+            "Category 1": 209.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-05T21:23:41.625348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 140.0,
+            "Category 1": 209.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-06T00:38:36.152348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 140.0,
+            "Category 1": 209.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-06T06:59:12.750348",
+          "prices": {
+            "Category 4": 115.0,
+            "Category 3": 119.0,
+            "Category 2": 140.0,
+            "Category 1": 209.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-06T13:18:44.876348",
+          "prices": {
+            "Category 4": 111.0,
+            "Category 3": 115.0,
+            "Category 2": 135.0,
+            "Category 1": 209.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-06T16:36:21.525345",
+          "prices": {
+            "Category 4": 111.0,
+            "Category 3": 115.0,
+            "Category 2": 135.0,
+            "Category 1": 209.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-06T19:52:54.525348",
+          "prices": {
+            "Category 4": 111.0,
+            "Category 3": 115.0,
+            "Category 2": 135.0,
+            "Category 1": 209.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-06T23:07:28.470348",
+          "prices": {
+            "Category 4": 111.0,
+            "Category 3": 115.0,
+            "Category 2": 135.0,
+            "Category 1": 209.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-07T02:20:31.731348",
+          "prices": {
+            "Category 4": 111.0,
+            "Category 3": 115.0,
+            "Category 2": 135.0,
+            "Category 1": 209.0,
+            "Category 1 Premium": 241.0,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-07T05:33:40.934348",
+          "prices": {
+            "Category 4": 111.0,
+            "Category 3": 115.0,
+            "Category 2": 135.0,
+            "Category 1": 208.99,
+            "Category 1 Premium": 240.99,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-07T08:43:48.680348",
+          "prices": {
+            "Category 4": 111.0,
+            "Category 3": 115.0,
+            "Category 2": 135.0,
+            "Category 1": 208.99,
+            "Category 1 Premium": 240.99,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-07T11:56:27.423348",
+          "prices": {
+            "Category 4": 111.0,
+            "Category 3": 115.0,
+            "Category 2": 135.0,
+            "Category 1": 208.99,
+            "Category 1 Premium": 240.99,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-07T15:10:38.934348",
+          "prices": {
+            "Category 4": 111.0,
+            "Category 3": 115.0,
+            "Category 2": 135.0,
+            "Category 1": 208.99,
+            "Category 1 Premium": 240.99,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-07T19:44:17.392348",
+          "prices": {
+            "Category 4": 111.1,
+            "Category 3": 115.0,
+            "Category 2": 135.0,
+            "Category 1": 208.98,
+            "Category 1 Premium": 240.99,
+            "Real Madrid VIP Hospitality Package": 863.36,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-12T11:49:47.775348",
+          "prices": {
+            "Category 4": 115.99,
+            "Category 3": 124.0,
+            "Category 2": 144.0,
+            "Category 1": 204.99,
+            "Category 1 Premium": 237.0,
+            "Real Madrid VIP Hospitality Package": 742.5,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-12T15:01:27.337348",
+          "prices": {
+            "Category 4": 115.99,
+            "Category 3": 124.0,
+            "Category 2": 144.0,
+            "Category 1": 204.99,
+            "Category 1 Premium": 237.0,
+            "Real Madrid VIP Hospitality Package": 742.5,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-12T18:13:23.615566",
+          "prices": {
+            "Category 4": 115.99,
+            "Category 3": 124.0,
+            "Category 2": 144.0,
+            "Category 1": 204.99,
+            "Category 1 Premium": 237.0,
+            "Real Madrid VIP Hospitality Package": 742.5,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-12T21:25:47.599348",
+          "prices": {
+            "Category 4": 115.99,
+            "Category 3": 123.99,
+            "Category 2": 143.0,
+            "Category 1": 204.99,
+            "Category 1 Premium": 237.0,
+            "Real Madrid VIP Hospitality Package": 742.5,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-13T00:38:08.501348",
+          "prices": {
+            "Category 4": 115.99,
+            "Category 3": 123.99,
+            "Category 2": 143.0,
+            "Category 1": 204.99,
+            "Category 1 Premium": 237.0,
+            "Real Madrid VIP Hospitality Package": 742.5,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-13T03:50:28.470348",
+          "prices": {
+            "Category 4": 115.99,
+            "Category 3": 123.99,
+            "Category 2": 143.0,
+            "Category 1": 204.99,
+            "Category 1 Premium": 237.0,
+            "Real Madrid VIP Hospitality Package": 742.5,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-13T07:02:35.394348",
+          "prices": {
+            "Category 4": 115.99,
+            "Category 3": 123.99,
+            "Category 2": 143.0,
+            "Category 1": 204.99,
+            "Category 1 Premium": 237.0,
+            "Real Madrid VIP Hospitality Package": 742.5,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-13T10:15:22.111348",
+          "prices": {
+            "Category 4": 115.99,
+            "Category 3": 123.99,
+            "Category 2": 143.0,
+            "Category 1": 204.99,
+            "Category 1 Premium": 237.0,
+            "Real Madrid VIP Hospitality Package": 742.5,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-13T13:27:58.574348",
+          "prices": {
+            "Category 4": 115.99,
+            "Category 3": 123.99,
+            "Category 2": 143.0,
+            "Category 1": 204.99,
+            "Category 1 Premium": 237.0,
+            "Real Madrid VIP Hospitality Package": 742.5,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-13T16:39:01.490348",
+          "prices": {
+            "Category 4": 115.99,
+            "Category 3": 123.99,
+            "Category 2": 143.0,
+            "Category 1": 204.99,
+            "Category 1 Premium": 237.0,
+            "Real Madrid VIP Hospitality Package": 742.5,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-13T19:50:48.343348",
+          "prices": {
+            "Category 4": 115.99,
+            "Category 3": 123.99,
+            "Category 2": 143.0,
+            "Category 1": 204.99,
+            "Category 1 Premium": 237.0,
+            "Real Madrid VIP Hospitality Package": 742.5,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-13T23:02:16.166348",
+          "prices": {
+            "Category 4": 115.99,
+            "Category 3": 123.99,
+            "Category 2": 143.0,
+            "Category 1": 204.99,
+            "Category 1 Premium": 237.0,
+            "Real Madrid VIP Hospitality Package": 742.5,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-14T02:13:37.004348",
+          "prices": {
+            "Category 4": 115.99,
+            "Category 3": 123.99,
+            "Category 2": 143.0,
+            "Category 1": 204.99,
+            "Category 1 Premium": 237.0,
+            "Real Madrid VIP Hospitality Package": 742.5,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-14T05:26:18.094348",
+          "prices": {
+            "Category 4": 115.99,
+            "Category 3": 123.99,
+            "Category 2": 143.0,
+            "Category 1": 204.99,
+            "Category 1 Premium": 237.0,
+            "Real Madrid VIP Hospitality Package": 742.5,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-14T08:41:57.726348",
+          "prices": {
+            "Category 4": 115.99,
+            "Category 3": 123.99,
+            "Category 2": 143.0,
+            "Category 1": 204.99,
+            "Category 1 Premium": 237.0,
+            "Real Madrid VIP Hospitality Package": 742.5,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-14T11:56:20.509348",
+          "prices": {
+            "Category 4": 115.99,
+            "Category 3": 123.99,
+            "Category 2": 143.0,
+            "Category 1": 204.99,
+            "Category 1 Premium": 237.0,
+            "Real Madrid VIP Hospitality Package": 742.5,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-14T15:09:00.769348",
+          "prices": {
+            "Category 4": 115.99,
+            "Category 3": 123.99,
+            "Category 2": 142.99,
+            "Category 1": 204.0,
+            "Category 1 Premium": 237.0,
+            "Real Madrid VIP Hospitality Package": 742.5,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-14T18:20:32.738348",
+          "prices": {
+            "Category 4": 115.99,
+            "Category 3": 123.99,
+            "Category 2": 142.99,
+            "Category 1": 204.0,
+            "Category 1 Premium": 237.0,
+            "Real Madrid VIP Hospitality Package": 742.5,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-14T21:32:38.200348",
+          "prices": {
+            "Category 4": 115.99,
+            "Category 3": 123.99,
+            "Category 2": 142.99,
+            "Category 1": 204.0,
+            "Category 1 Premium": 237.0,
+            "Real Madrid VIP Hospitality Package": 742.5,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-17T11:57:27.056600",
+          "prices": {
+            "Category 4": 115.99,
+            "Category 3": 123.99,
+            "Category 2": 142.95,
+            "Category 1": 203.55,
+            "Category 1 Premium": 236.0,
+            "Real Madrid VIP Hospitality Package": 742.5,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-17T15:07:04.344600",
+          "prices": {
+            "Category 4": 115.98,
+            "Category 3": 123.98,
+            "Category 2": 142.94,
+            "Category 1": 203.54,
+            "Category 1 Premium": 235.99,
+            "Real Madrid VIP Hospitality Package": 742.5,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-17T18:16:57.430600",
+          "prices": {
+            "Category 4": 115.98,
+            "Category 3": 123.98,
+            "Category 2": 142.94,
+            "Category 1": 203.54,
+            "Category 1 Premium": 235.99,
+            "Real Madrid VIP Hospitality Package": 742.5,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-17T21:26:12.362600",
+          "prices": {
+            "Category 4": 115.98,
+            "Category 3": 123.98,
+            "Category 2": 142.94,
+            "Category 1": 203.54,
+            "Category 1 Premium": 235.99,
+            "Real Madrid VIP Hospitality Package": 742.5,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-18T00:34:29.269600",
+          "prices": {
+            "Category 4": 115.98,
+            "Category 3": 123.98,
+            "Category 2": 142.94,
+            "Category 1": 203.54,
+            "Category 1 Premium": 235.99,
+            "Real Madrid VIP Hospitality Package": 742.5,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-18T03:42:54.880600",
+          "prices": {
+            "Category 4": 115.98,
+            "Category 3": 123.98,
+            "Category 2": 142.94,
+            "Category 1": 203.54,
+            "Category 1 Premium": 235.99,
+            "Real Madrid VIP Hospitality Package": 742.5,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-18T06:51:57.646600",
+          "prices": {
+            "Category 4": 115.98,
+            "Category 3": 123.98,
+            "Category 2": 142.94,
+            "Category 1": 203.54,
+            "Category 1 Premium": 235.99,
+            "Real Madrid VIP Hospitality Package": 742.5,
+            "Private VIP Box": 2302.3
+          }
+        },
+        {
+          "timestamp": "2026-05-18T10:01:31.019600",
+          "prices": {
+            "Category 4": 115.98,
+            "Category 3": 123.98,
+            "Category 2": 142.94,
+            "Category 1": 203.54,
+            "Category 1 Premium": 235.99,
+            "Real Madrid VIP Hospitality Package": 742.5,
+            "Private VIP Box": 2302.3
+          }
         }
       ],
       "latest_prices": {
-        "Category 4": 120.0,
-        "Category 3": 129.0,
-        "Category 2": 142.0,
-        "Category 1": 239.0,
-        "Category 1 Premium": 253.0
+        "Category 4": 115.98,
+        "Category 3": 123.98,
+        "Category 2": 142.94,
+        "Category 1": 203.54,
+        "Category 1 Premium": 235.99,
+        "Real Madrid VIP Hospitality Package": 742.5,
+        "Private VIP Box": 2302.3
       },
-      "last_scraped": "2026-04-16T15:46:21.508348"
+      "last_scraped": "2026-05-18T10:01:31.019600"
     },
     {
       "url": "https://www.footballticketnet.com/champions-league/real-madrid-vs-sl-benfica",
@@ -34751,7 +37527,195 @@
         "Real Madrid VIP Hospitality Package": 1350.0
       },
       "last_scraped": "2026-04-05T14:46:44.207414"
+    },
+    {
+      "url": "https://www.footballticketnet.com/corazon-classic-match/real-madrid-legends-vs-inter-milan-legends",
+      "match_name": "Real Madrid Legends Vs Inter Milan Legends",
+      "team": "Real Madrid",
+      "opponent": "Inter Milan Legends",
+      "date": "13/06/26",
+      "is_home": true,
+      "price_history": [
+        {
+          "timestamp": "2026-05-09T07:13:39.561348",
+          "prices": {
+            "Category 1": 80.0
+          }
+        },
+        {
+          "timestamp": "2026-05-12T11:49:47.775348",
+          "prices": {
+            "Category 1": 80.0
+          }
+        },
+        {
+          "timestamp": "2026-05-12T15:01:27.337348",
+          "prices": {
+            "Category 1": 80.0
+          }
+        },
+        {
+          "timestamp": "2026-05-12T18:13:23.615566",
+          "prices": {
+            "Category 1": 80.0
+          }
+        },
+        {
+          "timestamp": "2026-05-12T21:25:47.599348",
+          "prices": {
+            "Category 1": 80.0
+          }
+        },
+        {
+          "timestamp": "2026-05-13T00:38:08.501348",
+          "prices": {
+            "Category 1": 80.0
+          }
+        },
+        {
+          "timestamp": "2026-05-13T03:50:28.470348",
+          "prices": {
+            "Category 1": 80.0
+          }
+        },
+        {
+          "timestamp": "2026-05-13T07:02:35.394348",
+          "prices": {
+            "Category 1": 80.0
+          }
+        },
+        {
+          "timestamp": "2026-05-13T10:15:22.111348",
+          "prices": {
+            "Category 1": 80.0
+          }
+        },
+        {
+          "timestamp": "2026-05-13T13:27:58.574348",
+          "prices": {
+            "Category 1": 80.0
+          }
+        },
+        {
+          "timestamp": "2026-05-13T16:39:01.490348",
+          "prices": {
+            "Category 1": 80.0
+          }
+        },
+        {
+          "timestamp": "2026-05-13T19:50:48.343348",
+          "prices": {
+            "Category 1": 80.0
+          }
+        },
+        {
+          "timestamp": "2026-05-13T23:02:16.166348",
+          "prices": {
+            "Category 1": 80.0
+          }
+        },
+        {
+          "timestamp": "2026-05-14T02:13:37.004348",
+          "prices": {
+            "Category 1": 80.0
+          }
+        },
+        {
+          "timestamp": "2026-05-14T05:26:18.094348",
+          "prices": {
+            "Category 1": 80.0
+          }
+        },
+        {
+          "timestamp": "2026-05-14T08:41:57.726348",
+          "prices": {
+            "Category 1": 80.0
+          }
+        },
+        {
+          "timestamp": "2026-05-14T11:56:20.509348",
+          "prices": {
+            "Category 1": 80.0
+          }
+        },
+        {
+          "timestamp": "2026-05-14T15:09:00.769348",
+          "prices": {
+            "Category 1": 80.0
+          }
+        },
+        {
+          "timestamp": "2026-05-14T18:20:32.738348",
+          "prices": {
+            "Category 1": 80.0
+          }
+        },
+        {
+          "timestamp": "2026-05-14T21:32:38.200348",
+          "prices": {
+            "Category 1": 80.0
+          }
+        },
+        {
+          "timestamp": "2026-05-15T01:30:35.046348",
+          "prices": {
+            "Category 1": 80.0
+          }
+        },
+        {
+          "timestamp": "2026-05-17T11:57:27.056600",
+          "prices": {
+            "Category 1": 80.0
+          }
+        },
+        {
+          "timestamp": "2026-05-17T15:07:04.344600",
+          "prices": {
+            "Category 1": 80.0
+          }
+        },
+        {
+          "timestamp": "2026-05-17T18:16:57.430600",
+          "prices": {
+            "Category 1": 80.0
+          }
+        },
+        {
+          "timestamp": "2026-05-17T21:26:12.362600",
+          "prices": {
+            "Category 1": 80.0
+          }
+        },
+        {
+          "timestamp": "2026-05-18T00:34:29.269600",
+          "prices": {
+            "Category 1": 80.0
+          }
+        },
+        {
+          "timestamp": "2026-05-18T03:42:54.880600",
+          "prices": {
+            "Category 1": 80.0
+          }
+        },
+        {
+          "timestamp": "2026-05-18T06:51:57.646600",
+          "prices": {
+            "Category 1": 80.0
+          }
+        },
+        {
+          "timestamp": "2026-05-18T10:01:31.019600",
+          "prices": {
+            "Category 1": 80.0
+          }
+        }
+      ],
+      "latest_prices": {
+        "Category 1": 80.0
+      },
+      "last_scraped": "2026-05-18T10:01:31.019600"
     }
   ],
-  "last_updated": "2026-04-16T15:46:21.508348"
+  "last_updated": "2026-05-18T10:01:31.019600"
 }
