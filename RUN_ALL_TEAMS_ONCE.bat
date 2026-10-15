@@ -1,66 +1,12 @@
 @echo off
-REM Change to the script's directory
+REM One scrape cycle, then exit. Use this from Windows Task Scheduler (no pause, logs to scraper.log).
 cd /d "%~dp0"
-
-echo ============================================================
-echo RUN ALL TEAMS SCRAPER - FootballTicketNet (ONE TIME)
-echo Scrapes all teams from teams_list.json (or *_prices.json files)
-echo Runs once and exits
-echo ============================================================
-echo.
-
-REM Check Python (Windows 7 compatible)
-py --version >nul 2>&1
-if errorlevel 1 (
-    python --version >nul 2>&1
-    if errorlevel 1 (
-        echo [ERROR] Python not found!
-        echo Please install Python 3.7.9 first.
-        pause
-        exit /b 1
-    )
-    set PYTHON_CMD=python
+if exist "C:\PythonEnvs\ticketlive\Scripts\python.exe" (
+    set PY=C:\PythonEnvs\ticketlive\Scripts\python.exe
 ) else (
-    set PYTHON_CMD=py
+    set PY=py
 )
-
-REM Check if virtual environment exists
-if exist "C:\PythonEnvs\ticketlive\Scripts\activate.bat" (
-    echo [INFO] Activating virtual environment...
-    call C:\PythonEnvs\ticketlive\Scripts\activate.bat
-    set PYTHON_CMD=python
-) else (
-    echo [INFO] No virtual environment found, using system Python...
-)
-
-echo.
-echo [START] Running all teams from teams_list.json (or *_prices.json files)...
-echo.
-
-REM Check if the script exists
-if not exist "auto_scraper_teams.py" (
-    echo [ERROR] auto_scraper_teams.py not found in current directory!
-    echo Current directory: %CD%
-    echo.
-    echo Please make sure you're running this from the project root directory.
-    pause
-    exit /b 1
-)
-
-REM Run once (not continuous loop)
-%PYTHON_CMD% auto_scraper_teams.py --once
-
-if errorlevel 1 (
-    echo.
-    echo [ERROR] Scraper failed with error code: %ERRORLEVEL%
-    echo.
-    pause
-    exit /b 1
-)
-
-echo.
-echo ============================================================
-echo [DONE] All teams scraper finished!
-echo ============================================================
-pause
-
+REM Chrome 109 is the last Chrome on Windows 7 - keep chromedriver on the same major.
+if not defined CHROME_MAJOR set CHROME_MAJOR=109
+%PY% auto_scraper_teams.py --once >> scraper.log 2>&1
+exit /b %ERRORLEVEL%

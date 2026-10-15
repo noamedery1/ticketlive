@@ -2,6 +2,7 @@
 Cleanup script to remove old block-based price data from team JSON files.
 Keeps only main category prices (Category 1, Category 2, etc.) in the new format: {category: lowest_price}
 """
+from __future__ import annotations  # Python 3.8 (Windows 7) compatible type hints
 import json
 import os
 import re

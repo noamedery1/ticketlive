@@ -32,8 +32,8 @@ export function formatMoney(value, currency = 'USD', locale = 'en-GB', digits = 
 // 'DD/MM/YY' (scraper format) or ISO 'YYYY-MM-DD' -> Date
 export function parseDate(s) {
   if (!s) return null
-  let m = /^(\d{1,2})\/(\d{1,2})\/(\d{2})$/.exec(s)
-  if (m) return new Date(2000 + Number(m[3]), Number(m[2]) - 1, Number(m[1]))
+  let m = /^(\d{1,2})\/(\d{1,2})\/(\d{2}|\d{4})$/.exec(s)
+  if (m) return new Date(Number(m[3]) < 100 ? 2000 + Number(m[3]) : Number(m[3]), Number(m[2]) - 1, Number(m[1]))
   m = /^(\d{4})-(\d{2})-(\d{2})/.exec(s)
   if (m) return new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]))
   return null

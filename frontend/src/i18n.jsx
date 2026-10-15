@@ -4,7 +4,6 @@ const STRINGS = {
   en: {
     overview: 'Overview',
     teams: 'Teams',
-    offers: 'Offers',
     switchLang: 'עברית',
     allTeams: 'All teams',
     searchGames: 'Search games',
@@ -56,7 +55,6 @@ const STRINGS = {
   he: {
     overview: 'סקירה',
     teams: 'קבוצות',
-    offers: 'הצעות',
     switchLang: 'English',
     allTeams: 'כל הקבוצות',
     searchGames: 'חיפוש משחק',

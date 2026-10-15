@@ -1,20 +1,15 @@
 import { useState } from 'react'
 import Overview from './Overview'
 import TeamView from './TeamView'
-import TicketOffersManager from './TicketOffersManager'
 import { LangProvider, useLang } from './i18n'
 import './App.css'
 
 function Shell() {
   const { t, lang, setLang } = useLang()
-  // The browser extension opens ?raw=...&autoparse=true -> go straight to offers.
-  const [view, setView] = useState(() => {
-    const params = new URLSearchParams(window.location.search)
-    return params.get('raw') || params.get('autoparse') ? 'offers' : 'overview'
-  })
+  const [view, setView] = useState('overview')
   const [target, setTarget] = useState(null) // game opened from the overview
 
-  const tabs = [['overview', t('overview')], ['teams', t('teams')], ['offers', t('offers')]]
+  const tabs = [['overview', t('overview')], ['teams', t('teams')]]
 
   return (
     <div className="shell">
@@ -40,7 +35,6 @@ function Shell() {
       <main className="main">
         {view === 'overview' && <Overview onOpenGame={(teamKey, url) => { setTarget({ teamKey, url }); setView('teams') }} />}
         {view === 'teams' && <TeamView key={target ? `${target.teamKey}|${target.url}` : 'teams'} target={target} />}
-        {view === 'offers' && <div className="offers-wrap" dir="ltr"><TicketOffersManager /></div>}
       </main>
     </div>
   )

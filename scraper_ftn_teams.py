@@ -150,7 +150,9 @@ def get_driver():
         
         driver = uc.Chrome(
             options=options,
-            version_main=None,
+            # Pin to the installed Chrome major (e.g. CHROME_MAJOR=109 on Windows 7), otherwise
+            # undetected_chromedriver may fetch a driver for the newest Chrome.
+            version_main=int(os.environ['CHROME_MAJOR']) if os.environ.get('CHROME_MAJOR') else None,
             browser_executable_path=browser_path,
             driver_executable_path=driver_path,
             use_subprocess=False
@@ -1199,7 +1201,7 @@ def run_team_scraper(team_key='arsenal'):
     TEAMS_CONFIG = get_teams_config()
     if team_key not in TEAMS_CONFIG:
         print(f'❌ Team "{team_key}" not found in config', flush=True)
-        return
+        return False
     
     team_config = TEAMS_CONFIG[team_key]
     team_url = team_config['url']
@@ -1212,10 +1214,12 @@ def run_team_scraper(team_key='arsenal'):
     existing_data = {}
     if os.path.exists(OUTPUT_FILE):
         try:
-            with open(OUTPUT_FILE, 'r') as f:
+            with open(OUTPUT_FILE, 'r', encoding='utf-8') as f:
                 existing_data = json.load(f)
-        except:
-            existing_data = {}
+        except Exception as e:
+            # Never fall back to {} here: saving would wipe every other team's history.
+            print(f'❌ {OUTPUT_FILE} is unreadable ({e}). Fix or restore it from git, then rerun.', flush=True)
+            return False
     
     # Initialize team data if not exists
     if team_key not in existing_data:
@@ -1251,11 +1255,15 @@ def run_team_scraper(team_key='arsenal'):
     driver = get_driver()
     if not driver:
         print('❌ Failed to initialize driver', flush=True)
-        return
+        return False
     
     try:
         # Step 1: Extract all home game URLs from team page (with pagination)
         current_games = extract_home_game_urls(driver, team_url, team_name)
+        if not current_games:
+            # Usually a block page / layout change, not a team with zero fixtures. Keep old data.
+            print('❌ No games found on team page - not saving', flush=True)
+            return False
         
         # Step 2: Update game list
         # - Add new games
@@ -1274,11 +1282,8 @@ def run_team_scraper(team_key='arsenal'):
                 parts = date_str.split('/')
                 if len(parts) == 3:
                     day, month, year = int(parts[0]), int(parts[1]), int(parts[2])
-                    # Convert 2-digit year to 4-digit (assuming 20xx for years < 50, 19xx otherwise)
-                    if year < 50:
+                    if year < 100:  # "27/12/25"; FTN also sends "17/03/2026"
                         year += 2000
-                    else:
-                        year += 1900
                     return datetime(year, month, day)
             except Exception:
                 pass
@@ -1356,26 +1361,24 @@ def run_team_scraper(team_key='arsenal'):
         existing_data[team_key]['games'] = list(existing_games.values())
         existing_data[team_key]['last_updated'] = run_timestamp
         
-        # Save to main teams file
-        with open(OUTPUT_FILE, 'w') as f:
+        # Atomic save: a crash mid-write must not leave a half-written file.
+        tmp_file = OUTPUT_FILE + '.tmp'
+        with open(tmp_file, 'w', encoding='utf-8') as f:
             json.dump(existing_data, f, indent=2)
-        
-        # Also save team-specific file (for backward compatibility and easier access)
-        team_specific_file = f'{team_key}_prices.json'
-        team_data = existing_data[team_key]
-        with open(team_specific_file, 'w') as f:
-            json.dump(team_data, f, indent=2)
-        print(f'   💾 Saved {team_name} data to {team_specific_file}', flush=True)
+        os.replace(tmp_file, OUTPUT_FILE)
+        print(f'   💾 Saved {team_name} data to {OUTPUT_FILE}', flush=True)
         
         print(f'\n✅ Scraper complete!', flush=True)
         print(f'   Total games: {len(existing_games)}', flush=True)
         print(f'   Active games: {len(current_urls)}', flush=True)
         print(f'   Removed games: {len(removed_games)}', flush=True)
+        return True
         
     except Exception as e:
         print(f'❌ Error in scraper: {e}', flush=True)
         import traceback
         traceback.print_exc()
+        return False
     finally:
         try:
             driver.quit()
@@ -1385,4 +1388,5 @@ def run_team_scraper(team_key='arsenal'):
 if __name__ == '__main__':
     # Default to arsenal, can be overridden
     team = sys.argv[1] if len(sys.argv) > 1 else 'arsenal'
-    run_team_scraper(team)
+    # Non-zero exit so auto_scraper_teams.py skips committing a failed run.
+    sys.exit(0 if run_team_scraper(team) else 1)

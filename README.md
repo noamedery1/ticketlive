@@ -20,7 +20,6 @@ scraper_ftn_teams.py  ──>  ftn_teams_data.json  ──>  FastAPI  ──>  R
 - **Frontend:** React + Recharts (`frontend/`), English and Hebrew.
   - *Overview* — every upcoming game, cheapest ticket, 7-day change.
   - *Teams* — per-game price history by category.
-  - *Offers* — paste sellers' WhatsApp offers, parse, search, export to Excel.
 
 ## Running
 
@@ -37,42 +36,21 @@ Frontend dev server (proxies the API to localhost:8000):
 cd frontend && npm install && npm run dev
 ```
 
-Scrapers: `RUN_ALL_TEAMS.bat` / `RUN_ALL_TEAMS_ONCE.bat`.
+Scrapers: see [`SCRAPER_SETUP.md`](SCRAPER_SETUP.md).
 
 Smoke test: `python test_server.py`
 
-## Configuration
+## Secrets
 
-```bash
-cp .env.example .env
-```
-
-- `ADMIN_PASSWORD` — password for the Offers tab and `/api/tickets/*`
-  (browser asks for it; any username). Unset = offers API disabled.
-  Set it in Railway too.
-
-`.env` is gitignored and must stay that way. An earlier commit tracked it
+No configuration is needed. `.env` is gitignored and must stay that way. An earlier commit tracked it
 and exposed a live key; that key has been revoked. If you leak another one,
 revoke it rather than only deleting the file — the value stays in history.
-
-## Chromedriver
-
-The scrapers need a Chromedriver matching your installed Chrome:
-
-```bash
-python download_chromedriver.py
-```
-
-If it breaks after a Chrome update, see `FIX_CHROMEDRIVER.md` and the
-`FIX_CHROMEDRIVER*.bat` helpers.
 
 ## Guides
 
 - [`ADD_TEAM_GUIDE.md`](ADD_TEAM_GUIDE.md) — adding a team to `teams_list.json`
 - [`TEAMS_SCRAPER_GUIDE.md`](TEAMS_SCRAPER_GUIDE.md) — how the teams scraper works
-- [`TICKET_OFFERS_MANAGER.md`](TICKET_OFFERS_MANAGER.md) — offers management
-- [`DEPLOYMENT_READY.md`](DEPLOYMENT_READY.md) — deployment checklist
-- [`INSTALL_WINDOWS7.md`](INSTALL_WINDOWS7.md), [`MANUAL_PIP_INSTALL.md`](MANUAL_PIP_INSTALL.md) — install notes
+- [`SCRAPER_SETUP.md`](SCRAPER_SETUP.md) — setting up the scraper machine
 
 ## Scraping responsibly
 

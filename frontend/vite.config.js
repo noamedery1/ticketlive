@@ -6,7 +6,7 @@ const api = { target: process.env.API_TARGET || 'http://localhost:8000', changeO
 
 export default defineConfig({
   plugins: [react()],
-  server: { proxy: { '/teams': api, '/api': api, '/health': api } },
+  server: { proxy: { '/teams': api, '/health': api } },
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
