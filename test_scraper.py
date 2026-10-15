@@ -79,6 +79,14 @@ assert len(page_loads) == 1 + len(s.BACKOFF_MINUTES)  # gave up after the retrie
 last = {g['url']: g['price_history'][-1]['prices'] for g in data()['arsenal']['games']}
 assert last[EVENTS['b']['url']] == {s.FALLBACK_CATEGORY: 150.0}
 
+# 4b) Giving up started a cooldown: the next team loads no game pages and does not wait.
+assert s.cooling_down()
+page_loads.clear()
+s.list_events = lambda d, t: [dict(EVENTS['a'], from_price=70.0)]
+assert s.run_team_scraper('arsenal')
+assert page_loads == []
+os.remove(s.COOLDOWN_FILE)
+
 # 5) Another team lists a game scraped minutes ago: reused, not loaded again.
 page_loads.clear()
 s.list_events = lambda d, t: [dict(EVENTS['b'], from_price=999.0)]  # "price changed" -> wants details

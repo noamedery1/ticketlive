@@ -222,6 +222,8 @@ def scrape_event(driver, url, currency):
 
 DETAIL_MAX_AGE_HOURS = 12   # categories are refreshed at least this often
 BACKOFF_MINUTES = (4, 8)     # the bot check cleared after ~4 min in practice
+COOLDOWN_MINUTES = 60        # after giving up, no game pages (any team) for this long
+COOLDOWN_FILE = 'blocked_until.txt'
 DETAIL_PRIORITY = ['new game', 'price changed', 'refresh', None]
 SHARED_FIELDS = ('match_name', 'opponent', 'date', 'start', 'competition', 'currency', 'latest_prices', 'last_detail')
 
@@ -274,6 +276,21 @@ def scrape_with_backoff(driver, url, currency):
     return BLOCKED
 
 
+def cooling_down():
+    """True while a recent run gave up on the bot check: skip game pages, don't knock again."""
+    try:
+        with open(COOLDOWN_FILE, encoding='utf-8') as f:
+            return datetime.now() < datetime.fromisoformat(f.read().strip())
+    except (OSError, ValueError):
+        return False
+
+
+def start_cooldown():
+    from datetime import timedelta
+    with open(COOLDOWN_FILE, 'w', encoding='utf-8') as f:
+        f.write((datetime.now() + timedelta(minutes=COOLDOWN_MINUTES)).isoformat())
+
+
 def run_team_scraper(team_key):
     team = load_team(team_key)
     if not team:
@@ -311,7 +328,9 @@ def run_team_scraper(team_key):
         for ev in events:
             ev['why'] = detail_reason(games.get(ev['url']), ev)
         events.sort(key=lambda ev: DETAIL_PRIORITY.index(ev['why']))
-        gave_up = False
+        gave_up = cooling_down()
+        if gave_up:
+            log(f'   ⏸ Bot check seen recently - cheapest prices only until {open(COOLDOWN_FILE).read().strip()[11:16]}')
         for i, ev in enumerate(events, 1):
             url = ev['url']
             log(f'   [{i}/{len(events)}] {url.split("/")[-3]}' + (f' ({ev["why"]})' if ev['why'] else ''))
@@ -325,8 +344,9 @@ def run_team_scraper(team_key):
                 elif not gave_up:
                     info = scrape_with_backoff(driver, url, team.get('currency'))
                     if info == BLOCKED:
-                        log('      🛑 Still blocked - cheapest prices only for the rest of this run')
+                        log(f'      🛑 Still blocked - cheapest prices only for the next {COOLDOWN_MINUTES} min')
                         gave_up, info = True, None
+                        start_cooldown()
             if info:
                 prices = info.pop('latest_prices')
                 game.update(info)
