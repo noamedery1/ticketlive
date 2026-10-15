@@ -309,6 +309,12 @@ def get_game_prices(team_key: str, game_index: int):
         'currency': game.get('currency') or get_team_currency(team_key),
     }
 
+@app.get('/status')
+def scraper_status():
+    """Last scraper cycle, as written by auto_scraper_teams.py (None before the first one)."""
+    return load_data('scraper_status.json', None)
+
+
 @app.get('/health')
 def health_check():
     """Lightweight health check for Railway"""

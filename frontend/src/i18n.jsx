@@ -51,6 +51,10 @@ const STRINGS = {
     close: 'Close',
     selectGame: 'Pick a game to see its prices.',
     viewOnSite: 'Open on FootballTicketNet',
+    lastRun: (ago) => `Prices last checked ${ago}`,
+    staleRun: (ago) => `Prices last checked ${ago} - the scraper may have stopped`,
+    hoursAgo: (h) => (h < 1 ? 'less than an hour ago' : `${h} h ago`),
+    partialRun: 'some games got only the cheapest price (site bot check)',
   },
   he: {
     overview: 'סקירה',
@@ -102,6 +106,10 @@ const STRINGS = {
     close: 'סגור',
     selectGame: 'בחרו משחק כדי לראות מחירים.',
     viewOnSite: 'פתח ב-FootballTicketNet',
+    lastRun: (ago) => `המחירים נבדקו לאחרונה ${ago}`,
+    staleRun: (ago) => `המחירים נבדקו לאחרונה ${ago} - ייתכן שהסורק הפסיק לרוץ`,
+    hoursAgo: (h) => (h < 1 ? 'לפני פחות משעה' : `לפני ${h} שעות`),
+    partialRun: 'בחלק מהמשחקים נשמר רק המחיר הזול (בדיקת בוטים באתר)',
   },
 }
 

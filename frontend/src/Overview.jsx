@@ -3,6 +3,23 @@ import axios from 'axios'
 import { useLang } from './i18n'
 import { Change, DateStub, Sparkline, daysUntil, formatMoney, parseDate } from './ui'
 
+// Scraper health, so it can be checked from a phone. Runs every 3 h; 6 h = two missed runs.
+function ScraperStatus() {
+  const { t } = useLang()
+  const [status, setStatus] = useState(null)
+  useEffect(() => { axios.get('/status').then((res) => setStatus(res.data)).catch(() => {}) }, [])
+  if (!status?.finished) return null
+  const hours = Math.floor((Date.now() - new Date(status.finished)) / 3600000)
+  const ago = t('hoursAgo', hours)
+  const stale = hours >= 6
+  return (
+    <p className={stale ? 'run-status stale' : 'run-status'} role={stale ? 'alert' : undefined}>
+      {stale ? t('staleRun', ago) : t('lastRun', ago)}
+      {!stale && status.games_cheapest_only > 0 && ` · ${t('partialRun')}`}
+    </p>
+  )
+}
+
 export default function Overview({ onOpenGame }) {
   const { t, locale } = useLang()
   const [rows, setRows] = useState(null)
@@ -40,10 +57,11 @@ export default function Overview({ onOpenGame }) {
 
   if (error) return <div className="empty">{t('loadError')}</div>
   if (!rows) return <div className="empty">{t('loading')}</div>
-  if (!rows.length) return <div className="empty">{t('noGames')}</div>
+  if (!rows.length) return <div className="page"><ScraperStatus /><div className="empty">{t('noGames')}</div></div>
 
   return (
     <div className="page">
+      <ScraperStatus />
       <div className="toolbar">
         <div className="chips" role="group" aria-label={t('team')}>
           <button className={team === 'all' ? 'chip on' : 'chip'} onClick={() => setTeam('all')}>

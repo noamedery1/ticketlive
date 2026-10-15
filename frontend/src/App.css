@@ -217,6 +217,15 @@
 .price { font-size: 1.1rem; font-weight: 600; color: var(--text-strong); }
 .price .muted { font-size: 0.85rem; font-weight: 400; }
 
+.run-status { margin: 0 0 14px; font-size: 0.85rem; color: var(--muted); }
+.run-status.stale {
+  color: var(--text-strong);
+  background: rgba(240, 113, 103, 0.14);
+  border: 1px solid var(--bad);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+}
+
 .footnote { color: var(--faint); font-size: 0.82rem; margin-top: 12px; }
 
 /* ===== Teams ===== */

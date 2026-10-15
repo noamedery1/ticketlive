@@ -27,6 +27,8 @@ if sys.platform == 'win32':
 SCRAPE_INTERVAL_HOURS = 3.0
 TEAM_TIMEOUT_MINUTES = 45   # a hung Chrome gets killed after this
 OUTPUT_FILE = 'ftn_teams_data.json'
+STATUS_FILE = 'scraper_status.json'   # pushed with the data; the site shows it
+COOLDOWN_FILE = 'blocked_until.txt'   # written by scraper_ftn_teams.py
 TEAMS_LIST_FILE = 'teams_list.json'
 PYTHON_CMD = sys.executable or ('py' if shutil.which('py') else 'python')
 
@@ -67,6 +69,45 @@ def kill_tree(pid):
             pass
 
 
+COUNTS = {}
+
+
+def cleanup_chrome():
+    """Kill Chrome/chromedriver left behind by a crashed run. Only the scraper's own Chrome
+    (it uses the chrome-profile folder), never a Chrome someone opened by hand."""
+    if sys.platform != 'win32':
+        return
+    for where in ("name='chromedriver.exe'",
+                  "name='chrome.exe' and commandline like '%chrome-profile%'"):
+        try:
+            subprocess.run(['wmic', 'process', 'where', where, 'call', 'terminate'],
+                           capture_output=True, timeout=60)
+        except Exception:
+            pass
+
+
+def write_status(started, ok_teams, failed_teams):
+    try:
+        with open(COOLDOWN_FILE, encoding='utf-8') as f:
+            blocked_until = f.read().strip()
+        if blocked_until < datetime.now().isoformat():
+            blocked_until = None
+    except OSError:
+        blocked_until = None
+    status = {
+        'started': started,
+        'finished': datetime.now().isoformat(timespec='seconds'),
+        'ok': ok_teams,
+        'failed': failed_teams,
+        # only teams whose run was saved
+        'games_full': sum(COUNTS.get(t, {}).get('full', 0) for t in ok_teams),
+        'games_cheapest_only': sum(COUNTS.get(t, {}).get('cheapest_only', 0) for t in ok_teams),
+        'bot_check_until': blocked_until,
+    }
+    with open(STATUS_FILE, 'w', encoding='utf-8') as f:
+        json.dump(status, f, indent=1)
+
+
 def run_team_scraper(team_key):
     log(f'[ACTION] Scraping {team_key}...')
     kwargs = {} if sys.platform == 'win32' else {'start_new_session': True}
@@ -83,12 +124,18 @@ def run_team_scraper(team_key):
 
     watchdog = threading.Timer(TEAM_TIMEOUT_MINUTES * 60, on_timeout)
     watchdog.start()
+    counts = {'full': 0, 'cheapest_only': 0}
     try:
         for line in process.stdout:
             print(line.rstrip(), flush=True)
+            if 'categories, from' in line:
+                counts['full'] += 1
+            elif 'cheapest only:' in line:
+                counts['cheapest_only'] += 1
         process.wait()
     finally:
         watchdog.cancel()
+    COUNTS[team_key] = counts
 
     if timed_out.is_set():
         log(f'[ERROR] {team_key}: killed after {TEAM_TIMEOUT_MINUTES} min')
@@ -101,7 +148,7 @@ def run_team_scraper(team_key):
 
 
 def commit_and_push(ok_teams, failed_teams):
-    ok, out = git('add', OUTPUT_FILE)
+    ok, out = git('add', OUTPUT_FILE, STATUS_FILE)
     if not ok:
         log(f'[ERROR] git add failed: {out}')
         return False
@@ -130,6 +177,9 @@ def commit_and_push(ok_teams, failed_teams):
 def run_cycle():
     log('=' * 50)
     log('[START] Teams scraper cycle')
+    started = datetime.now().isoformat(timespec='seconds')
+    COUNTS.clear()
+    cleanup_chrome()
     if not git_sync():
         return False
     try:
@@ -143,7 +193,9 @@ def run_cycle():
         log(f'[{i}/{len(teams)}] {team["name"]}')
         (ok_teams if run_team_scraper(team['key']) else failed_teams).append(team['key'])
         time.sleep(5)  # be nice to the site
+    cleanup_chrome()
 
+    write_status(started, ok_teams, failed_teams)
     pushed = commit_and_push(ok_teams, failed_teams) if ok_teams else False
     log(f'[SUMMARY] ok: {ok_teams or "-"}  failed: {failed_teams or "-"}  pushed: {pushed}')
     return pushed and not failed_teams
