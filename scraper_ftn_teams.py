@@ -31,7 +31,11 @@ BASE = 'https://www.footballticketnet.com'
 OUTPUT_FILE = 'ftn_teams_data.json'
 TEAMS_LIST_FILE = 'teams_list.json'
 PAGE_TIMEOUT = 30   # seconds to wait for a page's data
-PAUSE = (3, 6)      # seconds between page loads, be nice to the site
+PAUSE = (6, 12)     # seconds between page loads, be nice to the site
+# Persistent profile: cookies survive between runs, like a normal browser.
+PROFILE_DIR = os.path.join(os.path.dirname(sys.executable), '..', 'chrome-profile')
+BLOCKED = 'blocked'  # scrape_event result when the site shows its bot check
+FALLBACK_CATEGORY = 'Cheapest (team page)'
 
 
 def log(msg):
@@ -58,6 +62,7 @@ def get_driver():
         p = r'C:\PythonEnvs\ticketlive\Scripts\chromedriver.exe'
         driver_path = p if os.path.exists(p) else None
     options = uc.ChromeOptions()
+    options.add_argument(f'--user-data-dir={os.path.abspath(PROFILE_DIR)}')
     options.add_argument('--start-maximized')
     options.add_argument('--disable-blink-features=AutomationControlled')
     try:
@@ -79,38 +84,86 @@ def with_currency(url, currency):
     return f'{url}{"&" if "?" in url else "?"}currency={currency}' if currency else url
 
 
+def is_challenge(html):
+    """Cloudflare's "verify you are human" page (any language)."""
+    return 'challenges.cloudflare.com' in html or 'cf-turnstile' in html or '<title>Just a moment' in html
+
+
 def wait_for(driver, predicate):
-    """Poll page_source until predicate(html) is truthy. Returns html or None."""
+    """Poll page_source until predicate(html) is truthy. Returns html, BLOCKED or None."""
     end = time.time() + PAGE_TIMEOUT
+    html = ''
     while time.time() < end:
         html = driver.page_source
         if predicate(html):
             return html
         time.sleep(1)
-    return None
+    return BLOCKED if is_challenge(html) else None
+
+
+MONTHS = {m: i for i, m in enumerate(
+    ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'], 1)}
+
+
+def parse_team_page(html, slug, all_games):
+    """Upcoming games on a team page: [{url, match_name, date, from_price}].
+
+    Each card reads like "Oct | 24 | Sat | 15:00 | vs | Arsenal vs Everton | Premier League | From £118.99".
+    """
+    games, seen = [], set()
+    for card in re.split(r'class="UpcomingMatchesSection-module__\w+__matchItem(?!Footer)', html)[1:]:
+        card = card[:6000]
+        m = re.search(r'href="(/[a-z0-9-]+/([a-z0-9-]+)/event/\d+)', card)
+        if not m or m.group(1) in seen:
+            continue
+        if not all_games and not m.group(2).startswith(f'{slug}-vs-'):
+            continue
+        seen.add(m.group(1))
+        text = re.sub(r'\s*(<[^>]+>\s*)+', ' | ', card)
+        name = re.search(r'\| ([^|<>]+? vs [^|<>]+?) \|', text)
+        day = re.search(r'\| (\w{3}) \| (\d{1,2}) \|', text)
+        price = re.search(r'From\s*\D{0,3}?([\d,]+(?:\.\d+)?)', text)
+        date = None
+        if day and day.group(1).lower() in MONTHS:
+            today = datetime.now()
+            month, d = MONTHS[day.group(1).lower()], int(day.group(2))
+            year = today.year + (1 if month < today.month - 1 else 0)  # the list has no year
+            date = f'{d:02d}/{month:02d}/{year}'
+        games.append({
+            'url': BASE + m.group(1),
+            'match_name': name.group(1).strip() if name else m.group(2),
+            'date': date,
+            'from_price': float(price.group(1).replace(',', '')) if price else None,
+        })
+    return games
+
+
+def fetch_plain(url):
+    """Team pages are not behind the bot check, so a plain request works when Chrome is challenged."""
+    import requests
+    try:
+        r = requests.get(url, timeout=30, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) '
+                         'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36'})
+        return r.text if r.ok else None
+    except Exception as e:
+        log(f'   ⚠️ {e}')
+        return None
 
 
 def list_events(driver, team):
-    """Upcoming event URLs from the team page (home games only unless all_games)."""
+    """Upcoming games from the team page (home games only unless all_games)."""
     team_url = team['team_url'].split('/filter/')[0]
     slug = team_url.rstrip('/').rsplit('/', 1)[-1].replace('-football-tickets', '')
     driver.get(with_currency(team_url, team.get('currency')))
-    if not wait_for(driver, lambda h: '/event/' in h):
-        log(f'   ❌ No event links on {team_url} (blocked or layout changed)')
+    html = wait_for(driver, lambda h: '/event/' in h)
+    if html == BLOCKED:
+        html = fetch_plain(with_currency(team_url, team.get('currency')))
+    if html in (None, BLOCKED) or '/event/' not in html:
+        log(f'   ❌ No games on {team_url} (bot check page or layout changed)')
         return []
-    links = driver.find_elements(By.CSS_SELECTOR, '[class*="UpcomingMatchesSection"] a[href*="/event/"]')
-    if not links:  # section class renamed: fall back to every event link on the page
-        links = driver.find_elements(By.CSS_SELECTOR, 'a[href*="/event/"]')
-    urls = []
-    for a in links:
-        href = (a.get_attribute('href') or '').split('?')[0]
-        m = re.match(r'https://www\.footballticketnet\.com/[a-z0-9-]+/([a-z0-9-]+)/event/\d+$', href)
-        if not m or href in urls:
-            continue
-        if team.get('all_games') or m.group(1).startswith(f'{slug}-vs-'):
-            urls.append(href)
-    log(f'   📋 {len(urls)} upcoming {"games" if team.get("all_games") else "home games"}')
-    return urls
+    games = parse_team_page(html, slug, team.get('all_games'))
+    log(f'   📋 {len(games)} upcoming {"games" if team.get("all_games") else "home games"}')
+    return games
 
 
 ZONES_RE = re.compile(r'"zones":(\[[^\[\]]*\])')
@@ -140,6 +193,8 @@ def parse_event(html):
 def scrape_event(driver, url, currency):
     driver.get(with_currency(url, currency))
     html = wait_for(driver, lambda h: 'SportsEvent' in h and 'zones' in h)
+    if html == BLOCKED:
+        return BLOCKED
     if not html:
         log('      ⚠️ Page data not found')
         return None
@@ -186,8 +241,8 @@ def run_team_scraper(team_key):
     if not driver:
         return False
     try:
-        urls = list_events(driver, team)
-        if not urls:
+        events = list_events(driver, team)
+        if not events:
             log('❌ No games found - not saving')
             return False
 
@@ -198,28 +253,45 @@ def run_team_scraper(team_key):
         now = datetime.now().isoformat()
         scraped = 0
 
-        for i, url in enumerate(urls, 1):
-            time.sleep(random.uniform(*PAUSE))
-            log(f'   [{i}/{len(urls)}] {url.split("/")[-3]}')
-            try:
-                info = scrape_event(driver, url, team.get('currency'))
-            except Exception as e:
-                log(f'      ⚠️ {e}')
-                continue
-            if not info:
-                continue
-            game = games.setdefault(url, {'url': url, 'price_history': []})
-            prices = info.pop('latest_prices')
-            game.update(info)
-            game['team'] = team.get('team_name', team_key)
-            game['latest_prices'] = prices
-            game['last_scraped'] = now
-            if prices:
-                game['price_history'].append({'timestamp': now, 'prices': {c: v['min'] for c, v in prices.items()}})
-                cheapest = min(v['min'] for v in prices.values())
-                log(f'      ✅ {len(prices)} categories, from {cheapest:,.2f} {info["currency"]}')
+        blocked = False
+        for i, ev in enumerate(events, 1):
+            url = ev['url']
+            log(f'   [{i}/{len(events)}] {url.split("/")[-3]}')
+            info = None
+            if not blocked:
+                time.sleep(random.uniform(*PAUSE))
+                try:
+                    info = scrape_event(driver, url, team.get('currency'))
+                except Exception as e:
+                    log(f'      ⚠️ {e}')
+                if info == BLOCKED:
+                    # Stop loading game pages for this run; more requests only prolong the block.
+                    log('      🛑 Bot check page - using team page prices for the rest of this run')
+                    blocked, info = True, None
+            if info:
+                game = games.setdefault(url, {'url': url, 'price_history': []})
+                prices = info.pop('latest_prices')
+                game.update(info)
+                game['latest_prices'] = prices
+                snapshot = {c: v['min'] for c, v in prices.items()}
+                if snapshot:
+                    log(f'      ✅ {len(prices)} categories, from {min(snapshot.values()):,.2f} {info["currency"]}')
+                else:
+                    log('      ⚠️ No tickets listed')
+            elif ev['from_price']:
+                # Fallback: only the cheapest price, from the team page.
+                game = games.setdefault(url, {'url': url, 'price_history': []})
+                for k in ('match_name', 'date'):
+                    game.setdefault(k, ev[k])
+                game.setdefault('currency', team.get('currency'))
+                snapshot = {FALLBACK_CATEGORY: ev['from_price']}
+                log(f'      ↪ cheapest only: {ev["from_price"]:,.2f}')
             else:
-                log('      ⚠️ No tickets listed')
+                continue
+            game['team'] = team.get('team_name', team_key)
+            game['last_scraped'] = now
+            if snapshot:
+                game['price_history'].append({'timestamp': now, 'prices': snapshot})
             scraped += 1
 
         if not scraped:
@@ -232,7 +304,7 @@ def run_team_scraper(team_key):
         with open(tmp, 'w', encoding='utf-8') as f:
             json.dump(data, f, indent=1)
         os.replace(tmp, OUTPUT_FILE)  # atomic: a crash never leaves a half-written file
-        log(f'✅ Saved {scraped}/{len(urls)} games')
+        log(f'✅ Saved {scraped}/{len(events)} games' + (' (cheapest only after the bot check)' if blocked else ''))
         return True
     except Exception as e:
         log(f'❌ Error: {e}')
