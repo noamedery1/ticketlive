@@ -1,6 +1,6 @@
 {
- "started": "2026-10-20T22:08:00",
- "finished": "2026-10-20T22:19:40",
+ "started": "2026-10-21T19:08:00",
+ "finished": "2026-10-21T19:19:52",
  "ok": [
   "champions-league"
  ],
@@ -10,6 +10,6 @@
   "real-madrid"
  ],
  "games_full": 0,
- "games_cheapest_only": 25,
+ "games_cheapest_only": 24,
  "bot_check_until": null
 }
