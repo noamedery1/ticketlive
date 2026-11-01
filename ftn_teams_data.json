@@ -10599,6 +10599,12 @@
       "prices": {
        "Cheapest (team page)": 124.16
       }
+     },
+     {
+      "timestamp": "2026-11-01T07:12:24.240693",
+      "prices": {
+       "Cheapest (team page)": 93.0
+      }
      }
     ],
     "match_name": "Real Madrid vs Getafe CF",
@@ -10650,7 +10656,7 @@
       "count": 20
      }
     },
-    "last_scraped": "2026-10-17T10:23:09.524550"
+    "last_scraped": "2026-11-01T07:12:24.240693"
    },
    {
     "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-levante-ud-santiago-bernabeu-football-tickets/event/132070",
@@ -10771,6 +10777,12 @@
       "prices": {
        "Cheapest (team page)": 97.0
       }
+     },
+     {
+      "timestamp": "2026-11-01T07:12:24.240693",
+      "prices": {
+       "Cheapest (team page)": 104.99
+      }
      }
     ],
     "match_name": "Real Madrid vs Levante UD",
@@ -10822,7 +10834,7 @@
       "count": 20
      }
     },
-    "last_scraped": "2026-10-17T10:23:09.524550"
+    "last_scraped": "2026-11-01T07:12:24.240693"
    },
    {
     "url": "https://www.footballticketnet.com/champions-league/real-madrid-vs-lask-santiago-bernabeu-football-tickets/event/134182",
@@ -10944,6 +10956,12 @@
       "prices": {
        "Cheapest (team page)": 142.0
       }
+     },
+     {
+      "timestamp": "2026-11-01T07:12:24.240693",
+      "prices": {
+       "Cheapest (team page)": 140.0
+      }
      }
     ],
     "match_name": "Real Madrid vs LASK",
@@ -10999,7 +11017,7 @@
       "count": 17
      }
     },
-    "last_scraped": "2026-10-17T10:23:09.524550"
+    "last_scraped": "2026-11-01T07:12:24.240693"
    },
    {
     "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-real-betis-santiago-bernabeu-football-tickets/event/132060",
@@ -11120,6 +11138,12 @@
       "prices": {
        "Cheapest (team page)": 111.99
       }
+     },
+     {
+      "timestamp": "2026-11-01T07:12:24.240693",
+      "prices": {
+       "Cheapest (team page)": 130.0
+      }
      }
     ],
     "match_name": "Real Madrid vs Real Betis",
@@ -11171,7 +11195,7 @@
       "count": 17
      }
     },
-    "last_scraped": "2026-10-17T10:23:09.524550"
+    "last_scraped": "2026-11-01T07:12:24.240693"
    },
    {
     "url": "https://www.footballticketnet.com/spanish-super-cup/real-madrid-vs-real-sociedad-tba-football-tickets/event/126846",
@@ -11286,6 +11310,12 @@
       "prices": {
        "Cheapest (team page)": 390.0
       }
+     },
+     {
+      "timestamp": "2026-11-01T07:12:24.240693",
+      "prices": {
+       "Cheapest (team page)": 600.0
+      }
      }
     ],
     "match_name": "Real Madrid vs Real Sociedad",
@@ -11313,7 +11343,7 @@
       "count": 1
      }
     },
-    "last_scraped": "2026-10-17T10:23:09.524550"
+    "last_scraped": "2026-11-01T07:12:24.240693"
    },
    {
     "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-athletic-bilbao-santiago-bernabeu-football-tickets/event/132067",
@@ -11434,6 +11464,12 @@
       "prices": {
        "Cheapest (team page)": 111.0
       }
+     },
+     {
+      "timestamp": "2026-11-01T07:12:24.240693",
+      "prices": {
+       "Cheapest (team page)": 135.0
+      }
      }
     ],
     "match_name": "Real Madrid vs Athletic Bilbao",
@@ -11485,7 +11521,7 @@
       "count": 19
      }
     },
-    "last_scraped": "2026-10-17T10:23:09.524550"
+    "last_scraped": "2026-11-01T07:12:24.240693"
    },
    {
     "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-valencia-cf-santiago-bernabeu-football-tickets/event/132064",
@@ -11606,6 +11642,12 @@
       "prices": {
        "Cheapest (team page)": 149.98
       }
+     },
+     {
+      "timestamp": "2026-11-01T07:12:24.240693",
+      "prices": {
+       "Cheapest (team page)": 137.0
+      }
      }
     ],
     "match_name": "Real Madrid vs Valencia CF",
@@ -11657,7 +11699,7 @@
       "count": 20
      }
     },
-    "last_scraped": "2026-10-17T10:23:09.524550"
+    "last_scraped": "2026-11-01T07:12:24.240693"
    },
    {
     "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-sevilla-fc-santiago-bernabeu-football-tickets/event/132072",
@@ -11987,13 +12029,19 @@
       "prices": {
        "Cheapest (team page)": 110.0
       }
+     },
+     {
+      "timestamp": "2026-11-01T07:12:24.240693",
+      "prices": {
+       "Cheapest (team page)": 107.99
+      }
      }
     ],
     "match_name": "Real Madrid vs Celta Vigo",
     "date": "22/11/2026",
     "currency": "EUR",
     "team": "Real Madrid",
-    "last_scraped": "2026-10-17T10:23:09.524550"
+    "last_scraped": "2026-11-01T07:12:24.240693"
    },
    {
     "url": "https://www.footballticketnet.com/champions-league/real-madrid-vs-psv-eindhoven-santiago-bernabeu-football-tickets/event/134180",
@@ -12099,13 +12147,19 @@
       "prices": {
        "Cheapest (team page)": 134.07
       }
+     },
+     {
+      "timestamp": "2026-11-01T07:12:24.240693",
+      "prices": {
+       "Cheapest (team page)": 137.99
+      }
      }
     ],
     "match_name": "Real Madrid vs PSV Eindhoven",
     "date": "24/11/2026",
     "currency": "EUR",
     "team": "Real Madrid",
-    "last_scraped": "2026-10-17T10:23:09.524550"
+    "last_scraped": "2026-11-01T07:12:24.240693"
    },
    {
     "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-deportivo-alaves-santiago-bernabeu-football-tickets/event/132068",
@@ -12211,13 +12265,19 @@
       "prices": {
        "Cheapest (team page)": 123.62
       }
+     },
+     {
+      "timestamp": "2026-11-01T07:12:24.240693",
+      "prices": {
+       "Cheapest (team page)": 114.0
+      }
      }
     ],
     "match_name": "Real Madrid vs Deportivo Alav\u00e9s",
     "date": "29/11/2026",
     "currency": "EUR",
     "team": "Real Madrid",
-    "last_scraped": "2026-10-17T10:23:09.524550"
+    "last_scraped": "2026-11-01T07:12:24.240693"
    },
    {
     "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-ca-osasuna-santiago-bernabeu-football-tickets/event/132071",
@@ -12323,17 +12383,55 @@
       "prices": {
        "Cheapest (team page)": 122.0
       }
+     },
+     {
+      "timestamp": "2026-11-01T07:12:24.240693",
+      "prices": {
+       "Cheapest (team page)": 108.99
+      }
      }
     ],
     "match_name": "Real Madrid vs CA Osasuna",
     "date": "13/12/2026",
     "currency": "EUR",
     "team": "Real Madrid",
-    "last_scraped": "2026-10-17T10:23:09.524550"
+    "last_scraped": "2026-11-01T07:12:24.240693"
+   },
+   {
+    "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-rcd-espanyol-santiago-bernabeu-football-tickets/event/132066",
+    "price_history": [
+     {
+      "timestamp": "2026-11-01T07:12:24.240693",
+      "prices": {
+       "Cheapest (team page)": 129.0
+      }
+     }
+    ],
+    "match_name": "Real Madrid vs RCD Espanyol",
+    "date": "14/03/2027",
+    "currency": "EUR",
+    "team": "Real Madrid",
+    "last_scraped": "2026-11-01T07:12:24.240693"
+   },
+   {
+    "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-atletico-madrid-santiago-bernabeu-football-tickets/event/132059",
+    "price_history": [
+     {
+      "timestamp": "2026-11-01T07:12:24.240693",
+      "prices": {
+       "Cheapest (team page)": 312.0
+      }
+     }
+    ],
+    "match_name": "Real Madrid vs Atl\u00e9tico Madrid",
+    "date": "04/04/2027",
+    "currency": "EUR",
+    "team": "Real Madrid",
+    "last_scraped": "2026-11-01T07:12:24.240693"
    }
   ],
   "team_name": "Real Madrid",
   "team_url": "https://www.footballticketnet.com/real-madrid-football-tickets",
-  "last_updated": "2026-10-17T10:23:09.524550"
+  "last_updated": "2026-11-01T07:12:24.240693"
  }
 }
