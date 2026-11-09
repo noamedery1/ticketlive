@@ -1,11 +1,11 @@
 {
- "started": "2026-11-08T19:08:00",
- "finished": "2026-11-08T19:17:39",
+ "started": "2026-11-09T10:08:00",
+ "finished": "2026-11-09T10:17:16",
  "ok": [
-  "barcelona"
+  "arsenal"
  ],
  "failed": [
-  "arsenal",
+  "barcelona",
   "real-madrid",
   "champions-league"
  ],
