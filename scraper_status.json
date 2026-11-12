@@ -1,15 +1,15 @@
 {
- "started": "2026-11-12T07:08:02",
- "finished": "2026-11-12T07:17:23",
+ "started": "2026-11-12T10:08:01",
+ "finished": "2026-11-12T10:16:50",
  "ok": [
-  "real-madrid"
+  "arsenal"
  ],
  "failed": [
-  "arsenal",
   "barcelona",
+  "real-madrid",
   "champions-league"
  ],
  "games_full": 0,
- "games_cheapest_only": 14,
+ "games_cheapest_only": 13,
  "bot_check_until": null
 }
