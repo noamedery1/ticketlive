@@ -280,6 +280,18 @@ def send_alert(subject, body):
     except ValueError as e:
         log(f'      ⚠️ {ALERT_FILE} is not valid JSON (line {getattr(e, "lineno", "?")}) - no email sent')
         return False
+    if cfg.get('ntfy_topic'):
+        # No SMTP (blocked on some networks): ntfy.sh over HTTPS, it forwards the message by email.
+        import requests
+        try:
+            r = requests.post(f'https://ntfy.sh/{cfg["ntfy_topic"]}', data=body.encode('utf-8'),
+                              headers={'Title': subject, 'Email': cfg['to']}, timeout=30)
+            if r.ok:
+                return True
+            log(f'      ⚠️ Alert failed: ntfy said {r.status_code} {r.text[:200]}')
+        except requests.RequestException as e:
+            log(f'      ⚠️ Alert failed: {type(e).__name__}')
+        return False
     import smtplib
     import socket
     from email.message import EmailMessage
