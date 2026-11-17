@@ -116,4 +116,13 @@ assert s.run_team_scraper('arsenal')
 assert len(page_loads) == 2 and len(sent) == 1 and not script
 assert not s.cooling_down()
 
+# 6b) The check comes back right after the click: stop at once (no 4+8 min wait), cooldown.
+page_loads.clear()
+s.list_events = lambda d, t: [{'url': f'{BASE}/pl/arsenal-vs-leeds-x/event/3', 'match_name': 'Arsenal vs Leeds',
+                               'date': '01/12/2026', 'from_price': 51.0}]
+script[:] = [s.BLOCKED]
+assert s.run_team_scraper('arsenal')
+assert len(page_loads) == 1 and len(sent) == 1 and s.cooling_down()
+os.remove(s.COOLDOWN_FILE)
+
 print('ok')

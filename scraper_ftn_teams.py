@@ -49,7 +49,23 @@ def load_team(team_key):
     return None
 
 
+PROFILE_DIR = (r'C:\PythonEnvs\ticketlive\chrome-profile' if sys.platform == 'win32'
+               else os.path.expanduser('~/.ticketlive-chrome-profile'))
+
+
 def get_driver():
+    """Chrome with a kept profile, so a check cleared by hand stays cleared for the next teams
+    (each team is its own process). A profile that stops Chrome from starting is wiped once."""
+    driver = start_driver()
+    if not driver and os.path.isdir(PROFILE_DIR):
+        log('   🧹 Resetting the Chrome profile and trying again')
+        import shutil
+        shutil.rmtree(PROFILE_DIR, ignore_errors=True)
+        driver = start_driver()
+    return driver
+
+
+def start_driver():
     """Chrome via undetected_chromedriver. CHROME_MAJOR pins the driver (109 on Windows 7)."""
     browser_path = driver_path = None
     if sys.platform == 'win32':
@@ -62,6 +78,7 @@ def get_driver():
         driver_path = p if os.path.exists(p) else None
     options = uc.ChromeOptions()
     options.add_argument('--start-maximized')
+    options.add_argument(f'--user-data-dir={PROFILE_DIR}')
     options.add_argument('--disable-blink-features=AutomationControlled')
     result = {}
 
@@ -361,6 +378,9 @@ def scrape_with_backoff(driver, url, currency):
         return None
     if info != BLOCKED:
         return info
+    if HUMAN_ASKED:
+        # Check came back right after a person cleared it: waiting won't help, stop now.
+        return BLOCKED
     waits = BACKOFF_MINUTES
     if wait_for_human(driver, url):
         waits = (0,)  # cleared by hand: retry right away, once
