@@ -47,12 +47,26 @@ pages in a row. It clears by itself after a few minutes. The scraper never click
 
 1. **Fewer page loads.** The team page lists every game with its cheapest price. A game's own
    page (all categories) is loaded only if the game is new, its cheapest price changed, or its
-   categories are older than 12 hours (`DETAIL_MAX_AGE_HOURS`). Most runs load only a few pages.
+   categories are older than 24 hours (`DETAIL_MAX_AGE_HOURS`). Most runs load only a few pages.
 2. **No duplicates.** A game already scraped for another team in the last 2 hours is reused.
 3. **Most valuable first.** New and changed games are loaded before routine refreshes.
 4. **Waits out a block.** On the check page it waits 4 minutes, retries, then 8 minutes
    (`BACKOFF_MINUTES`), then stops loading game pages for that run.
-5. **Never loses a run.** Games it could not open still get their cheapest price from the
+5. **Optional: asks you by email.** With `alert_email.json` present, the first check in a team's
+   run sends an email and keeps the Chrome window open for 20 minutes (`HUMAN_WAIT_MINUTES`).
+   Connect with remote desktop (AnyDesk / Chrome Remote Desktop), click the check, and the run
+   continues with full categories. No click in time: back to step 4.
+   At most 2 emails a day, only 09:00-18:00, never Friday or Saturday (`ALERT_*` settings);
+   outside that it just does step 4.
+
+   `alert_email.json` (next to the scripts, gitignored; Gmail needs 2-step verification and an
+   app password from myaccount.google.com/apppasswords, not your normal password):
+
+   ```json
+   {"user": "sender@gmail.com", "password": "abcd efgh ijkl mnop", "to": "you@example.com"}
+   ```
+   Other providers: add `"host"` and `"port"` (STARTTLS).
+6. **Never loses a run.** Games it could not open still get their cheapest price from the
    team page (shown as the "Cheapest (team page)" line on the chart).
 
 ## When something breaks

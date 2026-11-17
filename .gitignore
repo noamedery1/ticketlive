@@ -31,3 +31,5 @@ blocked_until.txt
 td_results/
 check_ticketsdata.py
 scraper.lock
+alert_email.json
+alerts_sent.txt

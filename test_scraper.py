@@ -94,4 +94,26 @@ assert s.run_team_scraper('cl')
 assert page_loads == []
 assert data()['cl']['games'][0]['latest_prices']['Lower']['min'] == 200.0
 
+# 6) Email alerts on: blocked, a person clicks the check, retried at once (no back-off loads).
+from datetime import datetime as dt  # noqa: E402
+assert not s.alert_allowed(dt(2026, 11, 20, 12))   # Friday
+assert not s.alert_allowed(dt(2026, 11, 21, 12))   # Saturday
+assert not s.alert_allowed(dt(2026, 11, 17, 8, 59)) and not s.alert_allowed(dt(2026, 11, 17, 18))
+assert s.alert_allowed(dt(2026, 11, 17, 9)) and s.alert_allowed(dt(2026, 11, 22, 17, 59))  # Sunday ok
+open(s.ALERT_LOG, 'w').write('2026-11-17T10:00:00\n2026-11-17T11:00:00\n')
+assert not s.alert_allowed(dt(2026, 11, 17, 12))   # already 2 today
+assert s.alert_allowed(dt(2026, 11, 18, 12))
+os.remove(s.ALERT_LOG)
+s.alert_allowed = lambda: True  # the run below must not depend on the clock
+Driver.page_source = '<html>event page</html>'  # the check is gone
+sent = []
+s.send_alert = lambda subject, body: sent.append(subject) or True
+page_loads.clear()
+s.list_events = lambda d, t: [{'url': f'{BASE}/pl/arsenal-vs-leeds-x/event/3', 'match_name': 'Arsenal vs Leeds',
+                               'date': '01/12/2026', 'from_price': 50.0}]
+script[:] = [s.BLOCKED, 55.0]
+assert s.run_team_scraper('arsenal')
+assert len(page_loads) == 2 and len(sent) == 1 and not script
+assert not s.cooling_down()
+
 print('ok')

@@ -229,7 +229,9 @@ def scrape_event(driver, url, currency):
     }
 
 
-DETAIL_MAX_AGE_HOURS = 12   # categories are refreshed at least this often
+DETAIL_MAX_AGE_HOURS = 24   # categories are refreshed at least this often (fewer loads = fewer bot checks)
+HUMAN_WAIT_MINUTES = 20     # with email alerts on: keep the check open this long for a person to click
+ALERT_FILE = 'alert_email.json'  # gitignored, see SCRAPER_SETUP.md
 BACKOFF_MINUTES = (4, 8)     # the bot check cleared after ~4 min in practice
 COOLDOWN_MINUTES = 60        # after giving up, no game pages (any team) for this long
 COOLDOWN_FILE = 'blocked_until.txt'
@@ -268,10 +270,82 @@ def recent_detail_elsewhere(data, team_key, url, max_age_hours=2):
     return None
 
 
+def send_alert(subject, body):
+    """Email via SMTP settings in ALERT_FILE. Returns False when not set up or sending failed."""
+    try:
+        with open(ALERT_FILE, encoding='utf-8') as f:
+            cfg = json.load(f)
+    except (OSError, ValueError):
+        return False
+    import smtplib
+    from email.message import EmailMessage
+    msg = EmailMessage()
+    msg['Subject'], msg['From'], msg['To'] = subject, cfg['user'], cfg['to']
+    msg.set_content(body)
+    try:
+        with smtplib.SMTP(cfg.get('host', 'smtp.gmail.com'), cfg.get('port', 587), timeout=30) as s:
+            s.starttls()
+            s.login(cfg['user'], cfg['password'])
+            s.send_message(msg)
+        return True
+    except Exception as e:
+        log(f'      ⚠️ Alert email failed: {type(e).__name__}')  # never log e: may echo the login
+        return False
+
+
+HUMAN_ASKED = []  # one email per team run, so a check that keeps coming back doesn't spam
+ALERT_LOG = 'alerts_sent.txt'  # gitignored: one line per email sent (ISO time)
+ALERT_HOURS = (9, 18)          # emails only from 09:00 to 18:00...
+ALERT_NO_DAYS = (4, 5)         # ...not on Friday / Saturday (Monday = 0)
+ALERTS_PER_DAY = 2
+
+
+def alert_allowed(now=None):
+    now = now or datetime.now()
+    if now.weekday() in ALERT_NO_DAYS or not ALERT_HOURS[0] <= now.hour < ALERT_HOURS[1]:
+        return False
+    try:
+        with open(ALERT_LOG, encoding='utf-8') as f:
+            today = sum(1 for line in f if line.startswith(now.date().isoformat()))
+    except OSError:
+        today = 0
+    return today < ALERTS_PER_DAY
+
+
+def wait_for_human(driver, url):
+    """Email, then keep the check open until someone clicks it (remote desktop) or time runs out."""
+    if HUMAN_ASKED or not alert_allowed() or not send_alert(
+            'TicketLive: bot check is waiting for a click',
+            f'Open the server (remote desktop) and click the check in the Chrome window.\n'
+            f'Waiting {HUMAN_WAIT_MINUTES} min, then it continues with cheapest prices only.\n\n{url}'):
+        return False
+    HUMAN_ASKED.append(url)
+    with open(ALERT_LOG, 'a', encoding='utf-8') as f:
+        f.write(datetime.now().isoformat() + '\n')
+    log(f'      📧 Email sent - waiting up to {HUMAN_WAIT_MINUTES} min for someone to click the check')
+    end = time.time() + HUMAN_WAIT_MINUTES * 60
+    while time.time() < end:
+        time.sleep(15)
+        if not is_challenge(driver.page_source):
+            log('      👍 Check cleared')
+            return True
+    return False
+
+
 def scrape_with_backoff(driver, url, currency):
-    """Game page; on the bot check wait it out (BACKOFF_MINUTES) and retry. Returns info, None or BLOCKED."""
+    """Game page; on the bot check ask a person (email) or wait it out, and retry. Returns info, None or BLOCKED."""
     time.sleep(random.uniform(*PAUSE))
-    for wait in (0,) + BACKOFF_MINUTES:
+    try:
+        info = scrape_event(driver, url, currency)
+    except Exception as e:
+        log(f'      ⚠️ {e}')
+        return None
+    if info != BLOCKED:
+        return info
+    waits = BACKOFF_MINUTES
+    if wait_for_human(driver, url):
+        waits = (0,)  # cleared by hand: retry right away, once
+    for wait in waits:
         if wait:
             log(f'      ⏳ Bot check page - waiting {wait} min, then retrying')
             time.sleep(wait * 60)
