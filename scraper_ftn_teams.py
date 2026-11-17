@@ -281,19 +281,35 @@ def send_alert(subject, body):
         log(f'      ⚠️ {ALERT_FILE} is not valid JSON (line {getattr(e, "lineno", "?")}) - no email sent')
         return False
     import smtplib
+    import socket
     from email.message import EmailMessage
     msg = EmailMessage()
     msg['Subject'], msg['From'], msg['To'] = subject, cfg['user'], cfg['to']
     msg.set_content(body)
+    host = cfg.get('host', 'smtp.gmail.com')
+
+    def deliver(s):
+        s.login(cfg['user'], cfg['password'])
+        s.send_message(msg)
+
     try:
-        with smtplib.SMTP(cfg.get('host', 'smtp.gmail.com'), cfg.get('port', 587), timeout=30) as s:
-            s.starttls()
-            s.login(cfg['user'], cfg['password'])
-            s.send_message(msg)
+        try:
+            with smtplib.SMTP(host, cfg.get('port', 587), timeout=30) as s:
+                s.starttls()
+                deliver(s)
+        except (smtplib.SMTPServerDisconnected, smtplib.SMTPConnectError, ConnectionError, socket.timeout) as e:
+            # Some networks/antivirus cut port 587: try implicit TLS on 465.
+            log(f'      ⚠️ port {cfg.get("port", 587)}: {type(e).__name__} {e} - trying 465')
+            with smtplib.SMTP_SSL(host, 465, timeout=30) as s:
+                deliver(s)
         return True
+    except smtplib.SMTPAuthenticationError:
+        log('      ⚠️ Alert email failed: wrong user / app password')  # never log e: may echo the login
+    except smtplib.SMTPResponseException as e:
+        log(f'      ⚠️ Alert email failed: server said {e.smtp_code}')
     except Exception as e:
-        log(f'      ⚠️ Alert email failed: {type(e).__name__}')  # never log e: may echo the login
-        return False
+        log(f'      ⚠️ Alert email failed: {type(e).__name__} {e}')  # connection errors: no secrets in them
+    return False
 
 
 HUMAN_ASKED = []  # one email per team run, so a check that keeps coming back doesn't spam
