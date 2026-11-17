@@ -273,9 +273,12 @@ def recent_detail_elsewhere(data, team_key, url, max_age_hours=2):
 def send_alert(subject, body):
     """Email via SMTP settings in ALERT_FILE. Returns False when not set up or sending failed."""
     try:
-        with open(ALERT_FILE, encoding='utf-8') as f:
+        with open(ALERT_FILE, encoding='utf-8-sig') as f:  # -sig: Notepad on Windows 7 adds a BOM
             cfg = json.load(f)
-    except (OSError, ValueError):
+    except OSError:
+        return False  # not set up: alerts are optional
+    except ValueError as e:
+        log(f'      ⚠️ {ALERT_FILE} is not valid JSON (line {getattr(e, "lineno", "?")}) - no email sent')
         return False
     import smtplib
     from email.message import EmailMessage
