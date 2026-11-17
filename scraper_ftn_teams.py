@@ -32,8 +32,7 @@ OUTPUT_FILE = 'ftn_teams_data.json'
 TEAMS_LIST_FILE = 'teams_list.json'
 PAGE_TIMEOUT = 30   # seconds to wait for a page's data
 PAUSE = (6, 12)     # seconds between page loads, be nice to the site
-# Persistent profile: cookies survive between runs, like a normal browser.
-PROFILE_DIR = os.path.join(os.path.dirname(sys.executable), '..', 'chrome-profile')
+DRIVER_TIMEOUT = 120  # seconds for Chrome to start
 BLOCKED = 'blocked'  # scrape_event result when the site shows its bot check
 FALLBACK_CATEGORY = 'Cheapest (team page)'
 
@@ -62,22 +61,32 @@ def get_driver():
         p = r'C:\PythonEnvs\ticketlive\Scripts\chromedriver.exe'
         driver_path = p if os.path.exists(p) else None
     options = uc.ChromeOptions()
-    options.add_argument(f'--user-data-dir={os.path.abspath(PROFILE_DIR)}')
     options.add_argument('--start-maximized')
     options.add_argument('--disable-blink-features=AutomationControlled')
-    try:
-        driver = uc.Chrome(
-            options=options,
-            version_main=int(os.environ['CHROME_MAJOR']) if os.environ.get('CHROME_MAJOR') else None,
-            browser_executable_path=browser_path,
-            driver_executable_path=driver_path,
-            use_subprocess=False,
-        )
-        driver.set_page_load_timeout(90)
-        return driver
-    except Exception as e:
-        log(f'   ❌ Driver init failed: {e}')
-        return None
+    result = {}
+
+    def start():
+        try:
+            result['driver'] = uc.Chrome(
+                options=options,
+                version_main=int(os.environ['CHROME_MAJOR']) if os.environ.get('CHROME_MAJOR') else None,
+                browser_executable_path=browser_path,
+                driver_executable_path=driver_path,
+                use_subprocess=False,
+            )
+        except Exception as e:
+            result['error'] = e
+
+    # Chrome that never comes up leaves chromedriver waiting forever: give up after DRIVER_TIMEOUT.
+    import threading
+    t = threading.Thread(target=start, daemon=True)
+    t.start()
+    t.join(DRIVER_TIMEOUT)
+    if 'driver' in result:
+        result['driver'].set_page_load_timeout(90)
+        return result['driver']
+    log(f'   ❌ Chrome did not start: {result.get("error") or f"no response after {DRIVER_TIMEOUT} s"}')
+    return None
 
 
 def with_currency(url, currency):

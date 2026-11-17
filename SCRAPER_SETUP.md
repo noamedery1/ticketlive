@@ -64,5 +64,7 @@ pages in a row. It clears by itself after a few minutes. The scraper never click
   `git checkout ftn_teams_data.json` to restore the last pushed version.
 - If git pull fails (conflict, dirty tree), the cycle stops and says so.
   `git status` on the machine, fix, rerun.
+- Chrome never opens (window stuck after the team name): the scraper gives up after 2 minutes
+  (`DRIVER_TIMEOUT`). Check `tasklist | findstr chrome` and that only one scraper is running.
 - Chrome updated and the driver broke: rerun `DOWNLOAD_CHROMEDRIVER.bat`.
   The `.bat` files set `CHROME_MAJOR=109`; change it if the machine runs another Chrome.

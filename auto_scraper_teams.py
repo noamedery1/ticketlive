@@ -74,12 +74,12 @@ COUNTS = {}
 
 
 def cleanup_chrome():
-    """Kill Chrome/chromedriver left behind by a crashed run. Only the scraper's own Chrome
-    (it uses the chrome-profile folder), never a Chrome someone opened by hand."""
+    """Kill Chrome/chromedriver left behind by a crashed run. Only Chrome started by
+    chromedriver (it has a remote-debugging port), never a Chrome someone opened by hand."""
     if sys.platform != 'win32':
         return
     for where in ("name='chromedriver.exe'",
-                  "name='chrome.exe' and commandline like '%chrome-profile%'"):
+                  "name='chrome.exe' and commandline like '%remote-debugging-port%'"):
         try:
             subprocess.run(['wmic', 'process', 'where', where, 'call', 'terminate'],
                            capture_output=True, timeout=60)
