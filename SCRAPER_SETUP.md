@@ -66,14 +66,6 @@ pages in a row. It clears by itself after a few minutes. The scraper never click
    {"user": "sender@gmail.com", "password": "abcd efgh ijkl mnop", "to": "you@example.com"}
    ```
    Other providers: add `"host"` and `"port"` (STARTTLS).
-
-   Network blocks SMTP (`SMTPServerDisconnected` on 587 and 465)? Use ntfy.sh instead, over
-   HTTPS, no password; it emails `to` and also pushes to the ntfy phone app if you subscribe
-   to the topic. Pick a long random topic, anyone who knows it can read the alerts:
-
-   ```json
-   {"ntfy_topic": "ticketlive-8f3k2q9x7m", "to": "you@example.com"}
-   ```
 6. **Never loses a run.** Games it could not open still get their cheapest price from the
    team page (shown as the "Cheapest (team page)" line on the chart).
 
