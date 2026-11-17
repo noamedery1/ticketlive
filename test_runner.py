@@ -45,5 +45,20 @@ os.remove(r.COOLDOWN_FILE)
 r.write_status('2026-10-15T10:00:00', ['good'], [])
 assert json.load(open(r.STATUS_FILE, encoding='utf-8'))['bot_check_until'] is None
 
+# Only one scraper at a time.
+first = r.acquire_lock()
+assert first is not None
+calls = []
+r._run_cycle = lambda: calls.append(1) or True
+if sys.platform == 'win32':
+    import subprocess as sp
+    other = sp.run([sys.executable, '-c', 'import os,sys; sys.path.insert(0, %r); os.chdir(%r); '
+                    'import auto_scraper_teams as r; print(r.acquire_lock() is None)'
+                    % (os.path.dirname(os.path.abspath(r.__file__)), os.getcwd())],
+                   capture_output=True, text=True)
+    assert other.stdout.strip().endswith('True'), other.stdout + other.stderr  # second process is refused
+first.close()
+assert r.run_cycle() is True and calls == [1]  # lock free again: the cycle runs
+
 os.chdir(os.path.dirname(os.path.abspath(sys.argv[0])) or '.')
 print('ok')

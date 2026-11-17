@@ -29,6 +29,7 @@ TEAM_TIMEOUT_MINUTES = 45   # a hung Chrome gets killed after this
 OUTPUT_FILE = 'ftn_teams_data.json'
 STATUS_FILE = 'scraper_status.json'   # pushed with the data; the site shows it
 COOLDOWN_FILE = 'blocked_until.txt'   # written by scraper_ftn_teams.py
+LOCK_FILE = 'scraper.lock'            # one scraper at a time (loop .bat + scheduled task)
 TEAMS_LIST_FILE = 'teams_list.json'
 PYTHON_CMD = sys.executable or ('py' if shutil.which('py') else 'python')
 
@@ -174,7 +175,37 @@ def commit_and_push(ok_teams, failed_teams):
     return False
 
 
+def acquire_lock():
+    """Open file handle holding the lock, or None if another scraper is running.
+    The OS drops the lock when the process ends, even after a crash."""
+    f = open(LOCK_FILE, 'a+')
+    try:
+        if sys.platform == 'win32':
+            import msvcrt
+            f.seek(0)
+            msvcrt.locking(f.fileno(), msvcrt.LK_NBLCK, 1)
+        else:
+            import fcntl
+            fcntl.flock(f, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        return f
+    except OSError:
+        f.close()
+        return None
+
+
 def run_cycle():
+    # Two scrapers at once share one Chrome profile and kill each other's Chrome.
+    lock = acquire_lock()
+    if not lock:
+        log('[SKIP] Another scraper run is in progress - not starting a second one')
+        return True
+    try:
+        return _run_cycle()
+    finally:
+        lock.close()
+
+
+def _run_cycle():
     log('=' * 50)
     log('[START] Teams scraper cycle')
     started = datetime.now().isoformat(timespec='seconds')

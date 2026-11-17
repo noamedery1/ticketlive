@@ -28,3 +28,6 @@ scraper.log
 ticketlive-scraper.zip
 blocked_until.txt
 *.tmp
+td_results/
+check_ticketsdata.py
+scraper.lock
