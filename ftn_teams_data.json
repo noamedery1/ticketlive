@@ -685,6 +685,12 @@
        "Cannon Club Level": 494.96,
        "Diamond Club": 1500
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:24:45.317006",
+      "prices": {
+       "Cheapest (team page)": 146.99
+      }
      }
     ],
     "match_name": "Arsenal vs Borussia Dortmund",
@@ -748,7 +754,7 @@
       "count": 5
      }
     },
-    "last_scraped": "2026-11-18T10:13:19.053006",
+    "last_scraped": "2026-11-18T13:24:45.317006",
     "last_detail": "2026-11-18T10:13:19.053006"
    },
    {
@@ -1001,6 +1007,12 @@
        "Cannon Club Level": 1245,
        "Diamond Club": 2500
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:24:45.317006",
+      "prices": {
+       "Cheapest (team page)": 228.38
+      }
      }
     ],
     "match_name": "Arsenal vs Manchester City",
@@ -1064,7 +1076,7 @@
       "count": 5
      }
     },
-    "last_scraped": "2026-11-18T10:13:19.053006",
+    "last_scraped": "2026-11-18T13:24:45.317006",
     "last_detail": "2026-11-18T10:13:19.053006"
    },
    {
@@ -1321,6 +1333,12 @@
        "Cannon Club Level": 999.95,
        "Diamond Club": 2500
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:24:45.317006",
+      "prices": {
+       "Cheapest (team page)": 388.99
+      }
      }
     ],
     "match_name": "Arsenal vs Real Madrid",
@@ -1384,7 +1402,7 @@
       "count": 7
      }
     },
-    "last_scraped": "2026-11-18T10:13:19.053006",
+    "last_scraped": "2026-11-18T13:24:45.317006",
     "last_detail": "2026-11-18T10:13:19.053006"
    },
    {
@@ -1846,6 +1864,12 @@
        "Cannon Club Level": 949.95,
        "Diamond Club": 4749.91
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:24:45.317006",
+      "prices": {
+       "Cheapest (team page)": 221.99
+      }
      }
     ],
     "match_name": "Arsenal vs Manchester United",
@@ -1909,7 +1933,7 @@
       "count": 6
      }
     },
-    "last_scraped": "2026-11-18T10:13:19.053006",
+    "last_scraped": "2026-11-18T13:24:45.317006",
     "last_detail": "2026-11-18T10:13:19.053006"
    },
    {
@@ -2162,6 +2186,12 @@
        "Cannon Club Level": 620,
        "Diamond Club": 1409.96
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:24:45.317006",
+      "prices": {
+       "Cheapest (team page)": 132.99
+      }
      }
     ],
     "match_name": "Arsenal vs Ipswich Town",
@@ -2221,7 +2251,7 @@
       "count": 6
      }
     },
-    "last_scraped": "2026-11-18T10:13:19.053006",
+    "last_scraped": "2026-11-18T13:24:45.317006",
     "last_detail": "2026-11-18T10:13:19.053006"
    },
    {
@@ -2470,6 +2500,12 @@
        "Cannon Club Level": 514.82,
        "Diamond Club": 2499.9
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:24:45.317006",
+      "prices": {
+       "Cheapest (team page)": 107.0
+      }
      }
     ],
     "match_name": "Arsenal vs Brentford",
@@ -2529,7 +2565,7 @@
       "count": 5
      }
     },
-    "last_scraped": "2026-11-18T10:13:19.053006",
+    "last_scraped": "2026-11-18T13:24:45.317006",
     "last_detail": "2026-11-18T10:13:19.053006"
    },
    {
@@ -2780,6 +2816,23 @@
       "prices": {
        "Cheapest (team page)": 130.97
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:24:45.317006",
+      "prices": {
+       "Club Level Shortside": 275,
+       "Executive Private Boxes": 2438.75,
+       "Club Level Longside": 324.95,
+       "Shortside Upper Level": 126.99,
+       "Shortside Lower Level": 192.65,
+       "Longside Lower Level": 195.66,
+       "Longside Upper Level": 157,
+       "Central Longside Lower": 266.71,
+       "Central Longside Upper": 199.98,
+       "VIP Packages": 2330,
+       "Cannon Club Level": 650,
+       "Diamond Club": 2500
+      }
      }
     ],
     "match_name": "Arsenal vs Newcastle United",
@@ -2799,23 +2852,23 @@
       "count": 15
      },
      "Club Level Longside": {
-      "min": 325,
-      "count": 91
+      "min": 324.95,
+      "count": 92
      },
      "Shortside Upper Level": {
-      "min": 130.97,
-      "count": 201
+      "min": 126.99,
+      "count": 202
      },
      "Shortside Lower Level": {
-      "min": 193.08,
+      "min": 192.65,
       "count": 146
      },
      "Longside Lower Level": {
       "min": 195.66,
-      "count": 153
+      "count": 155
      },
      "Longside Upper Level": {
-      "min": 160.42,
+      "min": 157,
       "count": 170
      },
      "Central Longside Lower": {
@@ -2827,7 +2880,7 @@
       "count": 105
      },
      "VIP Packages": {
-      "min": 2335,
+      "min": 2330,
       "count": 5
      },
      "Cannon Club Level": {
@@ -2839,8 +2892,8 @@
       "count": 4
      }
     },
-    "last_scraped": "2026-11-18T10:13:19.053006",
-    "last_detail": "2026-11-17T15:11:34.040338"
+    "last_scraped": "2026-11-18T13:24:45.317006",
+    "last_detail": "2026-11-18T13:24:45.317006"
    },
    {
     "url": "https://www.footballticketnet.com/champions-league/arsenal-vs-sabah-fc-emirates-stadium-football-tickets/event/134231",
@@ -3088,6 +3141,12 @@
        "Cannon Club Level": 339.93,
        "Diamond Club": 2500
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:24:45.317006",
+      "prices": {
+       "Cheapest (team page)": 79.89
+      }
      }
     ],
     "match_name": "Arsenal vs Sabah FC",
@@ -3147,7 +3206,7 @@
       "count": 4
      }
     },
-    "last_scraped": "2026-11-18T10:13:19.053006",
+    "last_scraped": "2026-11-18T13:24:45.317006",
     "last_detail": "2026-11-18T10:13:19.053006"
    },
    {
@@ -3402,6 +3461,24 @@
        "Cannon Club Level": 600,
        "Diamond Club": 2500
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:24:45.317006",
+      "prices": {
+       "Club Level Shortside": 550,
+       "Executive Private Boxes": 2347.12,
+       "Away Section": 514,
+       "Club Level Longside": 549.9,
+       "Shortside Upper Level": 280.48,
+       "Shortside Lower Level": 373.97,
+       "Longside Lower Level": 418.99,
+       "Longside Upper Level": 374.99,
+       "Central Longside Lower": 519.52,
+       "Central Longside Upper": 460,
+       "VIP Packages": 2500,
+       "Cannon Club Level": 600,
+       "Diamond Club": 2500
+      }
      }
     ],
     "match_name": "Arsenal vs Liverpool FC",
@@ -3429,7 +3506,7 @@
       "count": 84
      },
      "Shortside Upper Level": {
-      "min": 280.47,
+      "min": 280.48,
       "count": 189
      },
      "Shortside Lower Level": {
@@ -3465,8 +3542,8 @@
       "count": 5
      }
     },
-    "last_scraped": "2026-11-18T10:13:19.053006",
-    "last_detail": "2026-11-18T10:13:19.053006"
+    "last_scraped": "2026-11-18T13:24:45.317006",
+    "last_detail": "2026-11-18T13:24:45.317006"
    },
    {
     "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-afc-bournemouth-emirates-stadium-football-tickets/event/126913",
@@ -3578,13 +3655,31 @@
        "Cannon Club Level": 350,
        "Diamond Club": 1650
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:24:45.317006",
+      "prices": {
+       "Club Level Shortside": 245,
+       "Executive Private Boxes": 1290.9,
+       "Away Section": 180,
+       "Club Level Longside": 266,
+       "Shortside Upper Level": 118,
+       "Shortside Lower Level": 138,
+       "Longside Lower Level": 137,
+       "Longside Upper Level": 136,
+       "Central Longside Lower": 188.99,
+       "Central Longside Upper": 168,
+       "VIP Packages": 350,
+       "Cannon Club Level": 335,
+       "Diamond Club": 1650
+      }
      }
     ],
     "match_name": "Arsenal vs AFC Bournemouth",
     "date": "13/12/2026",
     "currency": "GBP",
     "team": "Arsenal",
-    "last_scraped": "2026-11-18T10:13:19.053006",
+    "last_scraped": "2026-11-18T13:24:45.317006",
     "opponent": "AFC Bournemouth",
     "start": "2026-12-13T14:00:00+00:00",
     "competition": "Premier League",
@@ -3606,7 +3701,7 @@
       "count": 101
      },
      "Shortside Upper Level": {
-      "min": 122.98,
+      "min": 118,
       "count": 189
      },
      "Shortside Lower Level": {
@@ -3614,7 +3709,7 @@
       "count": 133
      },
      "Longside Lower Level": {
-      "min": 148,
+      "min": 137,
       "count": 158
      },
      "Longside Upper Level": {
@@ -3630,11 +3725,11 @@
       "count": 100
      },
      "VIP Packages": {
-      "min": 375,
+      "min": 350,
       "count": 7
      },
      "Cannon Club Level": {
-      "min": 350,
+      "min": 335,
       "count": 9
      },
      "Diamond Club": {
@@ -3642,7 +3737,7 @@
       "count": 6
      }
     },
-    "last_detail": "2026-11-18T10:13:19.053006"
+    "last_detail": "2026-11-18T13:24:45.317006"
    },
    {
     "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-fulham-emirates-stadium-football-tickets/event/126918",
@@ -3752,13 +3847,30 @@
       "prices": {
        "Cheapest (team page)": 156.68
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:24:45.317006",
+      "prices": {
+       "Club Level Shortside": 452.96,
+       "Executive Private Boxes": 2447.95,
+       "Club Level Longside": 576.9,
+       "Shortside Upper Level": 153.67,
+       "Shortside Lower Level": 197.98,
+       "Longside Lower Level": 253.03,
+       "Longside Upper Level": 176.42,
+       "Central Longside Lower": 286.58,
+       "Central Longside Upper": 234.98,
+       "VIP Packages": 2500,
+       "Cannon Club Level": 600,
+       "Diamond Club": 1680
+      }
      }
     ],
     "match_name": "Arsenal vs Fulham",
     "date": "20/02/2027",
     "currency": "GBP",
     "team": "Arsenal",
-    "last_scraped": "2026-11-18T10:13:19.053006",
+    "last_scraped": "2026-11-18T13:24:45.317006",
     "opponent": "Fulham",
     "start": "2027-02-20T15:00:00+00:00",
     "competition": "Premier League",
@@ -3772,11 +3884,11 @@
       "count": 14
      },
      "Club Level Longside": {
-      "min": 576.99,
+      "min": 576.9,
       "count": 85
      },
      "Shortside Upper Level": {
-      "min": 156.68,
+      "min": 153.67,
       "count": 188
      },
      "Shortside Lower Level": {
@@ -3784,11 +3896,11 @@
       "count": 139
      },
      "Longside Lower Level": {
-      "min": 256.9,
+      "min": 253.03,
       "count": 145
      },
      "Longside Upper Level": {
-      "min": 176.96,
+      "min": 176.42,
       "count": 166
      },
      "Central Longside Lower": {
@@ -3812,7 +3924,7 @@
       "count": 6
      }
     },
-    "last_detail": "2026-11-17T15:11:34.040338"
+    "last_detail": "2026-11-18T13:24:45.317006"
    },
    {
     "url": "https://www.footballticketnet.com/premier-league/arsenal-vs-crystal-palace-emirates-stadium-football-tickets/event/126923",
@@ -3916,13 +4028,19 @@
        "Cannon Club Level": 564.95,
        "Diamond Club": 2500
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:24:45.317006",
+      "prices": {
+       "Cheapest (team page)": 154.83
+      }
      }
     ],
     "match_name": "Arsenal vs Crystal Palace",
     "date": "03/03/2027",
     "currency": "GBP",
     "team": "Arsenal",
-    "last_scraped": "2026-11-18T10:13:19.053006",
+    "last_scraped": "2026-11-18T13:24:45.317006",
     "opponent": "Crystal Palace",
     "start": "2027-03-03T20:00:00+00:00",
     "competition": "Premier League",
@@ -4068,13 +4186,19 @@
        "Cannon Club Level": 695,
        "Diamond Club": 2500
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:24:45.317006",
+      "prices": {
+       "Cheapest (team page)": 189.99
+      }
      }
     ],
     "match_name": "Arsenal vs Sunderland",
     "date": "20/03/2027",
     "currency": "GBP",
     "team": "Arsenal",
-    "last_scraped": "2026-11-18T10:13:19.053006",
+    "last_scraped": "2026-11-18T13:24:45.317006",
     "opponent": "Sunderland",
     "start": "2027-03-20T15:00:00+00:00",
     "competition": "Premier League",
@@ -4133,7 +4257,7 @@
   ],
   "team_name": "Arsenal",
   "team_url": "https://www.footballticketnet.com/arsenal-football-tickets",
-  "last_updated": "2026-11-18T10:13:19.053006"
+  "last_updated": "2026-11-18T13:24:45.317006"
  },
  "barcelona": {
   "games": [
@@ -5024,6 +5148,12 @@
        "Corner 2nd": 175,
        "Corner 1st": 185
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:28:25.191006",
+      "prices": {
+       "Cheapest (team page)": 172.0
+      }
      }
     ],
     "match_name": "FC Barcelona vs Villarreal CF",
@@ -5103,7 +5233,7 @@
       "count": 11
      }
     },
-    "last_scraped": "2026-11-18T10:16:27.510006",
+    "last_scraped": "2026-11-18T13:28:25.191006",
     "last_detail": "2026-11-18T10:16:27.510006"
    },
    {
@@ -5354,6 +5484,12 @@
        "Corner 2nd": 130,
        "Corner 1st": 143
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:28:25.191006",
+      "prices": {
+       "Cheapest (team page)": 112.0
+      }
      }
     ],
     "match_name": "FC Barcelona vs Celta Vigo",
@@ -5437,7 +5573,7 @@
       "count": 19
      }
     },
-    "last_scraped": "2026-11-18T10:16:27.510006",
+    "last_scraped": "2026-11-18T13:28:25.191006",
     "last_detail": "2026-11-18T10:16:27.510006"
    },
    {
@@ -5686,6 +5822,29 @@
        "Corner 2nd": 343.4,
        "Corner 1st": 361.4
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:28:25.191006",
+      "prices": {
+       "Barca VIP Hospitality Silver Package": 1430,
+       "Goal 1st": 324.99,
+       "Goal 2nd": 303.99,
+       "Lateral 2nd": 370.8,
+       "Lateral 1st": 400.9,
+       "Lateral 1st Central": 528.4,
+       "Tribuna 1st": 469.99,
+       "Tribuna 2nd": 414,
+       "Tribuna 3rd": 1663.29,
+       "Tribuna 2nd Central": 619.4,
+       "Lateral 2nd Central": 468.6,
+       "Tribuna 1st Central": 667.4,
+       "Barca VIP Hospitality Gold Package": 2050,
+       "Away Section": 600.6,
+       "Barca VIP Hospitality Players Zone": 2500,
+       "Barca VIP Hospitality Balcony": 1380,
+       "Corner 2nd": 343.4,
+       "Corner 1st": 361.4
+      }
      }
     ],
     "match_name": "FC Barcelona vs Manchester City",
@@ -5701,11 +5860,11 @@
       "count": 2
      },
      "Goal 1st": {
-      "min": 325,
-      "count": 17
+      "min": 324.99,
+      "count": 18
      },
      "Goal 2nd": {
-      "min": 304,
+      "min": 303.99,
       "count": 23
      },
      "Lateral 2nd": {
@@ -5769,8 +5928,8 @@
       "count": 31
      }
     },
-    "last_scraped": "2026-11-18T10:16:27.510006",
-    "last_detail": "2026-11-18T10:16:27.510006"
+    "last_scraped": "2026-11-18T13:28:25.191006",
+    "last_detail": "2026-11-18T13:28:25.191006"
    },
    {
     "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-real-sociedad-spotify-camp-nou-football-tickets/event/132046",
@@ -6038,6 +6197,12 @@
        "Corner 2nd": 179.99,
        "Corner 1st": 180.25
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:28:25.191006",
+      "prices": {
+       "Cheapest (team page)": 140.0
+      }
      }
     ],
     "match_name": "FC Barcelona vs Real Sociedad",
@@ -6121,7 +6286,7 @@
       "count": 16
      }
     },
-    "last_scraped": "2026-11-18T10:16:27.510006",
+    "last_scraped": "2026-11-18T13:28:25.191006",
     "last_detail": "2026-11-18T10:16:27.510006"
    },
    {
@@ -6392,6 +6557,12 @@
        "Corner 2nd": 146,
        "Corner 1st": 152
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:28:25.191006",
+      "prices": {
+       "Cheapest (team page)": 131.0
+      }
      }
     ],
     "match_name": "FC Barcelona vs Elche",
@@ -6475,7 +6646,7 @@
       "count": 18
      }
     },
-    "last_scraped": "2026-11-18T10:16:27.510006",
+    "last_scraped": "2026-11-18T13:28:25.191006",
     "last_detail": "2026-11-18T10:16:27.510006"
    },
    {
@@ -6738,6 +6909,12 @@
        "Corner 2nd": 178,
        "Corner 1st": 198
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:28:25.191006",
+      "prices": {
+       "Cheapest (team page)": 155.0
+      }
      }
     ],
     "match_name": "FC Barcelona vs Como",
@@ -6809,7 +6986,7 @@
       "count": 21
      }
     },
-    "last_scraped": "2026-11-18T10:16:27.510006",
+    "last_scraped": "2026-11-18T13:28:25.191006",
     "last_detail": "2026-11-18T10:16:27.510006"
    },
    {
@@ -7080,6 +7257,29 @@
        "Corner 2nd": 175,
        "Corner 1st": 199
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:28:25.191006",
+      "prices": {
+       "Goal 1st": 179,
+       "Goal 2nd": 153,
+       "Goal 3rd": 180,
+       "Lateral 4th": 300.18,
+       "Lateral 2nd": 211,
+       "Lateral 1st": 236,
+       "Lateral 1st Central": 296,
+       "Tribuna 1st": 281.25,
+       "Tribuna 2nd": 283.25,
+       "Tribuna 3rd": 300.19,
+       "Tribuna 2nd Central": 337,
+       "Lateral 2nd Central": 264,
+       "Tribuna 1st Central": 360.5,
+       "Barca VIP Hospitality Players Zone": 850,
+       "Corner 4th": 280,
+       "Corner 3rd": 275.79,
+       "Corner 2nd": 167,
+       "Corner 1st": 191
+      }
      }
     ],
     "match_name": "FC Barcelona vs Valencia CF",
@@ -7091,11 +7291,11 @@
     "team": "FC Barcelona",
     "latest_prices": {
      "Goal 1st": {
-      "min": 187,
+      "min": 179,
       "count": 17
      },
      "Goal 2nd": {
-      "min": 161,
+      "min": 153,
       "count": 20
      },
      "Goal 3rd": {
@@ -7155,16 +7355,16 @@
       "count": 1
      },
      "Corner 2nd": {
-      "min": 175,
+      "min": 167,
       "count": 21
      },
      "Corner 1st": {
-      "min": 199,
-      "count": 18
+      "min": 191,
+      "count": 19
      }
     },
-    "last_scraped": "2026-11-18T10:16:27.510006",
-    "last_detail": "2026-11-18T10:16:27.510006"
+    "last_scraped": "2026-11-18T13:28:25.191006",
+    "last_detail": "2026-11-18T13:28:25.191006"
    },
    {
     "url": "https://www.footballticketnet.com/spanish-super-cup/fc-barcelona-vs-atletico-madrid-ataturk-olympic-stadium-football-tickets/event/126847",
@@ -7603,6 +7803,12 @@
       "prices": {
        "Cheapest (team page)": 113.0
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:28:25.191006",
+      "prices": {
+       "Cheapest (team page)": 113.0
+      }
      }
     ],
     "match_name": "FC Barcelona vs Atl\u00e9tico Madrid",
@@ -7686,7 +7892,7 @@
       "count": 20
      }
     },
-    "last_scraped": "2026-11-18T10:16:27.510006",
+    "last_scraped": "2026-11-18T13:28:25.191006",
     "last_detail": "2026-11-17T15:12:50.661338"
    },
    {
@@ -7957,6 +8163,29 @@
        "Corner 2nd": 180.25,
        "Corner 1st": 175
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:28:25.191006",
+      "prices": {
+       "Goal 1st": 164,
+       "Goal 2nd": 149,
+       "Goal 3rd": 180,
+       "Lateral 4th": 300.25,
+       "Lateral 2nd": 203,
+       "Lateral 1st": 206,
+       "Lateral 1st Central": 257.5,
+       "Tribuna 1st": 257.5,
+       "Tribuna 2nd": 257.5,
+       "Tribuna 3rd": 280.76,
+       "Tribuna 2nd Central": 298,
+       "Lateral 2nd Central": 247,
+       "Tribuna 1st Central": 327,
+       "Barca VIP Hospitality Players Zone": 750,
+       "Corner 4th": 290,
+       "Corner 3rd": 273.03,
+       "Corner 2nd": 172,
+       "Corner 1st": 175
+      }
      }
     ],
     "match_name": "FC Barcelona vs Levante UD",
@@ -7968,11 +8197,11 @@
     "team": "FC Barcelona",
     "latest_prices": {
      "Goal 1st": {
-      "min": 174,
+      "min": 164,
       "count": 15
      },
      "Goal 2nd": {
-      "min": 154.5,
+      "min": 149,
       "count": 18
      },
      "Goal 3rd": {
@@ -7984,7 +8213,7 @@
       "count": 1
      },
      "Lateral 2nd": {
-      "min": 206,
+      "min": 203,
       "count": 22
      },
      "Lateral 1st": {
@@ -8008,15 +8237,15 @@
       "count": 9
      },
      "Tribuna 2nd Central": {
-      "min": 308,
+      "min": 298,
       "count": 19
      },
      "Lateral 2nd Central": {
-      "min": 257,
+      "min": 247,
       "count": 19
      },
      "Tribuna 1st Central": {
-      "min": 337,
+      "min": 327,
       "count": 16
      },
      "Barca VIP Hospitality Players Zone": {
@@ -8032,16 +8261,16 @@
       "count": 1
      },
      "Corner 2nd": {
-      "min": 180.25,
+      "min": 172,
       "count": 20
      },
      "Corner 1st": {
       "min": 175,
-      "count": 18
+      "count": 19
      }
     },
-    "last_scraped": "2026-11-18T10:16:27.510006",
-    "last_detail": "2026-11-18T10:16:27.510006"
+    "last_scraped": "2026-11-18T13:28:25.191006",
+    "last_detail": "2026-11-18T13:28:25.191006"
    },
    {
     "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-real-betis-spotify-camp-nou-football-tickets/event/132041",
@@ -8169,13 +8398,19 @@
        "Corner 2nd": 206,
        "Corner 1st": 199.99
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:28:25.191006",
+      "prices": {
+       "Cheapest (team page)": 180.0
+      }
      }
     ],
     "match_name": "FC Barcelona vs Real Betis",
     "date": "07/03/2027",
     "currency": "EUR",
     "team": "FC Barcelona",
-    "last_scraped": "2026-11-18T10:16:27.510006",
+    "last_scraped": "2026-11-18T13:28:25.191006",
     "opponent": "Real Betis",
     "start": "2027-03-07T17:00:00+01:00",
     "competition": "Spanish La Liga",
@@ -8369,13 +8604,19 @@
        "Corner 2nd": 165,
        "Corner 1st": 175
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:28:25.191006",
+      "prices": {
+       "Cheapest (team page)": 151.0
+      }
      }
     ],
     "match_name": "FC Barcelona vs Deportivo La Coruna",
     "date": "14/03/2027",
     "currency": "EUR",
     "team": "FC Barcelona",
-    "last_scraped": "2026-11-18T10:16:27.510006",
+    "last_scraped": "2026-11-18T13:28:25.191006",
     "opponent": "Deportivo La Coru\u00f1a",
     "start": "2027-03-14T17:00:00+01:00",
     "competition": "Spanish La Liga",
@@ -8569,23 +8810,46 @@
        "Corner 2nd": 177,
        "Corner 1st": 187
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:28:25.191006",
+      "prices": {
+       "Goal 1st": 164,
+       "Goal 2nd": 153,
+       "Goal 3rd": 180,
+       "Lateral 4th": 393.75,
+       "Lateral 2nd": 220,
+       "Lateral 1st": 244,
+       "Lateral 1st Central": 281,
+       "Tribuna 1st": 283.25,
+       "Tribuna 2nd": 283.25,
+       "Tribuna 3rd": 394.86,
+       "Tribuna 2nd Central": 331,
+       "Lateral 2nd Central": 266,
+       "Tribuna 1st Central": 353,
+       "Barca VIP Hospitality Players Zone": 1000,
+       "Corner 4th": 360,
+       "Corner 3rd": 370.79,
+       "Corner 2nd": 179,
+       "Corner 1st": 189
+      }
      }
     ],
     "match_name": "FC Barcelona vs Sevilla FC",
     "date": "04/04/2027",
     "currency": "EUR",
     "team": "FC Barcelona",
-    "last_scraped": "2026-11-18T10:16:27.510006",
+    "last_scraped": "2026-11-18T13:28:25.191006",
     "opponent": "Sevilla FC",
     "start": "2027-04-04T17:00:00+02:00",
     "competition": "Spanish La Liga",
     "latest_prices": {
      "Goal 1st": {
-      "min": 166,
+      "min": 164,
       "count": 18
      },
      "Goal 2nd": {
-      "min": 150,
+      "min": 153,
       "count": 20
      },
      "Goal 3rd": {
@@ -8597,7 +8861,7 @@
       "count": 1
      },
      "Lateral 2nd": {
-      "min": 224,
+      "min": 220,
       "count": 23
      },
      "Lateral 1st": {
@@ -8621,7 +8885,7 @@
       "count": 11
      },
      "Tribuna 2nd Central": {
-      "min": 351,
+      "min": 331,
       "count": 19
      },
      "Lateral 2nd Central": {
@@ -8629,7 +8893,7 @@
       "count": 19
      },
      "Tribuna 1st Central": {
-      "min": 360.5,
+      "min": 353,
       "count": 15
      },
      "Barca VIP Hospitality Players Zone": {
@@ -8645,15 +8909,15 @@
       "count": 1
      },
      "Corner 2nd": {
-      "min": 177,
+      "min": 179,
       "count": 21
      },
      "Corner 1st": {
-      "min": 187,
-      "count": 17
+      "min": 189,
+      "count": 18
      }
     },
-    "last_detail": "2026-11-18T10:16:27.510006"
+    "last_detail": "2026-11-18T13:28:25.191006"
    },
    {
     "url": "https://www.footballticketnet.com/spanish-la-liga/fc-barcelona-vs-rcd-espanyol-spotify-camp-nou-football-tickets/event/132047",
@@ -8769,13 +9033,36 @@
        "Corner 2nd": 209,
        "Corner 1st": 217
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:28:25.191006",
+      "prices": {
+       "Goal 1st": 199,
+       "Goal 2nd": 186,
+       "Goal 3rd": 235,
+       "Lateral 4th": 486.7,
+       "Lateral 2nd": 247,
+       "Lateral 1st": 257,
+       "Lateral 1st Central": 320,
+       "Tribuna 1st": 339,
+       "Tribuna 2nd": 328,
+       "Tribuna 3rd": 369.46,
+       "Tribuna 2nd Central": 354,
+       "Lateral 2nd Central": 285,
+       "Tribuna 1st Central": 381,
+       "Barca VIP Hospitality Players Zone": 1250,
+       "Corner 4th": 435,
+       "Corner 3rd": 467.42,
+       "Corner 2nd": 207,
+       "Corner 1st": 215
+      }
      }
     ],
     "match_name": "FC Barcelona vs RCD Espanyol",
     "date": "18/04/2027",
     "currency": "EUR",
     "team": "FC Barcelona",
-    "last_scraped": "2026-11-18T10:16:27.510006",
+    "last_scraped": "2026-11-18T13:28:25.191006",
     "opponent": "RCD Espanyol",
     "start": "2027-04-18T17:00:00+02:00",
     "competition": "Spanish La Liga",
@@ -8785,7 +9072,7 @@
       "count": 16
      },
      "Goal 2nd": {
-      "min": 190,
+      "min": 186,
       "count": 17
      },
      "Goal 3rd": {
@@ -8797,11 +9084,11 @@
       "count": 1
      },
      "Lateral 2nd": {
-      "min": 260,
+      "min": 247,
       "count": 23
      },
      "Lateral 1st": {
-      "min": 270,
+      "min": 257,
       "count": 18
      },
      "Lateral 1st Central": {
@@ -8809,7 +9096,7 @@
       "count": 16
      },
      "Tribuna 1st": {
-      "min": 341,
+      "min": 339,
       "count": 26
      },
      "Tribuna 2nd": {
@@ -8829,7 +9116,7 @@
       "count": 19
      },
      "Tribuna 1st Central": {
-      "min": 383,
+      "min": 381,
       "count": 16
      },
      "Barca VIP Hospitality Players Zone": {
@@ -8845,15 +9132,15 @@
       "count": 1
      },
      "Corner 2nd": {
-      "min": 209,
+      "min": 207,
       "count": 21
      },
      "Corner 1st": {
-      "min": 217,
-      "count": 16
+      "min": 215,
+      "count": 17
      }
     },
-    "last_detail": "2026-11-18T10:16:27.510006"
+    "last_detail": "2026-11-18T13:28:25.191006"
    },
    {
     "url": "https://www.footballticketnet.com/spanish-super-cup/fc-barcelona-vs-atletico-madrid-chobani-stadium-football-tickets/event/126847",
@@ -8923,13 +9210,19 @@
       "prices": {
        "Category 1": 545
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:28:25.191006",
+      "prices": {
+       "Cheapest (team page)": 545.0
+      }
      }
     ],
     "match_name": "FC Barcelona vs Atl\u00e9tico Madrid",
     "date": "02/02/2027",
     "currency": "EUR",
     "team": "FC Barcelona",
-    "last_scraped": "2026-11-18T10:16:27.510006",
+    "last_scraped": "2026-11-18T13:28:25.191006",
     "opponent": "Atl\u00e9tico Madrid",
     "start": "2027-02-02T22:00:00+03:00",
     "competition": "Spanish Super Cup",
@@ -9037,23 +9330,46 @@
        "Corner 2nd": 211.06,
        "Corner 1st": 226
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:28:25.191006",
+      "prices": {
+       "Goal 1st": 166,
+       "Goal 2nd": 140,
+       "Goal 3rd": 180,
+       "Lateral 4th": 557.82,
+       "Lateral 2nd": 212,
+       "Lateral 1st": 230,
+       "Lateral 1st Central": 275,
+       "Tribuna 1st": 305,
+       "Tribuna 2nd": 292,
+       "Tribuna 3rd": 372.23,
+       "Tribuna 2nd Central": 325,
+       "Lateral 2nd Central": 253,
+       "Tribuna 1st Central": 350,
+       "Barca VIP Hospitality Players Zone": 1500,
+       "Corner 4th": 470,
+       "Corner 3rd": 519.98,
+       "Corner 2nd": 176,
+       "Corner 1st": 196
+      }
      }
     ],
     "match_name": "FC Barcelona vs CA Osasuna",
     "date": "02/05/2027",
     "currency": "EUR",
     "team": "FC Barcelona",
-    "last_scraped": "2026-11-18T10:16:27.510006",
+    "last_scraped": "2026-11-18T13:28:25.191006",
     "opponent": "CA Osasuna",
     "start": "2027-05-02T17:00:00+02:00",
     "competition": "Spanish La Liga",
     "latest_prices": {
      "Goal 1st": {
-      "min": 202,
+      "min": 166,
       "count": 18
      },
      "Goal 2nd": {
-      "min": 171.54,
+      "min": 140,
       "count": 20
      },
      "Goal 3rd": {
@@ -9065,23 +9381,23 @@
       "count": 1
      },
      "Lateral 2nd": {
-      "min": 242,
+      "min": 212,
       "count": 23
      },
      "Lateral 1st": {
-      "min": 267,
+      "min": 230,
       "count": 18
      },
      "Lateral 1st Central": {
-      "min": 305,
+      "min": 275,
       "count": 15
      },
      "Tribuna 1st": {
-      "min": 309,
+      "min": 305,
       "count": 25
      },
      "Tribuna 2nd": {
-      "min": 309,
+      "min": 292,
       "count": 20
      },
      "Tribuna 3rd": {
@@ -9089,15 +9405,15 @@
       "count": 9
      },
      "Tribuna 2nd Central": {
-      "min": 355,
+      "min": 325,
       "count": 19
      },
      "Lateral 2nd Central": {
-      "min": 283,
+      "min": 253,
       "count": 19
      },
      "Tribuna 1st Central": {
-      "min": 385,
+      "min": 350,
       "count": 16
      },
      "Barca VIP Hospitality Players Zone": {
@@ -9113,20 +9429,20 @@
       "count": 1
      },
      "Corner 2nd": {
-      "min": 211.06,
+      "min": 176,
       "count": 20
      },
      "Corner 1st": {
-      "min": 226,
+      "min": 196,
       "count": 17
      }
     },
-    "last_detail": "2026-11-18T10:16:27.510006"
+    "last_detail": "2026-11-18T13:28:25.191006"
    }
   ],
   "team_name": "FC Barcelona",
   "team_url": "https://www.footballticketnet.com/fc-barcelona-football-tickets",
-  "last_updated": "2026-11-18T10:16:27.510006"
+  "last_updated": "2026-11-18T13:28:25.191006"
  },
  "champions-league": {
   "games": [
@@ -14177,13 +14493,19 @@
        "Central Longside Upper": 70.15,
        "VIP Packages": 90.22
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:30:05.233006",
+      "prices": {
+       "Cheapest (team page)": 57.65
+      }
      }
     ],
     "match_name": "Manchester City vs SSC Napoli",
     "date": "24/11/2026",
     "currency": "EUR",
     "team": "Champions League",
-    "last_scraped": "2026-11-18T10:21:09.026006",
+    "last_scraped": "2026-11-18T13:30:05.233006",
     "opponent": "SSC Napoli",
     "start": "2026-11-24T20:00:00+00:00",
     "competition": "Champions League",
@@ -14359,68 +14681,86 @@
        "Cannon Club Level": 494.96,
        "Diamond Club": 1500
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:30:05.233006",
+      "prices": {
+       "Club Level Shortside": 300.3,
+       "Executive Private Boxes": 1260.05,
+       "Away Section": 657.41,
+       "Club Level Longside": 372.36,
+       "Shortside Upper Level": 176.56,
+       "Shortside Lower Level": 207.81,
+       "Longside Lower Level": 227.03,
+       "Longside Upper Level": 198.2,
+       "Central Longside Lower": 285.14,
+       "Central Longside Upper": 240.13,
+       "VIP Packages": 2150.06,
+       "Cannon Club Level": 594.54,
+       "Diamond Club": 1801.79
+      }
      }
     ],
     "match_name": "Arsenal vs Borussia Dortmund",
     "date": "24/11/2026",
-    "currency": "GBP",
+    "currency": "EUR",
     "team": "Champions League",
-    "last_scraped": "2026-11-18T10:21:09.026006",
+    "last_scraped": "2026-11-18T13:30:05.233006",
     "opponent": "Borussia Dortmund",
     "start": "2026-11-24T20:00:00+00:00",
     "competition": "Champions League",
-    "last_detail": "2026-11-18T10:13:19.053006",
+    "last_detail": "2026-11-18T13:30:05.233006",
     "latest_prices": {
      "Club Level Shortside": {
-      "min": 250,
+      "min": 300.3,
       "count": 115
      },
      "Executive Private Boxes": {
-      "min": 1049,
+      "min": 1260.05,
       "count": 10
      },
      "Away Section": {
-      "min": 547.3,
+      "min": 657.41,
       "count": 2
      },
      "Club Level Longside": {
-      "min": 309.99,
+      "min": 372.36,
       "count": 90
      },
      "Shortside Upper Level": {
-      "min": 146.99,
+      "min": 176.56,
       "count": 212
      },
      "Shortside Lower Level": {
-      "min": 173,
+      "min": 207.81,
       "count": 114
      },
      "Longside Lower Level": {
-      "min": 189,
+      "min": 227.03,
       "count": 155
      },
      "Longside Upper Level": {
-      "min": 165,
-      "count": 176
+      "min": 198.2,
+      "count": 177
      },
      "Central Longside Lower": {
-      "min": 237.38,
+      "min": 285.14,
       "count": 142
      },
      "Central Longside Upper": {
-      "min": 199.91,
+      "min": 240.13,
       "count": 96
      },
      "VIP Packages": {
-      "min": 1789.94,
+      "min": 2150.06,
       "count": 5
      },
      "Cannon Club Level": {
-      "min": 494.96,
+      "min": 594.54,
       "count": 5
      },
      "Diamond Club": {
-      "min": 1500,
+      "min": 1801.79,
       "count": 5
      }
     }
@@ -14547,13 +14887,19 @@
       "prices": {
        "Cheapest (team page)": 700.0
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:30:05.233006",
+      "prices": {
+       "Cheapest (team page)": 700.0
+      }
      }
     ],
     "match_name": "Galatasaray vs Aston Villa",
     "date": "24/11/2026",
     "currency": "EUR",
     "team": "Champions League",
-    "last_scraped": "2026-11-18T10:21:09.026006",
+    "last_scraped": "2026-11-18T13:30:05.233006",
     "opponent": "Aston Villa",
     "start": "2026-11-24T20:45:00+03:00",
     "competition": "Champions League",
@@ -14689,53 +15035,67 @@
        "Category 2": 218,
        "Category 1 Premium": 238.99
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:30:05.233006",
+      "prices": {
+       "Category 3": 180,
+       "Category 4": 184.99,
+       "Category 2 Lateral": 205.21,
+       "Category 1 Silver": 288.99,
+       "Category 1 Gold": 309.99,
+       "Category 1 Platinum": 352.99,
+       "Category 1": 239.99,
+       "Category 2": 239.99,
+       "Category 1 Premium": 276.27
+      }
      }
     ],
     "match_name": "Real Madrid vs PSV Eindhoven",
     "date": "24/11/2026",
     "currency": "EUR",
     "team": "Champions League",
-    "last_scraped": "2026-11-18T10:21:09.026006",
+    "last_scraped": "2026-11-18T13:30:05.233006",
     "opponent": "PSV Eindhoven",
     "start": "2026-11-24T21:00:00+01:00",
     "competition": "Champions League",
-    "last_detail": "2026-11-18T10:19:03.378006",
+    "last_detail": "2026-11-18T13:29:31.271006",
     "latest_prices": {
      "Category 3": {
       "min": 180,
-      "count": 22
+      "count": 23
      },
      "Category 4": {
-      "min": 151.99,
-      "count": 27
+      "min": 184.99,
+      "count": 25
      },
      "Category 2 Lateral": {
-      "min": 210.99,
-      "count": 34
+      "min": 205.21,
+      "count": 35
      },
      "Category 1 Silver": {
-      "min": 248.99,
-      "count": 31
+      "min": 288.99,
+      "count": 32
      },
      "Category 1 Gold": {
-      "min": 269.99,
+      "min": 309.99,
       "count": 39
      },
      "Category 1 Platinum": {
-      "min": 312.99,
-      "count": 47
+      "min": 352.99,
+      "count": 48
      },
      "Category 1": {
-      "min": 231.99,
+      "min": 239.99,
       "count": 43
      },
      "Category 2": {
-      "min": 218,
+      "min": 239.99,
       "count": 42
      },
      "Category 1 Premium": {
-      "min": 238.99,
-      "count": 29
+      "min": 276.27,
+      "count": 30
      }
     }
    },
@@ -14839,13 +15199,19 @@
        "Longside Lower Level": 175,
        "Longside Upper Level": 164
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:30:05.233006",
+      "prices": {
+       "Cheapest (team page)": 120.0
+      }
      }
     ],
     "match_name": "Feyenoord vs FC Porto",
     "date": "24/11/2026",
     "currency": "EUR",
     "team": "Champions League",
-    "last_scraped": "2026-11-18T10:21:09.026006",
+    "last_scraped": "2026-11-18T13:30:05.233006",
     "opponent": "FC Porto",
     "start": "2026-11-24T21:00:00+01:00",
     "competition": "Champions League",
@@ -14969,13 +15335,19 @@
        "Category 2": 40,
        "Category 1 Premium": 89.09
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:30:05.233006",
+      "prices": {
+       "Cheapest (team page)": 40.0
+      }
      }
     ],
     "match_name": "SK Slovan Bratislava vs Real Betis",
     "date": "24/11/2026",
     "currency": "EUR",
     "team": "Champions League",
-    "last_scraped": "2026-11-18T10:21:09.026006",
+    "last_scraped": "2026-11-18T13:30:05.233006",
     "opponent": "Real Betis",
     "start": "2026-11-24T21:00:00+01:00",
     "competition": "Champions League",
@@ -15095,13 +15467,23 @@
        "Category 2": 25.03,
        "Category 1:": 24.02
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:30:05.233006",
+      "prices": {
+       "Category 3": 35.03,
+       "Category 1 Platinum": 79,
+       "Category 1": 40.04,
+       "Category 2": 20.02,
+       "Category 1:": 20.02
+      }
      }
     ],
     "match_name": "RB Leipzig vs RC Lens",
     "date": "24/11/2026",
     "currency": "EUR",
     "team": "Champions League",
-    "last_scraped": "2026-11-18T10:21:09.026006",
+    "last_scraped": "2026-11-18T13:30:05.233006",
     "opponent": "RC Lens",
     "start": "2026-11-24T21:00:00+01:00",
     "competition": "Champions League",
@@ -15115,19 +15497,19 @@
       "count": 3
      },
      "Category 1": {
-      "min": 45.04,
+      "min": 40.04,
       "count": 4
      },
      "Category 2": {
-      "min": 25.03,
+      "min": 20.02,
       "count": 16
      },
      "Category 1:": {
-      "min": 24.02,
+      "min": 20.02,
       "count": 3
      }
     },
-    "last_detail": "2026-11-18T10:21:09.026006"
+    "last_detail": "2026-11-18T13:30:05.233006"
    },
    {
     "url": "https://www.footballticketnet.com/champions-league/como-vs-aek-athens-stadio-giuseppe-sinigaglia-football-tickets/event/134320",
@@ -15223,13 +15605,19 @@
        "Category 1": 140,
        "Category 2": 110
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:30:05.233006",
+      "prices": {
+       "Cheapest (team page)": 110.0
+      }
      }
     ],
     "match_name": "Como vs AEK Athens",
     "date": "24/11/2026",
     "currency": "EUR",
     "team": "Champions League",
-    "last_scraped": "2026-11-18T10:21:09.026006",
+    "last_scraped": "2026-11-18T13:30:05.233006",
     "opponent": "AEK Athens",
     "start": "2026-11-24T21:00:00+01:00",
     "competition": "Champions League",
@@ -15341,13 +15729,19 @@
        "Category 1": 275,
        "Category 2": 199
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:30:05.233006",
+      "prices": {
+       "Cheapest (team page)": 199.0
+      }
      }
     ],
     "match_name": "SK Slavia Prague vs Villarreal CF",
     "date": "25/11/2026",
     "currency": "EUR",
     "team": "Champions League",
-    "last_scraped": "2026-11-18T10:21:09.026006",
+    "last_scraped": "2026-11-18T13:30:05.233006",
     "opponent": "Villarreal CF",
     "start": "2026-11-25T18:45:00+01:00",
     "competition": "Champions League",
@@ -15465,13 +15859,19 @@
        "Category 2": 140,
        "Away Section": 360.36
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:30:05.233006",
+      "prices": {
+       "Cheapest (team page)": 140.0
+      }
      }
     ],
     "match_name": "Sporting Lisbon vs Manchester United",
     "date": "25/11/2026",
     "currency": "EUR",
     "team": "Champions League",
-    "last_scraped": "2026-11-18T10:21:09.026006",
+    "last_scraped": "2026-11-18T13:30:05.233006",
     "opponent": "Manchester United",
     "start": "2026-11-25T20:00:00+00:00",
     "competition": "Champions League",
@@ -15619,13 +16019,19 @@
        "Central Longside Lower": 239.04,
        "Westview": 132.13
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:30:05.233006",
+      "prices": {
+       "Cheapest (team page)": 92.0
+      }
      }
     ],
     "match_name": "Shakhtar Donetsk vs Fenerbah\u00e7e SK",
     "date": "25/11/2026",
     "currency": "EUR",
     "team": "Champions League",
-    "last_scraped": "2026-11-18T10:21:09.026006",
+    "last_scraped": "2026-11-18T13:30:05.233006",
     "opponent": "Fenerbah\u00e7e SK",
     "start": "2026-11-25T20:00:00+00:00",
     "competition": "Champions League",
@@ -15763,40 +16169,53 @@
        "Category 2": 75,
        "Sky Lounge Experience": 375
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:30:05.233006",
+      "prices": {
+       "Category 3": 30,
+       "Category 4": 24.96,
+       "Category 1 Silver": 49.95,
+       "Category 1 Gold": 75,
+       "Category 1 Platinum": 109,
+       "Category 1": 32.92,
+       "Category 2": 75,
+       "Sky Lounge Experience": 375
+      }
      }
     ],
     "match_name": "Inter Milan vs VfB Stuttgart",
     "date": "25/11/2026",
     "currency": "EUR",
     "team": "Champions League",
-    "last_scraped": "2026-11-18T10:21:09.026006",
+    "last_scraped": "2026-11-18T13:30:05.233006",
     "opponent": "VfB Stuttgart",
     "start": "2026-11-25T21:00:00+01:00",
     "competition": "Champions League",
     "latest_prices": {
      "Category 3": {
-      "min": 45,
-      "count": 10
+      "min": 30,
+      "count": 11
      },
      "Category 4": {
-      "min": 24.97,
+      "min": 24.96,
       "count": 24
      },
      "Category 1 Silver": {
       "min": 49.95,
-      "count": 19
+      "count": 21
      },
      "Category 1 Gold": {
       "min": 75,
       "count": 10
      },
      "Category 1 Platinum": {
-      "min": 100,
-      "count": 18
+      "min": 109,
+      "count": 16
      },
      "Category 1": {
-      "min": 32.93,
-      "count": 23
+      "min": 32.92,
+      "count": 22
      },
      "Category 2": {
       "min": 75,
@@ -15807,7 +16226,7 @@
       "count": 1
      }
     },
-    "last_detail": "2026-11-18T10:21:09.026006"
+    "last_detail": "2026-11-18T13:30:05.233006"
    },
    {
     "url": "https://www.footballticketnet.com/champions-league/atletico-madrid-vs-viking-fk-wanda-metropolitano-football-tickets/event/134212",
@@ -15905,13 +16324,19 @@
        "Bench Experience": 175,
        "Hospitality blocks 211 / 212 / 200 / 201": 513.97
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:30:05.233006",
+      "prices": {
+       "Cheapest (team page)": 55.0
+      }
      }
     ],
     "match_name": "Atl\u00e9tico Madrid vs Viking FK",
     "date": "25/11/2026",
     "currency": "EUR",
     "team": "Champions League",
-    "last_scraped": "2026-11-18T10:21:09.026006",
+    "last_scraped": "2026-11-18T13:30:05.233006",
     "opponent": "Viking FK",
     "start": "2026-11-25T21:00:00+01:00",
     "competition": "Champions League",
@@ -16055,13 +16480,19 @@
        "PSG VIP Europe": 1101.1,
        "PSG VIP Saint Germain": 2400
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:30:05.233006",
+      "prices": {
+       "Cheapest (team page)": 120.0
+      }
      }
     ],
     "match_name": "Paris Saint-Germain vs AS Roma",
     "date": "25/11/2026",
     "currency": "EUR",
     "team": "Champions League",
-    "last_scraped": "2026-11-18T10:21:09.026006",
+    "last_scraped": "2026-11-18T13:30:05.233006",
     "opponent": "AS Roma",
     "start": "2026-11-25T21:00:00+01:00",
     "competition": "Champions League",
@@ -16199,13 +16630,19 @@
        "Away Section": 1099.09,
        "Category 1 Premium": 375
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:30:05.233006",
+      "prices": {
+       "Cheapest (team page)": 300.3
+      }
      }
     ],
     "match_name": "Club Brugge vs Liverpool FC",
     "date": "25/11/2026",
     "currency": "EUR",
     "team": "Champions League",
-    "last_scraped": "2026-11-18T10:21:09.026006",
+    "last_scraped": "2026-11-18T13:30:05.233006",
     "opponent": "Liverpool",
     "start": "2026-11-25T21:00:00+01:00",
     "competition": "Champions League",
@@ -16313,13 +16750,19 @@
        "Category 2": 55,
        "Category 1 Premium": 75
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:30:05.233006",
+      "prices": {
+       "Cheapest (team page)": 55.0
+      }
      }
     ],
     "match_name": "Lille OSC vs Bayern Munich",
     "date": "25/11/2026",
     "currency": "EUR",
     "team": "Champions League",
-    "last_scraped": "2026-11-18T10:21:09.026006",
+    "last_scraped": "2026-11-18T13:30:05.233006",
     "opponent": "Bayern Munich",
     "start": "2026-11-25T21:00:00+01:00",
     "competition": "Champions League",
@@ -16449,13 +16892,19 @@
        "Category 1": 390,
        "Category 2": 245
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:30:05.233006",
+      "prices": {
+       "Cheapest (team page)": 245.0
+      }
      }
     ],
     "match_name": "Villarreal CF vs Sabah FC",
     "date": "08/12/2026",
     "currency": "EUR",
     "team": "Champions League",
-    "last_scraped": "2026-11-18T10:21:09.026006",
+    "last_scraped": "2026-11-18T13:30:05.233006",
     "opponent": "Sabah FK",
     "start": "2026-12-08T18:45:00+01:00",
     "competition": "Champions League",
@@ -16589,13 +17038,19 @@
        "Longside Upper Level": 154.94,
        "VIP Packages:": 348.35
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:30:05.233006",
+      "prices": {
+       "Cheapest (team page)": 154.94
+      }
      }
     ],
     "match_name": "Aston Villa vs Paris Saint-Germain",
     "date": "08/12/2026",
     "currency": "EUR",
     "team": "Champions League",
-    "last_scraped": "2026-11-18T10:21:09.026006",
+    "last_scraped": "2026-11-18T13:30:05.233006",
     "opponent": "Paris Saint-Germain",
     "start": "2026-12-08T20:00:00+00:00",
     "competition": "Champions League",
@@ -16731,13 +17186,19 @@
        "Longside Upper Level 400": 103.95,
        "Longside Upper Level 300": 102.05
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:30:05.233006",
+      "prices": {
+       "Cheapest (team page)": 99.25
+      }
      }
     ],
     "match_name": "Manchester United vs RB Leipzig",
     "date": "08/12/2026",
     "currency": "EUR",
     "team": "Champions League",
-    "last_scraped": "2026-11-18T10:21:09.026006",
+    "last_scraped": "2026-11-18T13:30:05.233006",
     "opponent": "RB Leipzig",
     "start": "2026-12-08T20:00:00+00:00",
     "competition": "Champions League",
@@ -16910,28 +17371,51 @@
        "Corner 2nd": 343.4,
        "Corner 1st": 361.4
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:30:05.233006",
+      "prices": {
+       "Barca VIP Hospitality Silver Package": 1430,
+       "Goal 1st": 324.99,
+       "Goal 2nd": 303.99,
+       "Lateral 2nd": 370.8,
+       "Lateral 1st": 400.9,
+       "Lateral 1st Central": 528.4,
+       "Tribuna 1st": 469.99,
+       "Tribuna 2nd": 414,
+       "Tribuna 3rd": 1663.29,
+       "Tribuna 2nd Central": 619.4,
+       "Lateral 2nd Central": 468.6,
+       "Tribuna 1st Central": 667.4,
+       "Barca VIP Hospitality Gold Package": 2050,
+       "Away Section": 600.6,
+       "Barca VIP Hospitality Players Zone": 2500,
+       "Barca VIP Hospitality Balcony": 1380,
+       "Corner 2nd": 343.4,
+       "Corner 1st": 361.4
+      }
      }
     ],
     "match_name": "FC Barcelona vs Manchester City",
     "date": "08/12/2026",
     "currency": "EUR",
     "team": "Champions League",
-    "last_scraped": "2026-11-18T10:21:09.026006",
+    "last_scraped": "2026-11-18T13:30:05.233006",
     "opponent": "Manchester City",
     "start": "2026-12-08T21:00:00+01:00",
     "competition": "Champions League",
-    "last_detail": "2026-11-18T10:16:27.510006",
+    "last_detail": "2026-11-18T13:28:25.191006",
     "latest_prices": {
      "Barca VIP Hospitality Silver Package": {
       "min": 1430,
       "count": 2
      },
      "Goal 1st": {
-      "min": 325,
-      "count": 17
+      "min": 324.99,
+      "count": 18
      },
      "Goal 2nd": {
-      "min": 304,
+      "min": 303.99,
       "count": 23
      },
      "Lateral 2nd": {
@@ -17092,13 +17576,19 @@
        "VIP Business Seats": 1150,
        "Standing": 136.14
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:30:05.233006",
+      "prices": {
+       "Cheapest (team page)": 86.0
+      }
      }
     ],
     "match_name": "Bayern Munich vs SK Slavia Prague",
     "date": "08/12/2026",
     "currency": "EUR",
     "team": "Champions League",
-    "last_scraped": "2026-11-18T10:21:09.026006",
+    "last_scraped": "2026-11-18T13:30:05.233006",
     "opponent": "SK Slavia Prague",
     "start": "2026-12-08T21:00:00+01:00",
     "competition": "Champions League",
@@ -17229,13 +17719,19 @@
        "Category 1 Platinum": 75,
        "Category 2": 65
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:30:05.233006",
+      "prices": {
+       "Cheapest (team page)": 65.0
+      }
      }
     ],
     "match_name": "SSC Napoli vs Club Brugge",
     "date": "08/12/2026",
     "currency": "EUR",
     "team": "Champions League",
-    "last_scraped": "2026-11-18T10:21:09.026006",
+    "last_scraped": "2026-11-18T13:30:05.233006",
     "opponent": "Club Brugge",
     "start": "2026-12-08T21:00:00+01:00",
     "competition": "Champions League",
@@ -17349,13 +17845,19 @@
       "prices": {
        "Category 2": 65
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:30:05.233006",
+      "prices": {
+       "Cheapest (team page)": 65.0
+      }
      }
     ],
     "match_name": "Bodo Glimt vs LASK",
     "date": "24/11/2026",
     "currency": "EUR",
     "team": "Champions League",
-    "last_scraped": "2026-11-18T10:21:09.026006",
+    "last_scraped": "2026-11-18T13:30:05.233006",
     "opponent": "LASK",
     "start": "2026-11-24T18:45:00+01:00",
     "competition": "Champions League",
@@ -17433,13 +17935,19 @@
        "Category 2": 81,
        "Category 1 Premium": 194
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:30:05.233006",
+      "prices": {
+       "Cheapest (team page)": 70.0
+      }
      }
     ],
     "match_name": "Sabah FC vs FC Barcelona",
     "date": "25/11/2026",
     "currency": "EUR",
     "team": "Champions League",
-    "last_scraped": "2026-11-18T10:21:09.026006",
+    "last_scraped": "2026-11-18T13:30:05.233006",
     "opponent": "FC Barcelona",
     "start": "2026-11-25T21:45:00+04:00",
     "competition": "Champions League",
@@ -17523,13 +18031,19 @@
        "Category 1": 299,
        "Category 1:": 550
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:30:05.233006",
+      "prices": {
+       "Cheapest (team page)": 299.0
+      }
      }
     ],
     "match_name": "Viking FK vs Feyenoord",
     "date": "08/12/2026",
     "currency": "EUR",
     "team": "Champions League",
-    "last_scraped": "2026-11-18T10:21:09.026006",
+    "last_scraped": "2026-11-18T13:30:05.233006",
     "opponent": "Feyenoord",
     "start": "2026-12-08T18:45:00+01:00",
     "competition": "Champions League",
@@ -17548,7 +18062,7 @@
   ],
   "team_name": "Champions League",
   "team_url": "https://www.footballticketnet.com/champions-league-football-tickets",
-  "last_updated": "2026-11-18T10:21:09.026006"
+  "last_updated": "2026-11-18T13:30:05.233006"
  },
  "real-madrid": {
   "games": [
@@ -17759,6 +18273,12 @@
        "Category 2": 166,
        "Category 1 Premium": 245
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:29:31.271006",
+      "prices": {
+       "Cheapest (team page)": 100.0
+      }
      }
     ],
     "match_name": "Real Madrid vs Getafe CF",
@@ -17806,7 +18326,7 @@
       "count": 36
      }
     },
-    "last_scraped": "2026-11-18T10:19:03.378006",
+    "last_scraped": "2026-11-18T13:29:31.271006",
     "last_detail": "2026-11-18T10:19:03.378006"
    },
    {
@@ -18018,6 +18538,12 @@
        "Real Madrid VIP Hospitality Package": 755,
        "Category 1 Premium": 218
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:29:31.271006",
+      "prices": {
+       "Cheapest (team page)": 101.0
+      }
      }
     ],
     "match_name": "Real Madrid vs Levante UD",
@@ -18069,7 +18595,7 @@
       "count": 49
      }
     },
-    "last_scraped": "2026-11-18T10:19:03.378006",
+    "last_scraped": "2026-11-18T13:29:31.271006",
     "last_detail": "2026-11-18T10:19:03.378006"
    },
    {
@@ -18282,6 +18808,12 @@
        "Real Madrid VIP Hospitality Package": 530,
        "Category 1 Premium": 195
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:29:31.271006",
+      "prices": {
+       "Cheapest (team page)": 129.0
+      }
      }
     ],
     "match_name": "Real Madrid vs LASK",
@@ -18333,7 +18865,7 @@
       "count": 40
      }
     },
-    "last_scraped": "2026-11-18T10:19:03.378006",
+    "last_scraped": "2026-11-18T13:29:31.271006",
     "last_detail": "2026-11-18T10:19:03.378006"
    },
    {
@@ -18543,6 +19075,12 @@
        "Category 2": 168,
        "Category 1 Premium": 253
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:29:31.271006",
+      "prices": {
+       "Cheapest (team page)": 122.0
+      }
      }
     ],
     "match_name": "Real Madrid vs Real Betis",
@@ -18590,7 +19128,7 @@
       "count": 32
      }
     },
-    "last_scraped": "2026-11-18T10:19:03.378006",
+    "last_scraped": "2026-11-18T13:29:31.271006",
     "last_detail": "2026-11-18T10:19:03.378006"
    },
    {
@@ -18960,6 +19498,12 @@
        "Category 2": 171,
        "Category 1 Premium": 237
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:29:31.271006",
+      "prices": {
+       "Cheapest (team page)": 129.0
+      }
      }
     ],
     "match_name": "Real Madrid vs Athletic Bilbao",
@@ -19007,7 +19551,7 @@
       "count": 35
      }
     },
-    "last_scraped": "2026-11-18T10:19:03.378006",
+    "last_scraped": "2026-11-18T13:29:31.271006",
     "last_detail": "2026-11-18T10:19:03.378006"
    },
    {
@@ -19217,6 +19761,12 @@
        "Category 2": 173,
        "Category 1 Premium": 231
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:29:31.271006",
+      "prices": {
+       "Cheapest (team page)": 123.0
+      }
      }
     ],
     "match_name": "Real Madrid vs Valencia CF",
@@ -19264,7 +19814,7 @@
       "count": 38
      }
     },
-    "last_scraped": "2026-11-18T10:19:03.378006",
+    "last_scraped": "2026-11-18T13:29:31.271006",
     "last_detail": "2026-11-18T10:19:03.378006"
    },
    {
@@ -19683,55 +20233,74 @@
       "prices": {
        "Cheapest (team page)": 150.0
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:29:31.271006",
+      "prices": {
+       "Category 3": 199.99,
+       "Category 4": 112,
+       "Category 2 Lateral": 199.99,
+       "Category 1 Silver": 279.28,
+       "Category 1 Gold": 275,
+       "Category 1 Platinum": 305,
+       "Category 1": 223.66,
+       "Category 2": 224.99,
+       "Real Madrid VIP Hospitality Package": 475,
+       "Category 1 Premium": 264
+      }
      }
     ],
     "match_name": "Real Madrid vs Celta Vigo",
     "date": "21/11/2026",
     "currency": "EUR",
     "team": "Real Madrid",
-    "last_scraped": "2026-11-18T10:19:03.378006",
+    "last_scraped": "2026-11-18T13:29:31.271006",
     "opponent": "Celta Vigo",
     "start": "2026-11-21T21:00:00+01:00",
     "competition": "Spanish La Liga",
     "latest_prices": {
      "Category 3": {
-      "min": 131.54,
-      "count": 20
+      "min": 199.99,
+      "count": 14
      },
      "Category 4": {
-      "min": 150,
-      "count": 30
+      "min": 112,
+      "count": 31
      },
      "Category 2 Lateral": {
-      "min": 169.98,
-      "count": 30
+      "min": 199.99,
+      "count": 28
      },
      "Category 1 Silver": {
-      "min": 214.99,
-      "count": 29
+      "min": 279.28,
+      "count": 26
      },
      "Category 1 Gold": {
-      "min": 278.73,
-      "count": 44
+      "min": 275,
+      "count": 42
      },
      "Category 1 Platinum": {
       "min": 305,
-      "count": 63
+      "count": 65
      },
      "Category 1": {
-      "min": 185,
-      "count": 37
+      "min": 223.66,
+      "count": 27
      },
      "Category 2": {
-      "min": 185.99,
-      "count": 44
+      "min": 224.99,
+      "count": 38
+     },
+     "Real Madrid VIP Hospitality Package": {
+      "min": 475,
+      "count": 1
      },
      "Category 1 Premium": {
-      "min": 261.99,
-      "count": 32
+      "min": 264,
+      "count": 27
      }
     },
-    "last_detail": "2026-11-17T15:13:56.237338"
+    "last_detail": "2026-11-18T13:29:31.271006"
    },
    {
     "url": "https://www.footballticketnet.com/champions-league/real-madrid-vs-psv-eindhoven-santiago-bernabeu-football-tickets/event/134180",
@@ -19925,55 +20494,69 @@
        "Category 2": 218,
        "Category 1 Premium": 238.99
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:29:31.271006",
+      "prices": {
+       "Category 3": 180,
+       "Category 4": 184.99,
+       "Category 2 Lateral": 205.21,
+       "Category 1 Silver": 288.99,
+       "Category 1 Gold": 309.99,
+       "Category 1 Platinum": 352.99,
+       "Category 1": 239.99,
+       "Category 2": 239.99,
+       "Category 1 Premium": 276.27
+      }
      }
     ],
     "match_name": "Real Madrid vs PSV Eindhoven",
     "date": "24/11/2026",
     "currency": "EUR",
     "team": "Real Madrid",
-    "last_scraped": "2026-11-18T10:19:03.378006",
+    "last_scraped": "2026-11-18T13:29:31.271006",
     "opponent": "PSV Eindhoven",
     "start": "2026-11-24T21:00:00+01:00",
     "competition": "Champions League",
     "latest_prices": {
      "Category 3": {
       "min": 180,
-      "count": 22
+      "count": 23
      },
      "Category 4": {
-      "min": 151.99,
-      "count": 27
+      "min": 184.99,
+      "count": 25
      },
      "Category 2 Lateral": {
-      "min": 210.99,
-      "count": 34
+      "min": 205.21,
+      "count": 35
      },
      "Category 1 Silver": {
-      "min": 248.99,
-      "count": 31
+      "min": 288.99,
+      "count": 32
      },
      "Category 1 Gold": {
-      "min": 269.99,
+      "min": 309.99,
       "count": 39
      },
      "Category 1 Platinum": {
-      "min": 312.99,
-      "count": 47
+      "min": 352.99,
+      "count": 48
      },
      "Category 1": {
-      "min": 231.99,
+      "min": 239.99,
       "count": 43
      },
      "Category 2": {
-      "min": 218,
+      "min": 239.99,
       "count": 42
      },
      "Category 1 Premium": {
-      "min": 238.99,
-      "count": 29
+      "min": 276.27,
+      "count": 30
      }
     },
-    "last_detail": "2026-11-18T10:19:03.378006"
+    "last_detail": "2026-11-18T13:29:31.271006"
    },
    {
     "url": "https://www.footballticketnet.com/spanish-la-liga/real-madrid-vs-deportivo-alaves-santiago-bernabeu-football-tickets/event/132068",
@@ -20167,13 +20750,19 @@
        "Category 2": 160,
        "Category 1 Premium": 207
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:29:31.271006",
+      "prices": {
+       "Cheapest (team page)": 105.0
+      }
      }
     ],
     "match_name": "Real Madrid vs Deportivo Alav\u00e9s",
     "date": "28/11/2026",
     "currency": "EUR",
     "team": "Real Madrid",
-    "last_scraped": "2026-11-18T10:19:03.378006",
+    "last_scraped": "2026-11-18T13:29:31.271006",
     "opponent": "Deportivo Alav\u00e9s",
     "start": "2026-11-28T21:00:00+01:00",
     "competition": "Spanish La Liga",
@@ -20409,13 +20998,19 @@
        "Category 2": 151,
        "Category 1 Premium": 202
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:29:31.271006",
+      "prices": {
+       "Cheapest (team page)": 98.0
+      }
      }
     ],
     "match_name": "Real Madrid vs CA Osasuna",
     "date": "13/12/2026",
     "currency": "EUR",
     "team": "Real Madrid",
-    "last_scraped": "2026-11-18T10:19:03.378006",
+    "last_scraped": "2026-11-18T13:29:31.271006",
     "opponent": "CA Osasuna",
     "start": "2026-12-13T17:00:00+01:00",
     "competition": "Spanish La Liga",
@@ -20549,13 +21144,19 @@
        "Category 2": 170,
        "Category 1 Premium": 237
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:29:31.271006",
+      "prices": {
+       "Cheapest (team page)": 100.0
+      }
      }
     ],
     "match_name": "Real Madrid vs RCD Espanyol",
     "date": "14/03/2027",
     "currency": "EUR",
     "team": "Real Madrid",
-    "last_scraped": "2026-11-18T10:19:03.378006",
+    "last_scraped": "2026-11-18T13:29:31.271006",
     "opponent": "RCD Espanyol",
     "start": "2027-03-14T17:00:00+01:00",
     "competition": "Spanish La Liga",
@@ -20689,13 +21290,19 @@
        "Category 2": 427,
        "Category 1 Premium": 527
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:29:31.271006",
+      "prices": {
+       "Cheapest (team page)": 290.0
+      }
      }
     ],
     "match_name": "Real Madrid vs Atletico Madrid",
     "date": "04/04/2027",
     "currency": "EUR",
     "team": "Real Madrid",
-    "last_scraped": "2026-11-18T10:19:03.378006",
+    "last_scraped": "2026-11-18T13:29:31.271006",
     "opponent": "Atl\u00e9tico Madrid",
     "start": "2027-04-04T17:00:00+02:00",
     "competition": "Spanish La Liga",
@@ -20817,13 +21424,19 @@
        "Category 2": 180,
        "Category 1 Premium": 240
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:29:31.271006",
+      "prices": {
+       "Cheapest (team page)": 131.81
+      }
      }
     ],
     "match_name": "Real Madrid vs Elche",
     "date": "21/04/2027",
     "currency": "EUR",
     "team": "Real Madrid",
-    "last_scraped": "2026-11-18T10:19:03.378006",
+    "last_scraped": "2026-11-18T13:29:31.271006",
     "opponent": "Elche",
     "start": "2027-04-21T17:00:00+02:00",
     "competition": "Spanish La Liga",
@@ -20927,6 +21540,12 @@
        "Category 2": 400,
        "Category 1 Premium": 360
       }
+     },
+     {
+      "timestamp": "2026-11-18T13:29:31.271006",
+      "prices": {
+       "Cheapest (team page)": 360.0
+      }
      }
     ],
     "match_name": "Real Madrid vs Real Sociedad",
@@ -20951,11 +21570,11 @@
     },
     "last_detail": "2026-11-18T10:19:03.378006",
     "team": "Real Madrid",
-    "last_scraped": "2026-11-18T10:19:03.378006"
+    "last_scraped": "2026-11-18T13:29:31.271006"
    }
   ],
   "team_name": "Real Madrid",
   "team_url": "https://www.footballticketnet.com/real-madrid-football-tickets",
-  "last_updated": "2026-11-18T10:19:03.378006"
+  "last_updated": "2026-11-18T13:29:31.271006"
  }
 }
