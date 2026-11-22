@@ -31,7 +31,7 @@ BASE = 'https://www.footballticketnet.com'
 OUTPUT_FILE = 'ftn_teams_data.json'
 TEAMS_LIST_FILE = 'teams_list.json'
 PAGE_TIMEOUT = 30   # seconds to wait for a page's data
-PAUSE = (6, 12)     # seconds between page loads, be nice to the site
+PAUSE = (60, 120)   # seconds between game pages: slow enough to stay under the bot-check threshold
 DRIVER_TIMEOUT = 120  # seconds for Chrome to start
 BLOCKED = 'blocked'  # scrape_event result when the site shows its bot check
 FALLBACK_CATEGORY = 'Cheapest (team page)'
@@ -252,6 +252,7 @@ ALERT_FILE = 'alert_email.json'  # gitignored, see SCRAPER_SETUP.md
 BACKOFF_MINUTES = (4, 8)     # the bot check cleared after ~4 min in practice
 COOLDOWN_MINUTES = 60        # after giving up, no game pages (any team) for this long
 COOLDOWN_FILE = 'blocked_until.txt'
+DETAIL_BUDGET_MINUTES = 15   # per team run; the rest get cheapest prices now, full pages next run
 DETAIL_PRIORITY = ['new game', 'price changed', 'refresh', None]
 SHARED_FIELDS = ('match_name', 'opponent', 'date', 'start', 'competition', 'currency', 'latest_prices', 'last_detail')
 
@@ -451,6 +452,7 @@ def run_team_scraper(team_key):
             ev['why'] = detail_reason(games.get(ev['url']), ev)
         events.sort(key=lambda ev: DETAIL_PRIORITY.index(ev['why']))
         gave_up = cooling_down()
+        deadline = time.time() + DETAIL_BUDGET_MINUTES * 60  # runner kills a team after 45 min
         if gave_up:
             log(f'   ⏸ Bot check seen recently - cheapest prices only until {open(COOLDOWN_FILE).read().strip()[11:16]}')
         for i, ev in enumerate(events, 1):
@@ -463,7 +465,7 @@ def run_team_scraper(team_key):
                 if shared:
                     info = {k: shared.get(k) for k in SHARED_FIELDS}
                     log('      ♻ same game scraped minutes ago for another team')
-                elif not gave_up:
+                elif not gave_up and time.time() < deadline:
                     info = scrape_with_backoff(driver, url, team.get('currency'))
                     if info == BLOCKED:
                         log(f'      🛑 Still blocked - cheapest prices only for the next {COOLDOWN_MINUTES} min')

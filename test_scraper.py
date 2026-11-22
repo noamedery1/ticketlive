@@ -133,4 +133,11 @@ for prefix in ('UpcomingMatchesSection-module__ab12', 'NKlfKa'):
     g = s.parse_team_page(card.format(prefix, prefix), 'arsenal', False)
     assert len(g) == 1 and g[0]['from_price'] == 118.99 and g[0]['match_name'] == 'Arsenal vs Everton', g
 
+# 8) Time budget used up: no game pages, cheapest prices still saved.
+s.DETAIL_BUDGET_MINUTES = 0
+page_loads.clear()
+s.list_events = lambda d, t: [{'url': f'{BASE}/pl/arsenal-vs-wolves-x/event/4', 'match_name': 'Arsenal vs Wolves',
+                               'date': '05/12/2026', 'from_price': 40.0}]
+assert s.run_team_scraper('arsenal') and page_loads == []
+
 print('ok')
