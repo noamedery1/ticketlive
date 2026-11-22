@@ -49,7 +49,9 @@ pages in a row. It clears by itself after a few minutes. The scraper never click
    page (all categories) is loaded only if the game is new, its cheapest price changed, or its
    categories are older than 24 hours (`DETAIL_MAX_AGE_HOURS`). Most runs load only a few pages.
 2. **No duplicates.** A game already scraped for another team in the last 2 hours is reused.
-3. **Most valuable first.** New and changed games are loaded before routine refreshes.
+3. **Most valuable first, slowly.** New and changed games are loaded before routine refreshes,
+   60-120 s apart (`PAUSE`), for at most 15 minutes per team (`DETAIL_BUDGET_MINUTES`). The rest
+   get the team-page price now and their full page on the next run.
 4. **Waits out a block.** On the check page it waits 4 minutes, retries, then 8 minutes
    (`BACKOFF_MINUTES`), then stops loading game pages for that run.
 5. **Optional: asks you by email.** With `alert_email.json` present, the first check in a team's
