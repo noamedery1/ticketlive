@@ -137,7 +137,7 @@ def parse_team_page(html, slug, all_games):
     Each card reads like "Oct | 24 | Sat | 15:00 | vs | Arsenal vs Everton | Premier League | From £118.99".
     """
     games, seen = [], set()
-    for card in re.split(r'class="UpcomingMatchesSection-module__\w+__matchItem(?!Footer)', html)[1:]:
+    for card in re.split(r'class="[^"]*?_matchItem(?!Footer)', html)[1:]:
         card = card[:6000]
         m = re.search(r'href="(/[a-z0-9-]+/([a-z0-9-]+)/event/\d+)', card)
         if not m or m.group(1) in seen:

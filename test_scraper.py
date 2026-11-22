@@ -125,4 +125,12 @@ assert s.run_team_scraper('arsenal')
 assert len(page_loads) == 1 and len(sent) == 1 and s.cooling_down()
 os.remove(s.COOLDOWN_FILE)
 
+# 7) Team page cards: the CSS-module prefix changes between FTN releases.
+card = ('<div class="{}_matchItem x"><a href="/premier-league/arsenal-vs-everton-x-football-tickets/event/9">'
+        '<span>Oct</span><span>24</span><span>Arsenal vs Everton</span><span>From £118.99</span></a></div>'
+        '<div class="{}_matchItemFooter"></div>')
+for prefix in ('UpcomingMatchesSection-module__ab12', 'NKlfKa'):
+    g = s.parse_team_page(card.format(prefix, prefix), 'arsenal', False)
+    assert len(g) == 1 and g[0]['from_price'] == 118.99 and g[0]['match_name'] == 'Arsenal vs Everton', g
+
 print('ok')
